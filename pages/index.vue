@@ -70,6 +70,11 @@
             items: [{ title: 'Start', href: '/video-chat' }],
             title: 'Video Chat',
         },
+        {
+            action: 'mdi-chat',
+            items: [{ title: 'Start socket chat', href: '/socket' }],
+            title: 'Socket Chat',
+        },
       ],
     }),
   }

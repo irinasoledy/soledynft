@@ -27,25 +27,8 @@
         </v-card>
 
         <v-card class="mx-auto" v-else>
-            <VideoChat :username="username" room="kfdvdnvfdnvmdflk"/> -->
+            <VideoChat :username="username" room="cmsldmclsd"/>
         </v-card>
-
-        <!-- <div class="container-fluid chat_container" id="app">
-            <div class="row" v-if="authenticated">
-                <VideoChat :username="username" room="kfdvdnvfdnvmdflk"/>
-            </div>
-            <div class="row" v-else>
-                <div class="username">
-                    <form class="form-inline" @submit.prevent="submitUsername(username)">
-                        <div class="form-group mb-2">
-                            <input type="text" class="form-control" v-model="username" >
-                        </div>
-                        <button type="submit" class="btn btn-primary mb-2 Botton">Enter!</button>
-                    </form>
-                </div>
-            </div>
-        </div> -->
-
     </div>
 </template>
 
