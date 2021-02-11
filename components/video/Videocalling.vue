@@ -236,7 +236,7 @@ export default {
 
             // console.log(this.user);
             // Request a new token
-            axios.get(`http://demo.terradigital.online/token?identity=${this.user.name}`)
+            axios.get(`https://demo.terradigital.online/token?identity=${this.user.name}`)
                 .then(function (response) {
                     _this.accessToken = response.data.token
                 })
