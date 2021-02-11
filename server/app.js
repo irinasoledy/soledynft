@@ -1,11 +1,72 @@
 const app = require('express')()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
-const users = require('./users')()
+const users = require('./controllers/Users')()
+const conference = require('./controllers/Conference')()
 
 const m = (name, text, id) => ({ name, text, id })
 
 io.on('connection', socket => {
+
+    // Start: employee create a room
+    socket.on('employeeJoined', (data, cb) => {
+        socket.join(data.room._id)
+        cb()
+    })
+
+    // Start: client join a room
+    socket.on('joinExistingRoom', async (data, cb) => {
+        const response = await conference.createClientUser(data.roomId, data.userId)
+        socket.join(data.roomId)
+        io.to(data.roomId).emit('joinExistingRoom', response)
+        cb()
+    })
+
+    // Update active rooms
+    socket.on('updateActiveRooms', async data => {
+        io.emit('reloadEmployeeList', data)
+    })
+
+    // Create an send a message
+    socket.on('createMessage', (data, cb) => {
+        if (!data.text) {
+            return cb('The text cannot be empty')
+        }
+
+        if (data.user && data.room) {
+            // await conference.createMessage(data)
+            io.to(data.room._id).emit('newMessage', m(data.user.name, data.text, data.user._id))
+        }
+        cb()
+    })
+
+    // Create an send a message
+    socket.on('shareHistory', (data) => {
+        io.to(data.roomId).emit('shareHistory', data.messages)
+    })
+
+
+    // Video Calling modificators
+    socket.on('videoMute', (data) => {
+        io.to(data.roomId).emit('videoMute', data.userId)
+    })
+
+    socket.on('videoUnmute', (data) => {
+        io.to(data.roomId).emit('videoUnmute', data.userId)
+    })
+
+    socket.on('audioMute', (data) => {
+        io.to(data.roomId).emit('audioMute', data.userId)
+    })
+
+    socket.on('audioUnmute', (data) => {
+        io.to(data.roomId).emit('audioUnmute', data.userId)
+    })
+
+
+
+
+
   socket.on('userJoined', (data, cb) => {
     if (!data.name || !data.room) {
       return cb('Data is incorrect')
@@ -28,17 +89,7 @@ io.on('connection', socket => {
       .emit('newMessage', m('admin', `User ${data.name} joined.`))
   })
 
-  socket.on('createMessage', (data, cb) => {
-    if (!data.text) {
-      return cb('The text cannot be empty')
-    }
 
-    const user = users.get(data.id)
-    if (user) {
-      io.to(user.room).emit('newMessage', m(user.name, data.text, data.id))
-    }
-    cb()
-  })
 
   socket.on('userLeft', (id, cb) => {
     const user = users.remove(id)
@@ -52,33 +103,19 @@ io.on('connection', socket => {
     cb()
   })
 
-  socket.on('stop', () => {
-      io.to('room').emit('stopChat')
+  socket.on('stop', (roomId) => {
+      io.to(roomId).emit('stopChat')
   })
 
-  socket.on('changeVideoProccess', () => {
-      io.to('room').emit('changeVideoProccess')
-  })
+  // socket.on('changeVideoProccess', () => {
+  //     io.to('room').emit('changeVideoProccess')
+  // })
 
-  socket.on('changeAudioProccess', () => {
-      io.to('room').emit('changeAudioProccess')
-  })
+  // socket.on('changeAudioProccess', () => {
+  //     io.to('room').emit('changeAudioProccess')
+  // })
 
-  socket.on('videoMute', (data) => {
-      io.to('room').emit('videoMute', data)
-  })
 
-  socket.on('videoUnmute', (data) => {
-      io.to('room').emit('videoUnmute', data)
-  })
-
-  socket.on('audioMute', (data) => {
-      io.to('room').emit('audioMute', data)
-  })
-
-  socket.on('audioUnmute', (data) => {
-      io.to('room').emit('audioUnmute', data)
-  })
 
   socket.on('disconnect', () => {
     const user = users.remove(socket.id)

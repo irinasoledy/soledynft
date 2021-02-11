@@ -1,6 +1,7 @@
 const colors = require('vuetify/es5/util/colors').default
 
 module.exports = {
+  telemetry: false,
   mode: 'universal',
   /*
   ** Headers of the page

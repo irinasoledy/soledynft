@@ -1,6 +1,16 @@
+const Room = require('../models/user')
+
 class Users {
   constructor() {
     this.users = []
+  }
+
+  CreateUser(req, res){
+      const user = new User({
+          name: req.body.name
+      })
+
+      room.save()
   }
 
   add(user) {

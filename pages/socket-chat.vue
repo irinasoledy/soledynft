@@ -30,18 +30,6 @@
                                 </v-icon>
                             </v-btn>
 
-                            <!-- <v-btn class="ma-2" color="red" dark @click="cancelVideConference" v-if="videoConference">
-                                <v-icon dark center >
-                                    mdi-video-off
-                                </v-icon>
-                            </v-btn> -->
-
-                            <!-- <v-btn class="ma-2" color="green" dark v-if="videoConference" @click="cancelVideConference">
-                                <v-icon dark center>
-                                    mdi-microphone-off
-                                </v-icon>
-                            </v-btn> -->
-
                             <v-btn class="ma-2" color="green" dark v-if="videoConference && (mutedVideo === false)" @click="muteVideo">
                                 <v-icon dark center>
                                     mdi-video
@@ -138,8 +126,8 @@
 
 <script>
 import { mapState } from "vuex";
-import Message from "@/components/Message";
-import ChatForm from "@/components/ChatForm";
+import Message from "@/components/chat/Message";
+import ChatForm from "@/components/chat/ChatForm";
 
 export default {
   middleware: ["chat"],

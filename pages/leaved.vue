@@ -1,23 +1,3 @@
-<!-- <template lang="html">
-    <div class="">
-        <h4 class="text-center">The conference is over.</h4>
-    </div>
-</template> -->
-
-<!-- <template>
-      <v-container>
-          <v-row
-            justify="center"
-            align="center"
-          >
-            <v-chip draggable>
-              <h4 class="text-center">The conference is over.</h4>
-            </v-chip>
-          </v-row>
-      </v-container>
-
-</template> -->
-
 <template>
   <v-parallax
     dark
@@ -34,11 +14,11 @@
           The conference is over.
         </h1>
         <h4 class="subheading">
-            <NuxtLink to="/">
+            <!-- <NuxtLink to="/">
                 go home
             </NuxtLink>
-            <small> or </small>
-            <NuxtLink to="/socket">
+            <small> or </small> -->
+            <NuxtLink to="/">
                 create new conference
             </NuxtLink>
         </h4>
