@@ -1,6 +1,6 @@
 # nuxt-chat
 
-> My bedazzling Nuxt.js project
+> Chat project
 
 ## Build Setup
 
