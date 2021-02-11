@@ -14,7 +14,7 @@ async function start() {
     const { host, port } = nuxt.options.server
 
     try {
-        await mongoose.connect('mongodb://localhost:27017/chat', {
+        await mongoose.connect('mongodb://127.0.0.1:27017/chat', {
             useNewUrlParser: true,
             useFindAndModify: false,
             useUnifiedTopology: true
