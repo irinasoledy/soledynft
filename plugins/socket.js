@@ -5,7 +5,7 @@ export default function({ store }) {
   Vue.use(
     new VueSocketIO({
       debug: false,
-      connection: 'https://demo.terradigital.online',
+      connection: 'http://localhost:3000',
       vuex: {
         store,
         actionPrefix: 'SOCKET_',

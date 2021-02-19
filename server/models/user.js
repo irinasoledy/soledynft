@@ -9,6 +9,10 @@ const schema = new Schema({
         type: String,
         default: ''
     },
+    login: {
+        type: String,
+        default: ''
+    },
     phone: {
         type: String,
         default: ''

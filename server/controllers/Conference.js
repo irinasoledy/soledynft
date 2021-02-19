@@ -4,8 +4,6 @@ const History = require('../models/history')
 const Message = require('../models/message')
 
 class Conference {
-    constructor() {}
-
     // create employee
     async createEmployeeUser(req, res)
     {

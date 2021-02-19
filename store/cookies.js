@@ -12,7 +12,7 @@ export const mutations = {
 
 export const actions = {
     async setUserCookies({ commit }, data){
-        await axios.get("init-user-cookie").then(data => {
+        await axios.get("/init-user-cookie").then(data => {
             commit('SET_USER_COOKIE', data.data)
         })
     }
