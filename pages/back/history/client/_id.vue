@@ -4,23 +4,17 @@
         no-gutters
         style="height: 150px;"
     >
-    <v-col cols="12">
-        <AreaChat v-if="messages.length" :messages="messages" :client="client" :employee="authUser"></AreaChat>
-    </v-col>
+        <v-col cols="12">
+            <AreaChat v-if="messages.length" :messages="messages" :client="client" :employee="authUser" :room="room"></AreaChat>
+            <TextChat v-if="messages.length" :client="client" :employee="authUser" :room="room"></TextChat>
+        </v-col>
     </v-row>
-        <!-- <div v-if="historyClientsList.length">
-            <ListChat :users="historyClientsList" :employee="user"></ListChat>
-        </div>
-        <div v-else>
-            <v-col cols="12" class="text-center">
-                <div>The employee has no history.</div>
-            </v-col>
-        </div> -->
     </v-container>
 </template>
 
 <script>
 import ListChat from "@/components/dashboard/widgets/chat/ListChat"
+import TextChat from "@/components/dashboard/widgets/chat/TextChat"
 import { mapActions, mapGetters } from "vuex"
 import axios from "axios"
 
@@ -30,6 +24,7 @@ export default {
         return {
             users: [],
             messages: [],
+            room: '',
             client: {},
         }
     },
@@ -38,6 +33,7 @@ export default {
         employees: 'admin/getEmployees',
         clients: 'admin/getClients',
         historyClientsList: 'admin/getHistoryClientsList',
+        getUserMessages : 'chat/getUserMessages'
     }),
     async mounted(){
         this.client = await this.clients.find((client) => client._id === this.$route.params.id)
@@ -49,16 +45,17 @@ export default {
     methods: {
         ...mapActions({
             'removeEmployee': 'admin/removeEmployee',
-            'getClientsHitoryList' : 'admin/getClientsHitoryList'
+            'getClientsHitoryList' : 'admin/getClientsHitoryList',
+            'getClientMessages' : 'chat/getClientMessages'
         }),
         async showMessages(){
             const id = this.client._id
-            await axios.post('/back/history/get-messages', {id})
-                .then(response => {
-                    this.messages = response.data
-                }).catch(err => {
-                    console.log(err);
-                })
+            this.getClientMessages(id).then(() => {
+                this.messages = this.getUserMessages
+                if (this.messages.length) {
+                    this.room = this.messages[this.messages.length - 1].room
+                }
+            })
         },
         getClientList(){
             this.getClientsHitoryList(this.user._id)

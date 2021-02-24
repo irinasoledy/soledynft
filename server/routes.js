@@ -11,6 +11,7 @@ const employee = require('./controllers/Admin/Employee')()
 const app = require('./controllers/Admin/App')()
 const client = require('./controllers/Admin/Client')()
 const history = require('./controllers/Admin/History')()
+const languageController = require('./controllers/Admin/LanguageController')()
 
 
 router.get('/token', async (req, res) => await twilio.getToken(req, res))
@@ -55,7 +56,12 @@ router.post('/back/client/edit-account', (req, res) => client.editAccount(req, r
 router.post('/back/history/get-clients-list', (req, res) => history.getClientsList(req, res) )
 router.post('/back/history/get-messages', (req, res) => history.getClientMessages(req, res) )
 
-
+// Language routes:
+router.get('/back/languages/get', (req, res) => languageController.get(req, res))
+router.post('/back/languages/create', (req, res) => languageController.create(req, res))
+router.post('/back/languages/update', (req, res) => languageController.update(req, res))
+router.post('/back/languages/remove', (req, res) => languageController.remove(req, res))
+router.post('/back/languages/change-status', (req, res) => languageController.changeStatus(req, res))
 
 
 router.get('/get-cookie', (req, res) => {

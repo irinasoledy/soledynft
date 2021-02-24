@@ -44,12 +44,12 @@
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-avatar :color="item.sendBy == 'client' ? 'indigo': '#27ae60'" size="36" v-bind="attrs"
                                         v-on="on">
-                                        <span v-if="item.sendBy == 'client'" class="white--text">{{ item.employee.name[0] }}</span>
-                                        <span v-else class="white--text">{{ item.client.name[0] }}</span>
+                                        <span v-if="item.sendBy == 'client'" class="white--text">{{ item.client.name[0] }}</span>
+                                        <span v-else class="white--text">{{ item.employee.name[0] }}</span>
                                     </v-avatar>
                                 </template>
-                                <span v-if="item.sendBy != 'client'">{{ item.client.name }}</span>
-                                <span v-else>{{ item.employee.name }}</span>
+                                <span v-if="item.sendBy != 'client'">{{ item.employee.name }}  emploee</span>
+                                <span v-else>{{ item.client.name }}</span>
                             </v-tooltip>
                             <span v-if="item.sendBy != 'client'" class="mess message-employee ml-3">
                             {{ item.message }}
@@ -59,25 +59,13 @@
                     </v-col>
                 </v-row>
             </v-container>
-            <!-- <div fixed>
-                <v-container class="ma-0 pa-0">
-                  <v-row no-gutters>
-                    <v-col>
-                      <div class="d-flex flex-row align-center">
-                        <v-text-field v-model="msg" placeholder="Type Something" @keypress.enter="send"></v-text-field>
-                        <v-btn icon class="ml-4" @click="send"><v-icon>mdi-send</v-icon></v-btn>
-                      </div>
-                    </v-col>
-                  </v-row>
-                </v-container>
-                </div> -->
         </v-card>
     </div>
 </template>
 
 <script>
 export default {
-  props: ['messages', 'client', 'employee'],
+  props: ['messages', 'client', 'employee', 'room'],
   data(){
     return {
         clientMessages: 0,
@@ -90,6 +78,7 @@ export default {
           this.clientMessages = 0
           this.employeeMessages = 0
           this.messagesCount()
+          console.log(this.messages);
       }
   },
   mounted(){
@@ -97,13 +86,20 @@ export default {
   },
   methods: {
       messagesCount(){
-          this.messages.forEach((message) => {
-              if (message.sendBy == "client") {
-                  this.clientMessages++
-              }else{
-                  this.employeeMessages++
-              }
-          })
+          const data = {
+              name: this.employee,
+              room: this.client._id
+          }
+          this.$socket.emit("employeeJoined", data, response => {
+              this.messages.forEach((message) => {
+                  if (message.sendBy == "client") {
+                      this.clientMessages++
+                  }else{
+                      this.employeeMessages++
+                  }
+              })
+          });
+
       },
       dateToYMD(date) {
           let strArray=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -143,7 +139,7 @@ export default {
 }
 .area-card{
     margin-top: -60px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 140px);
     overflow-x: hidden;
 }
 .message-client{

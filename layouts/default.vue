@@ -1,9 +1,5 @@
 <template>
     <v-app app>
-         <!-- cookie - {{ this.$store.state.chat.cookie }}<br>
-         client - {{ this.$store.state.chat.client }}<br>
-         emplooy - {{ this.$store.state.chat.employee }}<br>
-         user - {{ this.$store.state.chat.user }} -->
         <nuxt />
     </v-app>
 </template>
@@ -22,7 +18,6 @@ export default {
         if (!this.$store.state.chat.cookie) {
             this.setUserCookies()
         }
-
     },
     methods: {
         ...mapActions({

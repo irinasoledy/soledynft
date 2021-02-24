@@ -8,7 +8,7 @@
                     <!-- Page Header -->
                     <page-header></page-header>
                     <div class="page-wrapper">
-                        <v-scroll-y-transition mode="out" hide-on-leave="true">
+                        <v-scroll-y-transition>
                             <nuxt/>
                         </v-scroll-y-transition>
                     </div>

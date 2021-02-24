@@ -140,7 +140,7 @@ const NewMenu = [
       {name: 'dashboard', title: 'Dashboard', href: '/back/dashboard'},
       {name: 'manager-one', title: 'Employees', href: '/back/employees'},
       {name: 'cr-managers', title: 'My area', href: '/back/my-area'},
-      // {name: 'stats', title: 'Stats and Reports', href: '/stats'},
+      {name: 'languages', title: 'Languages', href: '/back/languages'},
 ]
 // reorder menu
 Menu.forEach((item) => {

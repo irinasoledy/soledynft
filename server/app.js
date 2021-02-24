@@ -34,8 +34,12 @@ io.on('connection', socket => {
         }
 
         if (data.user && data.room) {
-            // await conference.createMessage(data)
-            io.to(data.room._id).emit('newMessage', m(data.user.name, data.text, data.user._id))
+            const res = {
+                message: data.message,
+                simpleMessage: m(data.user.name, data.text, data.user._id),
+            }
+
+            io.to(data.room._id).emit('newMessage', res)
         }
         cb()
     })

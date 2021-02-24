@@ -65,9 +65,6 @@
                        align="center"
                        justify="end"
                        >
-                       <!-- <v-icon class="mr-1 call-icon" >
-                           mdi-message-reply
-                       </v-icon> -->
                        <v-icon class="mr-1 call-icon" @click="joinRoom(room._id, room.employee)">
                            mdi-phone
                        </v-icon>
@@ -112,7 +109,6 @@ export default {
             setClientAsUser : 'chat/setClientAsUser',
         }),
         async joinRoom(roomId, employee){
-            console.log(this.user);
             this.$socket.emit("joinExistingRoom", {roomId : roomId, userId : this.user._id}, async response => {
                 await this.setClientAsUser(employee)
                 this.$router.push("/chat")

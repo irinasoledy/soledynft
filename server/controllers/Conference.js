@@ -74,7 +74,12 @@ class Conference {
            client: req.body.clientId,
            room: req.body.roomId,
            sendBy: req.body.sendBy
-       }).save()
+       })
+       .save()
+       .then(m => m.populate('client').execPopulate())
+       .then((m) =>
+            m.populate('employee').execPopulate()
+       )
 
        return res.json(message)
     }
