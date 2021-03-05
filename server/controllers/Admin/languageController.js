@@ -1,4 +1,4 @@
-const Language = require('../../Models/language');
+const Language = require('../../models/language');
 
 class LanguageController {
     async get(req, res)
@@ -53,7 +53,7 @@ class LanguageController {
             return res.status(400).send(`Error on delete language. ` + e)
         }
     }
-    
+
 
     async changeStatus(req, res)
     {
