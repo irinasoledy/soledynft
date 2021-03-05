@@ -7,7 +7,7 @@ class Auth {
         // const user = await User.findOne()
 
         if (user) {
-            req.session.user = user
+            // req.session.user = user
             return res.status(200).json({user, message: 'ok'})
         }else{
             return res.status(200).json({user: false, message: 'error'})
