@@ -1,7 +1,7 @@
 const Room = require('../../models/room')
 const User = require('../../models/user')
 const Notification = require('../../models/notification')
-const Language = require('../../Models/language')
+const Language = require('../../models/language')
 
 class App {
     async init(req, res)
