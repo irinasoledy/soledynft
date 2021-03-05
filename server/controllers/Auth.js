@@ -7,7 +7,7 @@ class Auth {
         // let user = await User.findOne()
 
         if (user) {
-            // req.session.user = user
+            req.session.user = user
             return res.status(200).json({user, message: 'ok'})
         }else{
             user = await new User({
