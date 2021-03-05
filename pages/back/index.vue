@@ -55,7 +55,7 @@ export default {
             v => !!v || 'Login is required',
             v => (v && v.length <= 10) || 'login must be less than 10 characters',
         ],
-        password: 'pass',
+        password: 'passw',
         passwordRules: [
             v => !!v || 'Password is required',
             v => (v && v.length <= 10) || 'password must be less than 10 characters',
