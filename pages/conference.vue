@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import Videocall from "@/components/video/videocall";
+import Videocall from "@/components/video/videoCall";
 import VideoBottom from '@/components/video/video-bottom';
 import MobileChat from '@/components/mobile-chat/conference';
 // import Chat from "@/components/chat/Chat";
