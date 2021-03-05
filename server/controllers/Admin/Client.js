@@ -1,5 +1,6 @@
 const Room = require('../../models/room')
 const User = require('../../models/user')
+const UserAction = require('../../models/userAction')
 const Notification = require('../../models/notification')
 
 class Client
@@ -7,8 +8,9 @@ class Client
     async getAll(req, res)
     {
         try {
-            let clients = await User.find({type: 'client'})
-            return res.status(200).json(clients)
+            const clients = await User.find({type: 'client'})
+            const actions = await UserAction.find().populate('userId')
+            return res.status(200).json({clients, actions})
         } catch (e) {
             return res.status(404).json({message: 'error'})
         }

@@ -3,10 +3,12 @@ import axios from "axios"
 export const state = () => ({
     employees: [],
     clients: [],
+    clientActions: [],
     authUser: false,
     status: false,
     notifications: [],
     historyClientsList: [],
+    languages: [],
 })
 
 export const mutations = {
@@ -16,6 +18,7 @@ export const mutations = {
     INIT_APP_DATA(state, data){
         state.employees = data.employees
         state.authUser = data.authUser
+        state.languages = data.languages
     },
     ADD_NEW_EMPLOYEE(state, data){
         state.employees.push(data)
@@ -26,15 +29,16 @@ export const mutations = {
         })
     },
     SET_USER_STATUS(state, data){
-        state.status = data.user.online
+        state.status = data.user.status
         state.authUser = data.user
         state.notifications = data.notifications
     },
     SET_NOTIFICATIONS(state, data){
         state.notifications = data.notifications
     },
-    SET_CLIENTS(state, clients){
-        state.clients = clients
+    SET_CLIENTS(state, data){
+        state.clients = data.clients
+        state.clientActions = data.actions
     },
     REMOVE_CLIENT(state, id){
         state.clients = state.clients.filter(function(item) {
@@ -43,6 +47,9 @@ export const mutations = {
     },
     SET_HISTORY_CLIENT_LIST(state, data){
         state.historyClientsList = data
+    },
+    SOCKET_refreshActions(state, data){
+        state.clientActions = data.actionsAll
     }
 }
 
@@ -135,10 +142,12 @@ export const actions = {
 }
 
 export const getters = {
-    getEmployees(state){ return state.employees },
-    getAuthUser(state){ return state.authUser },
-    getStatus(state){ return state.status },
-    getNotifications(state){ return state.notifications },
-    getClients(state){ return state.clients },
-    getHistoryClientsList(state){ return state.historyClientsList },
+    getEmployees: state => state.employees,
+    getAuthUser: state => state.authUser,
+    getStatus: state => state.status,
+    getNotifications: state => state.notifications,
+    getClients: state => state.clients,
+    getHistoryClientsList: state => state.historyClientsList,
+    getLanguages: state => state.languages,
+    getActions: state => state.clientActions,
 }

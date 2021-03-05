@@ -46,6 +46,7 @@
 import { mapGetters, mapActions } from "vuex"
 
 export default {
+    layout: 'empty',
     data: () => ({
         message: '',
         valid: true,
@@ -72,7 +73,9 @@ export default {
     },
     methods: {
         ...mapActions({
-            loginUser : 'admin/login',
+            loginUser: 'admin/login',
+
+            setUserStatus: 'admin/setUserStatus',
         }),
         submit () {
             if (this.$refs.form.validate()) {

@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import {Items as Users} from '@/util/user'
+import { Items as Users } from '@/util/user'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -126,7 +126,7 @@ export default {
             return d.toISOString().substr(0, 10);
         });
         this.getClientsList()
-        console.log(this.clients, 'mlcmsd');
+        // console.log(this.clients, 'mlcmsd');
     },
     computed: {
         user: {
@@ -139,7 +139,9 @@ export default {
                 return this.status()
             },
             set(status){
-                return this.setUserStatus({status, emploeeId: this.user._id})
+                this.setUserStatus({status, emploeeId: this.user._id}).then(() => {
+                    this.$socket.emit('shareEmployeeStatus', this.user)
+                })
             }
         },
         clients: {

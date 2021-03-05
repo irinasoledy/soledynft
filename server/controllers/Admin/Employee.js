@@ -1,5 +1,6 @@
 const Room = require('../../models/room')
 const User = require('../../models/user')
+const EmployeeService = require('../../models/employeeService')
 const Notification = require('../../models/notification')
 
 class Employee
@@ -82,8 +83,14 @@ class Employee
     {
         try {
             await User.findOneAndUpdate(
-                { _id: req.body.emploeeId },{ $set: { online: req.body.status } }, {new: true}
+                { _id: req.body.emploeeId },{ $set: { status: req.body.status } }, {new: true}
             )
+
+            const room = await new Room({
+                employee: req.body.emploeeId,
+                active: true,
+                name: this.uid()
+            })
 
             const user = await User.findOne({_id: req.body.emploeeId})
             const status = req.body.status ? ' set up online' : ' set up offline'
@@ -94,7 +101,9 @@ class Employee
             }).save()
 
             const notifications = await Notification.find().sort({date: -1}).populate('user')
+
             const data = {
+                room: room,
                 user: user,
                 notifications: notifications
             }
@@ -103,6 +112,38 @@ class Employee
         } catch (e) {
             return res.status(505).json({message: 'Server error'})
         }
+    }
+
+    async addServiceToEmployee(req, res)
+    {
+        try {
+            const services = req.body.data
+            await EmployeeService.deleteMany({employee: req.body.employeeId})
+
+            await services.forEach(service => {
+                new EmployeeService({
+                    employee: req.body.employeeId,
+                    service: service,
+                }).save()
+            })
+
+            const allServices = await EmployeeService.find({employee: req.body.employeeId})
+
+            return res.status(200).json(allServices)
+        } catch (e) {
+            return res.status(505).json({message: 'Server Error'})
+        }
+    }
+
+    async getEmployeeServices(req, res)
+    {
+        const services = await EmployeeService.find({employee: req.body.employeeId})
+        return res.status(200).json(services)
+    }
+
+    uid()
+    {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
     }
 
 }

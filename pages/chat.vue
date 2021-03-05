@@ -49,7 +49,7 @@ import Chat from "@/components/chat/Chat";
 import Waiting from "@/components/chat/Waiting";
 
 export default {
-    middleware: ['chat'],
+    // middleware: ['chat'],
     head() {
         return {
             title: this.alert !== null ? this.alert : "Wellcome to room"

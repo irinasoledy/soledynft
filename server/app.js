@@ -3,6 +3,9 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 const users = require('./controllers/Users')()
 const conference = require('./controllers/Conference')()
+// const auth = require('./controllers/auth')()
+
+const actions = require('./services/ActionService')()
 
 const m = (name, text, id) => ({ name, text, id })
 
@@ -10,15 +13,29 @@ io.on('connection', socket => {
 
     // Start: employee create a room
     socket.on('employeeJoined', (data, cb) => {
-        socket.join(data.room._id)
+        socket.join(data.roomId)
         cb()
     })
 
     // Start: client join a room
     socket.on('joinExistingRoom', async (data, cb) => {
-        const response = await conference.createClientUser(data.roomId, data.userId)
+        // const response = await conference.createClientUser(data.roomId, data.userId)
+        // socket.join(data.roomId)
+        // io.to(data.roomId).emit('joinExistingRoom', response)
+        // cb()
+    })
+
+    // joinRoomAsClient
+    socket.on('joinRoomAsClient', async (data, cb) => {
         socket.join(data.roomId)
-        io.to(data.roomId).emit('joinExistingRoom', response)
+        io.to(data.roomId).emit('joinRoom', {client: data.client})
+        cb()
+    })
+
+    // joinRoomAsClient
+    socket.on('joinRoomAsEmployee', async (data, cb) => {
+        socket.join(data.roomId)
+        io.to(data.roomId).emit('joinRoom', {employee: data.employee})
         cb()
     })
 
@@ -39,7 +56,7 @@ io.on('connection', socket => {
                 simpleMessage: m(data.user.name, data.text, data.user._id),
             }
 
-            io.to(data.room._id).emit('newMessage', res)
+            io.to(data.room).emit('newMessage', res)
         }
         cb()
     })
@@ -67,7 +84,32 @@ io.on('connection', socket => {
         io.to(data.roomId).emit('audioUnmute', data.userId)
     })
 
+    socket.on('shareUserAction', async data => {
+        socket.join(data.userId)
+        const action = await actions.addUser(data)
+        const actionsAll = await actions.getAllActions()
 
+        io.emit('refreshActions', {action, actionsAll})
+    })
+
+    socket.on('shareEmployeeStatus', employee => {
+        io.emit('refreshEmployeeStatus', employee)
+        socket.join(employee._id)
+    })
+
+    socket.on('call', roomId => {
+        socket.join(roomId)
+        socket.broadcast.to(roomId).emit('call', {roomId, call: true})
+        io.to(roomId).emit('setRoom', {roomId, call: true})
+    })
+
+    socket.on('rejectCall', data => {
+        io.to(data.roomId).emit('call_reject', true)
+    })
+
+    socket.on('responseCall', data => {
+        io.to(data.roomId).emit('call_response', true)
+    })
 
 
 

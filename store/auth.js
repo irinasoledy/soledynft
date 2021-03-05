@@ -22,5 +22,5 @@ export const actions = {
 }
 
 export const getters = {
-    getAuth(state){ return state.auth },
+    getAuth: state => state.auth
 }

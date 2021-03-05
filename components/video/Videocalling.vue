@@ -184,14 +184,14 @@ export default {
             });
             document.getElementById('my-video-chat-window').style.display = "none";
             this.mutedVideo = true
-            this.$socket.emit("videoMute", { roomId: this.room._id, userId: this.user._id });
+            this.$socket.emit("videoMute", { roomId: this.room, userId: this.user._id });
         },
         muteAudio(){
             this.activeRoom.localParticipant.audioTracks.forEach(publication => {
               publication.track.disable();
             });
             this.mutedAudio = true
-            this.$socket.emit("audioMute", { roomId: this.room._id, userId: this.user._id });
+            this.$socket.emit("audioMute", { roomId: this.room, userId: this.user._id });
         },
         unmuteVideo(){
             this.mutedVideo = false
@@ -199,14 +199,14 @@ export default {
             this.activeRoom.localParticipant.videoTracks.forEach(publication => {
               publication.track.enable();
             });
-            this.$socket.emit("videoUnmute", { roomId: this.room._id, userId: this.user._id });
+            this.$socket.emit("videoUnmute", { roomId: this.room, userId: this.user._id });
         },
         unmuteAudio(){
             this.mutedAudio = false
             this.activeRoom.localParticipant.audioTracks.forEach(publication => {
               publication.track.enable();
             });
-            this.$socket.emit("audioUnmute", { roomId: this.room._id, userId: this.user._id });
+            this.$socket.emit("audioUnmute", { roomId: this.room, userId: this.user._id });
         },
         // changeVideoProccess(){
         //     // if (this.mutedVideo === false) {
@@ -220,7 +220,7 @@ export default {
         //
         // },
         stopChat(){
-            this.$socket.emit("stop", this.room._id);
+            this.$socket.emit("stop", this.room);
         },
         cancelVideConference: function(){
             this.activeRoom.disconnect()
@@ -236,7 +236,7 @@ export default {
 
             // console.log(this.user);
             // Request a new token
-            axios.get(`http://localhost:3000/token?identity=${this.user.name}`)
+            axios.get(`/token?identity=${this.user.name}`)
                 .then(function (response) {
                     _this.accessToken = response.data.token
                 })
@@ -251,7 +251,7 @@ export default {
             const { connect, createLocalVideoTrack } = require('twilio-video');
             const _this = this;
 
-            connect( this.accessToken, { name: this.room._id }).then(room => {
+            connect( this.accessToken, { name: this.room }).then(room => {
                 console.log(`Successfully joined a Room: ${room}`);
                 _this.activeRoom = room;
 

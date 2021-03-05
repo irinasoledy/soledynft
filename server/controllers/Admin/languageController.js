@@ -11,6 +11,7 @@ class LanguageController {
         }
     }
 
+
     async create(req, res)
     {
         try {
@@ -26,6 +27,7 @@ class LanguageController {
         }
     }
 
+
     async update(req, res)
     {
         try {
@@ -40,6 +42,7 @@ class LanguageController {
         }
     }
 
+
     async remove(req, res)
     {
         try {
@@ -50,6 +53,7 @@ class LanguageController {
             return res.status(400).send(`Error on delete language. ` + e)
         }
     }
+    
 
     async changeStatus(req, res)
     {

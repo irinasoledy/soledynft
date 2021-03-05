@@ -1,6 +1,6 @@
 <template>
-    <v-flex xs12>
-        <v-text-field label="Message..." outline v-model="text" @keydown.enter="send"/>
+    <v-flex xs12 class="chat-form">
+        <v-text-field label="Message..." outline v-model="text" class="form-message" @keydown.enter="send"/>
     </v-flex>
 </template>
 
@@ -12,7 +12,8 @@ export default {
         text: ""
     }),
     computed: mapGetters({
-        room: 'chat/getRoom',
+        // room: 'chat/getRoom',
+        room: 'call/getRoomId',
         employee: 'chat/getEmployee',
         client: 'chat/getClient',
         history: 'chat/getHistory',
@@ -24,9 +25,9 @@ export default {
         }),
         send() {
             const data = {
-                roomId : this.room._id,
-                clientId : this.room.client,
-                employeeId : this.room.employee,
+                roomId : this.room,
+                clientId : this.client,
+                employeeId : this.employee,
                 historyId : this.history ? this.history._id : 'none',
                 text : this.text,
                 sendBy: this.user.type
@@ -38,8 +39,8 @@ export default {
                     {
                         text: this.text,
                         user: this.$store.state.chat.user,
-                        room: this.$store.state.chat.room,
-                        history: this.$store.state.chat.history ?? null,
+                        room: this.room,
+                        history: null,
                     },
                     data => {
                         if (typeof data === "string") {
@@ -52,5 +53,5 @@ export default {
             })
         }
     }
-};
+}
 </script>

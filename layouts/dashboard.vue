@@ -35,6 +35,61 @@
                 <v-icon>mdi-close</v-icon>
             </v-btn>
         </v-snackbar>
+
+        <v-dialog
+            v-model="dialog"
+            fullscreen
+            hide-overlay
+            transition="dialog-bottom-transition"
+            scrollable
+            >
+            <v-card
+            color="primary"
+            dark
+            >
+                <v-card-text>
+                    Incoming call from {{ roomId }}...
+                    <v-progress-linear
+                        indeterminate
+                        color="white"
+                        class="mb-0"
+                    ></v-progress-linear>
+                </v-card-text>
+
+                <v-card-text class="text-center">
+                    <h3>Guest user </h3>
+                    <h4>Room ID  {{ roomId }}</h4>
+                </v-card-text>
+
+                <div class="text-center">
+                    <v-btn
+                    @click="rejectCall"
+                    class="mx-2"
+                    fab
+                    dark
+                    large
+                    color="red"
+                    >
+                        <v-icon dark>
+                            mdi-phone-hangup
+                        </v-icon>
+                    </v-btn>
+
+                    <v-btn
+                    @click="responseCall"
+                    class="mx-2"
+                    fab
+                    dark
+                    large
+                    color="green"
+                    >
+                        <v-icon dark>
+                            mdi-phone
+                        </v-icon>
+                    </v-btn>
+                </div>
+            </v-card>
+        </v-dialog>
     </div>
 </template>
 
@@ -45,6 +100,7 @@ export default {
     data: () => ({
         expanded: true,
         rightDrawer: false,
+        dialog: false,
         snackbar: {
             show: false,
             text: '',
@@ -54,12 +110,42 @@ export default {
     mounted(){
         this.boot()
     },
+    watch: {
+        call(){
+            this.dialog = true
+            var audio = new Audio('/salamisound-5580171-steam-locomotive-whistle.mp3'); // path to file
+            audio.play();
+            console.log('calling.....');
+            this.setNullCall()
+        },
+        reject(){
+            this.dialog = false
+            this.setDefaultReject()
+        },
+        response(){
+            this.$socket.emit("joinRoomAsClient", {roomId : this.roomId, client : this.user}, async response => {
+                await this.setUser(this.user)
+                this.$router.push("/conference")
+            });
+            this.setDefaultResponse()
+        }
+    },
     computed: mapGetters({
-        authUser: 'admin/getAuthUser'
+        authUser: 'admin/getAuthUser',
+        call : 'call/getCall',
+        roomId : 'call/getRoomId',
+        user: 'chat/getUser',
+        'reject' : 'call/getReject',
+        'response' : 'call/getResponse',
     }),
     methods: {
         ...mapActions({
-            'initApp' : 'admin/initApp'
+            'initApp' : 'admin/initApp',
+            'setNullCall' : 'call/setNullCall',
+            'setClientAsUser' : 'chat/setClientAsUser',
+            'setUser' : 'chat/setUser',
+            'setDefaultReject' : 'call/setDefaultReject',
+            'setDefaultResponse' : 'call/setDefaultResponse',
         }),
         openThemeSettings() {
             this.$vuetify.goTo(0)
@@ -67,6 +153,20 @@ export default {
         },
         boot(){
             this.initApp()
+        },
+        rejectCall(){
+            this.dialog = false
+            this.$socket.emit('rejectCall', { roomId: this.roomId })
+        },
+        responseCall(){
+            const data = {
+                roomId: this.roomId
+            }
+            this.$socket.emit('responseCall', { roomId: this.roomId })
+            this.$socket.emit("joinRoomAsEmployee", {roomId : this.roomId, employee : this.authUser}, async response => {
+                await this.setUser(this.authUser)
+                this.$router.push("/conference")
+            });
         }
     }
 }

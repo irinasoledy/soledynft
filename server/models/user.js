@@ -33,6 +33,10 @@ const schema = new Schema({
         type: Boolean,
         default: false
     },
+    status: {
+        type: Boolean,
+        default: false,
+    },
     password: {
         type: String,
         default: ''

@@ -1,99 +1,104 @@
 <template>
     <v-sheet class="about-content">
         <v-container grid-list-xl fluid class="grid-desk">
-            <v-card class="profile-edit">
-                <div id="formInfo">
-                    <v-card-title  class="d-flex justify-space-between elevation-1">
-                        <h4>Edit employee</h4>
-                    </v-card-title>
-                    <v-card-title class="pb-0 mt-3">
-                        <h5 class="mb-0">User Info</h5>
-                    </v-card-title>
-                </div>
-                <v-card-text class="pt-0">
-                    <v-form class="row" ref="info" v-model="valid" lazy-validation>
-                        <div class="col-md-6 col-12">
-                            <v-text-field
-                                label="Full name"
-                                v-model="editedUser.name"
-                                :rules="rules.nameRules"
-                                required
-                            ></v-text-field>
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <v-select
-                                :items="roles"
-                                label="Role"
-                                v-model="editedUser.type"
-                            ></v-select>
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <v-text-field
-                                label="Email"
-                                type="email"
-                                v-model="editedUser.email"
-                                :rules="rules.emailRules"
-                                required
-                            ></v-text-field>
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <v-text-field
-                                label="Phone"
-                                type="number"
-                                v-model="editedUser.phone"
-                                :rules="rules.phoneRules"
-                                required
-                            ></v-text-field>
-                        </div>
-                        <v-divider class="my-4"></v-divider>
-                        <v-card-title class="d-flex justify-center">
-                            <v-btn color="primary" large class="mt-3 mb-3" @click="submitUserInfo">
-                                Save
-                            </v-btn>
+            <v-flex lg8>
+                <v-card class="profile-edit">
+                    <div id="formInfo">
+                        <v-card-title  class="d-flex justify-space-between elevation-1">
+                            <h4>Edit employee</h4>
                         </v-card-title>
-                    </v-form>
-                </v-card-text>
-                <v-divider class="my-4"></v-divider>
-                <v-card-title class="">
-                    <h5 class="mb-0">Account Data</h5>
-                </v-card-title>
-                <v-card-text>
-                    <v-form class="row" ref="account" v-model="valid" lazy-validation>
-                        <div class="col-md-4 col-12">
-                            <v-text-field
-                                label="Login"
-                                v-model="login=editedUser.login"
-                                :rules="rules.loginRules"
-                                required
-                            ></v-text-field>
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <v-text-field
-                                label="Password"
-                                type="password"
-                                v-model="formData.password"
-                                :rules="rules.passwordRules"
-                                ></v-text-field>
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <v-text-field
-                                label="Repeat Password"
-                                type="password"
-                                v-model="formData.confirmPassword"
-                                :rules="rules.confirmPasswordRules"
-                                required
-                                ></v-text-field>
-                        </div>
-                        <v-divider class="my-4"></v-divider>
-                        <v-card-title class="d-flex justify-center">
-                            <v-btn color="primary" large class="mt-3 mb-3" @click="submitUserAccount">
-                                Save
-                            </v-btn>
+                        <v-card-title class="pb-0 mt-3">
+                            <h5 class="mb-0">User Info</h5>
                         </v-card-title>
-                    </v-form>
-                </v-card-text>
-                <v-divider class="my-4"></v-divider>
-            </v-card>
+                    </div>
+                    <v-card-text class="pt-0">
+                        <v-form class="row" ref="info" v-model="valid" lazy-validation>
+                            <div class="col-md-6 col-12">
+                                <v-text-field
+                                    label="Full name"
+                                    v-model="editedUser.name"
+                                    :rules="rules.nameRules"
+                                    required
+                                ></v-text-field>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <v-select
+                                    :items="roles"
+                                    label="Role"
+                                    v-model="editedUser.type"
+                                ></v-select>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <v-text-field
+                                    label="Email"
+                                    type="email"
+                                    v-model="editedUser.email"
+                                    :rules="rules.emailRules"
+                                    required
+                                ></v-text-field>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <v-text-field
+                                    label="Phone"
+                                    type="number"
+                                    v-model="editedUser.phone"
+                                    :rules="rules.phoneRules"
+                                    required
+                                ></v-text-field>
+                            </div>
+                            <v-divider class="my-4"></v-divider>
+                            <v-card-title class="d-flex justify-center">
+                                <v-btn color="primary" large class="mt-3 mb-3" @click="submitUserInfo">
+                                    Save
+                                </v-btn>
+                            </v-card-title>
+                        </v-form>
+                    </v-card-text>
+                    <v-divider class="my-4"></v-divider>
+                    <v-card-title class="">
+                        <h5 class="mb-0">Account Data</h5>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-form class="row" ref="account" v-model="valid" lazy-validation>
+                            <div class="col-md-4 col-12">
+                                <v-text-field
+                                    label="Login"
+                                    v-model="login=editedUser.login"
+                                    :rules="rules.loginRules"
+                                    required
+                                ></v-text-field>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <v-text-field
+                                    label="Password"
+                                    type="password"
+                                    v-model="formData.password"
+                                    :rules="rules.passwordRules"
+                                    ></v-text-field>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <v-text-field
+                                    label="Repeat Password"
+                                    type="password"
+                                    v-model="formData.confirmPassword"
+                                    :rules="rules.confirmPasswordRules"
+                                    required
+                                    ></v-text-field>
+                            </div>
+                            <v-divider class="my-4"></v-divider>
+                            <v-card-title class="d-flex justify-center">
+                                <v-btn color="primary" large class="mt-3 mb-3" @click="submitUserAccount">
+                                    Save
+                                </v-btn>
+                            </v-card-title>
+                        </v-form>
+                    </v-card-text>
+                    <v-divider class="my-4"></v-divider>
+                </v-card>
+            </v-flex>
+            <v-flex lg4>
+                <EmployeeToService :employee="editedUser" :employeeId="editedUser._id"/>
+            </v-flex>
             <v-snackbar
                 v-model="snackbar"
                 :multi-line="true"
@@ -120,6 +125,7 @@
 <script>
 
 import { mapGetters, mapActions } from "vuex"
+import EmployeeToService from "@/components/dashboard/widgets/features/EmployeeToService"
 
 export default {
     layout: "dashboard",

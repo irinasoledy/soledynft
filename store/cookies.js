@@ -19,5 +19,5 @@ export const actions = {
 }
 
 export const getters = {
-    getUserCookie(state){ return state.user },
+    getUserCookie: state => state.user
 }

@@ -1,152 +1,227 @@
 <template>
-<div>
-   <v-card
-       class="mx-auto top-card"
-       color="#26c6da"
-       dark
-       max-width="600"
-       >
+  <main>
+      <div class="banner">
+        <v-carousel :show-arrows="false" cycle>
+          <v-carousel-item
+            v-for="(item,i) in items"
+            :key="i"
+            :src="item.src"
+          >
+            <v-container class="fill-height">
+              <v-row
+                class="fill-height"
+                align="center"
+                justify="center"
+              >
+                <v-col md12 class="text-center">
+                  <div class="display-1 text-center c-title">
+                    {{ item.text }}
+                  </div>
+                  <v-sheet
+                    class="c-sheet"
+                    elevation="1"
+                    height="auto"
+                    width="auto"
 
-        <v-alert
-            v-if="message"
-            dense
-            border="left"
-            type="warning"
-            >
-            {{ message }}
-        </v-alert>
+                  >
+                    Consultație gratuită
+                  </v-sheet>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-carousel-item>
+        </v-carousel>
+      </div>
+      <div class="callNow">
+        <v-parallax height="200" src="call-now-bg.png">
+          <v-container>
+            <v-row>
+              <v-col>
+                <v-sheet
+                  class="c-sheet text-center"
+                  elevation="0"
+                  height="auto"
+                  width="auto"
+                  >
 
-       <div v-if="!userType">
-           <v-card-title class="text-center">
-               <p class="title font-weight-light text-center full-width">Get started as:</p>
-           </v-card-title>
-           <v-card-text class="text-center">
-               <v-btn @click="setUserType('client')">Client</v-btn>
-               or
-               <v-btn @click="setUserType('employee')">Employee</v-btn>
-           </v-card-text>
-       </div>
-       <div v-else>
-           <v-card-title class="text-center">
-               <v-btn @click="setUserType(false)"> < back</v-btn>
-               <p class="title font-weight-light text-center full-width">Continue as {{ userType }}...</p>
-           </v-card-title>
-           <v-card-text v-if="userType === 'employee'">
-               <v-text-field
-                   v-model="name"
-                   :counter="20"
-                   label="Your full name"
-                   required
-                   ></v-text-field>
-               <v-btn
-                   v-if="name"
-                   class="mr-4"
-                   @click="createRoom"
-                   >
-                   create and connect to room
-               </v-btn>
-           </v-card-text>
-           <v-card-actions class="text-center" v-if="rooms.length == 0 && userType === 'client'">
-               no employee is online
-           </v-card-actions>
-           <v-card-actions v-for="room in rooms" :key="room.id" v-if="userType === 'client'">
-               <v-list-item class="grow">
-                   <v-list-item-avatar color="grey darken-3">
-                       <v-img
-                           class="elevation-6"
-                           alt=""
-                           src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                           ></v-img>
-                   </v-list-item-avatar>
-                   <v-list-item-content>
-                       <v-list-item-title>{{ room.employee.name }}</v-list-item-title>
-                   </v-list-item-content>
-                   <v-row
-                       align="center"
-                       justify="end"
-                       >
-                       <v-icon class="mr-1 call-icon" @click="joinRoom(room._id, room.employee)">
-                           mdi-phone
-                       </v-icon>
-                   </v-row>
-               </v-list-item>
-           </v-card-actions>
-       </div>
-   </v-card>
-</div>
+                  <v-btn
+                    class="ma-2 btn-yell"
+                    medium
+                    max-width="330"
+                    color="secondary"
+                    @click="$nuxt.$emit('open-appointment-form')"
+                  >
+                    <v-icon left>mdi-comment-bookmark</v-icon>
+                    Consultație gratuită
+                  </v-btn>
+                </v-sheet>
+
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-parallax>
+
+      </div>
+      <services></services>
+      <experts></experts>
+      <div class="callNow">
+        <v-parallax height="200" src="call-now-bg.png">
+          <v-container>
+            <v-row>
+              <v-col>
+                <v-sheet
+                  class="c-sheet text-center"
+                  elevation="0"
+                  height="auto"
+                  width="auto"
+                  >
+
+                  <v-btn
+                    class="ma-2 btn-yell"
+                    medium
+                    color="secondary"
+                    @click="$nuxt.$emit('open-appointment-form')"
+                  >
+                    <v-icon left>mdi-comment-bookmark</v-icon>
+                    Consultație gratuită
+                  </v-btn>
+                </v-sheet>
+
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-parallax>
+
+      </div>
+      <section class="testimonials">
+        <v-container>
+          <v-row>
+            <v-col cols="12">
+              <div class="display-1 text-center">
+                Clienții Noștri
+              </div>
+            </v-col>
+            <v-col cols="12">
+              <testimonial></testimonial>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+      <map-contact></map-contact>
+  </main>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
+
+import Testimonial from "@/components/sliders/testimonial"
+import MapContact from "@/components/mapContact.vue"
+import Experts from "@/components/blocs/experts.vue"
+import Services from '@/components/blocs/services.vue'
 
 export default {
-    data: () => ({
-        userType: false,
-        name: '',
-        message: false,
-    }),
-    computed: mapGetters({
-        rooms: 'chat/getRooms',
-        room: 'chat/getRoom',
-        employee: 'chat/getEmployee',
-        client: 'chat/getClient',
-        user: 'chat/getUser',
-    }),
-    mounted : function () {
-        const { message } = this.$route.query;
-        if (message === "noUser") {
-            this.message = "Choose the client or emplooy option";
-        } else if (message === "leftChat") {
-            this.message = "You are out of chat";
-        }
-        this.getActiveRoomList()
-    },
-    methods: {
-        ...mapActions({
-            createNewRoom : 'chat/createNewRoom',
-            getActiveRoomList : 'chat/getActiveRoomList',
-            joinExistingRoom : 'chat/joinExistingRoom',
-            setClientAsUser : 'chat/setClientAsUser',
-        }),
-        async joinRoom(roomId, employee){
-            this.$socket.emit("joinExistingRoom", {roomId : roomId, userId : this.user._id}, async response => {
-                await this.setClientAsUser(employee)
-                this.$router.push("/chat")
-            });
-        },
-        async createRoom(){
-            await this.createNewRoom(this.name)
-            setTimeout(() => {
-                const store = this.$store.state.chat
-                const data = {
-                    name: store.employee,
-                    room: store.room
-                }
-                this.$socket.emit("employeeJoined", data, response => {
-                    this.$router.push("/chat")
-                });
-            }, 1000)
-        },
-        setUserType(type){
-            this.userType = type
-            this.message = false
-            if (type === 'client') {
-                this.getActiveRoomList()
-            }
-        },
-    }
+  layout: "default",
+  components: {
+    Testimonial,
+    MapContact,
+    Experts,
+    Services
+  },
+  data: () => ({
+
+    items: [
+      {
+        src: 'banner.jpg',
+        text: 'Cetățenie Română'
+      },
+      {
+        src: 'banner.jpg',
+        text: 'Programări online'
+      },
+      {
+        src: 'banner.jpg',
+        text: 'Obținerea pașaportului românesc'
+      },
+      {
+        src: 'banner.jpg',
+        text: 'Programări online'
+      },
+    ],
+
+  }),
 }
 </script>
 
-<style>
-    .call-icon{
-        cursor: pointer;
-        margin-left: 10px;
+<style lang="scss">
+
+  .display-1 {
+    color: $custom_blue !important;
+    font-weight: 700 !important;
+  }
+
+  .banner {
+
+    .c-title {
+      color: $custom_blue;
+      font-weight: 900 !important;
+      margin-bottom: 5rem;
     }
-    .text-center{
-        width: 100%;
+
+    .c-sheet {
+      padding: 20px;
+      text-align: center;
+      display: inline;
+      background: rgba($color: $custom_red, $alpha: 1);
     }
-    .top-card{
-        margin-top: 100px;
+
+    .v-responsive__content {
+      background-color: rgba($color: #ffff, $alpha: 0.8);
     }
+  }
+  .callNow {
+    .c-sheet {
+      background: transparent;
+    }
+
+    .btn-yell {
+      background: $custom_yellow !important;
+      color: #000000 !important;
+    }
+  }
+
+  .experts {
+    background-color: $custom_blue;
+    .display-1 {
+      color: #ffff !important;
+    }
+
+    .text {
+      color: #ffff;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+  }
+
+  section {
+    padding: 50px 0;
+  }
+
+  main {
+    padding-bottom: 50px;
+    padding-top: 56px;
+  }
+  @media (min-width: 767px) {
+    .banner {
+
+      .v-window,
+      .v-carousel__item {
+        min-height: 80vh;
+      }
+    }
+  }
+
+  @media (min-width: 992px) {
+    main {
+      padding-top: 118px;
+    }
+  }
 </style>

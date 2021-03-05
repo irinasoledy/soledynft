@@ -27,7 +27,7 @@ export default {
            'messages': 'chat/getMessages',
            'user': 'chat/getUser',
            'messages': 'chat/getMessages',
-           'room': 'chat/getRoom',
+           'room': 'call/getRoomId',
        }),
     watch: {
         messages(){
@@ -37,10 +37,9 @@ export default {
         }
     },
     mounted(){
-        // console.log(this.user.name, this.user._id);
         if (this.user.type === "client") {
             this.getClientMessages(this.user._id).then(() => {
-                this.$socket.emit("shareHistory", {roomId: this.room._id, messages: this.messages})
+                this.$socket.emit("shareHistory", {roomId: this.room, messages: this.messages})
             })
         }
     },
@@ -66,7 +65,7 @@ export default {
     right: 0;
     padding: 1rem;
     height: 80px;
-    background: #212121;
+    /* background: #212121; */
 }
 .c-chat {
     position: absolute;
@@ -81,6 +80,7 @@ export default {
     width: 300px;
 }
 .full-height{
-    height: calc(90vh - 84px);
+    /* height: calc(100vh - 64px); */
+    height: 80vh;
 }
 </style>

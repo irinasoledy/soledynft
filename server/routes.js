@@ -12,6 +12,8 @@ const app = require('./controllers/Admin/App')()
 const client = require('./controllers/Admin/Client')()
 const history = require('./controllers/Admin/History')()
 const languageController = require('./controllers/Admin/LanguageController')()
+const serviceController = require('./controllers/Admin/ServiceController')()
+const front = require('./controllers/Front')()
 
 
 router.get('/token', async (req, res) => await twilio.getToken(req, res))
@@ -28,6 +30,8 @@ router.post('/get-active-room-list', (req, res) => conference.getActiveRoomList(
 router.post('/change-emploee-status', (req, res) => conference.changeEmployeeStatus(req, res))
 router.post('/create-message', (req, res) => conference.createMessagePost(req, res))
 router.post('/get-user-messages', (req, res) => conference.getUserMessages(req, res))
+
+router.post('/employees-by-service', (req, res) => front.getEmployeesByService(req, res))
 
 // router.use((req, res, next) => {
 //     if (1===2) {
@@ -62,6 +66,12 @@ router.post('/back/languages/create', (req, res) => languageController.create(re
 router.post('/back/languages/update', (req, res) => languageController.update(req, res))
 router.post('/back/languages/remove', (req, res) => languageController.remove(req, res))
 router.post('/back/languages/change-status', (req, res) => languageController.changeStatus(req, res))
+
+// Service routes
+router.post('/back/services/create', (req, res) => serviceController.create(req, res))
+
+router.post('/back/add-service-to-employee', (req, res) => employee.addServiceToEmployee(req, res))
+router.post('/back/get-services-employee', (req, res) => employee.getEmployeeServices(req, res))
 
 
 router.get('/get-cookie', (req, res) => {

@@ -1,13 +1,15 @@
 const Room = require('../../models/room')
 const User = require('../../models/user')
 const Notification = require('../../models/notification')
+const Language = require('../../Models/language')
 
 class App {
     async init(req, res)
     {
         try {
             const employees = await User.find({type : 'employee'})
-            return res.status(200).json({authUser: req.session.user, employees})
+            const languages = await Language.find()
+            return res.status(200).json({authUser: req.session.user, employees, languages})
         } catch (e) {
             return res.status(404).json({message: 'error'})
         }

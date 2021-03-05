@@ -32,7 +32,9 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-      {src: '@/plugins/socket', ssr : false}
+      {src: '@/plugins/socket', ssr : false},
+      {src: '~/plugins/vue-agile'},
+      '@/plugins/nestable',
   ],
   components: true,
   /*
@@ -45,9 +47,9 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    'nuxt-mobile',
   ],
   /*
   ** Axios module configuration
@@ -83,7 +85,13 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    transpile: ['vue-agile'],
     extend (config, ctx) {
     }
+},
+axios: {
+    baseURL: 'https://back.itmall.digital',
+    proxyHeaders: false,
+    credentials: false
   }
 }

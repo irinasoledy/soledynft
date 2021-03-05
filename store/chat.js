@@ -16,6 +16,11 @@ export const state = () => ({
     history: {},
     cookie: false,
 
+    // Feauters:
+    camera: true,
+    microphone: true,
+    endChat: false,
+
     // Video calling
     connectRoom: true,
     videoProccess: true,
@@ -43,7 +48,6 @@ export const mutations = {
         state.rooms = data
     },
     SOCKET_newMessage(state, data) {
-        console.log(data);
         state.messages.push(data.simpleMessage)
         state.userMessages.push(data.message)
     },
@@ -51,6 +55,17 @@ export const mutations = {
         state.client = data.user
         state.room = data.room
         state.waiting = false
+    },
+    SOCKET_joinRoom(state, data){
+        if (data.client) {
+            state.client = data.client
+            // state.user = data.user
+        }
+        if (data.employee) {
+            state.employee = data.employee
+            // state.user = data.user
+        }
+        state.room = data.room
     },
     SET_CLIENT_AS_USER(state, employee){
         state.employee = employee
@@ -70,15 +85,14 @@ export const mutations = {
    SOCKET_shareHistory(state, messages){
        state.messages = messages
    },
+   SET_USER(state, user){
+        state.user = user
+   },
 
    // Video calling
 
      SOCKET_stopChat(state){
-         if (state.connectRoom === false) {
-             state.connectRoom = true
-         }else{
-             state.connectRoom = false
-         }
+         state.endChat = state.endChat ? false : true
      },
      SOCKET_changeVideoProccess(state){
          if (state.videoProccess === false) {
@@ -109,6 +123,12 @@ export const mutations = {
      SOCKET_audioUnmute(state, data){
          state.audioMute = false
          state.audioUnmute = data
+     },
+     SWITCH_CAMERA(state, statut){
+         state.camera = statut
+     },
+     SWITCH_MICROPHONE(state, statut){
+         state.microphone = statut
      },
 }
 
@@ -166,27 +186,41 @@ export const actions = {
 
             commit('SET_MESSAGES_HISTORY', {messages: data.data, parsed: parsedMessages})
         })
-    }
+    },
+    setUser({ commit }, user){
+        commit('SET_USER', user)
+    },
+    switchCamera({ commit }, statut){
+        commit('SWITCH_CAMERA', statut)
+    },
+    switchMicrophone({ commit }, statut){
+        commit('SWITCH_MICROPHONE', statut)
+    },
 }
 
 export const getters = {
-    getRooms(state){ return state.rooms },
-    getRoom(state){ return state.room },
-    getEmployee(state){ return state.employee },
-    getClient(state){ return state.client },
-    getMessages(state){ return state.messages },
-    getUserMessages(state){ return state.userMessages },
-    getLastMessage(state){ return state.lastMessage },
-    getUser(state){ return state.user },
-    getHistory(state){ return state.history },
-    getUserCookie(state){ return state.cookie },
-    getWaiting(state){ return state.waiting },
+    getRooms: state => state.rooms,
+    getRoom: state => state.room,
+    getEmployee: state => state.employee,
+    getClient: state => state.client,
+    getMessages: state => state.messages,
+    getUserMessages: state => state.userMessages,
+    getLastMessage: state => state.lastMessage,
+    getUser: state => state.user,
+    getHistory: state => state.history,
+    getUserCookie: state => state.cookie,
+    getWaiting: state => state.waiting,
+    // to change
+    getConnectRoom: state => state.connectRoom,
+    getVideoProccess: state => state.videoProccess,
+    getAudioProccess: state => state.audioProccess,
+    getVideoMute: state => state.videoMute,
+    getVideoUnmute: state => state.videoUnmute,
+    getAudioMute: state => state.audioMute,
+    getAudioUnmute: state => state.audioUnmute,
 
-    getConnectRoom(state){ return state.connectRoom },
-    getVideoProccess(state){ return state.videoProccess },
-    getAudioProccess(state){ return state.audioProccess },
-    getVideoMute(state){ return state.videoMute },
-    getVideoUnmute(state){ return state.videoUnmute },
-    getAudioMute(state){ return state.audioMute },
-    getAudioUnmute(state){ return state.audioUnmute },
+    // Feauters:
+    getCamera: state => state.camera,
+    getMicrophone: state => state.microphone,
+    getEndChat: state => state.endChat,
 }
