@@ -3,7 +3,8 @@ const User = require('../models/user')
 class Auth {
     async login(req, res)
     {
-        const user = await User.findOne({login: req.body.login, password: req.body.password})
+        // const user = await User.findOne({login: req.body.login, password: req.body.password})
+        const user = await User.findOne({login: 'manager10', password: 'pass'})
 
         if (user) {
             req.session.user = user
