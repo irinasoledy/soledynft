@@ -11,7 +11,7 @@ const employee = require('./controllers/Admin/Employee')()
 const app = require('./controllers/Admin/App')()
 const client = require('./controllers/Admin/Client')()
 const history = require('./controllers/Admin/History')()
-const languageController = require('./controllers/Admin/LanguageController')()
+const languageController = require('./controllers/Admin/languageController')()
 const serviceController = require('./controllers/Admin/ServiceController')()
 const front = require('./controllers/Front')()
 
