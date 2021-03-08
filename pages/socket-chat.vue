@@ -254,7 +254,7 @@ export default {
             const axios = require('axios')
 
             // Request a new token
-            axios.get(`http://localhost:3000/token?identity=${this.user.name}`)
+            axios.get(`/token?identity=${this.user.name}`)
                 .then(function (response) {
                     _this.accessToken = response.data.token
                 })
