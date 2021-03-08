@@ -43,6 +43,8 @@
       >
       <v-card dark class="elevation-6">
         <v-card-title>
+
+            {{ roomId }}
           Andrei Tintari's meeting
         </v-card-title>
         <v-card-text>

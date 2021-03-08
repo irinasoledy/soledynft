@@ -95,7 +95,6 @@ export const actions = {
     async setUserStatus({ commit }, data){
         await axios.post('/back/employees/change-status', data)
             .then(response => {
-                console.log(response.data);
                 commit('SET_USER_STATUS', response.data)
             }).catch(err => {
                 console.log(err);

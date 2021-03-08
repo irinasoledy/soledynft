@@ -139,7 +139,7 @@ export default {
                 return this.status()
             },
             set(status){
-                this.setUserStatus({status, emploeeId: this.user._id}).then(() => {
+                this.setUserStatus({status, emploeeId: this.user._id}).then(() => {            
                     this.$socket.emit('shareEmployeeStatus', this.user)
                 })
             }

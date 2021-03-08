@@ -36,7 +36,6 @@ export const mutations = {
     },
     SOCKET_refreshEmployeeStatus(state, employee){
         state.changedEmployee = employee
-        // console.log(employee);
     },
 }
 
