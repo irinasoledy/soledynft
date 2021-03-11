@@ -6,10 +6,11 @@
           {{ service.translation.name }}
         </v-title>
       </div>
-      <div class="col-lg-3 col-md-4">
+
+      <!-- <div class="col-lg-3 col-md-4">
         <v-list class="list-expert-one">
           <v-sheet class="buttons-expert">
-            <v-btn small color="primary" outlined>
+             <v-btn small color="primary" outlined>
               discuta acum
             </v-btn>
             <v-btn small color="primary" outlined>
@@ -24,7 +25,17 @@
         </v-list>
       </div>
 
-      <div class="col-md" v-html="service.translation.description"></div>
+      <div class="col-md" v-html="service.translation.description"></div> -->
+
+
+      <div class="col-md row" v-html="service.translation.description" v-if="service.translation.description"></div>
+      <div class="col-md row" v-else>
+          No content
+      </div>
+
+
+
+
 
       <div class="col-lg-3 col-md-4 col-sm-12">
         <div class="expert-one-experts">
@@ -249,5 +260,11 @@ export default {
         margin-bottom: 10px;
       }
     }
+  }
+  .section-block{
+      padding-top: 120px;
+  }
+  .sections-block{
+      margin-top: -100px;
   }
 </style>

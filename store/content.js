@@ -11,12 +11,6 @@ export const mutations = {
 export const actions = {
   async nuxtServerInit({ commit }) {
       commit('SET_ANNOUNCEMENT', "mlmlm")
-      // console.log('cmlcmlsdmlcmsdl');
-      //   const { body } = await fetch('https://jsonplaceholder.typicode.com/posts/1')
-      // .then((response) => {
-      //     const body = response.json()
-      //     commit('SET_ANNOUNCEMENT', body)
-      // })
     }
 }
 

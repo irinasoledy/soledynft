@@ -1,12 +1,14 @@
 import axios from 'axios'
 
 export const state = () => ({
+    envAPI: {},
     user: {},
     room: false,
     drawer: true,
 
     services: [],
     allServices: [],
+    promotions: [],
     langs: [{id: 1, lang : 'ro', active: 1}, {id: 2, lang : 'en', active: 0}],
     lang: {id: 1, lang : 'ro', active: 1},
     translations: {},
@@ -27,6 +29,7 @@ export const mutations = {
     SET_SERVICES(state, data){
       state.services = data.services
       state.allServices = data.servicesAll
+      state.promotions = data.promotions
   },
     SET_DEFAULT_LANG(state, id){
         state.lang = state.langs.find((lang) => lang.id === id)
@@ -37,23 +40,24 @@ export const mutations = {
     SOCKET_refreshEmployeeStatus(state, employee){
         state.changedEmployee = employee
     },
+    SET_ENV_API(state, env){
+        state.envAPI = env
+    }
 }
 
 export const actions = {
     async nuxtServerInit({ commit }) {
-        // await axios.get('https://back.itmall.digital/api/v2/services/en')
-        //     .then(response => {
-        //         commit('SET_SERVICES', response.data)
-        //     }).catch(err => { console.log(err) })
-        await axios.get(`https://back.itmall.digital/api/v2/data?lang=en`)
+        await axios.get(`${process.env.API}/api/v2/data?lang=en`)
             .then(response => {
                 commit('SET_SERVICES', response.data)
             }).catch(err => { console.log(err) })
 
-        await axios.get('https://back.itmall.digital/api/v2/translations?lang=en')
+        await axios.get(`${process.env.API}/api/v2/translations?lang=en`)
             .then(response => {
                 commit('SET_TRANSALATIONS', response.data)
             }).catch(err => { console.log(err) })
+
+        commit('SET_ENV_API', process.env.API)
     },
     changeLanguage({ commit }, id) {
         commit('SET_DEFAULT_LANG', id)
@@ -69,5 +73,7 @@ export const getters = {
     getLanguages: state => state.langs,
     getLanguage: state => state.lang,
     getTranslations: state => state.translations,
-    getChangedEmployee: state => state.changedEmployee
+    getChangedEmployee: state => state.changedEmployee,
+    getEnvAPI: state => state.envAPI,
+    getPromotions: state => state.promotions,
 }

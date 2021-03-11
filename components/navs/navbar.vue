@@ -427,7 +427,7 @@
                                     Experții Noștri
                                 </v-list-item-title>
                             </v-list-item>
-                            <v-list-item height="43" nuxt exact :to="`/${language.lang}/about/`">
+                            <v-list-item height="43" nuxt exact :to="`/${language.lang}/contacts/`">
                                 <v-list-item-title>
                                     Contacte
                                 </v-list-item-title>

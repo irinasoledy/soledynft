@@ -3,9 +3,9 @@
       <div class="banner">
         <v-carousel :show-arrows="false" cycle>
           <v-carousel-item
-            v-for="(item,i) in items"
+            v-for="(promotion, i) in promotions"
             :key="i"
-            :src="item.src"
+            :src="`${envAPI}/images/promotions/${promotion.img}`"
           >
             <v-container class="fill-height">
               <v-row
@@ -15,21 +15,22 @@
               >
                 <v-col md12 class="text-center">
                   <div class="display-1 text-center c-title">
-                    {{ item.text }}
+                    {{ promotion.translation.name }}
                   </div>
                   <v-sheet
                     class="c-sheet"
                     elevation="1"
                     height="auto"
                     width="auto"
-
                   >
-                    Consultație gratuită
+                    {{ promotion.translation.btn_text }}
                   </v-sheet>
                 </v-col>
               </v-row>
             </v-container>
           </v-carousel-item>
+
+
         </v-carousel>
       </div>
       <div class="callNow">
@@ -113,6 +114,7 @@
 
 <script>
 
+import { mapActions, mapGetters } from 'vuex'
 import Testimonial from "@/components/sliders/testimonial"
 import MapContact from "@/components/mapContact.vue"
 import Experts from "@/components/blocs/experts.vue"
@@ -126,27 +128,9 @@ export default {
     Experts,
     Services
   },
-  data: () => ({
-
-    items: [
-      {
-        src: 'banner.jpg',
-        text: 'Cetățenie Română'
-      },
-      {
-        src: 'banner.jpg',
-        text: 'Programări online'
-      },
-      {
-        src: 'banner.jpg',
-        text: 'Obținerea pașaportului românesc'
-      },
-      {
-        src: 'banner.jpg',
-        text: 'Programări online'
-      },
-    ],
-
+  computed: mapGetters({
+     promotions : 'getPromotions',
+     envAPI: 'getEnvAPI'
   }),
 }
 </script>

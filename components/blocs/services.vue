@@ -14,22 +14,26 @@
                     >
                     <v-card v-if="item.children.length" :to="`/${language.lang}/services/${item.id}`">
                         <v-img
-                            :src="item.src"
+                            v-if="item.banner"
+                            :src="`${envAPI}/images/blogCategories/og/${item.banner}`"
                             aspect-ratio="1"
                             class="grey lighten-2"
                             >
                         </v-img>
+                        <v-img v-else src="" aspect-ratio="1" class="grey lighten-2"></v-img>
                         <v-card-title class="title">
                             {{item.translation.name}}
                         </v-card-title>
                     </v-card>
                     <v-card v-else :to="`/${language.lang}/services/list/${item.id}`">
                         <v-img
-                            :src="item.src"
+                            v-if="item.banner"
+                            :src="`${envAPI}/images/blogCategories/og/${item.banner}`"
                             aspect-ratio="1"
                             class="grey lighten-2"
                             >
                         </v-img>
+                        <v-img v-else src="" aspect-ratio="1" class="grey lighten-2"></v-img>
                         <v-card-title class="title">
                             {{item.translation.name}}
                         </v-card-title>
@@ -44,10 +48,10 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-    data: () => ({}),
     computed: mapGetters({
         'services' : 'getServices',
-        'language' : 'getLanguage'
+        'language' : 'getLanguage',
+        'envAPI' : 'getEnvAPI'
     })
 }
 </script>

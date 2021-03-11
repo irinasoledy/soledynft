@@ -14,12 +14,20 @@
                         class="col-lg-4 col-md-6 col-12 d-flex child-flex"
                         >
                         <v-card exact nuxt :to="`/${language.lang}/services/list/${item.id}`">
-                            <v-img
+                            <!-- <v-img
                                 :src="item.src"
                                 aspect-ratio="1"
                                 class="grey lighten-2"
                                 >
+                            </v-img> -->
+                            <v-img
+                                v-if="item.banner"
+                                :src="`${envAPI}/images/blogCategories/og/${item.banner}`"
+                                aspect-ratio="1"
+                                class="grey lighten-2"
+                                >
                             </v-img>
+                            <v-img v-else src="" aspect-ratio="1" class="grey lighten-2"></v-img>
                             <v-card-title class="title">
                                 {{item.translation.name}}
                             </v-card-title>
@@ -40,7 +48,8 @@ export default {
     }),
     computed: mapGetters({
         'services' : 'getServices',
-        'language' : 'getLanguage'
+        'language' : 'getLanguage',
+        'envAPI' : 'getEnvAPI',
     }),
     async mounted(){
         this.service = await this.services.find((serv) => serv.id == this.$route.params.id)

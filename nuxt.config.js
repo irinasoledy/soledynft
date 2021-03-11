@@ -49,6 +49,7 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/dotenv',
     'nuxt-mobile',
   ],
   /*
