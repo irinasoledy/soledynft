@@ -20,7 +20,7 @@
                 >
                 <v-sheet color="primary" dark>
                     <v-list-item>
-                        <v-list-item-content>
+                        <v-list-item-content to="/">
                             <img height="40" src="@/static/logo.svg" alt="">
                         </v-list-item-content>
                         <v-list-item-icon @click="drawer = false" >
@@ -120,7 +120,7 @@
                 </v-list>
             </v-navigation-drawer>
             <v-spacer></v-spacer>
-            <v-toolbar-title>
+            <v-toolbar-title to="/">
                 <img class="logo" src="@/static/logo.svg" alt="">
             </v-toolbar-title>
 
@@ -300,7 +300,7 @@
             <v-container>
                 <v-row class="justify-space-between align-center" max-height="80">
                     <v-col class="col-auto">
-                        <v-toolbar-title>
+                        <v-toolbar-title to="/">
                             <img width="180" class="logo" src="@/static/logo.svg" alt="">
                         </v-toolbar-title>
                     </v-col>
@@ -367,13 +367,13 @@
                         <v-list dark color="primary" class="d-flex align-center" height="43">
                             <v-list-item height="43" exact nuxt to="/">
                                 <v-list-item-title>
-                                    Acasă
+                                    {{ trans.PageNames.home }}
                                 </v-list-item-title>
                             </v-list-item>
                             <v-hover v-slot="{hover}">
                                 <v-list-item exact nuxt>
                                     <v-list-item-title>
-                                        Servicii
+                                        {{ trans.PageNames.ourServices }}
                                     </v-list-item-title>
                                     <v-icon>mdi-chevron-down</v-icon>
                                     <v-expand-transition>
@@ -418,18 +418,18 @@
                                 </v-list-item>
                             </v-hover>
                             <v-list-item height="43" exact nuxt :to="`/${language.lang}/about/`">
-                                <v-list-item-title >
-                                    Despre Noi
+                                <v-list-item-title>
+                                    {{ trans.PageNames.about }}
                                 </v-list-item-title>
                             </v-list-item>
                             <v-list-item height="43" nuxt exact :to="`/${language.lang}/experts/`">
                                 <v-list-item-title>
-                                    Experții Noștri
+                                    {{ trans.PageNames.ourTeam }}
                                 </v-list-item-title>
                             </v-list-item>
                             <v-list-item height="43" nuxt exact :to="`/${language.lang}/contacts/`">
                                 <v-list-item-title>
-                                    Contacte
+                                    {{ trans.PageNames.contacts }}
                                 </v-list-item-title>
                             </v-list-item>
                         </v-list>
@@ -452,7 +452,7 @@
                             <v-icon>
                                 mdi-book
                             </v-icon>
-                            Programează
+                            {{ trans.ContactsAndForms.graficLucruButton }}
                         </v-btn>
                     </v-col>
                 </v-row>
@@ -469,21 +469,12 @@
     components: {
         Contacts
     },
-    watch: {
-        '$route' () {
-
-        }
-    },
     computed: mapGetters({
         servicesList: 'getServices',
         languages: 'getLanguages',
         language: 'getLanguage',
         trans: 'getTranslations'
     }),
-    mounted(){
-        // console.log(this.trans);
-        // console.log(this.servicesList);
-    },
     data: () => ({
       servicesDesk: false,
       drawer: false,

@@ -4,7 +4,7 @@
             <v-row>
                 <v-col cols="12">
                     <div class="display-1 text-center c-title">
-                        Servicii
+                        {{ trans.PageNames.ourServices }}
                     </div>
                 </v-col>
                 <v-col
@@ -49,9 +49,10 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
     computed: mapGetters({
-        'services' : 'getServices',
-        'language' : 'getLanguage',
-        'envAPI' : 'getEnvAPI'
+        services : 'getServices',
+        language : 'getLanguage',
+        envAPI : 'getEnvAPI',
+        trans: 'getTranslations'
     })
 }
 </script>
