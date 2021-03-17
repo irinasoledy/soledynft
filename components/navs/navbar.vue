@@ -701,6 +701,7 @@
         width: 150px;
         height: auto;
         margin-top: 0;
+        margin: 10px 0;
       }
       .col {
         padding-top: 0;
