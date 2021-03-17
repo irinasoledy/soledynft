@@ -3,7 +3,7 @@
         <v-container>
             <v-row align="center" justify="center">
                 <nuxt-link to="/" class="footer-logo">
-                    <img height="40" src="@/static/logo-docrom3.jpg" alt="">
+                    <img height="40" src="@/static/logo-docrom4.png" alt="">
                 </nuxt-link>
             </v-row>
 

@@ -21,7 +21,7 @@
                 <v-sheet color="primary" dark>
                     <v-list-item>
                         <v-list-item-content to="/">
-                            <img height="40" src="@/static/logo-docrom3.jpg" alt="">
+                            <img height="40" src="@/static/logo-docrom4.png" alt="">
                         </v-list-item-content>
                         <v-list-item-icon @click="drawer = false" >
                             <v-icon>mdi-close</v-icon>
@@ -121,7 +121,7 @@
             </v-navigation-drawer>
             <v-spacer></v-spacer>
             <v-toolbar-title to="/">
-                <img class="logo" src="@/static/logo-docrom3.jpg" alt="">
+                <img class="logo" src="@/static/logo-docrom4.png" alt="">
             </v-toolbar-title>
 
 
@@ -308,7 +308,7 @@
                 <v-row class="justify-space-between align-center" max-height="80">
                     <v-col class="col-auto">
                         <v-toolbar-title to="/">
-                            <img width="180" class="logo" src="@/static/logo-docrom3.jpg" alt="">
+                            <img width="180" class="logo" src="@/static/logo-docrom4.png" alt="">
                         </v-toolbar-title>
                     </v-col>
                     <v-col class="col-auto">
