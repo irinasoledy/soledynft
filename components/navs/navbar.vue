@@ -698,7 +698,7 @@
         margin-bottom: 0;
       }
       .logo {
-        width: 150px;
+        width: 200px;
         height: auto;
         margin-top: 0;
         margin: 10px 0;

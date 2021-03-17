@@ -37,7 +37,6 @@ export const mutations = {
         state.lang = state.langs.find((lang) => lang.id === id)
     },
     SET_TRANSALATIONS(state, data){
-        console.log(data);
         state.translations = data.vars
     },
     SOCKET_refreshEmployeeStatus(state, employee){

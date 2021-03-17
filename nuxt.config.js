@@ -68,7 +68,8 @@ module.exports = {
       light: true,
       themes: {
         light: {
-          primary: '#002b7f', //blue
+          // primary: '#002b7f', //blue
+          primary: '#293754',
           accent:  '#fcd116', //yellow
           secondary: '#ce1126', //red
           info: colors.teal.lighten1,
