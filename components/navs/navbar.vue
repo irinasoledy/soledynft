@@ -21,7 +21,7 @@
                 <v-sheet color="primary" dark>
                     <v-list-item>
                         <v-list-item-content to="/">
-                            <img height="40" src="@/static/logo-docrom.png" alt="">
+                            <img height="40" src="@/static/logo-docrom2.png" alt="">
                         </v-list-item-content>
                         <v-list-item-icon @click="drawer = false" >
                             <v-icon>mdi-close</v-icon>
@@ -121,7 +121,7 @@
             </v-navigation-drawer>
             <v-spacer></v-spacer>
             <v-toolbar-title to="/">
-                <img class="logo" src="@/static/logo-docrom.png" alt="">
+                <img class="logo" src="@/static/logo-docrom2.png" alt="">
             </v-toolbar-title>
 
 
@@ -272,8 +272,11 @@
             light
             fixed
             grow
+            height="auto"
             >
-            <v-btn x-small>
+            <!-- <PolicyBar/> -->
+
+            <!-- <v-btn x-small>
                 <v-icon>mdi-home</v-icon>
             </v-btn>
             <v-btn x-small>
@@ -287,8 +290,12 @@
             </v-btn>
             <v-btn x-small>
                 <v-icon>mdi-view-list</v-icon>
-            </v-btn>
+            </v-btn> -->
         </v-bottom-navigation>
+
+
+
+
         <v-app-bar class="customBar desktop"
             fixed
             color="primary"
@@ -301,7 +308,7 @@
                 <v-row class="justify-space-between align-center" max-height="80">
                     <v-col class="col-auto">
                         <v-toolbar-title to="/">
-                            <img width="180" class="logo" src="@/static/logo-docrom.png" alt="">
+                            <img width="180" class="logo" src="@/static/logo-docrom2.png" alt="">
                         </v-toolbar-title>
                     </v-col>
                     <v-col class="col-auto">
@@ -463,11 +470,12 @@
 
 <script>
   import Contacts from './contacts';
+  import PolicyBar from '../policy/PolicyBar';
   import { mapGetters, mapActions } from 'vuex'
 
   export default {
     components: {
-        Contacts
+        Contacts, PolicyBar
     },
     computed: mapGetters({
         servicesList: 'getServices',
