@@ -16,6 +16,8 @@ const serviceController = require('./controllers/Admin/ServiceController')()
 const front = require('./controllers/Front')()
 
 
+router.post('/set/set-agr-option', async (req, res) => await conference.savePolicyOptons(req, res))
+
 router.get('/token', async (req, res) => await twilio.getToken(req, res))
 router.get('/init-user-cookie', async (req, res) => await cookies.setUserCookie(req, res))
 
@@ -30,6 +32,7 @@ router.post('/get-active-room-list', (req, res) => conference.getActiveRoomList(
 router.post('/change-emploee-status', (req, res) => conference.changeEmployeeStatus(req, res))
 router.post('/create-message', (req, res) => conference.createMessagePost(req, res))
 router.post('/get-user-messages', (req, res) => conference.getUserMessages(req, res))
+
 
 router.post('/employees-by-service', (req, res) => front.getEmployeesByService(req, res))
 
@@ -56,6 +59,8 @@ router.post('/back/clients/all', (req, res) => client.getAll(req, res))
 router.post('/back/clients/remove', (req, res) => employee.remove(req, res) )
 router.post('/back/clients/edit-info', (req, res) => client.editInfo(req, res) )
 router.post('/back/client/edit-account', (req, res) => client.editAccount(req, res) )
+
+router.post('/back/add/avatar', (req, res) => employee.addAvatar(req, res) )
 
 router.post('/back/history/get-clients-list', (req, res) => history.getClientsList(req, res) )
 router.post('/back/history/get-messages', (req, res) => history.getClientMessages(req, res) )

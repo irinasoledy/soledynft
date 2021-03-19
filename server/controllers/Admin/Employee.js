@@ -141,6 +141,28 @@ class Employee
         return res.status(200).json(services)
     }
 
+    async addAvatar(req, res)
+    {
+        if (!req.files) {
+            return res.status(500).send({ msg: "file is not found" })
+        }
+        // accessing the file
+        const myFile = req.files.file;
+
+        //  mv() method places the file inside public directory
+        myFile.mv(`./static/avatars/${myFile.name}`, async function (err) {
+            if (err) {
+                console.log(err)
+                return res.status(500).send({ msg: "Error occured" });
+            }
+            const user = await User.findOneAndUpdate(
+                { _id: req.body.id },{ $set: { avatar: myFile.name } }, {new: true}
+            )
+            // returing the response with file path and name
+            return res.json(user);
+        });
+    }
+
     uid()
     {
         return Date.now().toString(36) + Math.random().toString(36).substr(2);

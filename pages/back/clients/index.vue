@@ -13,7 +13,7 @@
                         v-model="tableData.selected"
                         >
                         <template v-slot:[`item`]="{ item, index }">
-                        <tr v-if="item.userId">
+                        <tr v-if="item.userId && item.userId.policy.length">
                             <td>{{ index + 1 }} </td>
                             <td>
                                 <span>{{ item.userId.name }}</span>

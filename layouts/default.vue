@@ -116,6 +116,7 @@ export default {
 
         }),
         addUserAction(route, counter = 0, pages = 1){
+            console.log('addUserAction');
             const data = {
                 userId : this.user._id,
                 cookie:  this.user.cookies,

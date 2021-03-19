@@ -187,6 +187,24 @@ export const actions = {
             commit('SET_MESSAGES_HISTORY', {messages: data.data, parsed: parsedMessages})
         })
     },
+    async savePolicyOptions({ commit }, data){
+        // await axios.post("/get-user-messages", data).then(data => {
+        //
+        //     const parsedMessages = data.data.map((message) => {
+        //         if (message.sendBy == "employee") {
+        //             return m (message.employee.name, message.message, message.employee._id)
+        //         }else{
+        //             return m (message.client.name, message.message, message.client._id)
+        //         }
+        //     })
+        //
+        //     commit('SET_MESSAGES_HISTORY', {messages: data.data, parsed: parsedMessages})
+        // })
+        await axios.post("/set/set-agr-option", data).then(data => {
+            console.log(data);
+            // commit('SET_USER_COOKIE', data.data)
+        })
+    },
     setUser({ commit }, user){
         commit('SET_USER', user)
     },

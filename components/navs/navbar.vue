@@ -268,13 +268,16 @@
 
 
 
-        <v-bottom-navigation
+        <v-app-bar
+            v-if="user.policy"
             light
             fixed
+            bottom
             grow
             height="auto"
             >
-            <!-- <PolicyBar/> -->
+
+            <PolicyBar v-if="!user.policy.length"/>
 
             <!-- <v-btn x-small>
                 <v-icon>mdi-home</v-icon>
@@ -291,7 +294,7 @@
             <v-btn x-small>
                 <v-icon>mdi-view-list</v-icon>
             </v-btn> -->
-        </v-bottom-navigation>
+        </v-app-bar>
 
 
 
@@ -481,7 +484,8 @@
         servicesList: 'getServices',
         languages: 'getLanguages',
         language: 'getLanguage',
-        trans: 'getTranslations'
+        trans: 'getTranslations',
+        user: 'chat/getUser',
     }),
     data: () => ({
       servicesDesk: false,

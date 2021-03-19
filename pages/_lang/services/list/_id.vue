@@ -6,10 +6,40 @@
                 {{ service.translation.name }}
             </v-title>
         </div>
-        <div class="col-md row" v-html="service.translation.description" v-if="service.translation.description"></div>
+
+        <div class="col-md row">
+            <div class="col-lg-3 col-md-4">
+                <div class="side-block">
+                    <a v-for="anchor in service.blogs"
+                        :key="anchor.id"
+                        class="v-list-item v-list-item--link theme--light"
+                        :href="`#section${anchor.id}`"
+                        role="listitem"
+                        tabindex="0">
+                        {{ anchor.translation.name }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md sections-block">
+                <div
+                    v-for="anchor in service.blogs"
+                    :key="anchor.id"
+                    :id="`section${anchor.id}`"
+                    class="section-block"
+                    >
+                    <h3 class="title">{{ anchor.translation.name }}</h3>
+                    {{ anchor.translation.body }}
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- <div class="col-md row" v-html="service.translation.description" v-if="service.translation.description"></div>
         <div class="col-md row" v-else>
             No content
-        </div>
+        </div> -->
         <div class="col-lg-3 col-md-4 col-sm-12">
             <div class="expert-one-experts">
                 <div class="title mb-2">
@@ -225,9 +255,12 @@ export default {
         }
     }
 }
-
 .section-block {
-    padding-top: 120px;
+    padding-top: 159px;
+    margin-bottom: -120px;
+}
+.section-block:last-child {
+    margin-bottom: 0;
 }
 
 .sections-block {

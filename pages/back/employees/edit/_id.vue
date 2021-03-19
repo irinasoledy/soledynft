@@ -52,6 +52,26 @@
                                     Save
                                 </v-btn>
                             </v-card-title>
+                            <div class="col-md-12 col-12"></div>
+
+                            <div class="col-md-6 col-12">
+                                <input type="file" @change="onFileChange" />
+                                <v-btn @click="onUploadFile" color="primary" large class="upload-button mt-3 mb-3" 
+                                    :disabled="!this.selectedFile">Upload file</v-btn>
+                            </div>
+
+                            <div class="col-md-6 col-12 text-center">
+                                <v-avatar size="115" color="primary">
+                                      <img
+                                        v-if="editedUser.avatar"
+                                        :src="`/avatars/${editedUser.avatar}`"
+                                        alt="John"
+                                      >
+                                      <span v-else class="white--text headline">E</span>
+                                    </v-avatar>
+                            </div>
+
+
                         </v-form>
                     </v-card-text>
                     <v-divider class="my-4"></v-divider>
@@ -126,11 +146,13 @@
 
 import { mapGetters, mapActions } from "vuex"
 import EmployeeToService from "@/components/dashboard/widgets/features/EmployeeToService"
+import axios from "axios"
 
 export default {
     layout: "dashboard",
     middleware: ['admin'],
     data: () => ({
+        selectedFile: '',
         editedUser: {},
         valid: true,
         snackbar: false,
@@ -177,7 +199,28 @@ export default {
             'createNewEmployee': 'admin/createNewEmployee',
             'editEmployeeInfo': 'admin/editEmployeeInfo',
             'editEmployeeAccount': 'admin/editEmployeeAccount',
+            'addAvatar': 'admin/addAvatar',
         }),
+        onFileChange(e) {
+            const selectedFile = e.target.files[0]; // accessing file
+            this.selectedFile = selectedFile;
+        },
+        onUploadFile() {
+            const formData = new FormData();
+            formData.append("file", this.selectedFile);  // appending file
+            formData.append("id", this.editedUser._id);  // appending file
+
+            // sending file to the backend
+            axios
+                .post("/back/add/avatar", formData)
+                .then(res => {
+                    this.editedUser = res.data
+                    console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        },
         submitUserInfo(){
             if (this.$refs.info.validate()) {
                 this.editEmployeeInfo(this.editedUser).then(() => {

@@ -17,6 +17,10 @@ const schema = new Schema({
         type: String,
         default: ''
     },
+    avatar: {
+        type: String,
+        default: null
+    },
     type: {
         type: String,
         default: ''
@@ -41,6 +45,12 @@ const schema = new Schema({
         type: String,
         default: ''
     },
+    policy: [{
+        agreementUsing : Boolean,
+        agreementAnalyzing : Boolean,
+        agreementContact : Boolean,
+        agreementProtect : Boolean,
+    }],
 })
 
 module.exports = model('users', schema)

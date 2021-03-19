@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const store = new session.MemoryStore()
+const fileUpload = require('express-fileupload')
 
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
@@ -32,6 +33,7 @@ async function start() {
         app.use(bodyParser.json())
         app.use(bodyParser.urlencoded({ extended: true }));
         app.use(cookieParser())
+        app.use(fileUpload())
 
         app.use(session({
             secret: 'cookie_secret',

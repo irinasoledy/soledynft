@@ -90,6 +90,15 @@ class Conference {
         return res.json(messages)
     }
 
+    async savePolicyOptons(req, res)
+    {
+        const user = await User.findOneAndUpdate(
+            { _id: req.body.userId },{ $set: { policy: [req.body.policies] } },{ new: true }
+        )
+        
+        return res.json(user)
+    }
+
     uid()
     {
         return Date.now().toString(36) + Math.random().toString(36).substr(2);

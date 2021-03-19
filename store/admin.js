@@ -138,6 +138,15 @@ export const actions = {
                 console.log(err);
             })
     },
+    async addAvatar({ commit }, formData){
+        await axios.post('/back/add/avatar', formData)
+            .then(response => {
+                console.log(response);
+                // commit('SET_HISTORY_CLIENT_LIST', response.data)
+            }).catch(err => {
+                console.log(err);
+            })
+    },
 }
 
 export const getters = {
