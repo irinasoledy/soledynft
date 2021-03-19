@@ -739,4 +739,10 @@
       }
     }
   }
+  .v-app-bar.v-app-bar--fixed{
+      top: auto !important;
+  }
+  .v-app-bar{
+      top: auto !important;
+  }
 </style>
