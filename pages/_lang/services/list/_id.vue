@@ -29,7 +29,7 @@
                     class="section-block"
                     >
                     <h3 class="title">{{ anchor.translation.name }}</h3>
-                    {{ anchor.translation.body }}
+                    <div v-html="anchor.translation.body"></div>
                 </div>
 
             </div>
