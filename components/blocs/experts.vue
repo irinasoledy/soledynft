@@ -17,7 +17,7 @@
                     >
                     <v-card>
                         <v-img
-                            :src="item.src"
+                            :src="`/avatars/${item.avatar}`"
                             aspect-ratio="1"
                             class="grey lighten-2"
                             >
@@ -26,12 +26,12 @@
                             {{item.name}}
                         </v-card-title>
                         <v-card-subtitle class="text-center">
-                            {{item.role}}
+                            {{item.type}}
                         </v-card-subtitle>
                         <v-card-actions
                             class="pb-5 justify-center"
                             >
-                            <v-btn
+                            <!-- <v-btn
                                 color="secondary"
                                 >
                                 <v-icon left>mdi-phone</v-icon>
@@ -42,7 +42,7 @@
                                 >
                                 <v-icon left>mdi-chat</v-icon>
                                 {{ trans.Team.companyMainAddress }}
-                            </v-btn>
+                            </v-btn> -->
                         </v-card-actions>
                     </v-card>
                 </v-col>
@@ -54,27 +54,17 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 export default {
-    data: () => ({
-        experts: [
-            {
-                name: "Lilia Balan",
-                role: "Jurist",
-                src: "https://image.tmdb.org/t/p/original/hs2xlX7jAgY0dib1RPmjMjqVLMC.jpg"
-            },
-            {
-                name: "Ion Neaga",
-                role: "Jurist",
-                src: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-            },
-            {
-                name: "Andrei Mancu",
-                role: "Jurist",
-                src: "https://monkey47.com/thumbs/species-rara/mark-braun/mark-braun-500x750-q75.jpg"
-            },
-        ],
-    }),
     computed: mapGetters({
-        trans: 'getTranslations'
-    })
+        trans: 'getTranslations',
+        experts: 'content/getExperts'
+    }),
+    mounted(){
+        this.getExpertsList()
+    },
+    methods: {
+        ...mapActions({
+            getExpertsList: 'content/getExpertsList'
+        })
+    }
 }
 </script>

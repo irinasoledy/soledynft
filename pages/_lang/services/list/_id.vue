@@ -35,11 +35,11 @@
             </div>
         </div>
 
-
         <!-- <div class="col-md row" v-html="service.translation.description" v-if="service.translation.description"></div>
         <div class="col-md row" v-else>
             No content
         </div> -->
+
         <div class="col-lg-3 col-md-4 col-sm-12">
             <div class="expert-one-experts">
                 <div class="title mb-2">
@@ -48,7 +48,12 @@
                 <v-card v-for="(item, i) in employeeList" :key="i" v-if="employeeList.length">
                     <v-sheet class="pa-3 d-flex align-start">
                         <v-avatar>
-                            <img src="/avatar/man_4.jpg" alt="jhon">
+                            <v-img
+                                :src="`/avatars/${item.employee.avatar}`"
+                                aspect-ratio="1"
+                                class="grey lighten-2"
+                                >
+                            </v-img>
                             <span class="mark"></span>
                         </v-avatar>
                         <v-card-text class="pa-0 ml-2" v-if="item.employee">

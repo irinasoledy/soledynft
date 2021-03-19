@@ -1,40 +1,41 @@
 <template lang="html">
-    <v-container>
+    <v-container v-if="policy">
         <v-row>
-            <v-col lg="9">
+            <v-col lg="9" cols="12">
                 <p>
                     {{ trans.Policies.cookieNotificationTitle }}
-                    <!-- Prin apăsarea "Accept" ești de acord să permiți colectarea de informații prin cookie-uri sau tehnologii similare pentru: -->
                 </p>
-                <!-- <ul class="policies-list">
+                <ul class="policies-list">
                     <li>
-                        <v-switch label="a oferi cea mai bună experiență de utilizare a site-ului" v-model="policy1"
+                        <v-switch label="a oferi cea mai bună experiență de utilizare a site-ului" v-model="policies.agreementUsing"
                         ></v-switch>
                     </li>
                     <li>
-                        <v-switch label="a oferi posibilitatea analizei datelor de navigare pe site" v-model="policy2"
+                        <v-switch label="a oferi posibilitatea analizei datelor de navigare pe site" v-model="policies.agreementAnalyzing"
                         ></v-switch>
                     </li>
                     <li>
-                        <v-switch label="să fiu contactat prin intermediul Chatu-ului si Videochat-ului plasate pe Site" v-model="policy3"
+                        <v-switch label="să fiu contactat prin intermediul Chatu-ului si Videochat-ului plasate pe Site" v-model="policies.agreementContact"
                         ></v-switch>
                     </li>
                     <li>
-                        <v-switch label="a oferi posibilitatea protecției datelor personale a utilizatorilor" v-model="policy4"
+                        <v-switch label="a oferi posibilitatea protecției datelor personale a utilizatorilor" v-model="policies.agreementProtect"
                         ></v-switch>
                     </li>
-                </ul> -->
-                <!-- <PolicyDialog />
-                <v-btn width="45%" class="primary custom-btn">
-                    Accept
-                </v-btn> -->
+                </ul>
+                <v-row>
+                    <v-col lg="6" cols="12">
+                        <v-btn width="100%" class="info custom-btn" @click="savePolicy">
+                            {{ trans.Policies.cookieNotificationBtn1 }}
+                        </v-btn>
+                    </v-col>
+                    <v-col lg="6" cols="12">
+                        <PolicyDialog />
+                    </v-col>
+                </v-row>
+
             </v-col>
-            <v-col>
-                <PolicyDialog />
-                <v-btn width="100%" class="primary custom-btn">
-                    {{ trans.Policies.cookieNotificationBtn1 }}
-                </v-btn>
-            </v-col>
+            <v-col></v-col>
         </v-row>
     </v-container>
 </template>
@@ -54,8 +55,25 @@ export default {
         },
     }),
     computed: mapGetters({
-        trans: 'getTranslations'
+        trans: 'getTranslations',
+        user: 'chat/getUser',
+        policy: 'chat/getPolicy',
     }),
+    methods: {
+        ...mapActions({
+            savePolicyOptions: 'chat/savePolicyOptions',
+            switchPolicy: 'chat/switchPolicy'
+        }),
+        savePolicy(){
+            const data = {
+                policies: this.policies,
+                userId: this.user._id
+            }
+            this.switchPolicy()
+            this.dialog = false
+            this.savePolicyOptions(data)
+        }
+    },
     components: {
         PolicyDialog,
     }
@@ -63,16 +81,31 @@ export default {
 </script>
 
 <style lang="css">
+.v-application ul, .v-application ol{
+    padding-left: 0;
+}
 .v-input--selection-controls{
     margin: 0;
-    padding: 0;
 }
 .policies-list{
     list-style: none;
+    padding-left: 0;
+}
+.policies-list li{
+    margin-left: 0;
 }
 .custom-btn{
     color: #FFF !important;
     padding: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
+}
+.v-input__slot{
+    margin-bottom: 0;
+}
+.v-messages{
+    min-height: 5px;
+}
+.v-input--selection-controls .v-input__slot > .v-label, .v-input--selection-controls .v-radio > .v-label{
+    font-size: 14px;
 }
 </style>

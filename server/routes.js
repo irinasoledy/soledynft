@@ -36,6 +36,10 @@ router.post('/get-user-messages', (req, res) => conference.getUserMessages(req, 
 
 router.post('/employees-by-service', (req, res) => front.getEmployeesByService(req, res))
 
+
+router.get('/api/v1/experts', (req, res) => front.getEmployee(req, res))
+
+
 // router.use((req, res, next) => {
 //     if (1===2) {
 //         next()

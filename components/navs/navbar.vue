@@ -21,7 +21,7 @@
                 <v-sheet color="primary" dark>
                     <v-list-item>
                         <v-list-item-content to="/">
-                            <img height="40" src="@/static/logo-docrom4.png" alt="">
+                            <img height="40" src="@/static/logo-docrom4.png" alt="" class="logo-burgher">
                         </v-list-item-content>
                         <v-list-item-icon @click="drawer = false" >
                             <v-icon>mdi-close</v-icon>
@@ -29,11 +29,18 @@
                     </v-list-item>
                 </v-sheet>
                 <contacts></contacts>
+
+
+
                 <v-list
                     nav
                     light
                     >
                     <v-list-item-group>
+                        <v-list-item @click="closeMenu(`/`)">
+                            <v-list-item-title>{{ trans.PageNames.home }}</v-list-item-title>
+                        </v-list-item>
+
                         <v-list-item v-for="(item, i) in drawerItems" :key="i" nuxt :to="item.href">
                             <v-list-item-title v-if="item.action" v-text="item.title" @click.stop="openServices"></v-list-item-title>
                             <v-list-item-title v-else v-text="item.title"></v-list-item-title>
@@ -41,8 +48,26 @@
                                 <v-icon v-text="item.icon"></v-icon>
                             </v-list-item-icon>
                         </v-list-item>
+
+                        <v-list-item @click="closeMenu(`/${language.lang}/about/`)">
+                            <v-list-item-title>{{ trans.PageNames.about }}</v-list-item-title>
+                        </v-list-item>
+
+                        <v-list-item @click="closeMenu(`/${language.lang}/experts/`)">
+                            <v-list-item-title>{{ trans.PageNames.ourTeam }}</v-list-item-title>
+                        </v-list-item>
+
+                        <v-list-item @click="closeMenu(`/${language.lang}/contacts/`)">
+                            <v-list-item-title>{{ trans.PageNames.contacts }}</v-list-item-title>
+                        </v-list-item>
+
                     </v-list-item-group>
                 </v-list>
+
+
+
+
+
                 <template v-slot:append>
                     <div class="pa-2 mb-4">
                         <v-btn color="secondary" outlined block>
@@ -270,7 +295,8 @@
 
         <v-app-bar
             v-if="user.policy"
-            light
+            dark
+            color="primary"
             fixed
             bottom
             grow
@@ -392,7 +418,7 @@
                                             color="primary"
                                             v-if="hover"
                                             class="mandat transition-fast-in-fast-out"
-                                            style="height: auto; width: 300px"
+                                            style="height: auto; width: auto"
                                             >
                                             <v-hover v-slot="{hover}" v-for="(item, i) in servicesList" :key="i">
                                                 <v-list-item
@@ -404,7 +430,7 @@
                                                     </v-list-item-title>
                                                     <v-expand-transition>
                                                         <v-list v-if="hover && item.children.length" light elevation="4" text class="subservicesHover transition-fast-in-fast-out"
-                                                            style="height: auto; width: 300px">
+                                                            style="height: auto; width: auto">
                                                             <v-list-item v-for="(child, i) in item.children"
                                                                 :key="i"
                                                                 active-class="accent"
@@ -497,29 +523,12 @@
       langs: ["RO", "EN", "RU"],
       group: null,
       drawerItems: [
-        {
-          title: "Acasă",
-          icon: "",
-          action: null,
-          href: '/'
-        },
+
         {
           title: "Servicii",
           icon: "mdi-arrow-right-drop-circle-outline",
           action: true
         },
-        {
-          title: "Despre Noi",
-          icon: "",
-          action: null,
-          href: "/about"
-        },
-        {
-          title: "Experții Noștri",
-          icon: "",
-          action: null,
-          href: "/experts"
-        }
       ],
       servicesItems: [
         {
@@ -695,6 +704,15 @@
   }
   .customBar.desktop {
     display: none;
+  }
+  @media (max-width: 991px) {
+      .logo {
+        width: auto !important;
+    }
+    .logo-burgher{
+        flex: 0;
+        margin: 0 auto;
+    }
   }
   @media (min-width: 991px) {
     .customBar.mobile,

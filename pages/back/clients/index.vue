@@ -13,7 +13,8 @@
                         v-model="tableData.selected"
                         >
                         <template v-slot:[`item`]="{ item, index }">
-                        <tr v-if="item.userId && item.userId.policy.length">
+                            <!-- <tr v-if="item.userId && item.userId.policy.length"> -->
+                        <tr v-if="item.userId">
                             <td>{{ index + 1 }} </td>
                             <td>
                                 <span>{{ item.userId.name }}</span>
@@ -40,6 +41,29 @@
                             </td>
                             <td>
                                 <span>{{ item.logged }}</span>
+                            </td>
+                            <td class="text-center">
+                                <span v-if="item.userId.policy.length">
+                                    <v-badge
+                                        v-if="item.userId.policy[0].agreementContact"
+                                        value="2"
+                                        color="green"
+                                        >
+                                    </v-badge>
+                                    <v-badge
+                                        v-else
+                                        value="2"
+                                        color="yellow"
+                                        >
+                                    </v-badge>
+                                </span>
+                                <span v-else>
+                                    <v-badge
+                                        value="2"
+                                        color="red"
+                                        >
+                                    </v-badge>
+                                </span>
                             </td>
                             <td>
                                 <span>{{ item.assignedManager ? item.assignedManager : '----' }}</span>
@@ -127,6 +151,7 @@ export default {
                 { text: 'Status', value: 'status' },
                 { text: 'Online', value: 'online' },
                 { text: 'Logged', value: 'logged' },
+                { text: 'Policies', value: 'yes' },
                 { text: 'Assigned Manager', value: 'assigned manager' },
                 { text: 'Site visits qty', value: 'visits qty' },
                 { text: 'Site visits min', value: 'visits min' },

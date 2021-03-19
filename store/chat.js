@@ -15,6 +15,7 @@ export const state = () => ({
     waiting: true,
     history: {},
     cookie: false,
+    policy: true,
 
     // Feauters:
     camera: true,
@@ -130,6 +131,9 @@ export const mutations = {
      SWITCH_MICROPHONE(state, statut){
          state.microphone = statut
      },
+     SWITCH_POLICY(state){
+         state.policy = false
+     },
 }
 
 export const actions = {
@@ -214,6 +218,10 @@ export const actions = {
     switchMicrophone({ commit }, statut){
         commit('SWITCH_MICROPHONE', statut)
     },
+    switchPolicy({ commit }){
+        console.log('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+        commit('SWITCH_POLICY')
+    }
 }
 
 export const getters = {
@@ -241,4 +249,6 @@ export const getters = {
     getCamera: state => state.camera,
     getMicrophone: state => state.microphone,
     getEndChat: state => state.endChat,
+
+    getPolicy: state => state.policy,
 }

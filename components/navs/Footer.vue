@@ -29,7 +29,6 @@
             </v-row>
 
             <v-row class="footer-links">
-
                 <v-col lg="3">
                     <h3>{{ trans.PageNames.aboutCompany }}</h3>
                     <ul>
@@ -39,7 +38,8 @@
                         <li><nuxt-link :to="`/`">{{ trans.PageNames.faq }}</nuxt-link></li>
                     </ul>
                 </v-col>
-                <v-col lg="3">
+
+                <v-col cols="12" lg="3">
                     <h3>{{ trans.PageNames.ourServices }}</h3>
                     <ul>
                         <li v-for="service in serviceArray[0]" :key="service.id">
@@ -47,7 +47,7 @@
                         </li>
                     </ul>
                 </v-col>
-                <v-col lg="3">
+                <v-col cols="12" lg="3">
                     <h3>{{ trans.PageNames.ourServices }}</h3>
                     <ul>
                         <li v-for="service in serviceArray[1]" :key="service.id">
@@ -55,7 +55,8 @@
                         </li>
                     </ul>
                 </v-col>
-                <v-col lg="3">
+
+                <v-col cols="12" lg="3">
                     <h3>{{ trans.PageNames.policiesCompany }}</h3>
                     <ul>
                         <li v-for="page in pages" :key="page.id">
@@ -158,7 +159,7 @@ export default {
 <style lang="scss">
     .footer-block{
         padding-top: 50px;
-        margin-bottom: 50px;
+        // margin-bottom: 50px;
 
         .footer-logo{
             width: 200px;

@@ -3,14 +3,14 @@
     <v-dialog
         v-model="dialog"
         width="900"
+        class="policy-dialog"
         >
         <template v-slot:activator="{ on, attrs }">
             <v-btn width="100%" class="info custom-btn" v-bind="attrs" v-on="on">
-                Administreaza preferitele
-                <!-- {{ trans.Policies.cookieNotificationBtn1 }} -->
+                {{ trans.Policies.cookieNotificationBtn2 }}
             </v-btn>
         </template>
-        <v-card>
+        <v-card class="dialog-wrapp">
             <v-tabs vertical>
                 <v-tab class="tab-item">
                     <small>{{ trans.Policies.cookieNotificationOption1 }}</small>
@@ -24,14 +24,18 @@
                 <v-tab class="tab-item">
                     <small>{{ trans.Policies.cookieNotificationOption4 }}</small>
                 </v-tab>
+                <v-tab class="tab-item">
+                    <small>{{ trans.Policies.cookiePopupTab5Title }}</small>
+                </v-tab>
+
                 <v-tab-item>
                     <v-card flat>
                         <v-card-text>
-                            <h4>{{ trans.Policies.cookiePopupTab1Title }}</h4>
-                            <p class="mb-0">
+                            <h4 class="mt-0">{{ trans.Policies.cookiePopupTab1Title }}</h4>
+                            <p class="mb-5 mt-5">
                                 {{ trans.Policies.cookiePopupTab1Text1 }}
                             </p>
-                            <p><v-switch @click="savePolicy" v-model="policies.agreementUsing"></v-switch></p>
+                            <p><v-switch :label="policies.agreementUsing ? 'Active' : 'Inactive'" v-model="policies.agreementUsing"></v-switch></p>
                         </v-card-text>
                     </v-card>
                 </v-tab-item>
@@ -39,16 +43,16 @@
                     <v-card flat>
                         <v-card-text>
                             <h4 class="mt-0">{{ trans.Policies.cookiePopupTab2Title }}</h4>
-                            <p class="mb-0">
+                            <p class="mb-5 mt-5">
                                 {{ trans.Policies.cookiePopupTab2Text1 }}
                             </p>
-                            <p class="mb-0">
+                            <p class="mb-5 mt-5">
                                 {{ trans.Policies.cookiePopupTab2Text2 }}
                             </p>
-                            <p class="mb-0">
+                            <p class="mb-5 mt-5">
                                 {{ trans.Policies.cookiePopupTab2Text3 }}
                             </p>
-                            <p><v-switch @click="savePolicy" v-model="policies.agreementAnalyzing"></v-switch></p>
+                            <p><v-switch :label="policies.agreementAnalyzing ? 'Active' : 'Inactive'" v-model="policies.agreementAnalyzing"></v-switch></p>
                         </v-card-text>
                     </v-card>
                 </v-tab-item>
@@ -56,10 +60,10 @@
                     <v-card flat>
                         <v-card-text>
                             <h4>{{ trans.Policies.cookiePopupTab3Title }}</h4>
-                            <p class="mb-0">
+                            <p class="mb-5 mt-5">
                                 {{ trans.Policies.cookiePopupTab3Text1 }}
                             </p>
-                            <p><v-switch @click="savePolicy" v-model="policies.agreementContact"></v-switch></p>
+                            <p><v-switch :label="policies.agreementContact ? 'Active' : 'Inactive'" v-model="policies.agreementContact"></v-switch></p>
                         </v-card-text>
                     </v-card>
                 </v-tab-item>
@@ -67,10 +71,20 @@
                     <v-card flat>
                         <v-card-text>
                             <h4>{{ trans.Policies.cookiePopupTab4Title }}</h4>
-                            <p class="mb-0">
+                            <p class="mb-5 mt-5">
                                 {{ trans.Policies.cookiePopupTab4Text1 }}
                             </p>
-                            <p><v-switch @click="savePolicy" v-model="policies.agreementProtect"></v-switch></p>
+                            <p>  <v-switch :label="policies.agreementProtect ? 'Active' : 'Inactive'" v-model="policies.agreementProtect"></v-switch></p>
+                        </v-card-text>
+                    </v-card>
+                </v-tab-item>
+                <v-tab-item>
+                    <v-card flat>
+                        <v-card-text>
+                            <h4>{{ trans.Policies.cookiePopupTab5Title }}</h4>
+                            <p class="mb-5 mt-5">{{ trans.Policies.cookiePopupTab5Text1 }}</p>
+                            <p class="mb-5">{{ trans.Policies.cookiePopupTab5Text2 }}</p>
+                            <p class="mb-5">{{ trans.Policies.cookiePopupTab5Text3 }}</p>
                         </v-card-text>
                     </v-card>
                 </v-tab-item>
@@ -81,9 +95,16 @@
                 <v-btn
                     color="primary"
                     text
+                    @click="savePolicy"
+                    >
+                    Accept
+                </v-btn>
+                <v-btn
+                    color="primary"
+                    text
                     @click="dialog = false"
                     >
-                    Cloose
+                    Close
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -109,13 +130,16 @@ export default {
     }),
     methods: {
         ...mapActions({
-            savePolicyOptions: 'chat/savePolicyOptions'
+            savePolicyOptions: 'chat/savePolicyOptions',
+            switchPolicy: 'chat/switchPolicy',
         }),
         savePolicy(){
             const data = {
                 policies: this.policies,
                 userId: this.user._id
             }
+            this.switchPolicy()
+            this.dialog = false
             this.savePolicyOptions(data)
         }
     }
@@ -125,5 +149,26 @@ export default {
 <style>
 .tab-item{
     word-wrap: break-word;
+}
+.dialog-wrapp{
+    padding: 20px;
+}
+.v-window-item{
+    min-height: 270px;
+}
+.v-slide-group__content{
+    white-space: normal;
+}
+.v-tab{
+    text-align: left;
+    justify-content: left;
+}
+.policy-dialog p{
+    margin-bottom: 20px;
+}
+@media (max-width: 991px) {
+    .v-tabs--vertical{
+        display: block;
+    }
 }
 </style>
