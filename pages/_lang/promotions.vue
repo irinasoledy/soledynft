@@ -61,10 +61,10 @@ export default {
 
 <style lang="scss">
 .v-expansion-panel::before{
-    box-shadow: none;
+    box-shadow: none !important;
 }
 .v-expansion-panel-content{
-    display: block;
+    display: block !important;
 }
 .v-application--is-ltr .v-expansion-panel-header__icon{
     margin-left: 10px;
