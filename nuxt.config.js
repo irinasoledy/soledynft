@@ -71,7 +71,8 @@ module.exports = {
           // primary: '#002b7f', //blue
           primary: '#293754',
           accent:  '#fcd116', //yellow
-          secondary: '#ce1126', //red
+          // secondary: '#ce1126', //red
+          secondary: '#ff0008',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,

@@ -6,9 +6,8 @@
         class="policy-dialog"
         >
         <template v-slot:activator="{ on, attrs }">
-            <v-btn width="100%" class="info custom-btn" v-bind="attrs" v-on="on">
-                {{ trans.Policies.cookieNotificationBtn2 }}
-            </v-btn>
+            <p class="policy-accept-link" v-bind="attrs" v-on="on">{{ trans.Policies.cookieNotificationBtn2 }}</p>
+            <!-- <span>{{ trans.Policies.cookieNotificationBtn2 }}</span> -->
         </template>
         <v-card class="dialog-wrapp">
             <v-tabs vertical>
@@ -63,7 +62,7 @@
                             <p class="mb-5 mt-5">
                                 {{ trans.Policies.cookiePopupTab3Text1 }}
                             </p>
-                            <p><v-switch :label="policies.agreementContact ? 'Active' : 'Inactive'" v-model="policies.agreementContact"></v-switch></p>
+                            <p><v-switch color="info" :label="policies.agreementContact ? 'Active' : 'Inactive'" v-model="policies.agreementContact"></v-switch></p>
                         </v-card-text>
                     </v-card>
                 </v-tab-item>
@@ -171,4 +170,10 @@ export default {
         display: block;
     }
 }
+.policy-accept-link{
+    margin-top: 20px;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
 </style>

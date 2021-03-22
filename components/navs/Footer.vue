@@ -77,11 +77,14 @@
                     {{ trans.PageNames.contacts }}
                 </v-card-title>
                 <v-card-text class="white--text pt-0">
-                    {{ trans.ContactsAndForms.companyMainName }}
-                    {{ trans.ContactsAndForms.companyMainAdres }}
-                    {{ trans.ContactsAndForms.companyMainPhone1 }}
+                    {{ trans.ContactsAndForms.companyMainName }} |
+                    {{ trans.ContactsAndForms.companyMainAdres }} |
+                    {{ trans.ContactsAndForms.companyMainPhone1 }} |
                     {{ trans.ContactsAndForms.companyMainEmail1 }}
                 </v-card-text>
+
+                <nuxt-link class="footer-link" :to="`/${language.lang}/experts`">{{ trans.PageNames.ourTeam }}</nuxt-link>
+
                 <v-divider></v-divider>
                 <v-card-text class="white--text">
                     <!-- {{ new Date().getFullYear() }} —  -->
@@ -184,6 +187,9 @@ export default {
                 }
             }
         }
+    }
+    .footer-link{
+        color: #FFF !important;
     }
 
 </style>

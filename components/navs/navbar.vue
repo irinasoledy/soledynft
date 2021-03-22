@@ -296,11 +296,11 @@
         <v-app-bar
             v-if="user.policy"
             dark
-            color="primary"
             fixed
             bottom
             grow
             height="auto"
+            class="policy-container"
             >
 
             <PolicyBar v-if="!user.policy.length"/>
@@ -744,5 +744,8 @@
   }
   .v-app-bar{
       top: auto !important;
+  }
+  .policy-container{
+      background-color: rgba(41,55,84,0.95) !important
   }
 </style>

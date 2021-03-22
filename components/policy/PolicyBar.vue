@@ -7,29 +7,29 @@
                 </p>
                 <ul class="policies-list">
                     <li>
-                        <v-switch label="a oferi cea mai bună experiență de utilizare a site-ului" v-model="policies.agreementUsing"
+                        <v-switch :label="trans.Policies.cookieNotificationOption1" v-model="policies.agreementUsing"
                         ></v-switch>
                     </li>
                     <li>
-                        <v-switch label="a oferi posibilitatea analizei datelor de navigare pe site" v-model="policies.agreementAnalyzing"
+                        <v-switch :label="trans.Policies.cookieNotificationOption2" v-model="policies.agreementAnalyzing"
                         ></v-switch>
                     </li>
                     <li>
-                        <v-switch label="să fiu contactat prin intermediul Chatu-ului si Videochat-ului plasate pe Site" v-model="policies.agreementContact"
+                        <v-switch :label="trans.Policies.cookieNotificationOption3" v-model="policies.agreementContact"
                         ></v-switch>
                     </li>
                     <li>
-                        <v-switch label="a oferi posibilitatea protecției datelor personale a utilizatorilor" v-model="policies.agreementProtect"
+                        <v-switch :label="trans.Policies.cookieNotificationOption4" v-model="policies.agreementProtect"
                         ></v-switch>
                     </li>
                 </ul>
                 <v-row>
-                    <v-col lg="6" cols="12">
-                        <v-btn width="100%" class="info custom-btn" @click="savePolicy">
+                    <v-col lg="6" >
+                        <v-btn width="100%" class="secondary custom-btn" @click="savePolicy">
                             {{ trans.Policies.cookieNotificationBtn1 }}
                         </v-btn>
                     </v-col>
-                    <v-col lg="6" cols="12">
+                    <v-col lg="6" >
                         <PolicyDialog />
                     </v-col>
                 </v-row>

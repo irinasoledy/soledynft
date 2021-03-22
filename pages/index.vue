@@ -17,14 +17,10 @@
                                 <div class="display-1 text-center c-title">
                                     {{ promotion.translation.name }}
                                 </div>
-                                <v-sheet
-                                    class="c-sheet"
-                                    elevation="1"
-                                    height="auto"
-                                    width="auto"
-                                    >
-                                    {{ promotion.translation.btn_text }}
-                                </v-sheet>
+                                <v-btn
+                                    color="secondary"
+                                    :to="`/${language.lang}/promotions#promotion-${promotion.id}`"
+                                >{{ promotion.translation.btn_text }}</v-btn>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -120,12 +116,13 @@ export default {
         Services
     },
     mounted(){
-        console.log(this.trans);
+        // console.log(this.trans);
     },
     computed: mapGetters({
         promotions : 'getPromotions',
         envAPI: 'getEnvAPI',
-        trans: 'getTranslations'
+        trans: 'getTranslations',
+        language: 'getLanguage',
     }),
 }
 </script>
