@@ -9,7 +9,7 @@ export const state = () => ({
     services: [],
     allServices: [],
     promotions: [],
-    langs: [{id: 1, lang : 'ro', active: 1}, {id: 2, lang : 'en', active: 0}, {id: 3, lang : 'en', active: 0}],
+    langs: [{id: 1, lang : 'ro', active: 1}, {id: 2, lang : 'en', active: 0}, {id: 3, lang : 'ru', active: 0}],
     lang: {id: 1, lang : 'ro', active: 1},
     translations: {},
     banners: [],
