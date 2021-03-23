@@ -1,11 +1,39 @@
 <template>
     <main>
+
         <div class="banner">
-            <v-carousel :show-arrows="false" cycle>
+            <v-carousel :show-arrows="false" cycle v-if="!$mobileDetect.mobile()">
                 <v-carousel-item
                     v-for="(promotion, i) in promotions"
                     :key="i"
                     :src="`${envAPI}/images/promotions/${promotion.img}`"
+                    style="width:100%;height:auto;"
+                    >
+                    <v-container class="fill-height">
+                        <v-row
+                            class="fill-height"
+                            align="center"
+                            justify="center"
+                            >
+                            <v-col md12 class="text-center">
+                                <div class="display-1 text-center c-title">
+                                    {{ promotion.translation.name }}
+                                </div>
+                                <v-btn
+                                    color="secondary"
+                                    :to="`/${language.lang}/promotions#promotion-${promotion.id}`"
+                                >{{ promotion.translation.btn_text }}</v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-carousel-item>
+            </v-carousel>
+
+            <v-carousel :show-arrows="false" cycle v-else>
+                <v-carousel-item
+                    v-for="(promotion, i) in promotions"
+                    :key="i"
+                    :src="`${envAPI}/images/promotions/${promotion.img_mobile}`"
                     style="width:100%;height:auto;"
                     >
                     <v-container class="fill-height">
@@ -125,6 +153,15 @@ export default {
         trans: 'getTranslations',
         language: 'getLanguage',
     }),
+    methods: {
+        isMobile() {
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true
+        } else {
+            return false
+            }
+        }
+    }
 }
 </script>
 

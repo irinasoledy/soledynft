@@ -1,26 +1,14 @@
 <template lang="html">
     <main class="about-content">
         <div v-for="promotion in promotions" :key="promotion.id" :id="`promotion-${promotion.id}`">
-            <v-img
-          :src="`${envAPI}/images/promotions/${promotion.img}`"
-          aspect-ratio="2"
-        ></v-img>
 
-            <!-- <v-parallax dark :src="`${envAPI}/images/promotions/${promotion.img}`">
-                <v-row
-                    align="center"
-                    justify="center"
-                    >
-                    <v-col
-                        class="text-center"
-                        cols="12"
-                        >
-                        <h1 class="display-1 mb-4">
-                            {{ promotion.translation.name }}
-                        </h1>
-                    </v-col>
-                </v-row>
-            </v-parallax> -->
+            <v-img
+                v-if="!$mobileDetect.mobile()"
+                :src="`${envAPI}/images/promotions/${promotion.img}`"
+                aspect-ratio="2"
+            ></v-img>
+
+            <img  width="100%" v-else :src="`${envAPI}/images/promotions/${promotion.img_mobile}`">
 
             <section>
                 <div class="container">
@@ -92,8 +80,8 @@ export default {
     padding-bottom: 40px;
 }
 .v-image__image--cover{
-    background-size: 100% auto;
-    background-size: contain;
+    // background-size: 100% auto;
+    // background-size: contain;
 }
 .v-carousel__item{
     height: auto !important;

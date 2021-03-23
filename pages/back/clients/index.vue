@@ -53,14 +53,14 @@
                                     <v-badge
                                         v-else
                                         value="2"
-                                        color="yellow"
+                                        color="red"
                                         >
                                     </v-badge>
                                 </span>
                                 <span v-else>
                                     <v-badge
                                         value="2"
-                                        color="red"
+                                        color="silver"
                                         >
                                     </v-badge>
                                 </span>
