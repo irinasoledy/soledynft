@@ -2,25 +2,53 @@
     <agile class="c-slider" :options="options">
         <div class="slide">
             <v-card class="c-card">
-                <v-card-title>{{ trans.General.testemonial1Name }}</v-card-title>
+                <v-card-title align="center" justify="center">
+                    <v-avatar color="indigo">
+                        <v-icon dark>
+                        mdi-account-circle
+                        </v-icon>
+                    </v-avatar>
+                    <span class="testimonial-author">{{ trans.General.testemonial1Name }}</span>
+                </v-card-title>
                 <v-card-text>"{{ trans.General.testemonial1Text }}"</v-card-text>
             </v-card>
         </div>
         <div class="slide">
             <v-card class="c-card">
-                <v-card-title>{{ trans.General.testemonial2Name }}</v-card-title>
+                <v-card-title>
+                    <v-avatar color="indigo">
+                        <v-icon dark>
+                        mdi-account-circle
+                        </v-icon>
+                    </v-avatar>
+                    <span class="testimonial-author">{{ trans.General.testemonial2Name }}</span>
+                </v-card-title>
                 <v-card-text>"{{ trans.General.testemonial2Text }}"</v-card-text>
             </v-card>
         </div>
         <div class="slide">
             <v-card class="c-card">
-                <v-card-title>{{ trans.General.testemonial3Name }}</v-card-title>
+                <v-card-title>
+                    <v-avatar color="indigo">
+                        <v-icon dark>
+                        mdi-account-circle
+                        </v-icon>
+                    </v-avatar>
+                    <span class="testimonial-author">{{ trans.General.testemonial3Name }}</span>
+                </v-card-title>
                 <v-card-text>"{{ trans.General.testemonial3Text }}"</v-card-text>
             </v-card>
         </div>
         <div class="slide">
             <v-card class="c-card">
-                <v-card-title>{{ trans.General.testemonial4Name }}</v-card-title>
+                <v-card-title>
+                    <v-avatar color="indigo">
+                        <v-icon dark>
+                        mdi-account-circle
+                        </v-icon>
+                    </v-avatar>
+                    <span class="testimonial-author">{{ trans.General.testemonial4Name }}</span>
+                </v-card-title>
                 <v-card-text>"{{ trans.General.testemonial4Text }}"</v-card-text>
             </v-card>
         </div>
@@ -93,5 +121,8 @@ export default {
   .agile__dot--current button {
       background-color: rgb(36, 35, 35)
   }
+}
+.testimonial-author{
+    margin-left: 20px;
 }
 </style>

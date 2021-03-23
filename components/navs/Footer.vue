@@ -34,7 +34,7 @@
                     <ul>
                         <li><nuxt-link :to="`/${language.lang}/about`">{{ trans.PageNames.about }}</nuxt-link></li>
                         <li><nuxt-link :to="`/${language.lang}/contacts`">{{ trans.PageNames.contacts }}</nuxt-link></li>
-                        <li><nuxt-link :to="`/`">{{ trans.PageNames.information }}</nuxt-link></li>
+                        <li><nuxt-link :to="`/${language.lang}/experts`">{{ trans.PageNames.ourTeam }}</nuxt-link></li>
                         <li><nuxt-link :to="`/`">{{ trans.PageNames.faq }}</nuxt-link></li>
                     </ul>
                 </v-col>
@@ -83,7 +83,7 @@
                     {{ trans.ContactsAndForms.companyMainEmail1 }}
                 </v-card-text>
 
-                <nuxt-link class="footer-link" :to="`/${language.lang}/experts`">{{ trans.PageNames.ourTeam }}</nuxt-link>
+                <!-- <nuxt-link class="footer-link" :to="`/${language.lang}/experts`">{{ trans.PageNames.ourTeam }}</nuxt-link> -->
 
                 <v-divider></v-divider>
                 <v-card-text class="white--text">
@@ -183,6 +183,9 @@ export default {
                     a{
                         color: #FFF;
                         text-decoration: none;
+                    }
+                    a:hover{
+                        text-decoration: underline;
                     }
                 }
             }

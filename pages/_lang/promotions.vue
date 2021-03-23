@@ -1,7 +1,12 @@
 <template lang="html">
     <main class="about-content">
         <div v-for="promotion in promotions" :key="promotion.id" :id="`promotion-${promotion.id}`">
-            <v-parallax dark :src="`${envAPI}/images/promotions/${promotion.img}`">
+            <v-img
+          :src="`${envAPI}/images/promotions/${promotion.img}`"
+          aspect-ratio="2"
+        ></v-img>
+
+            <!-- <v-parallax dark :src="`${envAPI}/images/promotions/${promotion.img}`">
                 <v-row
                     align="center"
                     justify="center"
@@ -15,12 +20,19 @@
                         </h1>
                     </v-col>
                 </v-row>
-            </v-parallax>
-            <section v-if="promotion.translation.body">
+            </v-parallax> -->
+
+            <section>
                 <div class="container">
                     <div class="row justify-center">
-                        <v-expansion-panels >
+
+                        <h1 class="display-1 mb-4">
+                            {{ promotion.translation.name }}
+                        </h1>
+
+                        <v-expansion-panels v-if="promotion.translation.body">
                             <v-expansion-panel>
+
                                 <v-expansion-panel-header class="text-center justify-center accordion-title">
                                     {{ trans.General.viewPromoDetails }}
                                     <template v-slot:actions>
@@ -29,7 +41,10 @@
                                         </v-icon>
                                     </template>
                                 </v-expansion-panel-header>
-                                <v-expansion-panel-content v-html="promotion.translation.body">
+                                <v-expansion-panel-content>
+                                    <div v-html="promotion.translation.body">
+
+                                    </div>
                                 </v-expansion-panel-content>
                             </v-expansion-panel>
                         </v-expansion-panels>
@@ -47,6 +62,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Experts from "@/components/blocs/experts.vue"
 
 export default {
     computed: mapGetters({
@@ -56,6 +72,7 @@ export default {
         promotions : 'getPromotions',
         trans: 'getTranslations'
     }),
+    components: { Experts }
 }
 </script>
 
@@ -63,18 +80,25 @@ export default {
 .v-expansion-panel::before{
     box-shadow: none !important;
 }
-.v-expansion-panel-content{
-    display: block !important;
-}
 .v-application--is-ltr .v-expansion-panel-header__icon{
-    margin-left: 10px;
+    margin-left: 10px !important;
 }
 .accordion-title{
-    font-size: 20px;
+    font-size: 20px !important;
 }
 .contact-btns{
     background-color: $custom_blue;
     color: #FFF;
     padding-bottom: 40px;
+}
+.v-image__image--cover{
+    background-size: 100% auto;
+    background-size: contain;
+}
+.v-carousel__item{
+    height: auto !important;
+}
+.v-carousel{
+    height: auto !important;
 }
 </style>

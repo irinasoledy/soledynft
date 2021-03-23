@@ -6,6 +6,7 @@
                     v-for="(promotion, i) in promotions"
                     :key="i"
                     :src="`${envAPI}/images/promotions/${promotion.img}`"
+                    style="width:100%;height:auto;"
                     >
                     <v-container class="fill-height">
                         <v-row
@@ -199,5 +200,15 @@ export default {
     main {
       padding-top: 118px;
     }
+  }
+  .v-image__image--cover{
+      background-size: 100% auto;
+      background-size: contain;
+  }
+  .v-carousel__item{
+      height: auto !important;
+  }
+  .v-carousel{
+      height: auto !important;
   }
 </style>

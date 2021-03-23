@@ -12,6 +12,7 @@ export const state = () => ({
     langs: [{id: 1, lang : 'ro', active: 1}, {id: 2, lang : 'en', active: 0}],
     lang: {id: 1, lang : 'ro', active: 1},
     translations: {},
+    banners: [],
     pages: [],
     changedEmployee: null
 })
