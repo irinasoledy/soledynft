@@ -1,68 +1,64 @@
 <template>
-  <v-app id="root">
-      <NavComponent></NavComponent>
-      <nuxt />
-      <Footer />
-
-              <v-dialog
-                  v-model="dialog"
-                  persistent
-                  max-width="290"
-                  >
-                  <v-card
-                  color="primary"
-                  dark
-                  >
-                      <v-card-text>
-                          Incoming call from...
-                          <v-progress-linear
-                              indeterminate
-                              color="white"
-                              class="mb-0"
-                          ></v-progress-linear>
-                      </v-card-text>
-
-                      <v-card-text class="text-center">
-                          <h3>Employee calling... </h3>
-                          <h4>Room ID  {{ roomId }}</h4>
-                      </v-card-text>
-
-                      <div class="text-center">
-                          <v-btn
-                          @click="rejectCall"
-                          class="mx-2"
-                          fab
-                          dark
-                          large
-                          color="red"
-                          >
-                              <v-icon dark>
-                                  mdi-phone-hangup
-                              </v-icon>
-                          </v-btn>
-
-                          <v-btn
-                          @click="responseCall"
-                          class="mx-2"
-                          fab
-                          dark
-                          large
-                          color="green"
-                          >
-                              <v-icon dark>
-                                  mdi-phone
-                              </v-icon>
-                          </v-btn>
-                      </div>
-                  </v-card>
-              </v-dialog>
-  </v-app>
+    <v-app id="root">
+        <NavComponent></NavComponent>
+        <nuxt />
+        <Footer />
+        <v-dialog
+            v-model="dialog"
+            persistent
+            max-width="290"
+            >
+            <v-card
+                color="primary"
+                dark
+                >
+                <v-card-text>
+                    Incoming call from...
+                    <v-progress-linear
+                        indeterminate
+                        color="white"
+                        class="mb-0"
+                        ></v-progress-linear>
+                </v-card-text>
+                <v-card-text class="text-center">
+                    <h3>Employee calling... </h3>
+                    <h4>Room ID  {{ roomId }}</h4>
+                </v-card-text>
+                <div class="text-center">
+                    <v-btn
+                        @click="rejectCall"
+                        class="mx-2"
+                        fab
+                        dark
+                        large
+                        color="red"
+                        >
+                        <v-icon dark>
+                            mdi-phone-hangup
+                        </v-icon>
+                    </v-btn>
+                    <v-btn
+                        @click="responseCall"
+                        class="mx-2"
+                        fab
+                        dark
+                        large
+                        color="green"
+                        >
+                        <v-icon dark>
+                            mdi-phone
+                        </v-icon>
+                    </v-btn>
+                </div>
+            </v-card>
+        </v-dialog>
+    </v-app>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex"
-import NavComponent from '@/components/navs/navbar';
-import Footer from '@/components/navs/Footer';
+import NavComponent from '@/components/front/partials/header';
+import Footer from '@/components/front/partials/footer';
 
 export default {
     fetch() {
@@ -116,7 +112,6 @@ export default {
 
         }),
         addUserAction(route, counter = 0, pages = 1){
-            console.log('addUserAction');
             const data = {
                 userId : this.user._id,
                 cookie:  this.user.cookies,

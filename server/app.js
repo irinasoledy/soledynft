@@ -1,10 +1,7 @@
 const app = require('express')()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
-const users = require('./controllers/Users')()
-const conference = require('./controllers/Conference')()
-// const auth = require('./controllers/auth')()
-
+const users = require('./controllers_/Users')()
 const actions = require('./services/ActionService')()
 
 const m = (name, text, id) => ({ name, text, id })
@@ -15,14 +12,6 @@ io.on('connection', socket => {
     socket.on('employeeJoined', (data, cb) => {
         socket.join(data.roomId)
         cb()
-    })
-
-    // Start: client join a room
-    socket.on('joinExistingRoom', async (data, cb) => {
-        // const response = await conference.createClientUser(data.roomId, data.userId)
-        // socket.join(data.roomId)
-        // io.to(data.roomId).emit('joinExistingRoom', response)
-        // cb()
     })
 
     // joinRoomAsClient
@@ -152,15 +141,6 @@ io.on('connection', socket => {
   socket.on('stop', (roomId) => {
       io.to(roomId).emit('stopChat')
   })
-
-  // socket.on('changeVideoProccess', () => {
-  //     io.to('room').emit('changeVideoProccess')
-  // })
-
-  // socket.on('changeAudioProccess', () => {
-  //     io.to('room').emit('changeAudioProccess')
-  // })
-
 
 
   socket.on('disconnect', () => {

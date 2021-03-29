@@ -137,12 +137,13 @@ const Menu = [
 ];
 
 const NewMenu = [
-      {name: 'dashboard', title: 'Dashboard', href: '/back/dashboard'},
-      {name: 'manager-one', title: 'Employees', href: '/back/employees'},
-      {name: 'clients', title: 'Clients', href: '/back/clients'},
-      {name: 'cr-managers', title: 'My area', href: '/back/my-area'},
-      {name: 'languages', title: 'Languages', href: '/back/languages'},
-      {name: 'services', title: 'Services', href: '/back/services'},
+      {name: 'dashboard', title: 'Dashboard', href: '/crm/dashboard'},
+      {name: 'manager-one', title: 'Employees', href: '/crm/employees'},
+      {name: 'clients', title: 'Clients', href: '/crm/clients'},
+      {name: 'notifications', title: 'Notifications', href: '/crm/notifications'},
+      {name: 'cr-managers', title: 'My area', href: '/crm/my-area'},
+      // {name: 'languages', title: 'Languages', href: '/back/languages'},
+      // {name: 'services', title: 'Services', href: '/back/services'},
 ]
 // reorder menu
 Menu.forEach((item) => {

@@ -1,6 +1,5 @@
 <template>
     <main>
-
         <div class="banner">
             <v-carousel :show-arrows="false" cycle v-if="!$mobileDetect.mobile()">
                 <v-carousel-item
@@ -57,7 +56,8 @@
             </v-carousel>
         </div>
         <div class="callNow">
-            <v-parallax height="200" src="call-now-bg.png">
+            <v-parallax height="200" :src="$banner('callNowBGBanner')">
+
                 <v-container>
                     <v-row>
                         <v-col>
@@ -86,7 +86,7 @@
         <services></services>
         <experts></experts>
         <div class="callNow">
-            <v-parallax height="200" src="call-now-bg.png">
+            <v-parallax height="200" :src="$banner('callNowBGBanner')">
                 <v-container>
                     <v-row>
                         <v-col>
@@ -120,7 +120,7 @@
                         </div>
                     </v-col>
                     <v-col cols="12">
-                        <testimonial></testimonial>
+                        <testimonials></testimonials>
                     </v-col>
                 </v-row>
             </v-container>
@@ -130,42 +130,41 @@
 </template>
 
 <script>
+
 import { mapActions, mapGetters } from 'vuex'
-import Testimonial from "@/components/sliders/testimonial"
-import MapContact from "@/components/mapContact.vue"
-import Experts from "@/components/blocs/experts.vue"
-import Services from '@/components/blocs/services.vue'
+import Testimonials from "@/components/front/sliders/testimonialsSlider"
+import Experts from "@/components/front/widgets/expertsWidget.vue"
+import Services from '@/components/front/widgets/servicesWidget.vue'
+import MapContact from "@/components/front/widgets/mapWidget.vue"
 
 export default {
     layout: "default",
     components: {
-        Testimonial,
+        Testimonials,
         MapContact,
         Experts,
         Services
     },
-    mounted(){
-        // console.log(this.trans);
-    },
     computed: mapGetters({
         promotions : 'getPromotions',
+        language: 'getLanguage',
         envAPI: 'getEnvAPI',
         trans: 'getTranslations',
-        language: 'getLanguage',
+        banners: 'getBanners',
     }),
     methods: {
-        isMobile() {
-            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                return true
-        } else {
-            return false
-            }
-        }
+        ...mapActions({
+            banner: 'banner'
+        })
+    },
+    mounted(){
+        console.log(this.$banner("mainBanner"));
+         console.log(this.$banner("lmlm"));
     }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
   .display-1 {
     color: $custom_blue !important;

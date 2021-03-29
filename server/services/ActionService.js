@@ -68,7 +68,6 @@ class ActionService {
             }
         })
 
-        // console.log(date, now, nowMinus);
         return date
     }
 }

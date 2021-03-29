@@ -42,7 +42,7 @@
                         </div>
                     </v-col>
                     <v-col cols="12">
-                        <testimonial></testimonial>
+                        <Testimonials></Testimonials>
                     </v-col>
                 </v-row>
             </v-container>
@@ -52,15 +52,16 @@
 </template>
 
 <script>
+
 import { mapGetters, mapActions } from 'vuex'
-import Testimonial from "@/components/sliders/testimonial"
-import MapContact from "@/components/mapContact.vue"
-import Experts from "@/components/blocs/experts.vue"
+import Testimonials from "@/components/front/sliders/testimonialsSlider"
+import Experts from "@/components/front/widgets/expertsWidget.vue"
+import MapContact from "@/components/front/widgets/mapWidget.vue"
 
 export default {
     layout: "default",
     components: {
-        Testimonial,
+        Testimonials,
         MapContact,
         Experts,
     },

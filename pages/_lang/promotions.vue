@@ -49,8 +49,9 @@
 </template>
 
 <script>
+
 import { mapActions, mapGetters } from 'vuex'
-import Experts from "@/components/blocs/experts.vue"
+import Experts from "@/components/front/widgets/expertsWidget.vue"
 
 export default {
     computed: mapGetters({
@@ -78,10 +79,6 @@ export default {
     background-color: $custom_blue;
     color: #FFF;
     padding-bottom: 40px;
-}
-.v-image__image--cover{
-    // background-size: 100% auto;
-    // background-size: contain;
 }
 .v-carousel__item{
     height: auto !important;

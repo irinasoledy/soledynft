@@ -29,9 +29,10 @@
 </template>
 
 <script>
+
 import { mapActions, mapGetters } from 'vuex'
-import MapContact from "@/components/mapContact.vue"
-import Experts from "@/components/blocs/experts.vue"
+import Experts from "@/components/front/widgets/expertsWidget.vue"
+import MapContact from "@/components/front/widgets/mapWidget.vue"
 
 export default {
     layout: "default",

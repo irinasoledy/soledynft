@@ -1,20 +1,53 @@
+<!-- <template>
+    <v-app dark>
+        <h1 v-if="error.statusCode === 404">
+            {{ pageNotFound }}
+        </h1>
+        <h1 v-else>
+            {{ otherError }}
+        </h1>
+        <NuxtLink to="/">
+            Home page
+        </NuxtLink>
+    </v-app>
+
+
+    <main>
+
+
+    </main>
+</template> -->
+
 <template>
-  <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
-  </v-app>
+  <v-parallax
+    dark
+    src=""
+  >
+    <v-row
+      align="center"
+      justify="center"
+    >
+      <v-col
+        class="text-center"
+        cols="12"
+      >
+        <h1 class="display-1 font-weight-thin mb-4">
+          404
+        </h1>
+        <p class="subheading" color="primary">
+            {{ otherError }}
+        </p>
+        <p class="btn-wrapp-404">
+            <v-btn to="/" class="primary">Go Home</v-btn>
+        </p>
+      </v-col>
+    </v-row>
+  </v-parallax>
 </template>
 
 <script>
 export default {
-  layout: 'empty',
+  layout: 'default',
   props: {
     error: {
       type: Object,
@@ -24,7 +57,7 @@ export default {
   data () {
     return {
       pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
+      otherError: 'We are sorry, but the page where you looking for was not found...'
     }
   },
   head () {
@@ -39,6 +72,20 @@ export default {
 
 <style scoped>
 h1 {
-  font-size: 20px;
+  font-size: 30px !important;
+  color: #293754;
+
+}
+.v-application .display-1{
+    font-size: 5.125rem !important;
+}
+.subheading{
+    color: #293754;
+}
+.v-parallax__image{
+    bottom: auto;
+}
+.btn-wrapp-404{
+    margin-top: 30px;
 }
 </style>

@@ -2,7 +2,7 @@ const colors = require('vuetify/es5/util/colors').default
 
 module.exports = {
   telemetry: false,
-  mode: 'universal',
+  // mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -34,7 +34,7 @@ module.exports = {
   plugins: [
       {src: '@/plugins/socket', ssr : false},
       {src: '~/plugins/vue-agile'},
-      '@/plugins/nestable',
+      {src: '~/plugins/global.js'},
   ],
   components: true,
   /*

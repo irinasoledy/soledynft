@@ -1,20 +1,26 @@
 import axios from 'axios'
+import contentApi from '@/api/contentApi'
 
 export const state = () => ({
+    langs: [
+        {id: 1, lang : 'ro', active: 1},
+        {id: 2, lang : 'en', active: 0},
+        {id: 3, lang : 'ru', active: 0}
+    ],
+    lang: {id: 1, lang : 'ro', active: 1},
     envAPI: {},
-    user: {},
-    room: false,
-    drawer: true,
-
+    pages: [],
     services: [],
     allServices: [],
     promotions: [],
-    langs: [{id: 1, lang : 'ro', active: 1}, {id: 2, lang : 'en', active: 0}, {id: 3, lang : 'ru', active: 0}],
-    lang: {id: 1, lang : 'ro', active: 1},
+    experts: [],
     translations: {},
     banners: [],
-    pages: [],
-    changedEmployee: null
+    drawer: true,
+
+    user: {},
+    room: false,
+    changedEmployee: null,
 })
 
 export const mutations = {
@@ -33,6 +39,7 @@ export const mutations = {
       state.allServices = data.servicesAll
       state.promotions = data.promotions
       state.pages = data.pages
+      state.banners = data.banners
   },
     SET_DEFAULT_LANG(state, id){
         state.lang = state.langs.find((lang) => lang.id === id)
@@ -45,35 +52,34 @@ export const mutations = {
     },
     SET_ENV_API(state, env){
         state.envAPI = env
-    }
+    },
+    SET_EXPERTS(state, experts){
+        state.experts = experts
+    },
 }
 
 export const actions = {
+
     async nuxtServerInit({ state, commit }) {
-        await axios.get(`${process.env.API}/api/v2/data?lang=${state.lang.lang}`)
-            .then(response => {
-                commit('SET_SERVICES', response.data)
-            }).catch(err => { console.log(err) })
-
-        await axios.get(`${process.env.API}/api/v2/translations?lang=${state.lang.lang}`)
-            .then(response => {
-                commit('SET_TRANSALATIONS', response.data)
-            }).catch(err => { console.log(err) })
-
+        await contentApi.getTranslations(state.lang.lang, data => commit('SET_TRANSALATIONS', data))
+        await contentApi.getInitData(state.lang.lang, data => commit('SET_SERVICES', data))
         commit('SET_ENV_API', process.env.API)
     },
+
     async changeLanguage({ state, commit }, id) {
         commit('SET_DEFAULT_LANG', id)
-        await axios.get(`${process.env.API}/api/v2/data?lang=${state.lang.lang}`)
-            .then(response => {
-                commit('SET_SERVICES', response.data)
-            }).catch(err => { console.log(err) })
-
-        await axios.get(`${process.env.API}/api/v2/translations?lang=${state.lang.lang}`)
-            .then(response => {
-                commit('SET_TRANSALATIONS', response.data)
-            }).catch(err => { console.log(err) })
+        await contentApi.getInitData(state.lang.lang, (response) => commit('SET_SERVICES', response.data))
+        await contentApi.getTranslations(state.lang.lang, (response) => commit('SET_SERVICES', response.data))
     },
+
+    async getExpertsList({ commit }){
+        await contentApi.getExperts( data => commit('SET_EXPERTS', data))
+    },
+
+    banner({ state }){
+        return 'ok'
+    },
+
     setDefaultChangedEmployee({ commit }){
         commit('SOCKET_refreshEmployeeStatus', null)
     }
@@ -88,5 +94,7 @@ export const getters = {
     getChangedEmployee: state => state.changedEmployee,
     getEnvAPI: state => state.envAPI,
     getPromotions: state => state.promotions,
-    getPages: state => state.pages
+    getPages: state => state.pages,
+    getExperts: state => state.experts,
+    getBanners: state => state.banners,
 }

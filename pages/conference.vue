@@ -34,10 +34,10 @@
 </template>
 
 <script>
-import Videocall from "@/components/video/videoCall";
-import VideoBottom from "@/components/video/video-bottom";
-import MobileChat from "@/components/mobile-chat/conference";
-import chat from "@/components/video/chat";
+import Videocall from "@/components/chat/video/videoCall";
+import VideoBottom from "@/components/chat/video/video-bottom";
+import MobileChat from "@/components/chat/mobile-chat/conference";
+import chat from "@/components/chat/video/chat";
 import Util from "@/util";
 
 export default {

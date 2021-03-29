@@ -1,4 +1,5 @@
 import axios from 'axios'
+import userApi from '@/api/userApi'
 
 export const state = () => ({
     employees : [],
@@ -192,22 +193,10 @@ export const actions = {
         })
     },
     async savePolicyOptions({ commit }, data){
-        // await axios.post("/get-user-messages", data).then(data => {
-        //
-        //     const parsedMessages = data.data.map((message) => {
-        //         if (message.sendBy == "employee") {
-        //             return m (message.employee.name, message.message, message.employee._id)
-        //         }else{
-        //             return m (message.client.name, message.message, message.client._id)
-        //         }
-        //     })
-        //
-        //     commit('SET_MESSAGES_HISTORY', {messages: data.data, parsed: parsedMessages})
-        // })
-        await axios.post("/set/set-agr-option", data).then(data => {
-            console.log(data);
-            // commit('SET_USER_COOKIE', data.data)
-        })
+        userApi.savePolicy(data)
+
+
+        // await axios.post("/set/set-agr-option", data).then(data => {})
     },
     setUser({ commit }, user){
         commit('SET_USER', user)
@@ -219,7 +208,6 @@ export const actions = {
         commit('SWITCH_MICROPHONE', statut)
     },
     switchPolicy({ commit }){
-        console.log('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
         commit('SWITCH_POLICY')
     }
 }

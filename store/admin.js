@@ -1,4 +1,5 @@
 import axios from "axios"
+import crmApi from '@/api/crmApi'
 
 export const state = () => ({
     employees: [],
@@ -8,23 +9,26 @@ export const state = () => ({
     status: false,
     notifications: [],
     historyClientsList: [],
-    languages: [],
 })
 
 export const mutations = {
-    LOGIN(state, data){
-        state.authUser = data.user
-    },
-    INIT_APP_DATA(state, data){
+    INIT_APP_DATA(state, data) {
         state.employees = data.employees
         state.authUser = data.authUser
-        state.languages = data.languages
+    },
+    LOGIN(state, data) {
+        state.authUser = data.user
     },
     ADD_NEW_EMPLOYEE(state, data){
         state.employees.push(data)
     },
     REMOVE_EMPLOYEE(state, id){
         state.employees = state.employees.filter(function(item) {
+            return item._id !== id
+        })
+    },
+    REMOVE_CLIENT(state, id){
+        state.clients = state.clients.filter(function(item) {
             return item._id !== id
         })
     },
@@ -37,14 +41,10 @@ export const mutations = {
         state.notifications = data.notifications
     },
     SET_CLIENTS(state, data){
-        state.clients = data.clients
+        state.clients = data.users
         state.clientActions = data.actions
     },
-    REMOVE_CLIENT(state, id){
-        state.clients = state.clients.filter(function(item) {
-            return item._id !== id
-        })
-    },
+
     SET_HISTORY_CLIENT_LIST(state, data){
         state.historyClientsList = data
     },
@@ -54,99 +54,59 @@ export const mutations = {
 }
 
 export const actions = {
-    async login({ commit }, data){
-        await axios.post('/auth/user-login', data)
-            .then(response => {
-                commit('LOGIN', response.data)
-            }).catch(err => {
-                console.log(err);
-            })
+
+    async initApp({ commit }, data) {
+        crmApi.init(response => commit('INIT_APP_DATA', response))
     },
-    async initApp({ commit }, data){
-        await axios.post('/back/init-app')
-            .then(response => {
-                commit('INIT_APP_DATA', response.data)
-            }).catch(err => {
-                console.log(err);
-            })
+
+    async login({ commit }, data) {
+        await crmApi.login(data, response => commit('LOGIN', response))
     },
-    async createNewEmployee({ commit }, data){
-        await axios.post('/back/employees/create', data)
-            .then(response => {
-                commit('ADD_NEW_EMPLOYEE', response.data)
-            }).catch(err => {
-                console.log(err);
-            })
+
+    async getClientsList({ commit }, type) {
+        await crmApi.getUsers(type, response => commit('SET_CLIENTS', response))
     },
-    async editEmployeeInfo({ commit }, data){
-        await axios.post('/back/employees/edit-info', data)
+
+    async createEmployee({ commit }, fromData) {
+        await crmApi.createUser(fromData, response => commit('ADD_NEW_EMPLOYEE', response))
     },
-    async editEmployeeAccount({ commit }, data){
-        await axios.post('/back/employees/edit-account', data)
+
+    async removeEmployee({ commit }, id) {
+        await crmApi.deleteUser(id, resposnse => commit('REMOVE_EMPLOYEE', id))
     },
-    async removeEmployee({ commit }, id){
-        await axios.post('/back/employees/remove', {id})
-            .then(response => {
-                commit('REMOVE_EMPLOYEE', id)
-            }).catch(err => {
-                console.log(err);
-            })
+
+    async removeClient({ commit }, id) {
+        await crmApi.deleteUser(id, resposnse => commit('REMOVE_CLIENT', id))
     },
-    async setUserStatus({ commit }, data){
-        await axios.post('/back/employees/change-status', data)
-            .then(response => {
-                commit('SET_USER_STATUS', response.data)
-            }).catch(err => {
-                console.log(err);
-            })
+
+    async editUser({ commit }, user) {
+        const id = user._id
+        await crmApi.updateUser(id, user, response => true)
     },
-    async getNotifications({ commit }){
-        await axios.post('/back/notifications/all')
-            .then(response => {
-                commit('SET_NOTIFICATIONS', response.data)
-            }).catch(err => {
-                console.log(err);
-            })
+
+    async editUserAvatar({ commit }, data) {
+        const id = data.id
+        let user = {}
+
+        await crmApi.updateUserAvatar(id, data.formData, response => {
+            user = response
+        })
+
+        return user
     },
-    async getClientsList({ commit }){
-        await axios.post('/back/clients/all')
-            .then(response => {
-                commit('SET_CLIENTS', response.data)
-            }).catch(err => {
-                console.log(err);
-            })
+
+    async setUserStatus({ commit }, user) {
+        const id = user._id
+        await crmApi.updateUserStatus(id, user, response => commit('SET_USER_STATUS', response))
     },
-    async editClientInfo({ commit }, data){
-        await axios.post('/back/clients/edit-info', data)
+
+    async getNotifications({ commit }) {
+        crmApi.getNotifications(response => commit('SET_NOTIFICATIONS', response))
     },
-    async editClientAccount({ commit }, data){
-        await axios.post('/back/clients/edit-account', data)
-    },
-    async removeClient({ commit }, id){
-        await axios.post('/back/clients/remove', {id})
-            .then(response => {
-                commit('REMOVE_CLIENT', id)
-            }).catch(err => {
-                console.log(err);
-            })
-    },
-    async getClientsHitoryList({ commit }, id){
-        await axios.post('/back/history/get-clients-list', {id})
-            .then(response => {
-                commit('SET_HISTORY_CLIENT_LIST', response.data)
-            }).catch(err => {
-                console.log(err);
-            })
-    },
-    async addAvatar({ commit }, formData){
-        await axios.post('/back/add/avatar', formData)
-            .then(response => {
-                console.log(response);
-                // commit('SET_HISTORY_CLIENT_LIST', response.data)
-            }).catch(err => {
-                console.log(err);
-            })
-    },
+
+    async getClientsHitoryList({ commit }, id) {
+        await crmApi.getHistory(id, response => commit('SET_HISTORY_CLIENT_LIST', response))
+    }
 }
 
 export const getters = {
@@ -156,6 +116,5 @@ export const getters = {
     getNotifications: state => state.notifications,
     getClients: state => state.clients,
     getHistoryClientsList: state => state.historyClientsList,
-    getLanguages: state => state.languages,
     getActions: state => state.clientActions,
 }

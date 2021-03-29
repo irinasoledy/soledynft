@@ -2,12 +2,13 @@ const { Nuxt, Builder } = require('nuxt')
 const { app, server } = require('./app')
 const consola = require('consola')
 const mongoose = require('mongoose')
-const routes = require('./routes')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
-const store = new session.MemoryStore()
 const fileUpload = require('express-fileupload')
+const frontRoutes = require('./routes/frontRoutes.js')
+const crmRoutes = require('./routes/crmRoutes.js')
+const store = new session.MemoryStore()
 
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
@@ -44,7 +45,9 @@ async function start() {
             saveUninitialized: true
         }));
 
-        app.use(routes)
+        app.use(frontRoutes)
+        app.use(crmRoutes)
+
         app.use(nuxt.render)
 
         server.listen(port, () => {
