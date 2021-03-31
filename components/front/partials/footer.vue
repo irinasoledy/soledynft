@@ -14,16 +14,27 @@
                 class="primary white--text text-center"
                 >
                 <v-card-text>
-                    <v-btn
-                        v-for="icon in icons"
-                        :key="icon"
-                        class="mx-4 white--text"
-                        icon
-                        >
-                        <v-icon size="24px">
-                            {{ icon }}
-                        </v-icon>
-                    </v-btn>
+                    <a :href="trans.ContactsAndForms.companyFacebook">
+                        <v-btn
+                            class="mx-4 white--text"
+                            icon
+                            >
+                            <v-icon size="24px">
+                                mdi-facebook
+                            </v-icon>
+                        </v-btn>
+                    </a>
+
+                    <a :href="trans.ContactsAndForms.companyInstagram">
+                        <v-btn
+                            class="mx-4 white--text"
+                            icon
+                            >
+                            <v-icon size="24px">
+                                mdi-instagram
+                            </v-icon>
+                        </v-btn>
+                    </a>
                 </v-card-text>
             </v-card>
         </v-row>

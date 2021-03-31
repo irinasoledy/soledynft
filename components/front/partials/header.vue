@@ -121,6 +121,18 @@
             </v-sheet>
             <v-list nav light>
                 <v-list-item-group>
+
+                    <v-list-item
+                        v-if="serviceIdentifier"
+                        @click="closeMenu(`/${language.lang}/service/${serviceIdentifier.alias}`)">
+                        <v-list-item-title
+                            font-weight-bold
+                            class="mobile-burgher-first-element"
+                            v-text="serviceIdentifier.translation.name">
+                        </v-list-item-title>
+                    </v-list-item>
+
+
                     <v-list-item
                         @click="closeMenu(`/${language.lang}/service/${serviceIdentifier.alias}/${service.alias}`)"
                         v-for="(service, i) in subserviceIdentifier"
@@ -292,7 +304,7 @@
                             <v-hover v-slot="{hover}">
                                 <v-list-item color="primary">
                                     <v-icon dark>mdi-account</v-icon>
-                                    Iov Albu
+                                    Cabinet
                                     <v-expand-transition>
                                         <v-list v-if="hover" width="250" class="transition-fast-in-fast-out cabinetDesk">
                                             <v-list-item nuxt to="/cabinet/personal-info" exact>
@@ -373,8 +385,6 @@
                                                         style="height: auto; width: auto">
                                                         <v-list-item v-for="(child, i) in item.children"
                                                             :key="i"
-                                                            active-class="accent"
-                                                            color="secondary"
                                                             :to="`/${language.lang}/service/${item.alias}/${child.alias}`">
                                                             <v-list-item-title>
                                                                 {{child.translation.name}}
@@ -463,7 +473,7 @@ export default {
         services: false,
         subservices: false,
         cabinetDrawer: false,
-        serviceIdentifier: {},
+        serviceIdentifier: null,
         subserviceIdentifier: [],
         drawerItems: [{
             title: "Servicii",
@@ -576,6 +586,9 @@ export default {
         flex: 0;
         margin: 0 auto;
     }
+    .v-list-item__title, .v-list-item__subtitle{
+        white-space: normal !important
+    }
 }
 
 @media (min-width: 991px) {
@@ -614,4 +627,12 @@ export default {
 .policy-container {
     background-color: rgba(41, 55, 84, 0.95) !important
 }
+
+.mobile-burgher-first-element{
+    font-weight: bold !important;
+}
+.active-link{
+    color: #FFF;
+}
+
 </style>

@@ -92,32 +92,32 @@ export default {
 }
 </script>
 
-<style lang="css">
-.v-application ul, .v-application ol{
-    padding-left: 0;
-}
-.v-input--selection-controls{
-    margin: 0;
-}
-.policies-list{
-    list-style: none;
-    padding-left: 0;
-}
-.policies-list li{
-    margin-left: 0;
-}
-.custom-btn{
-    color: #FFF !important;
-    padding: 10px;
-    margin-top: 10px;
-}
-.v-input__slot{
-    margin-bottom: 0;
-}
-.v-messages{
-    min-height: 5px;
-}
-.v-input--selection-controls .v-input__slot > .v-label, .v-input--selection-controls .v-radio > .v-label{
-    font-size: 14px;
-}
+<style lang="css" scoped>
+    .v-application ul, .v-application ol{
+        padding-left: 0;
+    }
+    .v-input--selection-controls{
+        margin: 0;
+    }
+    .policies-list{
+        list-style: none;
+        padding-left: 0;
+    }
+    .policies-list li{
+        margin-left: 0;
+    }
+    .custom-btn{
+        color: #FFF !important;
+        padding: 10px;
+        margin-top: 10px;
+    }
+    .v-input__slot{
+        margin-bottom: 0;
+    }
+    .v-messages{
+        min-height: 5px;
+    }
+    .v-input--selection-controls .v-input__slot > .v-label, .v-input--selection-controls .v-radio > .v-label{
+        font-size: 14px;
+    }
 </style>

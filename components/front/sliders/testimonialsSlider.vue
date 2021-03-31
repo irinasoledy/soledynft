@@ -4,9 +4,7 @@
             <v-card class="c-card">
                 <v-card-title align="center" justify="center">
                     <v-avatar color="indigo">
-                        <v-icon dark>
-                        mdi-account-circle
-                        </v-icon>
+                        <img :src="$banner('Testemonial-1')" alt="">
                     </v-avatar>
                     <span class="testimonial-author">{{ trans.General.testemonial1Name }}</span>
                 </v-card-title>
@@ -17,9 +15,7 @@
             <v-card class="c-card">
                 <v-card-title>
                     <v-avatar color="indigo">
-                        <v-icon dark>
-                        mdi-account-circle
-                        </v-icon>
+                        <img :src="$banner('Testemonial-2')" alt="">
                     </v-avatar>
                     <span class="testimonial-author">{{ trans.General.testemonial2Name }}</span>
                 </v-card-title>
@@ -30,9 +26,7 @@
             <v-card class="c-card">
                 <v-card-title>
                     <v-avatar color="indigo">
-                        <v-icon dark>
-                        mdi-account-circle
-                        </v-icon>
+                        <img :src="$banner('Testemonial-3')" alt="">
                     </v-avatar>
                     <span class="testimonial-author">{{ trans.General.testemonial3Name }}</span>
                 </v-card-title>
@@ -43,9 +37,7 @@
             <v-card class="c-card">
                 <v-card-title>
                     <v-avatar color="indigo">
-                        <v-icon dark>
-                        mdi-account-circle
-                        </v-icon>
+                        <img :src="$banner('Testemonial-4')" alt="">
                     </v-avatar>
                     <span class="testimonial-author">{{ trans.General.testemonial4Name }}</span>
                 </v-card-title>

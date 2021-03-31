@@ -1,7 +1,7 @@
 <template>
     <main>
         <div class="banner">
-            <v-carousel :show-arrows="false" cycle v-if="!$mobileDetect.mobile()">
+            <v-carousel :show-arrows="false"  v-if="!$mobileDetect.mobile()">
                 <v-carousel-item
                     v-for="(promotion, i) in promotions"
                     :key="i"
@@ -227,10 +227,12 @@ export default {
 
       .v-window,
       .v-carousel__item {
-        min-height: 80vh;
+        // min-height: 80vh;
+        // min-height: 558px;
       }
     }
   }
+
 
   @media (min-width: 992px) {
     main {
@@ -246,5 +248,11 @@ export default {
   }
   .v-carousel{
       height: auto !important;
+  }
+  .v-image__image--cover{
+      background-size: 100% 100%;
+  }
+  .v-carousel__item{
+      height: 558px !important;
   }
 </style>
