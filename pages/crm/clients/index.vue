@@ -103,7 +103,7 @@
                                             message
                                         </td>
                                         <td>
-                                            <v-btn depressed outlined icon fab dark color="pink" small @click="remove(item.userId)">
+                                            <v-btn depressed outlined icon fab dark color="pink" small @click="deleteItem(item.userId)">
                                                 <v-icon>mdi-delete</v-icon>
                                             </v-btn>
                                         </td>
@@ -185,6 +185,10 @@ export default {
             'getClientsList': 'admin/getClientsList',
             'removeClient' : 'admin/removeClient'
         }),
+        deleteItem(item){
+            this.removeClient(item._id)
+            this.$router.push("/crm/clients")
+        },
         call(client){
             this.roomId = client._id
             this.dialog = true

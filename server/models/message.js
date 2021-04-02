@@ -15,6 +15,10 @@ const schema = new Schema({
         type: String,
         required: true
     },
+    readed : {
+        type: Boolean,
+        default: false
+    },
     room : {
         ref: 'rooms',
         type: Schema.Types.ObjectId,
@@ -28,6 +32,10 @@ const schema = new Schema({
         ref: 'histories',
         type: Schema.Types.ObjectId,
         default: null
+    },
+    session : {
+        type: String,
+        default: '',
     },
     date : {
         type: Date,

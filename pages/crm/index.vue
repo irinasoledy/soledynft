@@ -78,11 +78,13 @@ export default {
         ...mapActions({
             loginUser: 'admin/login',
             setUserStatus: 'admin/setUserStatus',
+            setUser: 'chat/setUser' 
         }),
         submit () {
             if (this.$refs.form.validate()) {
                 this.loginUser({login: this.login, password: this.password}).then((data) => {
                     if (this.auth) {
+                        this.setUser(this.auth)
                         return this.$router.push('/crm/dashboard')
                     }
                 })

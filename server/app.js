@@ -8,6 +8,32 @@ const m = (name, text, id) => ({ name, text, id })
 
 io.on('connection', socket => {
 
+
+    //__________________________________________________________________________
+
+    // Start: user join socket
+    socket.on('userJoin', (id) => {
+        socket.join(id)
+    })
+
+    socket.on('createMessage', (data, cb) => {
+        socket.broadcast.to(data.to).emit('newMessage', data)
+        cb()
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Start: employee create a room
     socket.on('employeeJoined', (data, cb) => {
         socket.join(data.roomId)
@@ -34,21 +60,21 @@ io.on('connection', socket => {
     })
 
     // Create an send a message
-    socket.on('createMessage', (data, cb) => {
-        if (!data.text) {
-            return cb('The text cannot be empty')
-        }
-
-        if (data.user && data.room) {
-            const res = {
-                message: data.message,
-                simpleMessage: m(data.user.name, data.text, data.user._id),
-            }
-
-            io.to(data.room).emit('newMessage', res)
-        }
-        cb()
-    })
+    // socket.on('createMessage', (data, cb) => {
+    //     if (!data.text) {
+    //         return cb('The text cannot be empty')
+    //     }
+    //
+    //     if (data.user && data.room) {
+    //         const res = {
+    //             message: data.message,
+    //             simpleMessage: m(data.user.name, data.text, data.user._id),
+    //         }
+    //
+    //         io.to(data.room).emit('newMessage', res)
+    //     }
+    //     cb()
+    // })
 
     // Create an send a message
     socket.on('shareHistory', (data) => {

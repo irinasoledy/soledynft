@@ -113,7 +113,8 @@ class UserController{
         let user = await User.findOne({ cookies: cookie }).lean()
 
         if (!req.cookies.userId) {
-            cookie = this.uid()
+            // cookie = this.uid()
+            cookie = Date.now().toString(36)
             res.cookie('userId', cookie)
 
             user = await new User({

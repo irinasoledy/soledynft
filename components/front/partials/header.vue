@@ -297,7 +297,7 @@
                         <v-col>
                             <v-list-item dark color="primary" href="tel:+37378563423">
                                 <v-icon>mdi-phone</v-icon>
-                                +37378563423
+                                {{ trans.ContactsAndForms.companyMainPhone1 }}
                             </v-list-item>
                         </v-col>
                         <v-col>

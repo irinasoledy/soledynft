@@ -31,7 +31,7 @@
                         <v-card-actions
                             class="pb-5 justify-center"
                             >
-                            <!-- <v-btn
+                            <v-btn
                                 color="secondary"
                                 >
                                 <v-icon left>mdi-phone</v-icon>
@@ -39,10 +39,11 @@
                             </v-btn>
                             <v-btn
                                 color="info"
+                                @click="openDialog(item)"
                                 >
                                 <v-icon left>mdi-chat</v-icon>
                                 {{ trans.Team.companyMainAddress }}
-                            </v-btn> -->
+                            </v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-col>
@@ -65,8 +66,13 @@ export default {
     },
     methods: {
         ...mapActions({
-            getExpertsList: 'getExpertsList'
-        })
+            getExpertsList: 'getExpertsList',
+            setInterlocutor : 'dialog/setInterlocutor',
+        }),
+        openDialog(user){
+            this.setInterlocutor(null)
+            this.setInterlocutor(user)
+        }
     }
 }
 </script>

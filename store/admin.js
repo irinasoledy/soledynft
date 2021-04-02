@@ -28,9 +28,14 @@ export const mutations = {
         })
     },
     REMOVE_CLIENT(state, id){
+        console.log(id, state.clientActions);
         state.clients = state.clients.filter(function(item) {
             return item._id !== id
         })
+        state.clientActions = state.clientActions.filter(function(item) {
+            return item.userId._id !== id
+        })
+
     },
     SET_USER_STATUS(state, data){
         state.status = data.user.status

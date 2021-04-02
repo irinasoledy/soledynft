@@ -11,6 +11,8 @@
                         <v-scroll-y-transition>
                             <nuxt/>
                         </v-scroll-y-transition>
+                        <Chat mode="client"/>
+                        
                     </div>
                     <!-- App Footer -->
                     <v-footer height="auto" class="white pa-3 app--footer">
@@ -91,6 +93,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Chat from '@/components/dialog/chat';
 
 export default {
     data: () => ({
@@ -164,6 +167,9 @@ export default {
                 this.$router.push("/conference")
             });
         }
+    },
+    components: {
+        Chat
     }
 }
 </script>

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import userApi from '@/api/userApi'
+import chatApi from '@/api/chatApi'
 
 export const state = () => ({
     employees : [],
@@ -11,6 +12,7 @@ export const state = () => ({
     participants: {},
     user: {},
     messages: [],
+    newMessage: {},
     userMessages: [],
     lastMessage: {},
     waiting: true,
@@ -49,10 +51,11 @@ export const mutations = {
     SOCKET_reloadEmployeeList(state, data){
         state.rooms = data
     },
-    SOCKET_newMessage(state, data) {
-        state.messages.push(data.simpleMessage)
-        state.userMessages.push(data.message)
-    },
+    // SOCKET_newMessage(state, message) {
+    //     state.newMessage = message
+    //     state.messages.push(message)
+    //     // state.userMessages.push(data.message)
+    // },
     SOCKET_joinExistingRoom(state, data) {
         state.client = data.user
         state.room = data.room
@@ -166,30 +169,35 @@ export const actions = {
         commit('SET_CLIENT_AS_USER', employee)
     },
     async createMessage({ commit }, data){
-        await axios.post('/create-message', data)
-            .then(response => {
-                commit('SET_HISTORY', response.data)
-            })
+        await chatApi.createMessage(data, response => commit('SET_HISTORY', response))
+
+        // await axios.post('/create-message', data)
+        //     .then(response => {
+        //         commit('SET_HISTORY', response.data)
+        //     })
     },
     async setUserCookies({ commit }, data){
-        await axios.get("/init-user-cookie").then(data => {
-            commit('SET_USER_COOKIE', data.data)
-        })
+        // await crmApi.updateUserStatus(id, user, response => commit('SET_USER_STATUS', response))
+        await userApi.getUser(data, response => commit('SET_USER_COOKIE', response))
+
+        // await axios.get("/init-user-cookie").then(data => {
+        //     commit('SET_USER_COOKIE', data.data)
+        // })
     },
     async getClientMessages({ commit }, userId){
         const m = (name, text, id) => ({ name, text, id })
 
         await axios.post("/get-user-messages", {userId: userId}).then(data => {
 
-            const parsedMessages = data.data.map((message) => {
-                if (message.sendBy == "employee") {
-                    return m (message.employee.name, message.message, message.employee._id)
-                }else{
-                    return m (message.client.name, message.message, message.client._id)
-                }
-            })
+            // const parsedMessages = data.data.map((message) => {
+            //     if (message.sendBy == "employee") {
+            //         return m (message.employee.name, message.message, message.employee._id)
+            //     }else{
+            //         return m (message.client.name, message.message, message.client._id)
+            //     }
+            // })
 
-            commit('SET_MESSAGES_HISTORY', {messages: data.data, parsed: parsedMessages})
+            // commit('SET_MESSAGES_HISTORY', {messages: data.data, parsed: parsedMessages})
         })
     },
     async savePolicyOptions({ commit }, data){
@@ -218,6 +226,8 @@ export const getters = {
     getEmployee: state => state.employee,
     getClient: state => state.client,
     getMessages: state => state.messages,
+    getNewMessage: state => state.newMessage,
+
     getUserMessages: state => state.userMessages,
     getLastMessage: state => state.lastMessage,
     getUser: state => state.user,
@@ -239,4 +249,6 @@ export const getters = {
     getEndChat: state => state.endChat,
 
     getPolicy: state => state.policy,
+
+    getLastMessage: state => state.lastMessage,
 }

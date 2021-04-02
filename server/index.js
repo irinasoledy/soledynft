@@ -8,6 +8,7 @@ const session = require('express-session')
 const fileUpload = require('express-fileupload')
 const frontRoutes = require('./routes/frontRoutes.js')
 const crmRoutes = require('./routes/crmRoutes.js')
+const chatRoutes = require('./routes/chatRoutes.js')
 const store = new session.MemoryStore()
 
 let config = require('../nuxt.config.js')
@@ -47,6 +48,7 @@ async function start() {
 
         app.use(frontRoutes)
         app.use(crmRoutes)
+        app.use(chatRoutes)
 
         app.use(nuxt.render)
 

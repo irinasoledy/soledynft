@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
 
-    async getUser(cb){
+    async getUser(data, cb){
         await axios.get(`/init-user-cookie`)
             .then(response => cb(response.data))
             .catch(err => console.log(err) )

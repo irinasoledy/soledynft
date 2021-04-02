@@ -1,5 +1,5 @@
 export default ({ store, app }, inject) => {
-    inject('banner', (key) => {
+    inject('banner', (key, isMobile = false) => {
         const banners = store.state.banners
 
         const banner = banners.find(banner => banner.key === key)
@@ -8,6 +8,10 @@ export default ({ store, app }, inject) => {
             return '/logo-docrom4.png'
         }
 
-        return `${process.env.API}/images/banners/${banner.desktop_src}`
+        if (!isMobile) {
+            return `${process.env.API}/images/banners/${banner.desktop_src}`
+        }else{
+            return `${process.env.API}/images/banners/${banner.mobile_src}`
+        }
     })
 }

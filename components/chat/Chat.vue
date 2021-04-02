@@ -51,7 +51,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .c-wrap {
     height: 100%;
     position: relative;

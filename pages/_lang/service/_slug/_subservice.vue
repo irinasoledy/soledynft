@@ -1,50 +1,18 @@
 <template>
-<div class="container">
-    <div class="row expert-one-content" v-if="service">
+    <main>
+<v-container>
+    <v-row class="row expert-one-content" v-if="service">
         <div class="col-12 butons-service" id="serviceBtn">
             <v-btn
-                @click="toggleDisplayExperts()"
+                class="costum-btn-service"
+                @click="scrollExpertsBlock"
                 width="100%"
-                color="primary"
                 >
                 {{ trans.Services.liveDiscussionBtn }}
+                <v-icon>
+                  mdi-sort
+                </v-icon>
             </v-btn>
-            <div class="expert-one-experts" v-if="mobileExpertsDisplay">
-                <v-card  v-if="employeeList.length > 0" :key="i" v-for="(item, i) in employeeList" >
-                    <v-sheet class="pa-3 d-flex align-start">
-                        <v-avatar>
-                            <v-img
-                                :src="`/avatars/${item.employee.avatar}`"
-                                aspect-ratio="1"
-                                class="grey lighten-2"
-                                >
-                            </v-img>
-                            <span class="mark"></span>
-                        </v-avatar>
-                        <v-card-text class="pa-0 ml-2" v-if="item.employee">
-                            {{ item.employee.name }}
-                            <p class="caption">
-                                {{ item.employee.type }}
-                            </p>
-                            <v-sheet class="consultation" color="secondary">
-                                {{ trans.Services.freeConsultation }}
-                            </v-sheet>
-                        </v-card-text>
-                    </v-sheet>
-                    <v-divider class="mb-2 mt-1"></v-divider>
-                    <v-card-actions>
-                        <!-- <v-btn color="primary" outlined><v-icon>mdi-chat</v-icon>Message</v-btn> -->
-                        <v-btn color="primary" outlined @click="call(item.employee)" v-if="item.employee.status === true">
-                            <v-icon>
-                                mdi-phone
-                            </v-icon>
-                            {{ trans.Team.specialistBtnChat }}
-                        </v-btn>
-                        <p v-else>{{ trans.Team.specialistNotOnline }}</p>
-                        <!-- <v-btn color="primary" nuxt exact to="/calendar"><v-icon>mdi-book</v-icon>Programeaza-te</v-btn> -->
-                    </v-card-actions>
-                </v-card>
-            </div>
         </div>
 
         <div class="col-12">
@@ -53,8 +21,7 @@
             </h3>
         </div>
 
-        <div class="col-md row">
-            <div class="col-lg-3 col-md-4 side-block-wrap">
+            <div class="col-lg-3 col-md-3 side-block-wrap">
                 <div class="side-block" id="sidebar">
                     <a v-for="anchor in service.blogs"
                         :key="anchor.id"
@@ -78,9 +45,7 @@
                     <h3 class="title">{{ anchor.translation.name }}</h3>
                     <div v-html="anchor.translation.body"></div>
                 </div>
-
             </div>
-        </div>
 
         <div class="col-lg-3 col-md-4 col-sm-12">
             <div class="expert-one-experts" id="experts">
@@ -88,43 +53,46 @@
                     {{ trans.Team.expertSectionTitle }}
                 </div>
 
-                <v-card  v-if="employeeList.length > 0" :key="i" v-for="(item, i) in employeeList" >
-                    <v-sheet class="pa-3 d-flex align-start">
-                        <v-avatar>
-                            <v-img
-                                :src="`/avatars/${item.employee.avatar}`"
-                                aspect-ratio="1"
-                                class="grey lighten-2"
+                <v-card
+                    v-if="employeeList.length > 0"
+                    v-for="(item, i) in employeeList"
+                    :key="i"
+                    >
+                        <v-img
+                            :src="`/avatars/${item.employee.avatar}`"
+                            aspect-ratio="1"
+                            class="grey lighten-2"
+                            >
+                        </v-img>
+                        <v-card-title class="title justify-center">
+                            {{item.employee.name}}
+                        </v-card-title>
+                        <v-card-subtitle class="text-center">
+                            {{item.employee.type}}
+                        </v-card-subtitle>
+                        <v-card-actions
+                            class="pb-5 justify-center"
+                            >
+                            <v-btn
+                                color="secondary"
+                                @click="call(item.employee)"
                                 >
-                            </v-img>
-                            <span class="mark"></span>
-                        </v-avatar>
-                        <v-card-text class="pa-0 ml-2" v-if="item.employee">
-                            {{ item.employee.name }}
-                            <p class="caption">
-                                {{ item.employee.type }}
-                            </p>
-                            <v-sheet class="consultation" color="secondary">
-                                {{ trans.Services.freeConsultation }}
-                            </v-sheet>
-                        </v-card-text>
-                    </v-sheet>
-                    <v-divider class="mb-2 mt-1"></v-divider>
-                    <v-card-actions>
-                        <!-- <v-btn color="primary" outlined><v-icon>mdi-chat</v-icon>Message</v-btn> -->
-                        <v-btn color="primary" outlined @click="call(item.employee)" v-if="item.employee.status === true">
-                            <v-icon>
-                                mdi-phone
-                            </v-icon>
-                            {{ trans.Team.specialistBtnChat }}
-                        </v-btn>
-                        <p v-else>{{ trans.Team.specialistNotOnline }}</p>
-                        <!-- <v-btn color="primary" nuxt exact to="/calendar"><v-icon>mdi-book</v-icon>Programeaza-te</v-btn> -->
-                    </v-card-actions>
-                </v-card>
+                                <v-icon left>mdi-phone</v-icon>
+                                {{ trans.Team.specialistBtnChat }}
+                            </v-btn>
+                            <v-btn
+                                color="info"
+                                @click="openDialog(item.employee)"
+                                >
+                                <v-icon left>mdi-chat</v-icon>
+                                {{ trans.Team.companyMainAddress }}
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
             </div>
         </div>
-    </div>
+    </v-row>
+
     <v-dialog
         v-model="dialog"
         hide-overlay
@@ -145,7 +113,9 @@
             </v-card-text>
         </v-card>
     </v-dialog>
-</div>
+<!-- </div> -->
+</v-container>
+</main>
 </template>
 
 <script>
@@ -200,33 +170,33 @@ export default {
         this.service = await this.allServices.find((serv) => serv.alias == this.$route.params.subservice)
         this.getEmployees()
         window.addEventListener('scroll', this.handleScroll);
-
-        // const anchors = document.getElementsByClassName('item-anchor')[0];
-        // console.log(anchors, anchors[0]);
-        // const firstAnchors = anchors[0];
-        // firstAnchors.classList.add("active")
     },
     methods: {
         ...mapActions({
-            'setDefaultChangedEmployee' : 'setDefaultChangedEmployee',
-            'setDefaultReject' : 'call/setDefaultReject',
-            'setDefaultResponse' : 'call/setDefaultResponse',
-            'setClientAsUser' : 'chat/setClientAsUser',
-            'setUser' : 'chat/setUser',
+            setDefaultChangedEmployee : 'setDefaultChangedEmployee',
+            setDefaultReject : 'call/setDefaultReject',
+            setDefaultResponse : 'call/setDefaultResponse',
+            setClientAsUser : 'chat/setClientAsUser',
+            setUser : 'chat/setUser',
+            setInterlocutor : 'dialog/setInterlocutor'
         }),
+        openDialog(user){
+            this.setInterlocutor(null)
+            this.setInterlocutor(user)
+        },
         handleScroll(){
             const sidebar = document.getElementById('sidebar')
             const experts = document.getElementById('experts')
             const serviceBtn = document.getElementById('serviceBtn')
 
-            if (window.scrollY > 85) {
-                sidebar.classList.add("fixed")
-                experts.classList.add("fixed")
-                // serviceBtn.classList.add("fixed-btn")
-            }else{
-                sidebar.classList.remove("fixed")
-                experts.classList.remove("fixed")
-                // serviceBtn.classList.remove("fixed-btn")
+            if (!this.$mobileDetect.mobile()) {
+                if (window.scrollY > 85) {
+                    sidebar.classList.add("fixed")
+                    experts.classList.add("fixed")
+                }else{
+                    sidebar.classList.remove("fixed")
+                    experts.classList.remove("fixed")
+                }
             }
 
             if (window.scrollY > 35) {
@@ -240,8 +210,10 @@ export default {
             const offsetTop = element.offsetTop - 150
             window.scrollTo(0, offsetTop)
         },
-        toggleDisplayExperts(){
-            this.mobileExpertsDisplay = !this.mobileExpertsDisplay
+        scrollExpertsBlock(){
+            const element = document.getElementById('experts')
+            const offsetTop = element.offsetTop - 175
+            window.scrollTo(0, offsetTop)
         },
         async getEmployees(){
             await contentApi.getEmployeesByService(this.service.id, response => {
@@ -349,7 +321,7 @@ export default {
         display: none;
     }
     .expert-one-content{
-        padding-top: 70px;
+        padding-top: 62px;
     }
     .v-application .display-1{
         font-size: 2rem !important;
@@ -357,6 +329,15 @@ export default {
     .butons-service{
         display: block;
         max-width: 99%;
+        background-color: #FFF;
+        padding: 20px;
+        box-shadow: 0 3px 4px rgb(0 0 0 / 20%)
+    }
+    .costum-btn-service{
+        color: $custom_blue !important;
+        border: 1px solid $custom_blue;
+        box-shadow: none;
+        background-color: #FFF !important;
     }
 }
 .section-block {
@@ -371,12 +352,10 @@ export default {
 }
 .fixed-btn{
     position: fixed;
-    // margin-top: -80px;
-    // background-color: #FFF;
-    // padding: 30px;
     width: 100%;
-    margin-top: -20px;
-    // box-shadow: 0 3px 4px rgb(0 0 0 / 20%);
+    margin-top: -6px;
+    z-index: 4;
+    left: .5%;
 }
 .fixed{
     position: fixed;
@@ -385,8 +364,5 @@ export default {
 }
 .v-application ul{
     padding-left: 20px !important;
-}
-.active{
-    // color: $custom_blue;
 }
 </style>

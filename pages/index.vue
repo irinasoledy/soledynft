@@ -1,7 +1,19 @@
 <template>
     <main>
-        <div class="banner">
-            <v-carousel :show-arrows="false"  v-if="!$mobileDetect.mobile()">
+        <banner/>
+        <!-- <div class="banner">
+
+        <slick
+              ref="slick"
+              :options="slickOptions"
+              >
+              <a href="#" v-for="(promotion, i) in promotions">
+                  <img :src="`${envAPI}/images/promotions/${promotion.img}`" alt="">
+              </a>
+        </slick> -->
+
+
+            <!-- <v-carousel :show-arrows="false"  v-if="!$mobileDetect.mobile()">
                 <v-carousel-item
                     v-for="(promotion, i) in promotions"
                     :key="i"
@@ -26,9 +38,9 @@
                         </v-row>
                     </v-container>
                 </v-carousel-item>
-            </v-carousel>
+            </v-carousel> -->
 
-            <v-carousel :show-arrows="false" cycle v-else>
+            <!-- <v-carousel :show-arrows="false" cycle v-else>
                 <v-carousel-item
                     v-for="(promotion, i) in promotions"
                     :key="i"
@@ -53,10 +65,11 @@
                         </v-row>
                     </v-container>
                 </v-carousel-item>
-            </v-carousel>
-        </div>
+            </v-carousel> -->
+        <!-- </div> -->
+
         <div class="callNow">
-            <v-parallax height="200" :src="$banner('callNowBGBanner')">
+            <v-parallax height="200" :src="$banner('callNowBGBanner', $mobileDetect.mobile())">
 
                 <v-container>
                     <v-row>
@@ -86,7 +99,7 @@
         <services></services>
         <experts></experts>
         <div class="callNow">
-            <v-parallax height="200" :src="$banner('callNowBGBanner')">
+            <v-parallax height="200" :src="$banner('callNowBGBanner', $mobileDetect.mobile())">
                 <v-container>
                     <v-row>
                         <v-col>
@@ -131,9 +144,12 @@
 
 <script>
 
+import 'slick-carousel/slick/slick.css';
 import { mapActions, mapGetters } from 'vuex'
-import Testimonials from "@/components/front/sliders/testimonialsSlider"
-import Experts from "@/components/front/widgets/expertsWidget.vue"
+import Slick from 'vue-slick'
+import Testimonials from '@/components/front/sliders/testimonialsSlider'
+import Banner from '@/components/front/sliders/homeSlider'
+import Experts from '@/components/front/widgets/expertsWidget.vue'
 import Services from '@/components/front/widgets/servicesWidget.vue'
 import MapContact from "@/components/front/widgets/mapWidget.vue"
 
@@ -143,12 +159,11 @@ export default {
         Testimonials,
         MapContact,
         Experts,
-        Services
+        Services,
+        Banner
     },
     computed: mapGetters({
-        promotions : 'getPromotions',
         language: 'getLanguage',
-        envAPI: 'getEnvAPI',
         trans: 'getTranslations',
         banners: 'getBanners',
     }),
@@ -158,8 +173,8 @@ export default {
         })
     },
     mounted(){
-        console.log(this.$banner("mainBanner"));
-         console.log(this.$banner("lmlm"));
+        // console.log(this.$banner("mainBanner"));
+        // console.log(this.$banner("lmlm"));
     }
 }
 </script>
