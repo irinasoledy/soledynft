@@ -1,14 +1,20 @@
 <template>
     <div>
         <div class="wrap">
-
             <div class="mes" :class="{ owner }">
+                <div class="message-date">
+                    {{ getTimeAgo(message.date) }}
+                </div>
                 <small>
                     <strong v-if="message.sendBy == 'client'">{{ message.client.name }}</strong>
                     <strong v-else>{{ message.employee.name }}</strong>
                 </small>
                 <p>{{ message.message }}</p>
-                <b :class="message.sendBy == 'employee' ? 'readed' : ''"><v-icon>mdi-check-all</v-icon></b>
+
+                <!-- <div class="" v-if="!owner"> -->
+                    <b v-if="!message.readed"><v-icon>mdi-check</v-icon></b>
+                    <b v-else><v-icon>mdi-check-all</v-icon></b>
+                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -16,7 +22,22 @@
 
 <script>
 export default {
-    props: ['message', 'owner']
+    props: ['message', 'owner'],
+    methods: {
+        dateToYMD(date) {
+            let strArray=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            let mins = date.getMinutes();
+            let h = date.getHours();
+            let d = date.getDate();
+            let m = strArray[date.getMonth()];
+            let y = date.getFullYear();
+
+            return h + ':' + mins + ' ' + (d <= 9 ? '0' + d : d) + '/' + m + '/' + y;
+        },
+        getTimeAgo(date){
+            return this.dateToYMD(new Date(date))
+        },
+    }
 }
 </script>
 
@@ -63,5 +84,11 @@ export default {
   background: #ffffff;
   color: #000000;
   align-self: flex-end;
+}
+.message-date{
+    font-size: 10px;
+    position: absolute;
+    right: 5px;
+    top: 8px;
 }
 </style>

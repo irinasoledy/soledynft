@@ -21,6 +21,10 @@ io.on('connection', socket => {
         cb()
     })
 
+    //
+    socket.on('refreshReadedMessages', (data) => {
+        socket.broadcast.to(data.to).emit('refreshReadedMessages', data)
+    })
 
 
 

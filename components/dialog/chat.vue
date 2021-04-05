@@ -47,7 +47,7 @@
                     </v-toolbar-items>
                 </v-toolbar>
                 <v-list subheader class="messages-dialog-body">
-                    <!-- <v-subheader>Recent chat</v-subheader> -->
+                    <!-- <v-subheader>Not comunicate users</v-subheader> -->
                     <v-list-item
                         v-for="user in users"
                         :key="user.id"
@@ -142,23 +142,34 @@ export default {
         previewMessage: false,
         users: [],
         userJoined: false,
-        // interlocutor: {},
     }),
-    watch:{
-        $route (to, from){
+    watch: {
+        $route (to, from) {
             this.addUserAction(to)
         },
-        unreadMessages(){
+        unreadMessages() {
             this.previewMessage = true
         },
-        call(){
+        messages() {
+            console.log('kmcldsmlm;lml;m;l');
+        },
+        // lastMessage() {
+        //     const unreadMessages = this.showUnreadByUser(this.interlocutor)
+        //
+        //     if (unreadMessages) {
+        //         this.setMessagesAsReaded({ interlocutorId : this.interlocutor._id, userId : this.user._id }).then(data => {
+        //             this.$socket.emit('refreshReadedMessages', { to: this.interlocutor._id, messages : this.messages, from: this.user._id })
+        //         })
+        //     }
+        // },
+        call() {
             this.dialog = true
             var audio = new Audio('/salamisound-5580171-steam-locomotive-whistle.mp3'); // path to file
             audio.play();
             console.log('calling.....');
             this.setNullCall()
         },
-        interlocutor(){
+        interlocutor() {
             if (this.interlocutor) {
                 this.dialogItem = true
             }
@@ -166,17 +177,19 @@ export default {
     },
     computed: mapGetters({
         user: 'chat/getUser',
-        interlocutor: 'dialog/getInterlocutor',
         call : 'call/getCall',
         roomId : 'call/getRoomId',
         newMessage: 'chat/getNewMessage',
+
+        interlocutor: 'dialog/getInterlocutor',
         lastMessage: 'dialog/getLastMessage',
         unreadMessages: 'dialog/getUnreadMessages',
-        unreadFrom: 'dialog/getUnreadFrom'
+        unreadFrom: 'dialog/getUnreadFrom',
+        messages: 'dialog/getMessages',
     }),
-    mounted(){
+    async mounted() {
         if (!this.$store.state.chat.cookie && (this.mode === 'employee')) {
-            this.setUserCookies().then(() => {
+            await this.setUserCookies().then(() => {
                 if (!this.userJoined) {
                     this.$socket.emit('userJoin', this.user._id)
                     this.addUserAction(this.$route)
@@ -184,18 +197,22 @@ export default {
                 }
             })
         }
+
+        // get Unreaded messages
+        await this.getUnreadedMessages(this.user._id)
     },
     methods: {
         ...mapActions({
-            "setUserCookies" : "chat/setUserCookies",
-            'setNullCall' : 'call/setNullCall',
-            'setUser' : 'chat/setUser',
+            setUserCookies : 'chat/setUserCookies',
+            setNullCall : 'call/setNullCall',
+            setUser : 'chat/setUser',
+            getUnreadedMessages: 'dialog/getUnreadedMessages',
             setInterlocutor : 'dialog/setInterlocutor',
             setInterlocutorMessageUser : 'dialog/setInterlocutorMessageUser',
             setInterlocutor : 'dialog/setInterlocutor',
             setMessagesAsReaded : 'dialog/setMessagesAsReaded',
         }),
-        showUnreadByUser(user){
+        showUnreadByUser(user) {
             if (this.unreadMessages.length) {
                 const messages = this.unreadMessages.filter(message => {
                     return message.from === user._id
@@ -206,36 +223,34 @@ export default {
                 }
             }
         },
-        async toogleMessageDialog(){
+        async toogleMessageDialog() {
             await crmApi.getUsers(this.mode, response => this.users = response.users)
             this.dialogList = !this.dialogList
             this.previewMessage = false
         },
-        closeDialogList(){
+        closeDialogList() {
             this.previewMessage = false
             this.dialogList = true
             this.dialogItem = false
-            // this.setInterlocutorMessageUser(null)
             this.setInterlocutor(null)
         },
-        openDialogItem(user){
-            console.log(user);
+        openDialogItem(user) {
             this.previewMessage = false
-            // this.interlocutor = user
             this.dialogList = false
             this.dialogItem = true
             this.setInterlocutor(user)
-            // this.setInterlocutorMessageUser(user._id)
             this.checkUnreadMessages(user)
         },
-        checkUnreadMessages(interlocutor){
+        checkUnreadMessages(interlocutor) {
             const unreadMessages = this.showUnreadByUser(interlocutor)
 
             if (unreadMessages) {
-                this.setMessagesAsReaded({ interlocutorId : interlocutor._id, userId : this.user._id })
+                this.setMessagesAsReaded({ interlocutorId : interlocutor._id, userId : this.user._id }).then(data => {
+                    this.$socket.emit('refreshReadedMessages', { to: interlocutor._id, messages : this.messages, from: this.user._id })
+                })
             }
         },
-        addUserAction(route, counter = 0, pages = 1){
+        addUserAction(route, counter = 0, pages = 1) {
             if (this.mode === 'employee') {
                 const data = {
                     userId : this.user._id,
@@ -251,11 +266,11 @@ export default {
                 this.$socket.emit('shareUserAction', data)
             }
         },
-        rejectCall(){
+        rejectCall() {
             this.dialog = false
             this.$socket.emit('rejectCall', { roomId: this.roomId })
         },
-        responseCall(){
+        responseCall() {
             const data = {
                 roomId: this.roomId
             }
