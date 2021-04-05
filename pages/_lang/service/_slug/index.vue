@@ -13,7 +13,7 @@
                         :key="i"
                         class="col-lg-4 col-md-6 col-12 d-flex child-flex"
                         >
-                        <v-card exact nuxt :to="`/${language.lang}/services/list/${item.id}`">
+                        <v-card exact nuxt :to="`/${language.lang}/service/${service.alias}/${item.alias}`">
                             <v-img
                                 v-if="item.banner"
                                 :src="`${envAPI}/images/blogCategories/og/${item.banner}`"
