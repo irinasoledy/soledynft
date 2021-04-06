@@ -38,8 +38,23 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
+    layout: "default",
+    head() {
+        return {
+            title: this.title,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.description
+                }
+            ]
+        }
+    },
     data: () => ({
         service : null,
+        title: '',
+        description: '',
     }),
     computed: mapGetters({
         services : 'getServices',
@@ -51,6 +66,8 @@ export default {
         if (Object.keys(this.service).length === 0) {
             this.$router.push("/")
         }
+        this.title = this.service.translation.seo_title
+        this.description = this.service.translation.seo_description
     },
 }
 </script>

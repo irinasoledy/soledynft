@@ -3,17 +3,7 @@
         <banner/>
         <!-- <div class="banner">
 
-        <slick
-              ref="slick"
-              :options="slickOptions"
-              >
-              <a href="#" v-for="(promotion, i) in promotions">
-                  <img :src="`${envAPI}/images/promotions/${promotion.img}`" alt="">
-              </a>
-        </slick> -->
-
-
-            <!-- <v-carousel :show-arrows="false"  v-if="!$mobileDetect.mobile()">
+             <v-carousel :show-arrows="false"  v-if="!$mobileDetect.mobile()">
                 <v-carousel-item
                     v-for="(promotion, i) in promotions"
                     :key="i"
@@ -155,6 +145,36 @@ import MapContact from "@/components/front/widgets/mapWidget.vue"
 
 export default {
     layout: "default",
+    head() {
+        return {
+            title: this.title,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.description
+                }
+            ]
+        }
+    },
+    data: () => ({
+        title: '',
+        description: '',
+    }),
+    computed: mapGetters({
+        language: 'getLanguage',
+        trans: 'getTranslations',
+        banners: 'getBanners',
+    }),
+    mounted(){
+        this.title = this.trans.PageNames.homeSeoTitle
+        this.description = this.trans.PageNames.homeSeoDesc
+    },
+    methods: {
+        ...mapActions({
+            banner: 'banner'
+        })
+    },
     components: {
         Testimonials,
         MapContact,
@@ -162,20 +182,6 @@ export default {
         Services,
         Banner
     },
-    computed: mapGetters({
-        language: 'getLanguage',
-        trans: 'getTranslations',
-        banners: 'getBanners',
-    }),
-    methods: {
-        ...mapActions({
-            banner: 'banner'
-        })
-    },
-    mounted(){
-        // console.log(this.$banner("mainBanner"));
-        // console.log(this.$banner("lmlm"));
-    }
 }
 </script>
 

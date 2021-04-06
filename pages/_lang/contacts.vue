@@ -120,12 +120,26 @@ import MapContact from "@/components/front/widgets/mapWidget.vue"
 
 export default {
     layout: "default",
+    head() {
+        return {
+            title: this.title,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.description
+                }
+            ]
+        }
+    },
     components: {
         Testimonials,
         MapContact,
         Experts
     },
     data: () => ({
+        title: '',
+        description: '',
         valid: true,
         name: '',
         nameRules: [
@@ -141,6 +155,10 @@ export default {
     computed: mapGetters({
         trans: 'getTranslations'
     }),
+    mounted(){
+        this.title = this.trans.PageNames.defaultPageSeoTitle
+        this.description = this.trans.PageNames.defaultPageSeoDesc
+    },
     methods: {
         validate () {
             this.$refs.form.validate()

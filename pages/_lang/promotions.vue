@@ -54,6 +54,23 @@ import { mapActions, mapGetters } from 'vuex'
 import Experts from "@/components/front/widgets/expertsWidget.vue"
 
 export default {
+    layout: "default",
+    head() {
+        return {
+            title: this.title,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.description
+                }
+            ]
+        }
+    },
+    data: () => ({
+        title: '',
+        description: '',
+    }),
     computed: mapGetters({
         services : 'getServices',
         language : 'getLanguage',
@@ -61,6 +78,10 @@ export default {
         promotions : 'getPromotions',
         trans: 'getTranslations'
     }),
+    mounted(){
+        this.title = this.trans.PageNames.defaultPageSeoTitle
+        this.description = this.trans.PageNames.defaultPageSeoDesc
+    },
     components: { Experts }
 }
 </script>

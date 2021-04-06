@@ -11,7 +11,22 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
+    layout: "default",
+    head() {
+        return {
+            title: this.title,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.description
+                }
+            ]
+        }
+    },
     data: () => ({
+        title: '',
+        description: '',
         page: null
     }),
     async mounted(){
@@ -19,9 +34,12 @@ export default {
         if (Object.keys(this.page).length === 0) {
             this.$router.push("/")
         }
+        this.title = this.page.translation.seo_title || this.trans.PageNames.defaultPageSeoTitle,
+        this.description = this.page.translation.seo_description || this.trans.PageNames.defaultPageSeoDesc
     },
     computed: mapGetters({
-        pages: 'getPages'
+        pages: 'getPages',
+        trans: 'getTranslations',
     })
 }
 </script>

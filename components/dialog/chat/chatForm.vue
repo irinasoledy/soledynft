@@ -44,25 +44,27 @@ export default {
         send() {
             const clientId = this.mode === 'client' ? this.interlocutor._id : this.user._id
             const employeeId = this.mode === 'employee' ? this.interlocutor._id : this.user._id
+            const senderId = this.user._id
+            const recepientId = this.interlocutor._id
             const sendBy = this.mode === 'employee' ? 'client' : 'employee'
 
             const data = {
+                senderId: senderId,
+                recepientId: recepientId,
                 clientId: clientId,
                 employeeId: employeeId,
                 message: this.text,
                 sendBy: sendBy,
-                session : clientId + employeeId
+                session : senderId + recepientId
             }
-
-            console.log(this.lastMessage);
 
             this.createMessage(data).then(() => {
                 this.$socket.emit(
                     "createMessage",
                     {
                         message : this.lastMessage,
-                        to: this.interlocutor._id,
-                        from: this.user._id,
+                        to: recepientId,
+                        from: senderId,
                     },
                     data => {
                         if (typeof data === "string") {

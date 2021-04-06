@@ -6,8 +6,10 @@ export const state = () => ({
     unreadMessages: [],
     unreadFrom: [],
     lastMessage: {},
+    newMessage: {},
     interlocutorMessage: null,
-    interlocutor: {}
+    interlocutor: {},
+    from: {},
 })
 
 export const mutations = {
@@ -34,12 +36,14 @@ export const mutations = {
         state.unreadMessages = messages
     },
     SOCKET_newMessage(state, data) {
+        console.log(data);
+        state.lastMessage = data.message
+        state.newMessage = data.message
         if (state.interlocutorMessage === data.from) {
             state.messages.push(data.message)
         }else{
             state.unreadMessages.push(data)
         }
-        state.lastMessage = data.message
     },
     SOCKET_refreshReadedMessages(state, data) {
         if (state.interlocutorMessage === data.from) {
@@ -78,8 +82,10 @@ export const actions = {
 export const getters = {
     getMessages: state => state.messages,
     getLastMessage: state => state.lastMessage,
+    getNewMessage: state => state.newMessage,
     getUnreadMessages: state => state.unreadMessages,
     getUnreadFrom: state => state.unreadFrom,
 
-    getInterlocutor: state => state.interlocutor
+    getInterlocutor: state => state.interlocutor,
+    getFrom: state => state.from
 }

@@ -1,121 +1,120 @@
 <template>
     <main>
-<v-container>
-    <v-row class="row expert-one-content" v-if="service">
-        <div class="col-12 butons-service" id="serviceBtn">
-            <v-btn
-                class="costum-btn-service"
-                @click="scrollExpertsBlock"
-                width="100%"
+        <v-container>
+            <v-row class="row expert-one-content" v-if="service">
+                <div class="col-12 butons-service" id="serviceBtn">
+                    <v-btn
+                        class="costum-btn-service"
+                        @click="scrollExpertsBlock"
+                        width="100%"
+                        >
+                        {{ trans.Services.liveDiscussionBtn }}
+                        <v-icon>
+                          mdi-sort
+                        </v-icon>
+                    </v-btn>
+                </div>
+
+                <div class="col-12">
+                    <h3 class="display-1 text-left">
+                        {{ service.translation.name }}
+                    </h3>
+                </div>
+
+                    <div class="col-lg-3 col-md-3 side-block-wrap">
+                        <div class="side-block" id="sidebar">
+                            <a v-for="anchor in service.blogs"
+                                :key="anchor.id"
+                                class="v-list-item v-list-item--link theme--light item-anchor"
+                                :href="`#section${anchor.id}`"
+                                @click.prevent="scrollTo(anchor.id)"
+                                role="listitem"
+                                tabindex="0">
+                                {{ anchor.translation.name }}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md sections-block">
+                        <div
+                            v-for="anchor in service.blogs"
+                            :key="anchor.id"
+                            :id="`section${anchor.id}`"
+                            class="section-block"
+                            >
+                            <h3 class="title">{{ anchor.translation.name }}</h3>
+                            <div v-html="anchor.translation.body"></div>
+                        </div>
+                    </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-12">
+                    <div class="expert-one-experts" id="experts">
+                        <div class="title mb-2" v-if="employeeList.length > 0">
+                            {{ trans.Team.expertSectionTitle }}
+                        </div>
+
+                        <v-card
+                            v-if="employeeList.length > 0"
+                            v-for="(item, i) in employeeList"
+                            :key="i"
+                            >
+                                <v-img
+                                    :src="`/avatars/${item.employee.avatar}`"
+                                    aspect-ratio="1"
+                                    class="grey lighten-2"
+                                    >
+                                </v-img>
+                                <v-card-title class="title justify-center">
+                                    {{item.employee.name}}
+                                </v-card-title>
+                                <v-card-subtitle class="text-center">
+                                    {{item.employee.type}}
+                                </v-card-subtitle>
+                                <v-card-actions
+                                    class="pb-5 justify-center"
+                                    >
+                                    <v-btn
+                                        color="secondary"
+                                        @click="call(item.employee)"
+                                        >
+                                        <v-icon left>mdi-phone</v-icon>
+                                        {{ trans.Team.specialistBtnChat }}
+                                    </v-btn>
+                                    <v-btn
+                                        color="info"
+                                        @click="openDialog(item.employee)"
+                                        >
+                                        <v-icon left>mdi-chat</v-icon>
+                                        {{ trans.Team.companyMainAddress }}
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                    </div>
+                </div>
+            </v-row>
+
+            <v-dialog
+                v-model="dialog"
+                hide-overlay
+                persistent
+                width="300"
                 >
-                {{ trans.Services.liveDiscussionBtn }}
-                <v-icon>
-                  mdi-sort
-                </v-icon>
-            </v-btn>
-        </div>
-
-        <div class="col-12">
-            <h3 class="display-1 text-left">
-                {{ service.translation.name }}
-            </h3>
-        </div>
-
-            <div class="col-lg-3 col-md-3 side-block-wrap">
-                <div class="side-block" id="sidebar">
-                    <a v-for="anchor in service.blogs"
-                        :key="anchor.id"
-                        class="v-list-item v-list-item--link theme--light item-anchor"
-                        :href="`#section${anchor.id}`"
-                        @click.prevent="scrollTo(anchor.id)"
-                        role="listitem"
-                        tabindex="0">
-                        {{ anchor.translation.name }}
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md sections-block">
-                <div
-                    v-for="anchor in service.blogs"
-                    :key="anchor.id"
-                    :id="`section${anchor.id}`"
-                    class="section-block"
-                    >
-                    <h3 class="title">{{ anchor.translation.name }}</h3>
-                    <div v-html="anchor.translation.body"></div>
-                </div>
-            </div>
-
-        <div class="col-lg-3 col-md-4 col-sm-12">
-            <div class="expert-one-experts" id="experts">
-                <div class="title mb-2" v-if="employeeList.length > 0">
-                    {{ trans.Team.expertSectionTitle }}
-                </div>
-
                 <v-card
-                    v-if="employeeList.length > 0"
-                    v-for="(item, i) in employeeList"
-                    :key="i"
+                    color="primary"
+                    dark
                     >
-                        <v-img
-                            :src="`/avatars/${item.employee.avatar}`"
-                            aspect-ratio="1"
-                            class="grey lighten-2"
-                            >
-                        </v-img>
-                        <v-card-title class="title justify-center">
-                            {{item.employee.name}}
-                        </v-card-title>
-                        <v-card-subtitle class="text-center">
-                            {{item.employee.type}}
-                        </v-card-subtitle>
-                        <v-card-actions
-                            class="pb-5 justify-center"
-                            >
-                            <v-btn
-                                color="secondary"
-                                @click="call(item.employee)"
-                                >
-                                <v-icon left>mdi-phone</v-icon>
-                                {{ trans.Team.specialistBtnChat }}
-                            </v-btn>
-                            <v-btn
-                                color="info"
-                                @click="openDialog(item.employee)"
-                                >
-                                <v-icon left>mdi-chat</v-icon>
-                                {{ trans.Team.companyMainAddress }}
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-            </div>
-        </div>
-    </v-row>
-
-    <v-dialog
-        v-model="dialog"
-        hide-overlay
-        persistent
-        width="300"
-        >
-        <v-card
-            color="primary"
-            dark
-            >
-            <v-card-text>
-                Connecting to {{ roomId }}...
-                <v-progress-linear
-                    indeterminate
-                    color="white"
-                    class="mb-0"
-                    ></v-progress-linear>
-            </v-card-text>
-        </v-card>
-    </v-dialog>
-<!-- </div> -->
-</v-container>
-</main>
+                    <v-card-text>
+                        Connecting to {{ roomId }}...
+                        <v-progress-linear
+                            indeterminate
+                            color="white"
+                            class="mb-0"
+                            ></v-progress-linear>
+                    </v-card-text>
+                </v-card>
+            </v-dialog>
+        </v-container>
+    </main>
 </template>
 
 <script>
@@ -125,7 +124,22 @@ import { mapActions, mapGetters } from 'vuex'
 import contentApi from '@/api/contentApi.js'
 
 export default {
+    layout: "default",
+    head() {
+        return {
+            title: this.title,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.description
+                }
+            ]
+        }
+    },
     data: () => ({
+        title: '',
+        description: '',
         dialog: false,
         service : null,
         employeeList: [],
@@ -170,6 +184,8 @@ export default {
         this.service = await this.allServices.find((serv) => serv.alias == this.$route.params.subservice)
         this.getEmployees()
         window.addEventListener('scroll', this.handleScroll);
+        this.title = this.service.translation.seo_title
+        this.description = this.service.translation.seo_description
     },
     methods: {
         ...mapActions({

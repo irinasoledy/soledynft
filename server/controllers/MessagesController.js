@@ -6,15 +6,19 @@ class MessagesController {
     async create(req, res) {
         try {
             const message = await new Message({
-               message: req.body.message,
-               employee: req.body.employeeId,
-               client: req.body.clientId,
-               sendBy: req.body.sendBy,
-               session: req.body.session,
+                sender: req.body.senderId,
+                recepient: req.body.recepientId,
+                message: req.body.message,
+                employee: req.body.employeeId,
+                client: req.body.clientId,
+                sendBy: req.body.sendBy,
+                session: req.body.session,
            })
            .save()
            .then(m => m.populate('client').execPopulate())
            .then(m => m.populate('employee').execPopulate())
+           .then(m => m.populate('sender').execPopulate())
+           .then(m => m.populate('recepient').execPopulate())
 
            return res.status(200).json(message)
 
@@ -30,7 +34,7 @@ class MessagesController {
 
             const messages = await Message.find(
                 { $or : [{session: session1}, {session: session2}] }
-            ).populate('employee').populate('client')
+            ).populate('employee').populate('client').populate('sender').populate('recepient')
 
            return res.status(200).json(messages)
         } catch (e) {
@@ -70,25 +74,26 @@ class MessagesController {
                  { readed: true })
 
             const unreadedMessages = await Message.find(
-                { readed: false, $or : [
-                    { client: req.body.userId },
-                    { employee: req.body.userId }]
+                { readed: false, recepient: req.body.userId
+                    // $or : [
+                    // { client: req.body.userId },
+                    // { employee: req.body.userId }]
                 }
-                ).populate('employee').populate('client')
+            ).populate('employee').populate('client').populate('sender').populate('recepient')
 
             const parsedUnreadedMessages = unreadedMessages.map(message => {
                 return {
-                    from: message.employee._id,
+                    from: message.sender._id,
                     message: message,
-                    to: message.client._id
+                    to: message.recepient._id
                 }
             })
 
             const messages = await Message.find(
                     { $or : [{session: session1}, {session: session2}] }
-                ).populate('employee').populate('client')
+                ).populate('employee').populate('client').populate('sender').populate('recepient')
 
-            return res.status(200).json({message, messages, parsedUnreadedMessages})   
+            return res.status(200).json({message, messages, parsedUnreadedMessages})
         } catch (e) {
             return res.status(500).json({ message: 'error' + e })
         }
@@ -98,20 +103,20 @@ class MessagesController {
         try {
             const messages = await Message.find(
                 {
-                    readed: false,
-                    $or :
-                    [
-                        { client: req.query.user },
-                        { employee: req.query.user }
-                    ]
+                    readed: false, recepient: req.query.user
+                    // $or :
+                    // [
+                    //     { client: req.query.user },
+                    //     { employee: req.query.user }
+                    // ]
                 }
-            ).populate('employee').populate('client')
+            ).populate('employee').populate('client').populate('sender').populate('recepient')
 
             const parsedMessages = messages.map(message => {
                 return {
-                    from: message.employee._id,
+                    from: message.sender._id,
                     message: message,
-                    to: message.client._id
+                    to: message.recepient._id
                 }
             })
 

@@ -24,9 +24,6 @@ import chatMessages from "@/components/dialog/chat/chatMessages"
 
 export default {
     props: ['interlocutor', 'mode'],
-    data: () => ({
-        // messages: {},
-    }),
     computed: mapGetters({
            'messages': 'dialog/getMessages',
            'user': 'chat/getUser',
@@ -37,24 +34,28 @@ export default {
             this.getMessages()
         },
         messages(){
+            // this.checkUnreadMessages();
             setTimeout(() => {
               this.$refs.block.scrollTop = this.$refs.block.scrollHeight;
             });
         }
     },
-    mounted(){
-        this.getMessages()
+    async mounted(){
+        await this.getMessages()
 
-        if (this.user.type === "client") {
-            this.getClientMessages(this.user._id).then(() => {
-                this.$socket.emit("shareHistory", {roomId: this.room, messages: this.messages})
-            })
-        }
+        // await this.checkUnreadMessages()
+
+        // if (this.user.type === "client") {
+        //     this.getClientMessages(this.user._id).then(() => {
+        //         this.$socket.emit("shareHistory", {roomId: this.room, messages: this.messages})
+        //     })
+        // }
     },
     methods: {
         ...mapActions({
-            'getClientMessages' : 'chat/getClientMessages',
-            'getMessagesBySession' : 'dialog/getMessages'
+            getClientMessages : 'chat/getClientMessages',
+            getMessagesBySession : 'dialog/getMessages',
+            setMessagesAsReaded : 'dialog/setMessagesAsReaded',
         }),
         getMessages(){
             const data = {
@@ -63,6 +64,25 @@ export default {
             }
 
             this.getMessagesBySession(data)
+        },
+        checkUnreadMessages(){
+            // const unreaded = this.messages.filter(message => message.readed === false)
+
+            // if (unreaded.length > 0) {
+                this.setMessagesAsReaded({ interlocutorId : this.interlocutor._id, userId : this.user._id }).then(data => {
+                    this.$socket.emit('refreshReadedMessages', { to: this.interlocutor._id, messages : this.messages, from: this.user._id })
+                })
+            // }
+
+            // console.log(this.messages, unreaded);
+            // // const unreadMessages = this.showUnreadByUser(interlocutor)
+            //
+            // // if (unreadMessages) {
+            // //     this.setMessagesAsReaded({ interlocutorId : interlocutor._id, userId : this.user._id }).then(data => {
+            // //         this.$socket.emit('refreshReadedMessages', { to: interlocutor._id, messages : this.messages, from: this.user._id })
+            // //     })
+            // // }
+            // console.log(this.interlocutor._id);
         }
     },
     components: {
@@ -72,38 +92,29 @@ export default {
 </script>
 
 <style>
-.c-wrap {
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    max-width: 300px;
-}
-.c-form {
-    /* position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0; */
-    padding: 1rem;
-    height: 80px;
-}
-.c-chat {
-    /* position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 80px; */
-    height: calc(100vh - 311px);
-    padding: 1rem;
-    overflow-y: auto;
-}
-.chat-area{
-    width: 300px;
-}
-.full-height{
-    border: 1px solid red;
-    height: 300px;
-}
-.dialog--wrapp{
-    position: relative;
-}
+    .c-wrap {
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        max-width: 300px;
+    }
+    .c-form {
+        padding: 1rem;
+        height: 80px;
+    }
+    .c-chat {
+        height: calc(100vh - 311px);
+        padding: 1rem;
+        overflow-y: auto;
+    }
+    .chat-area{
+        width: 300px;
+    }
+    .full-height{
+        border: 1px solid red;
+        height: 300px;
+    }
+    .dialog--wrapp{
+        position: relative;
+    }
 </style>

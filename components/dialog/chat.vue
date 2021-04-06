@@ -1,10 +1,10 @@
 <template lang="html">
     <div>
-        <v-tooltip
+        <!-- <v-tooltip
             v-model="previewMessage"
             top
             >
-            <template v-slot:activator="{ on, attrs }">
+            <template v-slot:activator="{ on, attrs }"> -->
                 <!-- Button -->
                 <button type="button"
                     @click="toogleMessageDialog"
@@ -17,9 +17,9 @@
                     </span>
                     <small v-if="unreadMessages.length">{{ unreadMessages.length }}</small>
                 </button>
-            </template>
+            <!-- </template>
             <span>{{ lastMessage.message }}</span>
-        </v-tooltip>
+        </v-tooltip> -->
 
         <v-dialog
             class="messagesDialog"
@@ -85,7 +85,6 @@
             v-model="dialogItem"
             fullscreen
             hide-overlay
-
             >
             <v-card v-if="interlocutor">
                 <v-toolbar dark color="primary">
@@ -111,7 +110,7 @@
             :vertical="vertical"
             >
             <small>new message!</small>
-            <p>{{ newMessage.message }}</p>
+            <p>{{ lastMessage.message }}</p>
             <template v-slot:action="{ attrs }">
                 <v-btn
                     color="primary"
@@ -147,21 +146,35 @@ export default {
         $route (to, from) {
             this.addUserAction(to)
         },
+        dialogItem() {
+            if (this.dialogItem === false) {
+                this.setInterlocutor(null)
+            }
+        },
         unreadMessages() {
             this.previewMessage = true
         },
         messages() {
-            console.log('kmcldsmlm;lml;m;l');
+
         },
-        // lastMessage() {
-        //     const unreadMessages = this.showUnreadByUser(this.interlocutor)
-        //
-        //     if (unreadMessages) {
-        //         this.setMessagesAsReaded({ interlocutorId : this.interlocutor._id, userId : this.user._id }).then(data => {
-        //             this.$socket.emit('refreshReadedMessages', { to: this.interlocutor._id, messages : this.messages, from: this.user._id })
-        //         })
-        //     }
-        // },
+        newMessage() {
+            if (this.dialogItem === false && (this.lastMessage.sender._id !== this.user._id)) {
+                this.setInterlocutor(null)
+                this.setInterlocutor(this.lastMessage.sender)
+            }
+            var audio = new Audio('/message.mp3')
+            audio.play()
+        },
+        lastMessage() {
+            // console.log('lastmessage');
+            // const unreadMessages = this.showUnreadByUser(this.interlocutor)
+            //
+            // if (unreadMessages) {
+            //     this.setMessagesAsReaded({ interlocutorId : this.interlocutor._id, userId : this.user._id }).then(data => {
+            //         this.$socket.emit('refreshReadedMessages', { to: this.interlocutor._id, messages : this.messages, from: this.user._id })
+            //     })
+            // }
+        },
         call() {
             this.dialog = true
             var audio = new Audio('/salamisound-5580171-steam-locomotive-whistle.mp3'); // path to file
@@ -179,13 +192,14 @@ export default {
         user: 'chat/getUser',
         call : 'call/getCall',
         roomId : 'call/getRoomId',
-        newMessage: 'chat/getNewMessage',
 
         interlocutor: 'dialog/getInterlocutor',
         lastMessage: 'dialog/getLastMessage',
+        newMessage: 'dialog/getNewMessage',
         unreadMessages: 'dialog/getUnreadMessages',
         unreadFrom: 'dialog/getUnreadFrom',
         messages: 'dialog/getMessages',
+        from: 'dialog/getFrom'
     }),
     async mounted() {
         if (!this.$store.state.chat.cookie && (this.mode === 'employee')) {

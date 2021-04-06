@@ -36,12 +36,32 @@ import MapContact from "@/components/front/widgets/mapWidget.vue"
 
 export default {
     layout: "default",
-    components: {
-        MapContact, Experts
+    head() {
+        return {
+            title: this.title,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.description
+                }
+            ]
+        }
     },
+    data: () => ({
+        title: '',
+        description: '',
+    }),
     computed: mapGetters({
         trans: 'getTranslations'
-    })
+    }),
+    mounted(){
+        this.title = this.trans.PageNames.defaultPageSeoTitle
+        this.description = this.trans.PageNames.defaultPageSeoDesc
+    },
+    components: {
+        MapContact, Experts
+    }
 }
 </script>
 

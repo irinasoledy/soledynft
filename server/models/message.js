@@ -1,6 +1,16 @@
 const {Schema, model} = require('mongoose')
 
 const schema = new Schema({
+    sender : {
+        ref: 'users',
+        type: Schema.Types.ObjectId,
+        default: null
+    },
+    recepient : {
+        ref: 'users',
+        type: Schema.Types.ObjectId,
+        default: null
+    },
     client : {
         ref: 'users',
         type: Schema.Types.ObjectId,
