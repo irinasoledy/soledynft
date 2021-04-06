@@ -43,7 +43,8 @@ export default {
     async mounted(){
         await this.getMessages()
 
-        // await this.checkUnreadMessages()
+        console.log('here ');
+        await this.checkUnreadMessages()
 
         // if (this.user.type === "client") {
         //     this.getClientMessages(this.user._id).then(() => {
@@ -65,8 +66,8 @@ export default {
 
             this.getMessagesBySession(data)
         },
-        checkUnreadMessages(){
-            // const unreaded = this.messages.filter(message => message.readed === false)
+        checkUnreadMessages() {
+            const unreaded = this.messages.filter(message => message.readed === false)
 
             // if (unreaded.length > 0) {
                 this.setMessagesAsReaded({ interlocutorId : this.interlocutor._id, userId : this.user._id }).then(data => {
