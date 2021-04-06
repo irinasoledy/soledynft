@@ -146,6 +146,13 @@ export default {
         $route (to, from) {
             this.addUserAction(to)
         },
+        async dialogList() {
+            if (this.dialogItem === false) {
+                await crmApi.getUsers(this.mode, response => this.users = response.users)
+                // this.toogleMessageDialog()
+                // this.setInterlocutor(null)
+            }
+        },
         dialogItem() {
             if (this.dialogItem === false) {
                 this.setInterlocutor(null)
