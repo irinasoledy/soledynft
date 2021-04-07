@@ -39,12 +39,18 @@
                     </div>
                 </div>
             </section>
-            <experts></experts>
             <div class="text-center contact-btns"><br>
-                <p>{{ trans.ContactsAndForms.promosFormSectionTitle }} </p>
-                <v-btn color="secondary">{{ trans.ContactsAndForms.promosFormSectionBtnText }}</v-btn> <br>
+                <!-- <p>{{ trans.ContactsAndForms.promosFormSectionTitle }} </p> -->
+                <v-btn color="secondary" href="#experts-area">{{ trans.HP.hpDiscussLive }}</v-btn>
+                <v-btn color="info" @click="$nuxt.$emit('open-appointment-form')">{{ trans.ContactsAndForms.promosFormSectionBtnText }}</v-btn>
             </div>
         </div>
+
+        <div id="experts-area">
+            <experts></experts>
+        </div>
+        <appointment-form></appointment-form>
+
     </main>
 </template>
 
@@ -52,6 +58,7 @@
 
 import { mapActions, mapGetters } from 'vuex'
 import Experts from "@/components/front/widgets/expertsWidget.vue"
+import appointmentForm from "@/components/front/forms/appointmentForm.vue"
 
 export default {
     layout: "default",
@@ -82,7 +89,7 @@ export default {
         this.title = this.trans.PageNames.defaultPageSeoTitle
         this.description = this.trans.PageNames.defaultPageSeoDesc
     },
-    components: { Experts }
+    components: { Experts, appointmentForm }
 }
 </script>
 
@@ -97,7 +104,7 @@ export default {
     font-size: 20px !important;
 }
 .contact-btns{
-    background-color: $custom_blue;
+    // background-color: $custom_blue;
     color: #FFF;
     padding-bottom: 40px;
 }

@@ -30,12 +30,14 @@
                 </v-row>
             </v-container>
         </section>
+        <appointment-form></appointment-form>
     </main>
 </template>
 
 <script>
 
 import { mapActions, mapGetters } from 'vuex'
+import appointmentForm from "@/components/front/forms/appointmentForm.vue"
 
 export default {
     layout: "default",

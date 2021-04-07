@@ -295,7 +295,7 @@
                 <v-col class="col-auto">
                     <v-row class="align-center">
                         <v-col>
-                            <v-list-item dark color="primary" href="tel:+37378563423">
+                            <v-list-item dark color="primary" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">
                                 <v-icon>mdi-phone</v-icon>
                                 {{ trans.ContactsAndForms.companyMainPhone1 }}
                             </v-list-item>
@@ -433,7 +433,7 @@
                         solo
                         flat
                         dark
-                        ></v-select>
+                    ></v-select>
                     <v-btn color="secondary" @click="$nuxt.$emit('open-appointment-form')">
                         <v-icon>
                             mdi-book

@@ -1,9 +1,9 @@
 <template>
     <v-row>
-        <v-col cols="12" sm="10">
+        <v-col cols="10" sm="10">
             <v-text-field label="Message..." outline v-model="text" class="form-message" @keydown.enter="send"/>
         </v-col>
-        <v-col cols="12" sm="2">
+        <v-col cols="2" sm="2">
             <v-btn
                 class="mx-2"
                 fab

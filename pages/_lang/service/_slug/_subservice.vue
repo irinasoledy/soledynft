@@ -47,7 +47,7 @@
                         </div>
                     </div>
 
-                <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="col-lg-3 col-md-4 col-sm-12 experts-wrapp">
                     <div class="expert-one-experts" id="experts">
                         <div class="title mb-2" v-if="employeeList.length > 0">
                             {{ trans.Team.expertSectionTitle }}
@@ -114,6 +114,7 @@
                 </v-card>
             </v-dialog>
         </v-container>
+        <appointment-form></appointment-form>
     </main>
 </template>
 
@@ -122,6 +123,7 @@
 import axios from "axios"
 import { mapActions, mapGetters } from 'vuex'
 import contentApi from '@/api/contentApi.js'
+import appointmentForm from "@/components/front/forms/appointmentForm.vue"
 
 export default {
     layout: "default",
@@ -143,7 +145,7 @@ export default {
         dialog: false,
         service : null,
         employeeList: [],
-        roomId: '',
+        // roomId: '',
         mobileExpertsDisplay: false,
     }),
     watch:{
@@ -245,12 +247,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.expert-one-experts .v-card {
+<style lang="scss">
+.experts-wrapp{
+    // overflow-y: scroll;
+}
+#experts .v-card {
     margin-bottom: 30px;
+    max-width: 300px !important;
+    // overflow-y: scroll;
 }
 
-.expert-one-experts .v-btn {
+#experts .v-btn {
     margin-bottom: 10px;
 }
 

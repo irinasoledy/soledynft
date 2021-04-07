@@ -5,14 +5,20 @@
                 <v-list-item-icon>
                     <v-icon color="primary">mdi-phone</v-icon>
                 </v-list-item-icon>
-                <v-list-item-title>{{ trans.ContactsAndForms.companyMainPhone1 }}</v-list-item-title>
+                <v-list-item-title>
+                    <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">
+                        {{ trans.ContactsAndForms.companyMainPhone1 }}
+                    </a>
+                </v-list-item-title>
             </v-list-item>
             <v-list-item>
                 <v-list-item-icon>
                     <v-icon color="primary">mdi-email</v-icon>
                 </v-list-item-icon>
                 <v-list-item-title color="primary">
-                    {{ trans.ContactsAndForms.companyMainEmail1 }}
+                    <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">
+                        {{ trans.ContactsAndForms.companyMainEmail1 }}
+                    </a>
                 </v-list-item-title>
             </v-list-item>
         </v-list-item-group>

@@ -25,23 +25,23 @@
                     </v-col>
                     <div class="col-md-6">
                         <p class="text-center">
-                            <img width="100" src="/MD.png"/>
+                            <img width="100" src="/rm1.png"/>
                         </p>
                         <p class="text-center">
-                            Moldova
+                            {{ trans.ContactsAndForms.formTitle2 }}
                         </p>
-                        <p class="text-center">Compania: IT MALL OU</p>
+                        <p class="text-center">{{ trans.ContactsAndForms.companyMainName }}</p>
                         <p class="text-center">
                             <v-icon>mdi-marker</v-icon>
-                            Adresa depozitului: România, Brașov, str. Zizinului 9B
+                            {{ trans.ContactsAndForms.companyMainAdres }}
                         </p>
                         <p class="text-center">
                             <v-icon>mdi-phone</v-icon>
-                            Tel/ Viber/ Whatsapp: <a href="tel:+37379666626">+37379666626</a>
+                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
                         </p>
                         <p class="text-center">
                             <v-icon>mdi-email</v-icon>
-                            Email: <a href="mailto:info@soledy.com">info@soledy.com</a>
+                            {{ trans.ContactsAndForms.labelEmail }}: <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">{{ trans.ContactsAndForms.companyMainEmail1 }}</a>
                         </p>
                         <!-- <p class="text-center">
                             <v-btn

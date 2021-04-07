@@ -31,8 +31,8 @@
                         ></v-switch>
                     </li>
                 </ul>
-                <v-row>
-                    <v-col lg="6" >
+                <v-row class="align-center justify-center">
+                    <v-col lg="6">
                         <v-btn
                             width="100%"
                             class="secondary custom-btn"
@@ -92,7 +92,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
     .v-application ul, .v-application ol{
         padding-left: 0;
     }
@@ -115,7 +115,7 @@ export default {
         margin-bottom: 0;
     }
     .v-messages{
-        min-height: 5px;
+        min-height: 3px !important;
     }
     .v-input--selection-controls .v-input__slot > .v-label, .v-input--selection-controls .v-radio > .v-label{
         font-size: 14px;

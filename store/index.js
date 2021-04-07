@@ -68,8 +68,8 @@ export const actions = {
 
     async changeLanguage({ state, commit }, id) {
         commit('SET_DEFAULT_LANG', id)
-        await contentApi.getInitData(state.lang.lang, (response) => commit('SET_SERVICES', response.data))
-        await contentApi.getTranslations(state.lang.lang, (response) => commit('SET_SERVICES', response.data))
+        await contentApi.getTranslations(state.lang.lang, (response) => commit('SET_TRANSALATIONS', response))
+        await contentApi.getInitData(state.lang.lang, (response) => commit('SET_SERVICES', response))
     },
 
     async getExpertsList({ commit }){

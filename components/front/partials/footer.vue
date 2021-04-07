@@ -90,8 +90,12 @@
             <v-card-text class="white--text pt-0">
                 {{ trans.ContactsAndForms.companyMainName }} |
                 {{ trans.ContactsAndForms.companyMainAdres }} |
-                {{ trans.ContactsAndForms.companyMainPhone1 }} |
-                {{ trans.ContactsAndForms.companyMainEmail1 }}
+                <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">
+                    {{ trans.ContactsAndForms.companyMainPhone1 }}
+                </a>|
+                <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">
+                    {{ trans.ContactsAndForms.companyMainEmail1 }}
+                </a>
             </v-card-text>
 
             <v-divider></v-divider>
