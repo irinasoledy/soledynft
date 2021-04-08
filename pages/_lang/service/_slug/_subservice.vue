@@ -45,6 +45,11 @@
                             <h3 class="title">{{ anchor.translation.name }}</h3>
                             <div v-html="anchor.translation.body"></div>
                         </div>
+                        <div class="text-center">
+                            <v-btn color="secondary medium-width" @click="$nuxt.$emit('open-appointment-form')">
+                                {{ trans.Services.liveDiscussionBtn }}
+                            </v-btn>
+                        </div>
                     </div>
 
                 <div class="col-lg-3 col-md-4 col-sm-12 experts-wrapp">
@@ -75,7 +80,7 @@
                                     >
                                     <v-btn
                                         color="secondary"
-                                        @click="call(item.employee)"
+                                        @click="openVideoCall(item.employee)"
                                         >
                                         <v-icon left>mdi-phone</v-icon>
                                         {{ trans.Team.specialistBtnChat }}
@@ -93,7 +98,7 @@
                 </div>
             </v-row>
 
-            <v-dialog
+            <!-- <v-dialog
                 v-model="dialog"
                 hide-overlay
                 persistent
@@ -112,7 +117,8 @@
                             ></v-progress-linear>
                     </v-card-text>
                 </v-card>
-            </v-dialog>
+            </v-dialog> -->
+
         </v-container>
         <appointment-form></appointment-form>
     </main>
@@ -145,7 +151,6 @@ export default {
         dialog: false,
         service : null,
         employeeList: [],
-        // roomId: '',
         mobileExpertsDisplay: false,
     }),
     watch:{
@@ -196,8 +201,12 @@ export default {
             setDefaultResponse : 'call/setDefaultResponse',
             setClientAsUser : 'chat/setClientAsUser',
             setUser : 'chat/setUser',
-            setInterlocutor : 'dialog/setInterlocutor'
+            setInterlocutor : 'dialog/setInterlocutor',
+            initCall : 'dialog/initCall',
         }),
+        openVideoCall(user) {
+            this.initCall(user)
+        },
         openDialog(user){
             this.setInterlocutor(null)
             this.setInterlocutor(user)
@@ -207,21 +216,24 @@ export default {
             const experts = document.getElementById('experts')
             const serviceBtn = document.getElementById('serviceBtn')
 
-            if (!this.$mobileDetect.mobile()) {
-                if (window.scrollY > 85) {
-                    sidebar.classList.add("fixed")
-                    experts.classList.add("fixed")
+            if (sidebar) {
+                if (!this.$mobileDetect.mobile()) {
+                    if (window.scrollY > 85) {
+                        sidebar.classList.add("fixed")
+                        experts.classList.add("fixed")
+                    }else{
+                        sidebar.classList.remove("fixed")
+                        experts.classList.remove("fixed")
+                    }
+                }
+
+                if (window.scrollY > 35) {
+                    serviceBtn.classList.add("fixed-btn")
                 }else{
-                    sidebar.classList.remove("fixed")
-                    experts.classList.remove("fixed")
+                    serviceBtn.classList.remove("fixed-btn")
                 }
             }
 
-            if (window.scrollY > 35) {
-                serviceBtn.classList.add("fixed-btn")
-            }else{
-                serviceBtn.classList.remove("fixed-btn")
-            }
         },
         scrollTo(id){
             const element = document.getElementById('section' + id)
@@ -238,7 +250,7 @@ export default {
                 this.employeeList = response
             })
         },
-        call(employee){
+        call(employee) {
             this.roomId = employee._id
             this.dialog = true
             this.$socket.emit('call', this.roomId)
@@ -249,11 +261,12 @@ export default {
 
 <style lang="scss">
 .experts-wrapp{
+    // border: 1px solid red;
     // overflow-y: scroll;
 }
 #experts .v-card {
     margin-bottom: 30px;
-    max-width: 300px !important;
+    // max-width: 300px !important;
     // overflow-y: scroll;
 }
 
@@ -362,6 +375,9 @@ export default {
         box-shadow: none;
         background-color: #FFF !important;
     }
+    .expert-one-experts{
+        width: 100% !important;
+    }
 }
 .section-block {
     margin-bottom: 20px;
@@ -385,7 +401,15 @@ export default {
     margin-top: -80px;
     background-color: #FFF;
 }
+.expert-one-experts{
+    max-height: 85vh;
+    overflow: scroll;
+    width: 300px;
+}
 .v-application ul{
     padding-left: 20px !important;
+}
+.medium-width{
+    min-width: 90% !important;
 }
 </style>

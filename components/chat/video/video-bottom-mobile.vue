@@ -1,10 +1,10 @@
 <template>
-  <v-bottom-navigation
-    class="video-mobile__menu-bottom"
-    :value="value"
-    color="accent"
-    dark
-  >
+      <v-bottom-navigation
+        class="video-mobile__menu-bottom"
+        :value="value"
+        color="accent"
+        dark
+      >
       <!-- <v-btn small>
         <span>Mute</span>
         <v-icon>mdi-microphone</v-icon>
@@ -34,7 +34,7 @@
       </v-btn>
 
 
-      <v-btn small @click="$nuxt.$emit('openChat')">
+      <v-btn small @click="toggleChat()">
         <span>Chat</span>
         <v-icon>mdi-chat</v-icon>
       </v-btn>
@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: "video-bottom-mobile",
@@ -65,16 +65,37 @@ export default {
 
   }),
   computed: mapGetters({
+      user: 'chat/getUser',
       roomId : 'call/getRoomId',
       camera: 'chat/getCamera',
       microphone: 'chat/getMicrophone',
+      videoInterlocuitor: 'dialog/getVideoInterlocuitor',
+      reject: 'dialog/getReject',
+      response: 'dialog/getResponse',
   }),
   methods: {
       ...mapActions({
           changeEmployeeStatus : 'chat/changeEmployeeStatus',
           switchCamera: 'chat/switchCamera',
           switchMicrophone: 'chat/switchMicrophone',
+          setInterlocutor : 'dialog/setInterlocutor',
+          cancelCall : 'dialog/cancelCall',
+          restartStatuses: 'dialog/restartStatuses'
       }),
+      toggleChat() {
+          this.setInterlocutor(null)
+          this.setInterlocutor(this.videoInterlocuitor)
+      },
+      end() {
+          $nuxt.$emit('endVideoChat')
+          this.cancelCall()
+          this.restartStatuses(false)
+          const data = {
+              to: this.videoInterlocuitor, from: this.user
+          }
+          this.$socket.emit('endCall', data)
+          // this.$socket.emit("stop", this.roomId);
+      },
   }
 }
 </script>

@@ -101,10 +101,15 @@
                 <span>Participants</span>
                 <v-icon>mdi-account-multiple</v-icon>
             </v-btn>
-            <v-btn @click="$nuxt.$emit('openChat')">
+
+            <v-btn @click="toggleChat()">
                 <span>Chat</span>
                 <v-icon>mdi-chat</v-icon>
             </v-btn>
+            <!-- <v-btn @click="$nuxt.$emit('openChat')">
+                <span>Chat</span>
+                <v-icon>mdi-chat</v-icon>
+            </v-btn> -->
             <!-- <v-btn>
                 <span>Share Screen</span>
                 <v-icon>mdi-monitor-share</v-icon>
@@ -130,7 +135,7 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-    props: ['prev'],
+    props: ['interlocuitorUser'],
     name: "video-bottom",
     data: () => ({
         dialog: false,
@@ -142,18 +147,39 @@ export default {
         chat: true,
     }),
     computed: mapGetters({
+        user: 'chat/getUser',
         roomId : 'call/getRoomId',
         camera: 'chat/getCamera',
         microphone: 'chat/getMicrophone',
+        videoInterlocuitor: 'dialog/getVideoInterlocuitor',
+        reject: 'dialog/getReject',
+        response: 'dialog/getResponse',
     }),
+    mounted(){
+        console.log(this.interlocuitorUser, 'mklvndfklnvdklf');
+    },
     methods: {
         ...mapActions({
             changeEmployeeStatus : 'chat/changeEmployeeStatus',
             switchCamera: 'chat/switchCamera',
             switchMicrophone: 'chat/switchMicrophone',
+            setInterlocutor : 'dialog/setInterlocutor',
+            cancelCall : 'dialog/cancelCall',
+            restartStatuses: 'dialog/restartStatuses'
         }),
-        end(){
-            this.$socket.emit("stop", this.roomId);
+        toggleChat() {
+            this.setInterlocutor(null)
+            this.setInterlocutor(this.videoInterlocuitor)
+        },
+        end() {
+            $nuxt.$emit('endVideoChat')
+            this.cancelCall()
+            this.restartStatuses(false)
+            const data = {
+                to: this.videoInterlocuitor, from: this.user
+            }
+            this.$socket.emit('endCall', data)
+            // this.$socket.emit("stop", this.roomId);
         },
         setRoomStatus(status){
             const data = {

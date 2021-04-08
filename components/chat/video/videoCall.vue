@@ -49,7 +49,6 @@ export default {
             })
         },
         endChat(){
-            console.log('mlml');
             this.activeRoom.disconnect()
             this.$router.push(this.prevUrl)
         }
@@ -61,19 +60,13 @@ export default {
             camera: 'chat/getCamera',
             microphone: 'chat/getMicrophone',
             endChat: 'chat/getEndChat',
-
-            // "client": "chat/getClient",
-            // "employee": "chat/getEmployee",
-            // "connectRoom": "chat/getConnectRoom",
-            // "videoProccess": "chat/getVideoProccess",
-            // "audioProccess": "chat/getAudioProccess",
-            // "videoMute": "chat/getVideoMute",
-            // "videoUnmute": "chat/getVideoUnmute",
-            // "audioMute": "chat/getAudioMute",
-            // "audioUnmute" : "chat/getAudioMute",
         }
     ),
     mounted : function () {
+        $nuxt.$on('endVideoChat', () => {
+            console.log('disconenct chat');
+            this.activeRoom.disconnect()
+        })
         console.log('Video chat room loading...')
         this.videoChatWindow = document.getElementById('video-chat-window');
         this.startVideConference()

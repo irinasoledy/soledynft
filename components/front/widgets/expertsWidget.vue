@@ -33,6 +33,7 @@
                             >
                             <v-btn
                                 color="secondary"
+                                @click="openVideoCall(item)"
                                 >
                                 <v-icon left>mdi-phone</v-icon>
                                 {{ trans.Team.specialistBtnChat }}
@@ -68,10 +69,14 @@ export default {
         ...mapActions({
             getExpertsList: 'getExpertsList',
             setInterlocutor : 'dialog/setInterlocutor',
+            initCall : 'dialog/initCall',
         }),
-        openDialog(user){
+        openDialog(user) {
             this.setInterlocutor(null)
             this.setInterlocutor(user)
+        },
+        openVideoCall(user) {
+            this.initCall(user)
         }
     }
 }

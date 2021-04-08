@@ -1,5 +1,5 @@
 <template lang="html">
-    <div>
+    <div class="chat-module">
         <!-- <v-tooltip
             v-model="previewMessage"
             top
@@ -22,6 +22,7 @@
         </v-tooltip> -->
 
         <v-dialog
+            content-class="chat-dialog-window"
             class="messagesDialog"
             v-model="dialogList"
             fullscreen
@@ -43,8 +44,7 @@
                     </v-btn>
                     <v-toolbar-title>Chats: </v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-toolbar-items>
-                    </v-toolbar-items>
+                    <v-toolbar-items></v-toolbar-items>
                 </v-toolbar>
                 <v-list subheader class="messages-dialog-body">
                     <!-- <v-subheader>Not comunicate users</v-subheader> -->
@@ -58,7 +58,7 @@
                             <v-img
                                 v-if="user.avatar"
                                 :src="`/avatars/${user.avatar}`"
-                                ></v-img>
+                            ></v-img>
                             <v-avatar size="32" v-else dark color="info">
                                 C
                             </v-avatar>
@@ -67,9 +67,11 @@
                             <v-list-item-title v-text="user.name"></v-list-item-title>
                         </v-list-item-content>
                         <v-list-item-icon>
+
                             <v-icon :color="user.online ? 'deep-purple accent-4' : 'grey'">
                                 mdi-message-outline
                             </v-icon>
+
                             <v-badge color="red" overlap v-if="showUnreadByUser(user)">
                                 <span slot="badge">
                                     {{ showUnreadByUser(user) }}
@@ -81,10 +83,12 @@
             </v-card>
         </v-dialog>
         <v-dialog
+            content-class="chat-dialog-window"
             class="messagesDialog"
             v-model="dialogItem"
             fullscreen
             hide-overlay
+            transition="dialog-bottom-transition"
             >
             <v-card v-if="interlocutor">
                 <v-toolbar dark color="primary">
@@ -99,8 +103,12 @@
                         <v-avatar size="32" v-else dark color="info">
                             C
                         </v-avatar>
-                    <v-toolbar-title class="chat-user-name"><small>{{ interlocutor.name }}</small> </v-toolbar-title>
+                    <v-toolbar-title class="chat-user-name"><small>{{ interlocutor.name }}</small></v-toolbar-title>
                     <v-spacer></v-spacer>
+
+                    <v-icon @click.prevent="callTo(interlocutor)" color="grey" class="text-right">
+                        mdi-phone
+                    </v-icon>
                 </v-toolbar>
                 <chatBox :interlocutor="interlocutor" :mode="mode" />
             </v-card>
@@ -232,6 +240,8 @@ export default {
             setInterlocutorMessageUser : 'dialog/setInterlocutorMessageUser',
             setInterlocutor : 'dialog/setInterlocutor',
             setMessagesAsReaded : 'dialog/setMessagesAsReaded',
+
+            initCall : 'dialog/initCall',
         }),
         showUnreadByUser(user) {
             if (this.unreadMessages.length) {
@@ -271,6 +281,11 @@ export default {
                 })
             }
         },
+        callTo(user){
+            this.dialogList = false
+            this.dialogItem = false
+            this.initCall(user)
+        },
         addUserAction(route, counter = 0, pages = 1) {
             if (this.mode === 'employee') {
                 const data = {
@@ -309,18 +324,18 @@ export default {
 </script>
 
 <style lang="scss">
-    .v-dialog--fullscreen{
-        width: 420px;
-        height: calc(100vh - 140px);
+    .chat-dialog-window {
+        width: 25% !important;
+        height: calc(100vh - 128px);
         right: 0;
         bottom: 0;
         top: auto;
         left: auto;
     }
-    .item-dialog-list{
+    .chat-module .item-dialog-list{
         cursor: pointer;
     }
-    .messages-btn small{
+    .chat-module .messages-btn small{
         position: absolute;
         display: block;
         width: 25px;
@@ -333,18 +348,28 @@ export default {
         border-radius: 50%;
         font-size: 13px;
     }
-    .chat-user-name{
+    .chat-module .chat-user-name{
         margin-left: 20px;
     }
-    .messages-dialog-header{
+    .chat-module .messages-dialog-header{
         position: fixed;
         width: 100%;
         z-index: 1
     }
-    .messagesDialog{
+    .chat-module .messagesDialog{
         padding-top: 150px;
     }
-    .messages-dialog-body{
+    .chat-module .messages-dialog-body{
         padding-top: 77px;
+    }
+    @media (max-width: 991px) {
+        .chat-dialog-window {
+            width: 100% !important;
+            height: calc(100vh - 52px);
+            right: 0;
+            bottom: 0;
+            top: auto;
+            left: auto;
+        }
     }
 </style>

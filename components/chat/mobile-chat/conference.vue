@@ -445,18 +445,35 @@ export default {
     participants: [
       "Participant 1",
       "Participant 2",
-      "Participant 3",
-      "Participant 4",
-      "Participant 5",
-      "Participant 6",
     ]
   }),
   computed: mapGetters({
-      roomId : 'call/getRoomId'
+      user: 'chat/getUser',
+      roomId : 'call/getRoomId',
+      camera: 'chat/getCamera',
+      microphone: 'chat/getMicrophone',
+      videoInterlocuitor: 'dialog/getVideoInterlocuitor',
+      reject: 'dialog/getReject',
+      response: 'dialog/getResponse',
   }),
   methods: {
-      end(){
-          this.$socket.emit("stop", this.roomId);
+      ...mapActions({
+          changeEmployeeStatus : 'chat/changeEmployeeStatus',
+          switchCamera: 'chat/switchCamera',
+          switchMicrophone: 'chat/switchMicrophone',
+          setInterlocutor : 'dialog/setInterlocutor',
+          cancelCall : 'dialog/cancelCall',
+          restartStatuses: 'dialog/restartStatuses'
+      }),
+      end() {
+          $nuxt.$emit('endVideoChat')
+          this.cancelCall()
+          this.restartStatuses(false)
+          const data = {
+              to: this.videoInterlocuitor, from: this.user
+          }
+          this.$socket.emit('endCall', data)
+          // this.$socket.emit("stop", this.roomId);
       },
     onClick() {
         // Perform an action
@@ -490,7 +507,7 @@ export default {
 <style lang="scss" scoped>
   .video-mobile {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 128px) !important;
     background: rgb(34, 34, 34);
     position: relative;
     z-index: 1;

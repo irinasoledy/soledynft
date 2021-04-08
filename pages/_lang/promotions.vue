@@ -2,21 +2,26 @@
     <main class="about-content">
         <div v-for="promotion in promotions" :key="promotion.id" :id="`promotion-${promotion.id}`">
 
-            <v-img
-                v-if="!$mobileDetect.mobile()"
-                :src="`${envAPI}/images/promotions/${promotion.img}`"
-                aspect-ratio="2"
-            ></v-img>
+            <div class="banner-wrapper">
+                <v-img
+                    v-if="!$mobileDetect.mobile()"
+                    :src="`${envAPI}/images/promotions/${promotion.img}`"
+                    aspect-ratio="2"
+                ></v-img>
 
-            <img  width="100%" v-else :src="`${envAPI}/images/promotions/${promotion.img_mobile}`">
+                <img width="100%" v-else :src="`${envAPI}/images/promotions/${promotion.img_mobile}`">
+                <h1 class="display-1 mb-4 text-center">
+                    {{ promotion.translation.name }}
+                </h1>
+            </div>
 
-            <section>
-                <div class="container">
-                    <div class="row justify-center">
+            <!-- <section> -->
+                <v-container>
+                    <v-row align="center" justify="center">
 
-                        <h1 class="display-1 mb-4">
-                            {{ promotion.translation.name }}
-                        </h1>
+                        <!-- <v-col>
+
+                        </v-col> -->
 
                         <v-expansion-panels v-if="promotion.translation.body">
                             <v-expansion-panel>
@@ -36,13 +41,17 @@
                                 </v-expansion-panel-content>
                             </v-expansion-panel>
                         </v-expansion-panels>
-                    </div>
-                </div>
-            </section>
+
+
+                    </v-row>
+
+
+                </v-container>
+            <!-- </section> -->
             <div class="text-center contact-btns"><br>
                 <!-- <p>{{ trans.ContactsAndForms.promosFormSectionTitle }} </p> -->
-                <v-btn color="secondary" href="#experts-area">{{ trans.HP.hpDiscussLive }}</v-btn>
-                <v-btn color="info" @click="$nuxt.$emit('open-appointment-form')">{{ trans.ContactsAndForms.promosFormSectionBtnText }}</v-btn>
+                <v-btn class="-full-width" color="secondary" href="#experts-area">{{ trans.HP.hpDiscussLive }}</v-btn>
+                <v-btn class="-full-width" color="info" @click="$nuxt.$emit('open-appointment-form')">{{ trans.ContactsAndForms.promosFormSectionBtnText }}</v-btn>
             </div>
         </div>
 
@@ -102,7 +111,9 @@ export default {
 }
 .accordion-title{
     font-size: 20px !important;
+    margin-top: 25px;
 }
+
 .contact-btns{
     // background-color: $custom_blue;
     color: #FFF;
@@ -113,5 +124,28 @@ export default {
 }
 .v-carousel{
     height: auto !important;
+}
+.banner-wrapper{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.banner-wrapper h1{
+    position: absolute;
+    left: 0px;
+    top: 45%;
+    width: 100%;
+    height: auto;
+}
+@media (max-width: 991px) {
+    .-full-width{
+        width: 90%;
+        margin-bottom: 9px;
+    }
+    .banner-wrapper h1{
+        top: 40%;
+        font-size: 1.2rem !important
+    }
 }
 </style>

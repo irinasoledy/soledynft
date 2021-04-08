@@ -22,8 +22,10 @@
             >
             <v-sheet color="primary" dark>
                 <v-list-item>
-                    <v-list-item-content to="/">
-                        <img height="40" src="@/static/logo-docrom4.png" alt="" class="logo-burgher">
+                    <v-list-item-content >
+                        <nuxt-link to="/">
+                            <img height="40" src="@/static/logo-docrom4.png" alt="" class="logo-burgher">
+                        </nuxt-link>
                     </v-list-item-content>
                     <v-list-item-icon @click="drawer = false" >
                         <v-icon>mdi-close</v-icon>
@@ -143,8 +145,10 @@
             </v-list>
         </v-navigation-drawer>
         <v-spacer></v-spacer>
-        <v-toolbar-title to="/">
-            <img class="logo" src="@/static/logo-docrom4.png" alt="">
+        <v-toolbar-title>
+            <nuxt-link to="/">
+                <img class="logo" src="@/static/logo-docrom4.png" alt="">
+            </nuxt-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon @click.stop="cabinetDrawer = !cabinetDrawer">
@@ -289,7 +293,9 @@
             <v-row class="justify-space-between align-center" max-height="80">
                 <v-col class="col-auto">
                     <v-toolbar-title to="/">
-                        <img width="180" class="logo" src="@/static/logo-docrom4.png" alt="">
+                        <nuxt-link to="/">
+                            <img width="180" class="logo" src="@/static/logo-docrom4.png" alt="">
+                        </nuxt-link>
                     </v-toolbar-title>
                 </v-col>
                 <v-col class="col-auto">
@@ -424,9 +430,9 @@
                     <v-select
                         class="selectHeader"
                         :items="languages"
-                        :label="language.lang"
+                        :label="language.name"
                         @change="changeLang"
-                        item-text="lang"
+                        item-text="name"
                         item-value="id"
                         color="primary"
                         background-color="primary"

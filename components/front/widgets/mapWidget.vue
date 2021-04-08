@@ -29,9 +29,17 @@
         </div>
         <div class="mapouter">
             <div class="gmap_canvas">
-                <iframe
+                <!-- <iframe
                     id="gmap_canvas"
                     src="https://maps.google.com/maps?q=bucuresti&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    frameborder="0"
+                    scrolling="no"
+                    marginheight="0"
+                    marginwidth="0"
+                    ></iframe> -->
+                    <iframe
+                    id="gmap_canvas"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2851.377166467005!2d26.118026315508764!3d44.38437881285968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1fe14c2804f71%3A0x6cba951c2c3ede62!2zU3RyYWRhIFN0csSDZHVpbsibZWkgOSwgQnVjdXJlyJl0aSwg0KDRg9C80YvQvdC40Y8!5e0!3m2!1sru!2s!4v1617892359613!5m2!1sru!2s"
                     frameborder="0"
                     scrolling="no"
                     marginheight="0"

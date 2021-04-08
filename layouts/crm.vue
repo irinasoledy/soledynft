@@ -12,6 +12,7 @@
                             <nuxt/>
                         </v-scroll-y-transition>
                         <Chat mode="client"/>
+                        <Video mode="client"/>
                         
                     </div>
                     <!-- App Footer -->

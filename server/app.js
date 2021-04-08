@@ -21,11 +21,22 @@ io.on('connection', socket => {
         cb()
     })
 
-    //
     socket.on('refreshReadedMessages', (data) => {
         socket.broadcast.to(data.to).emit('refreshReadedMessages', data)
     })
 
+    socket.on('startCall', data => {
+        socket.broadcast.to(data.to._id).emit('incomingCall', data)
+    })
+
+    socket.on('endCall', data => {
+        socket.broadcast.to(data.to._id).emit('cancelCall', data)
+    })
+
+    socket.on('acceptCall', (data, cb) => {
+        socket.broadcast.to(data.to._id).emit('acceptCall', data)
+        cb()
+    })
 
 
 
@@ -116,11 +127,7 @@ io.on('connection', socket => {
         socket.join(employee._id)
     })
 
-    socket.on('call', roomId => {
-        socket.join(roomId)
-        socket.broadcast.to(roomId).emit('call', {roomId, call: true})
-        io.to(roomId).emit('setRoom', {roomId, call: true})
-    })
+
 
     socket.on('rejectCall', data => {
         io.to(data.roomId).emit('call_reject', true)

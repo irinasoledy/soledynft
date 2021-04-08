@@ -3,11 +3,11 @@ import contentApi from '@/api/contentApi'
 
 export const state = () => ({
     langs: [
-        {id: 1, lang : 'ro', active: 1},
-        {id: 2, lang : 'en', active: 0},
-        {id: 3, lang : 'ru', active: 0}
+        {id: 1, lang : 'ro', active: 1, name: 'RO'},
+        {id: 2, lang : 'en', active: 0, name: 'EN'},
+        {id: 3, lang : 'ru', active: 0, name: 'RU'}
     ],
-    lang: {id: 1, lang : 'ro', active: 1},
+    lang: {id: 1, lang : 'ro', active: 1, name: 'RO'},
     envAPI: {},
     pages: [],
     services: [],

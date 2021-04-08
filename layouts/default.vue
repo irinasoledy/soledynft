@@ -2,7 +2,10 @@
     <v-app id="root">
         <NavComponent></NavComponent>
         <nuxt />
+
         <Chat mode="employee"/>
+        <Video mode="employee"/>
+
         <Footer />
         <v-dialog
             v-model="dialog"
@@ -62,6 +65,7 @@ import { mapActions, mapGetters } from "vuex"
 import NavComponent from '@/components/front/partials/header';
 import Footer from '@/components/front/partials/footer';
 import Chat from '@/components/dialog/chat';
+import Video from '@/components/video/video';
 
 export default {
     data: () => ({
@@ -142,7 +146,8 @@ export default {
     components: {
         NavComponent,
         Footer,
-        Chat
+        Chat,
+        Video
     }
 };
 </script>

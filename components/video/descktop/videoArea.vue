@@ -14,6 +14,7 @@
             </v-icon>
           </v-btn>
         </v-sheet>
+        <!-- {{ interlocuitor }} -->
         <!-- <v-btn dark small @click="handleFullScreen()">
           <v-icon>
             mdi-fullscreen
@@ -24,10 +25,9 @@
       <div class="video-container">
         <Videocall :prevUrl="prevRoute" />
       </div>
-      <video-bottom :prev="prevRoute"></video-bottom>
+      <VideoBottom :interlocuitorUser="interlocuitor"/>
     </div>
-    <!-- <Chat v-show="chatDrawer"></Chat> -->
-    <chat v-show="chatDrawer" />
+    <!-- <chat v-show="chatDrawer" /> -->
   </div>
 
   <MobileChat v-else :prevRoute="prevRoute"></MobileChat>
@@ -37,16 +37,17 @@
 import Videocall from "@/components/chat/video/videoCall";
 import VideoBottom from "@/components/chat/video/video-bottom";
 import MobileChat from "@/components/chat/mobile-chat/conference";
-import chat from "@/components/chat/video/chat";
+// import chat from "@/components/chat/video/chat";
 import Util from "@/util";
 
 export default {
   layout: "conference",
+  props: ['interlocuitor'],
   components: {
     VideoBottom,
     Videocall,
     MobileChat,
-    chat
+    // chat
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
@@ -64,7 +65,6 @@ export default {
   },
   mounted() {
     this.$nuxt.$on("openChat", () => {
-      // console.log('mlmlm');
       this.chatDrawer = !this.chatDrawer;
     });
   },

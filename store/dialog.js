@@ -10,6 +10,17 @@ export const state = () => ({
     interlocutorMessage: null,
     interlocutor: {},
     from: {},
+
+    // video
+    calling: false,
+
+    callUser: {},
+    callFrom: null,
+    videoInterlocuitor: {},
+
+    reject: false,
+    response: false
+
 })
 
 export const mutations = {
@@ -20,6 +31,10 @@ export const mutations = {
         }else{
             state.interlocutorMessage = null
         }
+    },
+    initCall(state, user){
+        state.callUser = null
+        state.callUser = user
     },
     refreshAllMessages(state, data) {
         state.messages = data.messages
@@ -36,7 +51,6 @@ export const mutations = {
         state.unreadMessages = messages
     },
     SOCKET_newMessage(state, data) {
-        console.log(data);
         state.lastMessage = data.message
         state.newMessage = data.message
         if (state.interlocutorMessage === data.from) {
@@ -50,6 +64,46 @@ export const mutations = {
             state.messages = data.messages
         }
     },
+
+    // video
+    SOCKET_incomingCall(state, data) {
+        if (state.calling === false) {
+            state.calling = true
+            state.callFrom = data.from
+            // state.callUser = data.from
+        }
+    },
+
+    SOCKET_cancelCall(state, data) {
+        state.callFrom = null
+        // state.callUser = null
+        state.calling = false
+        state.reject  = true
+    },
+
+    SOCKET_acceptCall(state, data) {
+        state.response = true
+    },
+
+    restartStatuses(state, status) {
+        state.reject = false
+        state.response = false
+        state.calling = status
+    },
+
+    setResponse(state, status) {
+        state.response = status
+    },
+
+    setReject(state, status) {
+        console.log(state.reject, 1);
+        state.reject = status
+        console.log(state.reject, 2);
+    },
+
+    setVideoInterlocuitor(state, user) {
+        state.videoInterlocuitor = user
+    }
 }
 
 export const actions = {
@@ -59,6 +113,30 @@ export const actions = {
 
     setInterlocutor({ commit }, user) {
         commit('setInterlocutor', user)
+    },
+
+    initCall({ commit }, user){
+        commit('initCall', user)
+    },
+
+    restartStatuses({ commit }, status) {
+        commit('restartStatuses', status)
+    },
+
+    confirmCall({ commit }) {
+        console.log('confirm');
+        commit('setResponse', true)
+        commit('setReject', false)
+    },
+
+    cancelCall({ commit }) {
+        console.log('cancel');
+        commit('setResponse', false)
+        commit('setReject', true)
+    },
+
+    setVideoInterlocuitor({ commit }, user) {
+        commit('setVideoInterlocuitor', user)
     },
 
     async createMessage({ commit }, data) {
@@ -87,5 +165,13 @@ export const getters = {
     getUnreadFrom: state => state.unreadFrom,
 
     getInterlocutor: state => state.interlocutor,
-    getFrom: state => state.from
+    getFrom: state => state.from,
+
+    // video
+    getCallUser: state => state.callUser,
+    getCalling: state => state.calling,
+    getCallFrom: state => state.callFrom,
+    getVideoInterlocuitor: state => state.videoInterlocuitor,
+    getReject: state => state.reject,
+    getResponse: state => state.response,
 }
