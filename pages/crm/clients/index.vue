@@ -173,10 +173,16 @@ export default {
         search: '',
     }),
     computed: mapGetters({
+        refreshUserData: 'dialog/getRefreshUserData',
         authUser: 'admin/getAuthUser',
         clients: 'admin/getClients',
         actions: 'admin/getActions'
     }),
+    watch: {
+        async refreshUserData() {
+            this.getClientsList('client')
+        }
+    },
     mounted(){
         this.getClientsList('client')
     },
@@ -187,6 +193,7 @@ export default {
         }),
         deleteItem(item){
             this.removeClient(item._id)
+            this.$socket.emit('refreshUsersData')
             this.$router.push("/crm/clients")
         },
         call(client){

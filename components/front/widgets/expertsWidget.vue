@@ -59,9 +59,15 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
     computed: mapGetters({
+        refreshUserData : 'dialog/getRefreshUserData',
         trans: 'getTranslations',
         experts: 'getExperts'
     }),
+    watch: {
+        async refreshUserData() { // To test this method...
+            await this.getExpertsList()
+        },
+    },
     mounted(){
         this.getExpertsList()
     },

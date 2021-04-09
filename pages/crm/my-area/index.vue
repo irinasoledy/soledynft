@@ -161,7 +161,7 @@ export default {
             clientList: 'admin/getClients'
         }),
         remove(item){
-            console.log(item);
+            this.$socket.emit('refreshUsersData')
             this.removeClient(item._id)
         },
         functionEvents(date) {

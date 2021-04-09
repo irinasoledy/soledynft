@@ -131,6 +131,7 @@ export default {
         submit(){
             if (this.$refs.form.validate()) {
                 this.createEmployee(this.formData).then(() => {
+                    this.$socket.emit('refreshUsersData')
                     this.$router.push("/crm/employees")
                 })
             }

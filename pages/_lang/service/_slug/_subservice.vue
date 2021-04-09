@@ -154,6 +154,10 @@ export default {
         mobileExpertsDisplay: false,
     }),
     watch:{
+        async refreshUserData() { // To test this method...
+            
+            await this.getEmployees()
+        },
         changedEmployee(){ // cerez jopu...
             if (this.changedEmployee !== null) {
                 const employeeList = this.employeeList.find(service => {
@@ -177,6 +181,7 @@ export default {
         }
     },
     computed: mapGetters({
+        refreshUserData : 'dialog/getRefreshUserData',
         services : 'getServices',
         allServices : 'getAllServices',
         language : 'getLanguage',

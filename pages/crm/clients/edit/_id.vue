@@ -149,7 +149,7 @@ export default {
         employees: 'admin/getEmployees',
         clients: 'admin/getClients',
     }),
-    async mounted(){
+    async mounted() {
         this.editedUser = await this.clients.find((client) => client._id === this.$route.params.id)
         if (Object.keys(this.editedUser).length === 0) {
             this.$router.push("/back/my-area")
@@ -160,15 +160,16 @@ export default {
             editUser: 'admin/editUser',
             'editClientAccount': 'admin/editClientAccount',
         }),
-        submitUserInfo(){
+        submitUserInfo() {
             if (this.$refs.info.validate()) {
                 this.editUser(this.editedUser).then(() => {
                     this.snackbar = true
                     this.snackbarText = "The changes have been saved successfully!"
+                    this.$socket.emit('refreshUsersData')
                 })
             }
         },
-        submitUserAccount(){
+        submitUserAccount() {
             if (this.$refs.account.validate()) {
                 this.editedUser.password = this.formData.password
                 this.editUser(this.editedUser).then(() => {

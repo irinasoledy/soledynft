@@ -2,6 +2,8 @@ import userApi from '@/api/userApi'
 import chatApi from '@/api/chatApi'
 
 export const state = () => ({
+    refreshUserData: false,
+
     messages: [],
     unreadMessages: [],
     unreadFrom: [],
@@ -63,6 +65,10 @@ export const mutations = {
         if (state.interlocutorMessage === data.from) {
             state.messages = data.messages
         }
+    },
+
+    SOCKET_refreshUsersData(state) {
+        state.refreshUserData = !state.refreshUserData
     },
 
     // video
@@ -158,6 +164,7 @@ export const actions = {
 }
 
 export const getters = {
+    getRefreshUserData: state => state.refreshUserData,
     getMessages: state => state.messages,
     getLastMessage: state => state.lastMessage,
     getNewMessage: state => state.newMessage,

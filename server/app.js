@@ -8,9 +8,6 @@ const m = (name, text, id) => ({ name, text, id })
 
 io.on('connection', socket => {
 
-
-    //__________________________________________________________________________
-
     // Start: user join socket
     socket.on('userJoin', (id) => {
         socket.join(id)
@@ -38,6 +35,9 @@ io.on('connection', socket => {
         cb()
     })
 
+    socket.on('refreshUsersData', () => {
+        io.emit('refreshUsersData')
+    })
 
 
 

@@ -222,6 +222,7 @@ export default {
                 this.editUser(this.editedUser).then(() => {
                     this.snackbar = true
                     this.snackbarText = "The changes have been saved successfully!"
+                    this.$socket.emit('refreshUsersData')
                 })
             }
         },

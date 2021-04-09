@@ -109,6 +109,7 @@ export default {
             'removeEmployee': 'admin/removeEmployee'
         }),
         deleteItem(item){
+            this.$socket.emit('refreshUsersData')
             this.removeEmployee(item._id)
         }
     }

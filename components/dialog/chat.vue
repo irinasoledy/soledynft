@@ -1,25 +1,18 @@
 <template lang="html">
     <div class="chat-module">
-        <!-- <v-tooltip
-            v-model="previewMessage"
-            top
-            >
-            <template v-slot:activator="{ on, attrs }"> -->
-                <!-- Button -->
-                <button type="button"
-                    @click="toogleMessageDialog"
-                    class="messages-btn transition-swing v-btn v-btn--bottom v-btn--is-elevated v-btn--fab v-btn--fixed v-btn--has-bg v-btn--right v-btn--round theme--light v-size--large primary"
-                    style="z-index: 6; margin-bottom: 0px; transform-origin: center center;">
-                    <span class="v-btn__content">
-                        <span aria-hidden="true" class="v-icon notranslate theme--light">
-                            <v-icon>mdi-chat</v-icon>
-                        </span>
-                    </span>
-                    <small v-if="unreadMessages.length">{{ unreadMessages.length }}</small>
-                </button>
-            <!-- </template>
-            <span>{{ lastMessage.message }}</span>
-        </v-tooltip> -->
+
+        <!-- Button -->
+        <button type="button"
+            @click="toogleMessageDialog"
+            class="messages-btn transition-swing v-btn v-btn--bottom v-btn--is-elevated v-btn--fab v-btn--fixed v-btn--has-bg v-btn--right v-btn--round theme--light v-size--large primary"
+            style="z-index: 6; margin-bottom: 0px; transform-origin: center center;">
+            <span class="v-btn__content">
+                <span aria-hidden="true" class="v-icon notranslate theme--light">
+                    <v-icon>mdi-chat</v-icon>
+                </span>
+            </span>
+            <small v-if="unreadMessages.length">{{ unreadMessages.length }}</small>
+        </button>
 
         <v-dialog
             content-class="chat-dialog-window"
@@ -82,6 +75,7 @@
                 </v-list>
             </v-card>
         </v-dialog>
+
         <v-dialog
             content-class="chat-dialog-window"
             class="messagesDialog"
@@ -103,12 +97,20 @@
                         <v-avatar size="32" v-else dark color="info">
                             C
                         </v-avatar>
-                    <v-toolbar-title class="chat-user-name"><small>{{ interlocutor.name }}</small></v-toolbar-title>
+                    <v-toolbar-title class="chat-user-name">
+                        <small> {{ interlocutor.name }} <i v-if="mode === 'client'">({{ interlocutor.cookies }})</i></small>
+
+                    </v-toolbar-title>
                     <v-spacer></v-spacer>
+
+                    <v-icon v-if="mode === 'client'" @click.prevent="redirectToEditUser(interlocutor)" color="grey" class="text-right">
+                        mdi-pencil
+                    </v-icon>
 
                     <v-icon @click.prevent="callTo(interlocutor)" color="grey" class="text-right">
                         mdi-phone
                     </v-icon>
+
                 </v-toolbar>
                 <chatBox :interlocutor="interlocutor" :mode="mode" />
             </v-card>
@@ -154,11 +156,19 @@ export default {
         $route (to, from) {
             this.addUserAction(to)
         },
+        async refreshUserData() { // To test this method...
+            if (this.dialogList || this.dialogItem) {
+                await crmApi.getUsers(this.mode, response => this.users = response.users)
+                if (this.interlocutor) {
+                    const interlocutor = this.users.find(user => user._id === this.interlocutor._id)
+                    this.setInterlocutor(interlocutor)
+                    this.checkUnreadMessages(interlocutor)
+                }
+            }
+        },
         async dialogList() {
             if (this.dialogItem === false) {
                 await crmApi.getUsers(this.mode, response => this.users = response.users)
-                // this.toogleMessageDialog()
-                // this.setInterlocutor(null)
             }
         },
         dialogItem() {
@@ -169,9 +179,6 @@ export default {
         unreadMessages() {
             this.previewMessage = true
         },
-        messages() {
-
-        },
         newMessage() {
             if (this.dialogItem === false && (this.lastMessage.sender._id !== this.user._id)) {
                 this.setInterlocutor(null)
@@ -179,16 +186,6 @@ export default {
             }
             var audio = new Audio('/message.mp3')
             audio.play()
-        },
-        lastMessage() {
-            // console.log('lastmessage');
-            // const unreadMessages = this.showUnreadByUser(this.interlocutor)
-            //
-            // if (unreadMessages) {
-            //     this.setMessagesAsReaded({ interlocutorId : this.interlocutor._id, userId : this.user._id }).then(data => {
-            //         this.$socket.emit('refreshReadedMessages', { to: this.interlocutor._id, messages : this.messages, from: this.user._id })
-            //     })
-            // }
         },
         call() {
             this.dialog = true
@@ -204,6 +201,7 @@ export default {
         }
     },
     computed: mapGetters({
+        refreshUserData: 'dialog/getRefreshUserData',
         user: 'chat/getUser',
         call : 'call/getCall',
         roomId : 'call/getRoomId',
@@ -223,6 +221,7 @@ export default {
                     this.$socket.emit('userJoin', this.user._id)
                     this.addUserAction(this.$route)
                     this.userJoined = true
+                    this.$socket.emit('refreshUsersData')
                 }
             })
         }
@@ -231,7 +230,7 @@ export default {
         await this.getUnreadedMessages(this.user._id)
     },
     methods: {
-        ...mapActions({
+        ...mapActions ({
             setUserCookies : 'chat/setUserCookies',
             setNullCall : 'call/setNullCall',
             setUser : 'chat/setUser',
@@ -285,6 +284,9 @@ export default {
             this.dialogList = false
             this.dialogItem = false
             this.initCall(user)
+        },
+        redirectToEditUser(user) {
+            this.$router.push(`/crm/clients/edit/${user._id}`)
         },
         addUserAction(route, counter = 0, pages = 1) {
             if (this.mode === 'employee') {
