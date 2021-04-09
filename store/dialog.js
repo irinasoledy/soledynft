@@ -73,6 +73,7 @@ export const mutations = {
 
     // video
     SOCKET_incomingCall(state, data) {
+        console.log('mlvmdfl;');
         if (state.calling === false) {
             state.calling = true
             state.callFrom = data.from
