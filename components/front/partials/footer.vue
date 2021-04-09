@@ -122,13 +122,19 @@ export default {
         ],
         serviceArray: [],
     }),
+    watch: {
+        services() {
+            this.serviceArray = []
+            this.splitToChunks(this.services, 2)
+        }
+    },
     computed: mapGetters({
         pages : 'getPages',
         language: 'getLanguage',
         trans: 'getTranslations',
         services: 'getServices',
     }),
-    mounted(){
+    mounted() {
         this.splitToChunks(this.services, 2)
     },
     methods: {

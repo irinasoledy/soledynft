@@ -63,6 +63,11 @@ export default {
         language : 'getLanguage',
         envAPI : 'getEnvAPI',
     }),
+    watch: {
+        async services() {
+            this.service = await this.services.find((serv) => serv.alias == this.$route.params.slug)
+        }
+    },
     async mounted(){
         this.service = await this.services.find((serv) => serv.alias == this.$route.params.slug)
         if (Object.keys(this.service).length === 0) {

@@ -496,8 +496,20 @@ export default {
     }),
     methods: {
         ...mapActions(['changeLanguage']),
-        changeLang(select){
-            this.changeLanguage(select)
+        changeLang(select) {
+            this.changeLanguage(select).then(data => {
+                const currentLang = '/' + this.language.lang
+                const lastLang = this.$route.params.lang
+                const fullPath = this.$route.fullPath
+                let redirectTo = '/'
+
+                if (lastLang) {
+                    redirectTo = fullPath.replace('/' + lastLang, currentLang);
+                }else {
+                    redirectTo = currentLang;
+                }
+                this.$router.push(redirectTo)
+            })
         },
         closeMenu(url) {
             this.services = false

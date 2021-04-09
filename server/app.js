@@ -26,15 +26,15 @@ io.on('connection', socket => {
     })
 
     socket.on('startCall', data => {
-        socket.broadcast.to(data.to._id).emit('incomingCall', data)
+        socket.broadcast.to(data.to_id).emit('incomingCall', data)
     })
 
     socket.on('endCall', data => {
-        socket.broadcast.to(data.to._id).emit('cancelCall', data)
+        socket.broadcast.to(data.to_id).emit('cancelCall', data)
     })
 
     socket.on('acceptCall', (data, cb) => {
-        socket.broadcast.to(data.to._id).emit('acceptCall', data)
+        socket.broadcast.to(data.to_id).emit('acceptCall', data)
         cb()
     })
 

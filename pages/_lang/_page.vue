@@ -29,6 +29,11 @@ export default {
         description: '',
         page: null
     }),
+    watch: {
+        async pages() {
+            this.page = await this.pages.find(page => page.alias === this.$route.params.page)
+        }
+    },
     async mounted(){
         this.page = await this.pages.find(page => page.alias === this.$route.params.page)
         if (Object.keys(this.page).length === 0) {
