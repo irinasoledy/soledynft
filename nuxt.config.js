@@ -94,11 +94,11 @@ module.exports = {
     extend (config, ctx) {
     }
 },
-// axios: {
-//     baseURL: 'https://back.itmall.digital',
-//     proxyHeaders: false,
-//     credentials: false
-// },
+axios: {
+    baseURL: 'https://docrom.info',
+    proxyHeaders: false,
+    credentials: false
+},
 //
 //   auth: {
 //   strategies: {
@@ -127,13 +127,13 @@ module.exports = {
             local: {
                 endpoints: {
                     login: {
-                        url: '/auth/login',
+                        url: `/auth/login`,
                         method: 'post',
                         propertyName: 'token'
                     },
                     logout: false,
                     user: {
-                        url: '/auth/user',
+                        url: `/auth/user`,
                         method: 'get',
                         propertyName: false
                     },

@@ -36,7 +36,7 @@
                                 @click="facebookLogin()"
                                 >
                                 <v-icon>mdi-facebook</v-icon>
-                                Войти через учетную запись Facebook
+                                Login with Facebook account
                             </v-btn>
                             <v-spacer></v-spacer>
                             <v-btn
@@ -45,8 +45,7 @@
                                 light
                                 >
                                 <v-icon>mdi-google</v-icon>
-                                Войти через учетную запись Google
-
+                                Login with Google account
                             </v-btn>
                         </v-card-text>
                     </v-card-actions>
