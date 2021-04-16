@@ -145,6 +145,7 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
     layout: 'crm',
+    middleware: 'admin',
     data: () => ({
         roomId: false,
         dialog: false,

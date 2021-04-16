@@ -11,6 +11,10 @@ router.get('/api/crm/init', AppController.initCRM)
 
 router.post('/api/crm/login', AuthController.loginCRM)
 
+router.get('/auth/crm/get', AuthController.getCRMUser)
+
+router.post('/api/auth/login', AuthController.login)
+
 // User endpoints
 router.get('/api/users', UserController.getByType)
 

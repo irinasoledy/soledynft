@@ -112,7 +112,7 @@
                     </v-icon>
 
                 </v-toolbar>
-                <chatBox :interlocutor="interlocutor" :mode="mode" />
+                <chatBox :user="user" :interlocutor="interlocutor" :mode="mode" />
             </v-card>
         </v-dialog>
         <v-snackbar
@@ -142,7 +142,7 @@ import crmApi from '@/api/crmApi'
 import chatBox from '@/components/dialog/chat/chatBox'
 
 export default {
-    props: ['mode'],
+    props: ['mode', 'user'],
     data: () => ({
         dialogList: false,
         dialogItem: false,
@@ -202,7 +202,7 @@ export default {
     },
     computed: mapGetters({
         refreshUserData: 'dialog/getRefreshUserData',
-        user: 'chat/getUser',
+        // user: 'chat/getUser',
         call : 'call/getCall',
         roomId : 'call/getRoomId',
 

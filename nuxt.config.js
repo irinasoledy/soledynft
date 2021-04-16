@@ -48,9 +48,11 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
     'nuxt-mobile',
+    'cookie-universal-nuxt',
   ],
   /*
   ** Axios module configuration
@@ -92,9 +94,68 @@ module.exports = {
     extend (config, ctx) {
     }
 },
-axios: {
-    baseURL: 'https://back.itmall.digital',
-    proxyHeaders: false,
-    credentials: false
-  }
+// axios: {
+//     baseURL: 'https://back.itmall.digital',
+//     proxyHeaders: false,
+//     credentials: false
+// },
+//
+//   auth: {
+//   strategies: {
+//     local: {
+//       token: {
+//         property: 'token',
+//         // required: true,
+//         // type: 'Bearer'
+//       },
+//       user: {
+//         property: 'user',
+//         // autoFetch: true
+//       },
+//       endpoints: {
+//         login: { url: '/api/auth/login', method: 'post', propertyName: 'token'},
+//         logout: { url: '/api/auth/logout', method: 'post' },
+//         user: { url: '/api/auth/user', method: 'get' }
+//       }
+//     }
+//   }
+// }
+
+    auth: {
+        localStorage: true,
+        strategies: {
+            local: {
+                endpoints: {
+                    login: {
+                        url: '/auth/login',
+                        method: 'post',
+                        propertyName: 'token'
+                    },
+                    logout: false,
+                    user: {
+                        url: '/auth/user',
+                        method: 'get',
+                        propertyName: false
+                    },
+                },
+            },
+            facebook: {
+                endpoints: {
+                    userInfo: 'https://graph.facebook.com/v6.0/me?fields=id,name,picture{url}'
+                },
+                clientId: '164020048934642',
+                scope: ['public_profile', 'email']
+            },
+            google: {
+                clientId: '...'
+            },
+        },
+        redirect: {
+            login: false,
+            logout: false,
+            callback: false,
+            home: false
+        }
+    },
+
 }

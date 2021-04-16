@@ -1,5 +1,6 @@
 import axios from 'axios'
 import contentApi from '@/api/contentApi'
+import crmApi from '@/api/crmApi'
 
 export const state = () => ({
     langs: [
@@ -21,9 +22,13 @@ export const state = () => ({
     user: {},
     room: false,
     changedEmployee: null,
+    test: false,
 })
 
 export const mutations = {
+    setTest(state, param) {
+        state.test = param
+    },
     setUser(state, user){
         const data = this.$axios.$get('/create-user', user);
         state.user = data

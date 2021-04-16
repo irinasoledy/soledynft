@@ -4,10 +4,10 @@
             <v-card class="profile-edit">
                 <div id="formInfo">
                     <v-card-title  class="d-flex justify-space-between elevation-1">
-                        <h4>Edit Client</h4>
+                        <h4>Edit Client:</h4>
                     </v-card-title>
                     <v-card-title class="pb-0 mt-3">
-                        <h5 class="mb-0">User Info</h5>
+                        <h5 class="mb-0">User Info as guest:</h5>
                     </v-card-title>
                 </div>
                 <v-card-text class="pt-0">
@@ -51,8 +51,21 @@
                         </v-card-title>
                     </v-form>
                 </v-card-text>
+
                 <v-divider class="my-4"></v-divider>
-                <v-card-title class="">
+
+                <div id="formInfo">
+                    <v-card-title class="pb-0 mt-3">
+                        <h5 class="mb-0">Register/Login Client:</h5>
+                    </v-card-title>
+                    <v-card-text>
+                        <!-- <v-btn dark color="primary" @click="registeDialog = true" v-if="!editedUser.logged">Register and Login run time</v-btn> -->
+
+                        <v-btn dark color="primary" v-if="editedUser.logged">Login run time</v-btn>
+                        <v-btn dark color="primary" v-if="editedUser.logged">Logout run time</v-btn>
+                    </v-card-text>
+                </div>
+                <!-- <v-card-title class="">
                     <h5 class="mb-0">Create Auth Account</h5>
                 </v-card-title>
                 <v-card-text>
@@ -81,7 +94,7 @@
                             </v-btn>
                         </v-card-title>
                     </v-form>
-                </v-card-text>
+                </v-card-text> -->
                 <v-divider class="my-4"></v-divider>
             </v-card>
             <v-snackbar
@@ -103,6 +116,31 @@
                 </template>
             </v-snackbar>
 
+        <v-dialog
+            v-model="registeDialog"
+            persistent
+            max-width="450"
+            >
+            <v-card flat>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                    color="green darken-1"
+                    text
+                    @click="registeDialog = false"
+                    >
+                    close
+                    </v-btn>
+                </v-card-actions>
+                <v-card-title>
+                    Register user
+                </v-card-title>
+                <v-card-text>
+                    <register-form :user="editedUser"></register-form>
+                </v-card-text>
+                </v-card>
+        </v-dialog>
+
         </v-container>
     </v-sheet>
 </template>
@@ -110,11 +148,14 @@
 <script>
 
 import { mapGetters, mapActions } from "vuex"
+import RegisterForm from '@/components/front/forms/RegisterForm'
 
 export default {
+    components: {RegisterForm},
     layout: "crm",
     middleware: ['admin'],
     data: () => ({
+        registeDialog: false,
         editedUser: {},
         valid: true,
         snackbar: false,

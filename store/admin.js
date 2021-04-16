@@ -2,6 +2,8 @@ import axios from "axios"
 import crmApi from '@/api/crmApi'
 
 export const state = () => ({
+    token: null,
+    loginMessage: '',
     employees: [],
     clients: [],
     clientActions: [],
@@ -14,11 +16,25 @@ export const state = () => ({
 export const mutations = {
     INIT_APP_DATA(state, data) {
         state.employees = data.employees
-        state.authUser = data.authUser
+        // state.authUser = data.authUser
     },
-    LOGIN(state, data) {
-        state.authUser = data.user
-    },
+    // successLogin(state, data) {
+    //     state.loginMessage = data.message
+    //     state.token = data.token
+    //     // state.authUser = data.user
+    // },
+    // failedLogin(state, data) {
+    //     state.loginMessage = data.message
+    //     state.token = null
+    //     // state.authUser = data.user
+    // },
+    // setToken(state, token) {
+    //     state.token = token
+    // },
+    // setAuthUser(state, user) {
+    //     state.authUser = user
+    // },
+
     ADD_NEW_EMPLOYEE(state, data){
         state.employees.push(data)
     },
@@ -49,7 +65,6 @@ export const mutations = {
         state.clients = data.users
         state.clientActions = data.actions
     },
-
     SET_HISTORY_CLIENT_LIST(state, data){
         state.historyClientsList = data
     },
@@ -60,13 +75,33 @@ export const mutations = {
 
 export const actions = {
 
+    test({ commit }, data) {
+        commit('setAuthUser', data)
+    },
+
+    // authLogin({ commit }, data) {
+    //     commit('LOGIN', data)
+    // },
+
+    // async getUser({ state, commit }, data) {
+    //     commit('setToken', localStorage.getItem('crm-token'))
+    //
+    //     await crmApi.getAuthUser(state.token, response => {
+    //         commit('setAuthUser', response.user)
+    //     })
+    // },
+
     async initApp({ commit }, data) {
         crmApi.init(response => commit('INIT_APP_DATA', response))
     },
 
-    async login({ commit }, data) {
-        await crmApi.login(data, response => commit('LOGIN', response))
-    },
+    // async login({ commit }, data) {
+    //     await crmApi.login(data, response => {
+    //         commit('successLogin', response)
+    //     }, error => {
+    //         commit('failedLogin', error)
+    //     })
+    // },
 
     async getClientsList({ commit }, type) {
         await crmApi.getUsers(type, response => commit('SET_CLIENTS', response))
@@ -115,6 +150,9 @@ export const actions = {
 }
 
 export const getters = {
+    getToken: state => state.token,
+    getLoginMessage: state => state.loginMessage,
+
     getEmployees: state => state.employees,
     getAuthUser: state => state.authUser,
     getStatus: state => state.status,

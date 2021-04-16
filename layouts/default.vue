@@ -3,8 +3,16 @@
         <NavComponent></NavComponent>
         <nuxt />
 
-        <Chat mode="employee"/>
-        <Video mode="employee"/>
+        <div v-if="$auth.loggedIn">
+            <Chat mode="employee" :user="$auth.user"/>
+            <Video mode="employee" :user="$auth.user"/>
+        </div>
+
+        <div v-else>
+            <Chat mode="employee" :user="user"/>
+            <Video mode="employee" :user="user"/>
+            <AuthenticationForm :user="user"/>
+        </div>
 
         <Footer />
         <v-dialog
@@ -28,32 +36,6 @@
                     <h3>Employee calling... </h3>
                     <h4>Room ID  {{ roomId }}</h4>
                 </v-card-text>
-                <!-- <div class="text-center">
-                    <v-btn
-                        @click="rejectCall"
-                        class="mx-2"
-                        fab
-                        dark
-                        large
-                        color="red"
-                        >
-                        <v-icon dark>
-                            mdi-phone-hangup
-                        </v-icon>
-                    </v-btn>
-                    <v-btn
-                        @click="responseCall"
-                        class="mx-2"
-                        fab
-                        dark
-                        large
-                        color="green"
-                        >
-                        <v-icon dark>
-                            mdi-phone
-                        </v-icon>
-                    </v-btn>
-                </div> -->
             </v-card>
         </v-dialog>
     </v-app>
@@ -66,6 +48,7 @@ import NavComponent from '@/components/front/partials/header';
 import Footer from '@/components/front/partials/footer';
 import Chat from '@/components/dialog/chat';
 import Video from '@/components/video/video';
+import AuthenticationForm from '@/components/front/forms/AuthenticationForm.vue';
 
 export default {
     data: () => ({

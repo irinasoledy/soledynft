@@ -33,6 +33,10 @@ const schema = new Schema({
         type: String,
         default: ''
     },
+    logged: {
+        type: Boolean,
+        default: false
+    },
     online: {
         type: Boolean,
         default: false
@@ -42,6 +46,10 @@ const schema = new Schema({
         default: false,
     },
     password: {
+        type: String,
+        default: ''
+    },
+    hash: {
         type: String,
         default: ''
     },

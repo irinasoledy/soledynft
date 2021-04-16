@@ -25,7 +25,7 @@
 import { mapGetters, mapActions } from "vuex"
 
 export default {
-    props: ['interlocutor', 'mode'],
+    props: ['user', 'interlocutor', 'mode'],
     data: () => ({
         text: ""
     }),
@@ -34,7 +34,7 @@ export default {
         employee: 'chat/getEmployee',
         client: 'chat/getClient',
         history: 'chat/getHistory',
-        user: 'chat/getUser',
+        // user: 'chat/getUser',
         lastMessage: 'dialog/getLastMessage'
     }),
     methods: {

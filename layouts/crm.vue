@@ -5,17 +5,13 @@
                 <app-drawer class="app--drawer"></app-drawer>
                 <app-toolbar class="app--toolbar"></app-toolbar>
                 <v-main>
-                    <!-- Page Header -->
-                    <!-- <page-header></page-header> -->
                     <div class="page-wrapper">
                         <v-scroll-y-transition>
                             <nuxt/>
                         </v-scroll-y-transition>
-                        <Chat mode="client"/>
-                        <Video mode="client"/>
-                        
+                        <Chat mode="client" :user="authUser"/>
+                        <Video mode="client" :user="authUser"/>
                     </div>
-                    <!-- App Footer -->
                     <v-footer height="auto" class="white pa-3 app--footer">
                         <span class="caption">&copy; {{ new Date().getFullYear() }}</span>
                         <v-spacer></v-spacer>
@@ -23,7 +19,6 @@
                         <v-icon color="pink" small>mdi-heart</v-icon>
                     </v-footer>
                 </v-main>
-                <!-- Go to top -->
             </v-app>
         </template>
         <v-snackbar
@@ -38,57 +33,6 @@
                 <v-icon>mdi-close</v-icon>
             </v-btn>
         </v-snackbar>
-        <v-dialog
-            v-model="dialog"
-            fullscreen
-            hide-overlay
-            transition="dialog-bottom-transition"
-            scrollable
-            >
-            <v-card
-                color="primary"
-                dark
-                >
-                <v-card-text>
-                    Incoming call from {{ roomId }}...
-                    <v-progress-linear
-                        indeterminate
-                        color="white"
-                        class="mb-0"
-                        ></v-progress-linear>
-                </v-card-text>
-                <v-card-text class="text-center">
-                    <h3>Guest user </h3>
-                    <h4>Room ID  {{ roomId }}</h4>
-                </v-card-text>
-                <div class="text-center">
-                    <v-btn
-                        @click="rejectCall"
-                        class="mx-2"
-                        fab
-                        dark
-                        large
-                        color="red"
-                        >
-                        <v-icon dark>
-                            mdi-phone-hangup
-                        </v-icon>
-                    </v-btn>
-                    <v-btn
-                        @click="responseCall"
-                        class="mx-2"
-                        fab
-                        dark
-                        large
-                        color="green"
-                        >
-                        <v-icon dark>
-                            mdi-phone
-                        </v-icon>
-                    </v-btn>
-                </div>
-            </v-card>
-        </v-dialog>
     </div>
 </template>
 
@@ -107,8 +51,9 @@ export default {
             color: '',
         }
     }),
-    mounted(){
-        this.boot()
+    async mounted() {
+        await this.getUser()
+        await this.boot()
     },
     watch: {
         call(){
@@ -131,7 +76,8 @@ export default {
         }
     },
     computed: mapGetters({
-        authUser: 'admin/getAuthUser',
+        // authUser: 'admin/getAuthUser',
+        authUser: 'authCRM/getUser',
         call : 'call/getCall',
         roomId : 'call/getRoomId',
         user: 'chat/getUser',
@@ -140,6 +86,7 @@ export default {
     }),
     methods: {
         ...mapActions({
+            getUser : 'authCRM/getUser',
             'initApp' : 'admin/initApp',
             'setNullCall' : 'call/setNullCall',
             'setClientAsUser' : 'chat/setClientAsUser',

@@ -8,10 +8,18 @@ export default {
             .catch(err => console.log(err) )
     },
 
-    async login(data, cb){
+    async login(data, cb, cbError){
         await axios.post(`/api/crm/login`, data)
             .then(response => cb(response.data))
-            .catch(err => console.log(err) )
+            .catch(err => cbError(err.response.data))
+    },
+
+    async getAuthUser(token, cb) {
+        await axios.get(`/auth/crm/get`, {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        }).then(response => cb(response.data))
     },
 
     async getUser(id, cb){

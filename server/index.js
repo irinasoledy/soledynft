@@ -9,7 +9,10 @@ const fileUpload = require('express-fileupload')
 const frontRoutes = require('./routes/frontRoutes.js')
 const crmRoutes = require('./routes/crmRoutes.js')
 const chatRoutes = require('./routes/chatRoutes.js')
+const authRoutes = require('./routes/authRoutes.js')
 const store = new session.MemoryStore()
+const passport = require('passport');
+
 
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
@@ -37,6 +40,8 @@ async function start() {
         app.use(cookieParser())
         app.use(fileUpload())
 
+        app.use(passport.initialize())
+
         app.use(session({
             secret: 'cookie_secret',
             name: 'cookie_name',
@@ -49,6 +54,7 @@ async function start() {
         app.use(frontRoutes)
         app.use(crmRoutes)
         app.use(chatRoutes)
+        app.use(authRoutes)
 
         app.use(nuxt.render)
 

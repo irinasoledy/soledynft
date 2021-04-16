@@ -34,8 +34,11 @@
                             required
                         ></v-text-field>
                     </div>
+                    <v-alert type="error" v-if="error">
+                        {{ error.message }}
+                    </v-alert>
                     <div class="col-12">
-                        <v-btn color="info" class="d-block" @click="submit" :disabled="!valid">
+                        <v-btn color="info" class="d-block" @click="login" :disabled="!valid">
                             sign in
                         </v-btn>
                     </div>
@@ -51,17 +54,19 @@ import { mapGetters, mapActions } from "vuex"
 export default {
     layout: 'conference',
     data: () => ({
+        error: null,
         message: '',
         valid: true,
-        login: 'manager10',
+        // login: 'manager10',
+        login: 'email@email.com',
         loginRules: [
             v => !!v || 'Login is required',
-            v => (v && v.length <= 10) || 'login must be less than 10 characters',
+            // v => (v && v.length <= 20) || 'login must be less than 10 characters',
         ],
         password: 'passw',
         passwordRules: [
             v => !!v || 'Password is required',
-            v => (v && v.length <= 10) || 'password must be less than 10 characters',
+            // v => (v && v.length <= 20) || 'password must be less than 10 characters',
         ],
     }),
     computed: mapGetters({
@@ -88,6 +93,22 @@ export default {
                 })
             }
         },
+        async login() {
+            if (this.$refs.form.validate()) {
+                try {
+                    await this.$auth.loginWith('local', {
+                        data: {
+                            email: this.login,
+                            password: this.password,
+                            type: 'employee'
+                        }
+                    })
+                    return this.$router.push('/crm/dashboard')
+                } catch (e) {
+                    this.error = e.response.data.message
+                }
+            }
+        }
     },
 }
 </script>

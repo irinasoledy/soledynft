@@ -7,7 +7,8 @@
             <v-card>
                 <name-card v-bind="user"></name-card>
                 <v-card-actions>
-                    <v-switch :label="userStatus ? 'Online': 'Offline'" v-model="userStatus"></v-switch>
+                    <v-switch :label="userStatus ? 'Online': 'Offline'" v-model="userStatus">
+                    </v-switch>
                 </v-card-actions>
             </v-card>
         </v-flex>
@@ -45,7 +46,7 @@ export default {
             'removeClient' : 'admin/removeClient'
         }),
         ...mapGetters({
-            authUser: 'admin/getAuthUser',
+            authUser: 'authCRM/getUser',
             status: 'admin/getStatus',
             clientList: 'admin/getClients'
         }),

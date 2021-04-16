@@ -19,7 +19,7 @@
                     text
                     >
                     <v-badge color="red" overlap>
-                        <span slot="badge">3</span>
+                        <span slot="badge">1</span>
                         <v-icon medium>mdi-bell</v-icon>
                     </v-badge>
                 </v-btn>
@@ -29,22 +29,22 @@
         <v-menu offset-y origin="center center" :nudge-right="140" :nudge-bottom="10" transition="scale-transition">
             <template v-slot:activator="{on}">
                 <v-btn icon large text v-on="on">
-                    <v-avatar size="30px">
-                        <img src="@/static/avatar/man_4.jpg" alt="Michael Wang"/>
+                    <v-avatar size="30px" v-if="user.avatar">
+                        <img :src="`/avatars/${user.avatar}`" alt="Michael Wang"/>
                     </v-avatar>
                 </v-btn>
             </template>
             <v-list class="pa-0">
-                <v-list-item v-for="(item,index) in items" :to="!item.href ? { name: item.name } : null" :href="item.href"
-                    @click="item.click" ripple="ripple" :disabled="item.disabled" :target="item.target" rel="noopener"
-                    :key="index">
-                    <v-list-item-action v-if="item.icon">
-                        <v-icon>{{ item.icon }}</v-icon>
+
+                <v-list-item ripple="ripple" @click="logout()">
+                    <v-list-item-action>
+                        <v-icon>mdi-logout</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        <v-list-item-title>Logout</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+
             </v-list>
         </v-menu>
     </v-app-bar>
@@ -52,6 +52,7 @@
 
 <script>
 
+import { mapGetters, mapActions } from "vuex"
 import NotificationList from '@/components/crm/widgets/list/NotificationList';
 import Util from '@/util';
 
@@ -60,48 +61,27 @@ export default {
     components: {
         NotificationList
     },
-    data:  function () {
-        return {
-            items: [
-                {
-                    icon: 'mdi-account-circle',
-                    href: '#',
-                    title: 'Profile',
-                    click: (e) => {
-                        console.log(e);
-                    }
-                },
-                {
-                    icon: 'mdi-cog',
-                    href: '#',
-                    title: 'Settings',
-                    click: (e) => {
-                        console.log(e);
-                    }
-                },
-                {
-                    icon: 'mdi-logout',
-                    href: '/crm',
-                    title: 'Logout',
-                }
-            ],
-        }
+    data: function () {
+        return {}
     },
-    computed: {
-        toolbarColor() {
-            return this.$vuetify.options.extra.mainNav;
-        }
-    },
+    computed: mapGetters({
+        user: 'authCRM/getUser',
+    }),
     methods: {
+        ...mapActions({
+            resetAuth: 'authCRM/reset',
+        }),
         toggleDrawer() {
             this.$store.commit('toggleDrawer')
         },
         handleFullScreen() {
             Util.toggleFullScreen();
         },
-        handleLogout() {
-            this.$router.push('/crm');
-        }
+        async logout() {
+            await this.$cookies.remove('crm-token')
+            this.$router.push('/crm')
+            // this.resetAuth()
+        },
     }
 }
 </script>

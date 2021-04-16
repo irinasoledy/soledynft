@@ -10,7 +10,7 @@
                 />
             </div>
             <div class="c-form">
-                <chatForm :interlocutor="interlocutor" :mode="mode"/>
+                <chatForm :user="user" :interlocutor="interlocutor" :mode="mode"/>
             </div>
         </v-card>
     </div>
@@ -23,10 +23,10 @@ import chatForm from "@/components/dialog/chat/chatForm"
 import chatMessages from "@/components/dialog/chat/chatMessages"
 
 export default {
-    props: ['interlocutor', 'mode'],
+    props: ['user', 'interlocutor', 'mode'],
     computed: mapGetters({
            'messages': 'dialog/getMessages',
-           'user': 'chat/getUser',
+           // 'user': 'chat/getUser',
            'room': 'call/getRoomId',
        }),
     watch: {
@@ -42,8 +42,6 @@ export default {
     },
     async mounted(){
         await this.getMessages()
-
-        console.log('here ');
         await this.checkUnreadMessages()
 
         // if (this.user.type === "client") {

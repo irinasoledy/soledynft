@@ -21,36 +21,36 @@
                     </h3>
                 </div>
 
-                    <div class="col-lg-3 col-md-3 side-block-wrap">
-                        <div class="side-block" id="sidebar">
-                            <a v-for="anchor in service.blogs"
-                                :key="anchor.id"
-                                class="v-list-item v-list-item--link theme--light item-anchor"
-                                :href="`#section${anchor.id}`"
-                                @click.prevent="scrollTo(anchor.id)"
-                                role="listitem"
-                                tabindex="0">
-                                {{ anchor.translation.name }}
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-md sections-block">
-                        <div
-                            v-for="anchor in service.blogs"
+                <div class="col-lg-3 col-md-3 side-block-wrap">
+                    <div class="side-block" id="sidebar">
+                        <a v-for="anchor in service.blogs"
                             :key="anchor.id"
-                            :id="`section${anchor.id}`"
-                            class="section-block"
-                            >
-                            <h3 class="title">{{ anchor.translation.name }}</h3>
-                            <div v-html="anchor.translation.body"></div>
-                        </div>
-                        <div class="text-center">
-                            <v-btn color="secondary medium-width" @click="$nuxt.$emit('open-appointment-form')">
-                                {{ trans.Services.liveDiscussionBtn }}
-                            </v-btn>
-                        </div>
+                            class="v-list-item v-list-item--link theme--light item-anchor"
+                            :href="`#section${anchor.id}`"
+                            @click.prevent="scrollTo(anchor.id)"
+                            role="listitem"
+                            tabindex="0">
+                            {{ anchor.translation.name }}
+                        </a>
                     </div>
+                </div>
+
+                <div class="col-md sections-block">
+                    <div
+                        v-for="anchor in service.blogs"
+                        :key="anchor.id"
+                        :id="`section${anchor.id}`"
+                        class="section-block"
+                        >
+                        <h3 class="title">{{ anchor.translation.name }}</h3>
+                        <div v-html="anchor.translation.body"></div>
+                    </div>
+                    <div class="text-center">
+                        <v-btn color="secondary medium-width" @click="$nuxt.$emit('open-appointment-form')">
+                            {{ trans.Services.liveDiscussionBtn }}
+                        </v-btn>
+                    </div>
+                </div>
 
                 <div class="col-lg-3 col-md-4 col-sm-12 experts-wrapp">
                     <div class="expert-one-experts" id="experts">
@@ -63,37 +63,35 @@
                             v-for="(item, i) in employeeList"
                             :key="i"
                             >
-                                <v-img
-                                    :src="`/avatars/${item.employee.avatar}`"
-                                    aspect-ratio="1"
-                                    class="grey lighten-2"
+                            <v-img
+                                :src="`/avatars/${item.employee.avatar}`"
+                                aspect-ratio="1"
+                                class="grey lighten-2"
+                                >
+                            </v-img>
+                            <v-card-title class="title justify-center">
+                                {{item.employee.name}}
+                            </v-card-title>
+                            <v-card-subtitle class="text-center">
+                                {{item.employee.type}}
+                            </v-card-subtitle>
+                            <v-card-actions class="pb-5 justify-center">
+                                <v-btn
+                                    color="secondary"
+                                    @click="openVideoCall(item.employee)"
                                     >
-                                </v-img>
-                                <v-card-title class="title justify-center">
-                                    {{item.employee.name}}
-                                </v-card-title>
-                                <v-card-subtitle class="text-center">
-                                    {{item.employee.type}}
-                                </v-card-subtitle>
-                                <v-card-actions
-                                    class="pb-5 justify-center"
+                                    <v-icon left>mdi-phone</v-icon>
+                                    {{ trans.Team.specialistBtnChat }}
+                                </v-btn>
+                                <v-btn
+                                    color="info"
+                                    @click="openDialog(item.employee)"
                                     >
-                                    <v-btn
-                                        color="secondary"
-                                        @click="openVideoCall(item.employee)"
-                                        >
-                                        <v-icon left>mdi-phone</v-icon>
-                                        {{ trans.Team.specialistBtnChat }}
-                                    </v-btn>
-                                    <v-btn
-                                        color="info"
-                                        @click="openDialog(item.employee)"
-                                        >
-                                        <v-icon left>mdi-chat</v-icon>
-                                        {{ trans.Team.companyMainAddress }}
-                                    </v-btn>
-                                </v-card-actions>
-                            </v-card>
+                                    <v-icon left>mdi-chat</v-icon>
+                                    {{ trans.Team.companyMainAddress }}
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
                     </div>
                 </div>
             </v-row>
@@ -155,7 +153,6 @@ export default {
     }),
     watch:{
         async refreshUserData() { // To test this method...
-            
             await this.getEmployees()
         },
         changedEmployee(){ // cerez jopu...
@@ -195,6 +192,7 @@ export default {
     async mounted(){
         this.service = await this.allServices.find((serv) => serv.alias == this.$route.params.subservice)
         this.getEmployees()
+        // console.log(this.employeeList);
         window.addEventListener('scroll', this.handleScroll);
         this.title = this.service.translation.seo_title
         this.description = this.service.translation.seo_description
@@ -238,7 +236,6 @@ export default {
                     serviceBtn.classList.remove("fixed-btn")
                 }
             }
-
         },
         scrollTo(id){
             const element = document.getElementById('section' + id)

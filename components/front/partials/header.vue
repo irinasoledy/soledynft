@@ -61,8 +61,11 @@
             </v-list>
             <template v-slot:append>
                 <div class="pa-2 mb-4">
-                    <v-btn color="secondary" outlined block>
+                    <!-- <v-btn color="secondary" outlined block>
                         Cabinet
+                    </v-btn> -->
+                    <v-btn color="secondary" outlined block>
+                        sign in
                     </v-btn>
                 </div>
             </template>
@@ -309,47 +312,60 @@
                         <v-col>
                             <v-hover v-slot="{hover}">
                                 <v-list-item color="primary">
-                                    <v-icon dark>mdi-account</v-icon>
-                                    Cabinet
-                                    <v-expand-transition>
-                                        <v-list v-if="hover" width="250" class="transition-fast-in-fast-out cabinetDesk">
-                                            <v-list-item nuxt to="/cabinet/personal-info" exact>
-                                                <v-list-item-subtitle>
-                                                    Cabinet Personal
-                                                </v-list-item-subtitle>
-                                            </v-list-item>
-                                            <v-list-item nuxt to="/cabinet/orders">
-                                                <v-list-item-subtitle>
-                                                    Comenzile Mele
-                                                </v-list-item-subtitle>
-                                            </v-list-item>
-                                            <v-list-item nuxt to="/cabinet/photo">
-                                                <v-list-item-subtitle>
-                                                    Pozele mele
-                                                </v-list-item-subtitle>
-                                            </v-list-item>
-                                            <v-list-item nuxt to="/cabinet/subscribes">
-                                                <v-list-item-subtitle>
-                                                    Eu urmăresc
-                                                </v-list-item-subtitle>
-                                            </v-list-item>
-                                            <v-list-item nuxt to="#">
-                                                <v-list-item-subtitle>
-                                                    Mesaje
-                                                </v-list-item-subtitle>
-                                            </v-list-item>
-                                            <v-list-item nuxt to="#">
-                                                <v-list-item-subtitle>
-                                                    Notificări
-                                                </v-list-item-subtitle>
-                                            </v-list-item>
-                                            <v-list-item nuxt to="#">
-                                                <v-list-item-subtitle>
-                                                    Convorbiri
-                                                </v-list-item-subtitle>
-                                            </v-list-item>
-                                        </v-list>
-                                    </v-expand-transition>
+                                    <!-- sign in -->
+                                    <span class="sign-in-btn" v-if="!$auth.loggedIn" @click="$nuxt.$emit('openLoginDialog')">
+                                        <v-icon dark>mdi-account</v-icon>
+                                        Sign In
+                                    </span>
+
+                                    <span v-else>
+                                        <v-icon dark>mdi-account</v-icon>
+                                        {{ $auth.user.name }}
+                                        <v-expand-transition>
+                                            <v-list v-if="hover" width="250" class="transition-fast-in-fast-out cabinetDesk">
+                                                <v-list-item nuxt to="/cabinet/personal-info" exact>
+                                                    <v-list-item-subtitle>
+                                                        Cabinet Personal
+                                                    </v-list-item-subtitle>
+                                                </v-list-item>
+                                                <v-list-item nuxt to="/cabinet/orders">
+                                                    <v-list-item-subtitle>
+                                                        Comenzile Mele
+                                                    </v-list-item-subtitle>
+                                                </v-list-item>
+                                                <v-list-item nuxt to="/cabinet/photo">
+                                                    <v-list-item-subtitle>
+                                                        Pozele mele
+                                                    </v-list-item-subtitle>
+                                                </v-list-item>
+                                                <v-list-item nuxt to="/cabinet/subscribes">
+                                                    <v-list-item-subtitle>
+                                                        Eu urmăresc
+                                                    </v-list-item-subtitle>
+                                                </v-list-item>
+                                                <v-list-item nuxt to="#">
+                                                    <v-list-item-subtitle>
+                                                        Mesaje
+                                                    </v-list-item-subtitle>
+                                                </v-list-item>
+                                                <v-list-item nuxt to="#">
+                                                    <v-list-item-subtitle>
+                                                        Notificări
+                                                    </v-list-item-subtitle>
+                                                </v-list-item>
+                                                <v-list-item nuxt to="#">
+                                                    <v-list-item-subtitle>
+                                                        Convorbiri
+                                                    </v-list-item-subtitle>
+                                                </v-list-item>
+                                                <v-list-item @click="logout()">
+                                                    <v-list-item-subtitle>
+                                                        Logout
+                                                    </v-list-item-subtitle>
+                                                </v-list-item>
+                                            </v-list>
+                                        </v-expand-transition>
+                                    </span>
                                 </v-list-item>
                             </v-hover>
                         </v-col>
@@ -463,6 +479,7 @@
         >
         <PolicyBar v-if="!user.policy.length"/>
     </v-app-bar>
+
 </v-card>
 </template>
 
@@ -494,8 +511,18 @@ export default {
         trans: 'getTranslations',
         user: 'chat/getUser',
     }),
+    mounted(){
+        console.log(this.$auth);
+        console.log(this.$auth.user);
+    },
     methods: {
         ...mapActions(['changeLanguage']),
+        openLoginDialg () {
+            this.$nuxt.$emit('openLoginDialog');
+        },
+        async logout() {
+            await this.$auth.logout()
+        },
         changeLang(select) {
             this.changeLanguage(select).then(data => {
                 const currentLang = '/' + this.language.lang
@@ -651,6 +678,9 @@ export default {
 }
 .active-link{
     color: #FFF;
+}
+.sign-in-btn{
+    cursor: pointer;
 }
 
 </style>
