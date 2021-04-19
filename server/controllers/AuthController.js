@@ -88,6 +88,16 @@ class AuthController {
             return res.status(400).json({message: `Error AuthController@getCRMUser ${e}`})
         }
     }
+
+    async authFacebook(req, res) {
+        console.log(req);
+        return res.json(req)
+    }
+
+    async authGoogle(req, res) {
+        console.log(req);
+        return res.json(req.query)
+    }
 }
 
 module.exports = function() {

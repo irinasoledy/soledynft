@@ -143,11 +143,17 @@ axios: {
                 endpoints: {
                     userInfo: 'https://graph.facebook.com/v6.0/me?fields=id,name,picture{url}'
                 },
+                responseType: 'code',
                 clientId: '164020048934642',
-                scope: ['public_profile', 'email']
+                scope: ['public_profile', 'email'],
+                redirectUri:'http://localhost:3000/auth/facebook'
             },
             google: {
-                clientId: '...'
+                clientId: '856217470318-mav8rbnldra97o5otgjr91ovukivrj2q.apps.googleusercontent.com',
+                responseType: 'code',
+                clientId: '164020048934642',
+                scope: ['public_profile', 'email'],
+                redirectUri:'http://localhost:3000/auth/google'
             },
         },
         redirect: {

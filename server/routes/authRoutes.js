@@ -23,5 +23,9 @@ AuthController.login)
 
 router.get('/auth/user', AuthController.getUser)
 
+router.get('/auth/facebook', AuthController.authFacebook)
+router.get('/auth/google', AuthController.authGoogle)
+
+
 
 module.exports = router
