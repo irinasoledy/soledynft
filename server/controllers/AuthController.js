@@ -91,7 +91,7 @@ class AuthController {
 
     async authFacebook(req, res) {
         console.log(req);
-        return res.json(req)
+        return res.json({query: req.query, body: req.body, params: req.params})
     }
 
     async authGoogle(req, res) {
