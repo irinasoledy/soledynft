@@ -15,30 +15,46 @@ const generateAccessTokenCRM = (id, login) => {
 class AuthService {
 
     async register(data, type) {
-        const {guestId, name, email, phone, password} = data
+        const {guestId, cookie, name, email, phone, password} = data
         const hashPassword = bcrypt.hashSync(password, 7)
         const ecodedPassord = Buffer.from(password).toString('base64')
-        const cantidate = await User.findOne({email, logged: true})
+        const cantidateAuth = await User.findOne({email, logged: true})
+        const cantidateCookie = await User.findOne({cookies: cookie, logged: true})
 
-        if (cantidate) {
+        if (cantidateAuth) {
             return {statusCode: 400, message: 'The user with such an email already exists'}
         }
 
-        const user = await User.findOneAndUpdate(
-            { _id: guestId },
-            { $set: {name, email, phone, password: hashPassword, hash: ecodedPassord, logged: true}},
-            { new: true }
-        )
-
-        // const user = await new User({name, email, phone, password: hashPassword, type}).save()
+        if (cantidateCookie) {
+            const user = await new User({
+                name,
+                email,
+                phone,
+                cookies: [cookie],
+                password: hashPassword,
+                hash: ecodedPassord,
+                logged: true,
+                type
+            }).save()
+        }else {
+            const user = await User.findOneAndUpdate(
+                { _id: guestId },
+                {
+                    $set: {name, email, phone, password: hashPassword, hash: ecodedPassord, logged: true},
+                    $push: { cookies: cookie }
+                },
+                { new: true }
+            )
+        }
 
         return {statusCode: 200, message: 'Success register!'}
     }
 
     async login(data) {
-        const {email, password} = data
+        const {email, password, cookie} = data
 
         const user = await User.findOne({email, type: 'client'})
+
         if (!user) {
             return {statusCode: 400, message: 'User not exist!'}
         }
@@ -46,6 +62,17 @@ class AuthService {
         if (!validPassword) {
             return {statusCode: 400, message: 'User not exist!'}
         }
+
+        if (!user.cookies.includes(cookie)) {
+            await User.findOneAndUpdate(
+                { _id: user },
+                {
+                    $push: { cookies: cookie }
+                },
+                { new: true }
+            )
+        }
+        
         const token = generateAccessToken(user._id, user.email)
 
         return {statusCode: 200, message: 'Success Sign In', token}

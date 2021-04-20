@@ -2,6 +2,7 @@ const AuthService = require('../services/AuthService')()
 const User = require('../models/user')
 const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 
 
 class AuthController {
@@ -90,8 +91,28 @@ class AuthController {
     }
 
     async authFacebook(req, res) {
-        console.log(req);
-        return res.json({query: req.query, body: req.body, params: req.params})
+        const { provider, code, guest } = req.body
+
+        const findUser = await User.findOne({facebookAuth: code})
+
+        console.log(code, findUser);
+
+        if (!findUser) { // Register
+            const uniqueStr = Date.now().toString(36)
+            const name = `FB ${uniqueStr}`
+            const email = `FB_${uniqueStr}@docrom.info`
+            const password = uniqueStr
+            const hashPassword = bcrypt.hashSync(password, 7)
+            const ecodedPassord = Buffer.from(password).toString('base64')
+            const type = 'client'
+            const cookies = guest.cookies
+
+            const user = await new User({name, email, cookies, facebookAuth: code, password: hashPassword, hash: ecodedPassord, type}).save()
+
+            return res.status(200).json(user)
+        }
+
+        return res.status(200).json(findUser)
     }
 
     async authGoogle(req, res) {

@@ -95,7 +95,8 @@ module.exports = {
     }
 },
 axios: {
-    baseURL: 'https://docrom.info',
+    // baseURL: 'https://docrom.info',
+    baseURL: process.env.DOMAIN,
     proxyHeaders: false,
     credentials: false
 },
@@ -141,7 +142,9 @@ axios: {
             },
             facebook: {
                 endpoints: {
-                    userInfo: 'https://graph.facebook.com/v6.0/me?fields=id,name,picture{url}'
+                    userInfo:
+                      'https://graph.facebook.com/v2.12/me?fields=about,name,picture{url},email'
+                    // userInfo: 'https://graph.facebook.com/v6.0/me?fields=id,name,picture{url}'
                 },
                 responseType: 'code',
                 clientId: '164020048934642',
@@ -154,6 +157,39 @@ axios: {
                 scope: ['public_profile', 'email'],
                 redirectUri:'https://docrom.info/auth/google'
             },
+            social: {
+
+                scheme: 'oauth2',
+                    endpoints: {
+                      authorization: 'https://facebook.com/v2.12/dialog/oauth',
+                      userInfo:
+                        'https://graph.facebook.com/v2.12/me?fields=about,name,picture{url},email'
+                    },
+
+
+     token: {
+       property: 'access_token',
+       type: 'Bearer',
+       maxAge: 1800
+     },
+     refreshToken: {
+       property: 'refresh_token',
+       maxAge: 60 * 60 * 24 * 30
+     },
+     responseType: 'token',
+     grantType: 'authorization_code',
+     accessType: undefined,
+     redirectUri:'http://localhost:3000/auth/facebook',
+     logoutRedirectUri: undefined,
+     clientId: '164020048934642',
+     scope: ['openid', 'profile', 'email'],
+     state: 'UNIQUE_AND_NON_GUESSABLE',
+     codeChallengeMethod: '',
+     responseMode: '',
+     acrValues: '',
+     // autoLogout: false
+   }
+
         },
         redirect: {
             login: false,

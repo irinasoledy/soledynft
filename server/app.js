@@ -39,6 +39,13 @@ io.on('connection', socket => {
         io.emit('refreshUsersData')
     })
 
+    socket.on('remoteLogin', (data, cb) => {
+        console.log('remoteLogin socket');
+        console.log(data.to._id);
+        socket.broadcast.to(data.to._id).emit('remoteLogin', data)
+        cb()
+    })
+
 
 
 

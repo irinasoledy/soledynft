@@ -29,10 +29,11 @@ const schema = new Schema({
         type: String,
         default: ''
     },
-    cookies: {
-        type: String,
-        default: ''
-    },
+    // cookies: {
+    //     type: String,
+    //     default: ''
+    // },
+    cookies: [String],
     logged: {
         type: Boolean,
         default: false
@@ -53,12 +54,24 @@ const schema = new Schema({
         type: String,
         default: ''
     },
+    facebookAuth: {
+        type: String,
+        default: ''
+    },
+    googleAuth: {
+        type: String,
+        default: ''
+    },
     policy: [{
         agreementUsing : Boolean,
         agreementAnalyzing : Boolean,
         agreementContact : Boolean,
         agreementProtect : Boolean,
     }],
+    date : {
+        type: Date,
+        default: Date.now
+    }
 })
 
 module.exports = model('users', schema)

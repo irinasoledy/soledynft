@@ -124,6 +124,11 @@ export default {
             this.error = null
             if (this.$refs.registerForm.validate()) {
                 this.form.guestId = this.user._id
+                this.form.cookie = this.user.cookies[0]
+
+                // console.log(this.user.cookies[0]);
+                // return
+
                 userApi.register(this.form, async response => {
                     try {
                         await this.$auth.loginWith('local', {
@@ -133,7 +138,6 @@ export default {
                                 type: 'client',
                             }
                         })
-
                         this.$nuxt.$emit('clooseLoginDialog')
                     } catch (e) {
                         this.error = e.response.data.message

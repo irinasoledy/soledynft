@@ -1,4 +1,5 @@
 <template>
+    <div>
     <v-dialog
         v-model="showDialog"
         persistent
@@ -54,7 +55,7 @@
                     </div>
                     <v-card flat>
                         <v-card-text>
-                            <login-form button-title="Login" :form.sync="form"></login-form>
+                            <login-form button-title="Login" :form.sync="form" :user="user"></login-form>
                         </v-card-text>
 
                     </v-card>
@@ -94,9 +95,45 @@
                 </v-tab-item>
             </v-tabs-items>
 
-
         </v-card>
     </v-dialog>
+    <v-dialog
+        v-model="remoteLoginDialog"
+        persistent
+        max-width="500"
+        >
+        <v-card>
+        <v-card-title class="headline">
+          Request to login
+        </v-card-title>
+
+        <v-card-text>
+          log in as admin <b>{{ userToLogin.name }}</b>, please confirm it's you......
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="green darken-1"
+            text
+            @click="remoteLoginDialog = false"
+          >
+            discard
+          </v-btn>
+
+          <v-btn
+            color="green darken-1"
+            text
+            @click="continueLogin()"
+          >
+            it's me
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+        </v-card>
+    </v-dialog>
+</div>
 </template>
 
 <script>
@@ -110,6 +147,7 @@ export default {
     components: { LoginForm, RegisterForm },
     data: () => ({
         tab: null,
+        remoteLoginDialog: false,
         showDialog: false,
         form: {
         valid: false,
@@ -125,12 +163,38 @@ export default {
         language: 'getLanguage',
         trans: 'getTranslations',
         user: 'chat/getUser',
+        remoteLogin: 'authFront/getRemoteLogin',
+        userToLogin: 'authFront/getUserToLogin',
+        crmUser: 'authCRM/getUser'
     }),
     watch: {
         finish (newVal) {
             if (newVal) {
                 this.login()
                 this.form.finish = false
+            }
+        },
+        remoteLogin() {
+            if (!this.crmUser) {
+                // console.log(this.remoteLogin);
+                this.remoteLoginDialog = true
+                // try {
+                //     const email = this.userToLogin.email
+                //     const password = atob(this.userToLogin.hash)
+                //
+                //     await this.$auth.loginWith('local', {
+                //         data: {
+                //             email: email,
+                //             password: password,
+                //             type: 'client',
+                //             cookie: this.user.cookies[0]
+                //         }
+                //     })
+                //     this.$nuxt.$emit('clooseLoginDialog')
+                //     this.$socket.emit('userJoin', this.$auth.user._id)
+                // } catch (e) {
+                //     console.log(e);
+                // }
             }
         }
     },
@@ -143,6 +207,26 @@ export default {
         })
     },
     methods: {
+        async continueLogin() {
+            try {
+                const email = this.userToLogin.email
+                const password = atob(this.userToLogin.hash)
+
+                await this.$auth.loginWith('local', {
+                    data: {
+                        email: email,
+                        password: password,
+                        type: 'client',
+                        cookie: this.user.cookies[0]
+                    }
+                })
+                this.$nuxt.$emit('clooseLoginDialog')
+                this.$socket.emit('userJoin', this.$auth.user._id)
+                this.remoteLoginDialog = false
+            } catch (e) {
+                console.log(e);
+            }
+        },
         facebookLogin() {
             this.$auth.loginWith('facebook')
         },

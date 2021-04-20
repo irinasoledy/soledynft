@@ -104,7 +104,7 @@
                     <v-spacer></v-spacer>
 
                     <v-icon v-if="mode === 'client'" @click.prevent="redirectToEditUser(interlocutor)" color="grey" class="text-right">
-                        mdi-pencil
+                        mdi-account
                     </v-icon>
 
                     <v-icon @click.prevent="callTo(interlocutor)" color="grey" class="text-right">

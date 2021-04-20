@@ -32,8 +32,12 @@
 </template>
 
 <script>
+
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
     name: 'LoginForm',
+    props: ['user'],
     data: () => ({
         error: null,
         form: {
@@ -60,10 +64,12 @@ export default {
                         data: {
                             email: this.form.email,
                             password: this.form.password,
-                            type: 'client'
+                            type: 'client',
+                            cookie: this.user.cookies[0]
                         }
                     })
                     this.$nuxt.$emit('clooseLoginDialog')
+                    this.$socket.emit('userJoin', this.$auth.user._id)
                 } catch (e) {
                     this.error = e.response.data.message
                 }

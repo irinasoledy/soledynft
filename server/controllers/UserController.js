@@ -110,7 +110,7 @@ class UserController{
     */
     async setUserCookie(req, res) {
         let cookie = req.cookies.userId
-        let user = await User.findOne({ cookies: cookie }).lean()
+        let user = await User.findOne({ cookies: cookie }).sort({ date: 'desc' }).lean()
 
         if (!req.cookies.userId) {
             // cookie = this.uid()
@@ -121,7 +121,7 @@ class UserController{
                 name: "unknown (guest #"+ cookie + ")",
                 type: 'client',
                 active: true,
-                cookies: cookie,
+                cookies: [cookie],
             }).save()
         }
 
@@ -151,6 +151,23 @@ class UserController{
             })
         } catch (e) {
             return res.status(505).json({message: `Error UserController@updateAvatar ${e}`})
+        }
+    }
+
+    async getUsersByCookies(req, res) {
+        try {
+            const {cookies, userId} = req.body
+            const users = await User.find({ cookies: { "$in" : cookies}, type: 'client'})
+            const authUsers = await User.find({ logged: true, type: 'client'})
+
+            const data = {
+                similars: users,
+                auths: authUsers,
+            }
+
+            return res.status(200).json(data)
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@getUsersByCookies ${e}`})
         }
     }
 }

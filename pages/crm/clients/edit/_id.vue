@@ -1,18 +1,20 @@
 <template>
     <v-sheet class="about-content">
         <v-container grid-list-xl fluid class="grid-desk">
+            <v-flex lg8>
             <v-card class="profile-edit">
                 <div id="formInfo">
                     <v-card-title  class="d-flex justify-space-between elevation-1">
                         <h4>Edit Client:</h4>
                     </v-card-title>
                     <v-card-title class="pb-0 mt-3">
-                        <h5 class="mb-0">User Info as guest:</h5>
+                        <h5 class="mb-0" v-if="!editedUser.logged">User Info as guest:</h5>
+                        <h5 class="mb-0" v-else>User Info:</h5>
                     </v-card-title>
                 </div>
                 <v-card-text class="pt-0">
                     <v-form class="row" ref="info" v-model="valid" lazy-validation>
-                        <div class="col-md-6 col-12">
+                        <div class="col-md-4 col-12">
                             <v-text-field
                                 label="Full name"
                                 v-model="editedUser.name"
@@ -20,56 +22,24 @@
                                 required
                             ></v-text-field>
                         </div>
-                        <div class="col-md-6 col-12">
-                            <v-select
-                                :items="roles"
-                                label="Role"
-                                v-model="editedUser.type"
-                            ></v-select>
-                        </div>
-                        <div class="col-md-6 col-12">
+                        <div class="col-md-4 col-12">
                             <v-text-field
                                 label="Email"
                                 type="email"
                                 v-model="editedUser.email"
+                                :rules="rules.emailRules"
                                 required
                             ></v-text-field>
                         </div>
-                        <div class="col-md-6 col-12">
+                        <div class="col-md-4 col-12">
                             <v-text-field
                                 label="Phone"
                                 type="number"
                                 v-model="editedUser.phone"
+                                :rules="rules.phoneRules"
                                 required
                             ></v-text-field>
                         </div>
-                        <v-divider class="my-4"></v-divider>
-                        <v-card-title class="d-flex justify-center">
-                            <v-btn color="primary" large class="mt-3 mb-3" @click="submitUserInfo">
-                                Save
-                            </v-btn>
-                        </v-card-title>
-                    </v-form>
-                </v-card-text>
-
-                <v-divider class="my-4"></v-divider>
-
-                <div id="formInfo">
-                    <v-card-title class="pb-0 mt-3">
-                        <h5 class="mb-0">Register/Login Client:</h5>
-                    </v-card-title>
-                    <v-card-text>
-                        <!-- <v-btn dark color="primary" @click="registeDialog = true" v-if="!editedUser.logged">Register and Login run time</v-btn> -->
-
-                        <v-btn dark color="primary" v-if="editedUser.logged">Login run time</v-btn>
-                        <v-btn dark color="primary" v-if="editedUser.logged">Logout run time</v-btn>
-                    </v-card-text>
-                </div>
-                <!-- <v-card-title class="">
-                    <h5 class="mb-0">Create Auth Account</h5>
-                </v-card-title>
-                <v-card-text>
-                    <v-form class="row" ref="account" v-model="valid" lazy-validation>
                         <div class="col-md-6 col-12">
                             <v-text-field
                                 label="Password"
@@ -89,14 +59,92 @@
                         </div>
                         <v-divider class="my-4"></v-divider>
                         <v-card-title class="d-flex justify-center">
-                            <v-btn color="primary" large class="mt-3 mb-3" @click="submitUserAccount">
+                            <v-btn color="primary" large class="mt-3 mb-3" @click="submitUserInfo"  v-if="editedUser.logged">
                                 Save
+                            </v-btn>
+                            <v-btn color="primary" large class="mt-3 mb-3" @click="submitUserInfo"  v-else>
+                                Register
                             </v-btn>
                         </v-card-title>
                     </v-form>
-                </v-card-text> -->
+                </v-card-text>
+
                 <v-divider class="my-4"></v-divider>
             </v-card>
+        </v-flex>
+        <v-flex lg4>
+            <v-card class="profile-edit">
+                <div id="formInfo">
+                    <v-card-title  class="d-flex justify-space-between elevation-1">
+                        <h4>Client Info:</h4>
+                    </v-card-title>
+                    <v-card-text class="pt-0">
+                        <v-list-item two-line>
+                            <v-list-item-content>
+                                <v-list-item-title>Status:</v-list-item-title>
+                                <v-list-item-subtitle v-if="editedUser.logged">Auth</v-list-item-subtitle>
+                                <v-list-item-subtitle v-else>Guest</v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item two-line>
+                            <v-list-item-content>
+                                <v-list-item-title>Cookies:</v-list-item-title>
+                                <v-list-item-subtitle v-for="(cookie, index) in editedUser.cookies" :key="index">
+                                    {{ cookie }}
+                                </v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item two-line v-if="editedUser.logged">
+                            <v-list-item-content>
+                                <v-list-item-title>Credentials:</v-list-item-title>
+                                <v-list-item-subtitle>
+                                    Email: {{ editedUser.email }}
+                                </v-list-item-subtitle>
+                                <v-list-item-subtitle>
+                                    <!-- password: {{ showPassword(editedUser.hash) }} -->
+                                    Password: {{ editedUser.hash }}
+                                </v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+
+
+                        <v-list-item two-line>
+                            <v-list-item-content>
+                                <v-list-item-title>Run time actions:</v-list-item-title>
+                                <v-list-item-title><small>Simmilar Cookies:</small></v-list-item-title>
+                                <v-list-item-subtitle v-for="(similarUser, index) in similarUsers" :key="index">
+                                    <div v-if="similarUser.logged">
+                                        <v-btn color="primary" small @click="loginAs(editedUser, similarUser)">Login</v-btn>
+                                        <small>
+                                            <nuxt-link :to="`/crm/clients/edit/${similarUser._id}`">
+                                                as {{ similarUser.name }} (<i>{{ similarUser.email }}</i>)
+                                            </nuxt-link>
+                                        </small>
+                                    </div>
+                                    <div v-else>
+                                        Guest -
+                                        <!-- <v-btn color="primary" small @click="loginAs(editedUser, similarUser)">Login</v-btn> -->
+                                        <small>
+                                            <nuxt-link :to="`/crm/clients/edit/${similarUser._id}`">
+                                                as {{ similarUser.name }}
+                                            </nuxt-link>
+                                        </small>
+                                    </div>
+                                </v-list-item-subtitle>
+                                <v-btn @click="dialog = true">More Auth Users</v-btn>
+                            </v-list-item-content>
+
+                        </v-list-item>
+
+
+                    </v-card-text>
+
+                </div>
+
+            </v-card>
+        </v-flex>
             <v-snackbar
                 v-model="snackbar"
                 :multi-line="true"
@@ -116,30 +164,56 @@
                 </template>
             </v-snackbar>
 
-        <v-dialog
-            v-model="registeDialog"
-            persistent
-            max-width="450"
+            <v-dialog
+                v-model="dialog"
+                max-width="700"
             >
-            <v-card flat>
+                <v-card>
+                    <v-card-title class="headline">
+                        Auth Users:
+                    </v-card-title>
+
+                <v-card-text>
+                    <v-card>
+    <v-card-title>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="authUsers"
+      :search="search"
+    >
+    <template v-slot:[`item`]="{ item, index }">
+        <tr>
+          <td> {{ item.name }}</td>
+          <td>{{ item.email }}</td>
+          <td>
+              <v-btn color="primary" small @click="loginAs(editedUser, item)">Login</v-btn>
+          </td>
+        </tr>
+      </template>
+</v-data-table>
+  </v-card>
+                </v-card-text>
+
                 <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn
+                <v-spacer></v-spacer>
+                <v-btn
                     color="green darken-1"
                     text
-                    @click="registeDialog = false"
+                    @click="dialog = false"
                     >
                     close
-                    </v-btn>
+                </v-btn>
                 </v-card-actions>
-                <v-card-title>
-                    Register user
-                </v-card-title>
-                <v-card-text>
-                    <register-form :user="editedUser"></register-form>
-                </v-card-text>
                 </v-card>
-        </v-dialog>
+            </v-dialog>
 
         </v-container>
     </v-sheet>
@@ -148,6 +222,7 @@
 <script>
 
 import { mapGetters, mapActions } from "vuex"
+import crmApi from '@/api/crmApi'
 import RegisterForm from '@/components/front/forms/RegisterForm'
 
 export default {
@@ -155,11 +230,24 @@ export default {
     layout: "crm",
     middleware: ['admin'],
     data: () => ({
+        search: '',
+        headers: [
+          {
+            text: 'Name',
+            align: 'start',
+            value: 'name',
+          },
+          { text: 'Email', value: 'email' },
+          { text: 'Actions', value: 'actions' },
+        ],
+        dialog: false,
         registeDialog: false,
         editedUser: {},
         valid: true,
         snackbar: false,
         snackbarText: "",
+        similarUsers: [],
+        authUsers: {},
         roles: [
             'client',
         ],
@@ -178,11 +266,11 @@ export default {
             phoneRules: [ v => !!v || 'Phone is required'],
             passwordRules: [
                 v => !!v || 'Password is required',
-                v => (v && v.length >= 5) || 'Password must be more than 5 characters',
+                v => (v && v.length >= 4) || 'Password must be more than 4 characters',
             ],
             confirmPasswordRules: [
                 v => !!v || 'Type confirm password',
-                v => (v && v.length >= 5) || 'Password must be more than 5 characters',
+                v => (v && v.length >= 4) || 'Password must be more than 4 characters',
             ]
         }
     }),
@@ -195,14 +283,45 @@ export default {
         if (Object.keys(this.editedUser).length === 0) {
             this.$router.push("/back/my-area")
         }
+        this.getSimilarUsers()
     },
     methods: {
         ...mapActions({
             editUser: 'admin/editUser',
             'editClientAccount': 'admin/editClientAccount',
         }),
+        async loginAs(user, asUser) {
+            const data = {
+                to: user,
+                toLoginUser: asUser
+            }
+            this.$socket.emit('remoteLogin', data, response => {
+                this.snackbar = true
+                this.snackbarText = `${user.name} was logged! as ${asUser.name}!`
+                setTimeout(() => {
+                    this.$router.push(`/crm/clients/edit/${asUser._id}`)
+                }, 2000 )
+            })
+        },
+        async getSimilarUsers() {
+            const data = {
+                cookies: Object.values(this.editedUser.cookies),
+                userId: this.editedUser._id,
+            }
+            await crmApi.getUsersByCookies(data, response => {
+                this.similarUsers = response.similars
+                this.authUsers = response.auths
+            })
+        },
+        showPassword(password) {
+            const pass = atob(this.editedUser.hash)
+            // return atob(password)
+            return pass
+        },
         submitUserInfo() {
             if (this.$refs.info.validate()) {
+                this.editedUser.logged = true
+                this.editedUser.password = this.formData.password
                 this.editUser(this.editedUser).then(() => {
                     this.snackbar = true
                     this.snackbarText = "The changes have been saved successfully!"

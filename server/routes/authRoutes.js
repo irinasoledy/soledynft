@@ -23,8 +23,8 @@ AuthController.login)
 
 router.get('/auth/user', AuthController.getUser)
 
-router.get('/auth/facebook', AuthController.authFacebook)
-router.get('/auth/google', AuthController.authGoogle)
+router.post('/auth/social/facebook', AuthController.authFacebook)
+router.post('/auth/social/google', AuthController.authGoogle)
 
 
 

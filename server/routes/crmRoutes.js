@@ -32,6 +32,8 @@ router.post('/api/user-services', UserController.assignmentServiceToUser)
 
 router.get('/api/services', UserController.getUserServices)
 
+router.post('/api/users/cookies', UserController.getUsersByCookies)
+
 // History & messages endpoints
 router.get('/api/:id/history', HistoryController.getClientsList)
 

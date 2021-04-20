@@ -2,6 +2,7 @@ const User = require('../models/user')
 const UserAction = require('../models/userAction')
 const Notification = require('../models/notification')
 const EmployeeService = require('../models/employeeService')
+const bcrypt = require('bcryptjs')
 
 
 class UserService{
@@ -45,9 +46,21 @@ class UserService{
     }
 
     async update(userData, id) {
+        const {name, email, phone, password, logged, type} = userData
+        const hashPassword = bcrypt.hashSync(password, 7)
+        const ecodedPassord = Buffer.from(password).toString('base64')
+
         const user = await User.findOneAndUpdate(
             { _id: id },
-            { $set: userData },
+            { $set: {
+                name,
+                email,
+                phone,
+                type,
+                password: hashPassword,
+                hash: ecodedPassord,
+                logged: logged,
+            } },
             { new: true }
         )
 
@@ -73,7 +86,7 @@ class UserService{
 
     async assignmentServiceToUser(services, id){
         await EmployeeService.deleteMany({employee: id})
-        
+
         await services.forEach(async service => {
             let serv = await new EmployeeService({
                 employee: id,
