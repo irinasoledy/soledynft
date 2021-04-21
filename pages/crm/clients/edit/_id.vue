@@ -100,11 +100,11 @@
                             <v-list-item-content>
                                 <v-list-item-title>Credentials:</v-list-item-title>
                                 <v-list-item-subtitle>
-                                    Email: {{ editedUser.email }}
+                                    email: <b>{{ editedUser.email }}</b>
                                 </v-list-item-subtitle>
                                 <v-list-item-subtitle>
-                                    <!-- password: {{ showPassword(editedUser.hash) }} -->
-                                    Password: {{ editedUser.hash }}
+                                    password: <b>{{ showPassword(editedUser.hash) }}</b>
+                                    <!-- Password: {{ editedUser.hash }} -->
                                 </v-list-item-subtitle>
                             </v-list-item-content>
                         </v-list-item>
@@ -315,7 +315,7 @@ export default {
         },
         showPassword(password) {
             const pass = atob(this.editedUser.hash)
-            // return atob(password)
+            return atob(password)
             return pass
         },
         submitUserInfo() {
@@ -323,6 +323,7 @@ export default {
                 this.editedUser.logged = true
                 this.editedUser.password = this.formData.password
                 this.editUser(this.editedUser).then(() => {
+                    this.getSimilarUsers()
                     this.snackbar = true
                     this.snackbarText = "The changes have been saved successfully!"
                     this.$socket.emit('refreshUsersData')

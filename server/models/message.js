@@ -50,6 +50,10 @@ const schema = new Schema({
     date : {
         type: Date,
         default: Date.now
+    },
+    callAlert : {
+        type: Boolean,
+        default: false
     }
 })
 

@@ -60,6 +60,7 @@ export default {
         async login() {
             if (this.$refs.form.validate()) {
                 try {
+                    console.log(this.user, 'kmklmlkm');
                     await this.$auth.loginWith('local', {
                         data: {
                             email: this.form.email,

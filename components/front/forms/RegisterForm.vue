@@ -126,9 +126,6 @@ export default {
                 this.form.guestId = this.user._id
                 this.form.cookie = this.user.cookies[0]
 
-                // console.log(this.user.cookies[0]);
-                // return
-
                 userApi.register(this.form, async response => {
                     try {
                         await this.$auth.loginWith('local', {
@@ -136,6 +133,7 @@ export default {
                                 email: this.form.email,
                                 password: this.form.password,
                                 type: 'client',
+                                cookie: this.user.cookies[0]
                             }
                         })
                         this.$nuxt.$emit('clooseLoginDialog')

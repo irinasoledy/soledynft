@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="wrap">
-            <div class="mes" :class="{ owner }">
+            <div class="mes" :class="{ owner }" v-if="!message.callAlert">
                 <div class="message-date">
                     {{ getTimeAgo(message.date) }}
                 </div>
@@ -16,6 +16,13 @@
                     <b v-else><v-icon>mdi-check-all</v-icon></b>
                 </div> -->
 
+            </div>
+            <div class="call-message" v-else>
+                <p>
+                    <v-icon color="#FFF">mdi-phone</v-icon>
+                    <span>{{ message.message }}</span>
+                    <small>{{ getTimeAgo(message.date) }}</small>
+                </p>
             </div>
         </div>
     </div>
@@ -91,5 +98,27 @@ export default {
         position: absolute;
         right: 5px;
         top: 8px;
+    }
+    .call-message{
+        border-radius: 5px;
+        padding-top: 15px;
+        text-align: center;
+        margin: 10px;
+        background: #34495e;
+        color: #FFF;
+        position: relative;
+    }
+    .call-message span{
+        margin: 0 20px;
+    }
+    .call-message small{
+        position: absolute;
+        font-size: 10px;
+        top: 0;
+    }
+    .call-message i{
+        position: absolute !important;
+        top: 15px;
+        left: 10px;
     }
 </style>

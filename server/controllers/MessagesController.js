@@ -13,6 +13,7 @@ class MessagesController {
                 client: req.body.clientId,
                 sendBy: req.body.sendBy,
                 session: req.body.session,
+                callAlert: req.body.callAlert,
            })
            .save()
            .then(m => m.populate('client').execPopulate())

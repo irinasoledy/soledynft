@@ -37,14 +37,26 @@ class AuthService {
                 type
             }).save()
         }else {
-            const user = await User.findOneAndUpdate(
-                { _id: guestId },
-                {
-                    $set: {name, email, phone, password: hashPassword, hash: ecodedPassord, logged: true},
-                    $push: { cookies: cookie }
-                },
-                { new: true }
-            )
+            let user = await User.findOne({ _id: guestId })
+            if ((cookie !== null) && (!user.cookies.includes(cookie))) {
+                user = await User.findOneAndUpdate(
+                    { _id: guestId },
+                    {
+                        $set: {name, email, phone, password: hashPassword, hash: ecodedPassord, logged: true},
+                        $push: { cookies: cookie }
+                    },
+                    { new: true }
+                )
+            }else{
+                user = await User.findOneAndUpdate(
+                    { _id: guestId },
+                    {
+                        $set: {name, email, phone, password: hashPassword, hash: ecodedPassord, logged: true},
+                    },
+                    { new: true }
+                )
+            }
+
         }
 
         return {statusCode: 200, message: 'Success register!'}
@@ -63,7 +75,7 @@ class AuthService {
             return {statusCode: 400, message: 'User not exist!'}
         }
 
-        if (!user.cookies.includes(cookie)) {
+        if (!user.cookies.includes(cookie) && cookie) {
             await User.findOneAndUpdate(
                 { _id: user },
                 {
@@ -72,7 +84,7 @@ class AuthService {
                 { new: true }
             )
         }
-        
+
         const token = generateAccessToken(user._id, user.email)
 
         return {statusCode: 200, message: 'Success Sign In', token}

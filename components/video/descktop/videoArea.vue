@@ -13,6 +13,9 @@
               mdi-cog
             </v-icon>
           </v-btn>
+          <span class="timer" v-if="timer.seted">
+              {{ timer.minutes }}:{{ timer.seconds }}
+          </span>
         </v-sheet>
         <!-- {{ interlocuitor }} -->
         <!-- <v-btn dark small @click="handleFullScreen()">
@@ -42,7 +45,7 @@ import Util from "@/util";
 
 export default {
   layout: "conference",
-  props: ['interlocuitor'],
+  props: ['interlocuitor', 'timer'],
   components: {
     VideoBottom,
     Videocall,
@@ -97,6 +100,11 @@ export default {
 
   .video-container {
     height: 100%;
+  }
+  .timer{
+        position: absolute;
+        right: 20px;
+        font-size: 18px;
   }
 }
 </style>
