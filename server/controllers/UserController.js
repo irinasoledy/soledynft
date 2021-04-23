@@ -118,7 +118,7 @@ class UserController{
             res.cookie('userId', cookie)
 
             user = await new User({
-                name: "unknown (guest #"+ cookie + ")",
+                name: "unknown",
                 type: 'client',
                 active: true,
                 cookies: [cookie],
