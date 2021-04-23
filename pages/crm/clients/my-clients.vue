@@ -2,7 +2,7 @@
     <main>
         <div id="pageTable">
             <v-container grid-list-xl fluid>
-                <h3>Clients</h3>
+                <h3>My Clients</h3>
                 <v-layout row wrap>
                     <v-flex lg12>
                         <v-card>
@@ -22,7 +22,7 @@
                                 <v-data-table
                                     :headers="tableData.headers"
                                     :search="search"
-                                    :items="actions"
+                                    :items="myClientsActions"
                                     class="elevation-1"
                                     item-key="name"
                                     v-model="selected"
@@ -84,12 +84,6 @@
                                                     >
                                                 </v-badge>
                                             </span>
-                                        </td>
-                                        <td>
-                                            <nuxt-link :to="'/crm/employees/edit/operators/' + item.assigedManager._id" v-if="item.assigedManager" class="user-info-link">
-                                                <small>{{ item.assigedManager.name }}</small>
-                                            </nuxt-link>
-                                            <small v-else>---</small>
                                         </td>
                                         <td>
                                             <span>{{ item.visitsQty }}</span>
@@ -157,6 +151,7 @@ export default {
     layout: 'crm',
     middleware: 'admin',
     data: () => ({
+        myClientsActions: [],
         roomId: false,
         dialog: false,
         tableData: {
@@ -168,7 +163,6 @@ export default {
                 { text: 'Online', value: 'online' },
                 { text: 'Auth', value: 'auth' },
                 { text: 'Policies', value: 'yes' },
-                { text: 'Operator', value: 'operator' },
                 { text: 'Pages', value: 'pages' },
                 { text: 'Duration', value: 'duration' },
                 { text: 'Last visit', value: 'last visit' },
@@ -182,17 +176,25 @@ export default {
     }),
     computed: mapGetters({
         refreshUserData: 'dialog/getRefreshUserData',
-        authUser: 'admin/getAuthUser',
+        authUser: 'authCRM/getUser',
         clients: 'admin/getClients',
         actions: 'admin/getActions'
     }),
     watch: {
         async refreshUserData() {
-            this.getClientsList('client')
+            await this.getClientsList('client')
+            this.notAssignedActions = this.actions.filter(action => {
+                return !action.assigedManager
+            })
         }
     },
     mounted(){
         this.getClientsList('client')
+        this.myClientsActions = this.actions.filter(action => {
+            if (action.assigedManager) {
+                return action.assigedManager._id === this.authUser._id
+            }
+        })
     },
     methods: {
         ...mapActions({
@@ -246,9 +248,6 @@ export default {
     }
     a{
         text-decoration: none;
-    }
-    .actions-td{
-        /* min-width: 150px; */
     }
     .user-info-link{
         text-decoration: underline;

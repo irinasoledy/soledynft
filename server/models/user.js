@@ -22,17 +22,17 @@ const schema = new Schema({
         default: null
     },
     type: {
-        type: String,
+        type: String, // client, admin
         default: ''
+    },
+    role: {
+        type: String, // auth, guest, root, manager, employee
+        default: '',
     },
     gender: {
         type: String,
         default: ''
     },
-    // cookies: {
-    //     type: String,
-    //     default: ''
-    // },
     cookies: [String],
     logged: {
         type: Boolean,
@@ -68,6 +68,18 @@ const schema = new Schema({
         agreementContact : Boolean,
         agreementProtect : Boolean,
     }],
+    lead: {
+        type: Boolean,
+        default: false,
+    },
+    comment: {
+        type: String,
+        default: ''
+    },
+    comunitatePreference: {
+        type: String,
+        default: ''
+    },
     date : {
         type: Date,
         default: Date.now

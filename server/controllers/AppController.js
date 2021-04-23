@@ -6,8 +6,10 @@ class AppController {
 
     async initCRM(req, res){
         try {
-            const employees = await User.find({type : 'employee'})
-            return res.status(200).json({authUser: req.session.user, employees})
+            const employees = await User.find({type : 'employee'}).sort({date: 'desc'})
+            const managers = await User.find({type : 'manager'}).sort({date: 'desc'})
+
+            return res.status(200).json({authUser: req.session.user, employees, managers})
         } catch (e) {
             return res.status(404).json({message: 'error'})
         }

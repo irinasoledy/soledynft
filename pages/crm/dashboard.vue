@@ -2,6 +2,7 @@
     <v-container grid-list-xl justify-center class="text-center">
         <h3>{{ user.name }}</h3>
         <h4>Wellcome to Customer Relationship Management!</h4>
+        <h4>Logged as <i>{{ user.type }}</i> user</h4>
 
         <v-flex lg3 v-if="user.type === 'employee'">
             <v-card>
@@ -12,7 +13,6 @@
                 </v-card-actions>
             </v-card>
         </v-flex>
-
     </v-container>
 </template>
 

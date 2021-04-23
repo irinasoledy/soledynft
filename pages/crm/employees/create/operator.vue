@@ -1,30 +1,22 @@
 <template>
     <v-sheet class="about-content">
         <v-container>
-            <v-card class="profile-edit">
-                <div id="formInfo">
-                    <v-card-title  class="d-flex justify-space-between elevation-1">
-                        <h4>Create new employee</h4>
-                        <v-btn color="primary" @click="submit">
-                            Save All
-                        </v-btn>
-                    </v-card-title>
-                    <v-card-title class="pb-0 mt-3">
-                        <h5 class="mb-0">User Info</h5>
-                    </v-card-title>
-                </div>
-                <v-form ref="form" v-model="valid" lazy-validation>
-                <v-card-text class="pt-0">
-                    <div class="row">
-                        <div class="col-md-4 col-12">
+            <v-row justify="center">
+                <v-col class="col-md-6" justify="center">
+                    <v-card>
+                        <div id="formInfo">
+                            <v-card-title  class="d-flex justify-space-between elevation-1">
+                                <h5>Create new operator</h5>
+                            </v-card-title>
+                        </div>
+                        <v-form ref="form" v-model="valid" lazy-validation>
+                        <v-card-text class="pt-0">
                             <v-text-field
                                 label="Full name"
                                 v-model="formData.name"
                                 :rules="rules.nameRules"
                                 required
                             ></v-text-field>
-                        </div>
-                        <div class="col-md-4 col-12">
                             <v-text-field
                                 label="Email"
                                 type="email"
@@ -32,8 +24,6 @@
                                 :rules="rules.emailRules"
                                 required
                             ></v-text-field>
-                        </div>
-                        <div class="col-md-4 col-12">
                             <v-text-field
                                 label="Phone"
                                 type="number"
@@ -41,50 +31,33 @@
                                 :rules="rules.phoneRules"
                                 required
                             ></v-text-field>
-                        </div>
-                    </div>
-                </v-card-text>
-                <v-divider class="my-4"></v-divider>
-                <v-card-title class="">
-                    <h5 class="mb-0">Account Data</h5>
-                </v-card-title>
-                <v-card-text>
-                    <div class="row">
-                        <div class="col-md-4 col-12">
                             <v-text-field
                                 label="Login"
                                 v-model="formData.login"
                                 :rules="rules.loginRules"
                                 required
                             ></v-text-field>
-                        </div>
-                        <div class="col-md-4 col-12">
                             <v-text-field
                                 label="Password"
                                 type="password"
                                 v-model="formData.password"
                                 :rules="rules.passwordRules"
-                                ></v-text-field>
-                        </div>
-                        <div class="col-md-4 col-12">
+                            ></v-text-field>
                             <v-text-field
-                                label="Repeat Password"
+                                label="Confirm Password"
                                 type="password"
                                 v-model="formData.confirmPassword"
                                 :rules="rules.confirmPasswordRules"
                                 required
-                                ></v-text-field>
-                        </div>
-                    </div>
-                </v-card-text>
-                <v-divider class="my-4"></v-divider>
-                <v-card-title class="d-flex justify-center">
-                    <v-btn color="primary" large class="mt-3 mb-3" @click="submit">
-                        Save All
-                    </v-btn>
-                </v-card-title>
-            </v-form>
-            </v-card>
+                            ></v-text-field>
+                            <v-btn color="primary" large class="mt-3 mb-3" @click="submit">
+                                Save & Edit
+                            </v-btn>
+                        </v-card-text>
+                    </v-form>
+                    </v-card>
+                </v-col>
+            </v-row>
         </v-container>
     </v-sheet>
 </template>
@@ -96,7 +69,8 @@ import { mapGetters, mapActions } from "vuex"
 export default {
     layout: "crm",
     middleware: ['admin'],
-    data: () => ({
+    data(){
+        return {
         valid: true,
         roles: [
             'employee',
@@ -115,24 +89,48 @@ export default {
         rules: {
             loginRules: [
                 v => !!v || 'Login is required',
-                v => (v && v.length <= 10) || 'login must be less than 10 characters',
+                v => (v && v.length <= 10) || 'Login must be less than 10 characters',
             ],
-            nameRules: [ v => !!v || 'Name is required'],
-            emailRules: [ v => !!v || 'Email is required'],
-            phoneRules: [ v => !!v || 'Phone is required'],
-            passwordRules: [v => !!v || 'Password is required'],
-            confirmPasswordRules: [v => !!v || 'Type confirm password']
+            nameRules: [
+                v => !!v || 'Name is required',
+            ],
+            emailRules: [
+                v => !!v || 'E-mail is required',
+                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+            ],
+            phoneRules: [
+                v => !!v || 'Phone is required',
+            ],
+            passwordRules: [
+                v => !!v || 'Password is required',
+            ],
+            confirmPasswordRules: [
+                (value) => !!value || 'Type confirm password',
+                (value) =>
+                value === this.formData.password || 'The password confirmation does not match.',
+            ],
+            agreementRules: [
+                (value) => !!value || 'At least one item should be selected',
+            ]
         }
+    }},
+    mounted() {
+        this.formData.role = this.$route.query.type
+    },
+    computed: mapGetters({
+        employees: 'admin/getEmployees'
     }),
     methods: {
         ...mapActions({
-            'createEmployee': 'admin/createEmployee',
+            createEmployee: 'admin/createEmployee'
         }),
         submit(){
+            this.formData.role = 'employee'
             if (this.$refs.form.validate()) {
-                this.createEmployee(this.formData).then(() => {
+                this.createEmployee(this.formData).then(response => {
+                    const lastEmployee = this.employees[0]
                     this.$socket.emit('refreshUsersData')
-                    this.$router.push("/crm/employees")
+                    this.$router.push(`/crm/employees/edit/operators/${lastEmployee._id}`)
                 })
             }
         }

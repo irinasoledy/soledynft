@@ -3,8 +3,19 @@ const userAction = require('../models/userAction')
 
 
 class ActionService {
-    async addUser(payload)
-    {
+
+    async assignClientToEmployee(clientId, employeeId){
+        const action = await userAction.findOne({userId: clientId})
+
+        if (!action.assigedManager) {
+            await userAction.findOneAndUpdate(
+               { _id: action._id }, {$set: {
+                   assigedManager: employeeId
+               }})
+        }
+    }
+
+    async addUser(payload){
         const findAction = await userAction.findOne({userId: payload.userId})
         let action = null
 
@@ -42,7 +53,7 @@ class ActionService {
     {
         this.checkUsersStatus()
 
-        const actions = await userAction.find().populate('userId')
+        const actions = await userAction.find().sort({lastVisit: 'desc'}).populate('userId').populate('assigedManager')
         return actions
     }
 

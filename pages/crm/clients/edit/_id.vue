@@ -89,6 +89,14 @@
 
                         <v-list-item two-line>
                             <v-list-item-content>
+                                <v-list-item-title>Lead:</v-list-item-title>
+                                <v-list-item-subtitle v-if="editedUser.lead">Yes</v-list-item-subtitle>
+                                <v-list-item-subtitle v-else>Guest</v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item two-line>
+                            <v-list-item-content>
                                 <v-list-item-title>Cookies:</v-list-item-title>
                                 <v-list-item-subtitle v-for="(cookie, index) in editedUser.cookies" :key="index">
                                     {{ cookie }}

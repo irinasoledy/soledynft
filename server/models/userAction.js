@@ -38,7 +38,11 @@ const schema = new Schema({
     currentPage: {
         type: String,
         required: true
-    }
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    },
 })
 
 module.exports = model('userActions', schema)

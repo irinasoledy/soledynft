@@ -97,16 +97,16 @@ class AuthService {
     async loginCRM(data) {
         const {login, password} = data
 
-        const user = await User.findOne({login, type: 'employee'})
+        const user = await User.findOne({login, type: { $ne: 'client' }})
 
         if (!user) {
-            return {statusCode: 400, message: 'User not exist!'}
+            return {statusCode: 400, message: 'User not exist login!'}
         }
 
         const validPassword = bcrypt.compareSync(password, user.password)
 
         if (!validPassword) {
-            return {statusCode: 400, message: 'User not exist!'}
+            return {statusCode: 400, message: 'User not exist pass!'}
         }
 
         const token = generateAccessTokenCRM(user._id, user.login)

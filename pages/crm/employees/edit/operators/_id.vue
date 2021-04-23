@@ -4,8 +4,13 @@
             <v-flex lg8>
                 <v-card class="profile-edit">
                     <div id="formInfo">
-                        <v-card-title  class="d-flex justify-space-between elevation-1">
-                            <h4>Edit employee</h4>
+                        <v-card-title  class="d-flex justify-space-between elevation-1 title-relative">
+                                <h4>Edit employee</h4>
+                            <div class="credentials">
+                                <b>Credentials:</b> <br>
+                                Login: <b>{{ editedUser.login }}</b> <br>
+                                Password: <b>{{ showPass }}</b>
+                            </div>
                         </v-card-title>
                         <v-card-title class="pb-0 mt-3">
                             <h5 class="mb-0">User Info</h5>
@@ -23,10 +28,15 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <v-select
-                                    :items="roles"
-                                    label="Role"
-                                    v-model="editedUser.type"
-                                ></v-select>
+                                    :items="positions"
+                                    name="category"
+                                    label="Position"
+                                    v-model="editedUser.position"
+                                    >
+                                    <template v-slot:item="{item}">
+                                        {{ item }}
+                                    </template>
+                                </v-select>
                             </div>
                             <div class="col-md-6 col-12">
                                 <v-text-field
@@ -70,8 +80,6 @@
                                       <span v-else class="white--text headline">E</span>
                                     </v-avatar>
                             </div>
-
-
                         </v-form>
                     </v-card-text>
                     <v-divider class="my-4"></v-divider>
@@ -151,16 +159,22 @@ import axios from "axios"
 export default {
     layout: "crm",
     middleware: ['admin'],
-    data: () => ({
+    data: () =>  ({
         selectedFile: '',
         editedUser: {},
         valid: true,
         snackbar: false,
         snackbarText: "",
+        showPass: "",
         roles: [
             'employee',
-            'redactor',
+            'manager',
             'root'
+        ],
+        positions: [
+            'Team.employeePositionExpertCetatenie',
+            'Team.employeePositionExpertActeSoferi',
+            'Team.employeePositionExpertActeCivileIdentitate',
         ],
         formData: {
             login: '',
@@ -177,22 +191,24 @@ export default {
             phoneRules: [ v => !!v || 'Phone is required'],
             passwordRules: [
                 v => !!v || 'Password is required',
-                v => (v && v.length >= 5) || 'Password must be more than 5 characters',
+                v => (v && v.length >= 4) || 'Password must be more than 4 characters',
             ],
             confirmPasswordRules: [
                 v => !!v || 'Type confirm password',
-                v => (v && v.length >= 5) || 'Password must be more than 5 characters',
+                v => (v && v.length >= 4) || 'Password must be more than 4 characters',
             ]
         }
     }),
     computed: mapGetters({
-        employees: 'admin/getEmployees'
+        employees: 'admin/getEmployees',
+        trans: 'getTranslations',
     }),
     async mounted(){
         this.editedUser = await this.employees.find((employee) => employee._id === this.$route.params.id)
         if (Object.keys(this.editedUser).length === 0) {
             this.$router.push("/back/employees")
         }
+        this.showPassword(this.editedUser.hash, true)
     },
     methods: {
         ...mapActions({
@@ -203,6 +219,20 @@ export default {
             editUserAvatar: 'admin/editUserAvatar',
             initApp: 'admin/initApp'
         }),
+        showPassword(pass, hashed = false) {
+            if (hashed) {
+                try {
+                    return this.showPass = atob(pass)
+                } catch (e) {
+                    return this.showPass = 'password is unkown'
+                }
+            }
+            return this.showPass = pass
+        },
+        getTransValue(value) {
+            return value
+            // return this.trans.$value
+        },
         onFileChange(e) {
             const selectedFile = e.target.files[0]
             this.selectedFile = selectedFile;
@@ -232,6 +262,7 @@ export default {
                 this.editUser(this.editedUser).then(() => {
                     this.snackbar = true
                     this.snackbarText = "The changes have been saved successfully!"
+                    this.showPassword(this.editedUser.password)
                 })
             }
         }
@@ -367,5 +398,15 @@ export default {
     .avatar-relative {
       order: 2;
     }
+  }
+  .title-relative{
+    position: relative;
+  }
+  .credentials{
+      position: absolute;
+      font-size: 12px;
+      right: 10px;
+      line-height: 1.5;
+      // text-align: right;
   }
 </style>

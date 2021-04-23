@@ -22,7 +22,7 @@
                                 <v-data-table
                                     :headers="tableData.headers"
                                     :search="search"
-                                    :items="actions"
+                                    :items="notAssignedActions"
                                     class="elevation-1"
                                     item-key="name"
                                     v-model="selected"
@@ -63,7 +63,7 @@
                                             <v-icon color="secondary" v-else>mdi-minus</v-icon>
                                         </td>
                                         <td class="text-center">
-                                            <span v-if="item.userId.policy.length">
+                                            <span v-if="item.userId.policy.length !== 0">
                                                 <v-badge
                                                     v-if="item.userId.policy[0].agreementContact"
                                                     value="2"
@@ -73,23 +73,17 @@
                                                 <v-badge
                                                     v-else
                                                     value="2"
-                                                    color="red"
+                                                    color="#c0392b"
                                                     >
                                                 </v-badge>
                                             </span>
                                             <span v-else>
                                                 <v-badge
                                                     value="2"
-                                                    color="silver"
+                                                    color="#AAA"
                                                     >
                                                 </v-badge>
                                             </span>
-                                        </td>
-                                        <td>
-                                            <nuxt-link :to="'/crm/employees/edit/operators/' + item.assigedManager._id" v-if="item.assigedManager" class="user-info-link">
-                                                <small>{{ item.assigedManager.name }}</small>
-                                            </nuxt-link>
-                                            <small v-else>---</small>
                                         </td>
                                         <td>
                                             <span>{{ item.visitsQty }}</span>
@@ -157,6 +151,7 @@ export default {
     layout: 'crm',
     middleware: 'admin',
     data: () => ({
+        notAssignedActions: [],
         roomId: false,
         dialog: false,
         tableData: {
@@ -168,7 +163,6 @@ export default {
                 { text: 'Online', value: 'online' },
                 { text: 'Auth', value: 'auth' },
                 { text: 'Policies', value: 'yes' },
-                { text: 'Operator', value: 'operator' },
                 { text: 'Pages', value: 'pages' },
                 { text: 'Duration', value: 'duration' },
                 { text: 'Last visit', value: 'last visit' },
@@ -188,11 +182,17 @@ export default {
     }),
     watch: {
         async refreshUserData() {
-            this.getClientsList('client')
+            await this.getClientsList('client')
+            this.notAssignedActions = this.actions.filter(action => {
+                return !action.assigedManager
+            })
         }
     },
-    mounted(){
-        this.getClientsList('client')
+    async mounted(){
+        await this.getClientsList('client')
+        this.notAssignedActions = this.actions.filter(action => {
+            return !action.assigedManager
+        })
     },
     methods: {
         ...mapActions({

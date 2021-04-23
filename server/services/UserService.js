@@ -4,7 +4,6 @@ const Notification = require('../models/notification')
 const EmployeeService = require('../models/employeeService')
 const bcrypt = require('bcryptjs')
 
-
 class UserService{
 
     async getUsers(userData, type) {
@@ -19,7 +18,7 @@ class UserService{
     }
 
     async getUsersActions() {
-        const actions = await UserAction.find().sort({date: -1}).populate('userId')
+        const actions = await UserAction.find().sort({lastVisit: 'desc'}).populate('userId').populate('assigedManager')
 
         return actions
     }
@@ -27,8 +26,10 @@ class UserService{
     async create(userData) {
         const {name, email, phone, login, password, role} = userData
         let user = await User.findOne({email: email})
+        const hashPassword = bcrypt.hashSync(password, 7)
+        const ecodedPassord = Buffer.from(password).toString('base64')
 
-        if (user) {
+        if (user && user.email) {
             return false
         }
 
@@ -37,7 +38,8 @@ class UserService{
             email: email,
             phone: phone,
             login: login,
-            password: password,
+            password: hashPassword,
+            hash: ecodedPassord,
             type: role,
             active: false,
         }).save()
@@ -46,13 +48,14 @@ class UserService{
     }
 
     async update(userData, id) {
-        const {name, email, phone, password, logged, type} = userData
+        const {name, email, phone, password, logged, type, login} = userData
         const hashPassword = bcrypt.hashSync(password, 7)
         const ecodedPassord = Buffer.from(password).toString('base64')
 
         const user = await User.findOneAndUpdate(
             { _id: id },
             { $set: {
+                login,
                 name,
                 email,
                 phone,

@@ -15,4 +15,7 @@ router.get('/api/experts-by-service', UserController.getEmployeeByService)
 
 router.get('/init-user-cookie', UserController.setUserCookie)
 
+router.post('/api/user/book', UserController.bookUser)
+
+
 module.exports = router

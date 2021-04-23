@@ -5,6 +5,7 @@ export const state = () => ({
     token: null,
     loginMessage: '',
     employees: [],
+    managers: [],
     clients: [],
     clientActions: [],
     authUser: false,
@@ -16,6 +17,7 @@ export const state = () => ({
 export const mutations = {
     INIT_APP_DATA(state, data) {
         state.employees = data.employees
+        state.managers = data.managers
         // state.authUser = data.authUser
     },
     // successLogin(state, data) {
@@ -36,7 +38,7 @@ export const mutations = {
     // },
 
     ADD_NEW_EMPLOYEE(state, data){
-        state.employees.push(data)
+        state.employees.unshift(data)
     },
     REMOVE_EMPLOYEE(state, id){
         state.employees = state.employees.filter(function(item) {
@@ -44,7 +46,6 @@ export const mutations = {
         })
     },
     REMOVE_CLIENT(state, id){
-        console.log(id, state.clientActions);
         state.clients = state.clients.filter(function(item) {
             return item._id !== id
         })
@@ -154,6 +155,8 @@ export const getters = {
     getLoginMessage: state => state.loginMessage,
 
     getEmployees: state => state.employees,
+    getManagers: state => state.managers,
+
     getAuthUser: state => state.authUser,
     getStatus: state => state.status,
     getNotifications: state => state.notifications,

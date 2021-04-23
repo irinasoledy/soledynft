@@ -2,15 +2,15 @@
     <div id="appRoot" v-cloak>
         <template>
             <v-app id="inspire" class="app">
-                <app-drawer class="app--drawer"></app-drawer>
-                <app-toolbar class="app--toolbar"></app-toolbar>
+                <app-drawer class="app--drawer" :user="authUser"></app-drawer>
+                <app-toolbar class="app--toolbar" :authUser="authUser"></app-toolbar>
                 <v-main>
                     <div class="page-wrapper">
                         <v-scroll-y-transition>
                             <nuxt/>
                         </v-scroll-y-transition>
-                        <Chat mode="client" :user="authUser"/>
-                        <Video mode="client" :user="authUser"/>
+                        <Chat mode="client" :user="authUser" v-if="authUser.type === 'employee'"/>
+                        <Video mode="client" :user="authUser" v-if="authUser.type === 'employee'"/>
                     </div>
                     <v-footer height="auto" class="white pa-3 app--footer">
                         <span class="caption">&copy; {{ new Date().getFullYear() }}</span>
@@ -76,7 +76,6 @@ export default {
         }
     },
     computed: mapGetters({
-        // authUser: 'admin/getAuthUser',
         authUser: 'authCRM/getUser',
         call : 'call/getCall',
         roomId : 'call/getRoomId',

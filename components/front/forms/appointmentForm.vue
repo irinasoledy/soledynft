@@ -4,95 +4,109 @@
             <v-card-title>
                 <span class="headline">Programează-te</span>
             </v-card-title>
-            <v-card-text>
+            <v-card-text v-if="!success">
                 <v-container>
-                    <v-row>
-                        <v-col
-                            cols="12"
-                            sm="12"
-                            md="12"
-                            >
-                            <v-text-field
-                                label="Nume*"
-                                required
-                                hint="Introduceți numele"
-                                ></v-text-field>
-                        </v-col>
-                        <v-col
-                            cols="12"
-                            sm="12"
-                            md="12"
-                            >
-                            <v-text-field
-                                label="Email*"
-                                required
-                                hint="Introduceți email"
-                                ></v-text-field>
-                        </v-col>
-                        <v-col
-                            cols="12"
-                            sm="12"
-                            md="12"
-                            >
-                            <v-text-field
-                                label="Numărul de telefon*"
-                                required
-                                hint="Introduceți un număr de telefon valid"
-                                ></v-text-field>
-                        </v-col>
-                        <v-col
-                        v-if="items.length"
-                            cols="12"
-                            sm="12"
-                            md="12"
-                            >
-                            <v-select
-                                :items="items"
-                                item-text="name"
-                                :menu-props="{ top: true, offsetY: true }"
-                                :label="trans.ContactsAndForms.labelCommunicationMethodName"
+                    <v-form
+                        ref="form"
+                        v-model="form.valid"
+                        lazy-validation
+                        >
+                        <v-text-field
+                            label="Nume*"
+                            v-model="form.name"
+                            :rules="nameRules"
+                            ></v-text-field>
+                        <v-text-field
+                            label="Email*"
+                            v-model="form.email"
+                            :rules="emailRules"
+                            ></v-text-field>
+                        <v-text-field
+                            type="number"
+                            label="Numărul de telefon*"
+                            v-model="form.phone"
+                            :rules="phoneRules"
+                            ></v-text-field>
+                        <v-select
+                            v-if="items.length"
+                            :items="items"
+                            item-text="name"
+                            :menu-props="{ top: true, offsetY: true }"
+                            :label="trans.ContactsAndForms.labelCommunicationMethodName"
+                            v-model="form.comunitatePreference"
                             ></v-select>
-                        </v-col>
-                    </v-row>
+                        <v-textarea
+                            label="Cometariu"
+                            v-model="form.comment"
+                        ></v-textarea>
+                        <small>*indicates required field</small>
+                        <v-btn
+                            :disabled="!form.valid"
+                            color="primary lighten-1"
+                            class="mr-4 full-width"
+                            @click="submit()"
+                            >
+                            Programeaza-te
+                        </v-btn>
+                    </v-form>
                 </v-container>
-                <small>*indicates required field</small>
             </v-card-text>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                    color="primary"
+            <v-card-text v-else>
+                <v-alert
+                    dense
                     text
-                    @click.native="dialog = false"
+                    type="success"
                     >
-                    Close
-                </v-btn>
-                <v-btn
-                    color="primary"
-                    text
-                    @click.native="dialog = false"
-                    >
-                    Send
-                </v-btn>
-            </v-card-actions>
+                    Datele au fost transmise cu succes!!!
+                </v-alert>
+            </v-card-text>
         </v-card>
     </v-dialog>
 </template>
 
 <script>
+
 import { mapActions, mapGetters } from 'vuex';
+import userApi from '@/api/userApi'
 
 export default {
     data: () => ({
         dialog: false,
         name: '',
         items: [],
+        success: false,
+        form: {
+            valid: false,
+            name: '',
+            email: '',
+            phone: '',
+            comunitatePreference: '',
+            comment: '',
+        },
+        nameRules: [
+            v => !!v || 'Name is required',
+        ],
+        emailRules: [
+            v => !!v || 'E-mail is required',
+            v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+        ],
+        phoneRules: [
+            v => !!v || 'Phone is required',
+        ]
     }),
     computed: mapGetters({
         trans: 'getTranslations',
+        user: 'chat/getUser',
     }),
     methods: {
         submit () {
-            this.$refs.observer.validate()
+            if (this.$refs.form.validate()) {
+                this.form.guestId = this.user._id
+
+                userApi.bookUser(this.form, async response => {
+                    this.success = true
+                })
+            }
         },
         clear(){
             this.name = ''

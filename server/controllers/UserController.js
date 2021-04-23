@@ -170,6 +170,19 @@ class UserController{
             return res.status(505).json({message: `Error UserController@getUsersByCookies ${e}`})
         }
     }
+
+    async bookUser(req, res) {
+        try {
+            const {comment, comunitatePreference, email, guestId, name, phone} = req.body
+            const user = await User.findOneAndUpdate(
+                { _id: guestId, logged: false, type: 'client'},
+                { $set: { name, email, phone, comment, comunitatePreference, lead: true } }, {new: true}
+            )
+            return res.status(200).json('ok')
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@bookUser ${e}`})
+        }
+    }
 }
 
 module.exports = function() {

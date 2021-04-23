@@ -30,11 +30,36 @@
             <template v-slot:activator="{on}">
                 <v-btn icon large text v-on="on">
                     <v-avatar size="30px" v-if="user.avatar">
-                        <img :src="`/avatars/${user.avatar}`" alt="Michael Wang"/>
+                        <img :src="`/avatars/${user.avatar}`"/>
+                    </v-avatar>
+                    <v-avatar size="30" v-else dark color="info">
+                        {{ user.name.charAt(0) }}
                     </v-avatar>
                 </v-btn>
             </template>
             <v-list class="pa-0">
+
+                <v-list-item ripple="ripple"
+                        :to="`/crm/employees/edit/profile`"
+                        v-if="authUser.type !== 'employee'">
+                    <v-list-item-action>
+                        <v-icon>mdi-account</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>Profile</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item ripple="ripple"
+                        :to="`/crm/employees/edit/operators/${authUser._id}`" 
+                        v-if="authUser.type === 'employee'">
+                    <v-list-item-action>
+                        <v-icon>mdi-account</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>Profile</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
 
                 <v-list-item ripple="ripple" @click="logout()">
                     <v-list-item-action>
@@ -61,6 +86,7 @@ export default {
     components: {
         NotificationList
     },
+    props: ['authUser'],
     data: function () {
         return {}
     },

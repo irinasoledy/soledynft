@@ -30,5 +30,11 @@ export default {
         await axios.post(`/auth/social/google`, {provider, code, guest})
             .then(response => cb(response.data))
             .catch(err => cbError(err.response.data))
-    }
+    },
+
+    async bookUser(data, cb) {
+        await axios.post(`/api/user/book`, data)
+            .then(response => cb(response.data))
+            .catch(err => cbError(err.response.data))
+    },
 }
