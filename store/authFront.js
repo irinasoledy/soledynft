@@ -8,15 +8,12 @@ export const state = () => ({
 export const mutations = {
 
     SOCKET_remoteLogin(state, data) {
-        console.log('kklknk');
         state.remoteLoginSwich = !state.remoteLoginSwich
         state.userToLogin = data.toLoginUser
     },
 }
 
-export const actions = {
-
-}
+export const actions = {}
 
 export const getters = {
     getRemoteLogin: state => state.remoteLoginSwich,

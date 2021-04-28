@@ -61,15 +61,14 @@
             </v-list>
             <template v-slot:append>
                 <div class="pa-2 mb-4">
-                    <!-- <v-btn color="secondary" outlined block>
-                        Cabinet
-                    </v-btn> -->
                     <v-btn color="secondary" outlined block>
                         sign in
                     </v-btn>
                 </div>
             </template>
         </v-navigation-drawer>
+
+
         <v-navigation-drawer
             class="navdrawer"
             v-model="services"
@@ -104,6 +103,7 @@
                 </v-list-item-group>
             </v-list>
         </v-navigation-drawer>
+
         <v-navigation-drawer
             class="navdrawer"
             v-model="subservices"
@@ -147,6 +147,7 @@
                 </v-list-item-group>
             </v-list>
         </v-navigation-drawer>
+
         <v-spacer></v-spacer>
         <v-toolbar-title>
             <nuxt-link to="/">
@@ -157,6 +158,8 @@
         <v-btn icon @click.stop="cabinetDrawer = !cabinetDrawer">
             <v-icon dark>mdi-account</v-icon>
         </v-btn>
+
+
         <v-navigation-drawer
             class="navdrawer"
             v-model="cabinetDrawer"
@@ -511,10 +514,6 @@ export default {
         trans: 'getTranslations',
         user: 'chat/getUser',
     }),
-    mounted(){
-        console.log(this.$auth);
-        console.log(this.$auth.user);
-    },
     methods: {
         ...mapActions(['changeLanguage']),
         openLoginDialg () {

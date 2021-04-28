@@ -15,6 +15,17 @@ class ActionService {
         }
     }
 
+    async removeAssignClientToEmployee(clientId, employeeId){
+        const action = await userAction.findOne({userId: clientId})
+
+        if (action.assigedManager) {
+            await userAction.findOneAndUpdate(
+               { _id: action._id }, {$set: {
+                   assigedManager: null
+               }})
+        }
+    }
+
     async addUser(payload){
         const findAction = await userAction.findOne({userId: payload.userId})
         let action = null

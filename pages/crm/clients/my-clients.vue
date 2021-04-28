@@ -98,6 +98,11 @@
                                         <td>
                                             <small>{{ item.currentPage }}</small>
                                         </td>
+                                        <td>
+                                            <a href="#" @click="removeAssignUser(item.userId)">
+                                                <v-icon color="primary">mdi-account-remove</v-icon>
+                                            </a>
+                                        </td>
                                         <td class="actions-td">
                                             <a href="#" @click="openDialog(item.userId)">
                                                 <v-icon color="primary">mdi-chat</v-icon>
@@ -146,6 +151,7 @@
 <script>
 
 import { mapActions, mapGetters } from 'vuex'
+import crmApi from '@/api/crmApi'
 
 export default {
     layout: 'crm',
@@ -167,6 +173,7 @@ export default {
                 { text: 'Duration', value: 'duration' },
                 { text: 'Last visit', value: 'last visit' },
                 { text: 'On page', value: 'page' },
+                { text: 'Assign', value: 'assign' },
                 { text: 'Contact', value: 'contact' },
                 { text: 'Delete', value: 'delete' },
             ],
@@ -183,8 +190,10 @@ export default {
     watch: {
         async refreshUserData() {
             await this.getClientsList('client')
-            this.notAssignedActions = this.actions.filter(action => {
-                return !action.assigedManager
+            this.myClientsActions = this.actions.filter(action => {
+                if (action.assigedManager) {
+                    return action.assigedManager._id === this.authUser._id
+                }
             })
         }
     },
@@ -203,6 +212,15 @@ export default {
             setInterlocutor : 'dialog/setInterlocutor',
             initCall : 'dialog/initCall',
         }),
+        async removeAssignUser(client) {
+            const data = {
+                userId: this.authUser._id,
+                clientId: client._id
+            }
+            await crmApi.removeAssignUser(data, response => {
+                this.$socket.emit('refreshUsersData')
+            })
+        },
         openVideoCall(user) {
             this.initCall(user)
         },

@@ -20,7 +20,7 @@
                             <v-divider></v-divider>
                             <v-card-text class="pa-0">
                                 <v-data-table
-                                    :headers="tableData.headers"
+                                    :headers="tableData"
                                     :search="search"
                                     :items="actions"
                                     class="elevation-1"
@@ -159,24 +159,22 @@ export default {
     data: () => ({
         roomId: false,
         dialog: false,
-        tableData: {
-            headers: [
-                { text: 'ID', value: 'id' },
-                { text: 'Name', value: 'name' },
-                { text: 'Cookies', value: 'coookies' },
-                { text: 'Lead', value: 'lead' },
-                { text: 'Online', value: 'online' },
-                { text: 'Auth', value: 'auth' },
-                { text: 'Policies', value: 'yes' },
-                { text: 'Operator', value: 'operator' },
-                { text: 'Pages', value: 'pages' },
-                { text: 'Duration', value: 'duration' },
-                { text: 'Last visit', value: 'last visit' },
-                { text: 'On page', value: 'page' },
-                { text: 'Contact', value: 'contact' },
-                { text: 'Delete', value: 'delete' },
-            ],
-        },
+        tableData: [
+            { text: 'ID', value: 'id' },
+            { text: 'Name', value: 'name' },
+            { text: 'Cookies', value: 'coookies' },
+            { text: 'Lead', value: 'lead' },
+            { text: 'Online', value: 'online' },
+            { text: 'Auth', value: 'auth' },
+            { text: 'Policies', value: 'yes' },
+            { text: 'Operator', value: 'operator' },
+            { text: 'Pages', value: 'pages' },
+            { text: 'Duration', value: 'duration' },
+            { text: 'Last visit', value: 'last visit' },
+            { text: 'On page', value: 'page' },
+            { text: 'Contact', value: 'contact' },
+            { text: 'Delete', value: 'delete' }
+        ],
         search: '',
         selected: [],
     }),

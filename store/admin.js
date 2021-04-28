@@ -18,25 +18,7 @@ export const mutations = {
     INIT_APP_DATA(state, data) {
         state.employees = data.employees
         state.managers = data.managers
-        // state.authUser = data.authUser
     },
-    // successLogin(state, data) {
-    //     state.loginMessage = data.message
-    //     state.token = data.token
-    //     // state.authUser = data.user
-    // },
-    // failedLogin(state, data) {
-    //     state.loginMessage = data.message
-    //     state.token = null
-    //     // state.authUser = data.user
-    // },
-    // setToken(state, token) {
-    //     state.token = token
-    // },
-    // setAuthUser(state, user) {
-    //     state.authUser = user
-    // },
-
     ADD_NEW_EMPLOYEE(state, data){
         state.employees.unshift(data)
     },
@@ -79,31 +61,9 @@ export const actions = {
     test({ commit }, data) {
         commit('setAuthUser', data)
     },
-
-    // authLogin({ commit }, data) {
-    //     commit('LOGIN', data)
-    // },
-
-    // async getUser({ state, commit }, data) {
-    //     commit('setToken', localStorage.getItem('crm-token'))
-    //
-    //     await crmApi.getAuthUser(state.token, response => {
-    //         commit('setAuthUser', response.user)
-    //     })
-    // },
-
     async initApp({ commit }, data) {
         crmApi.init(response => commit('INIT_APP_DATA', response))
     },
-
-    // async login({ commit }, data) {
-    //     await crmApi.login(data, response => {
-    //         commit('successLogin', response)
-    //     }, error => {
-    //         commit('failedLogin', error)
-    //     })
-    // },
-
     async getClientsList({ commit }, type) {
         await crmApi.getUsers(type, response => commit('SET_CLIENTS', response))
     },

@@ -26,7 +26,7 @@
                             {{item.name}}
                         </v-card-title>
                         <v-card-subtitle class="text-center">
-                            {{item.type}}
+                            {{trans.Team[item.position]}}
                         </v-card-subtitle>
                         <v-card-actions
                             class="pb-5 justify-center"

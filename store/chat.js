@@ -51,11 +51,6 @@ export const mutations = {
     SOCKET_reloadEmployeeList(state, data){
         state.rooms = data
     },
-    // SOCKET_newMessage(state, message) {
-    //     state.newMessage = message
-    //     state.messages.push(message)
-    //     // state.userMessages.push(data.message)
-    // },
     SOCKET_joinExistingRoom(state, data) {
         state.client = data.user
         state.room = data.room
@@ -64,11 +59,9 @@ export const mutations = {
     SOCKET_joinRoom(state, data){
         if (data.client) {
             state.client = data.client
-            // state.user = data.user
         }
         if (data.employee) {
             state.employee = data.employee
-            // state.user = data.user
         }
         state.room = data.room
     },
@@ -94,8 +87,7 @@ export const mutations = {
         state.user = user
    },
 
-   // Video calling
-
+     // Video calling
      SOCKET_stopChat(state){
          state.endChat = state.endChat ? false : true
      },
@@ -106,13 +98,6 @@ export const mutations = {
              state.videoProccess = false
          }
      },
-     // SOCKET_changeAudioProccess(state){
-     //     if (state.audioProccess === false) {
-     //         state.audioProccess = true
-     //     }else{
-     //         state.audioProccess = false
-     //     }
-     // },
      SOCKET_videoMute(state, data){
          state.videoMute = data
          state.videoUnmute = false
@@ -170,41 +155,17 @@ export const actions = {
     },
     async createMessage({ commit }, data){
         await chatApi.createMessage(data, response => commit('SET_HISTORY', response))
-
-        // await axios.post('/create-message', data)
-        //     .then(response => {
-        //         commit('SET_HISTORY', response.data)
-        //     })
     },
     async setUserCookies({ commit }, data){
-        // await crmApi.updateUserStatus(id, user, response => commit('SET_USER_STATUS', response))
         await userApi.getUser(data, response => commit('SET_USER_COOKIE', response))
-
-        // await axios.get("/init-user-cookie").then(data => {
-        //     commit('SET_USER_COOKIE', data.data)
-        // })
     },
     async getClientMessages({ commit }, userId){
         const m = (name, text, id) => ({ name, text, id })
 
-        await axios.post("/get-user-messages", {userId: userId}).then(data => {
-
-            // const parsedMessages = data.data.map((message) => {
-            //     if (message.sendBy == "employee") {
-            //         return m (message.employee.name, message.message, message.employee._id)
-            //     }else{
-            //         return m (message.client.name, message.message, message.client._id)
-            //     }
-            // })
-
-            // commit('SET_MESSAGES_HISTORY', {messages: data.data, parsed: parsedMessages})
-        })
+        await axios.post("/get-user-messages", {userId: userId}).then(data => {})
     },
     async savePolicyOptions({ commit }, data){
         userApi.savePolicy(data)
-
-
-        // await axios.post("/set/set-agr-option", data).then(data => {})
     },
     setUser({ commit }, user){
         commit('SET_USER', user)

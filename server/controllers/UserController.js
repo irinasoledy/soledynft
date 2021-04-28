@@ -1,11 +1,13 @@
 const User = require('../models/user')
 const UserAction = require('../models/userAction')
+const UserDetails = require('../models/userDetails')
 const Notification = require('../models/notification')
 const EmployeeService = require('../models/employeeService')
 
 
 const UserService = require('../services/UserService')()
 const NotificationService = require('../services/NotificationService')()
+const ActionService = require('../services/ActionService')()
 
 
 class UserController{
@@ -181,6 +183,95 @@ class UserController{
             return res.status(200).json('ok')
         } catch (e) {
             return res.status(505).json({message: `Error UserController@bookUser ${e}`})
+        }
+    }
+
+    async assingClientToUser(req, res) {
+        try {
+            const {userId, clientId} = req.body
+
+            await ActionService.assignClientToEmployee(clientId, userId)
+
+            return res.status(200).json('ok')
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@assingClientToUser ${e}`})
+        }
+    }
+
+    async removeAssingClientToUser(req, res) {
+        try {
+            const {userId, clientId} = req.body
+
+            await ActionService.removeAssignClientToEmployee(clientId, userId)
+
+            return res.status(200).json('ok')
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@assingClientToUser ${e}`})
+        }
+    }
+
+    async getUserDetails(req, res) {
+        try {
+            const id = req.query.id
+
+            const user = await UserDetails.findOne({userId: id})
+
+            return res.status(200).json({user})
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@getUserDetails ${e}`})
+        }
+    }
+
+    async setUserDetails(req, res) {
+        try {
+            const searchDetails = await UserDetails.findOne({userId: req.body.userId})
+            let details = {}
+
+            if (searchDetails) {
+                console.log('if');
+
+                let details = await UserDetails.findOneAndUpdate({_id: searchDetails._id},
+                    { $set: {
+                        whatsapp: req.body.whatsapp,
+                        messager: req.body.messager,
+                        viber: req.body.viber,
+                        telegram: req.body.telegram,
+                        facebook: req.body.facebook,
+                        instagram: req.body.instagram,
+                        other: req.body.other,
+                        preferred: req.body.preferred,
+                        address: req.body.address,
+                        city: req.body.city,
+                        country: req.body.country,
+                        postalCode: req.body.postalCode,
+                        language: req.body.language,
+                        currency: req.body.currency,
+                        payment: req.body.payment,
+                    } }, {new: true})
+            }else {
+                console.log('else');
+                let details = await UserDetails({
+                    userId:  req.body.userId,
+                    whatsapp: req.body.whatsapp,
+                    messager: req.body.messager,
+                    viber: req.body.viber,
+                    telegram: req.body.telegram,
+                    facebook: req.body.facebook,
+                    instagram: req.body.instagram,
+                    other: req.body.other,
+                    preferred: req.body.preferred,
+                    address: req.body.address,
+                    city: req.body.city,
+                    country: req.body.country,
+                    postalCode: req.body.postalCode,
+                    language: req.body.language,
+                    currency: req.body.currency,
+                    payment: req.body.payment,
+                }).save()
+            }
+            return res.status(200).json({details})
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@getUserDetails ${e}`})
         }
     }
 }

@@ -38,7 +38,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Chat from '@/components/dialog/chat';
+import Chat from '@/components/chat-module/chat';
 
 export default {
     data: () => ({

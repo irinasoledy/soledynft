@@ -50,6 +50,10 @@ const schema = new Schema({
         type: String,
         default: ''
     },
+    position: {
+        type: String,
+        default: ''
+    },
     hash: {
         type: String,
         default: ''

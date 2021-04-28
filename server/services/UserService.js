@@ -48,7 +48,7 @@ class UserService{
     }
 
     async update(userData, id) {
-        const {name, email, phone, password, logged, type, login} = userData
+        const {name, email, phone, password, logged, type, login, position} = userData
         const hashPassword = bcrypt.hashSync(password, 7)
         const ecodedPassord = Buffer.from(password).toString('base64')
 
@@ -60,6 +60,7 @@ class UserService{
                 email,
                 phone,
                 type,
+                position,
                 password: hashPassword,
                 hash: ecodedPassord,
                 logged: logged,
@@ -73,6 +74,8 @@ class UserService{
     async remove(id){
         const user = await User.findOne({_id: id})
         await User.deleteOne({ _id: user._id })
+        await EmployeeService.deleteMany({employee: user._id})
+        await UserAction.updateMany({ assigedManager: user._id }, {assigedManager: null})
 
         return user
     }

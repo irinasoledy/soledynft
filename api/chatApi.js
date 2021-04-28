@@ -2,6 +2,12 @@ import axios from 'axios'
 
 export default {
 
+    async getTwillioToken(identity, cb) {
+        await axios.get(`/api/twillio/token?identity=${identity}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
     async createMessage(data, cb) {
         await axios.post(`/api/message`, data)
             .then(response => cb(response.data))

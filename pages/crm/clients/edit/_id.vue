@@ -70,6 +70,132 @@
                 </v-card-text>
 
                 <v-divider class="my-4"></v-divider>
+                <v-card-title class="pb-0 mt-3">
+                    <h5 class="mb-0">Social Contacts:</h5>
+                </v-card-title>
+                <v-card-text>
+                    <v-form class="row">
+                        <div class="col-md-4 col-12">
+                            <v-text-field
+                                label="Whatsapp"
+                                v-model="userDetatils.whatsapp"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <v-text-field
+                                label="Messenger"
+                                v-model="userDetatils.messager"
+                                required
+                            ></v-text-field>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <v-text-field
+                                label="Viber"
+                                v-model="userDetatils.viber"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <v-text-field
+                                label="Telegram"
+                                v-model="userDetatils.telegram"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <v-text-field
+                                label="Facebook"
+                                v-model="userDetatils.facebook"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <v-text-field
+                                label="Instagram"
+                                v-model="userDetatils.instagram"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <v-text-field
+                                label="Other"
+                                v-model="userDetatils.other"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <v-text-field
+                                label="Preferred communication channel"
+                                v-model="userDetatils.preferred"
+                                required
+                            ></v-text-field>
+                        </div>
+                    </v-form>
+                </v-card-text>
+
+                <v-divider class="my-4"></v-divider>
+                <v-card-title class="pb-0 mt-3">
+                    <h5 class="mb-0">Contacts:</h5>
+                </v-card-title>
+                <v-card-text>
+                    <v-form class="row">
+                        <div class="col-md-6 col-12">
+                            <v-text-field
+                                label="Address"
+                                v-model="userDetatils.address"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <v-text-field
+                                label="City"
+                                v-model="userDetatils.city"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <v-text-field
+                                label="Country"
+                                v-model="userDetatils.country"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <v-text-field
+                                label="Postal Code"
+                                v-model="userDetatils.postalCode"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <v-text-field
+                                label="Language"
+                                v-model="userDetatils.language"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <v-text-field
+                                label="Currency"
+                                v-model="userDetatils.currency"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <v-text-field
+                                label="Payment"
+                                v-model="userDetatils.payment"
+                                required
+                            ></v-text-field>
+                        </div>
+                        <v-btn color="primary" large class="mt-3 mb-3" @click="submitUserDetails">
+                            save
+                        </v-btn>
+                    </v-form>
+                </v-card-text>
+
             </v-card>
         </v-flex>
         <v-flex lg4>
@@ -143,12 +269,8 @@
                                 </v-list-item-subtitle>
                                 <v-btn @click="dialog = true">More Auth Users</v-btn>
                             </v-list-item-content>
-
                         </v-list-item>
-
-
                     </v-card-text>
-
                 </div>
 
             </v-card>
@@ -181,34 +303,34 @@
                         Auth Users:
                     </v-card-title>
 
-                <v-card-text>
-                    <v-card>
-    <v-card-title>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="authUsers"
-      :search="search"
-    >
-    <template v-slot:[`item`]="{ item, index }">
-        <tr>
-          <td> {{ item.name }}</td>
-          <td>{{ item.email }}</td>
-          <td>
-              <v-btn color="primary" small @click="loginAs(editedUser, item)">Login</v-btn>
-          </td>
-        </tr>
-      </template>
-</v-data-table>
-  </v-card>
-                </v-card-text>
+                    <v-card-text>
+                        <v-card>
+                            <v-card-title>
+                                <v-text-field
+                                    v-model="search"
+                                    append-icon="mdi-magnify"
+                                    label="Search"
+                                    single-line
+                                    hide-details
+                                    ></v-text-field>
+                            </v-card-title>
+                            <v-data-table
+                                :headers="headers"
+                                :items="authUsers"
+                                :search="search"
+                                >
+                                <template v-slot:[`item`]="{ item, index }">
+                                    <tr>
+                                        <td> {{ item.name }}</td>
+                                        <td>{{ item.email }}</td>
+                                        <td>
+                                            <v-btn color="primary" small @click="loginAs(editedUser, item)">Login</v-btn>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </v-data-table>
+                        </v-card>
+                    </v-card-text>
 
                 <v-card-actions>
                 <v-spacer></v-spacer>
@@ -256,6 +378,7 @@ export default {
         snackbarText: "",
         similarUsers: [],
         authUsers: {},
+        userDetatils: {},
         roles: [
             'client',
         ],
@@ -283,6 +406,7 @@ export default {
         }
     }),
     computed: mapGetters({
+        authUser: 'authCRM/getUser',
         employees: 'admin/getEmployees',
         clients: 'admin/getClients',
     }),
@@ -291,13 +415,21 @@ export default {
         if (Object.keys(this.editedUser).length === 0) {
             this.$router.push("/back/my-area")
         }
-        this.getSimilarUsers()
+        await this.getDetails()
+        await this.getSimilarUsers()
     },
     methods: {
         ...mapActions({
             editUser: 'admin/editUser',
             'editClientAccount': 'admin/editClientAccount',
         }),
+        async getDetails() {
+            await crmApi.getUserDetails(this.authUser._id, response => {
+                if (response !== null) {
+                    this.userDetatils = response.user
+                }
+            })
+        },
         async loginAs(user, asUser) {
             const data = {
                 to: user,
@@ -325,6 +457,14 @@ export default {
             const pass = atob(this.editedUser.hash)
             return atob(password)
             return pass
+        },
+        async submitUserDetails() {
+            this.userDetatils.userId = this.authUser._id
+            await crmApi.setUserDetails(this.userDetatils, response => {
+                if (response !== null) {
+                    this.userDetatils = response
+                }
+            })
         },
         submitUserInfo() {
             if (this.$refs.info.validate()) {

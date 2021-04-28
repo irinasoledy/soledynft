@@ -34,8 +34,9 @@
                                     v-model="editedUser.position"
                                     >
                                     <template v-slot:item="{item}">
-                                        {{ item }}
+                                        {{ trans.Team[item] }}
                                     </template>
+                                    <template slot="selection" slot-scope="data">{{ trans.Team[editedUser.position] }}</template>
                                 </v-select>
                             </div>
                             <div class="col-md-6 col-12">
@@ -172,9 +173,9 @@ export default {
             'root'
         ],
         positions: [
-            'Team.employeePositionExpertCetatenie',
-            'Team.employeePositionExpertActeSoferi',
-            'Team.employeePositionExpertActeCivileIdentitate',
+            'employeePositionExpertCetatenie',
+            'employeePositionExpertActeSoferi',
+            'employeePositionExpertActeCivileIdentitate',
         ],
         formData: {
             login: '',
@@ -231,7 +232,6 @@ export default {
         },
         getTransValue(value) {
             return value
-            // return this.trans.$value
         },
         onFileChange(e) {
             const selectedFile = e.target.files[0]
@@ -247,7 +247,7 @@ export default {
                 this.initApp()
             })
         },
-        submitUserInfo(){
+        submitUserInfo() {
             if (this.$refs.info.validate()) {
                 this.editUser(this.editedUser).then(() => {
                     this.snackbar = true

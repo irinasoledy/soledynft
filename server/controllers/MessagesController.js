@@ -22,7 +22,7 @@ class MessagesController {
            .then(m => m.populate('sender').execPopulate())
            .then(m => m.populate('recepient').execPopulate())
 
-           await ActionService.assignClientToEmployee(req.body.clientId, req.body.employeeId)
+           // await ActionService.assignClientToEmployee(req.body.clientId, req.body.employeeId)
 
            return res.status(200).json(message)
 

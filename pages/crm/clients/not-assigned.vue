@@ -98,6 +98,11 @@
                                         <td>
                                             <small>{{ item.currentPage }}</small>
                                         </td>
+                                        <td >
+                                            <a href="#" @click="assignUser(item.userId)">
+                                                <v-icon color="primary">mdi-account-plus</v-icon>
+                                            </a>
+                                        </td>
                                         <td class="actions-td">
                                             <a href="#" @click="openDialog(item.userId)">
                                                 <v-icon color="primary">mdi-chat</v-icon>
@@ -117,7 +122,7 @@
                         </v-card-text>
                     </v-card>
                 </v-flex>
-                <v-dialog
+                <!-- <v-dialog
                     v-model="dialog"
                     hide-overlay
                     persistent
@@ -136,7 +141,7 @@
                     ></v-progress-linear>
                 </v-card-text>
                 </v-card>
-                </v-dialog>
+                </v-dialog> -->
             </v-layout>
         </v-container>
     </div>
@@ -146,6 +151,8 @@
 <script>
 
 import { mapActions, mapGetters } from 'vuex'
+import crmApi from '@/api/crmApi'
+
 
 export default {
     layout: 'crm',
@@ -167,6 +174,7 @@ export default {
                 { text: 'Duration', value: 'duration' },
                 { text: 'Last visit', value: 'last visit' },
                 { text: 'On page', value: 'page' },
+                { text: 'Assign', value: 'assign' },
                 { text: 'Contact', value: 'contact' },
                 { text: 'Delete', value: 'delete' },
             ],
@@ -176,7 +184,7 @@ export default {
     }),
     computed: mapGetters({
         refreshUserData: 'dialog/getRefreshUserData',
-        authUser: 'admin/getAuthUser',
+        authUser: 'authCRM/getUser',
         clients: 'admin/getClients',
         actions: 'admin/getActions'
     }),
@@ -201,6 +209,15 @@ export default {
             setInterlocutor : 'dialog/setInterlocutor',
             initCall : 'dialog/initCall',
         }),
+        async assignUser(client) {
+            const data = {
+                userId: this.authUser._id,
+                clientId: client._id
+            }
+            await crmApi.assignUser(data, response => {
+                this.$socket.emit('refreshUsersData')
+            })
+        },
         openVideoCall(user) {
             this.initCall(user)
         },

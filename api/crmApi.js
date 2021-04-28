@@ -99,6 +99,29 @@ export default {
         await axios.post(`/api/users/cookies`, data)
             .then(response => cb(response.data))
             .catch(err => console.log(err) )
-    }
+    },
 
+    async assignUser(data, cb) {
+        await axios.post(`/api/users/assing`, data)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
+    async removeAssignUser(data, cb) {
+        await axios.post(`/api/users/removeAssing`, data)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
+    async getUserDetails(id, cb) {
+        await axios.get(`/api/user/details?id=${id}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
+    async setUserDetails(data, cb) {
+        await axios.post(`/api/user/details`, data)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
 }

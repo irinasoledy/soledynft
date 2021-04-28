@@ -73,7 +73,7 @@
                                 {{item.employee.name}}
                             </v-card-title>
                             <v-card-subtitle class="text-center">
-                                {{item.employee.type}}
+                                {{trans.Team[item.employee.position]}}
                             </v-card-subtitle>
                             <v-card-actions class="pb-5 justify-center">
                                 <v-btn

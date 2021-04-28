@@ -73,11 +73,9 @@ export const mutations = {
 
     // video
     SOCKET_incomingCall(state, data) {
-        console.log('mlvmdfl;');
         if (state.calling === false) {
             state.calling = true
             state.callFrom = data.from
-            // state.callUser = data.from
         }
     },
 
@@ -103,9 +101,7 @@ export const mutations = {
     },
 
     setReject(state, status) {
-        console.log(state.reject, 1);
         state.reject = status
-        console.log(state.reject, 2);
     },
 
     setVideoInterlocuitor(state, user) {
@@ -131,13 +127,11 @@ export const actions = {
     },
 
     confirmCall({ commit }) {
-        console.log('confirm');
         commit('setResponse', true)
         commit('setReject', false)
     },
 
     cancelCall({ commit }) {
-        console.log('cancel');
         commit('setResponse', false)
         commit('setReject', true)
     },
