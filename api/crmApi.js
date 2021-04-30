@@ -34,6 +34,12 @@ export default {
             .catch(err => console.log(err) )
     },
 
+    async getHistoryUsers(id, cb) {
+        await axios.get(`/api/users/history?id=${id}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
     async createUser(data, cb) {
         await axios.post(`/api/user`, data)
             .then(response => cb(response.data))

@@ -7,10 +7,10 @@
                         class="costum-btn-service"
                         @click="scrollExpertsBlock"
                         width="100%"
-                        >
+                    >
                         {{ trans.Services.liveDiscussionBtn }}
                         <v-icon>
-                          mdi-sort
+                            mdi-sort
                         </v-icon>
                     </v-btn>
                 </div>
@@ -24,12 +24,12 @@
                 <div class="col-lg-3 col-md-3 side-block-wrap">
                     <div class="side-block" id="sidebar">
                         <a v-for="anchor in service.blogs"
-                            :key="anchor.id"
-                            class="v-list-item v-list-item--link theme--light item-anchor"
-                            :href="`#section${anchor.id}`"
-                            @click.prevent="scrollTo(anchor.id)"
-                            role="listitem"
-                            tabindex="0">
+                           :key="anchor.id"
+                           class="v-list-item v-list-item--link theme--light item-anchor"
+                           :href="`#section${anchor.id}`"
+                           @click.prevent="scrollTo(anchor.id)"
+                           role="listitem"
+                           tabindex="0">
                             {{ anchor.translation.name }}
                         </a>
                     </div>
@@ -41,7 +41,7 @@
                         :key="anchor.id"
                         :id="`section${anchor.id}`"
                         class="section-block"
-                        >
+                    >
                         <h3 class="title">{{ anchor.translation.name }}</h3>
                         <div v-html="anchor.translation.body"></div>
                     </div>
@@ -62,31 +62,43 @@
                             v-if="employeeList.length > 0"
                             v-for="(item, i) in employeeList"
                             :key="i"
+                        >
+                            <v-badge
+                                v-if="item.employee.status === true"
+                                bordered
+                                bottom
+                                color="#27ae60"
+                                content="ONLINE"
+                                offset-x="10"
+                                offset-y="10"
                             >
+                            </v-badge>
                             <v-img
                                 :src="`/avatars/${item.employee.avatar}`"
                                 aspect-ratio="1"
                                 class="grey lighten-2"
-                                >
+                            >
                             </v-img>
                             <v-card-title class="title justify-center">
-                                {{item.employee.name}}
+                                {{ item.employee.name }}
                             </v-card-title>
                             <v-card-subtitle class="text-center">
-                                {{trans.Team[item.employee.position]}}
+                                {{ trans.Team[item.employee.position] }}
                             </v-card-subtitle>
                             <v-card-actions class="pb-5 justify-center">
+
                                 <v-btn
+                                    v-if="item.employee.status"
                                     color="secondary"
                                     @click="openVideoCall(item.employee)"
-                                    >
+                                >
                                     <v-icon left>mdi-phone</v-icon>
                                     {{ trans.Team.specialistBtnChat }}
                                 </v-btn>
                                 <v-btn
                                     color="info"
                                     @click="openDialog(item.employee)"
-                                    >
+                                >
                                     <v-icon left>mdi-chat</v-icon>
                                     {{ trans.Team.companyMainAddress }}
                                 </v-btn>
@@ -95,28 +107,6 @@
                     </div>
                 </div>
             </v-row>
-
-            <!-- <v-dialog
-                v-model="dialog"
-                hide-overlay
-                persistent
-                width="300"
-                >
-                <v-card
-                    color="primary"
-                    dark
-                    >
-                    <v-card-text>
-                        Connecting to {{ roomId }}...
-                        <v-progress-linear
-                            indeterminate
-                            color="white"
-                            class="mb-0"
-                            ></v-progress-linear>
-                    </v-card-text>
-                </v-card>
-            </v-dialog> -->
-
         </v-container>
         <appointment-form></appointment-form>
     </main>
@@ -124,8 +114,7 @@
 
 <script>
 
-import axios from "axios"
-import { mapActions, mapGetters } from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 import contentApi from '@/api/contentApi.js'
 import appointmentForm from "@/components/front/forms/appointmentForm.vue"
 
@@ -147,30 +136,32 @@ export default {
         title: '',
         description: '',
         dialog: false,
-        service : null,
+        service: null,
         employeeList: [],
         mobileExpertsDisplay: false,
     }),
-    watch:{
-        async refreshUserData() { // To test this method...
-            await this.getEmployees()
+    watch: {
+        refreshUserData() { // To test this method...
+            this.getEmployees()
         },
-        changedEmployee(){ // cerez jopu...
-            if (this.changedEmployee !== null) {
-                const employeeList = this.employeeList.find(service => {
-                    if (service.employee._id == this.changedEmployee._id) {
-                        return service.employee.status = this.changedEmployee.status
-                    }
-                })
-            }
-            this.setDefaultChangedEmployee()
+        changedEmployee() { // cerez jopu...
+            this.getEmployees()
+            // console.log(this.changedEmployee);
+            // if (this.changedEmployee !== null) {
+            //     const employeeList = this.employeeList.find(service => {
+            //         if (service.employee._id == this.changedEmployee._id) {
+            //             return service.employee.status = this.changedEmployee.status
+            //         }
+            //     })
+            // }
+            // this.setDefaultChangedEmployee()
         },
-        reject(){
+        reject() {
             this.dialog = false
             this.setDefaultReject()
         },
-        response(){
-            this.$socket.emit("joinRoomAsClient", {roomId : this.roomId, client : this.user}, async response => {
+        response() {
+            this.$socket.emit("joinRoomAsClient", {roomId: this.roomId, client: this.user}, async response => {
                 await this.setUser(this.user)
                 this.$router.push("/conference")
             });
@@ -178,18 +169,18 @@ export default {
         }
     },
     computed: mapGetters({
-        refreshUserData : 'dialog/getRefreshUserData',
-        services : 'getServices',
-        allServices : 'getAllServices',
-        language : 'getLanguage',
-        changedEmployee : 'getChangedEmployee',
-        reject : 'call/getReject',
-        response : 'call/getResponse',
-        roomId : 'call/getRoomId',
+        refreshUserData: 'dialog/getRefreshUserData',
+        services: 'getServices',
+        allServices: 'getAllServices',
+        language: 'getLanguage',
+        changedEmployee: 'getChangedEmployee',
+        reject: 'call/getReject',
+        response: 'call/getResponse',
+        roomId: 'call/getRoomId',
         user: 'chat/getUser',
         trans: 'getTranslations'
     }),
-    async mounted(){
+    async mounted() {
         this.service = await this.allServices.find((serv) => serv.alias == this.$route.params.subservice)
         this.getEmployees()
         // console.log(this.employeeList);
@@ -199,22 +190,22 @@ export default {
     },
     methods: {
         ...mapActions({
-            setDefaultChangedEmployee : 'setDefaultChangedEmployee',
-            setDefaultReject : 'call/setDefaultReject',
-            setDefaultResponse : 'call/setDefaultResponse',
-            setClientAsUser : 'chat/setClientAsUser',
-            setUser : 'chat/setUser',
-            setInterlocutor : 'dialog/setInterlocutor',
-            initCall : 'dialog/initCall',
+            setDefaultChangedEmployee: 'setDefaultChangedEmployee',
+            setDefaultReject: 'call/setDefaultReject',
+            setDefaultResponse: 'call/setDefaultResponse',
+            setClientAsUser: 'chat/setClientAsUser',
+            setUser: 'chat/setUser',
+            setInterlocutor: 'dialog/setInterlocutor',
+            initCall: 'dialog/initCall',
         }),
         openVideoCall(user) {
             this.initCall(user)
         },
-        openDialog(user){
+        openDialog(user) {
             this.setInterlocutor(null)
             this.setInterlocutor(user)
         },
-        handleScroll(){
+        handleScroll() {
             const sidebar = document.getElementById('sidebar')
             const experts = document.getElementById('experts')
             const serviceBtn = document.getElementById('serviceBtn')
@@ -224,7 +215,7 @@ export default {
                     if (window.scrollY > 85) {
                         sidebar.classList.add("fixed")
                         experts.classList.add("fixed")
-                    }else{
+                    } else {
                         sidebar.classList.remove("fixed")
                         experts.classList.remove("fixed")
                     }
@@ -232,22 +223,22 @@ export default {
 
                 if (window.scrollY > 35) {
                     serviceBtn.classList.add("fixed-btn")
-                }else{
+                } else {
                     serviceBtn.classList.remove("fixed-btn")
                 }
             }
         },
-        scrollTo(id){
+        scrollTo(id) {
             const element = document.getElementById('section' + id)
             const offsetTop = element.offsetTop - 150
             window.scrollTo(0, offsetTop)
         },
-        scrollExpertsBlock(){
+        scrollExpertsBlock() {
             const element = document.getElementById('experts')
             const offsetTop = element.offsetTop - 175
             window.scrollTo(0, offsetTop)
         },
-        async getEmployees(){
+        async getEmployees() {
             await contentApi.getEmployeesByService(this.service.id, response => {
                 this.employeeList = response
             })
@@ -262,10 +253,15 @@ export default {
 </script>
 
 <style lang="scss">
-.experts-wrapp{
-    // border: 1px solid red;
-    // overflow-y: scroll;
+.experts-wrapp {
+    .v-badge {
+        position: absolute;
+        z-index: 9;
+        top: 20px;
+        left: 10px;
+    }
 }
+
 #experts .v-card {
     margin-bottom: 30px;
     // max-width: 300px !important;
@@ -345,73 +341,83 @@ export default {
     .buttons-expert {
         position: static;
         display: block;
+
         .v-btn {
             margin-bottom: 10px;
         }
     }
-    .butons-service{
+    .butons-service {
         display: none;
     }
 
 }
+
 @media (max-width: 991px) {
-    .side-block-wrap{
+    .side-block-wrap {
         display: none;
     }
-    .expert-one-content{
+    .expert-one-content {
         padding-top: 62px;
     }
-    .v-application .display-1{
+    .v-application .display-1 {
         font-size: 2rem !important;
     }
-    .butons-service{
+    .butons-service {
         display: block;
         max-width: 99%;
         background-color: #FFF;
         padding: 20px;
         box-shadow: 0 3px 4px rgb(0 0 0 / 20%)
     }
-    .costum-btn-service{
+    .costum-btn-service {
         color: $custom_blue !important;
         border: 1px solid $custom_blue;
         box-shadow: none;
         background-color: #FFF !important;
     }
-    .expert-one-experts{
+    .expert-one-experts {
         width: 100% !important;
     }
 }
+
 .section-block {
     margin-bottom: 20px;
 }
+
 .section-block:last-child {
     margin-bottom: 0;
 }
-.side-block{
+
+.side-block {
     border-left: 3px solid $custom_blue;
     min-width: 200px;
 }
-.fixed-btn{
+
+.fixed-btn {
     position: fixed;
     width: 100%;
     margin-top: -6px;
     z-index: 4;
     left: .5%;
 }
-.fixed{
+
+.fixed {
     position: fixed;
     margin-top: -80px;
     background-color: #FFF;
 }
-.expert-one-experts{
+
+.expert-one-experts {
     max-height: 85vh;
     overflow: scroll;
     width: 300px;
 }
-.v-application ul{
+
+.v-application ul {
     padding-left: 20px !important;
 }
-.medium-width{
+
+.medium-width {
     min-width: 90% !important;
 }
 </style>

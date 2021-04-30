@@ -378,7 +378,23 @@ export default {
         snackbarText: "",
         similarUsers: [],
         authUsers: {},
-        userDetatils: {},
+        userDetatils: {
+            whatsapp: '',
+            messager: '',
+            viber: '',
+            telegram: '',
+            facebook: '',
+            instagram: '',
+            other: '',
+            preferred: '',
+            address: '',
+            city: '',
+            country: '',
+            postalCode: '',
+            language: '',
+            currency: '',
+            payment: '',
+        },
         roles: [
             'client',
         ],
@@ -424,8 +440,8 @@ export default {
             'editClientAccount': 'admin/editClientAccount',
         }),
         async getDetails() {
-            await crmApi.getUserDetails(this.authUser._id, response => {
-                if (response !== null) {
+            await crmApi.getUserDetails(this.editedUser._id, response => {
+                if (response.user !== null) {
                     this.userDetatils = response.user
                 }
             })
@@ -459,11 +475,10 @@ export default {
             return pass
         },
         async submitUserDetails() {
-            this.userDetatils.userId = this.authUser._id
+            this.userDetatils.userId = this.editedUser._id
             await crmApi.setUserDetails(this.userDetatils, response => {
-                if (response !== null) {
-                    this.userDetatils = response
-                }
+                this.snackbar = true
+                this.snackbarText = `${this.editedUser.name} details was saved!`
             })
         },
         submitUserInfo() {

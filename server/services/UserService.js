@@ -1,7 +1,7 @@
 const User = require('../models/user')
 const UserAction = require('../models/userAction')
-const Notification = require('../models/notification')
 const EmployeeService = require('../models/employeeService')
+const History = require('../models/history')
 const bcrypt = require('bcryptjs')
 
 class UserService{
@@ -101,7 +101,6 @@ class UserService{
         })
     }
 
-
     async getUserServices(req, res){
         const services = await EmployeeService.find({employee: req.query.id})
         return res.status(200).json(services)
@@ -113,6 +112,39 @@ class UserService{
             return res.status(200).json(employee)
         } catch (e) {
             return res.status(505).json({message: 'Server Error'})
+        }
+    }
+
+    async setHistories(req) {
+        const session1 = req.body.senderId + req.body.recepientId
+        const session2 = req.body.recepientId + req.body.senderId
+
+        const senderHistory = await History.findOneAndUpdate(
+            {userId: req.body.senderId, $or: [{session: session1}, {session: session2}]},
+            {$set: {date: Date.now()}},
+            {new: true}
+        )
+
+        const recipientHistory = await History.findOneAndUpdate(
+            {userId: req.body.recepientId, $or: [{session: session1}, {session: session2}]},
+            {$set: {date: Date.now()}},
+            {new: true}
+        )
+
+        if (!senderHistory) {
+            await new History({
+                userId: req.body.senderId,
+                recipientId: req.body.recepientId,
+                session: req.body.senderId + req.body.recepientId
+            }).save()
+        }
+
+        if (!recipientHistory) {
+            await new History({
+                userId: req.body.recepientId,
+                recipientId: req.body.senderId,
+                session: req.body.recepientId + req.body.senderId
+            }).save()
         }
     }
 

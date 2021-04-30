@@ -1,6 +1,6 @@
 <template lang="html">
     <div>
-        <!-- Outcomming call -->
+        <!-- Outgoing call -->
         <v-dialog
             content-class="video-dialog-window"
             class="messagesDialog"
@@ -30,7 +30,7 @@
                         <v-btn
                             class="mx-2"
                             fab dark large color="red"
-                            @click="endCall(callUser)"
+                            @click="rejectOutgoingCall()"
                             >
                             <v-icon dark>
                                 mdi-phone-hangup
@@ -68,7 +68,7 @@
                 <v-btn
                     class="mx-2"
                     fab dark large color="red"
-                    @click="endCall()"
+                    @click="rejectIncomingCall()"
                     >
                     <v-icon dark>mdi-phone-hangup</v-icon>
                 </v-btn>
@@ -128,6 +128,8 @@ export default {
                     this.audio.pause();
                     this.audio.currentTime = 0;
                     this.resetTimer()
+                    // const message = 'Call Rejected'
+                    // this.sendMessage(this.callUser._id, this.user._id, message, 'rejected')
                 }
             }, 2000)
         },
@@ -160,10 +162,10 @@ export default {
     },
     mounted() {
         $nuxt.$on('endVideoChat', () => {
-            this.resetTimer()
             this.endCall()
-            const message = 'Call finish'
-            this.sendMessage(this.callUser._id, this.user._id, message)
+            const message = `Call duration ${this.timer.minutes}:${this.timer.seconds}`
+            this.sendMessage(this.callUser._id, this.user._id, message, 'accepted')
+            this.resetTimer()
         })
 
         $nuxt.$on('openDialogOut', () => {
@@ -229,19 +231,32 @@ export default {
         pad(val) {
             return val > 9 ? val : "0" + val
         },
-        sendMessage(to, from, message) {
+        rejectOutgoingCall() { //missed call
+            const message = 'Missed Call'
+            const status = 'missed'
+            this.endCall()
+            this.sendMessage(this.callUser._id, this.user._id, message, status)
+        },
+        rejectIncomingCall() { //reject call
+            const message = 'Rejected Call'
+            const status = 'rejected'
+            this.endCall()
+            this.sendMessage(this.callUser._id, this.user._id, message, status)
+        },
+        sendMessage(to, from, message, callStatus) {
             if (to) {
                 const sendBy = this.mode === 'employee' ? 'client' : 'employee'
 
                 const data = {
-                    senderId: to,
-                    recepientId: from,
+                    senderId: from,
+                    recepientId: to,
                     clientId: to,
                     employeeId: from,
                     message: message,
                     sendBy: sendBy,
                     session: to + from,
-                    callAlert: true
+                    callAlert: true,
+                    callStatus
                 }
 
                 this.createMessage(data).then(() => {

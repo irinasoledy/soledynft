@@ -2,7 +2,7 @@
     <main>
         <div id="pageTable">
             <v-container grid-list-xl fluid>
-                <h3>Clients</h3>
+                <h3>Clients <v-icon class="link-icon" @click="refreshUsersActions()">mdi-refresh</v-icon></h3>
                 <v-layout row wrap>
                     <v-flex lg12>
                         <v-card>
@@ -161,6 +161,7 @@ export default {
         notAssignedActions: [],
         roomId: false,
         dialog: false,
+        userActions: [],
         tableData: {
             headers: [
                 { text: 'ID', value: 'id' },
@@ -189,6 +190,11 @@ export default {
         actions: 'admin/getActions'
     }),
     watch: {
+        actions() {
+            this.notAssignedActions = this.actions.filter(action => {
+                return !action.assigedManager
+            })
+        },
         async refreshUserData() {
             await this.getClientsList('client')
             this.notAssignedActions = this.actions.filter(action => {
@@ -209,6 +215,9 @@ export default {
             setInterlocutor : 'dialog/setInterlocutor',
             initCall : 'dialog/initCall',
         }),
+        refreshUsersActions() {
+            this.$socket.emit('shareUserAction', null)
+        },
         async assignUser(client) {
             const data = {
                 userId: this.authUser._id,
@@ -271,5 +280,7 @@ export default {
         text-decoration: underline;
         color: #293754 !important;
     }
-
+    .link-icon{
+        cursor: pointer;
+    }
 </style>

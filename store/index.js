@@ -4,11 +4,11 @@ import crmApi from '@/api/crmApi'
 
 export const state = () => ({
     langs: [
-        {id: 1, lang : 'ro', active: 1, name: 'RO'},
-        {id: 2, lang : 'en', active: 0, name: 'EN'},
-        {id: 3, lang : 'ru', active: 0, name: 'RU'}
+        {id: 1, lang: 'ro', active: 1, name: 'RO'},
+        {id: 2, lang: 'en', active: 0, name: 'EN'},
+        {id: 3, lang: 'ru', active: 0, name: 'RU'}
     ],
-    lang: {id: 1, lang : 'ro', active: 1, name: 'RO'},
+    lang: {id: 1, lang: 'ro', active: 1, name: 'RO'},
     envAPI: {},
     pages: [],
     services: [],
@@ -29,7 +29,7 @@ export const mutations = {
     setTest(state, param) {
         state.test = param
     },
-    setUser(state, user){
+    setUser(state, user) {
         const data = this.$axios.$get('/create-user', user);
         state.user = data
     },
@@ -39,33 +39,33 @@ export const mutations = {
     drawer(state, val) {
         state.drawer = val
     },
-    SET_SERVICES(state, data){
-      state.services = data.services
-      state.allServices = data.servicesAll
-      state.promotions = data.promotions
-      state.pages = data.pages
-      state.banners = data.banners
-  },
-    SET_DEFAULT_LANG(state, id){
+    SET_SERVICES(state, data) {
+        state.services = data.services
+        state.allServices = data.servicesAll
+        state.promotions = data.promotions
+        state.pages = data.pages
+        state.banners = data.banners
+    },
+    SET_DEFAULT_LANG(state, id) {
         state.lang = state.langs.find((lang) => lang.id === id)
     },
-    SET_TRANSALATIONS(state, data){
+    SET_TRANSALATIONS(state, data) {
         state.translations = data.vars
     },
-    SOCKET_refreshEmployeeStatus(state, employee){
+    SOCKET_refreshEmployeeStatus(state, employee) {
         state.changedEmployee = employee
     },
-    SET_ENV_API(state, env){
+    SET_ENV_API(state, env) {
         state.envAPI = env
     },
-    SET_EXPERTS(state, experts){
+    SET_EXPERTS(state, experts) {
         state.experts = experts
     },
 }
 
 export const actions = {
 
-    async nuxtServerInit({ state, commit }) {
+    async nuxtServerInit({state, commit}) {
         const currenctLang = this.$router.history.current.params.lang
         if (currenctLang) {
             const findLang = state.langs.find(lang => lang.lang === currenctLang)
@@ -79,21 +79,21 @@ export const actions = {
         commit('SET_ENV_API', process.env.API)
     },
 
-    async changeLanguage({ state, commit }, id) {
+    async changeLanguage({state, commit}, id) {
         commit('SET_DEFAULT_LANG', id)
         await contentApi.getTranslations(state.lang.lang, (response) => commit('SET_TRANSALATIONS', response))
         await contentApi.getInitData(state.lang.lang, (response) => commit('SET_SERVICES', response))
     },
 
-    async getExpertsList({ commit }){
-        await contentApi.getExperts( data => commit('SET_EXPERTS', data))
+    async getExpertsList({commit}) {
+        await contentApi.getExperts(data => commit('SET_EXPERTS', data))
     },
 
-    banner({ state }){
+    banner({state}) {
         return 'ok'
     },
 
-    setDefaultChangedEmployee({ commit }){
+    setDefaultChangedEmployee({commit}) {
         commit('SOCKET_refreshEmployeeStatus', null)
     }
 }

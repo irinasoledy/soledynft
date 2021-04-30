@@ -1,11 +1,12 @@
-const User = require('../models/user')
 const Message = require('../models/message')
-const ActionService = require('../services/ActionService')()
+const UserService = require('../services/UserService')()
 
 class MessagesController {
 
     async create(req, res) {
         try {
+            await UserService.setHistories(req)
+
             const message = await new Message({
                 sender: req.body.senderId,
                 recepient: req.body.recepientId,
@@ -15,16 +16,15 @@ class MessagesController {
                 sendBy: req.body.sendBy,
                 session: req.body.session,
                 callAlert: req.body.callAlert,
-           })
-           .save()
-           .then(m => m.populate('client').execPopulate())
-           .then(m => m.populate('employee').execPopulate())
-           .then(m => m.populate('sender').execPopulate())
-           .then(m => m.populate('recepient').execPopulate())
+                callStatus: req.body.callStatus
+            })
+                .save()
+                .then(m => m.populate('client').execPopulate())
+                .then(m => m.populate('employee').execPopulate())
+                .then(m => m.populate('sender').execPopulate())
+                .then(m => m.populate('recepient').execPopulate())
 
-           // await ActionService.assignClientToEmployee(req.body.clientId, req.body.employeeId)
-
-           return res.status(200).json(message)
+            return res.status(200).json(message)
 
         } catch (e) {
             return res.status(400).json({message: 'error' + e})
@@ -37,10 +37,10 @@ class MessagesController {
             const session2 = req.query.interlocutorId + req.query.userId
 
             const messages = await Message.find(
-                { $or : [{session: session1}, {session: session2}] }
+                {$or: [{session: session1}, {session: session2}]}
             ).populate('employee').populate('client').populate('sender').populate('recepient')
 
-           return res.status(200).json(messages)
+            return res.status(200).json(messages)
         } catch (e) {
             return res.status(400).json({message: 'error' + e})
         }
@@ -74,11 +74,12 @@ class MessagesController {
             const session2 = req.body.interlocutorId + req.body.userId
 
             const message = await Message.updateMany(
-                 { $or : [{session: session1}, {session: session2}] },
-                 { readed: true })
+                {$or: [{session: session1}, {session: session2}]},
+                {readed: true})
 
             const unreadedMessages = await Message.find(
-                { readed: false, recepient: req.body.userId
+                {
+                    readed: false, recepient: req.body.userId
                     // $or : [
                     // { client: req.body.userId },
                     // { employee: req.body.userId }]
@@ -94,12 +95,12 @@ class MessagesController {
             })
 
             const messages = await Message.find(
-                    { $or : [{session: session1}, {session: session2}] }
-                ).populate('employee').populate('client').populate('sender').populate('recepient')
+                {$or: [{session: session1}, {session: session2}]}
+            ).populate('employee').populate('client').populate('sender').populate('recepient')
 
             return res.status(200).json({message, messages, parsedUnreadedMessages})
         } catch (e) {
-            return res.status(500).json({ message: 'error' + e })
+            return res.status(500).json({message: 'error' + e})
         }
     }
 
@@ -124,7 +125,7 @@ class MessagesController {
                 }
             })
 
-           return res.status(200).json(parsedMessages)
+            return res.status(200).json(parsedMessages)
         } catch (e) {
             return res.status(500).json({message: 'error' + e})
         }
@@ -132,6 +133,6 @@ class MessagesController {
 
 }
 
-module.exports = function() {
+module.exports = function () {
     return new MessagesController()
 }

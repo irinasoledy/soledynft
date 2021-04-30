@@ -51,8 +51,12 @@ const schema = new Schema({
         type: Date,
         default: Date.now
     },
-    callAlert : {
+    callAlert: {
         type: Boolean,
+        default: false
+    },
+    callStatus: {
+        type: String,
         default: false
     }
 })

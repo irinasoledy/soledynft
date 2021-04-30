@@ -18,6 +18,8 @@ router.post('/api/auth/login', AuthController.login)
 // User endpoints
 router.get('/api/users', UserController.getByType)
 
+router.get('/api/users/history', UserController.getHistories)
+
 router.get('/api/user/details', UserController.getUserDetails)
 
 router.post('/api/user/details', UserController.setUserDetails)

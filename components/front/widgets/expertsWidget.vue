@@ -16,6 +16,16 @@
                     class="col-lg-4 col-md-6 col-12 d-flex child-flex"
                     >
                     <v-card>
+                        <v-badge
+                            v-if="item.status === true"
+                            bordered
+                            bottom
+                            color="#27ae60"
+                            content="ONLINE"
+                            offset-x="10"
+                            offset-y="10"
+                        >
+                        </v-badge>
                         <v-img
                             :src="`/avatars/${item.avatar}`"
                             aspect-ratio="1"
@@ -32,6 +42,7 @@
                             class="pb-5 justify-center"
                             >
                             <v-btn
+                                v-if="item.status"
                                 color="secondary"
                                 @click="openVideoCall(item)"
                                 >
@@ -61,10 +72,14 @@ export default {
     computed: mapGetters({
         refreshUserData : 'dialog/getRefreshUserData',
         trans: 'getTranslations',
-        experts: 'getExperts'
+        experts: 'getExperts',
+        changedEmployee : 'getChangedEmployee',
     }),
     watch: {
         async refreshUserData() { // To test this method...
+            await this.getExpertsList()
+        },
+        async changedEmployee() {
             await this.getExpertsList()
         },
     },
@@ -76,6 +91,7 @@ export default {
             getExpertsList: 'getExpertsList',
             setInterlocutor : 'dialog/setInterlocutor',
             initCall : 'dialog/initCall',
+
         }),
         openDialog(user) {
             this.setInterlocutor(null)
@@ -89,6 +105,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    .experts{
+        .v-badge {
+            position: absolute;
+            z-index: 9;
+            top: 20px;
+            left: 10px;
+        }
+    }
     .experts{
         background-color: $custom_blue;
     }

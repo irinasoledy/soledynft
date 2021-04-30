@@ -37,6 +37,9 @@ io.on('connection', socket => {
 
     socket.on('refreshUsersData', () => {
         io.emit('refreshUsersData')
+        socket.emit('refreshUsersData')
+        // console.log(io);
+
     })
 
     socket.on('remoteLogin', (data, cb) => {
@@ -122,12 +125,17 @@ io.on('connection', socket => {
     })
 
     socket.on('shareUserAction', async data => {
-        socket.join(data.userId)
-        const action = await actions.addUser(data)
+        let action = {}
+        if (data) {
+            socket.join(data.userId)
+            action = await actions.addUser(data)
+        }
+        console.log('sockets share user actions')
         const actionsAll = await actions.getAllActions()
 
         io.emit('refreshActions', {action, actionsAll})
     })
+
 
     socket.on('shareEmployeeStatus', employee => {
         io.emit('refreshEmployeeStatus', employee)

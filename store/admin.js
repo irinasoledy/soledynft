@@ -53,6 +53,7 @@ export const mutations = {
     },
     SOCKET_refreshActions(state, data){
         state.clientActions = data.actionsAll
+        console.log(data.actionsAll)
     }
 }
 

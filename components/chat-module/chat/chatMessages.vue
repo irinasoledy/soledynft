@@ -17,12 +17,30 @@
                 </div> -->
 
             </div>
-            <div class="call-message" v-else>
-                <p>
-                    <v-icon color="#FFF">mdi-phone</v-icon>
-                    <span>{{ message.message }}</span>
-                    <small>{{ getTimeAgo(message.date) }}</small>
-                </p>
+            <div v-else>
+                <div v-if="message.callStatus === 'missed'" class="call-message missed">
+                    <p>
+                        <v-icon color="#FFF">mdi-phone-missed</v-icon>
+                        <span class="call-message-body">{{ message.message }}</span>
+                        <small>{{ getTimeAgo(message.date) }}</small>
+                    </p>
+                </div>
+                <div v-if="message.callStatus === 'rejected'" class="call-message rejected">
+                    <p>
+                        <v-icon color="#FFF">mdi-phone-hangup</v-icon>
+                        <span class="call-message-body">{{ message.message }}</span>
+                        <small>{{ getTimeAgo(message.date) }}</small>
+                    </p>
+                </div>
+
+                <div v-if="message.callStatus === 'accepted'" class="call-message accepted">
+                    <p>
+                        <v-icon color="#FFF"> mdi-phone-in-talk</v-icon>
+                        <span class="call-message-body">{{ message.message }}</span>
+                        <small>{{ getTimeAgo(message.date) }}</small>
+                    </p>
+                </div>
+
             </div>
         </div>
     </div>
@@ -68,6 +86,7 @@ export default {
       border-radius: 4px;
       background: #1976d2;
       position: relative;
+      color: #FFF;
       margin-bottom: 1rem;
       p {
         margin-bottom: 0;
@@ -102,11 +121,21 @@ export default {
     .call-message{
         border-radius: 5px;
         padding-top: 15px;
+        padding-bottom: 1px;
         text-align: center;
-        margin: 10px;
-        background: #34495e;
+        margin: 10px 40px;
+        /* background: #e74c3c; */
         color: #FFF;
         position: relative;
+    }
+    .missed{
+        background: #e74c3c;
+    }
+    .rejected{
+        background: #2c3e50;
+    }
+    .accepted{
+        background: #27ae60;
     }
     .call-message span{
         margin: 0 20px;
@@ -115,10 +144,15 @@ export default {
         position: absolute;
         font-size: 10px;
         top: 0;
+        width: 90px;
+        right: 0;
     }
     .call-message i{
         position: absolute !important;
         top: 15px;
         left: 10px;
+    }
+    .call-message-body{
+        font-size: 12px;
     }
 </style>

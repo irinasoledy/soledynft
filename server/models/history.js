@@ -1,17 +1,21 @@
 const {Schema, model} = require('mongoose')
 
 const schema = new Schema({
-    employee : {
+    userId: {
         ref: 'users',
         type: Schema.Types.ObjectId,
         default: null
     },
-    client : {
+    recipientId: {
         ref: 'users',
         type: Schema.Types.ObjectId,
         default: null
     },
-    date : {
+    session: {
+        type: String,
+        default: false
+    },
+    date: {
         type: Date,
         default: Date.now
     }
