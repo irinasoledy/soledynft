@@ -23,6 +23,9 @@
 
                 <div class="col-lg-3 col-md-3 side-block-wrap">
                     <div class="side-block" id="sidebar">
+
+                        <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="service"/>
+
                         <a v-for="anchor in service.blogs"
                            :key="anchor.id"
                            class="v-list-item v-list-item--link theme--light item-anchor"
@@ -62,6 +65,7 @@
                             v-if="employeeList.length > 0"
                             v-for="(item, i) in employeeList"
                             :key="i"
+                            align="center" justify="center"
                         >
                             <v-badge
                                 v-if="item.employee.status === true"
@@ -73,20 +77,17 @@
                                 offset-y="10"
                             >
                             </v-badge>
-                            <v-img
-                                :src="`/avatars/${item.employee.avatar}`"
-                                aspect-ratio="1"
-                                class="grey lighten-2"
-                            >
-                            </v-img>
-                            <v-card-title class="title justify-center">
+                            <v-avatar size="115" color="primary" class="mx-auto">
+                                <img :src="`/avatars/${item.employee.avatar}`">
+                            </v-avatar>
+
+                            <v-card-title class="title justify-center operator-title">
                                 {{ item.employee.name }}
                             </v-card-title>
-                            <v-card-subtitle class="text-center">
+                            <v-card-subtitle class="text-center operator-position">
                                 {{ trans.Team[item.employee.position] }}
                             </v-card-subtitle>
-                            <v-card-actions class="pb-5 justify-center">
-
+                            <v-card-actions class="pb-5 justify-center operator-btns">
                                 <v-btn
                                     v-if="item.employee.status"
                                     color="secondary"
@@ -116,10 +117,11 @@
 
 import {mapActions, mapGetters} from 'vuex'
 import contentApi from '@/api/contentApi.js'
-import appointmentForm from "@/components/front/forms/appointmentForm.vue"
+import cartBtn from "@/components/front/cart/cartBtn"
 
 export default {
     layout: "default",
+    components: { cartBtn },
     head() {
         return {
             title: this.title,
@@ -144,17 +146,8 @@ export default {
         refreshUserData() { // To test this method...
             this.getEmployees()
         },
-        changedEmployee() { // cerez jopu...
+        changedEmployee() {
             this.getEmployees()
-            // console.log(this.changedEmployee);
-            // if (this.changedEmployee !== null) {
-            //     const employeeList = this.employeeList.find(service => {
-            //         if (service.employee._id == this.changedEmployee._id) {
-            //             return service.employee.status = this.changedEmployee.status
-            //         }
-            //     })
-            // }
-            // this.setDefaultChangedEmployee()
         },
         reject() {
             this.dialog = false
@@ -183,7 +176,6 @@ export default {
     async mounted() {
         this.service = await this.allServices.find((serv) => serv.alias == this.$route.params.subservice)
         this.getEmployees()
-        // console.log(this.employeeList);
         window.addEventListener('scroll', this.handleScroll);
         this.title = this.service.translation.seo_title
         this.description = this.service.translation.seo_description
@@ -419,5 +411,23 @@ export default {
 
 .medium-width {
     min-width: 90% !important;
+}
+
+.operator-title {
+    line-height: 1;
+    margin-top: -10px;
+}
+
+.operator-position {
+    line-height: 1;
+    margin-top: -10px;
+}
+
+.operator-btns {
+    line-height: 1;
+    margin-top: -18px;
+}
+.add-to-cart-btn {
+    margin-left: 15px;
 }
 </style>

@@ -4,8 +4,8 @@
         <nuxt />
 
         <div v-if="$auth.loggedIn">
-            <Chat mode="employee" :user="$auth.user"/>
-            <Video mode="employee" :user="$auth.user"/>
+<!--            <Chat mode="employee" :user="$auth.user"/>-->
+<!--            <Video mode="employee" :user="$auth.user"/>-->
         </div>
 
         <div v-else>

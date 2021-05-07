@@ -108,7 +108,7 @@ export default {
     .experts{
         .v-badge {
             position: absolute;
-            z-index: 9;
+            z-index: 4;
             top: 20px;
             left: 10px;
         }

@@ -6,6 +6,9 @@ const EmployeeService = require('../models/employeeService')
 const UserService = require('../services/UserService')()
 const NotificationService = require('../services/NotificationService')()
 const ActionService = require('../services/ActionService')()
+const bcrypt = require('bcryptjs')
+
+
 
 class UserController {
 
@@ -84,7 +87,7 @@ class UserController {
 
     async getEmployee(req, res) {
         try {
-            const employee = await User.find({type: 'employee'})
+            const employee = await User.find({type: 'employee'}).sort({status: 'desc'}).lean()
             return res.status(200).json(employee)
         } catch (e) {
             return res.status(505).json({message: 'Server Error'})
@@ -96,8 +99,16 @@ class UserController {
             const services = await EmployeeService.find({service: req.query.serviceId})
                 // .sort({status: 'asc'})
                 // .populate('employee')
-                .populate('employee', '_id name avatar status position', null, { sort: { 'status': 1 } })
-                // .populate({path: 'employee', options: { sort: { status: 'desc' } } })
+                .populate('employee', '_id name avatar status position', null, {sort: {status: 'desc'}})
+            // .populate({path: 'employee', options: { sort: { status: 'desc' } } })
+            // .populate({
+            //     path: 'employee'
+            //     , select: '_id name avatar status position'
+            //     , match: null
+            //     , options: { sort: {status: -1}}
+            // }).lean()
+            // .populate({path:'employee',options:{ sort: {'status' : 'desc'}}})
+
 
             return res.status(200).json(services)
 
@@ -232,6 +243,51 @@ class UserController {
             return res.status(200).json(histories)
         } catch (e) {
             return res.status(505).json({message: `Error UserController@getUserDetails ${e}`})
+        }
+    }
+
+    async setUserGenerals(req, res) {
+        try {
+            const {userId, name, email, phone} = req.body
+
+            const user = await User.findOneAndUpdate(
+                {_id: userId},
+                {
+                    $set: {
+                        name,
+                        email,
+                        phone
+                    }
+                },
+                {new: true}
+            )
+
+            return res.status(200).json(user)
+
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@setUserGenerals ${e}`})
+        }
+    }
+
+    async setUserPasswords(req, res) {
+        try {
+            const {userId, newPassword} = req.body
+            const hashPassword = bcrypt.hashSync(newPassword, 7)
+            const ecodedPassord = Buffer.from(newPassword).toString('base64')
+
+            const user = await User.findOneAndUpdate(
+                { _id: userId },
+                { $set: {
+                        password: hashPassword,
+                        hash: ecodedPassord
+                    } },
+                { new: true }
+            )
+
+            return res.status(200).json(user)
+
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@setUserPasswords ${e}`})
         }
     }
 

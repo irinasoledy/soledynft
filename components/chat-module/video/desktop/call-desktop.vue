@@ -125,6 +125,9 @@ export default {
     }
     .remote-video-d{
         max-height: 70vh;
+        video{
+            width: 100%;
+        }
     }
     .local-video-d video{
         position: absolute;
@@ -133,5 +136,11 @@ export default {
     }
     .local-video-d video{
         height: 150px !important;
+    }
+    .video-wrapp-inside{
+        width: 100%;
+        video{
+            //width: 100%;
+        }
     }
 </style>

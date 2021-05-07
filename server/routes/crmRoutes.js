@@ -24,6 +24,10 @@ router.get('/api/user/details', UserController.getUserDetails)
 
 router.post('/api/user/details', UserController.setUserDetails)
 
+router.post('/api/user/generals', UserController.setUserGenerals)
+
+router.post('/api/user/passwords', UserController.setUserPasswords)
+
 router.post('/api/user', UserController.create)
 
 router.patch('/api/:id/user', UserController.update)

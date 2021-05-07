@@ -100,7 +100,6 @@ export default {
             .catch(err => console.log(err) )
     },
 
-
     async getUsersByCookies(data, cb) {
         await axios.post(`/api/users/cookies`, data)
             .then(response => cb(response.data))
@@ -130,4 +129,17 @@ export default {
             .then(response => cb(response.data))
             .catch(err => console.log(err) )
     },
+
+    async setUserGeneralData(data, cb) {
+        await axios.post(`/api/user/generals`, data)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
+    async setUserPasswords(data, cb) {
+        await axios.post(`/api/user/passwords`, data)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
 }

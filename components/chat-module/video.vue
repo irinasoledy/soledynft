@@ -102,7 +102,7 @@ export default {
             minutes: 0,
             hours: 0,
         },
-
+        iterval: '',
         interlocuitor: {},
         userWith: {},
 
@@ -214,16 +214,19 @@ export default {
             })
         },
         resetTimer() {
+            clearInterval(this.iterval)
+            console.log('reset')
             this.timer.seted = false
             this.timer.seconds = 0
             this.timer.minutes = 0
             this.timer.hours = 0
+            console.log(this.timer)
         },
         runTimer() {
             this.resetTimer()
             this.timer.seted = true
             let sec = 0;
-            setInterval(() => {
+            this.iterval = setInterval(() => {
                 this.timer.seconds = this.pad(++sec%60)
                 this.timer.minutes = this.pad(parseInt(sec/60,10))
             }, 1000);

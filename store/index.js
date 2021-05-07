@@ -1,6 +1,5 @@
-import axios from 'axios'
 import contentApi from '@/api/contentApi'
-import crmApi from '@/api/crmApi'
+import cartApi from '@/api/cartApi'
 
 export const state = () => ({
     langs: [
@@ -67,6 +66,7 @@ export const actions = {
 
     async nuxtServerInit({state, commit}) {
         const currenctLang = this.$router.history.current.params.lang
+
         if (currenctLang) {
             const findLang = state.langs.find(lang => lang.lang === currenctLang)
             if (findLang) {
@@ -76,6 +76,7 @@ export const actions = {
 
         await contentApi.getTranslations(state.lang.lang, data => commit('SET_TRANSALATIONS', data))
         await contentApi.getInitData(state.lang.lang, data => commit('SET_SERVICES', data))
+
         commit('SET_ENV_API', process.env.API)
     },
 
