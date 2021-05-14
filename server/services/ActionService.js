@@ -4,29 +4,33 @@ const userAction = require('../models/userAction')
 
 class ActionService {
 
-    async assignClientToEmployee(clientId, employeeId){
+    async assignClientToEmployee(clientId, employeeId) {
         const action = await userAction.findOne({userId: clientId})
 
         if (!action.assigedManager) {
             await userAction.findOneAndUpdate(
-               { _id: action._id }, {$set: {
-                   assigedManager: employeeId
-               }})
+                {_id: action._id}, {
+                    $set: {
+                        assigedManager: employeeId
+                    }
+                })
         }
     }
 
-    async removeAssignClientToEmployee(clientId, employeeId){
+    async removeAssignClientToEmployee(clientId, employeeId) {
         const action = await userAction.findOne({userId: clientId})
 
         if (action.assigedManager) {
             await userAction.findOneAndUpdate(
-               { _id: action._id }, {$set: {
-                   assigedManager: null
-               }})
+                {_id: action._id}, {
+                    $set: {
+                        assigedManager: null
+                    }
+                })
         }
     }
 
-    async addUser(payload){
+    async addUser(payload) {
         const findAction = await userAction.findOne({userId: payload.userId})
         let action = null
 
@@ -35,17 +39,19 @@ class ActionService {
             const visitsMin = parseInt(findAction.visitsMin) + parseInt(payload.visitsMin)
 
             action = await userAction.findOneAndUpdate(
-                { _id: findAction._id },{ $set: {
-                    online: payload.online,
-                    logged: payload.logged,
-                    lastVisit: payload.lastVisit,
-                    currentPage: payload.currentPage,
-                    visitsQty: visitsQty,
-                    visitsMin: visitsMin,
-                    status: payload.status
-                } },{ new: true }
+                {_id: findAction._id}, {
+                    $set: {
+                        online: payload.online,
+                        logged: payload.logged,
+                        lastVisit: payload.lastVisit,
+                        currentPage: payload.currentPage,
+                        visitsQty: visitsQty,
+                        visitsMin: visitsMin,
+                        status: payload.status
+                    }
+                }, {new: true}
             )
-        }else{
+        } else {
             action = await new userAction({
                 userId: payload.userId,
                 online: payload.online,
@@ -60,32 +66,32 @@ class ActionService {
         return action
     }
 
-    async getAllActions()
-    {
+    async getAllActions() {
         this.checkUsersStatus()
 
         const actions = await userAction.find().sort({lastVisit: 'desc'}).populate('userId').populate('assigedManager')
         return actions
     }
 
-    async checkUsersStatus()
-    {
+    async checkUsersStatus() {
         let date = ''
         let action = null
         let now = new Date()
-        let nowMinus = now.setMinutes( now.getMinutes() - 2 );
+        let nowMinus = now.setMinutes(now.getMinutes() - 2);
 
         const actions = await userAction.find({online: true})
 
         actions.forEach(async action => {
             let dt = new Date(action.lastVisit);
-            date = dt.setMinutes( dt.getMinutes() );
+            date = dt.setMinutes(dt.getMinutes());
 
             if (nowMinus > date) {
                 action = await userAction.findOneAndUpdate(
-                    { _id: action._id },{ $set: {
-                        online: false,
-                    } },{ new: true }
+                    {_id: action._id}, {
+                        $set: {
+                            online: false,
+                        }
+                    }, {new: true}
                 )
             }
         })
@@ -94,6 +100,6 @@ class ActionService {
     }
 }
 
-module.exports = function() {
+module.exports = function () {
     return new ActionService()
 }

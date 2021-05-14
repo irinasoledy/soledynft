@@ -1,5 +1,5 @@
-const { Nuxt, Builder } = require('nuxt')
-const { app, server } = require('./app')
+const {Nuxt, Builder} = require('nuxt')
+const {app, server} = require('./app')
 const consola = require('consola')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
@@ -19,7 +19,7 @@ config.dev = !(process.env.NODE_ENV === 'production')
 
 async function start() {
     const nuxt = new Nuxt(config)
-    const { host, port } = nuxt.options.server
+    const {host, port} = nuxt.options.server
 
     try {
         await mongoose.connect('mongodb://127.0.0.1:27017/chat', {
@@ -36,7 +36,7 @@ async function start() {
         }
 
         app.use(bodyParser.json())
-        app.use(bodyParser.urlencoded({ extended: true }));
+        app.use(bodyParser.urlencoded({extended: true}));
         app.use(cookieParser())
         app.use(fileUpload())
 

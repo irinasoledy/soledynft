@@ -2,10 +2,8 @@ const Room = require('../models/room')
 const User = require('../models/user')
 const Message = require('../models/message')
 
-class HistoryController
-{
-    async getClientsList(req, res)
-    {
+class HistoryController {
+    async getClientsList(req, res) {
         try {
             const messages = await Message.find({employee: req.params.id})
             let clientsId = []
@@ -14,7 +12,7 @@ class HistoryController
                 clientsId.push(message.client)
             })
 
-            const users = await User.find({'_id': {$in : clientsId}})
+            const users = await User.find({'_id': {$in: clientsId}})
 
             return res.status(200).json(users)
         } catch (e) {
@@ -22,8 +20,7 @@ class HistoryController
         }
     }
 
-    async getClientMessages(req, res)
-    {
+    async getClientMessages(req, res) {
         try {
             const messages = await Message.find({client: req.query.id}).populate('employee').populate('client')
             return res.status(200).json(messages)
@@ -34,6 +31,6 @@ class HistoryController
 
 }
 
-module.exports = function() {
+module.exports = function () {
     return new HistoryController()
 }

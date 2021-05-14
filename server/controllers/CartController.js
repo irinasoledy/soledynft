@@ -1,7 +1,6 @@
 const Cart = require('../models/cart')
 
 class CartController {
-
     async add(req, res) {
         try {
             const {userId, serviceId} = req.body
@@ -30,6 +29,25 @@ class CartController {
             const cart = await Cart.find({userId: userId}).sort({date: 'desc'})
 
             return res.status(200).json(cart)
+        } catch (e) {
+            return res.status(404).json({message: 'error'})
+        }
+    }
+
+    async updateQty(req, res) {
+        try {
+            const {qty, userId, cartId} = req.body
+
+            await Cart.findOneAndUpdate(
+                {_id: cartId},
+                {$set: {qty, qty}},
+                {new: true}
+            )
+
+            const cart = await Cart.find({userId: userId}).sort({date: 'desc'})
+
+            return res.status(200).json(cart)
+
         } catch (e) {
             return res.status(404).json({message: 'error'})
         }

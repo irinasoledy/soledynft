@@ -1,0 +1,175 @@
+<template>
+    <v-expansion-panel>
+        <v-expansion-panel-header>
+            <h5 class="mb-0">
+                <v-badge
+                    v-if="orders.length"
+                    color="green"
+                    :content="orders.length"
+                >
+                    <v-icon>mdi-view-headline</v-icon>
+                </v-badge>
+                <v-badge
+                    v-else
+                    color="green"
+                    content="0"
+                >
+                    <v-icon>mdi-view-headline</v-icon>
+                </v-badge>
+                Orders:
+            </h5>
+        </v-expansion-panel-header>
+
+        <v-expansion-panel-content>
+
+            <v-simple-table>
+                <template template v-slot:default>
+                    <thead>
+                    <tr>
+                        <th class="text-left">ID</th>
+                        <th class="text-left">Status</th>
+                        <th class="text-center">Payment</th>
+                        <th class="text-left">Amount</th>
+                        <th class="text-left">Date</th>
+                        <th class="text-left">Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(order, index) in orders" :key="index">
+                        <td><small>{{ order._id }}</small></td>
+                        <td class="text-center">
+                            <v-select
+                                class="table-select"
+                                :items="statuses"
+                                :label="order.status"
+                                v-model="orderStatuses[order._id]=order.status"
+                                dense
+                                solo
+                                @change="changeOrderStatus(order._id)"
+                            ></v-select>
+                        </td>
+                        <td class="text-center">
+                            <v-select
+                                class="table-select"
+                                :items="payments"
+                                :label="order.paymentMethod"
+                                v-model="orderPayments[order._id]=order.paymentMethod"
+                                dense
+                                solo
+                                @change="changeOrderPayment(order._id)"
+                            ></v-select>
+                        </td>
+                        <td><small>{{ order.amount }}
+                            <v-icon>mdi-currency-eur</v-icon>
+                        </small></td>
+                        <td><small>{{ $parseDate(order.date) }}</small></td>
+                        <td>
+                            <v-icon @click="showOrder(order)">mdi-eye</v-icon>
+                        </td>
+                    </tr>
+                    </tbody>
+                </template>
+            </v-simple-table>
+
+            <v-dialog v-model="servicesDialog" scrollable max-width="700px">
+                <v-card class="mx-auto" tile v-if="orderServices">
+                    <v-card-title>
+                        Services list:
+                    </v-card-title>
+                    <v-list-item two-line v-for="(service, index) in orderServices" :key="index">
+                        <v-list-item-content>
+                            <v-list-item-title>
+                                <strong>#{{ index + 1 }}</strong>
+                                {{ service.service.translation.name }}
+                            </v-list-item-title>
+                            <v-list-item-subtitle>
+                                <strong>Qty:</strong> {{ service.qty }} |
+                                <strong>Price:</strong> {{ service.service.price }} EUR
+                            </v-list-item-subtitle>
+                        </v-list-item-content>
+                    </v-list-item>
+                    <v-card-actions class="justify-end">
+                        <v-btn
+                            text
+                            @click="servicesDialog = false"
+                        >Close</v-btn>
+                    </v-card-actions>
+                </v-card>
+
+            </v-dialog>
+        </v-expansion-panel-content>
+    </v-expansion-panel>
+</template>
+
+<script>
+import cartApi from "@/api/cartApi";
+import {mapGetters} from "vuex";
+
+export default {
+    props: ['user'],
+    data: () => ({
+        servicesDialog: false,
+        orders: [],
+        orderStatuses: [],
+        statuses: ['Scheduled', 'Payed', 'Performed', 'Shipped', 'Cancelled', 'Expired'],
+        orderPayments: [],
+        payments: ['card', 'cod', 'paypal'],
+        chooseOrder: null,
+        orderServices: null,
+    }),
+    mounted() {
+        cartApi.getOrders({userId: this.user._id}, response => this.orders = response)
+    },
+    computed: mapGetters({
+        allServices: 'getAllServices'
+    }),
+    methods: {
+        showOrder(order) {
+            this.servicesDialog = true
+            this.getOrderServices(order)
+        },
+        changeOrderStatus(orderId) {
+            cartApi.changeOrderStatus(
+                {
+                    orderId: orderId,
+                    status: this.orderStatuses[orderId].status,
+                    userId: this.user._id
+                },
+                response => this.orders = response
+            )
+        },
+        changeOrderPayment(orderId) {
+            cartApi.changeOrderPayment(
+                {
+                    orderId: orderId,
+                    payment: this.orderPayments[orderId].paymentMethod,
+                    userId: this.user._id
+                },
+                response => this.orders = response
+            )
+        },
+        getOrderServices(order) {
+            this.orderServices = order.services.map(item => {
+                const arr = {
+                    id: item._id,
+                    qty: item.qty,
+                    service: '',
+                }
+                arr.service = this.allServices.find(service => service.id == item.serviceId)
+                return arr
+            })
+        }
+    }
+}
+</script>
+
+<style>
+.table-select {
+    font-size: 12px !important;
+    margin-top: 20px !important;
+}
+
+.table-select .v-input__control {
+    min-height: 28px !important;
+}
+</style>

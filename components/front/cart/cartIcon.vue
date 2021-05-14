@@ -1,8 +1,6 @@
 <template>
-    <nuxt-link :to="`/ro/cart`">
-
+    <nuxt-link :to="`/ro/cart`" v-if="cart.length > 0">
         <v-badge
-            v-if="cart.length"
             bordered
             color="secondary"
             icon="mdi-lock"
@@ -13,13 +11,10 @@
                 mdi-cart
             </v-icon>
         </v-badge>
-
-        <v-icon v-else>
-            mdi-cart
-        </v-icon>
-
     </nuxt-link>
-
+    <v-icon v-else>
+        mdi-cart
+    </v-icon>
 </template>
 
 <script>
@@ -28,11 +23,16 @@ import {mapGetters, mapActions} from 'vuex'
 
 export default {
     computed: mapGetters({
-        cart: 'cart/getCart'
+        cart: 'cart/getCart',
+        cartRefresh: 'cart/getRefresh'
     }),
+    watch: {
+        cartRefresh() {
+            this.getCart(this.$auth.user._id)
+        }
+    },
     async mounted() {
         await this.getCart(this.$auth.user._id)
-        console.log(this.cart)
     },
     methods: {
         ...mapActions({

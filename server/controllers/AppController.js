@@ -1,4 +1,3 @@
-const Room = require('../models/room')
 const User = require('../models/user')
 const Notification = require('../models/notification')
 

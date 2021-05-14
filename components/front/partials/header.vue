@@ -315,13 +315,14 @@
                                     {{ trans.ContactsAndForms.companyMainPhone1 }}
                                 </v-list-item>
                             </v-col>
-                            <v-col>
+                            <v-col class="text-right">
+                                <CartIcon v-if="$auth.loggedIn"
+                                          :user="$auth.user"
+                                ></CartIcon>
+                            </v-col>
+                            <v-col class="account-header-area">
                                 <v-hover v-slot="{hover}">
                                     <v-list-item color="primary">
-
-                                        <CartIcon v-if="$auth.loggedIn"
-                                                  :user="$auth.user"
-                                        ></CartIcon>
 
                                         <!-- sign in -->
                                         <span class="sign-in-btn" v-if="!$auth.loggedIn"
@@ -676,6 +677,9 @@ export default {
 
 .sign-in-btn {
     cursor: pointer;
+}
+.account-header-area{
+    width: 271px;
 }
 
 </style>

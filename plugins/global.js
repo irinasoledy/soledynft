@@ -1,4 +1,5 @@
 export default ({ store, app }, inject) => {
+
     inject('banner', (key, isMobile = false) => {
         const banners = store.state.banners
 
@@ -13,5 +14,18 @@ export default ({ store, app }, inject) => {
         }else{
             return `${process.env.API}/images/banners/${banner.mobile_src}`
         }
+    })
+
+
+    inject('parseDate', date => {
+        date = new Date(date)
+        let strArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        let mins = date.getMinutes();
+        let h = date.getHours();
+        let d = date.getDate();
+        let m = strArray[date.getMonth()];
+        let y = date.getFullYear();
+
+        return h + ':' + mins + ' ' + (d <= 9 ? '0' + d : d) + '/' + m + '/' + y;
     })
 }

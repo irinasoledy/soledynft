@@ -11,11 +11,9 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
     props: ['user', 'service'],
-    mounted() {
-        console.log(this.user)
-    },
     computed: mapGetters({
-        cart: 'cart/getCart'
+        cart: 'cart/getCart',
+        total: 'cart/getTotal'
     }),
     methods: {
         ...mapActions({

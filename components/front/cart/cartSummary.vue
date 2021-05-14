@@ -110,6 +110,7 @@ export default {
             let step = parseInt(this.step)
             if (step === 1) {
                 this.$nuxt.$emit('nextStep', step++)
+                return
             }
             if (step === 2) {
                 this.$nuxt.$emit('valiadateCheckoutForm', {
@@ -117,9 +118,15 @@ export default {
                         this.$nuxt.$emit('nextStep', step++)
                     }
                 })
+                return
             }
             if (step === 3) {
-
+                this.$nuxt.$emit('valiadatePayment', {
+                    done: response => {
+                        alert('yes')
+                    }
+                })
+                return false
             }
         },
         prevStep() {

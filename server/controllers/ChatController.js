@@ -4,16 +4,15 @@ const User = require('../models/user')
 
 
 class ChatController {
-
     constructor() {
         this.accountId = 'ACf774fdacb3804858ce05f50638a9b7c4'
         this.apiKeyId = 'SKa009673cd0e1a4fabe39b6f04fd213e4'
         this.apiKeySecret = 'PCW5zOsQomxsPkrjX6Nl079irATIOMaE'
     }
 
-    async savePolicy(req, res){
+    async savePolicy(req, res) {
         const user = await User.findOneAndUpdate(
-            { _id: req.body.userId },{ $set: { policy: [req.body.policies] } },{ new: true }
+            {_id: req.body.userId}, {$set: {policy: [req.body.policies]}}, {new: true}
         )
 
         return res.json(user)
@@ -46,6 +45,6 @@ class ChatController {
     }
 }
 
-module.exports = function() {
+module.exports = function () {
     return new ChatController()
 }

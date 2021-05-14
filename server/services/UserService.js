@@ -4,12 +4,12 @@ const EmployeeService = require('../models/employeeService')
 const History = require('../models/history')
 const bcrypt = require('bcryptjs')
 
-class UserService{
+class UserService {
 
     async getUsers(userData, type) {
         let condition = {}
         if (type) {
-            condition = { type: type }
+            condition = {type: type}
         }
 
         const users = await User.find(condition).sort({date: -1})
@@ -53,44 +53,46 @@ class UserService{
         const ecodedPassord = Buffer.from(password).toString('base64')
 
         const user = await User.findOneAndUpdate(
-            { _id: id },
-            { $set: {
-                login,
-                name,
-                email,
-                phone,
-                type,
-                position,
-                password: hashPassword,
-                hash: ecodedPassord,
-                logged: logged,
-            } },
-            { new: true }
+            {_id: id},
+            {
+                $set: {
+                    login,
+                    name,
+                    email,
+                    phone,
+                    type,
+                    position,
+                    password: hashPassword,
+                    hash: ecodedPassord,
+                    logged: logged,
+                }
+            },
+            {new: true}
         )
 
         return user
     }
 
-    async remove(id){
+    async remove(id) {
         const user = await User.findOne({_id: id})
-        await User.deleteOne({ _id: user._id })
+        await User.deleteOne({_id: user._id})
         await EmployeeService.deleteMany({employee: user._id})
-        await UserAction.updateMany({ assigedManager: user._id }, {assigedManager: null})
+        await UserAction.updateMany({assigedManager: user._id}, {assigedManager: null})
 
         return user
     }
 
-    async updateStatus(status, id){
-            const user = await User.findOneAndUpdate(
-                { _id: id },
-                { $set: { status: status } },
-                { new: true }
-            )
+    async updateStatus(status, id) {
+        const user = await User.findOneAndUpdate(
+            {_id: id},
+            {$set: {status: status}},
+            {new: true}
+        )
 
-            return user
+        return user
     }
 
-    async assignmentServiceToUser(services, id){
+    async assignmentServiceToUser(services, id) {
         await EmployeeService.deleteMany({employee: id})
 
         await services.forEach(async service => {
@@ -101,7 +103,7 @@ class UserService{
         })
     }
 
-    async getUserServices(req, res){
+    async getUserServices(req, res) {
         const services = await EmployeeService.find({employee: req.query.id})
         return res.status(200).json(services)
     }
@@ -150,6 +152,6 @@ class UserService{
 
 }
 
-module.exports = function() {
+module.exports = function () {
     return new UserService()
 }

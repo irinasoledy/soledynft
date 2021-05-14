@@ -65,10 +65,10 @@ export const mutations = {
 export const actions = {
 
     async nuxtServerInit({state, commit}) {
-        const currenctLang = this.$router.history.current.params.lang
+        const currentLang = this.$router.history.current.params.lang
 
-        if (currenctLang) {
-            const findLang = state.langs.find(lang => lang.lang === currenctLang)
+        if (currentLang) {
+            const findLang = state.langs.find(lang => lang.lang === currentLang)
             if (findLang) {
                 commit('SET_DEFAULT_LANG', findLang.id)
             }

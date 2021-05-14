@@ -4,7 +4,7 @@ const io = require('socket.io')(server)
 const users = require('./controllers/Users')()
 const actions = require('./services/ActionService')()
 
-const m = (name, text, id) => ({ name, text, id })
+const m = (name, text, id) => ({name, text, id})
 
 io.on('connection', socket => {
 
@@ -38,8 +38,6 @@ io.on('connection', socket => {
     socket.on('refreshUsersData', () => {
         io.emit('refreshUsersData')
         socket.emit('refreshUsersData')
-        // console.log(io);
-
     })
 
     socket.on('remoteLogin', (data, cb) => {
@@ -49,14 +47,9 @@ io.on('connection', socket => {
         cb()
     })
 
-
-
-
-
-
-
-
-
+    socket.on('refreshCart', userId => {
+        socket.broadcast.to(userId).emit('refreshCart')
+    })
 
 
     // Start: employee create a room
@@ -143,7 +136,6 @@ io.on('connection', socket => {
     })
 
 
-
     socket.on('rejectCall', data => {
         io.to(data.roomId).emit('call_reject', true)
     })
@@ -153,61 +145,59 @@ io.on('connection', socket => {
     })
 
 
+    socket.on('userJoined', (data, cb) => {
+        if (!data.name || !data.room) {
+            return cb('Data is incorrect')
+        }
 
-  socket.on('userJoined', (data, cb) => {
-    if (!data.name || !data.room) {
-      return cb('Data is incorrect')
-    }
+        socket.join(data.room)
 
-    socket.join(data.room)
+        users.remove(socket.id)
+        users.add({
+            id: socket.id,
+            name: data.name,
+            room: data.room
+        })
 
-    users.remove(socket.id)
-    users.add({
-      id: socket.id,
-      name: data.name,
-      room: data.room
+        cb({userId: socket.id})
+        io.to(data.room).emit('updateUsers', users.getByRoom(data.room))
+        socket.emit('newMessage', m('admin', `Wellcome ${data.name}.`))
+        socket.broadcast
+            .to(data.room)
+            .emit('newMessage', m('admin', `User ${data.name} joined.`))
     })
 
-    cb({ userId: socket.id })
-    io.to(data.room).emit('updateUsers', users.getByRoom(data.room))
-    socket.emit('newMessage', m('admin', `Wellcome ${data.name}.`))
-    socket.broadcast
-      .to(data.room)
-      .emit('newMessage', m('admin', `User ${data.name} joined.`))
-  })
+
+    socket.on('userLeft', (id, cb) => {
+        const user = users.remove(id)
+        if (user) {
+            io.to(user.room).emit('updateUsers', users.getByRoom(user.room))
+            io.to(user.room).emit(
+                'newMessage',
+                m('admin', `User ${user.name} logged out.`)
+            )
+        }
+        cb()
+    })
+
+    socket.on('stop', (roomId) => {
+        io.to(roomId).emit('stopChat')
+    })
 
 
-
-  socket.on('userLeft', (id, cb) => {
-    const user = users.remove(id)
-    if (user) {
-      io.to(user.room).emit('updateUsers', users.getByRoom(user.room))
-      io.to(user.room).emit(
-        'newMessage',
-        m('admin', `User ${user.name} logged out.`)
-      )
-    }
-    cb()
-  })
-
-  socket.on('stop', (roomId) => {
-      io.to(roomId).emit('stopChat')
-  })
-
-
-  socket.on('disconnect', () => {
-    const user = users.remove(socket.id)
-    if (user) {
-      io.to(user.room).emit('updateUsers', users.getByRoom(user.room))
-      io.to(user.room).emit(
-        'newMessage',
-        m('admin', `User ${user.name} logged out.`)
-      )
-    }
-  })
+    socket.on('disconnect', () => {
+        const user = users.remove(socket.id)
+        if (user) {
+            io.to(user.room).emit('updateUsers', users.getByRoom(user.room))
+            io.to(user.room).emit(
+                'newMessage',
+                m('admin', `User ${user.name} logged out.`)
+            )
+        }
+    })
 })
 
 module.exports = {
-  app,
-  server
+    app,
+    server
 }

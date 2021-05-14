@@ -9,7 +9,6 @@ const ActionService = require('../services/ActionService')()
 const bcrypt = require('bcryptjs')
 
 
-
 class UserController {
 
     async getByType(req, res) {
@@ -276,12 +275,14 @@ class UserController {
             const ecodedPassord = Buffer.from(newPassword).toString('base64')
 
             const user = await User.findOneAndUpdate(
-                { _id: userId },
-                { $set: {
+                {_id: userId},
+                {
+                    $set: {
                         password: hashPassword,
                         hash: ecodedPassord
-                    } },
-                { new: true }
+                    }
+                },
+                {new: true}
             )
 
             return res.status(200).json(user)

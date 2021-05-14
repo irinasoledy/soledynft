@@ -67,10 +67,10 @@ const schema = new Schema({
         default: ''
     },
     policy: [{
-        agreementUsing : Boolean,
-        agreementAnalyzing : Boolean,
-        agreementContact : Boolean,
-        agreementProtect : Boolean,
+        agreementUsing: Boolean,
+        agreementAnalyzing: Boolean,
+        agreementContact: Boolean,
+        agreementProtect: Boolean,
     }],
     lead: {
         type: Boolean,
@@ -84,7 +84,7 @@ const schema = new Schema({
         type: String,
         default: ''
     },
-    date : {
+    date: {
         type: Date,
         default: Date.now
     }

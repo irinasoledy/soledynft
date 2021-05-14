@@ -5,18 +5,23 @@ export const state = () => ({
     subtotal: 0,
     total: 0,
     step: 1,
+    order: null,
+    refresh: false,
 })
 
 export const mutations = {
     refreshCart(state, data) {
         state.cart = data
     },
-    setCart(state, data) {
-        state.cart = data
+    refreshOrder(state, data) {
+        state.order = data
     },
     setStep(state, step) {
         state.step = step
-    }
+    },
+    SOCKET_refreshCart(state) {
+        state.refresh = !state.refresh
+    },
 }
 
 export const actions = {
@@ -25,11 +30,38 @@ export const actions = {
     },
 
     async getCart({commit}, userId) {
-        await cartApi.getCart(userId, response => commit('setCart', response))
+        await cartApi.getCart(userId, response => commit('refreshCart', response))
     },
 
     async removeCart({commit}, data) {
         await cartApi.removeCart(data, response => commit('refreshCart', response))
+    },
+
+    async updateQty({commit}, data) {
+        await cartApi.updateCartQty(data, response => commit('refreshCart', response))
+    },
+
+    async addCheckOutInfo({commit}, data) {
+        await cartApi.addCheckOutInfo(data, response => commit('refreshOrder', response))
+    },
+
+    async updateCheckOutInfo({commit}, data) {
+        await cartApi.updateCheckOutInfo(data, response => commit('refreshOrder', response))
+    },
+
+    async updatePaymentInfo({commit}, data) {
+        await cartApi.updatePaymentInfo(data, response => commit('refreshOrder', response))
+    },
+
+    async pay({commit}, data) {
+        await cartApi.pay(data, response => {
+            commit('refreshOrder', response)
+            commit('refreshCart', [])
+        })
+    },
+
+    resetOrder({commit}) {
+        commit('refreshOrder', null)
     },
 
     changeStep({commit}, step) {
@@ -58,18 +90,20 @@ export const getters = {
     getSubtotal: (state, getters) => {
         const carts = getters.getCart
         let subtotal = 0
-        for (let i = 0; i < carts.length; i++ ){
-            subtotal += parseFloat(carts[i].service.price)
+        for (let i = 0; i < carts.length; i++) {
+            subtotal += parseFloat(carts[i].service.price) * carts[i].qty
         }
         return subtotal.toFixed(2)
     },
     getTotal: (state, getters) => {
         const carts = getters.getCart
         let subtotal = 0
-        for (let i = 0; i < carts.length; i++ ){
-            subtotal += parseFloat(carts[i].service.price)
+        for (let i = 0; i < carts.length; i++) {
+            subtotal += parseFloat(carts[i].service.price) * carts[i].qty
         }
         return subtotal.toFixed(2)
     },
     getStep: state => state.step,
+    getOrder: state => state.order,
+    getRefresh: state => state.refresh
 }

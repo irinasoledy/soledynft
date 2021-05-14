@@ -1,53 +1,53 @@
 const {Schema, model} = require('mongoose')
 
 const schema = new Schema({
-    sender : {
+    sender: {
         ref: 'users',
         type: Schema.Types.ObjectId,
         default: null
     },
-    recepient : {
+    recepient: {
         ref: 'users',
         type: Schema.Types.ObjectId,
         default: null
     },
-    client : {
+    client: {
         ref: 'users',
         type: Schema.Types.ObjectId,
         default: null
     },
-    employee : {
+    employee: {
         ref: 'users',
         type: Schema.Types.ObjectId,
         default: null
     },
-    message : {
+    message: {
         type: String,
         required: true
     },
-    readed : {
+    readed: {
         type: Boolean,
         default: false
     },
-    room : {
+    room: {
         ref: 'rooms',
         type: Schema.Types.ObjectId,
         default: null
     },
-    sendBy : {
+    sendBy: {
         type: String,
         default: '',
     },
-    history : {
+    history: {
         ref: 'histories',
         type: Schema.Types.ObjectId,
         default: null
     },
-    session : {
+    session: {
         type: String,
         default: '',
     },
-    date : {
+    date: {
         type: Date,
         default: Date.now
     },

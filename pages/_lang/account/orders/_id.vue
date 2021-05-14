@@ -2,126 +2,70 @@
     <main>
         <div class="container account-area">
             <div class="row">
-                <div class="col-auto pad">
+                <div class="col-md-3 pad">
                     <sidebar></sidebar>
                 </div>
-                <div class="col account-area">
+                <div class="col-md-9 account-area" v-if="order">
                     <div class="row cabinet-content">
-                        <div class="col-lg-10 col-md-12 col-12 display-1 text-center">
-                            Datele personale
+                        <div class="col-md-10 col-12 display-1 text-center">
+                            Order Details
                         </div>
-                        <div class="col-lg-10 col-md-12 col-12">
-                            <v-form
-                                ref="form"
-                                class="row"
-                                lazy-validation
-                            >
-                                <div class="col-md-6">
-                                    <v-text-field
-                                        label="Nume"
-                                        required
-                                    ></v-text-field>
-                                </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <v-card class="mx-auto" tile>
+                                <v-list-item two-line>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Order ID:</v-list-item-title>
+                                        <v-list-item-subtitle>{{ order._id }}</v-list-item-subtitle>
+                                    </v-list-item-content>
+                                </v-list-item>
 
-                                <div class="col-md-6">
-                                    <v-text-field
-                                        label="Prenume"
-                                        required
-                                    ></v-text-field>
-                                </div>
-                                <div class="col-6">
-                                    <label>
-                                        Gen
-                                    </label>
-                                    <v-radio-group v-model="radioGroup" class="d-flex">
-                                        <v-radio
-                                            label="Masculin"
-                                        ></v-radio>
-                                        <v-radio
-                                            label="Femenin"
-                                        ></v-radio>
-                                    </v-radio-group>
-                                </div>
+                                <v-list-item two-line>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Status:</v-list-item-title>
+                                        <v-list-item-subtitle>{{ order.status }}</v-list-item-subtitle>
+                                    </v-list-item-content>
+                                </v-list-item>
 
-                                <div class="col-6">
-                                    <label>Data Nasterii</label>
-                                    <v-menu
-                                        ref="menu"
-                                        v-model="dateMenu"
-                                        :close-on-content-click="false"
-                                        :return-value.sync="date"
-                                        transition="scale-transition"
-                                        offset-y
-                                        min-width="auto"
-                                    >
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-text-field
-                                                v-model="date"
-                                                prepend-icon="mdi-calendar"
-                                                readonly
-                                                v-bind="attrs"
-                                                v-on="on"
-                                            ></v-text-field>
-                                        </template>
-                                        <v-date-picker
-                                            v-model="date"
-                                            no-title
-                                            scrollable
-                                        >
-                                            <v-spacer></v-spacer>
-                                            <v-btn
-                                                text
-                                                color="primary"
-                                                @click="menu = false"
-                                            >
-                                                Cancel
-                                            </v-btn>
-                                            <v-btn
-                                                text
-                                                color="primary"
-                                                @click="$refs.menu.save(date)"
-                                            >
-                                                OK
-                                            </v-btn>
-                                        </v-date-picker>
-                                    </v-menu>
-                                </div>
+                                <v-list-item two-line>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Date:</v-list-item-title>
+                                        <v-list-item-subtitle>{{ $parseDate(order.date) }}</v-list-item-subtitle>
+                                    </v-list-item-content>
+                                </v-list-item>
 
-                                <div class="col-md-6">
-                                    <v-text-field
-                                        label="Telefon"
-                                        required
-                                    ></v-text-field>
-                                </div>
-                                <div class="col-md-6">
-                                    <v-text-field
-                                        label="E-mail"
-                                        required
-                                    ></v-text-field>
-                                </div>
-                                <div class="col-md-6">
-                                    <v-text-field
-                                        label="Resetați parola"
-                                        type="password"
-                                        required
-                                    ></v-text-field>
-                                </div>
+                                <v-list-item two-line>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Payment :</v-list-item-title>
+                                        <v-list-item-subtitle>{{ order.paymentMethod }}</v-list-item-subtitle>
+                                    </v-list-item-content>
+                                </v-list-item>
 
-                                <div class="col-md-6">
-                                    <v-text-field
-                                        label="Repetați parola"
-                                        type="password"
-                                        required
-                                    ></v-text-field>
-                                </div>
-                                <div class="col-12">
-                                    <v-btn
-                                        color="secondary"
-                                    >
-                                        Save
-                                    </v-btn>
-                                </div>
-                            </v-form>
+                                <v-list-item two-line>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Amount:</v-list-item-title>
+                                        <v-list-item-subtitle>{{ order.amount }} EUR</v-list-item-subtitle>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </v-card>
+                        </div>
+
+                        <div class="col-md-7">
+                            <v-card class="mx-auto" tile v-if="orderServices.length">
+                                <v-list-item two-line v-for="(service, index) in orderServices" :key="index">
+                                    <v-list-item-content>
+                                        <v-list-item-title>
+                                            <strong>#{{ index + 1 }}</strong>
+                                            {{ service.service.translation.name }}
+                                        </v-list-item-title>
+                                        <v-list-item-subtitle>
+                                            <strong>Qty:</strong> {{ service.qty }} |
+                                            <strong>Price:</strong> {{ service.service.price }} EUR
+                                        </v-list-item-subtitle>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </v-card>
                         </div>
                     </div>
                 </div>
@@ -132,31 +76,49 @@
 
 <script>
 
+import {mapGetters, mapActions} from "vuex";
 import sidebar from '@/components/front/partials/nav-cabinet'
+import cartApi from '@/api/cartApi'
 
 export default {
-    components: {
-        sidebar
-    },
-    middleware: 'auth',
+    components: {sidebar},
     data: () => ({
-        date: new Date().toISOString().substr(0, 10),
-        dateMenu: false,
-        radioGroup: 1
+        orderId: '',
+        order: null,
+        orderServices: null
     }),
+    computed: mapGetters({
+        allServices: 'getAllServices'
+    }),
+    mounted() {
+        this.orderId = this.$route.params.id
+        this.getOrder()
+    },
+    methods: {
+        getOrder() {
+            cartApi.getOrder(this.orderId, response => {
+                this.order = response
+                this.getOrderServices()
+            })
+        },
+        getOrderServices() {
+            this.orderServices = this.order.services.map(item => {
+                const arr = {
+                    id: item._id,
+                    qty: item.qty,
+                    service: '',
+                }
+                arr.service = this.allServices.find(service => service.id == item.serviceId)
+                return arr
+            })
+        }
+    }
 }
 </script>
 
-<style scoped>
+<style>
 .account-area {
     margin-top: 80px;
-}
-
-.cabinet-content {
-
-.radiogroup {
-    flex-direction: row;
-}
-
+    margin-bottom: 50px;
 }
 </style>

@@ -4,20 +4,48 @@
         <v-stepper v-model="e1">
             <v-container>
                 <v-stepper-header>
-                    <template v-for="n in steps">
+                    <template>
                         <v-stepper-step
-                            :key="`${n.id}-step`"
-                            :complete="e1 > n.id"
-                            :step="n.id"
+                            key="1-step"
+                            :complete="e1 > 1"
+                            step="1"
                             editable
                         >
-                            {{ n.title }}
+                            Shopping cart
+                        </v-stepper-step>
+                        <v-divider></v-divider>
+                    </template>
+                    <template>
+                        <v-stepper-step
+                            key="2-step"
+                            :complete="e1 > 2"
+                            step="2"
+                            editable
+                        >
+                            Customer information
+                        </v-stepper-step>
+                        <v-divider></v-divider>
+                    </template>
+
+                    <template v-if="order">
+                        <v-stepper-step
+                            key="3-step"
+                            :complete="e1 > 3"
+                            :step="3"
+                            editable
+                        >
+                            Complete order
+                        </v-stepper-step>
+                    </template>
+                    <template v-else>
+                        <v-stepper-step
+                            key="3-step"
+                            :complete="e1 > 3"
+                            :step="3"
+                        >
+                            Complete order
                         </v-stepper-step>
 
-                        <v-divider
-                            v-if="n.id !== steps"
-                            :key="n.id"
-                        ></v-divider>
                     </template>
                 </v-stepper-header>
             </v-container>
@@ -33,7 +61,7 @@
                                 <cartSummary step="1" btnTitle="Continue to checkout"/>
                             </v-col>
                             <v-col>
-                                <p><b>We accept:</b> </p>
+                                <p><b>We accept:</b></p>
                                 <img class="cards-img" src="/cards-img.png" alt="">
                             </v-col>
                         </v-row>
@@ -45,13 +73,13 @@
                     <v-container>
                         <v-row>
                             <v-col class="col-md-8 cart-box">
-                                <checkOutBox />
+                                <checkOutBox/>
                             </v-col>
                             <v-col class="col-md-4 cart-summary">
                                 <cartSummary step="2" btnTitle="Continue to payment"/>
                             </v-col>
                             <v-col>
-                                <p><b>We accept:</b> </p>
+                                <p><b>We accept:</b></p>
                                 <img class="cards-img" src="/cards-img.png" alt="">
                             </v-col>
                         </v-row>
@@ -62,8 +90,9 @@
                     <v-container>
                         <v-row>
                             <v-col class="col-md-8 cart-box">
+                                <paymentBox />
+                                <p><b>We accept:</b></p>
                                 <img class="cards-img" src="/cards-img.png" alt="">
-                                <!--<cartBox/>-->
                             </v-col>
                             <v-col class="col-md-4 cart-summary">
                                 <cartSummary step="3" btnTitle="Pay"/>
@@ -83,6 +112,7 @@ import {mapGetters, mapActions} from 'vuex'
 import cartBox from '@/components/front/cart/cartBox'
 import cartSummary from '@/components/front/cart/cartSummary'
 import checkOutBox from '@/components/front/cart/checkOutBox'
+import paymentBox from "~/components/front/cart/paymentBox";
 
 export default {
     data() {
@@ -97,6 +127,7 @@ export default {
     },
     computed: mapGetters({
         cart: 'cart/getCart',
+        order: 'cart/getOrder',
     }),
     watch: {
         steps(val) {
@@ -124,7 +155,7 @@ export default {
         },
     },
     components: {
-        cartBox, cartSummary, checkOutBox
+        cartBox, cartSummary, checkOutBox, paymentBox
     }
 }
 </script>
@@ -141,14 +172,17 @@ export default {
 .cart-summary {
 
 }
-.v-stepper__header{
+
+.v-stepper__header {
     box-shadow: none;
     margin-left: -15px;
 }
+
 .pointer {
     cursor: pointer;
 }
-.cards-img{
+
+.cards-img {
     max-width: 300px;
 
 }

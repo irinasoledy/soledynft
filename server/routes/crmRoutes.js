@@ -1,4 +1,4 @@
-const { Router } = require('express')
+const {Router} = require('express')
 const router = Router()
 
 const AppController = require('./../controllers/AppController')()
@@ -55,7 +55,6 @@ router.get('/api/messages', HistoryController.getClientMessages)
 
 // Notifications endpoints
 router.get('/api/notifications', AppController.getNotifications)
-
 
 
 module.exports = router

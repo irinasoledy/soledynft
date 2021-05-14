@@ -1,16 +1,16 @@
 const {Schema, model} = require('mongoose')
 
 const schema = new Schema({
-    title : {
+    title: {
         type: String,
         required: true
     },
-    user : {
+    user: {
         ref: 'users',
         type: Schema.Types.ObjectId,
         default: null
     },
-    date : {
+    date: {
         type: Date,
         default: Date.now
     }

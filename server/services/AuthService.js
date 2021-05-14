@@ -36,24 +36,24 @@ class AuthService {
                 logged: true,
                 type
             }).save()
-        }else {
-            let user = await User.findOne({ _id: guestId })
+        } else {
+            let user = await User.findOne({_id: guestId})
             if ((cookie !== null) && (!user.cookies.includes(cookie))) {
                 user = await User.findOneAndUpdate(
-                    { _id: guestId },
+                    {_id: guestId},
                     {
                         $set: {name, email, phone, password: hashPassword, hash: ecodedPassord, logged: true},
-                        $push: { cookies: cookie }
+                        $push: {cookies: cookie}
                     },
-                    { new: true }
+                    {new: true}
                 )
-            }else{
+            } else {
                 user = await User.findOneAndUpdate(
-                    { _id: guestId },
+                    {_id: guestId},
                     {
                         $set: {name, email, phone, password: hashPassword, hash: ecodedPassord, logged: true},
                     },
-                    { new: true }
+                    {new: true}
                 )
             }
 
@@ -77,11 +77,11 @@ class AuthService {
 
         if (!user.cookies.includes(cookie) && cookie) {
             await User.findOneAndUpdate(
-                { _id: user },
+                {_id: user},
                 {
-                    $push: { cookies: cookie }
+                    $push: {cookies: cookie}
                 },
-                { new: true }
+                {new: true}
             )
         }
 
@@ -97,7 +97,7 @@ class AuthService {
     async loginCRM(data) {
         const {login, password} = data
 
-        const user = await User.findOne({login, type: { $ne: 'client' }})
+        const user = await User.findOne({login, type: {$ne: 'client'}})
 
         if (!user) {
             return {statusCode: 400, message: 'User not exist login!'}
@@ -116,6 +116,6 @@ class AuthService {
 
 }
 
-module.exports = function() {
+module.exports = function () {
     return new AuthService()
 }

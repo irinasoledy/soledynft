@@ -1,25 +1,25 @@
 const {Schema, model} = require('mongoose')
 
 const schema = new Schema({
-    name : {
+    name: {
         type: String,
         required: true
     },
-    duration : {
+    duration: {
         type: String,
         default: ''
     },
-    employee : {
+    employee: {
         ref: 'users',
         type: Schema.Types.ObjectId,
         default: null
     },
-    client : {
+    client: {
         ref: 'users',
         type: Schema.Types.ObjectId,
         default: null
     },
-    active : {
+    active: {
         type: Boolean,
         default: false
     }
