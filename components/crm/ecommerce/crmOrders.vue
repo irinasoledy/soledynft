@@ -21,7 +21,6 @@
         </v-expansion-panel-header>
 
         <v-expansion-panel-content>
-
             <v-simple-table>
                 <template template v-slot:default>
                     <thead>
@@ -59,9 +58,7 @@
                                 @change="changeOrderPayment(order._id)"
                             ></v-select>
                         </td>
-                        <td><small>{{ order.amount }}
-                            <v-icon>mdi-currency-eur</v-icon>
-                        </small></td>
+                        <td><small>{{ order.amount }}<v-icon>mdi-currency-eur</v-icon></small></td>
                         <td><small>{{ $parseDate(order.date) }}</small></td>
                         <td>
                             <v-icon @click="showOrder(order)">mdi-eye</v-icon>
@@ -72,30 +69,75 @@
             </v-simple-table>
 
             <v-dialog v-model="servicesDialog" scrollable max-width="700px">
-                <v-card class="mx-auto" tile v-if="orderServices">
-                    <v-card-title>
-                        Services list:
-                    </v-card-title>
-                    <v-list-item two-line v-for="(service, index) in orderServices" :key="index">
-                        <v-list-item-content>
-                            <v-list-item-title>
-                                <strong>#{{ index + 1 }}</strong>
-                                {{ service.service.translation.name }}
-                            </v-list-item-title>
-                            <v-list-item-subtitle>
-                                <strong>Qty:</strong> {{ service.qty }} |
-                                <strong>Price:</strong> {{ service.service.price }} EUR
-                            </v-list-item-subtitle>
-                        </v-list-item-content>
-                    </v-list-item>
+                <v-card class="mx-auto" tile>
+                    <v-row v-if="orderServices">
+                        <v-col>
+                            <v-card-title>Order Details:</v-card-title>
+                            <v-list-item two-line>
+                                <v-list-item-content>
+                                    <v-list-item-title>Name:</v-list-item-title>
+                                    <v-list-item-subtitle>{{ order.userDetails.name }}</v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item two-line>
+                                <v-list-item-content>
+                                    <v-list-item-title>Email:</v-list-item-title>
+                                    <v-list-item-subtitle>{{ order.userDetails.email }}</v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item two-line>
+                                <v-list-item-content>
+                                    <v-list-item-title>Phone:</v-list-item-title>
+                                    <v-list-item-subtitle>{{ order.userDetails.phone }}</v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item two-line>
+                                <v-list-item-content>
+                                    <v-list-item-title>Country:</v-list-item-title>
+                                    <v-list-item-subtitle>{{ order.userDetails.country }}</v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item two-line>
+                                <v-list-item-content>
+                                    <v-list-item-title>City:</v-list-item-title>
+                                    <v-list-item-subtitle>{{ order.userDetails.city }}</v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item two-line>
+                                <v-list-item-content>
+                                    <v-list-item-title>Address:</v-list-item-title>
+                                    <v-list-item-subtitle>{{ order.userDetails.address }}</v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item two-line>
+                                <v-list-item-content>
+                                    <v-list-item-title>Postal Code:</v-list-item-title>
+                                    <v-list-item-subtitle>{{ order.userDetails.postalCode }}</v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-col>
+                        <v-col>
+                            <v-card-title>Services list:</v-card-title>
+                            <v-list-item two-line v-for="(service, index) in orderServices" :key="index">
+                                <v-list-item-content>
+                                    <v-list-item-title>
+                                        <strong>#{{ index + 1 }}</strong>
+                                        {{ service.service.translation.name }}
+                                    </v-list-item-title>
+                                    <v-list-item-subtitle>
+                                        <strong>Qty:</strong> {{ service.qty }} |
+                                        <strong>Price:</strong> {{ service.service.price }} EUR
+                                    </v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-col>
+                    </v-row>
                     <v-card-actions class="justify-end">
-                        <v-btn
-                            text
-                            @click="servicesDialog = false"
-                        >Close</v-btn>
+                        <v-btn text @click="servicesDialog = false">
+                            Close
+                        </v-btn>
                     </v-card-actions>
                 </v-card>
-
             </v-dialog>
         </v-expansion-panel-content>
     </v-expansion-panel>
@@ -116,9 +158,13 @@ export default {
         payments: ['card', 'cod', 'paypal'],
         chooseOrder: null,
         orderServices: null,
+        order: {}
     }),
     mounted() {
         cartApi.getOrders({userId: this.user._id}, response => this.orders = response)
+        this.$nuxt.$on('refresh-crm-order', () => {
+            cartApi.getOrders({userId: this.user._id}, response => this.orders = response)
+        })
     },
     computed: mapGetters({
         allServices: 'getAllServices'
@@ -149,6 +195,7 @@ export default {
             )
         },
         getOrderServices(order) {
+            this.order = order
             this.orderServices = order.services.map(item => {
                 const arr = {
                     id: item._id,

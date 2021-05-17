@@ -102,7 +102,6 @@ export default {
         submit () {
             if (this.$refs.form.validate()) {
                 this.form.guestId = this.user._id
-
                 userApi.bookUser(this.form, async response => {
                     this.success = true
                 })

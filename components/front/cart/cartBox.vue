@@ -14,14 +14,14 @@
             <tbody>
             <tr v-for="(cartItem, index) in cart" :key="index">
                 <td>{{ index + 1 }}</td>
-                <td>{{ cartItem.service.translation.name }}</td>
-                <td class="text-center">
+                <td class="str-col">{{ cartItem.service.translation.name }}</td>
+                <td class="text-center qty-area str-col">
                     <v-icon class="qty-control" @click="changeQty(cartItem, 'minus')">mdi-minus</v-icon>
                     <span>{{ cartItem.qty }}</span>
                     <v-icon class="qty-control" @click="changeQty(cartItem, 'plus')">mdi-plus</v-icon>
                 </td>
-                <td>{{ cartItem.service.price }} EUR</td>
-                <td>{{ cartItem.service.price * cartItem.qty }} EUR</td>
+                <td class="str-col">{{ cartItem.service.price }} EUR</td>
+                <td class="str-col">{{ cartItem.service.price * cartItem.qty }} EUR</td>
                 <td>
                     <v-icon class="pointer" @click="deleteCartItem(cartItem)">
                         mdi-delete
@@ -66,16 +66,34 @@ export default {
         }
     }
 }
-
 </script>
 
 <style>
 .qty-control{
     cursor: pointer;
     font-size: 14px !important;
-    margin: auto 15px;
+    margin: auto 3px;
     border-radius: 50%;
     background-color: #DDD;
     padding: 5px;
+}
+
+.qty-area{
+    min-width: 160px;
+}
+
+@media (max-width: 991px) {
+    tbody tr td{
+        font-size: 12px !important;
+    }
+    .str-col{
+        min-width: 114px;
+    }
+    .qty-area{
+        min-width: 114px;
+    }
+    .summary{
+        width: 100%;
+    }
 }
 </style>

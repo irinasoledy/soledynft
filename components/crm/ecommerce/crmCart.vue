@@ -144,6 +144,11 @@ export default {
     mounted() {
         this.getUserCart()
         this.parseServices()
+
+        this.$nuxt.$on('refresh-crm-cart', () => {
+            this.getUserCart()
+            this.parseServices()
+        })
     },
     methods: {
         ...mapActions({

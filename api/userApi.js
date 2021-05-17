@@ -37,4 +37,10 @@ export default {
             .then(response => cb(response.data))
             .catch(err => cbError(err.response.data))
     },
+
+    async valadateEmail(user, cb) {
+        await axios.post(`/api/user/validate`, user)
+            .then(response => cb(response.data))
+            .catch(err => cbError(err.response.data))
+    },
 }

@@ -130,7 +130,6 @@ module.exports = {
                 redirectUri: 'https://docrom.info/auth/google'
             },
             social: {
-
                 scheme: 'oauth2',
                 endpoints: {
                     authorization: 'https://facebook.com/v2.12/dialog/oauth',
@@ -161,7 +160,7 @@ module.exports = {
         },
         redirect: {
             login: false,
-            logout: false,
+            logout: '/',
             callback: false,
             home: false
         }

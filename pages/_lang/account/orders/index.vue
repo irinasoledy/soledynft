@@ -103,5 +103,13 @@ export default {
     height: 22px !important;
     text-transform: lowercase;
 }
+@media (max-width: 991px) {
+    .account-area {
+        margin-top: 20px;
+    }
+    .display-1{
+        font-size: 1.5rem !important;
+    }
+}
 
 </style>

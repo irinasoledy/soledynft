@@ -24,8 +24,6 @@
                 <div class="col-lg-3 col-md-3 side-block-wrap">
                     <div class="side-block" id="sidebar">
 
-                        <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="service"/>
-
                         <a v-for="anchor in service.blogs"
                            :key="anchor.id"
                            class="v-list-item v-list-item--link theme--light item-anchor"
@@ -49,7 +47,12 @@
                         <div v-html="anchor.translation.body"></div>
                     </div>
                     <div class="text-center">
-                        <v-btn color="secondary medium-width" @click="$nuxt.$emit('open-appointment-form')">
+                        <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="service"/>
+
+                        <v-btn v-else
+                               color="secondary medium-width"
+                               @click="$nuxt.$emit('open-appointment-form')"
+                        >
                             {{ trans.Services.liveDiscussionBtn }}
                         </v-btn>
                     </div>
@@ -256,8 +259,6 @@ export default {
 
 #experts .v-card {
     margin-bottom: 30px;
-    // max-width: 300px !important;
-    // overflow-y: scroll;
 }
 
 #experts .v-btn {

@@ -25,7 +25,7 @@ export default {
 
 <style lang="scss">
     .video {
-        width: 100%;
+        //width: 100%;
         height: calc(100vh - 128px - 70px) !important;
         background: rgb(34, 34, 34);
         position: relative;

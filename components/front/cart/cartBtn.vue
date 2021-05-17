@@ -1,5 +1,5 @@
 <template>
-    <v-btn color="secondary" small class="add-to-cart-btn" @click="addToCart()">
+    <v-btn  color="secondary medium-width" class="add-to-cart-btn" @click="addToCart()">
         <v-icon>mdi-cart</v-icon>
         add service to cart
     </v-btn>

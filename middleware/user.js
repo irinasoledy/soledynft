@@ -1,9 +1,7 @@
 
 export default async function({ store, redirect, app }) {
     if(!app.$auth.loggedIn) {
-    // if(10 !== 1) {
+        console.log(app.$auth.loggedIn)
         return redirect('/')
     }
-    // return redirect('/')
-
 }

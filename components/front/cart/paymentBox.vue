@@ -16,7 +16,7 @@
                 max-width="300"
             >
                 <v-card-text class="text-center">
-                    <h3>Cash on Delivery</h3>
+                    <h3 class="payment-title">Cash on Delivery</h3>
                     <img src="/cod.png" class="payment-img"/>
                 </v-card-text>
             </v-card>
@@ -30,14 +30,12 @@
                 max-width="300"
             >
                 <v-card-text class="text-center">
-                    <h3>Credit Card</h3>
+                    <h3 class="payment-title">Credit Card</h3>
                     <img src="/card.jpeg" class="payment-img"/>
 
                 </v-card-text>
             </v-card>
         </v-col>
-
-
         <v-col>
             <v-card
                 :class="[(methods.paypal) ? 'selected-method' : '', 'mx-auto', 'payment-card']"
@@ -45,7 +43,7 @@
                 max-width="300"
             >
                 <v-card-text class="text-center">
-                    <h3>Paypal</h3>
+                    <h3 class="payment-title">Paypal</h3>
                     <img src="/paypal.png" class="payment-img"/>
                 </v-card-text>
             </v-card>
@@ -101,7 +99,7 @@ export default {
             if (!this.payment) {
                 this.validateErrors = 'Change payment method'
                 return false
-            }else{
+            } else {
                 this.updatePaymentInfo({
                     paymentMethod: this.payment,
                     orderId: this.order._id
@@ -144,5 +142,9 @@ export default {
 
 .selected-method {
     background-color: #CCC !important;
+}
+
+.payment-title{
+    min-height: 48px;
 }
 </style>

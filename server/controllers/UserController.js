@@ -292,6 +292,27 @@ class UserController {
         }
     }
 
+    async validateEmail(req, res) {
+        try {
+            const user = req.body
+
+            const findEmail = await User.findOne(
+                {
+                    email: user.email,
+                    _id: {$ne: user._id}
+                }
+            )
+
+            if (findEmail) {
+                return res.status(200).json(true)
+            }
+
+            return res.status(200).json(false)
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@validateEmail ${e}`})
+        }
+    }
+
     async setUserDetails(req, res) {
         try {
             const searchDetails = await UserDetails.findOne({userId: req.body.userId})

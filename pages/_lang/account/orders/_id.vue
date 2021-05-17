@@ -82,6 +82,7 @@ import cartApi from '@/api/cartApi'
 
 export default {
     components: {sidebar},
+    middleware: ['user'],
     data: () => ({
         orderId: '',
         order: null,
@@ -120,5 +121,13 @@ export default {
 .account-area {
     margin-top: 80px;
     margin-bottom: 50px;
+}
+@media (max-width: 991px) {
+    .account-area {
+        margin-top: 20px;
+    }
+    .display-1{
+        font-size: 1.5rem !important;
+    }
 }
 </style>

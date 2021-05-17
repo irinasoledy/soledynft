@@ -10,7 +10,6 @@
                             <v-col class="col-xs-3 text-right">{{ subtotal }} EUR</v-col>
                         </v-row>
                     </v-list-item-title>
-
                 </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
@@ -156,5 +155,10 @@ export default {
 
 .v-btn--icon.v-size--default .v-icon, .v-btn--fab.v-size--default .v-icon {
     font-size: 19px;
+}
+@media (max-width: 991px) {
+    .summary{
+        width: 100%;
+    }
 }
 </style>

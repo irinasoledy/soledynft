@@ -28,6 +28,8 @@ router.post('/api/user/generals', UserController.setUserGenerals)
 
 router.post('/api/user/passwords', UserController.setUserPasswords)
 
+router.post('/api/user/validate', UserController.validateEmail)
+
 router.post('/api/user', UserController.create)
 
 router.patch('/api/:id/user', UserController.update)

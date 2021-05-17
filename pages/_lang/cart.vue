@@ -71,11 +71,11 @@
 
                 <v-stepper-content step="2">
                     <v-container>
-                        <v-row>
-                            <v-col class="col-md-8 cart-box">
+                        <v-row no-gutters>
+                            <v-col cols="12" md="8" sm="12" xs="12" class="cart-box">
                                 <checkOutBox/>
                             </v-col>
-                            <v-col class="col-md-4 cart-summary">
+                            <v-col cols="12" md="4" sm="12" xs="12" class="cart-summary">
                                 <cartSummary step="2" btnTitle="Continue to payment"/>
                             </v-col>
                             <v-col>
@@ -161,29 +161,30 @@ export default {
 </script>
 
 <style scoped>
+
 .content {
     margin-top: 130px;
 }
-
-.cart-box, .cart-summary {
-    /*margin-top: 50px;*/
-}
-
-.cart-summary {
-
-}
-
 .v-stepper__header {
     box-shadow: none;
     margin-left: -15px;
 }
-
 .pointer {
     cursor: pointer;
 }
-
 .cards-img {
     max-width: 300px;
+}
 
+@media (max-width: 991px) {
+    .content{
+        margin-top: 50px;
+    }
+    .v-stepper__content{
+        padding: 0;
+    }
+    .v-stepper__header{
+        margin-left: 0;
+    }
 }
 </style>

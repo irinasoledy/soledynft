@@ -62,13 +62,15 @@
                 </v-list>
                 <template v-slot:append>
                     <div class="pa-2 mb-4">
-                        <v-btn color="secondary" outlined block>
+                        <v-btn color="secondary" outlined block v-if="!$auth.loggedIn" @click="$nuxt.$emit('openLoginDialog')">
                             sign in
+                        </v-btn>
+                        <v-btn color="secondary" outlined block v-else @click.stop="cabinetDrawer = !cabinetDrawer">
+                            Profile
                         </v-btn>
                     </div>
                 </template>
             </v-navigation-drawer>
-
 
             <v-navigation-drawer
                 class="navdrawer"
@@ -128,7 +130,6 @@
                 </v-sheet>
                 <v-list nav light>
                     <v-list-item-group>
-
                         <v-list-item
                             v-if="serviceIdentifier"
                             @click="closeMenu(`/${language.lang}/service/${serviceIdentifier.alias}`)">
@@ -138,8 +139,6 @@
                                 v-text="serviceIdentifier.translation.name">
                             </v-list-item-title>
                         </v-list-item>
-
-
                         <v-list-item
                             @click="closeMenu(`/${language.lang}/service/${serviceIdentifier.alias}/${service.alias}`)"
                             v-for="(service, i) in subserviceIdentifier"
@@ -151,18 +150,28 @@
             </v-navigation-drawer>
 
             <v-spacer></v-spacer>
+
             <v-toolbar-title>
                 <nuxt-link to="/">
                     <img class="logo" src="@/static/logo-docrom4.png" alt="">
                 </nuxt-link>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn icon @click.stop="cabinetDrawer = !cabinetDrawer">
+
+            <CartIcon v-if="$auth.loggedIn"
+                      :user="$auth.user"
+            ></CartIcon>
+
+            <v-icon dark @click.stop="cabinetDrawer = !cabinetDrawer" v-if="$auth.loggedIn">
+                mdi-account
+            </v-icon>
+
+            <v-btn icon @click="$nuxt.$emit('openLoginDialog')" v-else>
                 <v-icon dark>mdi-account</v-icon>
             </v-btn>
 
-
             <v-navigation-drawer
+                v-if="$auth.loggedIn"
                 class="navdrawer"
                 v-model="cabinetDrawer"
                 absolute
@@ -180,113 +189,52 @@
                             <v-icon>mdi-chevron-left</v-icon>
                         </v-list-item-icon>
                         <v-list-item-content>
-                            <v-list-item-title>
-                                Profilul meu
-                            </v-list-item-title>
+                            <v-list-item-title>My profile</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                 </v-app-bar>
+
                 <v-list nav light class="pt-15">
                     <v-list-item two-line>
-                        <v-list-item-avatar height="80" width="80">
-                            <img src="https://randomuser.me/api/portraits/women/81.jpg">
+                        <v-list-item-avatar height="80" width="80" v-if="$auth.user.avatar">
+                            <img :src="`/avatars/${$auth.user.avatar}`">
+                        </v-list-item-avatar>
+                        <v-list-item-avatar height="80" width="80" color="primary" v-else>
+                            <span class="white--text">{{ getInitials($auth.user) }}</span>
                         </v-list-item-avatar>
                         <v-list-item-content>
-                            <v-list-item-title>Jane Smith</v-list-item-title>
+                            <v-list-item-title>{{ $auth.user.name }}</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item-group>
-                        <v-list-item-subtitle>
-                            Setări
-                        </v-list-item-subtitle>
-                        <v-list-item color="primary" exact to="/cabinet/personal-info" nuxt>
+                        <v-list-item color="primary" exact :to="`/${language.lang}/account`" nuxt>
                             <v-list-item-icon>
                                 <v-icon x-large color="primary">mdi-cog-box</v-icon>
                             </v-list-item-icon>
                             <v-list-item-content>
-                                <v-list-item-title>Profilul meu și setări</v-list-item-title>
+                                <v-list-item-title>My profile</v-list-item-title>
                             </v-list-item-content>
-                            <v-list-item-icon>
-                                <v-icon x-large>mdi-chevron-right</v-icon>
-                            </v-list-item-icon>
                         </v-list-item>
-                        <v-list-item color="primary" to="/cabinet/photo" exact nuxt>
-                            <v-list-item-icon>
-                                <v-icon x-large color="primary">mdi-camera</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-content>
-                                <v-list-item-title>Pozele mele</v-list-item-title>
-                            </v-list-item-content>
-                            <v-list-item-icon>
-                                <v-icon x-large>mdi-chevron-right</v-icon>
-                            </v-list-item-icon>
-                        </v-list-item>
-                        <v-list-item color="primary" nuxt exact to="/cabinet/subscribes">
-                            <v-list-item-icon>
-                                <v-icon x-large color="primary">mdi-format-list-bulleted</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-content>
-                                <v-list-item-title>Eu urmăresc</v-list-item-title>
-                            </v-list-item-content>
-                            <v-list-item-icon>
-                                <v-icon x-large>mdi-chevron-right</v-icon>
-                            </v-list-item-icon>
-                        </v-list-item>
-                        <v-list-item-subtitle>
-                            Contul personal
-                        </v-list-item-subtitle>
-                        <v-list-item color="primary">
+                        <v-list-item color="primary" nuxt exact :to="`/${language.lang}/account/orders`">
                             <v-list-item-icon>
                                 <v-icon x-large color="primary">mdi-cash</v-icon>
                             </v-list-item-icon>
                             <v-list-item-content>
-                                <v-list-item-title>Comenzile mele</v-list-item-title>
+                                <v-list-item-title>My Orders</v-list-item-title>
                             </v-list-item-content>
-                            <v-list-item-icon>
-                                <v-icon x-large>mdi-chevron-right</v-icon>
-                            </v-list-item-icon>
                         </v-list-item>
-                        <v-list-item color="primary">
+                        <v-list-item color="primary" @click="logout()">
                             <v-list-item-icon>
-                                <v-icon x-large color="primary">mdi-receipt</v-icon>
+                                <v-icon color="primary">mdi-logout</v-icon>
                             </v-list-item-icon>
                             <v-list-item-content>
-                                <v-list-item-title>Invoice</v-list-item-title>
+                                <v-list-item-title>Logout</v-list-item-title>
                             </v-list-item-content>
-                            <v-list-item-icon>
-                                <v-icon x-large>mdi-chevron-right</v-icon>
-                            </v-list-item-icon>
-                        </v-list-item>
-                        <v-list-item-subtitle>
-                            Alte funcții
-                        </v-list-item-subtitle>
-                        <v-list-item color="primary">
-                            <v-list-item-icon>
-                                <v-icon x-large color="primary">mdi-help-box</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-content>
-                                <v-list-item-title>Ajutor</v-list-item-title>
-                            </v-list-item-content>
-                            <v-list-item-icon>
-                                <v-icon x-large>mdi-chevron-right</v-icon>
-                            </v-list-item-icon>
-                        </v-list-item>
-                        <v-list-item color="primary">
-                            <v-list-item-icon>
-                                <v-icon x-large color="primary">mdi-logout</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-content>
-                                <v-list-item-title>Ieși</v-list-item-title>
-                            </v-list-item-content>
-                            <v-list-item-icon>
-                                <v-icon x-large>mdi-chevron-right</v-icon>
-                            </v-list-item-icon>
                         </v-list-item>
                     </v-list-item-group>
                 </v-list>
             </v-navigation-drawer>
         </v-app-bar>
-
 
         <!-- Desktop bar -->
         <v-app-bar class="customBar desktop"
@@ -308,14 +256,17 @@
                     </v-col>
                     <v-col class="col-auto">
                         <v-row class="align-center">
-                            <v-col>
+                            <v-col></v-col>
+                            <v-col class="col-md-4">
                                 <v-list-item dark color="primary"
-                                             :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">
+                                             class="text-right"
+                                             :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`"
+                                >
                                     <v-icon>mdi-phone</v-icon>
                                     {{ trans.ContactsAndForms.companyMainPhone1 }}
                                 </v-list-item>
                             </v-col>
-                            <v-col class="text-right">
+                            <v-col class="text-right col-md-1">
                                 <CartIcon v-if="$auth.loggedIn"
                                           :user="$auth.user"
                                 ></CartIcon>
@@ -549,7 +500,21 @@ export default {
             if (!service.children.length) {
                 this.closeMenu(`/${this.language.lang}/service/${service.alias}`)
             }
-        }
+        },
+        getInitials(user) {
+            const name = user.name
+            if (name) {
+                const rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+                let initials = [...name.matchAll(rgx)] || [];
+
+                initials = (
+                    (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+                ).toUpperCase();
+
+                return initials
+            }
+            return 'C'
+        },
     },
     components: {
         HeaderContacts, PolicyBar, CartIcon

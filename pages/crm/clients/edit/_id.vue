@@ -6,7 +6,7 @@
                     <div id="formInfo">
                         <v-card-title class="d-flex justify-space-between elevation-1">
                             <h4>Edit Client: <i>{{ editedUser.name }}</i></h4>
-<!--                            <v-icon @click="refresh">mdi-refresh</v-icon>-->
+                            <v-icon @click="refresh">mdi-refresh</v-icon>
                         </v-card-title>
                     </div>
                 </v-card>
@@ -63,6 +63,23 @@
                                     ></v-text-field>
                                 </div>
                                 <v-divider class="my-4"></v-divider>
+                                <div class="col-md-12 col-12">
+                                    <v-alert
+                                        class="customize-alert"
+                                        v-if="validateError"
+                                        prominent
+                                        type="error"
+                                    >
+                                        <v-row align="center">
+                                            <v-col class="grow">
+                                                {{ validateError }}
+                                            </v-col>
+                                            <v-col class="shrink">
+                                                <v-icon @click="closeValidateErrors()">mdi-close</v-icon>
+                                            </v-col>
+                                        </v-row>
+                                    </v-alert>
+                                </div>
                                 <v-card-title class="d-flex justify-center">
                                     <v-btn color="primary" large class="mt-3 mb-3" @click="submitUserInfo"
                                            v-if="editedUser.logged">
@@ -196,8 +213,8 @@
                         </v-expansion-panel-content>
                     </v-expansion-panel>
 
-                    <crmCart v-if="editedUser" :user="editedUser" />
-                    <crmOrders v-if="editedUser" :user="editedUser"  />
+                    <crmCart v-if="editedUser" :user="editedUser"/>
+                    <crmOrders v-if="editedUser" :user="editedUser"/>
 
                 </v-expansion-panels>
             </v-flex>
@@ -282,7 +299,6 @@
                 right
             >
                 {{ snackbarText }}
-
                 <template v-slot:action="{ attrs }">
                     <v-btn
                         color="red"
@@ -348,6 +364,7 @@
 
 import {mapGetters, mapActions} from "vuex"
 import crmApi from '@/api/crmApi'
+import userApi from '@/api/userApi'
 import crmOrders from '~/components/crm/ecommerce/crmOrders'
 import crmCart from '~/components/crm/ecommerce/crmCart'
 
@@ -367,6 +384,7 @@ export default {
             {text: 'Email', value: 'email'},
             {text: 'Actions', value: 'actions'},
         ],
+        validateError: false,
         dialog: false,
         registerDialog: false,
         editedUser: null,
@@ -437,9 +455,8 @@ export default {
             editClientAccount: 'admin/editClientAccount',
         }),
         refresh() {
-            this.$forceUpdate()
-            // this.showContent = false
-            // this.showContent = true
+            this.$nuxt.$emit('refresh-crm-cart')
+            this.$nuxt.$emit('refresh-crm-order')
         },
         async getDetails() {
             await crmApi.getUserDetails(this.editedUser._id, response => {
@@ -485,15 +502,29 @@ export default {
         },
         submitUserInfo() {
             if (this.$refs.info.validate()) {
-                this.editedUser.logged = true
-                this.editedUser.password = this.formData.password
-                this.editUser(this.editedUser).then(() => {
-                    this.getSimilarUsers()
-                    this.snackbar = true
-                    this.snackbarText = "The changes have been saved successfully!"
-                    this.$socket.emit('refreshUsersData')
-                })
+                this.validateEmail(this.editedUser)
+                if (this.validateError === false) {
+                    this.editedUser.logged = true
+                    this.editedUser.password = this.formData.password
+                    this.editUser(this.editedUser).then(() => {
+                        this.getSimilarUsers()
+                        this.snackbar = true
+                        this.snackbarText = "The changes have been saved successfully!"
+                        this.$socket.emit('refreshUsersData')
+                    })
+                }
             }
+        },
+        closeValidateErrors() {
+            this.validateError = false
+        },
+        async validateEmail(user) {
+            this.validateError = false
+            await userApi.valadateEmail(user, response => {
+                if(response) {
+                    this.validateError = 'Email must be unique'
+                }
+            })
         },
         submitUserAccount() {
             if (this.$refs.account.validate()) {
@@ -646,6 +677,14 @@ export default {
     }
     .avatar-relative {
         order: 2;
+    }
+}
+
+.customize-alert {
+    padding: 3px;
+
+    .shrink {
+        margin-right: 20px;
     }
 }
 </style>

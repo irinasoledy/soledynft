@@ -124,7 +124,7 @@ export default {
         position: relative;
     }
     .remote-video-d{
-        max-height: 70vh;
+        max-height: 60vh;
         video{
             width: 100%;
         }

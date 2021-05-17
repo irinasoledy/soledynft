@@ -1,30 +1,29 @@
 <template>
-    <div>
-        <v-form
-            class="row"
-            ref="formCheckOut"
-            v-if="$auth.loggedIn"
-            lazy-validation
-            v-model="form.valid"
-        >
+    <v-form
+        ref="formCheckOut"
+        v-if="$auth.loggedIn"
+        lazy-validation
+        v-model="form.valid"
+    >
+        <v-row>
             <v-col class="col-md-12">
                 <h4>User Info:</h4>
             </v-col>
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-text-field
                     v-model="form.name"
                     :rules="form.rules.name"
                     label="Name"
                 ></v-text-field>
             </v-col>
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-text-field
                     v-model="form.email"
                     :rules="form.rules.email"
                     label="Email"
                 ></v-text-field>
             </v-col>
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-text-field
                     v-model="form.phone"
                     :rules="form.rules.phone"
@@ -32,40 +31,41 @@
                     type="number"
                 ></v-text-field>
             </v-col>
-            <v-col class="col-md-12">
+            <v-col cols="12" md="12" sm="12" xs="12">
                 <h4>Contacts:</h4>
             </v-col>
-            <v-col class="col-md-6">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-text-field
                     v-model="form.address"
                     :rules="form.rules.address"
                     label="Address"
                 ></v-text-field>
             </v-col>
-            <v-col class="col-md-6">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-text-field
                     v-model="form.city"
                     :rules="form.rules.city"
                     label="City"
                 ></v-text-field>
             </v-col>
-            <v-col class="col-md-6">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-text-field
                     v-model="form.country"
                     :rules="form.rules.country"
                     label="Country"
                 ></v-text-field>
             </v-col>
-            <v-col class="col-md-6">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-text-field
                     v-model="form.postalCode"
                     :rules="form.rules.postalCode"
                     label="Postal Code"
-                    type="number"
                 ></v-text-field>
             </v-col>
-        </v-form>
-    </div>
+        </v-row>
+
+    </v-form>
+
 </template>
 
 <script>
@@ -163,5 +163,13 @@ export default {
 <style scoped>
 .v-form {
     padding-left: 10px;
+}
+
+.col {
+    flex-basis: 1 !important;
+}
+
+.v-form {
+    width: 100%;
 }
 </style>
