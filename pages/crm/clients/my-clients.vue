@@ -220,6 +220,7 @@ export default {
             initCall : 'dialog/initCall',
         }),
         refreshUsersActions() {
+            this.$socket.emit('pingUsers')
             this.$socket.emit('shareUserAction', null)
         },
         async removeAssignUser(client) {

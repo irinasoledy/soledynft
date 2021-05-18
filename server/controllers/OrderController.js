@@ -120,6 +120,26 @@ class OrderController {
         }
     }
 
+    async changeOrderAppointment(req, res) {
+        try {
+            const {order} = req.body
+
+            await Order.findOneAndUpdate(
+                {_id: order._id},
+                {
+                    $set: {appointmentDate: order.appointmentDate}
+                },
+                {new: true}
+            )
+
+            return res.status(200).json(true)
+        } catch (e) {
+            return res.status(404).json({message: 'error'})
+        }
+    }
+
+
+
     async pay(req, res) {
         try {
             const {userId, orderId, amount} = req.body

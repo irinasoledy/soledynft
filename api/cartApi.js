@@ -61,6 +61,10 @@ export default {
             .catch(err => console.log(err))
     },
 
+    async changeOrderAppointmentDate(data) {
+        await axios.patch(`/api/order/appointment`, data)
+    },
+
     async getOrders(data, cb) {
         await axios.get(`/api/orders?userId=${data.userId}`)
             .then(response => cb(response.data))

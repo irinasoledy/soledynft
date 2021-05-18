@@ -4,6 +4,16 @@ const userAction = require('../models/userAction')
 
 class ActionService {
 
+    async setOfflineUsers() {
+        try {
+            await User.findOneAndUpdate({online: true}, {$set: {online: false}})
+            await userAction.findOneAndUpdate({online: true}, {$set: {online: false}})
+        } catch (e) {
+            console.log(e)
+        }
+        return true
+    }
+
     async assignClientToEmployee(clientId, employeeId) {
         const action = await userAction.findOne({userId: clientId})
 

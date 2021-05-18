@@ -4,10 +4,16 @@ const io = require('socket.io')(server)
 const users = require('./controllers/Users')()
 const actions = require('./services/ActionService')()
 
+const cron = require('node-cron');
+
+cron.schedule('*/12 * * * * *', () => {
+    actions.setOfflineUsers()
+    io.emit('pingUsers')
+})
+
 const m = (name, text, id) => ({name, text, id})
 
 io.on('connection', socket => {
-
     // Start: user join socket
     socket.on('userJoin', (id) => {
         socket.join(id)
@@ -33,6 +39,11 @@ io.on('connection', socket => {
     socket.on('acceptCall', (data, cb) => {
         socket.broadcast.to(data.to._id).emit('acceptCall', data)
         cb()
+    })
+
+    socket.on('pingUsers', () => {
+        actions.setOfflineUsers()
+        io.emit('pingUsers')
     })
 
     socket.on('refreshUsersData', () => {

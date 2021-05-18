@@ -2,6 +2,7 @@ const User = require('../models/user')
 const History = require('../models/history')
 const UserDetails = require('../models/userDetails')
 const EmployeeService = require('../models/employeeService')
+const UserAction = require('../models/userAction')
 
 const UserService = require('../services/UserService')()
 const NotificationService = require('../services/NotificationService')()
@@ -86,7 +87,7 @@ class UserController {
 
     async getEmployee(req, res) {
         try {
-            const employee = await User.find({type: 'employee'}).sort({status: 'desc'}).lean()
+            const employee = await User.find({type: 'employee'}).sort({online: 'desc'}).lean()
             return res.status(200).json(employee)
         } catch (e) {
             return res.status(505).json({message: 'Server Error'})
@@ -98,7 +99,7 @@ class UserController {
             const services = await EmployeeService.find({service: req.query.serviceId})
                 // .sort({status: 'asc'})
                 // .populate('employee')
-                .populate('employee', '_id name avatar status position', null, {sort: {status: 'desc'}})
+                .populate('employee', '_id name avatar status position online', null, {sort: {status: 'desc'}})
             // .populate({path: 'employee', options: { sort: { status: 'desc' } } })
             // .populate({
             //     path: 'employee'
@@ -247,7 +248,7 @@ class UserController {
 
     async setUserGenerals(req, res) {
         try {
-            const {userId, name, email, phone} = req.body
+            const {userId, name, email, phone, age} = req.body
 
             const user = await User.findOneAndUpdate(
                 {_id: userId},
@@ -255,7 +256,8 @@ class UserController {
                     $set: {
                         name,
                         email,
-                        phone
+                        phone,
+                        age
                     }
                 },
                 {new: true}
@@ -342,7 +344,6 @@ class UserController {
                         }
                     }, {new: true})
             } else {
-                console.log('else');
                 let details = await UserDetails({
                     userId: req.body.userId,
                     whatsapp: req.body.whatsapp,
@@ -368,6 +369,26 @@ class UserController {
         }
     }
 
+
+    async setUserOnline(req, res) {
+        try {
+            const {userId, type} = req.body
+            let inverseType = 'client'
+
+            await User.findOneAndUpdate({_id: userId}, {$set: {online: true}})
+
+            if (type === 'client') {
+                await UserAction.findOneAndUpdate({userId: userId}, {$set: {online: true}})
+                inverseType = 'employee'
+            }
+            const users = await UserService.getUsers(req.body, inverseType)
+            const actions = await UserService.getUsersActions()
+
+            return res.status(200).json({users, actions})
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@setUserOnline ${e}`})
+        }
+    }
 }
 
 module.exports = function () {

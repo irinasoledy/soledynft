@@ -71,7 +71,7 @@
                             align="center" justify="center"
                         >
                             <v-badge
-                                v-if="item.employee.status === true"
+                                v-if="item.employee.online === true"
                                 bordered
                                 bottom
                                 color="#27ae60"

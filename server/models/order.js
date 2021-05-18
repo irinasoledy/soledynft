@@ -38,6 +38,10 @@ const schema = new Schema({
         type: Date,
         default: Date.now,
     },
+    appointmentDate: {
+        type: String,
+        default: null,
+    }
 })
 
 module.exports = model('orders', schema)

@@ -62,6 +62,7 @@ export const actions = {
 
 export const getters = {
     getUser: state => state.user,
+    getAuth: state => state.user,
     getMessage: state => state.message,
-    getToken: state => state.token
+    getToken: state => state.token,
 }

@@ -19,7 +19,7 @@
                                 <div class="col-md-12">
                                     <h3>General Data</h3>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <v-text-field
                                         v-model="formGeneralData.name"
                                         :rules="formGeneralData.rules.name"
@@ -27,7 +27,7 @@
                                         required
                                     ></v-text-field>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <v-text-field
                                         v-model="formGeneralData.email"
                                         :rules="formGeneralData.rules.email"
@@ -35,12 +35,20 @@
                                         required
                                     ></v-text-field>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <v-text-field
                                         v-model="formGeneralData.phone"
                                         :rules="formGeneralData.rules.phone"
                                         type="number"
                                         label="Phone"
+                                        required
+                                    ></v-text-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <v-text-field
+                                        v-model="formGeneralData.age"
+                                        type="number"
+                                        label="Age"
                                         required
                                     ></v-text-field>
                                 </div>
@@ -265,6 +273,7 @@ export default {
                 name: this.$auth.user.name,
                 email: this.$auth.user.email,
                 phone: this.$auth.user.phone,
+                age: this.$auth.user.age,
                 rules: {
                     name: [v => !!v || 'Name is required'],
                     email: [
@@ -328,6 +337,7 @@ export default {
                     this.$auth.user.name = user.name
                     this.$auth.user.email = user.email
                     this.$auth.user.phone = user.phone
+                    this.$auth.user.age = user.age
                 })
             }
         },
@@ -336,9 +346,6 @@ export default {
                 this.formPasswords.userId = this.$auth.user._id
                 await crmApi.setUserPasswords(this.formPasswords, user => {
                     this.$auth.user.hash = user.hash
-                    // this.formPasswords.oldPassword = ''
-                    // this.formPasswords.newPassword = ''
-                    // this.formPasswords.confirmPassword = ''
                 })
             }
         },

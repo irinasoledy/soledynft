@@ -274,9 +274,9 @@ export default {
 
 <style lang="scss">
     .video-dialog-window {
-        width: 50% !important;
+        width: 70% !important;
         height: calc(100vh - 128px);
-        right: 25%;
+        right: 30%;
         bottom: 0;
         top: auto;
         left: auto;

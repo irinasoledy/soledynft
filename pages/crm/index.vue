@@ -89,12 +89,14 @@ export default {
     },
     computed: mapGetters({
         loginMessage: 'authCRM/getMessage',
-        token: 'authCRM/getToken'
+        token: 'authCRM/getToken',
+        user: 'authCRM/getAuth'
     }),
     methods: {
         ...mapActions({
             loginUser: 'authCRM/login',
-            getUser: 'authCRM/getUser'
+            getUser: 'authCRM/getUser',
+            setUserStatus: 'admin/setUserStatus',
         }),
         submit() {
             if (this.$refs.form.validate()) {
@@ -105,7 +107,12 @@ export default {
                             maxAge: 60 * 60 * 24 * 7
                         })
                         localStorage.setItem('crm-token', this.token)
+
                         this.getUser().then(data => {
+                            this.setUserStatus({status: true, emploeeId: this.user._id}).then(() => {
+                                this.$socket.emit('shareEmployeeStatus', this.user)
+                                this.$socket.emit('refreshUserData')
+                            })
                             return this.$router.push('/crm/dashboard')
                         })
                     }

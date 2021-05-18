@@ -52,7 +52,8 @@
                             <v-avatar size="32" v-else light color="#AAA" class="white--text">
                                 {{ getInitials(history.recipientId) }}
                             </v-avatar>
-                            <span class="user-online" v-if="history.recipientId.status"></span>
+                            <span class="user-online" v-if="history.recipientId.online"></span>
+
                         </v-list-item-avatar>
                         <v-list-item-content>
                             <v-list-item-title class="_chat-title">
@@ -102,7 +103,7 @@
                             <v-avatar size="32" v-else light color="#AAA" class="white--text">
                                 {{ getInitials(user) }}
                             </v-avatar>
-                            <span class="user-online" v-if="user.status"></span>
+                            <span class="user-online" v-if="user.online"></span>
 
                         </v-list-item-avatar>
                         <v-list-item-content>
@@ -447,7 +448,7 @@ export default {
 }
 
 .chat-dialog-window {
-    width: 25% !important;
+    width: 30% !important;
     height: calc(100vh - 128px);
     right: 0;
     bottom: 0;

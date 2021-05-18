@@ -1,5 +1,5 @@
 import contentApi from '@/api/contentApi'
-import cartApi from '@/api/cartApi'
+import userApi from '@/api/userApi'
 
 export const state = () => ({
     langs: [
@@ -22,9 +22,14 @@ export const state = () => ({
     room: false,
     changedEmployee: null,
     test: false,
+    ping: false,
 })
 
 export const mutations = {
+    SOCKET_pingUsers(state) {
+        state.ping = !state.ping
+        console.log('ping')
+    },
     setTest(state, param) {
         state.test = param
     },
@@ -96,6 +101,13 @@ export const actions = {
 
     setDefaultChangedEmployee({commit}) {
         commit('SOCKET_refreshEmployeeStatus', null)
+    },
+
+    async setUserOnline({commit}, data) {
+        await userApi.setUserOnline(data, response => {
+            commit('admin/SET_CLIENTS', response)
+            commit('SET_EXPERTS', response.users)
+        })
     }
 }
 
@@ -111,4 +123,5 @@ export const getters = {
     getPages: state => state.pages,
     getExperts: state => state.experts,
     getBanners: state => state.banners,
+    getServerPing: state => state.ping,
 }

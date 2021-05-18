@@ -11,6 +11,7 @@
                         </v-scroll-y-transition>
                         <Chat mode="client" :user="authUser" v-if="authUser.type === 'employee'"/>
                         <Video mode="client" :user="authUser" v-if="authUser.type === 'employee'"/>
+                        <Analytics type="employee" :user="authUser"/>
                     </div>
                     <v-footer height="auto" class="white pa-3 app--footer">
                         <span class="caption">&copy; {{ new Date().getFullYear() }}</span>
@@ -38,7 +39,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Chat from '@/components/chat-module/chat';
+import Chat from '@/components/chat-module/chat'
+import Video from '@/components/chat-module/video'
+import Analytics from '@/components/analytics'
 
 export default {
     data: () => ({
@@ -116,7 +119,7 @@ export default {
         }
     },
     components: {
-        Chat
+        Chat, Video, Analytics
     }
 }
 </script>

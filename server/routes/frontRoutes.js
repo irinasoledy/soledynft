@@ -42,4 +42,6 @@ router.patch('/api/order/status', OrderController.changeOrderStatus)
 
 router.patch('/api/order/payment', OrderController.changeOrderPayment)
 
+router.patch('/api/order/appointment', OrderController.changeOrderAppointment)
+
 module.exports = router

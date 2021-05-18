@@ -36,7 +36,6 @@ export default {
                 this.setUserStatus({status, emploeeId: this.user._id}).then(() => {
                     this.$socket.emit('shareEmployeeStatus', this.user)
                     this.$socket.emit('refreshUserData')
-                    console.log('kvdfm');
                 })
             }
         }

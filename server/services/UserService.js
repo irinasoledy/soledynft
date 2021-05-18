@@ -48,7 +48,7 @@ class UserService {
     }
 
     async update(userData, id) {
-        const {name, email, phone, password, logged, type, login, position} = userData
+        const {name, email, phone, password, logged, type, login, position, age, comments} = userData
         const hashPassword = bcrypt.hashSync(password, 7)
         const ecodedPassord = Buffer.from(password).toString('base64')
 
@@ -62,6 +62,8 @@ class UserService {
                     phone,
                     type,
                     position,
+                    age,
+                    comments,
                     password: hashPassword,
                     hash: ecodedPassord,
                     logged: logged,

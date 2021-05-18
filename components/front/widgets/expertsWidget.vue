@@ -17,7 +17,7 @@
                     >
                     <v-card>
                         <v-badge
-                            v-if="item.status === true"
+                            v-if="item.online === true"
                             bordered
                             bottom
                             color="#27ae60"

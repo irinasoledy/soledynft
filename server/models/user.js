@@ -29,7 +29,11 @@ const schema = new Schema({
         type: String, // auth, guest, root, manager, employee
         default: '',
     },
-    gender: {
+    age: {
+        type: String,
+        default: ''
+    },
+    comments: {
         type: String,
         default: ''
     },

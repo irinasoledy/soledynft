@@ -2,6 +2,12 @@ import axios from 'axios'
 
 export default {
 
+    async setUserOnline(data, cb) {
+        await axios.post(`/user/pong`, data)
+            .then(response => cb(response.data))
+            .catch(err => cbError(err.response.data))
+    },
+
     async register(data, cb, cbError) {
         await axios.post(`/auth/register`, data)
             .then(response => cb(response.data))

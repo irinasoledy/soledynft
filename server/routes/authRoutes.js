@@ -2,9 +2,8 @@ const {Router} = require('express')
 const router = Router()
 const {check} = require('express-validator')
 
-
 const AuthController = require('./../controllers/AuthController')()
-
+const UserController = require('./../controllers/UserController')()
 
 router.post('/auth/register',
     [
@@ -25,6 +24,8 @@ router.get('/auth/user', AuthController.getUser)
 
 router.post('/auth/social/facebook', AuthController.authFacebook)
 router.post('/auth/social/google', AuthController.authGoogle)
+
+router.post('/user/pong', UserController.setUserOnline)
 
 
 module.exports = router

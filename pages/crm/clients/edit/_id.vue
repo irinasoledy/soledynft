@@ -45,7 +45,22 @@
                                         required
                                     ></v-text-field>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-md-2 col-12">
+                                    <v-text-field
+                                        label="Age"
+                                        type="number"
+                                        v-model="editedUser.age"
+                                        required
+                                    ></v-text-field>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <v-text-field
+                                        label="Comments"
+                                        v-model="editedUser.comments"
+                                        required
+                                    ></v-text-field>
+                                </div>
+                                <div class="col-md-3 col-12">
                                     <v-text-field
                                         label="Password"
                                         type="password"
@@ -53,7 +68,7 @@
                                         :rules="rules.passwordRules"
                                     ></v-text-field>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-md-3 col-12">
                                     <v-text-field
                                         label="Repeat Password"
                                         type="password"

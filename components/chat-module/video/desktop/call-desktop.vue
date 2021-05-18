@@ -127,6 +127,7 @@ export default {
         max-height: 60vh;
         video{
             width: 100%;
+            max-height: 60vh;
         }
     }
     .local-video-d video{
@@ -142,5 +143,8 @@ export default {
         video{
             //width: 100%;
         }
+    }
+    .v-item-group.v-bottom-navigation{
+        z-index: 9;
     }
 </style>

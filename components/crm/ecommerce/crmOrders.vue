@@ -130,6 +130,18 @@
                                     </v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
+
+                            <v-list-item>
+                                <v-list-content>
+                                    <v-text-field
+                                        v-model="appointmentDate=order.appointmentDate"
+                                        label="Appointment Date"
+                                        hide-details="auto"
+                                    ></v-text-field>
+
+                                </v-list-content>
+                                <v-icon @click="saveAppointmentDate(order)">mdi-content-save</v-icon>
+                            </v-list-item>
                         </v-col>
                     </v-row>
                     <v-card-actions class="justify-end">
@@ -150,6 +162,8 @@ import {mapGetters} from "vuex";
 export default {
     props: ['user'],
     data: () => ({
+        appointmentDate: '',
+        date: new Date().toISOString().substr(0, 10),
         servicesDialog: false,
         orders: [],
         orderStatuses: [],
@@ -170,6 +184,9 @@ export default {
         allServices: 'getAllServices'
     }),
     methods: {
+        saveAppointmentDate(order) {
+            cartApi.changeOrderAppointmentDate({order})
+        },
         showOrder(order) {
             this.servicesDialog = true
             this.getOrderServices(order)
