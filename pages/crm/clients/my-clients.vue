@@ -215,7 +215,7 @@ export default {
 
             setTimeout(res => {
                 this.loading = false
-            }, 5000)
+            }, 3800)
         },
         async removeAssignUser(client) {
             const data = {

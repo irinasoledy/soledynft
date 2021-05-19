@@ -6,8 +6,8 @@ class ActionService {
 
     async setOfflineUsers() {
         try {
-            await User.findOneAndUpdate({online: true}, {$set: {online: false}})
-            await userAction.findOneAndUpdate({online: true}, {$set: {online: false}})
+            await User.updateMany({online: true}, {$set: {online: false}})
+            await userAction.updateMany({online: true}, {$set: {online: false}})
         } catch (e) {
             console.log(e)
         }
