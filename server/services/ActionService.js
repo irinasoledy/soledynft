@@ -14,6 +14,11 @@ class ActionService {
         return true
     }
 
+    async getOnlineUsers() {
+        const users = await User.find({online: true})
+        return users
+    }
+
     async assignClientToEmployee(clientId, employeeId) {
         const action = await userAction.findOne({userId: clientId})
 
@@ -91,20 +96,20 @@ class ActionService {
 
         const actions = await userAction.find({online: true})
 
-        actions.forEach(async action => {
-            let dt = new Date(action.lastVisit);
-            date = dt.setMinutes(dt.getMinutes());
-
-            if (nowMinus > date) {
-                action = await userAction.findOneAndUpdate(
-                    {_id: action._id}, {
-                        $set: {
-                            online: false,
-                        }
-                    }, {new: true}
-                )
-            }
-        })
+        // actions.forEach(async action => {
+        //     let dt = new Date(action.lastVisit);
+        //     date = dt.setMinutes(dt.getMinutes());
+        //
+        //     if (nowMinus > date) {
+        //         action = await userAction.findOneAndUpdate(
+        //             {_id: action._id}, {
+        //                 $set: {
+        //                     online: false,
+        //                 }
+        //             }, {new: true}
+        //         )
+        //     }
+        // })
 
         return date
     }

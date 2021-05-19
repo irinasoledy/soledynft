@@ -221,7 +221,7 @@ export default {
         }),
         refreshUsersActions() {
             this.$socket.emit('pingUsers')
-            this.$socket.emit('shareUserAction', null)
+            // this.$socket.emit('shareUserAction', null)
         },
         async removeAssignUser(client) {
             const data = {

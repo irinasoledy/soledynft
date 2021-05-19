@@ -26,9 +26,10 @@ export const state = () => ({
 })
 
 export const mutations = {
-    SOCKET_pingUsers(state) {
+    SOCKET_pingUsers(state, cb) {
         state.ping = !state.ping
         console.log('ping')
+        // cb()
     },
     setTest(state, param) {
         state.test = param
