@@ -48,6 +48,9 @@ export const mutations = {
         state.clients = data.users
         state.clientActions = data.actions
     },
+    SET_CLIENTS_ACTIONS(state, actions){
+        state.clientActions = actions
+    },
     SET_HISTORY_CLIENT_LIST(state, data){
         state.historyClientsList = data
     },

@@ -373,18 +373,18 @@ class UserController {
     async setUserOnline(req, res) {
         try {
             const {userId, type} = req.body
-            let inverseType = 'client'
+            // let inverseType = 'client'
 
             await User.findOneAndUpdate({_id: userId}, {$set: {online: true}})
 
             if (type === 'client') {
                 await UserAction.findOneAndUpdate({userId: userId}, {$set: {online: true}})
-                inverseType = 'employee'
             }
-            const users = await UserService.getUsers(req.body, inverseType)
-            const actions = await UserService.getUsersActions()
+            // const users = await UserService.getUsers(req.body, inverseType)
+            // const actions = await UserService.getUsersActions()
 
-            return res.status(200).json({users, actions})
+            // return res.status(200).json({users, actions})
+            return res.status(200).json(true)
         } catch (e) {
             return res.status(505).json({message: `Error UserController@setUserOnline ${e}`})
         }

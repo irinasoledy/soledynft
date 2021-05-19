@@ -26,10 +26,15 @@ export const state = () => ({
 })
 
 export const mutations = {
-    SOCKET_pingUsers(state, cb) {
+    SOCKET_pingUsers(state) {
         state.ping = !state.ping
         console.log('ping')
-        // cb()
+    },
+    SOCKET_refreshUserList(state, data) {
+        console.log(data)
+        this.commit('admin/SET_CLIENTS_ACTIONS', data.actions)
+        this.commit('SET_EXPERTS', data.users)
+        console.log('refresh')
     },
     setTest(state, param) {
         state.test = param
@@ -106,8 +111,8 @@ export const actions = {
 
     async setUserOnline({commit}, data) {
         await userApi.setUserOnline(data, response => {
-            commit('admin/SET_CLIENTS', response)
-            commit('SET_EXPERTS', response.users)
+            // commit('admin/SET_CLIENTS', response)
+            // commit('SET_EXPERTS', response.users)
         })
     }
 }

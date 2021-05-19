@@ -4,23 +4,22 @@ const io = require('socket.io')(server)
 const users = require('./controllers/Users')()
 const actions = require('./services/ActionService')()
 
-const cron = require('node-cron');
-
-
-
-
+const cron = require('node-cron')
+let loading = false
 
 cron.schedule('*/20 * * * * *', async () => {
-    console.log('20 seconds cron...')
-    await actions.setOfflineUsers()
-    // const users = await actions.getOnlineUsers()
-    // users.forEach(user => {
-    //     console.log(user._id)
-    //     io.to(user._id).emit('pingUsers', response => {
-    //         console.log(user._id)
-    //     })
-    // })
-    io.emit('pingUsers')
+    if (!loading) {
+        loading = true
+        console.log('20 seconds cron...')
+        await actions.setOfflineUsers()
+        await io.emit('pingUsers')
+
+        setTimeout(async res => {
+            const data = await actions.getUsersList()
+            await io.emit('refreshUserList', data)
+            loading = false
+        },5000)
+    }
 })
 
 const m = (name, text, id) => ({name, text, id})
@@ -28,8 +27,19 @@ const m = (name, text, id) => ({name, text, id})
 io.on('connection', socket => {
 
     socket.on('pingUsers', async () => {
-        await actions.setOfflineUsers()
-        io.emit('pingUsers')
+        console.log(loading)
+        if (!loading) {
+            loading = true
+            console.log('refresh cron...')
+            await actions.setOfflineUsers()
+            await io.emit('pingUsers')
+
+            setTimeout(async res => {
+                const data = await actions.getUsersList()
+                await io.emit('refreshUserList', data)
+                loading = false
+            },5000)
+        }
     })
 
     // Start: user join socket

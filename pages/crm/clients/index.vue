@@ -46,7 +46,7 @@
                                         </td>
                                         <td>
                                             <v-badge
-                                                v-if="item.userId.online === true"
+                                                v-if="item.online === true"
                                                 value="2"
                                                 color="green"
                                                 >

@@ -14,6 +14,13 @@ class ActionService {
         return true
     }
 
+    async getUsersList() {
+        const users = await User.find({type: 'employee'}).sort({online: -1})
+        const actions = await userAction.find().sort({lastVisit: 'desc'}).populate('userId').populate('assigedManager')
+
+        return {users, actions}
+    }
+
     async getOnlineUsers() {
         const users = await User.find({online: true})
         return users
