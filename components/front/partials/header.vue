@@ -62,7 +62,8 @@
                 </v-list>
                 <template v-slot:append>
                     <div class="pa-2 mb-4">
-                        <v-btn color="secondary" outlined block v-if="!$auth.loggedIn" @click="$nuxt.$emit('openLoginDialog')">
+                        <v-btn color="secondary" outlined block v-if="!$auth.loggedIn"
+                               @click="$nuxt.$emit('openLoginDialog')">
                             sign in
                         </v-btn>
                         <v-btn color="secondary" outlined block v-else @click.stop="cabinetDrawer = !cabinetDrawer">
@@ -255,16 +256,93 @@
                         </v-toolbar-title>
                     </v-col>
                     <v-col class="col-auto">
-                        <v-row class="align-center">
-                            <v-col></v-col>
-                            <v-col class="col-md-4">
-                                <v-list-item dark color="primary"
-                                             class="text-right"
-                                             :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`"
-                                >
-                                    <v-icon>mdi-phone</v-icon>
-                                    {{ trans.ContactsAndForms.companyMainPhone1 }}
+                        <v-list dark color="primary" class="d-flex align-center" height="43">
+                            <v-list-item height="43" exact nuxt to="/">
+                                <v-list-item-title>
+                                    {{ trans.PageNames.home }}
+                                </v-list-item-title>
+                            </v-list-item>
+                            <v-hover v-slot="{hover}">
+                                <v-list-item exact nuxt>
+                                    <v-list-item-title>
+                                        {{ trans.PageNames.ourServices }}
+                                    </v-list-item-title>
+                                    <v-icon>mdi-chevron-down</v-icon>
+                                    <v-expand-transition>
+                                        <v-list
+                                            dark
+                                            color="primary"
+                                            v-if="hover"
+                                            class="mandat transition-fast-in-fast-out"
+                                            style="height: auto; width: auto"
+                                        >
+                                            <v-hover v-slot="{hover}" v-for="(item, i) in servicesList" :key="i">
+                                                <v-list-item
+                                                    v-if="item.subcategories.length"
+                                                    :to="`/${language.lang}/service/${item.alias}`"
+                                                >
+                                                    <v-list-item-title>
+                                                        {{ item.translation.name }}
+                                                    </v-list-item-title>
+                                                    <v-expand-transition>
+                                                        <v-list v-if="hover && item.subcategories.length > 0" light elevation="4"
+                                                                text
+                                                                class="subservicesHover transition-fast-in-fast-out"
+                                                                style="height: auto; width: auto">
+                                                            <v-list-item v-for="(child, i) in item.subcategories"
+                                                                         :key="i"
+                                                                         :to="`/${language.lang}/service/${item.alias}/${child.alias}`">
+                                                                <v-list-item-title>
+                                                                    {{ child.translation.name }}
+                                                                </v-list-item-title>
+                                                            </v-list-item>
+                                                        </v-list>
+                                                    </v-expand-transition>
+                                                </v-list-item>
+                                                <v-list-item v-else
+                                                             :to="`/${language.lang}/service/${item.alias}/${item.alias}`">
+                                                    <v-list-item-title>
+                                                        {{ item.translation.name }}
+                                                    </v-list-item-title>
+                                                </v-list-item>
+                                            </v-hover>
+                                        </v-list>
+                                    </v-expand-transition>
                                 </v-list-item>
+                            </v-hover>
+                            <v-list-item height="43" exact nuxt :to="`/${language.lang}/about/`">
+                                <v-list-item-title>
+                                    {{ trans.PageNames.about }}
+                                </v-list-item-title>
+                            </v-list-item>
+                            <v-list-item height="43" nuxt exact :to="`/${language.lang}/experts/`">
+                                <v-list-item-title>
+                                    Portfolio
+                                </v-list-item-title>
+                            </v-list-item>
+                            <v-list-item height="43" nuxt exact :to="`/${language.lang}/contacts/`">
+                                <v-list-item-title>
+                                    {{ trans.PageNames.contacts }}
+                                </v-list-item-title>
+                            </v-list-item>
+                        </v-list>
+                    </v-col>
+                    <v-col class="col-auto">
+                        <v-row class="align-center">
+                            <v-col cols="auto" class="d-flex align-center">
+                                <v-select
+                                    class="selectHeader"
+                                    :items="languages"
+                                    :label="language.name"
+                                    @change="changeLang"
+                                    item-text="name"
+                                    item-value="id"
+                                    color="primary"
+                                    background-color="primary"
+                                    solo
+                                    flat
+                                    dark
+                                ></v-select>
                             </v-col>
                             <v-col class="text-right col-md-1">
                                 <CartIcon v-if="$auth.loggedIn"
@@ -274,7 +352,6 @@
                             <v-col class="account-header-area">
                                 <v-hover v-slot="{hover}">
                                     <v-list-item color="primary">
-
                                         <!-- sign in -->
                                         <span class="sign-in-btn" v-if="!$auth.loggedIn"
                                               @click="$nuxt.$emit('openLoginDialog')">
@@ -309,101 +386,6 @@
                                 </v-hover>
                             </v-col>
                         </v-row>
-                    </v-col>
-                </v-row>
-                <v-row class="justify-space-between align-center" height="43">
-                    <v-col class="col-auto">
-                        <v-list dark color="primary" class="d-flex align-center" height="43">
-                            <v-list-item height="43" exact nuxt to="/">
-                                <v-list-item-title>
-                                    {{ trans.PageNames.home }}
-                                </v-list-item-title>
-                            </v-list-item>
-                            <v-hover v-slot="{hover}">
-                                <v-list-item exact nuxt>
-                                    <v-list-item-title>
-                                        {{ trans.PageNames.ourServices }}
-                                    </v-list-item-title>
-                                    <v-icon>mdi-chevron-down</v-icon>
-                                    <v-expand-transition>
-                                        <v-list
-                                            dark
-                                            color="primary"
-                                            v-if="hover"
-                                            class="mandat transition-fast-in-fast-out"
-                                            style="height: auto; width: auto"
-                                        >
-                                            <v-hover v-slot="{hover}" v-for="(item, i) in servicesList" :key="i">
-                                                <v-list-item
-                                                    v-if="item.children.length"
-                                                    :to="`/${language.lang}/service/${item.alias}`"
-                                                >
-                                                    <v-list-item-title>
-                                                        {{ item.translation.name }}
-                                                    </v-list-item-title>
-                                                    <v-expand-transition>
-                                                        <v-list v-if="hover && item.children.length" light elevation="4"
-                                                                text
-                                                                class="subservicesHover transition-fast-in-fast-out"
-                                                                style="height: auto; width: auto">
-                                                            <v-list-item v-for="(child, i) in item.children"
-                                                                         :key="i"
-                                                                         :to="`/${language.lang}/service/${item.alias}/${child.alias}`">
-                                                                <v-list-item-title>
-                                                                    {{ child.translation.name }}
-                                                                </v-list-item-title>
-                                                            </v-list-item>
-                                                        </v-list>
-                                                    </v-expand-transition>
-                                                </v-list-item>
-                                                <v-list-item v-else
-                                                             :to="`/${language.lang}/service/${item.alias}/${item.alias}`">
-                                                    <v-list-item-title>
-                                                        {{ item.translation.name }}
-                                                    </v-list-item-title>
-                                                </v-list-item>
-                                            </v-hover>
-                                        </v-list>
-                                    </v-expand-transition>
-                                </v-list-item>
-                            </v-hover>
-                            <v-list-item height="43" exact nuxt :to="`/${language.lang}/about/`">
-                                <v-list-item-title>
-                                    {{ trans.PageNames.about }}
-                                </v-list-item-title>
-                            </v-list-item>
-                            <v-list-item height="43" nuxt exact :to="`/${language.lang}/experts/`">
-                                <v-list-item-title>
-                                    {{ trans.PageNames.ourTeam }}
-                                </v-list-item-title>
-                            </v-list-item>
-                            <v-list-item height="43" nuxt exact :to="`/${language.lang}/contacts/`">
-                                <v-list-item-title>
-                                    {{ trans.PageNames.contacts }}
-                                </v-list-item-title>
-                            </v-list-item>
-                        </v-list>
-                    </v-col>
-                    <v-col cols="auto" class="d-flex align-center">
-                        <v-select
-                            class="selectHeader"
-                            :items="languages"
-                            :label="language.name"
-                            @change="changeLang"
-                            item-text="name"
-                            item-value="id"
-                            color="primary"
-                            background-color="primary"
-                            solo
-                            flat
-                            dark
-                        ></v-select>
-                        <v-btn color="secondary" @click="$nuxt.$emit('open-appointment-form')">
-                            <v-icon>
-                                mdi-book
-                            </v-icon>
-                            {{ trans.ContactsAndForms.graficLucruButton }}
-                        </v-btn>
                     </v-col>
                 </v-row>
             </v-container>
@@ -643,7 +625,8 @@ export default {
 .sign-in-btn {
     cursor: pointer;
 }
-.account-header-area{
+
+.account-header-area {
     width: 271px;
 }
 

@@ -49,7 +49,7 @@
 
 <script>
 
-import { mapActions, mapGetters } from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
     data: () => ({
@@ -59,12 +59,12 @@ export default {
             dots: true,
             responsive: [{
                 breakpoint: 600,
-                settings: { slidesToShow: 2 }
+                settings: {slidesToShow: 2}
             },
-            {
-                breakpoint: 900,
-                settings: { slidesToShow: 3 }
-            }]
+                {
+                    breakpoint: 900,
+                    settings: {slidesToShow: 3}
+                }]
         }
     }),
     computed: mapGetters({
@@ -74,23 +74,30 @@ export default {
 </script>
 
 <style lang="scss">
+
 .c-slider {
     margin: 0 -15px;
+
     .agile__list {
         padding: 20px 0 !important;
     }
+
     .slide,
     .c-card {
         height: 100%;
     }
+
     .c-card {
         margin: 15px;
     }
+
     .agile__actions {
         margin-top: 20px;
     }
+
     .agile__dot {
         margin: 0 10px;
+
         button {
             background-color: rgb(147, 143, 143);
             border: none;
@@ -105,10 +112,12 @@ export default {
             transition-duration: .3s;
             width: 10px;
         }
+
         &:hover button {
             background-color: rgb(36, 35, 35)
         }
     }
+
     .agile__dot--current button {
         background-color: rgb(36, 35, 35)
     }

@@ -1,9 +1,9 @@
 <template>
-    <section class="services">
+    <section class="services services-area">
         <v-container>
             <v-row>
                 <v-col cols="12">
-                    <div class="display-1 text-center c-title">
+                    <div class="display-1 text-center c-title white--text">
                         {{ trans.PageNames.ourServices }}
                     </div>
                 </v-col>
@@ -57,3 +57,9 @@ export default {
     })
 }
 </script>
+
+<style lang="scss">
+.services-area{
+    background-color: $custom_blue;
+}
+</style>

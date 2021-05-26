@@ -74,11 +74,11 @@
                                     class="ma-2 btn-yell"
                                     medium
                                     max-width="330"
-                                    color="secondary"
+                                    color="primary"
                                     @click="$nuxt.$emit('open-appointment-form')"
                                 >
-                                    <v-icon left>mdi-comment-bookmark</v-icon>
-                                    {{ trans.HP.hpfreeConsultation }}
+                                    <v-icon left >mdi-comment-bookmark</v-icon>
+                                    OBTINE UN DEMO
                                 </v-btn>
                             </v-sheet>
                         </v-col>
@@ -118,7 +118,7 @@
             <v-container>
                 <v-row>
                     <v-col cols="12">
-                        <div class="display-1 text-center">
+                        <div class="display-1 text-center white--text">
                             {{ trans.General.testemonialsServicesPageTitle1 }}
                             {{ trans.General.testemonialsServicesPageTitle2 }}
                         </div>
@@ -187,8 +187,10 @@
 
 <style lang="scss" scoped>
 
+.testimonials{
+    background-color: $custom_blue;
+}
 .display-1 {
-    color: $custom_blue !important;
     font-weight: 700 !important;
 }
 

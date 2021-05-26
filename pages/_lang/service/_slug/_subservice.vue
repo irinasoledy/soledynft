@@ -1,118 +1,96 @@
 <template>
-    <main>
+    <main class="wrap">
         <v-container>
-            <v-row class="row expert-one-content" v-if="service">
-                <div class="col-12 butons-service" id="serviceBtn">
-                    <v-btn
-                        class="costum-btn-service"
-                        @click="scrollExpertsBlock"
-                        width="100%"
-                    >
-                        {{ trans.Services.liveDiscussionBtn }}
-                        <v-icon>
-                            mdi-sort
-                        </v-icon>
-                    </v-btn>
-                </div>
+            <v-row class="ip-plan-row" v-if="service">
+                <v-col class="col-md-12">
+                    <h1 class="text-center title-plans" color="#34495e">{{ service.translation.name }}</h1>
+                </v-col>
+                <v-col v-for="(plan, planIndex) in service.children" v-if="service.children" :key="planIndex">
+                    <v-card flat class="xs12 sm12 md4 mb-3 flex ip-plan"
+                            :style="`order:${order(plan)}; z-index:${planIndex == 1 ? 3 : 1}`"
+                            :class="{'elevation-10': planIndex == 1}">
+                        <v-layout row v-if="planIndex == 1" ma-0 pa-0 align-center justify-center
+                                  class="primary ip-highligh-plan">
+                            <v-icon color="white" small class="mr-2">mdi-star</v-icon>
+                            <v-flex shrink text-xs-center class="white--text body-2 text-capitalized ">
+                                Most popular
+                            </v-flex>
+                        </v-layout>
+                        <v-card-text class="pa-4 grey lighten-4">
+                            <v-flex pa-0><h2 class="headline">{{ plan.translation.name }}</h2></v-flex>
+                            <v-flex pa-0 style="min-height:66px">Short description {{ plan.translation.name }}</v-flex>
+                            <v-flex pa-0 class="ip-plan-price info--text">
+                                <v-icon>mdi-currency-eur</v-icon>
+                                {{ plan.price }}
+                            </v-flex>
+                            <v-flex pa-0 class="grey--text">EUR/month</v-flex>
+                            <v-flex pa-0 mt-4>
+                                <v-btn :outline="!plan.highlight" depressed large color="primary"
+                                       class="ma-0 white--text">
+                                    Get Started
+                                </v-btn>
+                            </v-flex>
+                        </v-card-text>
 
-                <div class="col-12">
-                    <h3 class="display-1 text-left">
-                        {{ service.translation.name }}
-                    </h3>
-                </div>
-
-                <div class="col-lg-3 col-md-3 side-block-wrap">
-                    <div class="side-block" id="sidebar">
-
-                        <a v-for="anchor in service.blogs"
-                           :key="anchor.id"
-                           class="v-list-item v-list-item--link theme--light item-anchor"
-                           :href="`#section${anchor.id}`"
-                           @click.prevent="scrollTo(anchor.id)"
-                           role="listitem"
-                           tabindex="0">
-                            {{ anchor.translation.name }}
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-md sections-block">
-                    <div
-                        v-for="anchor in service.blogs"
-                        :key="anchor.id"
-                        :id="`section${anchor.id}`"
-                        class="section-block"
-                    >
-                        <h3 class="title">{{ anchor.translation.name }}</h3>
-                        <div v-html="anchor.translation.body"></div>
-                    </div>
-                    <div class="text-center">
+                        <v-list class="pa-3 mb-3">
+                            <template>
+                                <v-subheader>Standard</v-subheader>
+                                <v-list-item>
+                                    <v-list-item-content>
+                                        <v-list-item-title>
+                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
+                                            Periodic upgrading of the site platform
+                                        </v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-content>
+                                        <v-list-item-title>
+                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
+                                            Monitoring site performance
+                                        </v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-content>
+                                        <v-list-item-title>
+                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
+                                            Restoring the site in the event of a fall
+                                        </v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-subheader>Advanced</v-subheader>
+                                <v-list-item>
+                                    <v-list-item-content>
+                                        <v-list-item-title>
+                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
+                                            Content update in news / blog: 1
+                                        </v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-content>
+                                        <v-list-item-title>
+                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
+                                            Products upload: 10
+                                        </v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-content>
+                                        <v-list-item-title class="disabled">
+                                            <v-icon class="mr-2">mdi-close</v-icon>
+                                            Creating new pages: 5
+                                        </v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </template>
+                        </v-list>
                         <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="service"/>
-
-                        <v-btn v-else
-                               color="secondary medium-width"
-                               @click="$nuxt.$emit('open-appointment-form')"
-                        >
-                            {{ trans.Services.liveDiscussionBtn }}
-                        </v-btn>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4 col-sm-12 experts-wrapp">
-                    <div class="expert-one-experts" id="experts">
-                        <div class="title mb-2" v-if="employeeList.length > 0">
-                            {{ trans.Team.expertSectionTitle }}
-                        </div>
-
-                        <v-card
-                            v-if="employeeList.length > 0"
-                            v-for="(item, i) in employeeList"
-                            :key="i"
-                            align="center" justify="center"
-                        >
-                            <v-badge
-                                v-if="item.employee.online === true"
-                                bordered
-                                bottom
-                                color="#27ae60"
-                                content="ONLINE"
-                                offset-x="10"
-                                offset-y="10"
-                            >
-                            </v-badge>
-                            <v-avatar size="115" color="primary" class="mx-auto">
-                                <img :src="`/avatars/${item.employee.avatar}`">
-                            </v-avatar>
-
-                            <v-card-title class="title justify-center operator-title">
-                                {{ item.employee.name }}
-                            </v-card-title>
-                            <v-card-subtitle class="text-center operator-position">
-                                {{ trans.Team[item.employee.position] }}
-                            </v-card-subtitle>
-                            <v-card-actions class="pb-5 justify-center operator-btns">
-                                <v-btn
-                                    v-if="item.employee.status"
-                                    color="secondary"
-                                    @click="openVideoCall(item.employee)"
-                                >
-                                    <v-icon left>mdi-phone</v-icon>
-                                    {{ trans.Team.specialistBtnChat }}
-                                </v-btn>
-                                <v-btn
-                                    color="info"
-                                    @click="openDialog(item.employee)"
-                                >
-                                    <v-icon left>mdi-chat</v-icon>
-                                    {{ trans.Team.companyMainAddress }}
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </div>
-                </div>
+                    </v-card>
+                </v-col>
             </v-row>
         </v-container>
-        <appointment-form></appointment-form>
     </main>
 </template>
 
@@ -124,7 +102,7 @@ import cartBtn from "@/components/front/cart/cartBtn"
 
 export default {
     layout: "default",
-    components: { cartBtn },
+    components: {cartBtn},
     head() {
         return {
             title: this.title,
@@ -137,31 +115,14 @@ export default {
             ]
         }
     },
-    data: () => ({
-        title: '',
-        description: '',
-        dialog: false,
-        service: null,
-        employeeList: [],
-        mobileExpertsDisplay: false,
-    }),
-    watch: {
-        refreshUserData() { // To test this method...
-            this.getEmployees()
-        },
-        changedEmployee() {
-            this.getEmployees()
-        },
-        reject() {
-            this.dialog = false
-            this.setDefaultReject()
-        },
-        response() {
-            this.$socket.emit("joinRoomAsClient", {roomId: this.roomId, client: this.user}, async response => {
-                await this.setUser(this.user)
-                this.$router.push("/conference")
-            });
-            this.setDefaultResponse()
+    data() {
+        return {
+            title: '',
+            description: '',
+            dialog: false,
+            service: null,
+            employeeList: [],
+            mobileExpertsDisplay: false,
         }
     },
     computed: mapGetters({
@@ -183,6 +144,14 @@ export default {
         this.title = this.service.translation.seo_title
         this.description = this.service.translation.seo_description
     },
+    watch: {
+        refreshUserData() {
+            this.getEmployees()
+        },
+        changedEmployee() {
+            this.getEmployees()
+        },
+    },
     methods: {
         ...mapActions({
             setDefaultChangedEmployee: 'setDefaultChangedEmployee',
@@ -193,6 +162,16 @@ export default {
             setInterlocutor: 'dialog/setInterlocutor',
             initCall: 'dialog/initCall',
         }),
+        order(plan) {
+            switch (this.$vuetify.breakpoint.name) {
+                case 'xs':
+                    return plan.orderList
+                case 'sm':
+                    return plan.orderList
+                default:
+                    return plan.orderRow
+            }
+        },
         openVideoCall(user) {
             this.initCall(user)
         },
@@ -237,17 +216,16 @@ export default {
             await contentApi.getEmployeesByService(this.service.id, response => {
                 this.employeeList = response
             })
-        },
-        call(employee) {
-            this.roomId = employee._id
-            this.dialog = true
-            this.$socket.emit('call', this.roomId)
         }
-    }
+    },
 }
 </script>
 
 <style lang="scss">
+.title-plans {
+    //color: #;
+}
+
 .experts-wrapp {
     .v-badge {
         position: absolute;
@@ -428,7 +406,57 @@ export default {
     line-height: 1;
     margin-top: -18px;
 }
+
 .add-to-cart-btn {
     margin-left: 15px;
+}
+
+
+.ip-plan {
+    border: solid 1px #e0e0e0;
+    margin-top: 40px;
+}
+
+.ip-plan-row .ip-plan {
+    max-width: 400px !important;
+    border: solid 1px #e0e0e0;
+}
+
+.ip-plan-row .ip-plan:nth-child(2) {
+    border-right: 0;
+    border-left: 0;
+}
+
+.ip-plan-price {
+    display: block;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+.cursor-help {
+    cursor: help;
+}
+
+.ip-highligh-plan {
+    height: 40px;
+    position: absolute;
+    width: calc(100% + 2px);
+    left: -1px;
+    top: -40px;
+}
+
+.wrap {
+    margin-top: 130px;
+}
+
+.title-plans {
+    color: #34495e;
+}
+
+.disabled{
+    color: rgba(0, 0, 0, 0.54);
 }
 </style>

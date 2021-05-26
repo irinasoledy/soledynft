@@ -7,7 +7,7 @@ module.exports = {
     */
     head: {
         titleTemplate: '%s',
-        title: 'docrom.info',
+        title: 'terradigital.ro',
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -64,12 +64,15 @@ module.exports = {
     */
     vuetify: {
         customVariables: ['~/assets/variables.scss'],
+        font: {
+            family: 'Roboto'
+        },
         theme: {
             light: true,
             themes: {
                 light: {
-                    primary: '#293754',
-                    accent: '#fcd116', //yellow
+                    primary: '#161746',
+                    accent: '#4EFF00', //green
                     secondary: '#ff0008',
                     info: colors.teal.lighten1,
                     warning: colors.amber.base,

@@ -1,13 +1,13 @@
 {
-    "name": "DOCROM",
+    "name": "Terradigital",
     "version": "1.0.0",
-    "description": "DOCROM",
+    "description": "Terradigital",
     "author": "Tudor Iovita",
     "private": true,
     "scripts": {
-        "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
-        "build": "nuxt build",
-        "start": "cross-env NODE_ENV=production node server/index.js",
+        "dev": "PORT=3001 cross-env NODE_ENV=development nodemon server/index.js --watch server",
+        "build": "PORT=3001 nuxt build",
+        "start": "PORT=3001 cross-env NODE_ENV=production node server/index.js",
         "generate": "nuxt generate"
     },
     "dependencies": {
