@@ -20,6 +20,7 @@
                                   {{ promotion.translation.description }}
                               </div>
                               <v-btn
+                                  class="btn-custom"
                                   color="accent"
                                   :to="`/${language.lang}/promotions#promotion-${promotion.id}`"
                               >{{ promotion.translation.btn_text }}</v-btn>
@@ -47,6 +48,7 @@
                                   {{ promotion.translation.name }}
                               </div>
                               <v-btn
+                                  class="btn-custom"
                                   color="accent"
                                   :to="`/${language.lang}/promotions#promotion-${promotion.id}`"
                               >{{ promotion.translation.btn_text }}</v-btn>
@@ -88,7 +90,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
 .slick-slide img{
     width: 100%;
 }
@@ -135,5 +137,8 @@ export default {
 }
 .c-subtitle{
     margin-bottom: 20px;
+}
+.btn-custom{
+    color: $custom_blue !important;
 }
 </style>
