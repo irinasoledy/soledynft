@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="services-page">
         <section class="services" v-if="service">
             <v-container>
                 <v-row>
@@ -78,3 +78,14 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+
+.services-page{
+    margin-top: 70px;
+    background-color: $custom_blue;
+}
+.c-title{
+    color: #FFF !important;
+}
+</style>

@@ -10,21 +10,23 @@
                       <v-row
                           class="fill-height-home-slider"
                           align="center"
-                          justify="center"
+
                           >
-                          <v-col md12 class="text-center">
+                          <v-col class="text-center col-md-6">
                               <div class="display-1 text-center c-title">
                                   {{ promotion.translation.name }}
                               </div>
+                              <div class="text-center c-subtitle">
+                                  {{ promotion.translation.description }}
+                              </div>
                               <v-btn
-                                  color="secondary"
+                                  color="accent"
                                   :to="`/${language.lang}/promotions#promotion-${promotion.id}`"
                               >{{ promotion.translation.btn_text }}</v-btn>
                           </v-col>
                       </v-row>
                   </div>
                   <img :src="`${envAPI}/images/promotions/${promotion.img}`" alt="">
-
               </a>
         </slick>
 
@@ -45,7 +47,7 @@
                                   {{ promotion.translation.name }}
                               </div>
                               <v-btn
-                                  color="secondary"
+                                  color="accent"
                                   :to="`/${language.lang}/promotions#promotion-${promotion.id}`"
                               >{{ promotion.translation.btn_text }}</v-btn>
                           </v-col>
@@ -127,5 +129,11 @@ export default {
 }
 .c-title{
     margin-bottom: 50px;
+}
+.banner{
+    margin-top: -27px;
+}
+.c-subtitle{
+    margin-bottom: 20px;
 }
 </style>

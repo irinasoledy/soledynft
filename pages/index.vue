@@ -1,66 +1,8 @@
 <template>
     <main>
         <banner/>
-        <!-- <div class="banner">
-
-             <v-carousel :show-arrows="false"  v-if="!$mobileDetect.mobile()">
-                <v-carousel-item
-                    v-for="(promotion, i) in promotions"
-                    :key="i"
-                    :src="`${envAPI}/images/promotions/${promotion.img}`"
-                    style="width:100%;height:auto;"
-                    >
-                    <v-container class="fill-height">
-                        <v-row
-                            class="fill-height"
-                            align="center"
-                            justify="center"
-                            >
-                            <v-col md12 class="text-center">
-                                <div class="display-1 text-center c-title">
-                                    {{ promotion.translation.name }}
-                                </div>
-                                <v-btn
-                                    color="secondary"
-                                    :to="`/${language.lang}/promotions#promotion-${promotion.id}`"
-                                >{{ promotion.translation.btn_text }}</v-btn>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-carousel-item>
-            </v-carousel> -->
-
-        <!-- <v-carousel :show-arrows="false" cycle v-else>
-            <v-carousel-item
-                v-for="(promotion, i) in promotions"
-                :key="i"
-                :src="`${envAPI}/images/promotions/${promotion.img_mobile}`"
-                style="width:100%;height:auto;"
-                >
-                <v-container class="fill-height">
-                    <v-row
-                        class="fill-height"
-                        align="center"
-                        justify="center"
-                        >
-                        <v-col md12 class="text-center">
-                            <div class="display-1 text-center c-title">
-                                {{ promotion.translation.name }}
-                            </div>
-                            <v-btn
-                                color="secondary"
-                                :to="`/${language.lang}/promotions#promotion-${promotion.id}`"
-                            >{{ promotion.translation.btn_text }}</v-btn>
-                        </v-col>
-                    </v-row>
-                </v-container>
-            </v-carousel-item>
-        </v-carousel> -->
-        <!-- </div> -->
-
         <div class="callNow">
             <v-parallax height="200" :src="$banner('callNowBGBanner', $mobileDetect.mobile())">
-
                 <v-container>
                     <v-row>
                         <v-col>
@@ -77,7 +19,7 @@
                                     color="primary"
                                     @click="$nuxt.$emit('open-appointment-form')"
                                 >
-                                    <v-icon left >mdi-comment-bookmark</v-icon>
+                                    <v-icon left>mdi-comment-bookmark</v-icon>
                                     OBTINE UN DEMO
                                 </v-btn>
                             </v-sheet>
@@ -87,6 +29,7 @@
             </v-parallax>
         </div>
         <services></services>
+        <recommended></recommended>
         <experts></experts>
         <div class="callNow">
             <v-parallax height="200" :src="$banner('callNowBGBanner', $mobileDetect.mobile())">
@@ -102,11 +45,11 @@
                                 <v-btn
                                     class="ma-2 btn-yell"
                                     medium
-                                    color="secondary"
+                                    color="primary"
                                     @click="$nuxt.$emit('open-appointment-form')"
                                 >
                                     <v-icon left>mdi-comment-bookmark</v-icon>
-                                    {{ trans.HP.hpfreeConsultation }}
+                                   obtine un demo
                                 </v-btn>
                             </v-sheet>
                         </v-col>
@@ -134,62 +77,66 @@
 </template>
 
 <script>
-    import Slick from 'vue-slick'
-    import 'slick-carousel/slick/slick.css';
-    import {mapActions, mapGetters} from 'vuex'
-    import Testimonials from '@/components/front/sliders/testimonialsSlider'
-    import Banner from '@/components/front/sliders/homeSlider'
-    import Experts from '@/components/front/widgets/expertsWidget.vue'
-    import Services from '@/components/front/widgets/servicesWidget.vue'
-    import MapContact from "@/components/front/widgets/mapWidget.vue"
+import Slick from 'vue-slick'
+import 'slick-carousel/slick/slick.css';
+import {mapActions, mapGetters} from 'vuex'
+import Testimonials from '@/components/front/sliders/testimonialsSlider'
+import Banner from '@/components/front/sliders/homeSlider'
+import Experts from '@/components/front/widgets/expertsWidget.vue'
+import Services from '@/components/front/widgets/servicesWidget.vue'
+import MapContact from "@/components/front/widgets/mapWidget.vue"
+import Recommended from "~/components/front/widgets/recommended";
 
-    export default {
-        layout: "default",
-        head() {
-            return {
-                title: this.title,
-                meta: [
-                    {
-                        hid: 'description',
-                        name: 'description',
-                        content: this.description
-                    }
-                ]
-            }
-        },
-        data: () => ({
-            title: '',
-            description: '',
-        }),
-        computed: mapGetters({
-            language: 'getLanguage',
-            trans: 'getTranslations',
-            banners: 'getBanners',
-        }),
-        mounted() {
-            this.title = this.trans.PageNames.homeSeoTitle
-            this.description = this.trans.PageNames.homeSeoDesc
-        },
-        methods: {
-            ...mapActions({
-                banner: 'banner'
-            })
-        },
-        components: {
-            Testimonials,
-            MapContact,
-            Experts,
-            Services,
-            Banner
-        },
-    }
+export default {
+    layout: "default",
+    head() {
+        return {
+            title: this.title,
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.description
+                }
+            ]
+        }
+    },
+    data: () => ({
+        title: '',
+        description: '',
+    }),
+    computed: mapGetters({
+        language: 'getLanguage',
+        trans: 'getTranslations',
+        banners: 'getBanners',
+    }),
+    mounted() {
+        this.title = this.trans.PageNames.homeSeoTitle
+        this.description = this.trans.PageNames.homeSeoDesc
+    },
+    methods: {
+        ...mapActions({
+            banner: 'banner'
+        })
+    },
+    components: {
+        Recommended,
+        Testimonials,
+        MapContact,
+        Experts,
+        Services,
+        Banner,
+
+    },
+}
 </script>
 
 <style lang="scss" scoped>
 
-.testimonials{
+.testimonials {
     background-color: $custom_blue;
 }
+
 .display-1 {
     font-weight: 700 !important;
 }
@@ -220,8 +167,8 @@
     }
 
     .btn-yell {
-        background: $custom_yellow !important;
-        color: #000000 !important;
+        //background: $custom_yellow !important;
+        color: $custom_yellow !important;
     }
 }
 

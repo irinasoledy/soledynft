@@ -10,9 +10,9 @@
                             :style="`order:${order(plan)}; z-index:${planIndex == 1 ? 3 : 1}`"
                             :class="{'elevation-10': planIndex == 1}">
                         <v-layout row v-if="planIndex == 1" ma-0 pa-0 align-center justify-center
-                                  class="primary ip-highligh-plan">
-                            <v-icon color="white" small class="mr-2">mdi-star</v-icon>
-                            <v-flex shrink text-xs-center class="white--text body-2 text-capitalized ">
+                                  class="accent ip-highligh-plan">
+                            <v-icon color="primary" small class="mr-2">mdi-star</v-icon>
+                            <v-flex shrink text-xs-center class="primary--text body-2 text-capitalized ">
                                 Most popular
                             </v-flex>
                         </v-layout>
@@ -90,7 +90,17 @@
                     </v-card>
                 </v-col>
             </v-row>
+            <v-row class="btns-row">
+                <v-col class="text-center">
+                    <v-btn class="v-btn-costum" color="accent" @click="$nuxt.$emit('open-appointment-form')">Solicita demo</v-btn>
+                    <v-btn class="v-btn-costum" to="#experts-block" color="accent">Dicuta cu consultantul</v-btn>
+                </v-col>
+            </v-row>
         </v-container>
+        <div id="experts-block">
+            <experts></experts>
+        </div>
+        <appointment-form></appointment-form>
     </main>
 </template>
 
@@ -99,10 +109,12 @@
 import {mapActions, mapGetters} from 'vuex'
 import contentApi from '@/api/contentApi.js'
 import cartBtn from "@/components/front/cart/cartBtn"
+import Experts from '@/components/front/widgets/expertsWidget.vue'
+
 
 export default {
     layout: "default",
-    components: {cartBtn},
+    components: {cartBtn, Experts},
     head() {
         return {
             title: this.title,
@@ -222,9 +234,6 @@ export default {
 </script>
 
 <style lang="scss">
-.title-plans {
-    //color: #;
-}
 
 .experts-wrapp {
     .v-badge {
@@ -449,14 +458,21 @@ export default {
 }
 
 .wrap {
-    margin-top: 130px;
+    padding-top: 120px;
+    background-color: $custom_blue;
 }
 
 .title-plans {
-    color: #34495e;
+    color: #FFF;
 }
 
 .disabled{
     color: rgba(0, 0, 0, 0.54);
+}
+.v-btn-costum{
+    color: $custom_blue !important;
+}
+.btns-row{
+    padding: 30px;
 }
 </style>

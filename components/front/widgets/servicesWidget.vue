@@ -60,6 +60,6 @@ export default {
 
 <style lang="scss">
 .services-area{
-    background-color: $custom_blue;
+    background-color: $primary_dark;
 }
 </style>

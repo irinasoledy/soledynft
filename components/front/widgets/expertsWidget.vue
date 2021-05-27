@@ -1,6 +1,6 @@
 <template>
     <section class="experts">
-        <v-container color="primary">
+        <v-container>
             <v-row>
                 <v-col cols="12 experts-heading">
                     <div class="display-1 text-center c-title">
@@ -114,7 +114,7 @@ export default {
         }
     }
     .experts{
-        background-color: $custom_blue;
+        background-color: $primary_dark !important;
     }
     .experts-heading .display-1{
         color: #FFF !important

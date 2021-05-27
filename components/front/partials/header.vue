@@ -81,6 +81,7 @@
                 temporary
                 light
                 stateless
+                dense
             >
                 <v-sheet color="primary" dark>
                     <v-list-item @click="closeServices">
@@ -285,7 +286,8 @@
                                                         {{ item.translation.name }}
                                                     </v-list-item-title>
                                                     <v-expand-transition>
-                                                        <v-list v-if="hover && item.subcategories.length > 0" light elevation="4"
+                                                        <v-list v-if="hover && item.subcategories.length > 0" light
+                                                                elevation="4"
                                                                 text
                                                                 class="subservicesHover transition-fast-in-fast-out"
                                                                 style="height: auto; width: auto">
@@ -629,5 +631,4 @@ export default {
 .account-header-area {
     width: 271px;
 }
-
 </style>
