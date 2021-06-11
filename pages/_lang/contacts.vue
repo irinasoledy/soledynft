@@ -23,36 +23,70 @@
                             {{ trans.ContactsAndForms.contactPagesTitle }}
                         </div>
                     </v-col>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <p class="text-center">
-                            <img width="100" src="/rm1.png"/>
+                            <img width="100" src="/rm1.png" class="map-country-img"/>
+                        </p>
+                        <p class="text-center">
+                            {{ trans.ContactsAndForms.formTitle2 }}
+                        </p>
+                        <p class="text-center">{{ trans.ContactsAndForms.companyMainName }}</p>
+                        <p class="text-center white--text">
+                            <v-icon class="white--text">mdi-marker</v-icon>
+                            {{ trans.ContactsAndForms.companyMainAdres }}
+                        </p>
+                        <p class="text-center">
+                            <v-icon class="white--text">mdi-phone</v-icon>
+                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
+                        </p>
+                        <p class="text-center">
+                            <v-icon class="white--text">mdi-email</v-icon>
+                            {{ trans.ContactsAndForms.labelEmail }}: <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">{{ trans.ContactsAndForms.companyMainEmail1 }}</a>
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-center">
+                            <img width="100" src="/md2.png" class="map-country-img"/>
                         </p>
                         <p class="text-center">
                             {{ trans.ContactsAndForms.formTitle2 }}
                         </p>
                         <p class="text-center">{{ trans.ContactsAndForms.companyMainName }}</p>
                         <p class="text-center">
-                            <v-icon>mdi-marker</v-icon>
+                            <v-icon class="white--text">mdi-marker</v-icon>
                             {{ trans.ContactsAndForms.companyMainAdres }}
                         </p>
                         <p class="text-center">
-                            <v-icon>mdi-phone</v-icon>
-                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
+                            <v-icon class="white--text">mdi-phone</v-icon>
+                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
                         </p>
                         <p class="text-center">
-                            <v-icon>mdi-email</v-icon>
-                            {{ trans.ContactsAndForms.labelEmail }}: <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">{{ trans.ContactsAndForms.companyMainEmail1 }}</a>
+                            <v-icon class="white--text">mdi-email</v-icon>
+                            {{ trans.ContactsAndForms.labelEmail }}: <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">{{ trans.ContactsAndForms.companyMainEmail1 }}</a>
                         </p>
-                        <!-- <p class="text-center">
-                            <v-btn
-                                color="primary"
-                                class="mr-4 mt-11 "
-                                >
-                                Discută live cu expertul
-                            </v-btn>
-                        </p> -->
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4 white--text">
+                        <p class="text-center">
+                            <img width="100" src="/es4.png" class="map-country-img"/>
+                        </p>
+                        <p class="text-center">
+                            {{ trans.ContactsAndForms.formTitle2 }}
+                        </p>
+                        <p class="text-center">{{ trans.ContactsAndForms.companyMainName }}</p>
+                        <p class="text-center">
+                            <v-icon class="white--text">mdi-marker</v-icon>
+                            {{ trans.ContactsAndForms.companyMainAdres }}
+                        </p>
+                        <p class="text-center">
+                            <v-icon class="white--text">mdi-phone</v-icon>
+                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
+                        </p>
+                        <p class="text-center">
+                            <v-icon class="white--text">mdi-email</v-icon>
+                            {{ trans.ContactsAndForms.labelEmail }}: <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">{{ trans.ContactsAndForms.companyMainEmail1 }}</a>
+                        </p>
+                    </div>
+                    <div class="col-md-12">
                         <v-form
                             class="contactForm"
                             ref="form"
@@ -60,6 +94,7 @@
                             lazy-validation
                             >
                             <v-text-field
+                                solo
                                 v-model="name"
                                 :counter="10"
                                 :rules="nameRules"
@@ -67,23 +102,26 @@
                                 required
                                 ></v-text-field>
                             <v-text-field
+                                solo
                                 v-model="email"
                                 :rules="emailRules"
                                 :label="trans.ContactsAndForms.labelEmail"
                                 required
                                 ></v-text-field>
                             <v-text-field
+                                solo
                                 :label="trans.ContactsAndForms.labelPhone"
                                 required
                                 ></v-text-field>
                             <v-textarea
+                                solo
                                 name="input-7-4"
                                 :label="trans.ContactsAndForms.labelMessage"
                                 hint="Hint text"
                                 ></v-textarea>
                             <v-btn
-                                color="secondary"
-                                class="mr-4"
+                                color="accent"
+                                class="mr-4 btn-primary-text"
                                 >
                                 {{ trans.ContactsAndForms.sendButton }}
                             </v-btn>
@@ -175,10 +213,12 @@ export default {
 
 <style lang="scss">
 .display-1 {
-    color: $custom_blue !important;
+    color: #FFF !important;
     font-weight: 700 !important;
 }
 .contact-content {
+    background-color: $custom_blue !important;
+    color: #FFF;
     .subheading {
         color: $custom_red !important
     }
@@ -186,11 +226,21 @@ export default {
         height: 60vh !important;
     }
     .contactForm {
-        max-width: 360px;
+        max-width: 50%;
         margin: auto;
     }
 }
 section {
     padding: 50px 0;
+}
+.map-country-img{
+    height: 70px;
+    width: auto;
+}
+textarea, input{
+    color: $custom_blue !important;
+}
+.btn-primary-text{
+    color: $custom_blue !important;
 }
 </style>

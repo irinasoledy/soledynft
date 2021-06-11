@@ -92,6 +92,10 @@ export default {
 </script>
 
 <style lang="scss">
+.about-content{
+    background-color: $custom_blue !important;
+    color: #FFF;
+}
 .display-1 {
     color: $custom_blue !important;
     font-weight: 700 !important;
