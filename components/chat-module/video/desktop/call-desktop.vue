@@ -9,8 +9,8 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
-import { connect, createLocalVideoTrack } from 'twilio-video'
+import {mapGetters} from 'vuex'
+import {connect, createLocalVideoTrack} from 'twilio-video'
 import chatApi from '@/api/chatApi'
 
 export default {
@@ -20,27 +20,38 @@ export default {
         activeRoom: null,
     }),
     watch: {
-        camera() {
+        activeRoom() {
             this.activeRoom.localParticipant.videoTracks.forEach(publication => {
-                if(!this.camera){
-                    document.getElementById('my-video-chat-window').style.display = "none";
+                if (!this.camera) {
                     publication.track.disable()
-                }else{
+                    document.getElementById('my-video-chat-window').style.display = "none";
+                } else {
                     publication.track.enable()
                     document.getElementById('my-video-chat-window').style.display = "block";
                 }
             })
         },
-        microphone(){
-            this.activeRoom.localParticipant.audioTracks.forEach(publication => {
-                if(!this.microphone){
+        camera() {
+            this.activeRoom.localParticipant.videoTracks.forEach(publication => {
+                if (!this.camera) {
+                    document.getElementById('my-video-chat-window').style.display = "none";
                     publication.track.disable()
-                }else{
+                } else {
+                    publication.track.enable()
+                    document.getElementById('my-video-chat-window').style.display = "block";
+                }
+            })
+        },
+        microphone() {
+            this.activeRoom.localParticipant.audioTracks.forEach(publication => {
+                if (!this.microphone) {
+                    publication.track.disable()
+                } else {
                     publication.track.enable()
                 }
             })
         },
-        endChat(){
+        endChat() {
             this.activeRoom.disconnect()
         }
     },
@@ -50,11 +61,12 @@ export default {
         microphone: 'chat/getMicrophone',
         endChat: 'chat/getEndChat',
     }),
-    mounted() {
+    async mounted() {
         $nuxt.$on('endVideoChat', () => {
             this.activeRoom.disconnect()
         })
-        this.startVideConference()
+        await this.startVideConference()
+        document.getElementById('my-video-chat-window').style.display = "none";
     },
     methods: {
         cancelVideConference() {
@@ -71,8 +83,16 @@ export default {
                 this.connectToRoom()
             })
         },
+
         async connectToRoom() {
-            await connect(this.accessToken, { name: this.room }).then(room => {
+            let audioOutputDevice;
+
+            await navigator.mediaDevices.enumerateDevices().then(devices => {
+                audioOutputDevice = devices.find(device => device.kind === 'audiooutput');
+                // return connect(this.accessToken, { name: this.room });
+            })
+
+            await connect(this.accessToken, {name: this.room}).then(room => {
                 const localVideo = this.$refs["local-video"];
                 const remoteVideo = this.$refs["remote-video"];
                 this.activeRoom = room;
@@ -80,6 +100,15 @@ export default {
                 createLocalVideoTrack().then(track => {
                     localVideo.appendChild(track.attach())
                 })
+
+                room.on('trackAdded', track => {
+                    if (track.kind === 'audio') {
+                        const audioElement = track.attach();
+                        audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
+                            document.body.appendChild(audioElement);
+                        });
+                    }
+                });
 
                 room.participants.forEach(participant => {
                     participant.on('trackSubscribed', track => {
@@ -115,36 +144,44 @@ export default {
 </script>
 
 <style lang="scss">
-    .video-wrapp{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .video-wrapp-inside{
-        position: relative;
-    }
-    .remote-video-d{
-        max-height: 60vh;
-        video{
-            width: 100%;
-            max-height: 60vh;
-        }
-    }
-    .local-video-d video{
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .local-video-d video{
-        height: 150px !important;
-    }
-    .video-wrapp-inside{
+.video-wrapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-wrapp-inside {
+    position: relative;
+}
+
+.remote-video-d {
+    max-height: 60vh;
+
+    video {
         width: 100%;
-        video{
-            //width: 100%;
-        }
+        max-height: 50vh;
     }
-    .v-item-group.v-bottom-navigation{
-        z-index: 9;
+}
+
+.local-video-d video {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.local-video-d video {
+    height: 150px !important;
+}
+
+.video-wrapp-inside {
+    width: 100%;
+
+    video {
+        //width: 100%;
     }
+}
+
+.v-item-group.v-bottom-navigation {
+    z-index: 9;
+}
 </style>

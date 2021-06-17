@@ -110,6 +110,11 @@ export const mutations = {
 }
 
 export const actions = {
+
+    createMessageFromSelf({ commit }, data){
+        commit('SOCKET_newMessage', data)
+    },
+
     setInterlocutorMessageUser({ commit }, user) {
         commit('setInterlocutor', user)
     },
@@ -156,6 +161,9 @@ export const actions = {
         await chatApi.getUnreadedMessages(id, response => commit('refreshUnreadMessages', response))
     },
 
+    async setUserCallStatus({ commit }, data) {
+        await chatApi.setUserCallStatus(data)
+    },
 }
 
 export const getters = {

@@ -20,6 +20,17 @@ export default {
         activeRoom: null,
     }),
     watch: {
+        activeRoom() {
+            this.activeRoom.localParticipant.videoTracks.forEach(publication => {
+                if (!this.camera) {
+                    publication.track.disable()
+                    document.getElementById('my-video-chat-window').style.display = "none";
+                } else {
+                    publication.track.enable()
+                    document.getElementById('my-video-chat-window').style.display = "block";
+                }
+            })
+        },
         camera() {
             this.activeRoom.localParticipant.videoTracks.forEach(publication => {
                 if(!this.camera){
@@ -31,7 +42,7 @@ export default {
                 }
             })
         },
-        microphone(){
+        microphone() {
             this.activeRoom.localParticipant.audioTracks.forEach(publication => {
                 if(!this.microphone){
                     publication.track.disable()
@@ -40,7 +51,7 @@ export default {
                 }
             })
         },
-        endChat(){
+        endChat() {
             this.activeRoom.disconnect()
         }
     },
@@ -54,7 +65,14 @@ export default {
         $nuxt.$on('endVideoChat', () => {
             this.activeRoom.disconnect()
         })
+
+        $nuxt.$on('switchSpeaker', () => {
+            console.log(this.activeRoom);
+            // this.activeRoom.trackAdded()
+        })
+
         this.startVideConference()
+        document.getElementById('my-video-chat-window').style.display = "none";
     },
     methods: {
         cancelVideConference() {
@@ -72,7 +90,16 @@ export default {
             })
         },
         async connectToRoom() {
-            await connect(this.accessToken, { name: this.room }).then(room => {
+            let audioOutputDevice;
+
+            await navigator.mediaDevices.enumerateDevices().then(devices => {
+                audioOutputDevice = devices.find(device => device.kind === 'audiooutput');
+                // return connect(this.accessToken, { name: this.room });
+            })
+
+            await connect(this.accessToken, { name: this.room, audio: true,
+                    video: { width: 640 },
+                    dominantSpeaker: true }).then(room => {
                 const localVideo = this.$refs["local-video"];
                 const remoteVideo = this.$refs["remote-video"];
                 this.activeRoom = room;
@@ -81,9 +108,30 @@ export default {
                     localVideo.appendChild(track.attach())
                 })
 
+                room.on('trackSubscribed', track => {
+                    if (track.kind === 'audio') {
+                        console.log('vldfml');
+                        const audioElement = track.attach();
+                        audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
+                            document.body.appendChild(audioElement);
+                        });
+                    }
+                });
+
+                // room.on('trackAdded', track => {
+                //     if (track.kind === 'audio') {
+                //         console.log('track kind');
+                //         const audioElement = track.attach();
+                //         audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
+                //             document.body.appendChild(audioElement);
+                //         });
+                //     }
+                // })
+
                 room.participants.forEach(participant => {
                     participant.on('trackSubscribed', track => {
                         remoteVideo.appendChild(track.attach())
+
                     })
                 })
 
@@ -97,6 +145,17 @@ export default {
                     participant.on('trackSubscribed', track => {
                         remoteVideo.appendChild(track.attach())
                     })
+                })
+
+                room.on('trackAdded', track => {
+                    if (track.kind === 'audio') {
+                        console.log('track kind');
+                        const audioElement = track.attach();
+                        audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
+                            console.log(audioElement);
+                            document.body.appendChild(audioElement);
+                        });
+                    }
                 })
 
                 room.on('disconnected', room => {
@@ -124,8 +183,19 @@ export default {
 .video-wrapp-inside{
     position: relative;
 }
+.remote-video{
+    text-align: center;
+    margin-top: -100px;
+}
 .remote-video video{
-    max-width: 100%;
+    width: 100%;
+    max-height: calc(100vh - 173px);
+}
+@media (max-width: 400px) {
+    /*.remote-video video{*/
+    /*    !*max-width: 100%;*!*/
+    /*    max-height: calc(100vh - 188px);*/
+    /*}*/
 }
 .local-video {
     position: absolute;

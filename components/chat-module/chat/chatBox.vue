@@ -26,7 +26,7 @@ export default {
     props: ['user', 'interlocutor', 'mode'],
     computed: mapGetters({
            'messages': 'dialog/getMessages',
-           // 'user': 'chat/getUser',
+           // 'user': 'chat_old/getUser',
            'room': 'call/getRoomId',
        }),
     watch: {

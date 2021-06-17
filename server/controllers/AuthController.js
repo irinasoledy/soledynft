@@ -60,6 +60,28 @@ class AuthController {
         }
     }
 
+    async authSocial(req, res) {
+        try {
+            const { name, email, driver, guestId } = req.body
+            let user = await User.findOne({email})
+            if (!user) {
+                const password = email + 'password'
+                const hashPassword = bcrypt.hashSync(password, 7)
+                const ecodedPassord = Buffer.from(password).toString('base64')
+                user = await User.findOneAndUpdate(
+                    {_id: guestId},
+                    {
+                        $set: {name, email, password: hashPassword, hash: ecodedPassord, logged: true},
+                    },
+                    {new: true}
+                )
+            }
+            return res.status(200).json(user)
+        } catch (e) {
+            return res.status(400).json({message: `Error AuthController@authSocial ${e}`})
+        }
+    }
+
     async loginCRM(req, res) {
         try {
             const { statusCode, message, token } = await AuthService.loginCRM(req.body)

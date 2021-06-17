@@ -27,5 +27,6 @@ router.post('/auth/social/google', AuthController.authGoogle)
 
 router.post('/user/pong', UserController.setUserOnline)
 
+router.post('/api/auth/social', AuthController.authSocial)
 
 module.exports = router

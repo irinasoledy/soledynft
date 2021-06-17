@@ -49,4 +49,30 @@ export default {
             .then(response => cb(response.data))
             .catch(err => cbError(err.response.data))
     },
+
+    async getRandomEmployee(cb) {
+        await axios.get(`/api/user/random/employee`)
+            .then(response => cb(response.data))
+            .catch(err => cbError(err.response.data))
+    },
+
+    async setUserBotActivated(id, cb) {
+        await axios.post(`/api/user/set/botActivated`, id)
+            .then(response => cb(response.data))
+    },
+
+    async sendAcceptPoliciesMail(data) {
+        await axios.post(`${process.env.APISERVICE}/api/mail/acceptPolicies`, data)
+    },
+
+    async socialLogin(hash, cb, cbError) {
+        await axios.get(`${process.env.APISERVICE}/api/auth-user?hash=${hash}`)
+            .then(response => cb(response))
+            .catch(err => cbError(err.response.data))
+    },
+
+    async chechSocialUserLogin(data, cb) {
+        await axios.post(`/api/auth/social`, data)
+            .then(response => cb(response.data))
+    },
 }

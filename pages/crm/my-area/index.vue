@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { Items as Users } from '@/util/user'
+
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -113,7 +113,7 @@ export default {
                     { text: 'Edit', value: 'edit' },
                     { text: 'Delete', value: 'delete' }
                 ],
-                items: Users
+                items: []
             },
             search: '',
         };

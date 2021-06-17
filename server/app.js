@@ -7,10 +7,9 @@ const actions = require('./services/ActionService')()
 const cron = require('node-cron')
 let loading = false
 
-cron.schedule('*/20 * * * * *', async () => {
+cron.schedule('*/25 * * * * *', async () => {
     if (!loading) {
         loading = true
-        console.log('20 seconds cron...')
         await actions.setOfflineUsers()
         await io.emit('pingUsers')
 
@@ -27,10 +26,8 @@ const m = (name, text, id) => ({name, text, id})
 io.on('connection', socket => {
 
     socket.on('pingUsers', async () => {
-        console.log(loading)
         if (!loading) {
             loading = true
-            console.log('refresh cron...')
             await actions.setOfflineUsers()
             await io.emit('pingUsers')
 
@@ -75,8 +72,6 @@ io.on('connection', socket => {
     })
 
     socket.on('remoteLogin', (data, cb) => {
-        console.log('remoteLogin socket');
-        console.log(data.to._id);
         socket.broadcast.to(data.to._id).emit('remoteLogin', data)
         cb()
     })
@@ -84,7 +79,6 @@ io.on('connection', socket => {
     socket.on('refreshCart', userId => {
         socket.broadcast.to(userId).emit('refreshCart')
     })
-
 
     // Start: employee create a room
     socket.on('employeeJoined', (data, cb) => {
@@ -110,23 +104,6 @@ io.on('connection', socket => {
     socket.on('updateActiveRooms', async data => {
         io.emit('reloadEmployeeList', data)
     })
-
-    // Create an send a message
-    // socket.on('createMessage', (data, cb) => {
-    //     if (!data.text) {
-    //         return cb('The text cannot be empty')
-    //     }
-    //
-    //     if (data.user && data.room) {
-    //         const res = {
-    //             message: data.message,
-    //             simpleMessage: m(data.user.name, data.text, data.user._id),
-    //         }
-    //
-    //         io.to(data.room).emit('newMessage', res)
-    //     }
-    //     cb()
-    // })
 
     // Create an send a message
     socket.on('shareHistory', (data) => {
@@ -157,7 +134,6 @@ io.on('connection', socket => {
             socket.join(data.userId)
             action = await actions.addUser(data)
         }
-        console.log('sockets share user actions')
         const actionsAll = await actions.getAllActions()
 
         io.emit('refreshActions', {action, actionsAll})

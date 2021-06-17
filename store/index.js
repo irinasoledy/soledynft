@@ -23,18 +23,17 @@ export const state = () => ({
     changedEmployee: null,
     test: false,
     ping: false,
+    pageName: '',
+    navigations: 0,
 })
 
 export const mutations = {
     SOCKET_pingUsers(state) {
         state.ping = !state.ping
-        console.log('ping')
     },
     SOCKET_refreshUserList(state, data) {
-        console.log(data)
         this.commit('admin/SET_CLIENTS_ACTIONS', data.actions)
         this.commit('SET_EXPERTS', data.users)
-        console.log('refresh')
     },
     setTest(state, param) {
         state.test = param
@@ -71,6 +70,12 @@ export const mutations = {
     SET_EXPERTS(state, experts) {
         state.experts = experts
     },
+    SET_PAGE_NAME(state, pageName) {
+        state.pageName = pageName
+    },
+    SET_NAVIGATION(state, nav) {
+        state.navigations = nav
+    }
 }
 
 export const actions = {
@@ -114,6 +119,14 @@ export const actions = {
             // commit('admin/SET_CLIENTS', response)
             // commit('SET_EXPERTS', response.users)
         })
+    },
+
+    setPageName({commit}, pageName) {
+        commit('SET_PAGE_NAME', pageName)
+    },
+
+    setNavigations({commit}, nav) {
+        commit('SET_NAVIGATION', nav)
     }
 }
 
@@ -130,4 +143,6 @@ export const getters = {
     getExperts: state => state.experts,
     getBanners: state => state.banners,
     getServerPing: state => state.ping,
+    getPageName: state => state.pageName,
+    getNavigations: state => state.navigations,
 }

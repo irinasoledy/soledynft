@@ -6,6 +6,7 @@
         >
         <v-app-bar-nav-icon @click.stop="toggleDrawer()"></v-app-bar-nav-icon>
         </v-text-field>
+        <v-icon color="red" @click="refreshPage()">mdi-refresh</v-icon>
         <v-spacer></v-spacer>
         <v-btn icon @click="handleFullScreen()">
             <v-icon>mdi-fullscreen</v-icon>
@@ -51,7 +52,7 @@
                 </v-list-item>
 
                 <v-list-item ripple="ripple"
-                        :to="`/crm/employees/edit/operators/${authUser._id}`" 
+                        :to="`/crm/employees/edit/operators/${authUser._id}`"
                         v-if="authUser.type === 'employee'">
                     <v-list-item-action>
                         <v-icon>mdi-account</v-icon>
@@ -79,7 +80,7 @@
 
 import { mapGetters, mapActions } from "vuex"
 import NotificationList from '@/components/crm/widgets/list/NotificationList';
-import Util from '@/util';
+import Support from '@/support';
 
 export default {
     name: 'app-toolbar',
@@ -93,15 +94,25 @@ export default {
     computed: mapGetters({
         user: 'authCRM/getUser',
     }),
+    mounted() {
+        this.setUserStatus({status: true, emploeeId: this.user._id}).then(() => {
+            this.$socket.emit('shareEmployeeStatus', this.user)
+            this.$socket.emit('refreshUserData')
+        })
+    },
     methods: {
         ...mapActions({
             resetAuth: 'authCRM/reset',
+            setUserStatus: 'admin/setUserStatus',
         }),
+        refreshPage() {
+            location.reload()
+        },
         toggleDrawer() {
             this.$store.commit('toggleDrawer')
         },
         handleFullScreen() {
-            Util.toggleFullScreen();
+            Support.toggleFullScreen();
         },
         async logout() {
             await this.$cookies.remove('crm-token')

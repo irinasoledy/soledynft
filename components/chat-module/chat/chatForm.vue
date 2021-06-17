@@ -34,7 +34,7 @@ export default {
         employee: 'chat/getEmployee',
         client: 'chat/getClient',
         history: 'chat/getHistory',
-        // user: 'chat/getUser',
+        // user: 'chat_old/getUser',
         lastMessage: 'dialog/getLastMessage'
     }),
     methods: {

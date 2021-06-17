@@ -33,11 +33,11 @@
 
 <script>
 
-import notes from '@/util/notification';
+// import notes from '@/util/notification';
 
 export default {
     data: () => ({
-        items: notes
+        items: []
     }),
     methods: {
         handleClick: (e) => {

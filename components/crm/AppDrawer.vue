@@ -75,7 +75,7 @@
 
 <script>
 
-import menu from '@/util/menu';
+import menu from '@/support/menu';
 
 export default {
     name: 'app-drawer',

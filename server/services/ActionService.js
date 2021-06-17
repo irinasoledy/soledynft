@@ -6,7 +6,12 @@ class ActionService {
 
     async setOfflineUsers() {
         try {
+            // await User.updateMany(
+            //     {online: false},
+            //     {$set: {sessionDate: null}}
+            // )
             await User.updateMany({online: true}, {$set: {online: false}})
+
             await userAction.updateMany({online: true}, {$set: {online: false}})
         } catch (e) {
             console.log(e)
@@ -54,13 +59,25 @@ class ActionService {
 
     async addUser(payload) {
         const findAction = await userAction.findOne({userId: payload.userId})
+        const findUser = await User.findOne({_id: payload.userId})
+        let sessionDate = findUser.sessionDate
+        let sessionDuration= findUser.sessionDuration
         let action = null
+
+        if (!findUser.online) {
+            sessionDate =  Date.now()
+            sessionDuration = 0
+        }
+
+        await User.findOneAndUpdate(
+            {_id:  payload.userId}, { $set: { sessionDate: sessionDate, sessionDuration: sessionDuration } }
+        )
 
         if (findAction) {
             const visitsQty = findAction.visitsQty + parseInt(payload.visits)
             const visitsMin = parseInt(findAction.visitsMin) + parseInt(payload.visitsMin)
 
-            action = await userAction.findOneAndUpdate(
+            action = await userAction.findOneAndUpdate (
                 {_id: findAction._id}, {
                     $set: {
                         online: payload.online,
@@ -69,7 +86,8 @@ class ActionService {
                         currentPage: payload.currentPage,
                         visitsQty: visitsQty,
                         visitsMin: visitsMin,
-                        status: payload.status
+                        status: payload.status,
+                        sessionDate: payload.sessionDate
                     }
                 }, {new: true}
             )

@@ -111,23 +111,9 @@
                             <small class="user-position" v-if="user.position">{{ trans.Team[user.position] }}</small>
                         </v-list-item-content>
                         <v-list-item-icon>
-<!--                            <v-badge color="red" overlap v-if="showMissedCallsByUser(user)">-->
-<!--                                <span slot="badge">-->
-<!--                                    {{ showMissedCallsByUser(user) }}-->
-<!--                                </span>-->
-<!--                                <v-icon :color="user.online ? 'deep-purple accent-4' : 'grey'">-->
-<!--                                    mdi-phone-->
-<!--                                </v-icon>-->
-<!--                            </v-badge>-->
-
-<!--                            <v-badge color="red" overlap v-if="showUnreadByUser(user)">-->
-<!--                            <span slot="badge">-->
-<!--                                {{ showUnreadByUser(user) }}-->
-<!--                            </span>-->
-                                <v-icon :color="user.online ? 'deep-purple accent-4' : 'grey'">
-                                    mdi-message-outline
-                                </v-icon>
-<!--                            </v-badge>-->
+                            <v-icon :color="user.online ? 'deep-purple accent-4' : 'grey'">
+                                mdi-message-outline
+                            </v-icon>
                         </v-list-item-icon>
                     </v-list-item>
                 </v-list>
@@ -144,8 +130,8 @@
         >
             <v-card v-if="interlocutor">
                 <v-toolbar dark color="primary">
-                    <v-btn icon dark @click="closeDialogList">
-                        <v-icon>mdi-chevron-left</v-icon>
+                    <v-btn icon dark @click="closeDialogList()">
+                        <v-icon>mdi-close</v-icon>
                     </v-btn>
                     <v-avatar size="32" v-if="interlocutor.avatar" light color="info">
                         <v-img
@@ -171,6 +157,13 @@
 
                 </v-toolbar>
                 <chatBox :user="user" :interlocutor="interlocutor" :mode="mode"/>
+            </v-card>
+            <v-card v-else>
+                <v-toolbar dark color="primary">
+                    <v-btn icon dark @click="closeDialogList()">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                </v-toolbar>
             </v-card>
         </v-dialog>
         <v-snackbar
@@ -214,14 +207,14 @@ export default {
     watch: {
         $route(to, from) {
             this.addUserAction(to)
+            this.setNavigations(to.path)
         },
         async refreshUserData() { // To test this method...
             if (this.dialogList || this.dialogItem) {
-                // await crmApi.getUsers(this.mode, response => this.users = response.users)
                 this.getHistories()
-                if (this.interlocutor) {
+                if (this.interlocutor && (typeof this.interlocutor !== "undefined")) {
                     const interlocutor = this.users.find(user => user._id === this.interlocutor._id)
-                    this.setInterlocutor(interlocutor)
+                    // this.setInterlocutor(interlocutor)
                     this.checkUnreadMessages(interlocutor)
                 }
             }
@@ -229,7 +222,6 @@ export default {
         async dialogList() {
             if (this.dialogItem === false) {
                 this.getHistories()
-                // await crmApi.getUsers(this.mode, response => this.users = response.users)
             }
         },
         dialogItem() {
@@ -256,9 +248,14 @@ export default {
             this.setNullCall()
         },
         interlocutor() {
-            if (this.interlocutor) {
-                this.dialogItem = true
+            if (this.dialogItem === false) {
+                if (this.interlocutor) {
+                    this.dialogItem = true
+                }else{
+                    this.dialogItem = false
+                }
             }
+
         }
     },
     computed: mapGetters({
@@ -273,6 +270,7 @@ export default {
         messages: 'dialog/getMessages',
         from: 'dialog/getFrom',
         trans: 'getTranslations',
+        navigation: 'getNavigations',
     }),
     async mounted() {
         if (!this.$store.state.chat.cookie && (this.mode === 'employee')) {
@@ -285,11 +283,8 @@ export default {
                 }
             })
         }
-
         // get Unreaded messages
         await this.getUnreadedMessages(this.user._id)
-
-
     },
     methods: {
         ...mapActions({
@@ -300,8 +295,8 @@ export default {
             setInterlocutor: 'dialog/setInterlocutor',
             setInterlocutorMessageUser: 'dialog/setInterlocutorMessageUser',
             setMessagesAsReaded: 'dialog/setMessagesAsReaded',
-
             initCall: 'dialog/initCall',
+            setNavigations: 'setNavigations',
         }),
         getInitials(user) {
             const name = user.name
@@ -352,10 +347,12 @@ export default {
             this.previewMessage = false
         },
         closeDialogList() {
-            this.previewMessage = false
-            this.dialogList = true
-            this.dialogItem = false
-            this.setInterlocutor(null)
+             this.dialogItem = false
+             this.previewMessage = false
+             this.dialogList = false
+             setTimeout(() => {
+                 this.setInterlocutor(null)
+             }, 0)
         },
         openDialogItem(user) {
             this.previewMessage = false
@@ -495,7 +492,7 @@ export default {
 @media (max-width: 991px) {
     .chat-dialog-window {
         width: 100% !important;
-        height: calc(100vh - 52px);
+        height: calc(100vh - 56px);
         right: 0;
         bottom: 0;
         top: auto;

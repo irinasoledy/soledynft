@@ -21,7 +21,7 @@ export const state = () => ({
     policy: true,
 
     // Feauters:
-    camera: true,
+    camera: false,
     microphone: true,
     endChat: false,
 
@@ -148,7 +148,6 @@ export const actions = {
         })
     },
     joinExistingRoom({ commit }, data){
-        console.log(data, 'store');
     },
     setClientAsUser({ commit }, employee){
         commit('SET_CLIENT_AS_USER', employee)

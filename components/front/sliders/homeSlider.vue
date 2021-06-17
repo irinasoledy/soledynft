@@ -22,7 +22,7 @@
                               <v-btn
                                   class="btn-custom"
                                   color="accent"
-                                  :to="`/${language.lang}/promotions#promotion-${promotion.id}`"
+                                  :to="`/${language.lang}/promotions#${promotion.alias}`"
                               >{{ promotion.translation.btn_text }}</v-btn>
                           </v-col>
                       </v-row>
@@ -50,7 +50,7 @@
                               <v-btn
                                   class="btn-custom"
                                   color="accent"
-                                  :to="`/${language.lang}/promotions#promotion-${promotion.id}`"
+                                  :to="`/${language.lang}/promotions#${promotion.alias}`"
                               >{{ promotion.translation.btn_text }}</v-btn>
                           </v-col>
                       </v-row>

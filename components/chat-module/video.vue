@@ -10,10 +10,13 @@
             persistent
             transition="dialog-bottom-transition"
             >
+
             <v-card v-if="videoInterlocuitor">
                 <v-toolbar dark color="primary">
                     <v-icon class="minify-window" @click="minifyWindow()">mdi-chevron-down</v-icon>
-                    <v-toolbar-title class="chat-user-name"><small>Video Chat with  - {{ videoInterlocuitor.name }}</small></v-toolbar-title>
+                    <v-toolbar-title class="chat-user-name">
+                        <small>Video Chat with  - {{ videoInterlocuitor.name }}</small>
+                    </v-toolbar-title>
                     <v-spacer></v-spacer>
                 </v-toolbar>
 
@@ -48,9 +51,9 @@
             persistent
             max-width="400"
             >
-            <v-card class="call-area-in" align="center" justify="center">
+            <v-card class="call-area-in" align="center" justify="center" v-if="accepted">
                 <h3>Incoming call</h3> <br>
-                <p>{{ callUser.name }}</p>
+                <p v-if="callFrom">{{ callFrom.name }}</p>
                 <div>
                     <v-progress-linear
                     indeterminate
@@ -73,6 +76,25 @@
                     <v-icon dark>mdi-phone-hangup</v-icon>
                 </v-btn>
             </v-card>
+            <v-card class="call-area-in" align="center" justify="center" v-else>
+                <div class="call-allert" v-if="callFrom">
+                    Veti fi apelat de {{ callFrom.name }} in {{ allertConter }} sec
+                </div>
+                <v-btn
+                    @click="acceptRequestToCall()"
+                    class="mx-2"
+                    dark large color="green"
+                    >
+                    Accept
+                </v-btn>
+                <v-btn
+                    class="mx-2"
+                    dark large color="red"
+                    @click="rejectRequestToCall()"
+                    >
+                    Refuz
+                </v-btn>
+            </v-card>
         </v-dialog>
 
         <Minified
@@ -92,6 +114,8 @@ import Minified from '@/components/chat-module/video/minified'
 export default {
     props: ['user', 'mode'],
     data: () => ({
+        allertConter: 5,
+        accepted: false,
         dialogOut: false,
         dialogIn: false,
         minifiedDialog: false,
@@ -108,6 +132,7 @@ export default {
 
     }),
     computed: mapGetters({
+        trans: 'getTranslations',
         calling: 'dialog/getCalling',
 
         callUser: 'dialog/getCallUser',
@@ -128,8 +153,6 @@ export default {
                     this.audio.pause();
                     this.audio.currentTime = 0;
                     this.resetTimer()
-                    // const message = 'Call Rejected'
-                    // this.sendMessage(this.callUser._id, this.user._id, message, 'rejected')
                 }
             }, 2000)
         },
@@ -142,9 +165,20 @@ export default {
             }
         },
         calling() {
+            this.accepted = false
             if (this.calling === true) {
+                this.setUserCallStatus({userId: this.user._id, status: 'No answer'})
+                this.allertConter = 5
                 this.dialogIn = true
-                this.audio.play();
+                // this.audio.play();
+                const timer = setInterval(() => {
+                    if (this.allertConter > 0) {
+                        this.allertConter--
+                    }else{
+                        clearInterval(timer)
+                        this.accepted = true
+                    }
+                }, 1000)
             }else{
                 this.dialogIn = false
                 this.dialogOut = false
@@ -180,8 +214,19 @@ export default {
             restartStatuses : 'dialog/restartStatuses',
             confirmCall : 'dialog/confirmCall',
             setVideoInterlocuitor: 'dialog/setVideoInterlocuitor',
-            createMessage: 'dialog/createMessage'
+            createMessage: 'dialog/createMessage',
+            setUserCallStatus: 'dialog/setUserCallStatus'
         }),
+        acceptRequestToCall() {
+            this.setUserCallStatus({userId: this.user._id, status: 'Accepted'})
+            this.audio.play()
+            this.accepted = true
+            // this.acceptCall()
+        },
+        rejectRequestToCall() {
+            this.setUserCallStatus({userId: this.user._id, status: 'Refused'})
+            this.rejectIncomingCall()
+        },
         minifyWindow() {
             this.dialogOut = false
             this.minifiedDialog = true
@@ -205,6 +250,7 @@ export default {
             this.$socket.emit('endCall', data)
         },
         acceptCall() {
+            this.setUserCallStatus({userId: this.user._id, status: 'Accepted'})
             this.restartStatuses(true)
             this.dialogIn = false
             this.setVideoInterlocuitor(this.callFrom)
@@ -215,12 +261,10 @@ export default {
         },
         resetTimer() {
             clearInterval(this.iterval)
-            console.log('reset')
             this.timer.seted = false
             this.timer.seconds = 0
             this.timer.minutes = 0
             this.timer.hours = 0
-            console.log(this.timer)
         },
         runTimer() {
             this.resetTimer()
@@ -241,6 +285,7 @@ export default {
             this.sendMessage(this.callUser._id, this.user._id, message, status)
         },
         rejectIncomingCall() { //reject call
+            this.setUserCallStatus({userId: this.user._id, status: 'Refused'})
             const message = 'Rejected Call'
             const status = 'rejected'
             this.endCall()
@@ -266,7 +311,6 @@ export default {
                     this.$socket.emit( "createMessage", { message: this.lastMessage, to, from }, data => {})
                 })
             }
-
         }
     }
 }
@@ -280,6 +324,7 @@ export default {
         bottom: 0;
         top: auto;
         left: auto;
+        overflow: hidden;
     }
     .call-area-out{
         height: calc(100vh - 128px - 70px) !important;
@@ -291,7 +336,7 @@ export default {
     @media (max-width: 991px) {
         .video-dialog-window {
             width: 100% !important;
-            height: calc(100vh - 52px);
+            height: calc(100vh - 56px);
             right: 0;
             bottom: 0;
             top: auto;
@@ -325,5 +370,9 @@ export default {
             font-size: 19px;
             font-weight: bold;
         }
+    }
+    .call-allert{
+        margin-bottom: 30px;
+        font-weight: bold;
     }
 </style>

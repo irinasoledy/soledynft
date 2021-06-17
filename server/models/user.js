@@ -88,9 +88,29 @@ const schema = new Schema({
         type: String,
         default: ''
     },
+    trigger: {
+        type: String,
+        default: ''
+    },
     date: {
         type: Date,
         default: Date.now
+    },
+    sessionDate: {
+        type: Date,
+        default: 0
+    },
+    sessionDuration: {
+        type: String,
+        default: 0
+    },
+    callStatus: {
+        type: String,
+        default: null
+    },
+    botActivated: {
+        type: Boolean,
+        default: false,
     }
 })
 

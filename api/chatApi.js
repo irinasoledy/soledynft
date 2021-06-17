@@ -30,5 +30,12 @@ export default {
         await axios.get(`/api/messages/unreaded?user=${id}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err) )
+    },
+
+    async setUserCallStatus(data) {
+        await axios.patch(`/api/user/callStatus`, data)
+            .then(response => console.log('ok'))
+            .catch(err => console.log(err) )
     }
+
 }

@@ -1,20 +1,28 @@
 <template>
     <div class="d-flex">
         <div class="video-mobile">
+            <small class="chatWarning">
+                {{ trans.General.chatWarning }}
+                <v-sheet dark class="but-end">
+                    <v-btn small dark fab color="secondary" @click="end" class="end-btn">
+                        <v-icon dark>
+                            mdi-phone-hangup
+                        </v-icon>
+                    </v-btn>
+                </v-sheet>
+            </small>
             <div  class="video-mobile__top d-flex justify-space-between">
-                <v-btn
+
+                <!-- <v-btn
                     @click.stop="drawerInfo = !drawerInfo"
                     small
                     dark
                     >
                     <v-icon>mdi-cog</v-icon>
-                </v-btn>
-                <v-sheet dark class="but-end">
-                    <v-btn height="30" width="40" small dark  color="secondary" @click="end">
-                        End
-                    </v-btn>
-                </v-sheet>
+                </v-btn> -->
+
             </div>
+
             <div class="video-mobile-container">
                 <callVideo :user='user'/>
             </div>
@@ -57,7 +65,7 @@ import drawerMenu from '@/components/chat-module/video/mobile/drawer-menu-mobile
 import callVideo from '@/components/chat-module/video/mobile/call-mobile'
 import bottomVideo from '@/components/chat-module/video/mobile/bottom-mobile'
 
-// import chat from '@/components/chat/video/chat'
+// import chat_old from '@/components/chat_old/video/chat_old'
 import chat from '@/components/chat-module/chat/chatBox'
 
 export default {
@@ -71,6 +79,7 @@ export default {
     },
     computed: mapGetters({
         videoInterlocuitor: 'dialog/getVideoInterlocuitor',
+        trans: 'getTranslations',
     }),
     data: () => ({
         chatDrawer: false,
@@ -106,14 +115,16 @@ export default {
 <style lang="scss" scoped>
     .video-mobile {
         width: 100%;
-        height: calc(100vh - 128px) !important;
+        height: calc(100vh - 65px) !important;
         background: rgb(34, 34, 34);
         position: relative;
         z-index: 1;
         display: flex;
         flex-direction: column;
         &__menu-bottom {
-            position: static;
+            //position: static;
+            position: absolute !important;
+            bottom: 48px;
         }
         &__top {
             padding: 15px;
@@ -134,6 +145,7 @@ export default {
         }
         .but-end {
             padding-left: 15px;
+            background-color: transparent;
             .v-btn span {
                 color: #ffff
             }
@@ -314,5 +326,18 @@ export default {
 
     .full-height {
         height: calc(100vh - 151px);
+    }
+    .chatWarning {
+        position: absolute;
+        text-align: center;
+        color: #FFF;
+        width: 100%;
+        font-size: 10px;
+        margin-top: -10px;
+        z-index: 9;
+        left: 0 !important
+    }
+    .end-btn{
+        margin-top: 5px;
     }
 </style>

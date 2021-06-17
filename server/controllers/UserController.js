@@ -132,7 +132,7 @@ class UserController {
             res.cookie('userId', cookie)
 
             user = await new User({
-                name: "unknown",
+                name: `unknown ${cookie}`,
                 type: 'client',
                 active: true,
                 cookies: [cookie],
@@ -187,10 +187,10 @@ class UserController {
 
     async bookUser(req, res) {
         try {
-            const {comment, comunitatePreference, email, guestId, name, phone} = req.body
+            const {comment, comunitatePreference, email, guestId, name, phone, trigger} = req.body
             const user = await User.findOneAndUpdate(
                 {_id: guestId, logged: false, type: 'client'},
-                {$set: {name, email, phone, comment, comunitatePreference, lead: true}}, {new: true}
+                {$set: {name, email, phone, comment, comunitatePreference, trigger, lead: true}}, {new: true}
             )
             return res.status(200).json('ok')
         } catch (e) {
@@ -373,22 +373,65 @@ class UserController {
     async setUserOnline(req, res) {
         try {
             const {userId, type} = req.body
-            // let inverseType = 'client'
+            const user = await User.findOne({_id: userId})
 
-            await User.findOneAndUpdate({_id: userId}, {$set: {online: true}})
+            // let sessionDuration = user.sessionDuration
+            //
+            // if (user.sessionDate) {
+                let dateOne = new Date(user.sessionDate);
+                let dateTwo = Date.now();
+
+                let msDifference =  dateTwo - dateOne;
+                let sessionDuration = Math.floor(msDifference/1000/60);
+            // }
+
+            await User.findOneAndUpdate({_id: userId}, {$set: {online: true, sessionDuration: sessionDuration}})
 
             if (type === 'client') {
                 await UserAction.findOneAndUpdate({userId: userId}, {$set: {online: true}})
             }
-            // const users = await UserService.getUsers(req.body, inverseType)
-            // const actions = await UserService.getUsersActions()
 
-            // return res.status(200).json({users, actions})
-            return res.status(200).json(true)
+            return res.status(200).json(sessionDuration)
         } catch (e) {
             return res.status(505).json({message: `Error UserController@setUserOnline ${e}`})
         }
     }
+
+    async chageCallStatus(req, res) {
+        try {
+            const {userId, status} = req.body
+
+            await User.findOneAndUpdate({_id: userId},
+                {$set: {callStatus: status}})
+
+            return res.status(200).json(true)
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@chageCallStatus ${e}`})
+        }
+    }
+
+    async getRandomEmployee(req, res) {
+        try {
+            const allUsers = await User.find({type: 'employee', online: true})
+            const rand = Math.floor(Math.random() * allUsers.length);
+
+            const user = await User.findOne({type: 'employee', online: true}).skip(rand)
+
+            return res.status(200).json(user)
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@getRandomEmployee ${e}`})
+        }
+    }
+
+    async setUserBotActivated(req, res) {
+        try {
+            const user = await User.findOneAndUpdate({_id: req.body.id}, {$set: {botActivated: true}}, {new: true})
+            return res.status(200).json(user)
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@setUserBotActivated ${e}`})
+        }
+    }
+
 }
 
 module.exports = function () {
