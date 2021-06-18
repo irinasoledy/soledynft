@@ -6,6 +6,8 @@
                 <nuxt-link to="/">
                     <img height="40" src="@/static/logo-terra.png" alt="">
                 </nuxt-link>
+
+                
             </nuxt-link>
         </v-row>
 
