@@ -24,7 +24,7 @@
                     <v-list-item>
                         <v-list-item-content>
                             <nuxt-link to="/">
-                                <img height="40" src="@/static/logo-docrom4.png" alt="" class="logo-burgher">
+                                <img height="40" src="@/static/logo-terra.png" alt="" class="logo-burgher">
                             </nuxt-link>
                         </v-list-item-content>
                         <v-list-item-icon @click="drawer = false">
@@ -155,7 +155,7 @@
 
             <v-toolbar-title>
                 <nuxt-link to="/">
-                    <img class="logo" src="@/static/logo-docrom4.png" alt="">
+                    <img class="logo" src="@/static/logo-terra.png" alt="">
                 </nuxt-link>
             </v-toolbar-title>
             <v-spacer></v-spacer>
@@ -252,7 +252,7 @@
                     <v-col class="col-auto">
                         <v-toolbar-title to="/">
                             <nuxt-link to="/">
-                                <img width="180" class="logo" src="@/static/logo-docrom4.png" alt="">
+                                <img width="180" class="logo" src="@/static/logo-terra.png" alt="">
                             </nuxt-link>
                         </v-toolbar-title>
                     </v-col>
@@ -595,6 +595,7 @@ export default {
             height: auto;
             margin-top: 0;
             margin: 10px 0;
+            padding-top: 10px;
         }
 
         .col {
