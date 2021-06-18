@@ -4,7 +4,7 @@
         <v-row align="center" justify="center">
             <nuxt-link to="/" class="footer-logo">
                 <nuxt-link to="/">
-                    <img height="40" src="@/static/logo-docrom4.png" alt="">
+                    <img height="40" src="@/static/logo-terra.png" alt="">
                 </nuxt-link>
             </nuxt-link>
         </v-row>

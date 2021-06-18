@@ -412,9 +412,9 @@
 <script>
 
 import {mapGetters, mapActions} from 'vuex'
+import CartIcon from '@/components/front/cart/cartIcon';
 import HeaderContacts from '@/components/front/widgets/headerContactsWidget';
 import PolicyBar from '@/components/front/policies/PolicyBar';
-import CartIcon from '@/components/front/cart/cartIcon';
 
 export default {
     data: () => ({
