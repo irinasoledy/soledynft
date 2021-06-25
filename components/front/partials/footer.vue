@@ -3,11 +3,9 @@
     <v-container>
         <v-row align="center" justify="center">
             <nuxt-link to="/" class="footer-logo">
-                <nuxt-link to="/">
+                <!-- <nuxt-link to="/"> -->
                     <img height="40" src="@/static/logo-terra.png" alt="">
-                </nuxt-link>
-
-                
+                <!-- </nuxt-link> -->
             </nuxt-link>
         </v-row>
 
@@ -155,6 +153,7 @@ export default {
     .footer-block{
         padding-top: 50px;
         .footer-logo{
+            z-index: 9;
             width: 200px;
             img{
                 width: 100%;

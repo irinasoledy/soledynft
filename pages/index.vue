@@ -191,7 +191,7 @@ section {
 }
 
 main {
-    padding-bottom: 50px;
+    // padding-bottom: 50px;
     padding-top: 56px;
 }
 

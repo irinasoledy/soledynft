@@ -15,11 +15,11 @@
                 </v-col>
             </v-row>
         </v-parallax>
-        <section>
+        <section class="contact-section">
             <v-container>
                 <v-row>
                     <v-col cols="12">
-                        <div class="display-1 text-center c-title">
+                        <div class="display-1 text-center c-title white--text">
                             {{ trans.ContactsAndForms.contactPagesTitle }}
                         </div>
                     </v-col>
@@ -212,6 +212,9 @@ export default {
 </script>
 
 <style lang="scss">
+.contact-section {
+    padding-top: 0 !important
+}
 .display-1 {
     color: #FFF !important;
     font-weight: 700 !important;

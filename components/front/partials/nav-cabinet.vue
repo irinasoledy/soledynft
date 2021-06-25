@@ -23,6 +23,17 @@
                     <v-icon>mdi-chevron-right</v-icon>
                 </v-list-item-icon>
             </v-list-item>
+            <v-list-item color="primary" exact nuxt :to="`/${language.lang}/cart`">
+                <v-list-item-icon>
+                    <v-icon color="primary">mdi-cart</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                    <v-list-item-title>My Cart</v-list-item-title>
+                </v-list-item-content>
+                <v-list-item-icon>
+                    <v-icon>mdi-chevron-right</v-icon>
+                </v-list-item-icon>
+            </v-list-item>
             <v-list-item color="primary" exact nuxt :to="`/${language.lang}/account/orders`">
                 <v-list-item-icon>
                     <v-icon color="primary">mdi-cash</v-icon>

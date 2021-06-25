@@ -10,7 +10,6 @@
                       <v-row
                           class="fill-height-home-slider"
                           align="center"
-
                           >
                           <v-col class="text-center col-md-6">
                               <div class="display-1 text-center c-title">
@@ -22,8 +21,8 @@
                               <v-btn
                                   class="btn-custom"
                                   color="accent"
-                                  :to="`/${language.lang}/promotions#${promotion.alias}`"
-                              >{{ promotion.translation.btn_text }}</v-btn>
+                                  :to="promotion.translation.seo_title"
+                              >{{ promotion.translation.btn_text }} </v-btn>
                           </v-col>
                       </v-row>
                   </div>
@@ -50,7 +49,7 @@
                               <v-btn
                                   class="btn-custom"
                                   color="accent"
-                                  :to="`/${language.lang}/promotions#${promotion.alias}`"
+                                  :to="promotion.translation.seo_title"
                               >{{ promotion.translation.btn_text }}</v-btn>
                           </v-col>
                       </v-row>
@@ -133,7 +132,7 @@ export default {
     margin-bottom: 50px;
 }
 .banner{
-    margin-top: -27px;
+    margin-top: -42px;
 }
 .c-subtitle{
     margin-bottom: 20px;

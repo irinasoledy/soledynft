@@ -85,6 +85,7 @@ export default {
     padding: 0;
     position: relative;
     z-index: 1;
+    // padding-bottom: 0 !important;
     .col-12 {
         padding: 0;
     }

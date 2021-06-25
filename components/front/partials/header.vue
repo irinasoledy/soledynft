@@ -24,7 +24,7 @@
                     <v-list-item>
                         <v-list-item-content>
                             <nuxt-link to="/">
-                                <img height="40" src="@/static/logo-terra.png" alt="" class="logo-burgher">
+                                <img height="25" src="@/static/logo-terra.png" alt="" class="logo-burgher">
                             </nuxt-link>
                         </v-list-item-content>
                         <v-list-item-icon @click="drawer = false">
@@ -52,8 +52,8 @@
                         <v-list-item @click="closeMenu(`/${language.lang}/about/`)">
                             <v-list-item-title>{{ trans.PageNames.about }}</v-list-item-title>
                         </v-list-item>
-                        <v-list-item @click="closeMenu(`/${language.lang}/experts/`)">
-                            <v-list-item-title>{{ trans.PageNames.ourTeam }}</v-list-item-title>
+                        <v-list-item @click="closeMenu(`/${language.lang}/portfolio/`)">
+                            <v-list-item-title>Portfolio</v-list-item-title>
                         </v-list-item>
                         <v-list-item @click="closeMenu(`/${language.lang}/contacts/`)">
                             <v-list-item-title>{{ trans.PageNames.contacts }}</v-list-item-title>
@@ -317,7 +317,7 @@
                                     {{ trans.PageNames.about }}
                                 </v-list-item-title>
                             </v-list-item>
-                            <v-list-item height="43" nuxt exact :to="`/${language.lang}/experts/`">
+                            <v-list-item height="43" nuxt exact :to="`/${language.lang}/portfolio/`">
                                 <v-list-item-title>
                                     Portfolio
                                 </v-list-item-title>
@@ -331,6 +331,8 @@
                     </v-col>
                     <v-col class="col-auto">
                         <v-row class="align-center">
+                            <v-col class="col-md-1">
+                            </v-col>
                             <v-col cols="auto" class="d-flex align-center">
                                 <v-select
                                     class="selectHeader"
@@ -346,7 +348,7 @@
                                     dark
                                 ></v-select>
                             </v-col>
-                            <v-col class="text-right col-md-1">
+                            <v-col class="text-right">
                                 <CartIcon v-if="$auth.loggedIn"
                                           :user="$auth.user"
                                 ></CartIcon>
@@ -542,7 +544,7 @@ export default {
 
     .logo {
         width: 120px;
-        height: 40px;
+        height: 26px;
         margin-top: 10px;
     }
 

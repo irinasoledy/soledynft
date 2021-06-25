@@ -1,47 +1,25 @@
-<!-- <template>
-    <v-app dark>
-        <h1 v-if="error.statusCode === 404">
-            {{ pageNotFound }}
-        </h1>
-        <h1 v-else>
-            {{ otherError }}
-        </h1>
-        <NuxtLink to="/">
-            Home page
-        </NuxtLink>
-    </v-app>
-
-
-    <main>
-
-
-    </main>
-</template> -->
-
 <template>
   <v-parallax
     dark
-    src=""
+    src="/bcgFour.png"
+    class="container-404"
   >
-    <v-row
-      align="center"
-      justify="center"
-    >
-      <v-col
-        class="text-center"
-        cols="12"
-      >
-        <h1 class="display-1 font-weight-thin mb-4">
-          404
-        </h1>
-        <p class="subheading" color="primary">
-            {{ otherError }}
-        </p>
-        <p class="btn-wrapp-404">
-            <v-btn to="/" class="primary">Go Home</v-btn>
-        </p>
-      </v-col>
-    </v-row>
+    <v-container>
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-col cols="12">
+            <img src="/four.png" class="image-404">
+            <p class="subheading" color="primary">
+                We looked far and wide for that page and couldn't find it. Try one of these links to get back on track:
+            </p>
+            <p class="btn-wrapp-404">
+                <v-btn to="/" class="primary">Go Home</v-btn>
+            </p>
+          </v-col>
+        </v-row>
+    </v-container>
   </v-parallax>
 </template>
 
@@ -71,6 +49,12 @@ export default {
 </script>
 
 <style scoped>
+.container-404{
+    height: 90vh !important
+}
+.image-404{
+    max-width: 600px;
+}
 h1 {
   font-size: 30px !important;
   color: #293754;
@@ -81,11 +65,12 @@ h1 {
 }
 .subheading{
     color: #293754;
+    font-size: 2rem;
+    color: #FFF;
+    max-width: 600px;
+    line-height: 1.2;
 }
 .v-parallax__image{
     bottom: auto;
-}
-.btn-wrapp-404{
-    margin-top: 30px;
 }
 </style>

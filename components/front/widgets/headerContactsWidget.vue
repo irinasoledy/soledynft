@@ -1,5 +1,15 @@
 <template>
     <v-list nav light>
+        <div class="langs-wrapper">
+            <span class="langs-block" v-for="(languageItem, index) in languages" @click="changeLang(languageItem)">
+                <i class="active" v-if="language.id == languageItem.id">
+                    {{ languageItem.name }}
+                </i>
+                <i v-else>
+                    {{ languageItem.name }}
+                </i>
+            </span>
+        </div>
         <v-list-item-group>
             <v-list-item href="tel:+37378563423">
                 <v-list-item-icon>
@@ -50,6 +60,45 @@ export default {
     name: "headerContactsWidget",
     computed: mapGetters({
         trans: 'getTranslations',
+        languages: 'getLanguages',
+        language: 'getLanguage',
     }),
+    methods: {
+        ...mapActions(['changeLanguage']),
+        changeLang(lang) {
+            this.changeLanguage(lang.id).then(data => {
+                const currentLang = '/' + this.language.lang
+                const lastLang = this.$route.params.lang
+                const fullPath = this.$route.fullPath
+                let redirectTo = '/'
+
+                if (lastLang) {
+                    redirectTo = fullPath.replace('/' + lastLang, currentLang);
+                } else {
+                    redirectTo = currentLang;
+                }
+                this.$router.push(redirectTo)
+            })
+        },
+    }
 }
 </script>
+
+<style media="screen">
+    .langs-wrapper{
+        position: absolute;
+        right: 5px;
+        margin-top: 17px;
+        z-index: 9;
+    }
+    .langs-block{
+        margin: 0 10px;
+    }
+    .langs-block i{
+        font-style: normal;
+    }
+    .langs-block .active{
+        font-weight: bold;
+        text-decoration: underline;
+    }
+</style>
