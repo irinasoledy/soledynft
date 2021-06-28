@@ -125,9 +125,12 @@ export default {
     background-color: #DDD;
     margin: 0 5px;
 }
-.slick-active{
-    background-color: #FFF !important;
+.banner {
+    .slick-active{
+        background-color: #FFF !important;
+    }
 }
+
 .c-title{
     margin-bottom: 50px;
 }

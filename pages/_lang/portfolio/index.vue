@@ -1,8 +1,31 @@
 <template>
     <main class="portfolio-content">
+        <v-parallax
+            dark
+            src="/banner-about.jpg"
+            class="profolio-banner"
+            >
+            <v-row
+                align="center"
+                justify="center"
+
+                >
+                <v-col
+                    class="text-center"
+                    cols="12"
+                    >
+                    <h1 class="display-1 mb-4">
+                        Portfolio
+                    </h1>
+                    <h4 class="subheading" color="secondary">
+                        {{ trans.About.aboutPageSubTitle }}
+                    </h4>
+                </v-col>
+            </v-row>
+        </v-parallax>
     <v-container>
         <v-row>
-            <v-col class="col-md-6">
+            <v-col class="col-md-4">
                 <v-card
                     :to="`/${language.lang}/portfolio/ja`"
                     :loading="loading"
@@ -10,156 +33,85 @@
                     >
                     <v-img
                         height="250"
+                        src="/1607432224-julia1.png"
+                        ></v-img>
+                    <div class="portfolio-descr">
+                        Julia Allert -
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                </v-card>
+            </v-col>
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/apj`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <v-img
+                        height="250"
+                        src="/1607527410-jwbanner1.jpeg"
+                        ></v-img>
+                    <div class="portfolio-descr">
+                        Anne Popova Jewellry -
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                </v-card>
+            </v-col>
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/apl`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <v-img
+                        height="250"
+                        src="/1607529333-Glavniibaner_APL.jpeg"
+                        ></v-img>
+                    <div class="portfolio-descr">
+                        Anne Popova Loungewear -
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                </v-card>
+            </v-col>
+
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/trenwood`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <v-img
+                        height="250"
+                        src="https://itmall.digital/images/promotions/1607508416-trenwood1.png"
+                        ></v-img>
+                    <div class="portfolio-descr">Trenwood -
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                </v-card>
+            </v-col>
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/no-content`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <v-img
+                        height="250"
                         src="https://itmall.digital/images/promotions/1607432224-julia1.png"
                         ></v-img>
-                    <div class="portfolio-title">Julia Allert</div>
-                    <div>
-                        <div class=" text-subtitle-1">
-                            • Online Store Development
-                        </div>
-                        <div class=" text-subtitle-1">
-                            • Photo-video session
-                        </div>
-                        <div class=" text-subtitle-1">
-                            • CRM Development and integration with an online store
-                        </div>
-                        <div class=" text-subtitle-1">
-                            • Copyrighting services
-                        </div>
-                        <div class=" text-subtitle-1">
-                            • Online products adverstining
-                        </div>
-                    </div>
-                    <v-divider class="mx-4"></v-divider>
-                    <div class="text-center btn-area">
-                        <v-btn
-                            color="accent"
-                            class="btn-custom"
-                            >
-                            View
-                        </v-btn>
-                    </div>
+                    <div class="portfolio-descr"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
                 </v-card>
             </v-col>
-            <v-col class="col-md-6">
+            <v-col class="col-md-4">
                 <v-card
-                    :to="`/`"
+                    :to="`/${language.lang}/portfolio/no-content`"
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
                     <v-img
                         height="250"
-                        src="https://itmall.digital/images/promotions/1607508416-trenwood1.png"
+                        src="https://itmall.digital/images/promotions/1607432224-julia1.png"
                         ></v-img>
-                    <div class="portfolio-title">Trenwood</div>
-                    <div>
-                        <div class="text-subtitle-1">
-                            • Consulting Services
-                        </div>
-                        <div class="text-subtitle-1">
-                            • Online Store Development
-                        </div>
+                    <div class="portfolio-descr"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                </v-card>
+            </v-col>
 
-                        <div class="text-subtitle-1">
-                            • Branding
-                        </div>
-                        <div class="text-subtitle-1">
-                            • Photo-video session
-                        </div>
-                        <div class="text-subtitle-1">
-                            • Online products adverstining
-                        </div>
-                    </div>
-                    <v-divider class="mx-4"></v-divider>
-                    <div class="text-center btn-area">
-                        <v-btn
-                            color="accent"
-                            class="btn-custom"
-                            >
-                            View
-                        </v-btn>
-                    </div>
-                </v-card>
-            </v-col>
-            <v-col class="col-md-6">
-                <v-card
-                    :to="`/`"
-                    :loading="loading"
-                    class="mx-auto my-4 profolio-item"
-                    >
-                    <v-img
-                        height="250"
-                        src="https://itmall.digital/images/promotions/1607527410-jwbanner1.jpg"
-                        ></v-img>
-                    <div class="portfolio-title">Anne Popova</div>
-                    <div>
-                        <div class=" text-subtitle-1">
-                            • Online Store Development
-                        </div>
-                        <div class=" text-subtitle-1">
-                            • Photo-video session
-                        </div>
-                        <div class=" text-subtitle-1">
-                            • CRM Development and integration with an online store
-                        </div>
-                        <div class=" text-subtitle-1">
-                            • Copyrighting services
-                        </div>
-                        <div class=" text-subtitle-1">
-                            • Online products adverstining
-                        </div>
-                    </div>
-                    <v-divider class="mx-4"></v-divider>
-                    <div class="text-center btn-area">
-                        <v-btn
-                            color="accent"
-                            class="btn-custom"
-                            >
-                            View
-                        </v-btn>
-                    </div>
-                </v-card>
-            </v-col>
-            <v-col class="col-md-6">
-                <v-card
-                    :to="`/`"
-                    :loading="loading"
-                    class="mx-auto my-4 profolio-item"
-                    >
-                    <v-img
-                        height="250"
-                        src="https://itmall.digital/images/promotions/1607508416-trenwood1.png"
-                        ></v-img>
-                    <div class="portfolio-title">Trenwood</div>
-                    <div>
-                        <div class="text-subtitle-1">
-                            • Consulting Services
-                        </div>
-                        <div class="text-subtitle-1">
-                            • Online Store Development
-                        </div>
-
-                        <div class="text-subtitle-1">
-                            • Branding
-                        </div>
-                        <div class="text-subtitle-1">
-                            • Photo-video session
-                        </div>
-                        <div class="text-subtitle-1">
-                            • Online products adverstining
-                        </div>
-                    </div>
-                    <v-divider class="mx-4"></v-divider>
-                    <div class="text-center btn-area">
-                        <v-btn
-                            color="accent"
-                            class="btn-custom"
-                            >
-                            View
-                        </v-btn>
-                    </div>
-                </v-card>
-            </v-col>
         </v-row>
     </v-container>
 </main>
@@ -209,7 +161,6 @@ export default {
     font-weight: 700 !important;
 }
 .portfolio-content {
-    padding-top: 100px;
     background-color: $primary_dark !important;
     .profolio-item {
         background-color: $custom_blue !important;
@@ -220,11 +171,7 @@ export default {
         .portfolio-desc {
             color: #FFF;
         }
-        .portfolio-title {
-            color: #007bff;
-            font-weight: bold;
-            font-size: 30px;
-            text-align: center !important;
+        .portfolio-descr {
             padding: 15px;
         }
         .btn-area {
@@ -282,5 +229,8 @@ export default {
 
 section {
     padding: 50px 0;
+}
+.profolio-banner{
+    margin-top: -100px !important;
 }
 </style>

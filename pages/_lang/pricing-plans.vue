@@ -1,98 +1,109 @@
 <template>
     <main class="wrap">
         <v-container>
-            <v-row class="ip-plan-row" v-if="service">
+            <v-row class="ip-plan-row">
                 <v-col class="col-md-12">
-                    <h1 class="text-center title-plans" color="#34495e">{{ service.translation.name }}</h1>
+                    <h1 class="text-center title-plans" color="#34495e">Pricing plans</h1>
                 </v-col>
                 <v-tabs class="pricing-plans-tabs" centered dark>
-                    <v-tab>Pricing plans</v-tab>
+                    <v-tab @click="$router.back()">Pricing plans</v-tab>
                     <v-tab :to="`/${language.lang}/pricing-plans`">Extended</v-tab>
                 </v-tabs>
-                <v-col v-for="(plan, planIndex) in service.children" v-if="service.children" :key="planIndex">
-                    <v-card flat class="xs12 sm12 md4 mb-3 flex ip-plan"
-                            :style="`order:${order(plan)}; z-index:${planIndex == 1 ? 3 : 1}`"
-                            :class="{'elevation-10': planIndex == 1}">
-                        <v-layout row v-if="planIndex == 1" ma-0 pa-0 align-center justify-center
-                                  class="accent ip-highligh-plan">
-                            <v-icon color="primary" small class="mr-2">mdi-star</v-icon>
-                            <v-flex shrink text-xs-center class="primary--text body-2 text-capitalized ">
-                                Most popular
-                            </v-flex>
-                        </v-layout>
-                        <v-card-text class="pa-4 grey lighten-4">
-                            <v-flex pa-0><h2 class="headline">{{ plan.translation.name }}</h2></v-flex>
-                            <v-flex pa-0 style="min-height:66px">Short description {{ plan.translation.name }}</v-flex>
-                            <v-flex pa-0 class="ip-plan-price info--text">
-                                <v-icon>mdi-currency-eur</v-icon>
-                                {{ plan.price }}
-                            </v-flex>
-                            <v-flex pa-0 class="grey--text">EUR/month</v-flex>
-                            <v-flex pa-0 mt-4>
-                                <v-btn :outline="!plan.highlight" depressed large color="primary"
-                                       class="ma-0 white--text">
-                                    Get Started
-                                </v-btn>
-                            </v-flex>
-                        </v-card-text>
-
-                        <v-list class="pa-3 mb-3">
-                            <template>
-                                <v-subheader>Standard</v-subheader>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
-                                            Periodic upgrading of the site platform
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
-                                            Monitoring site performance
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
-                                            Restoring the site in the event of a fall
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-subheader>Advanced</v-subheader>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
-                                            Content update in news / blog: 1
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
-                                            Products upload: 10
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title class="disabled">
-                                            <v-icon class="mr-2">mdi-close</v-icon>
-                                            Creating new pages: 5
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </template>
-                        </v-list>
-                        <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="service"/>
-                    </v-card>
-                </v-col>
+                <v-simple-table>
+                <template v-slot:default>
+                    <thead>
+                        <tr>
+                            <th class="th-title">
+                                Features:
+                            </th>
+                            <th class="text-center">
+                                Bussines
+                            </th>
+                            <th class="text-center">
+                                Enterprise
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-title">Video Chat</td>
+                            <td class="text-center">Nu</td>
+                            <td class="text-center">Da</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-title">Web Chat</td>
+                            <td class="text-center">Da</td>
+                            <td class="text-center">Da</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-title">Cobrowsing</td>
+                            <td class="text-center">Nu</td>
+                            <td class="text-center">Da</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-title">Screensharing</td>
+                            <td class="text-center">---</td>
+                            <td class="text-center">Basic configuration</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-title">Web Call Backs</td>
+                            <td class="text-center">Nu</td>
+                            <td class="text-center">Da</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-title">WhatsApp</td>
+                            <td class="text-center">Da</td>
+                            <td class="text-center">Da</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-title">Virtual Agent</td>
+                            <td class="text-center">12 months</td>
+                            <td class="text-center">24 months</td>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th class="th-title">
+                                Integrations:
+                            </th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-title">Google Analytics</td>
+                            <td class="text-center">Nu</td>
+                            <td class="text-center">Da</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-title">Salesforce Integration</td>
+                            <td class="text-center">Da</td>
+                            <td class="text-center">Da</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-title">Other CRM Integration</td>
+                            <td class="text-center">Nu</td>
+                            <td class="text-center">Da</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-title">Contact Centre Integration</td>
+                            <td class="text-center">Da</td>
+                            <td class="text-center">Da</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-title">Native App Integration</td>
+                            <td class="text-center">Nu</td>
+                            <td class="text-center">Da</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-title">Salesforce Integration</td>
+                            <td class="text-center">Da</td>
+                            <td class="text-center">Da</td>
+                        </tr>
+                    </tbody>
+                    </template>
+                </v-simple-table>
             </v-row>
             <v-row class="btns-row">
                 <v-col class="text-center">
@@ -133,6 +144,7 @@ export default {
     },
     data() {
         return {
+            prevUrl: null,
             title: '',
             description: '',
             dialog: false,
@@ -154,11 +166,8 @@ export default {
         trans: 'getTranslations'
     }),
     async mounted() {
-        this.service = await this.allServices.find((serv) => serv.alias == this.$route.params.subservice)
-        this.getEmployees()
-        window.addEventListener('scroll', this.handleScroll);
-        this.title = this.service.translation.seo_title
-        this.description = this.service.translation.seo_description
+        // this.title = this.service.translation.seo_title
+        // this.description = this.service.translation.seo_description
     },
     watch: {
         refreshUserData() {
@@ -195,39 +204,6 @@ export default {
             this.setInterlocutor(null)
             this.setInterlocutor(user)
         },
-        handleScroll() {
-            const sidebar = document.getElementById('sidebar')
-            const experts = document.getElementById('experts')
-            const serviceBtn = document.getElementById('serviceBtn')
-
-            if (sidebar) {
-                if (!this.$mobileDetect.mobile()) {
-                    if (window.scrollY > 85) {
-                        sidebar.classList.add("fixed")
-                        experts.classList.add("fixed")
-                    } else {
-                        sidebar.classList.remove("fixed")
-                        experts.classList.remove("fixed")
-                    }
-                }
-
-                if (window.scrollY > 35) {
-                    serviceBtn.classList.add("fixed-btn")
-                } else {
-                    serviceBtn.classList.remove("fixed-btn")
-                }
-            }
-        },
-        scrollTo(id) {
-            const element = document.getElementById('section' + id)
-            const offsetTop = element.offsetTop - 150
-            window.scrollTo(0, offsetTop)
-        },
-        scrollExpertsBlock() {
-            const element = document.getElementById('experts')
-            const offsetTop = element.offsetTop - 175
-            window.scrollTo(0, offsetTop)
-        },
         async getEmployees() {
             await contentApi.getEmployeesByService(this.service.id, response => {
                 this.employeeList = response
@@ -238,6 +214,25 @@ export default {
 </script>
 
 <style lang="scss">
+
+.v-data-table {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.feature-title {
+    font-size: 15px !important;
+    color: $custom_blue;
+}
+
+th{
+    border-top: thin solid rgba(0, 0, 0, 0.12) !important;
+
+}
+.th-title {
+    font-size: 22px !important;
+    color: $custom_blue !important;
+}
 
 .experts-wrapp {
     .v-badge {

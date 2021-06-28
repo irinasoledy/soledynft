@@ -1,7 +1,7 @@
 <template>
-    <main class="ja-bg portfolio-item" :style="{ backgroundImage: `url('/portfolio/ja/fonJulia.png')`}">
-        <img src="/portfolio/ja/bannerMain.png" alt="">
-        <h4 class="section-title">Julia Allert</h4>
+    <main class="ja-bg portfolio-item" style="background-color: #DAE2EA">
+        <img src="/portfolio/trenwood/bannerMain.png" alt="">
+        <h4 class="section-title">Trenwood</h4>
         <v-row align="center" justify="center">
             <v-col>
                 <img src="/portfolio/ja/banner.png" alt="">
@@ -20,17 +20,20 @@
             </v-col>
         </v-row>
         <div class="text-center">
-            <h4 class="section-title">Shop Online</h4>
-            <img src="/portfolio/ja/shopOnline.png" alt="">
-            <h4 class="section-title">Realizarea sessiunilor foto-video</h4>
+            <h4 class="section-title">Branding</h4>
             <v-carousel hide-delimiters>
                 <v-carousel-item
-                    v-for="(item,i) in photoVideoImages"
+                    v-for="(item,i) in branding"
                     :key="i"
                     :src="item.src"
                     ></v-carousel-item>
             </v-carousel>
-            <h4 class="section-title">Copywriting</h4>
+        </div>
+
+
+        <div class="text-center">
+            <h4 class="section-title">Shop Online</h4>
+            <img src="/portfolio/trenwood/shopOnline.png" alt="">
         </div>
         <v-row align="center" justify="center">
             <v-col>
@@ -42,9 +45,16 @@
                     for static pages, for products categories. Texts could be viewed on www.juliaallert.com</p>
             </v-col>
         </v-row>
+
         <div class="text-center">
-            <h4 class="section-title">Social Media Management</h4>
-            <img src="/portfolio/ja/administrationRetImg.png" alt="">
+            <h4 class="section-title">Realizare sessiunilor foto-video</h4>
+            <v-carousel hide-delimiters>
+                <v-carousel-item
+                    v-for="(item,i) in photoVideoImages"
+                    :key="i"
+                    :src="item.src"
+                    ></v-carousel-item>
+            </v-carousel>
         </div>
 
         <div class="text-center container-slider">
@@ -93,15 +103,22 @@ export default {
     },
     data: () => ({
         photoVideoImages: [
-            {src: '/portfolio/ja/juliaItem1.png'},
-            {src: '/portfolio/ja/juliaItem2.png'},
-            {src: '/portfolio/ja/juliaItem3.png'},
-            {src: '/portfolio/ja/juliaItem4.png'},
+            {src: '/portfolio/trenwood/slideTrenBranding1.png'},
+            {src: '/portfolio/trenwood/slideTrenBranding2.png'},
+            {src: '/portfolio/trenwood/slideTrenBranding3.png'},
+            {src: '/portfolio/trenwood/slideTrenBranding4.png'},
+        ],
+        branding: [
+            {src: '/portfolio/trenwood/trenItem1.png'},
+            {src: '/portfolio/trenwood/trenItem2.png'},
+            {src: '/portfolio/trenwood/trenItem3.png'},
+            {src: '/portfolio/trenwood/trenItem4.png'},
+            {src: '/portfolio/trenwood/trenItem5.png'},
         ],
         CRMImages: [
-            {src: '/portfolio/ja/crmSlide1.png'},
-            {src: '/portfolio/ja/crmSlide2.png'},
-            {src: '/portfolio/ja/crmSlide3.png'},
+            {src: '/portfolio/trenwood/carmSlide1.png'},
+            {src: '/portfolio/trenwood/crmSlide2.png'},
+            {src: '/portfolio/trenwood/crmSlide3.png'},
         ],
         title: '',
         description: '',

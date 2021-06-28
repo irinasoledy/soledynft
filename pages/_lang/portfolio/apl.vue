@@ -1,10 +1,16 @@
 <template>
     <main class="ja-bg portfolio-item" :style="{ backgroundImage: `url('/portfolio/ja/fonJulia.png')`}">
-        <img src="/portfolio/ja/bannerMain.png" alt="">
-        <h4 class="section-title">Julia Allert</h4>
+        <img src="/portfolio/apl/Glavniibaner_APL.jpeg" alt="">
+        <h4 class="section-title">Anne Popova Loungewear</h4>
+
+        <div class="text-center">
+            <h4 class="section-title">Branding</h4>
+            <img src="/portfolio/apl/BranbookAPL.jpeg" width="100%">
+            <h4 class="section-title">Strategie de marketing</h4>
+        </div>
         <v-row align="center" justify="center">
             <v-col>
-                <img src="/portfolio/ja/banner.png" alt="">
+                <img src="/portfolio/apj/banner.png" alt="">
             </v-col>
             <v-col>
                 <h3 class="list-title">Regions analyzed - Europe and the US</h3>
@@ -20,59 +26,35 @@
             </v-col>
         </v-row>
         <div class="text-center">
-            <h4 class="section-title">Shop Online</h4>
-            <img src="/portfolio/ja/shopOnline.png" alt="">
-            <h4 class="section-title">Realizarea sessiunilor foto-video</h4>
-            <v-carousel hide-delimiters>
-                <v-carousel-item
-                    v-for="(item,i) in photoVideoImages"
-                    :key="i"
-                    :src="item.src"
-                    ></v-carousel-item>
-            </v-carousel>
-            <h4 class="section-title">Copywriting</h4>
-        </div>
-        <v-row align="center" justify="center">
-            <v-col>
-                <img src="/portfolio/ja/copywritingImg.png" alt="">
-            </v-col>
-            <v-col>
-                <p class="copywriting-portfolio">Для проекта <b>Jullia Allert</b>
-                    Texts were created in 3 languages, <b>romanian</b>, <b>russian</b>, <b>english</b>
-                    for static pages, for products categories. Texts could be viewed on www.juliaallert.com</p>
-            </v-col>
-        </v-row>
-        <div class="text-center">
-            <h4 class="section-title">Social Media Management</h4>
-            <img src="/portfolio/ja/administrationRetImg.png" alt="">
+            <h4 class="section-title">Online Shop</h4>
+            <img src="/portfolio/apl/MOCKUP.APL.png" alt="">
         </div>
 
-        <div class="text-center container-slider">
-            <h4 class="section-title">CRM development and integration with online shop</h4>
-            <v-carousel hide-delimiters>
-                <v-carousel-item
-                    v-for="(item,i) in CRMImages"
-                    :key="i"
-                    :src="item.src"
-                    ></v-carousel-item>
-            </v-carousel>
+        <div class="text-center">
+            <h4 class="section-title">Social Media Management</h4>
+            <slick ref="slick" :options="slickOptions">
+                <img src="/portfolio/apl/Smm APL.png" alt="">
+                <img src="/portfolio/apl/Smm_APL_insta.png" alt="">
+            </slick>
         </div>
 
         <div class="text-center">
             <h4 class="section-title">Locating your business in the region with the highest sales potential in Europe</h4>
-            <img src="/portfolio/ja/bloc6Img.png" alt="">
+            <img src="/portfolio/apj/presentationLoc.png" alt="">
         </div>
 
         <div class="text-center">
             <h4 class="section-title">Consulting services</h4>
-            <img src="/portfolio/ja/bloc7.png" alt="">
+            <img src="/portfolio/apj/bloc7.png" alt="">
         </div>
     </main>
 </template>
 
 <script>
 
+import 'slick-carousel/slick/slick.css';
 import { mapActions, mapGetters } from 'vuex'
+import Slick from 'vue-slick'
 import Experts from "@/components/front/widgets/expertsWidget.vue"
 import MapContact from "@/components/front/widgets/mapWidget.vue"
 
@@ -81,6 +63,11 @@ export default {
     layout: "default",
     head() {
         return {
+            slickOptions: {
+                slidesToShow: 2,
+                arrows: false,
+                dots: false,
+            },
             title: this.title,
             meta: [
                 {
@@ -93,10 +80,9 @@ export default {
     },
     data: () => ({
         photoVideoImages: [
-            {src: '/portfolio/ja/juliaItem1.png'},
-            {src: '/portfolio/ja/juliaItem2.png'},
-            {src: '/portfolio/ja/juliaItem3.png'},
-            {src: '/portfolio/ja/juliaItem4.png'},
+            {src: '/portfolio/apj/jwbanner1.jpeg'},
+            {src: '/portfolio/apj/jwbanner2.jpeg'},
+            {src: '/portfolio/apj/jwbanner3.jpeg'},
         ],
         CRMImages: [
             {src: '/portfolio/ja/crmSlide1.png'},
@@ -114,7 +100,7 @@ export default {
         this.description = this.trans.PageNames.defaultPageSeoDesc
     },
     components: {
-        MapContact, Experts
+        MapContact, Experts, Slick
     }
 }
 </script>
@@ -162,5 +148,15 @@ export default {
 .container-slider{
     max-width: 80%;
     margin: 30px auto;
+}
+.slick-active {
+    background-color: transparent !important;
+}
+.slick-arrow{
+    display: none !important;
+}
+.mobile-slick-view {
+    max-height: 500px !important;
+    width: auto !important;
 }
 </style>
