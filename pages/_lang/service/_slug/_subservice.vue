@@ -10,7 +10,7 @@
                     <v-tab :to="`/${language.lang}/pricing-plans`">Extended</v-tab>
                 </v-tabs>
                 <v-col v-for="(plan, planIndex) in service.children" v-if="service.children" :key="planIndex">
-                    <v-card flat class="xs12 sm12 md4 mb-3 flex ip-plan"
+                    <v-card flat class="xs12 sm12 md4 mb-3 flex ip-plan-service"
                             :style="`order:${order(plan)}; z-index:${planIndex == 1 ? 3 : 1}`"
                             :class="{'elevation-10': planIndex == 1}">
                         <v-layout row v-if="planIndex == 1" ma-0 pa-0 align-center justify-center
@@ -31,7 +31,7 @@
                             <v-flex pa-0 mt-4>
                                 <v-btn :outline="!plan.highlight" depressed large color="primary"
                                        class="ma-0 white--text">
-                                    Get Started
+                                    Add To Cart
                                 </v-btn>
                             </v-flex>
                         </v-card-text>
@@ -39,6 +39,16 @@
                         <v-list class="pa-3 mb-3">
                             <div v-for="(part, indexPart) in plan.blogs" v-html="part.translation.body"></div>
                         </v-list>
+
+
+                        <v-card-text class="pa-4 grey lighten-4">
+                            <v-flex pa-0 class="grey--text">Single payment</v-flex>
+
+                            <v-flex pa-0 class="ip-plan-price info--text">
+                                <v-icon>mdi-currency-eur</v-icon>
+                                {{ plan.price_bottom }}
+                            </v-flex>
+                        </v-card-text>
                         <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="service"/>
                     </v-card>
                 </v-col>
@@ -189,24 +199,29 @@ export default {
 <style lang="scss">
 
 .services-area {
+    .theme--light.grey-item:not(.v-list-item--active):not(.v-list-item--disabled){
+        color: #95A5A6 !important;
+    }
     .v-subheader {
         font-size: 17px;
         font-weight: bold;
+        line-height: 1.2;
+        margin-top: 20px;
     }
     .v-list-item {
-        // display: block;
+        line-height: 1.2 !important;
+        background-image: url('/check-mark.png');
+        background-repeat: no-repeat;
+        background-size: 25px;
+        background-position: 0 center;
+        padding-left: 35px;
     }
-    .v-list-item {
-        font-size: 14px;
-        line-height: 1.1 !important;
-        min-height: 26px;
-        // background-image: url('/check-mark-icon.png');
-        // background-repeat: no-repeat;
-        // background-size: 20px;
-        // background-position: 0 center;
+    .grey-item {
+        background-image: url('/close-icon.png');
+        background-size: 20px;
+        filter: grayscale(100%);
     }
 }
-
 
 .experts-wrapp {
     .v-badge {
@@ -393,19 +408,17 @@ export default {
     margin-left: 15px;
 }
 
-
-.ip-plan {
+.ip-plan-service {
     border: solid 1px #e0e0e0;
     margin-top: 40px;
-    width: 100%;
+    max-width: 100% !important;
 }
 
-.ip-plan-row .ip-plan {
-    max-width: 400px !important;
+.ip-plan-row .ip-plan-service {
     border: solid 1px #e0e0e0;
 }
 
-.ip-plan-row .ip-plan:nth-child(2) {
+.ip-plan-row .ip-plan-service:nth-child(2) {
     border-right: 0;
     border-left: 0;
 }
@@ -449,11 +462,12 @@ export default {
 .btns-row{
     padding: 30px;
 }
-.pricing-plans-tabs{
+.pricing-plans-tabs {
     text-align: center !important;
     background-color: transparent;
 }
-.theme--dark.v-tabs > .v-tabs-bar{
+.theme--dark.v-tabs > .v-tabs-bar {
     background-color: transparent
 }
+
 </style>
