@@ -1,5 +1,5 @@
 <template>
-    <main class="wrap">
+    <main class="wrap services-area">
         <v-container>
             <v-row class="ip-plan-row" v-if="service">
                 <v-col class="col-md-12">
@@ -37,58 +37,7 @@
                         </v-card-text>
 
                         <v-list class="pa-3 mb-3">
-                            <template>
-                                <v-subheader>Standard</v-subheader>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
-                                            Periodic upgrading of the site platform
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
-                                            Monitoring site performance
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
-                                            Restoring the site in the event of a fall
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-subheader>Advanced</v-subheader>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
-                                            Content update in news / blog: 1
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <v-icon class="mr-2" color="yellow darken-3">mdi-check</v-icon>
-                                            Products upload: 10
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title class="disabled">
-                                            <v-icon class="mr-2">mdi-close</v-icon>
-                                            Creating new pages: 5
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </template>
+                            <div v-for="(part, indexPart) in plan.blogs" v-html="part.translation.body"></div>
                         </v-list>
                         <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="service"/>
                     </v-card>
@@ -238,6 +187,26 @@ export default {
 </script>
 
 <style lang="scss">
+
+.services-area {
+    .v-subheader {
+        font-size: 17px;
+        font-weight: bold;
+    }
+    .v-list-item {
+        // display: block;
+    }
+    .v-list-item {
+        font-size: 14px;
+        line-height: 1.1 !important;
+        min-height: 26px;
+        // background-image: url('/check-mark-icon.png');
+        // background-repeat: no-repeat;
+        // background-size: 20px;
+        // background-position: 0 center;
+    }
+}
+
 
 .experts-wrapp {
     .v-badge {
@@ -428,6 +397,7 @@ export default {
 .ip-plan {
     border: solid 1px #e0e0e0;
     margin-top: 40px;
+    width: 100%;
 }
 
 .ip-plan-row .ip-plan {
