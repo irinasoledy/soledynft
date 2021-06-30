@@ -97,6 +97,20 @@
                 </v-sheet>
                 <v-list nav light>
                     <v-list-item-group>
+                        <v-list-item>
+                            <v-list-item-title
+                                @click="closeMenu(`/${language.lang}/live-video-chat`)"
+                                v-text="'Live VideoChat integrat pe website'">
+                            </v-list-item-title>
+                        </v-list-item>
+
+                        <v-list-item>
+                            <v-list-item-title
+                                @click="closeMenu(`/${language.lang}/digital-automation-sales`)"
+                                v-text="'Automatizare Digitală Vânzari prin CRM'">
+                            </v-list-item-title>
+                        </v-list-item>
+                        
                         <v-list-item v-for="service in servicesList" :key="service.id"
                                      @click.stop="openSubservices(service)">
                             <v-list-item-title v-text="service.translation.name"></v-list-item-title>
@@ -277,6 +291,16 @@
                                             class="mandat transition-fast-in-fast-out"
                                             style="height: auto; width: auto"
                                         >
+                                            <v-hover v-slot="{hover}">
+                                                <v-list-item :to="`/${language.lang}/live-video-chat`">
+                                                    Live VideoChat integrat pe website
+                                                </v-list-item>
+                                            </v-hover>
+                                            <v-hover v-slot="{hover}">
+                                                <v-list-item :to="`/${language.lang}/digital-automation-sales`">
+                                                    Automatizare Digitală Vânzari prin CRM
+                                                </v-list-item>
+                                            </v-hover>
                                             <v-hover v-slot="{hover}" v-for="(item, i) in servicesList" :key="i">
                                                 <v-list-item
                                                     v-if="item.subcategories.length"

@@ -5,11 +5,7 @@
             src="/banner-about.jpg"
             class="profolio-banner"
             >
-            <v-row
-                align="center"
-                justify="center"
-
-                >
+            <v-row align="center" justify="center">
                 <v-col
                     class="text-center"
                     cols="12"
@@ -32,12 +28,10 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <v-img
-                        height="250"
                         src="/1607432224-julia1.png"
                         ></v-img>
                     <div class="portfolio-descr">
-                        Julia Allert -
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                        Julia Allert</div>
                 </v-card>
             </v-col>
             <v-col class="col-md-4">
@@ -47,12 +41,10 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <v-img
-                        height="250"
                         src="/1607527410-jwbanner1.jpeg"
                         ></v-img>
                     <div class="portfolio-descr">
-                        Anne Popova Jewellry -
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                        Anne Popova Jewellry</div>
                 </v-card>
             </v-col>
             <v-col class="col-md-4">
@@ -62,12 +54,10 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <v-img
-                        height="250"
                         src="/1607529333-Glavniibaner_APL.jpeg"
                         ></v-img>
                     <div class="portfolio-descr">
-                        Anne Popova Loungewear -
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                        Anne Popova Loungewear</div>
                 </v-card>
             </v-col>
 
@@ -78,13 +68,62 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <v-img
-                        height="250"
                         src="https://itmall.digital/images/promotions/1607508416-trenwood1.png"
                         ></v-img>
-                    <div class="portfolio-descr">Trenwood -
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                    <div class="portfolio-descr">Trenwood</div>
                 </v-card>
             </v-col>
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/boiar`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <v-img
+                        src="https://itmall.digital/images/promotions/1607508369-boiar.png"
+                        ></v-img>
+                    <div class="portfolio-descr">Boiar</div>
+                </v-card>
+            </v-col>
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/stone-decorum`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <v-img
+                        src="https://itmall.digital/images/promotions/1607529987-Glavniibaner_STONE.jpg"
+                        ></v-img>
+                    <div class="portfolio-descr">Stone Decorum</div>
+                </v-card>
+            </v-col>
+
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/sandic`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <v-img
+                        src="https://itmall.digital/images/promotions/1607529475-Glavnii_%20baner_Sandic.jpg"
+                        ></v-img>
+                    <div class="portfolio-descr">Sandic</div>
+                </v-card>
+            </v-col>
+
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/seminee`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <v-img
+                        src="https://itmall.digital/images/promotions/1607529616-Glavnii_%20baner_Seminee2.jpg"
+                        ></v-img>
+                    <div class="portfolio-descr">Seminee</div>
+                </v-card>
+            </v-col>
+
             <v-col class="col-md-4">
                 <v-card
                     :to="`/${language.lang}/portfolio/no-content`"
@@ -92,12 +131,12 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <v-img
-                        height="250"
-                        src="https://itmall.digital/images/promotions/1607432224-julia1.png"
+                        src=""
                         ></v-img>
-                    <div class="portfolio-descr"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                    <div class="portfolio-descr">Soledy</div>
                 </v-card>
             </v-col>
+
             <v-col class="col-md-4">
                 <v-card
                     :to="`/${language.lang}/portfolio/no-content`"
@@ -105,10 +144,35 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <v-img
-                        height="250"
-                        src="https://itmall.digital/images/promotions/1607432224-julia1.png"
+                        src=""
                         ></v-img>
-                    <div class="portfolio-descr"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                    <div class="portfolio-descr">Biblioteca Hasdeu</div>
+                </v-card>
+            </v-col>
+
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/no-content`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <v-img
+                        src=""
+                        ></v-img>
+                    <div class="portfolio-descr">Docrom</div>
+                </v-card>
+            </v-col>
+
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/no-content`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <v-img
+                        src=""
+                        ></v-img>
+                    <div class="portfolio-descr">Galina Tomas</div>
                 </v-card>
             </v-col>
 

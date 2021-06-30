@@ -435,14 +435,6 @@ th{
     border-left: 0;
 }
 
-.ip-plan-price {
-    display: block;
-    font-size: 38px;
-    font-weight: 400;
-    line-height: 1;
-    margin-bottom: 5px;
-    margin-top: 20px;
-}
 
 .cursor-help {
     cursor: help;

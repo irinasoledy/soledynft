@@ -17,7 +17,7 @@
                                 <p class="mb-4 heading-subtitle">{{ promotion.translation.description }}</p>
                                 <div class="btn-wrapper-promo">
                                     <v-btn
-                                        color="secondary"
+                                        class="btn-custom" color="accent"
                                         @click="$nuxt.$emit('open-appointment-form')"
                                     >{{ promotion.translation.btn_text }}</v-btn>
                                 </div>
@@ -73,6 +73,7 @@
                     <v-row align="center" justify="center" class="feed-back-promo">
                         <v-col cols="12" sm="6" md="3">
                             <v-text-field
+                                dark
                                 class="name-filed-input"
                                 :label="trans.ContactsAndForms.labelName"
                                 outlined
@@ -82,6 +83,7 @@
                         </v-col>
                         <v-col cols="12" sm="6" md="3">
                             <v-text-field
+                            dark
                                 type="number"
                                 :label="trans.ContactsAndForms.labelPhone"
                                 outlined
@@ -90,7 +92,7 @@
                             ></v-text-field>
                         </v-col>
                         <v-col cols="12" class="btn-promo-area">
-                            <v-btn color="primary" width="300" @click="submitFeedback(promotion)">
+                            <v-btn class="btn-custom" color="accent" width="300" @click="submitFeedback(promotion)">
                                 {{ trans.General.freeConsultationMsg }}
                             </v-btn>
                         </v-col>
@@ -98,7 +100,7 @@
                             <span>{{ trans.General.or }}</span>
                         </v-col>
                         <v-col cols="12" class="bottom-spacer">
-                            <v-btn color="secondary" width="300" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">
+                            <v-btn class="btn-custom" color="accent" width="300" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">
                                 {{ trans.General.callNow }} {{ trans.ContactsAndForms.companyMainPhone1 }}
                             </v-btn>
                         </v-col>
@@ -368,5 +370,8 @@ export default {
     .name-filed-input{
         margin-bottom: -31px !important;
     }
+}
+.btn-custom{
+    color: $custom_blue !important;
 }
 </style>

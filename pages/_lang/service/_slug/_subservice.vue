@@ -20,33 +20,36 @@
                                 Most popular
                             </v-flex>
                         </v-layout>
-                        <v-card-text class="pa-4 grey lighten-4">
+                        <v-card-text class="pa-4 lighten-4">
                             <v-flex pa-0><h2 class="headline">{{ plan.translation.name }}</h2></v-flex>
-                            <v-flex pa-0 style="min-height:66px">Short description {{ plan.translation.name }}</v-flex>
-                            <v-flex pa-0 class="ip-plan-price info--text">
-                                <v-icon>mdi-currency-eur</v-icon>
-                                {{ plan.price }}
+                            <!-- <v-flex pa-0 style="min-height:66px">Short description {{ plan.translation.name }}</v-flex> -->
+                            <v-flex pa-0 class="ip-plan-price">
+                                {{ plan.translation.price_top_begin }}
+                                <span>{{ plan.price }}</span>
+                                <!-- <v-icon>mdi-currency-eur</v-icon> -->
+                                euro
+                                {{ plan.translation.price_top_end }}
+
                             </v-flex>
-                            <v-flex pa-0 class="grey--text">EUR/month</v-flex>
+                            <!-- <v-flex pa-0 class="grey--text">EUR/month</v-flex> -->
                             <v-flex pa-0 mt-4>
                                 <v-btn :outline="!plan.highlight" depressed large color="primary"
-                                       class="ma-0 white--text">
+                                       class="ma-0 ip-plan-btn">
                                     Add To Cart
                                 </v-btn>
                             </v-flex>
                         </v-card-text>
 
-                        <v-list class="pa-3 mb-3">
+                        <v-list :class="{'elevation-10': planIndex == 1}">
                             <div v-for="(part, indexPart) in plan.blogs" v-html="part.translation.body"></div>
                         </v-list>
-
-
-                        <v-card-text class="pa-4 grey lighten-4">
-                            <v-flex pa-0 class="grey--text">Single payment</v-flex>
-
-                            <v-flex pa-0 class="ip-plan-price info--text">
-                                <v-icon>mdi-currency-eur</v-icon>
-                                {{ plan.price_bottom }}
+                        <v-card-text class="pa-4 lighten-4">
+                            <!-- <v-flex pa-0 class="grey--text">Single payment</v-flex> -->
+                            <v-flex pa-0 class="ip-plan-price">
+                                <!-- <v-icon>mdi-currency-eur</v-icon> -->
+                                {{ plan.translation.price_bottom_begin }}
+                                <span>{{ plan.price_bottom }} </span>
+                                euro {{ plan.translation.price_bottom_end }}
                             </v-flex>
                         </v-card-text>
                         <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="service"/>
@@ -199,14 +202,39 @@ export default {
 <style lang="scss">
 
 .services-area {
+    .elevation-10 {
+        background-color: #1C1F6A;
+        color: #FFF !important;
+        .ip-plan-price{
+            color: #FFF;
+        }
+        .theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+            color: #FFF !important;
+        }
+        .headline {
+            color: #FFF;
+        }
+    }
+    .headline {
+        font-size: 28px;
+        color: #919191;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
     .theme--light.grey-item:not(.v-list-item--active):not(.v-list-item--disabled){
         color: #95A5A6 !important;
     }
     .v-subheader {
-        font-size: 17px;
-        font-weight: bold;
-        line-height: 1.2;
-        margin-top: 20px;
+        margin: 20px 0;
+        padding: 0 10px;
+        background-color: #AAA;
+        color: #FFF;
+        padding: 0 10px;
+        font-size: 18px;
+        color: #FFFFFF;
+        letter-spacing: 0
     }
     .v-list-item {
         line-height: 1.2 !important;
@@ -409,13 +437,13 @@ export default {
 }
 
 .ip-plan-service {
-    border: solid 1px #e0e0e0;
+    // border: solid 1px #e0e0e0;
     margin-top: 40px;
     max-width: 100% !important;
 }
 
 .ip-plan-row .ip-plan-service {
-    border: solid 1px #e0e0e0;
+    // border: solid 1px #e0e0e0;
 }
 
 .ip-plan-row .ip-plan-service:nth-child(2) {
@@ -425,11 +453,19 @@ export default {
 
 .ip-plan-price {
     display: block;
-    font-size: 38px;
+    font-size: 15px;
     font-weight: 400;
     line-height: 1;
     margin-bottom: 5px;
     margin-top: 20px;
+    color: #1C1F6A;
+    span {
+        font-size: 35px;
+        font-weight: bold;
+    }
+}
+.ip-plan-btn {
+    color: $custom_green !important;
 }
 
 .cursor-help {
