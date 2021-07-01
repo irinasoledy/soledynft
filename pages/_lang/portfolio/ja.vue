@@ -3,10 +3,10 @@
         <img src="/portfolio/ja/bannerMain.png" alt="">
         <h4 class="section-title">Julia Allert</h4>
         <v-row align="center" justify="center">
-            <v-col>
+            <v-col cols="12" md="6">
                 <img src="/portfolio/ja/banner.png" alt="">
             </v-col>
-            <v-col>
+            <v-col cols="12" md="6">
                 <h3 class="list-title">Regions analyzed - Europe and the US</h3>
                 <ul class="potfolio-list">
                     <li>Over 50 countries surveyed</li>
@@ -33,10 +33,10 @@
             <h4 class="section-title">Copywriting</h4>
         </div>
         <v-row align="center" justify="center">
-            <v-col>
+            <v-col cols="12" md="6">
                 <img src="/portfolio/ja/copywritingImg.png" alt="">
             </v-col>
-            <v-col>
+            <v-col cols="12" md="6">
                 <p class="copywriting-portfolio">Для проекта <b>Jullia Allert</b>
                     Texts were created in 3 languages, <b>romanian</b>, <b>russian</b>, <b>english</b>
                     for static pages, for products categories. Texts could be viewed on www.juliaallert.com</p>
@@ -162,5 +162,29 @@ export default {
 .container-slider{
     max-width: 80%;
     margin: 30px auto;
+}
+@media (max-width: 991px) {
+    .portfolio-item{
+        margin-top: 50px;
+    }
+    .list-title{
+        text-align: center;
+    }
+    .copywriting-portfolio{
+        font-size: 20px;
+    }
+    .section-title{
+        font-size: 25px;
+    }
+    .v-image__image--cover{
+        background-size: 100% !important
+    }
+    .container-slider{
+        max-width: 100% !important;
+    }
+    .section-title {
+        background-color: transparent;
+        font-size: 25px;
+    }
 }
 </style>

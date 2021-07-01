@@ -110,4 +110,28 @@ export default {
     max-width: 80%;
     margin: 30px auto;
 }
+@media (max-width: 991px) {
+    .portfolio-item{
+        margin-top: 50px;
+    }
+    .list-title{
+        text-align: center;
+    }
+    .copywriting-portfolio{
+        font-size: 20px;
+    }
+    .section-title{
+        font-size: 25px;
+    }
+    .v-image__image--cover{
+        background-size: 100% !important
+    }
+    .container-slider{
+        max-width: 100% !important;
+    }
+    .section-title {
+        background-color: transparent;
+        font-size: 25px;
+    }
+}
 </style>

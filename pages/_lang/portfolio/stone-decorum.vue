@@ -6,10 +6,10 @@
         <h4 class="section-title">Strategie De Marketing</h4>
 
         <v-row align="center" justify="center">
-            <v-col>
+            <v-col cols="12" md="6">
                 <img src="/portfolio/ja/banner.png" alt="">
             </v-col>
-            <v-col>
+            <v-col cols="12" md="6">
                 <h3 class="list-title">Regions analyzed - Europe and the US</h3>
                 <ul class="potfolio-list">
                     <li>Over 50 countries surveyed</li>
@@ -130,5 +130,20 @@ export default {
 .container-slider{
     max-width: 80%;
     margin: 30px auto;
+}
+@media (max-width: 991px) {
+    .portfolio-item{
+        margin-top: 50px;
+    }
+    .list-title{
+        text-align: center;
+    }
+    .copywriting-portfolio{
+        font-size: 20px;
+    }
+    .section-title {
+        background-color: transparent;
+        font-size: 25px;
+    }
 }
 </style>

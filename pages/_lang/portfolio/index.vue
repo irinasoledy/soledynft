@@ -126,7 +126,7 @@
 
             <v-col class="col-md-4">
                 <v-card
-                    :to="`/${language.lang}/portfolio/no-content`"
+                    :to="`/${language.lang}/portfolio/soledy`"
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
@@ -139,7 +139,7 @@
 
             <v-col class="col-md-4">
                 <v-card
-                    :to="`/${language.lang}/portfolio/no-content`"
+                    :to="`/${language.lang}/portfolio/bh`"
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
@@ -152,7 +152,7 @@
 
             <v-col class="col-md-4">
                 <v-card
-                    :to="`/${language.lang}/portfolio/no-content`"
+                    :to="`/${language.lang}/portfolio/docrom`"
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
@@ -165,7 +165,7 @@
 
             <v-col class="col-md-4">
                 <v-card
-                    :to="`/${language.lang}/portfolio/no-content`"
+                    :to="`/${language.lang}/portfolio/gt`"
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >

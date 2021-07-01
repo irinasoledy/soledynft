@@ -110,7 +110,7 @@
                                 v-text="'Automatizare Digitală Vânzari prin CRM'">
                             </v-list-item-title>
                         </v-list-item>
-                        
+
                         <v-list-item v-for="service in servicesList" :key="service.id"
                                      @click.stop="openSubservices(service)">
                             <v-list-item-title v-text="service.translation.name"></v-list-item-title>
@@ -172,6 +172,8 @@
                     <img class="logo" src="@/static/logo-terra.png" alt="">
                 </nuxt-link>
             </v-toolbar-title>
+
+
             <v-spacer></v-spacer>
 
             <CartIcon v-if="$auth.loggedIn"
