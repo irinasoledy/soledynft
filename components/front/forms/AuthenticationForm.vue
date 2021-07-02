@@ -10,8 +10,10 @@
                     <v-icon>mdi-close</v-icon>
                 </span>
                 <div class="auth-info">
-                    <p class="title">Free customer support</p>
-                    <a href="">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
+                    <p class="title">{{ trans.ContactsAndForms.authCustumerSupport }}</p>
+                    <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">
+                        {{ trans.ContactsAndForms.companyMainPhone1 }}
+                    </a>
                 </div>
             <v-tabs
                 v-model="tab"
@@ -19,10 +21,10 @@
                 >
                 <v-tabs-slider></v-tabs-slider>
                 <v-tab href="#tab-login">
-                    Login
+                    {{ trans.ContactsAndForms.authLogin }}
                 </v-tab>
                 <v-tab href="#tab-register">
-                    Register
+                    {{ trans.ContactsAndForms.authRegister }}
                 </v-tab>
             </v-tabs>
 
@@ -34,19 +36,19 @@
                                 class="full-width social-btns"
                                 color="#365899"
                                 dark
-                                @click="facebookLogin()"
+                                href="https://api.terradigital.ro/api/login/facebook"
                                 >
                                 <v-icon>mdi-facebook</v-icon>
-                                Login with Facebook account
+                                {{ trans.ContactsAndForms.authGoogleLogin }}
                             </v-btn>
                             <v-spacer></v-spacer>
                             <v-btn
                                 class="full-width social-btns"
-                                @click="googleLogin()"
+                                href="https://api.terradigital.ro/api/login/google"
                                 light
                                 >
                                 <v-icon>mdi-google</v-icon>
-                                Login with Google account
+                                {{ trans.ContactsAndForms.authFacebookLogin }}
                             </v-btn>
                         </v-card-text>
                     </v-card-actions>
@@ -68,19 +70,19 @@
                                 class="full-width social-btns"
                                 color="#365899"
                                 dark
-                                @click="facebookLogin()"
+                                href="https://api.terradigital.ro/api/login/facebook"
                                 >
                                 <v-icon>mdi-facebook</v-icon>
-                                Login with Facebook account
+                                {{ trans.ContactsAndForms.authGoogleLogin }}
                             </v-btn>
                             <v-spacer></v-spacer>
                             <v-btn
                                 class="full-width social-btns"
-                                @click="googleLogin()"
+                                href="https://api.terradigital.ro/api/login/google"
                                 light
                                 >
                                 <v-icon>mdi-google</v-icon>
-                                Login with Google account
+                                {{ trans.ContactsAndForms.authFacebookLogin }}
                             </v-btn>
                         </v-card-text>
                     </v-card-actions>

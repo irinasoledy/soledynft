@@ -33,10 +33,11 @@
                             </v-flex>
                             <!-- <v-flex pa-0 class="grey--text">EUR/month</v-flex> -->
                             <v-flex pa-0 mt-4>
-                                <v-btn :outline="!plan.highlight" depressed large color="primary"
-                                       class="ma-0 ip-plan-btn">
+                                <v-btn v-if="!$auth.loggedIn" :outline="!plan.highlight" depressed large color="primary"
+                                       class="ma-0 ip-plan-btn" @click="openDialogLogin()">
                                     Add To Cart
                                 </v-btn>
+                                <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="service"/>
                             </v-flex>
                         </v-card-text>
 
@@ -52,7 +53,6 @@
                                 euro {{ plan.translation.price_bottom_end }}
                             </v-flex>
                         </v-card-text>
-                        <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="service"/>
                     </v-card>
                 </v-col>
             </v-row>
@@ -140,6 +140,9 @@ export default {
             setInterlocutor: 'dialog/setInterlocutor',
             initCall: 'dialog/initCall',
         }),
+        openDialogLogin() {
+            $nuxt.$emit('open-login-form')
+        },
         order(plan) {
             switch (this.$vuetify.breakpoint.name) {
                 case 'xs':

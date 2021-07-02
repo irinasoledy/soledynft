@@ -265,14 +265,14 @@
                    height="auto">
             <v-container>
                 <v-row class="justify-space-between align-center" max-height="80">
-                    <v-col class="col-auto">
+                    <v-col class="col-auto col-md-2">
                         <v-toolbar-title to="/">
                             <nuxt-link to="/">
-                                <img width="180" class="logo" src="@/static/logo-terra.png" alt="">
+                                <img width="160" class="logo" src="@/static/logo-terra.png" alt="">
                             </nuxt-link>
                         </v-toolbar-title>
                     </v-col>
-                    <v-col class="col-auto">
+                    <v-col class="col-auto col-md-5">
                         <v-list dark color="primary" class="d-flex align-center" height="43">
                             <v-list-item height="43" exact nuxt to="/">
                                 <v-list-item-title>
@@ -290,7 +290,7 @@
                                             dark
                                             color="primary"
                                             v-if="hover"
-                                            class="mandat transition-fast-in-fast-out"
+                                            class="mandat transition-fast-in-fast-out drop-menu-list"
                                             style="height: auto; width: auto"
                                         >
                                             <v-hover v-slot="{hover}">
@@ -355,11 +355,21 @@
                             </v-list-item>
                         </v-list>
                     </v-col>
-                    <v-col class="col-auto">
+                    <v-col class="col-auto col-md-5">
                         <v-row class="align-center">
-                            <v-col class="col-md-1">
+                            <v-col class="col-md-1" v-if="!$auth.loggedIn">
                             </v-col>
                             <v-col cols="auto" class="d-flex align-center">
+                                <v-btn
+                                    class="ma-2 btn-yell btn-custom"
+                                    small
+                                    max-width="230"
+                                    color="accent"
+                                    @click="$nuxt.$emit('open-appointment-form')"
+                                    >
+                                    <v-icon left>mdi-comment-bookmark</v-icon>
+                                    {{ trans.HP.hpfreeConsultation }}
+                                </v-btn>
                                 <v-select
                                     class="selectHeader"
                                     :items="languages"
@@ -373,13 +383,13 @@
                                     flat
                                     dark
                                 ></v-select>
-                            </v-col>
-                            <v-col class="text-right">
+                            <!-- </v-col>
+                            <v-col class="text-right"> -->
                                 <CartIcon v-if="$auth.loggedIn"
                                           :user="$auth.user"
                                 ></CartIcon>
-                            </v-col>
-                            <v-col class="account-header-area">
+                            <!-- </v-col>
+                            <v-col class="account-header-area"> -->
                                 <v-hover v-slot="{hover}">
                                     <v-list-item color="primary">
                                         <!-- sign in -->
@@ -619,7 +629,7 @@ export default {
         }
 
         .logo {
-            width: 200px;
+            width: 100%;
             height: auto;
             margin-top: 0;
             margin: 10px 0;
@@ -659,5 +669,8 @@ export default {
 
 .account-header-area {
     width: 271px;
+}
+.drop-menu-list{
+    min-width: 320px !important;
 }
 </style>
