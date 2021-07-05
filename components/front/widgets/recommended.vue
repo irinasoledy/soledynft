@@ -92,7 +92,7 @@ export default {
 <style scoped lang="scss">
 .recommended-area {
     .v-image__image--cover {
-        background-size: 100%;
+        background-size: 100% !important;
     }
     background-color: $custom_blue;
     ul{
