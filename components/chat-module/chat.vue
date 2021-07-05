@@ -5,7 +5,7 @@
         <button type="button"
                 @click="toogleMessageDialog"
                 class="messages-btn transition-swing v-btn v-btn--bottom v-btn--is-elevated v-btn--fab v-btn--fixed v-btn--has-bg v-btn--right v-btn--round theme--light v-size--large primary"
-                style="z-index: 6; margin-bottom: 0px; transform-origin: center center;">
+                style="z-index: 6; margin-bottom: 71px; transform-origin: center center;">
             <span class="v-btn__content">
                 <span aria-hidden="true" class="v-icon notranslate theme--light">
                     <v-icon>mdi-chat</v-icon>
@@ -433,6 +433,9 @@ export default {
 </script>
 
 <style lang="scss">
+.amo-button-holder{
+    z-index: 1 !important;
+}
 .user-online {
     position: absolute;
     display: block;
