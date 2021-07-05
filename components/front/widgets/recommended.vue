@@ -12,7 +12,7 @@
                 <v-spacer></v-spacer>
                 <v-col cols="12" sm="6" md="6">
                     <v-card>
-                        <v-img src="/IMG_1599_polarr.jpeg" height="400px">
+                        <v-img src="/IMG_1599_polarr.jpeg" height="500px">
                             <span
                                 class="headline white--text pl-4 pt-4 d-inline-block"
                                 v-text="'Publicitate Google Apps'"
@@ -30,7 +30,7 @@
                 </v-col>
                 <v-col cols="12" sm="6" md="6">
                     <v-card>
-                        <v-img src="/IMG_0579_polarr.jpeg" height="400px">
+                        <v-img src="/IMG_0579_polarr.jpeg" height="500px">
                             <span
                                 class="headline white--text pl-4 pt-4 d-inline-block"
                                 v-text="'Publicitate Google Apps'"
@@ -91,6 +91,9 @@ export default {
 
 <style scoped lang="scss">
 .recommended-area {
+    .v-image__image--cover {
+        background-size: 100%;
+    }
     background-color: $custom_blue;
     ul{
         margin-left: 25px;
