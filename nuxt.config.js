@@ -18,7 +18,7 @@ module.exports = {
         ],
         script: [
             {
-                src: 'scripts/ammocrm.js'
+                src: '/scripts/ammocrm.js'
             }
         ]
     },
