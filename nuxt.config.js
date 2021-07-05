@@ -15,7 +15,12 @@ module.exports = {
         ],
         link: [
             {rel: 'icon', type: 'image/x-icon', href: '/fav.png'}
-        ]
+        ],
+        // script: [
+        //     {
+        //         src: 'scripts/ammocrm.js'
+        //     }
+        // ]
     },
     /*
     ** Customize the progress-bar color

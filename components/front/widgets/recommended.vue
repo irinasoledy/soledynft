@@ -12,7 +12,7 @@
                 <v-spacer></v-spacer>
                 <v-col cols="12" sm="6" md="6">
                     <v-card>
-                        <v-img src="/test-recom.jpeg" height="400px">
+                        <v-img src="/IMG_3100.PNG" height="400px">
                             <span
                                 class="headline white--text pl-4 pt-4 d-inline-block"
                                 v-text="'Publicitate Google Apps'"
@@ -30,7 +30,7 @@
                 </v-col>
                 <v-col cols="12" sm="6" md="6">
                     <v-card>
-                        <v-img src="/test-recom2.jpeg" height="400px">
+                        <v-img src="/IMG_3105.PNG" height="400px">
                             <span
                                 class="headline white--text pl-4 pt-4 d-inline-block"
                                 v-text="'Publicitate Google Apps'"
