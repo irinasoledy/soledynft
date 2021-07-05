@@ -27,11 +27,10 @@
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
-                    <v-img
-                        src="/1607432224-julia1.png"
-                        ></v-img>
+                    <img src="/portfolio/TD-JA-banner-main.png" width="100%">
                     <div class="portfolio-descr">
-                        Julia Allert</div>
+                        Julia Allert
+                    </div>
                 </v-card>
             </v-col>
             <v-col class="col-md-4">
@@ -40,11 +39,10 @@
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
-                    <v-img
-                        src="/1607527410-jwbanner1.jpeg"
-                        ></v-img>
+                    <img src="/portfolio/TD-AP-Bijoux-banner-main.png" width="100%">
                     <div class="portfolio-descr">
-                        Anne Popova Jewellry</div>
+                        Anne Popova Jewellry
+                    </div>
                 </v-card>
             </v-col>
             <v-col class="col-md-4">
@@ -53,11 +51,40 @@
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
-                    <v-img
-                        src="/1607529333-Glavniibaner_APL.jpeg"
-                        ></v-img>
+                    <img src="/portfolio/TD-AP-Homewear-banner-main.png" width="100%">
                     <div class="portfolio-descr">
-                        Anne Popova Loungewear</div>
+                        Anne Popova Loungewear
+                    </div>
+                </v-card>
+            </v-col>
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/stone-decorum`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <img src="/portfolio/TD-Stonedecorum-banner-main.png" width="100%">
+                    <div class="portfolio-descr">Stone Decorum</div>
+                </v-card>
+            </v-col>
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/sandic`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <img src="/portfolio/TD-Sandic-banner-main.png" width="100%">
+                    <div class="portfolio-descr">Sandic</div>
+                </v-card>
+            </v-col>
+            <v-col class="col-md-4">
+                <v-card
+                    :to="`/${language.lang}/portfolio/seminee`"
+                    :loading="loading"
+                    class="mx-auto my-4 profolio-item"
+                    >
+                    <img src="/portfolio/TD-Seminee-banner-main.png" width="100%">
+                    <div class="portfolio-descr">Seminee</div>
                 </v-card>
             </v-col>
 
@@ -85,44 +112,10 @@
                     <div class="portfolio-descr">Boiar</div>
                 </v-card>
             </v-col>
-            <v-col class="col-md-4">
-                <v-card
-                    :to="`/${language.lang}/portfolio/stone-decorum`"
-                    :loading="loading"
-                    class="mx-auto my-4 profolio-item"
-                    >
-                    <v-img
-                        src="https://itmall.digital/images/promotions/1607529987-Glavniibaner_STONE.jpg"
-                        ></v-img>
-                    <div class="portfolio-descr">Stone Decorum</div>
-                </v-card>
-            </v-col>
 
-            <v-col class="col-md-4">
-                <v-card
-                    :to="`/${language.lang}/portfolio/sandic`"
-                    :loading="loading"
-                    class="mx-auto my-4 profolio-item"
-                    >
-                    <v-img
-                        src="https://itmall.digital/images/promotions/1607529475-Glavnii_%20baner_Sandic.jpg"
-                        ></v-img>
-                    <div class="portfolio-descr">Sandic</div>
-                </v-card>
-            </v-col>
 
-            <v-col class="col-md-4">
-                <v-card
-                    :to="`/${language.lang}/portfolio/seminee`"
-                    :loading="loading"
-                    class="mx-auto my-4 profolio-item"
-                    >
-                    <v-img
-                        src="https://itmall.digital/images/promotions/1607529616-Glavnii_%20baner_Seminee2.jpg"
-                        ></v-img>
-                    <div class="portfolio-descr">Seminee</div>
-                </v-card>
-            </v-col>
+
+
 
             <v-col class="col-md-4">
                 <v-card
