@@ -141,7 +141,7 @@ export default {
             initCall: 'dialog/initCall',
         }),
         openDialogLogin() {
-            $nuxt.$emit('open-login-form')
+            $nuxt.$emit('openLoginDialog')
         },
         order(plan) {
             switch (this.$vuetify.breakpoint.name) {

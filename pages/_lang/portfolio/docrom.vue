@@ -1,41 +1,10 @@
 <template>
-    <main class="ja-bg portfolio-item" style="background-image: linear-gradient(135deg, #ECD7A9 0%, #D6BF8B 100%);">
-        <img src="/portfolio/boiar/bannerMain.png">
-        <div class="text-center">
-            <h4 class="section-title">Branding</h4>
-            <v-carousel hide-delimiters>
-                <v-carousel-item
-                    v-for="(item,i) in branding"
-                    :key="i"
-                    :src="item.src"
-                    ></v-carousel-item>
-            </v-carousel>
-        </div>
+    <main class="ja-bg portfolio-item" :style="{ backgroundImage: `url('/portfolio/ja/fonJulia.png')`}">
+        <img src="/portfolio/seminee/Glavnii_ baner_Seminee2.jpeg" alt="">
         <div class="text-center">
             <h4 class="section-title">Shop Online</h4>
-            <img src="/portfolio/boiar/shopOnline.png">
-            <h4 class="section-title">Copywriting</h4>
-        </div>
-        <v-row align="center" justify="center">
-            <v-col cols="12" md="6">
-                <img src="/portfolio/boiar/copywritingImg.png">
-            </v-col>
-            <v-col cols="12" md="6">
-                <p class="copywriting-portfolio">Pentru Proiectul BOIAR au fost concepute textele in 3 limbi , si anume Romana, Rusa, pentru paginile statice, categorii de produse si unele produse. Textele pot fi vizualizate pe:
-                    <a href="https://boiar.md" target="_blank">boiar.md</a>
-                </p>
-            </v-col>
-        </v-row>
-        <div class="text-center container-slider">
-            <h4 class="section-title">Develop and integrate CRM with Online Shop</h4>
-            <v-carousel hide-delimiters>
-                <v-carousel-item
-                    v-for="(item,i) in CRMImages"
-                    :key="i"
-                    :src="item.src"
-                    ></v-carousel-item>
-            </v-carousel>
-        </div>
+            <img src="/portfolio/seminee/MOCKUP.Seminee.png" alt="">
+        </div><br><br><br><br>
     </main>
 </template>
 
@@ -61,20 +30,15 @@ export default {
         }
     },
     data: () => ({
-        branding: [
-            {src: '/portfolio/boiar/boiarItem2.png'},
-            {src: '/portfolio/boiar/boiarItem1.png'},
-        ],
         photoVideoImages: [
-            {src: '/portfolio/ja/juliaItem1.png'},
-            {src: '/portfolio/ja/juliaItem2.png'},
-            {src: '/portfolio/ja/juliaItem3.png'},
-            {src: '/portfolio/ja/juliaItem4.png'},
+            {src: '/portfolio/sandic/Slaider_ baner_Sandic1.jpeg'},
+            {src: '/portfolio/sandic/Slaider_ baner_Sandic1.jpeg'},
+            {src: '/portfolio/sandic/Slaider_ baner_Sandic1.jpeg'},
         ],
         CRMImages: [
-            {src: '/portfolio/boiar/crmSlide1.png'},
-            {src: '/portfolio/boiar/crmSlide2.png'},
-            {src: '/portfolio/boiar/crmSlide3.png'},
+            {src: '/portfolio/ja/crmSlide1.png'},
+            {src: '/portfolio/ja/crmSlide2.png'},
+            {src: '/portfolio/ja/crmSlide3.png'},
         ],
         title: '',
         description: '',
@@ -145,15 +109,6 @@ export default {
     }
     .copywriting-portfolio{
         font-size: 20px;
-    }
-    .section-title{
-        font-size: 25px;
-    }
-    .v-image__image--cover{
-        background-size: 100% !important
-    }
-    .container-slider{
-        max-width: 100% !important;
     }
     .section-title {
         background-color: transparent;

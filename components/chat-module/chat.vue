@@ -435,7 +435,12 @@ export default {
 <style lang="scss">
 .amo-button-holder{
     z-index: 1 !important;
-    bottom: 16px !important;
+    bottom: 8px !important;
+}
+.v-btn--fab.v-size--large{
+    height: 50px !important;
+    width: 50px !important;
+    right: 34px;
 }
 .user-online {
     position: absolute;

@@ -95,7 +95,7 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <v-img
-                        src="https://itmall.digital/images/promotions/1607508416-trenwood1.png"
+                        src="/portfolio/TD-Trendwood-banner-main.jpg"
                         ></v-img>
                     <div class="portfolio-descr">Trenwood</div>
                 </v-card>
@@ -244,6 +244,9 @@ export default {
     .text-subtitle-1:nth-child(odd) {
         background-color: $primary_dark;
     }
+}
+.subheading {
+    color: $custom_blue !important;
 }
 .experts-content {
     .subheading {

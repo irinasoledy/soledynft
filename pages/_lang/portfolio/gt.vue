@@ -1,72 +1,10 @@
 <template>
     <main class="ja-bg portfolio-item" :style="{ backgroundImage: `url('/portfolio/ja/fonJulia.png')`}">
-        <img src="/portfolio/ja/bannerMain.png" alt="">
-        <h4 class="section-title">Galina Tomas</h4>
-        <v-row align="center" justify="center">
-            <v-col cols="12" md="6">
-                <img src="/portfolio/ja/banner.png" alt="">
-            </v-col>
-            <v-col cols="12" md="6">
-                <h3 class="list-title">Regions analyzed - Europe and the US</h3>
-                <ul class="potfolio-list">
-                    <li>Over 50 countries surveyed</li>
-                    <li>Analyze existing product interest, over 300 interests</li>
-                    <li>Potential target audience analysis, 5 age categories, 3 revenue categories.</li>
-                    <li>Logisticы Analysis - Cost Optimization</li>
-                    <li>Market penetration and development strategy</li>
-                    <li>Promotion. Accumulation of leads. Marketing budgets. Support and first export</li>
-                    <li>* Outcome: There were identified 3 groups of countries in Europe with total number of consumers who expressed interest in the Customer's products of over 5 million (each)</li>
-                </ul>
-            </v-col>
-        </v-row>
+        <img src="/portfolio/seminee/Glavnii_ baner_Seminee2.jpeg" alt="">
         <div class="text-center">
             <h4 class="section-title">Shop Online</h4>
-            <img src="/portfolio/ja/shopOnline.png" alt="">
-            <h4 class="section-title">Realizarea sessiunilor foto-video</h4>
-            <v-carousel hide-delimiters>
-                <v-carousel-item
-                    v-for="(item,i) in photoVideoImages"
-                    :key="i"
-                    :src="item.src"
-                    ></v-carousel-item>
-            </v-carousel>
-            <h4 class="section-title">Copywriting</h4>
-        </div>
-        <v-row align="center" justify="center">
-            <v-col cols="12" md="6">
-                <img src="/portfolio/ja/copywritingImg.png" alt="">
-            </v-col>
-            <v-col cols="12" md="6">
-                <p class="copywriting-portfolio">Для проекта <b>Jullia Allert</b>
-                    Texts were created in 3 languages, <b>romanian</b>, <b>russian</b>, <b>english</b>
-                    for static pages, for products categories. Texts could be viewed on www.juliaallert.com</p>
-            </v-col>
-        </v-row>
-        <div class="text-center">
-            <h4 class="section-title">Social Media Management</h4>
-            <img src="/portfolio/ja/administrationRetImg.png" alt="">
-        </div>
-
-        <div class="text-center container-slider">
-            <h4 class="section-title">CRM development and integration with online shop</h4>
-            <v-carousel hide-delimiters>
-                <v-carousel-item
-                    v-for="(item,i) in CRMImages"
-                    :key="i"
-                    :src="item.src"
-                    ></v-carousel-item>
-            </v-carousel>
-        </div>
-
-        <div class="text-center">
-            <h4 class="section-title">Locating your business in the region with the highest sales potential in Europe</h4>
-            <img src="/portfolio/ja/bloc6Img.png" alt="">
-        </div>
-
-        <div class="text-center">
-            <h4 class="section-title">Consulting services</h4>
-            <img src="/portfolio/ja/bloc7.png" alt="">
-        </div>
+            <img src="/portfolio/seminee/MOCKUP.Seminee.png" alt="">
+        </div><br><br><br><br>
     </main>
 </template>
 
@@ -93,10 +31,9 @@ export default {
     },
     data: () => ({
         photoVideoImages: [
-            {src: '/portfolio/ja/juliaItem1.png'},
-            {src: '/portfolio/ja/juliaItem2.png'},
-            {src: '/portfolio/ja/juliaItem3.png'},
-            {src: '/portfolio/ja/juliaItem4.png'},
+            {src: '/portfolio/sandic/Slaider_ baner_Sandic1.jpeg'},
+            {src: '/portfolio/sandic/Slaider_ baner_Sandic1.jpeg'},
+            {src: '/portfolio/sandic/Slaider_ baner_Sandic1.jpeg'},
         ],
         CRMImages: [
             {src: '/portfolio/ja/crmSlide1.png'},
@@ -172,15 +109,6 @@ export default {
     }
     .copywriting-portfolio{
         font-size: 20px;
-    }
-    .section-title{
-        font-size: 25px;
-    }
-    .v-image__image--cover{
-        background-size: 100% !important
-    }
-    .container-slider{
-        max-width: 100% !important;
     }
     .section-title {
         background-color: transparent;

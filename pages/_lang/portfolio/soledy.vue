@@ -1,60 +1,16 @@
 <template>
     <main class="ja-bg portfolio-item" :style="{ backgroundImage: `url('/portfolio/ja/fonJulia.png')`}">
-        <img src="/portfolio/apl/Glavniibaner_APL.jpeg" alt="">
-        <h4 class="section-title">Soledy</h4>
-
+        <img src="/portfolio/seminee/Glavnii_ baner_Seminee2.jpeg" alt="">
         <div class="text-center">
-            <h4 class="section-title">Branding</h4>
-            <img src="/portfolio/apl/BranbookAPL.jpeg" width="100%">
-            <h4 class="section-title">Strategie de marketing</h4>
-        </div>
-        <v-row align="center" justify="center">
-            <v-col cols="12" md="6">
-                <img src="/portfolio/apj/banner.png" alt="">
-            </v-col>
-            <v-col cols="12" md="6">
-                <h3 class="list-title">Regions analyzed - Europe and the US</h3>
-                <ul class="potfolio-list">
-                    <li>Over 50 countries surveyed</li>
-                    <li>Analyze existing product interest, over 300 interests</li>
-                    <li>Potential target audience analysis, 5 age categories, 3 revenue categories.</li>
-                    <li>Logisticы Analysis - Cost Optimization</li>
-                    <li>Market penetration and development strategy</li>
-                    <li>Promotion. Accumulation of leads. Marketing budgets. Support and first export</li>
-                    <li>* Outcome: There were identified 3 groups of countries in Europe with total number of consumers who expressed interest in the Customer's products of over 5 million (each)</li>
-                </ul>
-            </v-col>
-        </v-row>
-        <div class="text-center">
-            <h4 class="section-title">Online Shop</h4>
-            <img src="/portfolio/apl/MOCKUP.APL.png" alt="">
-        </div>
-
-        <div class="text-center">
-            <h4 class="section-title">Social Media Management</h4>
-            <slick ref="slick" :options="slickOptions">
-                <img src="/portfolio/apl/Smm APL.png" alt="">
-                <img src="/portfolio/apl/Smm_APL_insta.png" alt="">
-            </slick>
-        </div>
-
-        <div class="text-center">
-            <h4 class="section-title">Locating your business in the region with the highest sales potential in Europe</h4>
-            <img src="/portfolio/apj/presentationLoc.png" alt="">
-        </div>
-
-        <div class="text-center">
-            <h4 class="section-title">Consulting services</h4>
-            <img src="/portfolio/apj/bloc7.png" alt="">
-        </div>
+            <h4 class="section-title">Shop Online</h4>
+            <img src="/portfolio/seminee/MOCKUP.Seminee.png" alt="">
+        </div><br><br><br><br>
     </main>
 </template>
 
 <script>
 
-import 'slick-carousel/slick/slick.css';
 import { mapActions, mapGetters } from 'vuex'
-import Slick from 'vue-slick'
 import Experts from "@/components/front/widgets/expertsWidget.vue"
 import MapContact from "@/components/front/widgets/mapWidget.vue"
 
@@ -63,11 +19,6 @@ export default {
     layout: "default",
     head() {
         return {
-            slickOptions: {
-                slidesToShow: 2,
-                arrows: false,
-                dots: false,
-            },
             title: this.title,
             meta: [
                 {
@@ -80,9 +31,9 @@ export default {
     },
     data: () => ({
         photoVideoImages: [
-            {src: '/portfolio/apj/jwbanner1.jpeg'},
-            {src: '/portfolio/apj/jwbanner2.jpeg'},
-            {src: '/portfolio/apj/jwbanner3.jpeg'},
+            {src: '/portfolio/sandic/Slaider_ baner_Sandic1.jpeg'},
+            {src: '/portfolio/sandic/Slaider_ baner_Sandic1.jpeg'},
+            {src: '/portfolio/sandic/Slaider_ baner_Sandic1.jpeg'},
         ],
         CRMImages: [
             {src: '/portfolio/ja/crmSlide1.png'},
@@ -100,7 +51,7 @@ export default {
         this.description = this.trans.PageNames.defaultPageSeoDesc
     },
     components: {
-        MapContact, Experts, Slick
+        MapContact, Experts
     }
 }
 </script>
@@ -149,16 +100,6 @@ export default {
     max-width: 80%;
     margin: 30px auto;
 }
-.slick-active {
-    background-color: transparent !important;
-}
-.slick-arrow{
-    display: none !important;
-}
-.mobile-slick-view {
-    max-height: 500px !important;
-    width: auto !important;
-}
 @media (max-width: 991px) {
     .portfolio-item{
         margin-top: 50px;
@@ -168,15 +109,6 @@ export default {
     }
     .copywriting-portfolio{
         font-size: 20px;
-    }
-    .section-title{
-        font-size: 25px;
-    }
-    .v-image__image--cover{
-        background-size: 100% !important
-    }
-    .container-slider{
-        max-width: 100% !important;
     }
     .section-title {
         background-color: transparent;
