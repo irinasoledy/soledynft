@@ -76,4 +76,11 @@ export default {
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
+
+    async createStripeProducts(data, cb) {
+        await axios.post(`/api/stripe`, data)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
 }

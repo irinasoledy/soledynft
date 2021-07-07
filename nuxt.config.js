@@ -18,7 +18,8 @@ module.exports = {
         ],
         script: [
             {
-                src: '/scripts/ammocrm.js'
+                src: '/scripts/ammocrm.js',
+                src: 'https://js.stripe.com/v3'
             }
         ]
     },
@@ -39,6 +40,7 @@ module.exports = {
         {src: '@/plugins/socket', ssr: false},
         {src: '~/plugins/vue-agile'},
         {src: '~/plugins/global.js'},
+        {src: '~/plugins/stripe.js',  mode: 'client'},
     ],
     components: true,
     /*

@@ -328,7 +328,7 @@
                                                     </v-expand-transition>
                                                 </v-list-item>
                                                 <v-list-item v-else
-                                                             :to="`/${language.lang}/service/${item.alias}/${item.alias}`">
+                                                             :to="`/${language.lang}/service/plans/${item.alias}`">
                                                     <v-list-item-title>
                                                         {{ item.translation.name }}
                                                     </v-list-item-title>

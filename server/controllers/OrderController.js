@@ -1,5 +1,6 @@
 const Cart = require('../models/cart')
 const Order = require('../models/order')
+const stripe = require('stripe')('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');
 
 class OrderController {
 
@@ -185,6 +186,38 @@ class OrderController {
             const order = await Order.findOne({_id: id})
 
             return res.status(200).json(order)
+        } catch (e) {
+            return res.status(404).json({message: 'error'})
+        }
+    }
+
+
+    async createStripeProducts() {}
+
+    async addProductsToStripe(req, res) {
+        try {
+            const { userId, cart } = req.body
+            const items = []
+            let product = {}
+            let price = {}
+
+            for (var i = 0; i < cart.length; i++) {
+                product = await stripe.products.create({
+                    name: cart[i].service.translation.name,
+                })
+
+                price = await stripe.prices.create({
+                   product: product.id,
+                   unit_amount: parseFloat(cart[i].service.price * 100),
+                   currency: 'eur',
+               })
+
+               items.push({
+                   price : price.id,
+                   quantity: parseInt(cart[i].qty),
+               })
+            }
+            return res.status(200).json(items)
         } catch (e) {
             return res.status(404).json({message: 'error'})
         }

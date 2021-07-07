@@ -12,7 +12,7 @@
                     :key="i"
                     class="col-lg-4 col-md-6 col-12 d-flex child-flex"
                     >
-                    <v-card v-if="item.children.length" :to="`/${language.lang}/service/${item.alias}`">
+                    <v-card v-if="item.subcategories.length" :to="`/${language.lang}/service/${item.alias}`">
                         <v-img
                             v-if="item.banner"
                             :src="`${envAPI}/images/blogCategories/og/${item.banner}`"
@@ -25,7 +25,7 @@
                             {{item.translation.name}}
                         </v-card-title>
                     </v-card>
-                    <v-card v-else :to="`/${language.lang}/service/${item.alias}/${item.alias}`">
+                    <v-card v-else :to="`/${language.lang}/service/plans/${item.alias}`">
                         <v-img
                             v-if="item.banner"
                             :src="`${envAPI}/images/blogCategories/og/${item.banner}`"

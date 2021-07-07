@@ -23,7 +23,6 @@
         </v-col>
 
         <v-col>
-
             <v-card
                 :class="[(methods.card) ? 'selected-method' : '', 'mx-auto', 'payment-card']"
                 @click="changePayment('card')"
@@ -36,7 +35,7 @@
                 </v-card-text>
             </v-card>
         </v-col>
-        <v-col>
+        <!-- <v-col>
             <v-card
                 :class="[(methods.paypal) ? 'selected-method' : '', 'mx-auto', 'payment-card']"
                 @click="changePayment('paypal')"
@@ -47,17 +46,42 @@
                     <img src="/paypal.png" class="payment-img"/>
                 </v-card-text>
             </v-card>
+        </v-col> -->
+        <v-col>
+            <stripe-checkout
+                ref="checkoutRef"
+                mode="payment"
+                :pk="publishableKey"
+                :line-items="lineItems"
+                :success-url="successURL"
+                :cancel-url="cancelURL"
+                @loading="v => loading = v"
+                />
+            <!-- <v-btn @click="submit">test stripe</v-btn> -->
         </v-col>
     </v-row>
 </template>
 
 <script>
 
+import { StripeCheckout } from '@vue-stripe/vue-stripe';
 import {mapGetters, mapActions} from 'vuex'
+import cartApi from '@/api/cartApi'
 
 export default {
     data() {
         return {
+            ready: true,
+            publishableKey: 'pk_live_51J2zFVFqQHaOvZ90hxwoDQnhXBLNeQET13gpabvTg27OPAynJX4tttToAHufHXquNvCCGg6f8T9ybrRLIvTR4EDP00e25RJMWe',
+            loading: false,
+            lineItems: [
+                {
+                    price: 'price_1J3jPzFqQHaOvZ90TZBI6HZg', // The id of the recurring price you created in your Stripe dashboard
+                    quantity: 1,
+                },
+            ],
+            successURL: 'https://docrom.info/redirect/payment/success',
+            cancelURL: 'https://docrom.info/redirect/payment/cancel',
             validateErrors: null,
             payment: null,
             methods: {
@@ -71,12 +95,24 @@ export default {
         order: 'cart/getOrder',
         total: 'cart/getTotal',
         language: 'getLanguage',
+        cart: 'cart/getCart',
     }),
     mounted() {
         this.$nuxt.$on('valiadatePayment', cb => {
-            this.validatePayments(cb)
+            if (this.payment === 'card' && this.ready) {
+                this.ready = false
+                cartApi.createStripeProducts({userId: this.$auth.user._id, cart: this.cart}, response => {
+                    this.lineItems = response
+                    if (this.lineItems) {
+                        this.redirectToCheckout()
+                    }
+                })
+            }else{
+                this.validatePayments(cb)
+            }
         })
     },
+    components: { StripeCheckout},
     methods: {
         ...mapActions({
             updatePaymentInfo: 'cart/updatePaymentInfo',
@@ -95,6 +131,15 @@ export default {
             this.payment = null
             this.validateErrors = null
         },
+        redirectToCheckout() {
+            this.updatePaymentInfo({
+                paymentMethod: this.payment,
+                orderId: this.order._id
+            }).then(res => {
+                this.$refs.checkoutRef.redirectToCheckout()
+                this.ready = true
+            })
+        },
         validatePayments(cb) {
             if (!this.payment) {
                 this.validateErrors = 'Change payment method'
@@ -109,6 +154,7 @@ export default {
             }
         },
         handleBilling() {
+            const order =  this.order
             if (!this.order.paymentMethod) {
                 this.validateErrors = 'Change payment method'
                 return false
@@ -120,7 +166,7 @@ export default {
             }).then(res => {
                 this.resetMethods()
                 this.resetOrder()
-                this.$router.push(`/${this.language.lang}/thank-you`)
+                this.$router.push(`/${this.language.lang}/thank-you?order=${order._id}`)
             })
         }
     }

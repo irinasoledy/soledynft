@@ -7,7 +7,7 @@
                 </v-col>
                 <v-tabs class="pricing-plans-tabs" centered dark>
                     <v-tab>Pricing plans</v-tab>
-                    <v-tab :to="`/${language.lang}/pricing-plans`">Extended</v-tab>
+                    <v-tab v-if="service.services.length" :to="`/${language.lang}/service/pricing-plans/${service.alias}`">Extended</v-tab>
                 </v-tabs>
                 <v-col v-for="(plan, planIndex) in service.children" v-if="service.children" :key="planIndex">
                     <v-card flat class="xs12 sm12 md4 mb-3 flex ip-plan-service"
@@ -22,16 +22,12 @@
                         </v-layout>
                         <v-card-text class="pa-4 lighten-4">
                             <v-flex pa-0><h2 class="headline">{{ plan.translation.name }}</h2></v-flex>
-                            <!-- <v-flex pa-0 style="min-height:66px">Short description {{ plan.translation.name }}</v-flex> -->
                             <v-flex pa-0 class="ip-plan-price">
                                 {{ plan.translation.price_top_begin }}
                                 <span>{{ plan.price }}</span>
-                                <!-- <v-icon>mdi-currency-eur</v-icon> -->
-                                euro
+                                lei
                                 {{ plan.translation.price_top_end }}
-
                             </v-flex>
-                            <!-- <v-flex pa-0 class="grey--text">EUR/month</v-flex> -->
                             <v-flex pa-0 mt-4>
                                 <v-btn v-if="!$auth.loggedIn" :outline="!plan.highlight" depressed large color="primary"
                                        class="ma-0 ip-plan-btn" @click="openDialogLogin()">
@@ -45,12 +41,10 @@
                             <div v-for="(part, indexPart) in plan.blogs" v-html="part.translation.body"></div>
                         </v-list>
                         <v-card-text class="pa-4 lighten-4">
-                            <!-- <v-flex pa-0 class="grey--text">Single payment</v-flex> -->
                             <v-flex pa-0 class="ip-plan-price">
-                                <!-- <v-icon>mdi-currency-eur</v-icon> -->
                                 {{ plan.translation.price_bottom_begin }}
                                 <span>{{ plan.price_bottom }} </span>
-                                euro {{ plan.translation.price_bottom_end }}
+                                lei {{ plan.translation.price_bottom_end }}
                             </v-flex>
                         </v-card-text>
                     </v-card>
@@ -100,7 +94,6 @@ export default {
             dialog: false,
             service: null,
             employeeList: [],
-            mobileExpertsDisplay: false,
         }
     },
     computed: mapGetters({
@@ -109,16 +102,11 @@ export default {
         allServices: 'getAllServices',
         language: 'getLanguage',
         changedEmployee: 'getChangedEmployee',
-        reject: 'call/getReject',
-        response: 'call/getResponse',
-        roomId: 'call/getRoomId',
         user: 'chat/getUser',
-        trans: 'getTranslations'
     }),
     async mounted() {
         this.service = await this.allServices.find((serv) => serv.alias == this.$route.params.subservice)
         this.getEmployees()
-        window.addEventListener('scroll', this.handleScroll);
         this.title = this.service.translation.seo_title
         this.description = this.service.translation.seo_description
     },
@@ -131,15 +119,6 @@ export default {
         },
     },
     methods: {
-        ...mapActions({
-            setDefaultChangedEmployee: 'setDefaultChangedEmployee',
-            setDefaultReject: 'call/setDefaultReject',
-            setDefaultResponse: 'call/setDefaultResponse',
-            setClientAsUser: 'chat/setClientAsUser',
-            setUser: 'chat/setUser',
-            setInterlocutor: 'dialog/setInterlocutor',
-            initCall: 'dialog/initCall',
-        }),
         openDialogLogin() {
             $nuxt.$emit('openLoginDialog')
         },
@@ -152,46 +131,6 @@ export default {
                 default:
                     return plan.orderRow
             }
-        },
-        openVideoCall(user) {
-            this.initCall(user)
-        },
-        openDialog(user) {
-            this.setInterlocutor(null)
-            this.setInterlocutor(user)
-        },
-        handleScroll() {
-            const sidebar = document.getElementById('sidebar')
-            const experts = document.getElementById('experts')
-            const serviceBtn = document.getElementById('serviceBtn')
-
-            if (sidebar) {
-                if (!this.$mobileDetect.mobile()) {
-                    if (window.scrollY > 85) {
-                        sidebar.classList.add("fixed")
-                        experts.classList.add("fixed")
-                    } else {
-                        sidebar.classList.remove("fixed")
-                        experts.classList.remove("fixed")
-                    }
-                }
-
-                if (window.scrollY > 35) {
-                    serviceBtn.classList.add("fixed-btn")
-                } else {
-                    serviceBtn.classList.remove("fixed-btn")
-                }
-            }
-        },
-        scrollTo(id) {
-            const element = document.getElementById('section' + id)
-            const offsetTop = element.offsetTop - 150
-            window.scrollTo(0, offsetTop)
-        },
-        scrollExpertsBlock() {
-            const element = document.getElementById('experts')
-            const offsetTop = element.offsetTop - 175
-            window.scrollTo(0, offsetTop)
         },
         async getEmployees() {
             await contentApi.getEmployeesByService(this.service.id, response => {
@@ -348,9 +287,7 @@ export default {
     .butons-service {
         display: none;
     }
-
 }
-
 @media (max-width: 991px) {
     .side-block-wrap {
         display: none;
@@ -378,82 +315,40 @@ export default {
         width: 100% !important;
     }
 }
-
-.section-block {
-    margin-bottom: 20px;
-}
-
-.section-block:last-child {
-    margin-bottom: 0;
-}
-
-.side-block {
-    border-left: 3px solid $custom_blue;
-    min-width: 200px;
-}
-
-.fixed-btn {
-    position: fixed;
-    width: 100%;
-    margin-top: -6px;
-    z-index: 4;
-    left: .5%;
-}
-
-.fixed {
-    position: fixed;
-    margin-top: -80px;
-    background-color: #FFF;
-}
-
 .expert-one-experts {
     max-height: 85vh;
     overflow: scroll;
     width: 300px;
 }
-
 .v-application ul {
     padding-left: 20px !important;
 }
-
 .medium-width {
     min-width: 90% !important;
 }
-
 .operator-title {
     line-height: 1;
     margin-top: -10px;
 }
-
 .operator-position {
     line-height: 1;
     margin-top: -10px;
 }
-
 .operator-btns {
     line-height: 1;
     margin-top: -18px;
 }
-
 .add-to-cart-btn {
     margin-left: 15px;
 }
-
 .ip-plan-service {
-    // border: solid 1px #e0e0e0;
     margin-top: 40px;
     max-width: 100% !important;
 }
-
-.ip-plan-row .ip-plan-service {
-    // border: solid 1px #e0e0e0;
-}
-
 .ip-plan-row .ip-plan-service:nth-child(2) {
     border-right: 0;
     border-left: 0;
 }
-
 .ip-plan-price {
     display: block;
     font-size: 15px;
@@ -470,11 +365,9 @@ export default {
 .ip-plan-btn {
     color: $custom_green !important;
 }
-
 .cursor-help {
     cursor: help;
 }
-
 .ip-highligh-plan {
     height: 40px;
     position: absolute;
@@ -482,23 +375,17 @@ export default {
     left: -1px;
     top: -40px;
 }
-
 .wrap {
     padding-top: 120px;
     background-color: $custom_blue;
 }
-
 .title-plans {
     color: #FFF;
 }
-
-.disabled{
-    color: rgba(0, 0, 0, 0.54);
-}
-.v-btn-costum{
+.v-btn-costum {
     color: $custom_blue !important;
 }
-.btns-row{
+.btns-row {
     padding: 30px;
 }
 .pricing-plans-tabs {
