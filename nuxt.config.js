@@ -22,6 +22,7 @@ module.exports = {
                 src: 'https://js.stripe.com/v3'
             }
         ]
+        
     },
     /*
     ** Customize the progress-bar color
