@@ -81,8 +81,11 @@ export const getters = {
                 qty: item.qty,
                 user: user,
                 service: '',
+                stripePrice: '',
+                stripeProduct: '',
             }
             arr.service = services.find(service => service.id == item.serviceId)
+            // arr.stripePrice = services.find(service => service.id == item.serviceId)
             return arr
         })
         return cart

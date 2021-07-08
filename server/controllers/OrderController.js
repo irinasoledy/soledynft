@@ -139,8 +139,6 @@ class OrderController {
         }
     }
 
-
-
     async pay(req, res) {
         try {
             const {userId, orderId, amount} = req.body
@@ -202,12 +200,12 @@ class OrderController {
             let price = {}
 
             for (var i = 0; i < cart.length; i++) {
-                product = await stripe.products.create({
-                    name: cart[i].service.translation.name,
-                })
-
+               //  product = await stripe.products.create({
+               //      name: cart[i].service.translation.name,
+               //  })
+               //
                 price = await stripe.prices.create({
-                   product: product.id,
+                   product: cart[i].service.stripe_product,
                    unit_amount: parseFloat(cart[i].service.price * 100),
                    currency: 'eur',
                })

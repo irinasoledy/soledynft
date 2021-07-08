@@ -33,7 +33,7 @@
                                        class="ma-0 ip-plan-btn" @click="openDialogLogin()">
                                     Add To Cart
                                 </v-btn>
-                                <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="service"/>
+                                <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="plan"/>
                             </v-flex>
                         </v-card-text>
 
