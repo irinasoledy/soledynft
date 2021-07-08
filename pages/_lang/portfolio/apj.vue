@@ -4,24 +4,23 @@
         <h4 class="section-title">Anne Popova Jewellry</h4>
 
         <div class="text-center">
-            <h4 class="section-title">Branding</h4>
             <img src="/portfolio/apj/BranbookAPJ.jpeg" width="100%">
-            <h4 class="section-title">Strategie de marketing</h4>
+            <h4 class="section-title">{{ trans.Portfolio.insidePageStrategyTitle }}</h4>
         </div>
         <v-row align="center" justify="center">
             <v-col cols="12" md="6">
-                <img src="/portfolio/apj/banner.png" alt="">
+                <img src="/portfolio/apj/banner.png" width="100%">
             </v-col>
             <v-col cols="12" md="6">
-                <h3 class="list-title">Regions analyzed - Europe and the US</h3>
+                <h3 class="list-title">{{ trans.Portfolio.insidePageStrategySubTitle }}</h3>
                 <ul class="potfolio-list">
-                    <li>Over 50 countries surveyed</li>
-                    <li>Analyze existing product interest, over 300 interests</li>
-                    <li>Potential target audience analysis, 5 age categories, 3 revenue categories.</li>
-                    <li>Logisticы Analysis - Cost Optimization</li>
-                    <li>Market penetration and development strategy</li>
-                    <li>Promotion. Accumulation of leads. Marketing budgets. Support and first export</li>
-                    <li>* Outcome: There were identified 3 groups of countries in Europe with total number of consumers who expressed interest in the Customer's products of over 5 million (each)</li>
+                    <li>{{ trans.Portfolio.insidePageStrategyText1 }}</li>
+                    <li>{{ trans.Portfolio.insidePageStrategyText2 }}</li>
+                    <li>{{ trans.Portfolio.insidePageStrategyText3 }}</li>
+                    <li>{{ trans.Portfolio.insidePageStrategyText4 }}</li>
+                    <li>{{ trans.Portfolio.insidePageStrategyText5 }}</li>
+                    <li>{{ trans.Portfolio.insidePageStrategyText6 }}</li>
+                    <li>{{ trans.Portfolio.insidePageStrategyText7 }}</li>
                 </ul>
             </v-col>
         </v-row>
@@ -44,7 +43,7 @@
         </div>
 
         <div class="text-center">
-            <h4 class="section-title">Realiazarea sessiunulor foto-video</h4>
+            <h4 class="section-title">{{ trans.Portfolio.insidePageFotoSessionsTitle }}</h4>
             <v-carousel hide-delimiters>
                 <v-carousel-item
                     v-for="(item,i) in photoVideoImages"
@@ -55,13 +54,13 @@
         </div>
 
         <div class="text-center">
-            <h4 class="section-title">Locating your business in the region with the highest sales potential in Europe</h4>
-            <img src="/portfolio/apj/presentationLoc.png" alt="">
+            <h4 class="section-title">{{ trans.Portfolio.insidePageLocalisationTitle }}</h4>
+            <img src="/portfolio/ja/bloc6Img.png">
         </div>
 
         <div class="text-center">
-            <h4 class="section-title">Consulting services</h4>
-            <img src="/portfolio/apj/bloc7.png" alt="">
+            <h4 class="section-title">{{ trans.Portfolio.insidePageConsultingTitle }}</h4>
+            <img src="/portfolio/ja/bloc7.png">
         </div>
     </main>
 </template>

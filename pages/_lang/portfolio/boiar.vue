@@ -1,6 +1,6 @@
 <template>
     <main class="ja-bg portfolio-item" style="background-image: linear-gradient(135deg, #ECD7A9 0%, #D6BF8B 100%);">
-        <img src="/portfolio/boiar/bannerMain.png">
+        <img src="/portfolio/boiar/bannerMain.png" width="100%">
         <div class="text-center">
             <h4 class="section-title">Branding</h4>
             <v-carousel hide-delimiters>
@@ -21,13 +21,13 @@
                 <img src="/portfolio/boiar/copywritingImg.png">
             </v-col>
             <v-col cols="12" md="6">
-                <p class="copywriting-portfolio">Pentru Proiectul BOIAR au fost concepute textele in 3 limbi , si anume Romana, Rusa, pentru paginile statice, categorii de produse si unele produse. Textele pot fi vizualizate pe:
-                    <a href="https://boiar.md" target="_blank">boiar.md</a>
+                <p class="copywriting-portfolio">
+                    {{ trans.Portfolio.insidePageFotoCopywritingText }}
                 </p>
             </v-col>
         </v-row>
         <div class="text-center container-slider">
-            <h4 class="section-title">Develop and integrate CRM with Online Shop</h4>
+            <h4 class="section-title">{{ trans.Portfolio.insidePageCRMTitle }}</h4>
             <v-carousel hide-delimiters>
                 <v-carousel-item
                     v-for="(item,i) in CRMImages"

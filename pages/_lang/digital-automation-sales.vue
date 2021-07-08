@@ -4,8 +4,9 @@
             <v-row align="center" justify="center">
                 <v-col class="text-center" cols="12">
                     <h1 class="display-1 mb-4">
-                        Automatizare Digitală Vânzari prin CRM
+                        {{ trans.ServicePages.crmMainbannerTitle }}
                     </h1>
+                    <p class="display-1-subtitle">{{ trans.ServicePages.crmMainbannerSubTitle }}</p>
                 </v-col>
             </v-row>
         </v-parallax>
@@ -14,8 +15,9 @@
             <v-row align="center" justify="center">
                 <v-col class="text-center" cols="12">
                     <h1 class="display-1 mb-4">
-                        Automatizare Digitală Vânzari prin CRM
+                        {{ trans.ServicePages.crmMainbannerTitle }}
                     </h1>
+                    <p class="display-1-subtitle">{{ trans.ServicePages.crmMainbannerSubTitle }}</p>
                 </v-col>
             </v-row>
         </v-parallax>
@@ -29,13 +31,12 @@
                         </v-col>
                         <v-col cols="12" md="2" sm="12" xs="12"></v-col>
                         <v-col cols="12" md="5" sm="12" xs="12" class="container-section">
-                            <p>Purpose-built video chat software</p>
+                            <p>{{ trans.ServicePages.crmSection1Title }}</p>
                             <ul>
-                                <li>No plugins, downloads, popups or separate applications required</li>
-                                <li>Works on all devices/browsers including smartphones</li>
-                                <li>Go fullscreen, 1 or 2 way video, flip cameras</li>
-                                <li>Global low-latency architecture, HD-quality video</li>
-                                <li>Use from agents’ mobile and tablet devices for a heightened virtual in-store experience</li>
+                                <li>{{ trans.ServicePages.crmSection1Text1 }}</li>
+                                <li>{{ trans.ServicePages.crmSection1Text2 }}</li>
+                                <li>{{ trans.ServicePages.crmSection1Text3 }}</li>
+                                <li>{{ trans.ServicePages.crmSection1Text4 }}</li>
                             </ul>
                         </v-col>
                     </v-row>
@@ -45,13 +46,12 @@
                         </v-col>
                         <v-col cols="12" md="5" sm="12" xs="12" v-if="$mobileDetect.mobile()"></v-col>
                         <v-col cols="12" md="5" sm="12" xs="12" class="container-section">
-                            <p>Purpose-built video chat software</p>
+                            <p>{{ trans.ServicePages.crmSection2Title }}</p>
                             <ul>
-                                <li>No plugins, downloads, popups or separate applications required</li>
-                                <li>Works on all devices/browsers including smartphones</li>
-                                <li>Go fullscreen, 1 or 2 way video, flip cameras</li>
-                                <li>Global low-latency architecture, HD-quality video</li>
-                                <li>Use from agents’ mobile and tablet devices for a heightened virtual in-store experience</li>
+                                <li>{{ trans.ServicePages.crmSection2Text1 }}</li>
+                                <li>{{ trans.ServicePages.crmSection2Text2 }}</li>
+                                <li>{{ trans.ServicePages.crmSection2Text3 }}</li>
+                                <li>{{ trans.ServicePages.crmSection2Text4 }}</li>
                             </ul>
                         </v-col>
                         <v-col cols="12" md="2" sm="12" xs="12" v-if="!$mobileDetect.mobile()"></v-col>
@@ -65,13 +65,12 @@
                         </v-col>
                         <v-col cols="12" md="2" sm="12" xs="12"></v-col>
                         <v-col cols="12" md="5" sm="12" xs="12" class="container-section">
-                            <p>Purpose-built video chat software</p>
+                            <p>{{ trans.ServicePages.crmSection3Title }}</p>
                             <ul>
-                                <li>No plugins, downloads, popups or separate applications required</li>
-                                <li>Works on all devices/browsers including smartphones</li>
-                                <li>Go fullscreen, 1 or 2 way video, flip cameras</li>
-                                <li>Global low-latency architecture, HD-quality video</li>
-                                <li>Use from agents’ mobile and tablet devices for a heightened virtual in-store experience</li>
+                                <li>{{ trans.ServicePages.crmSection3Text1 }}</li>
+                                <li>{{ trans.ServicePages.crmSection3Text2 }}</li>
+                                <li>{{ trans.ServicePages.crmSection3Text3 }}</li>
+                                <li>{{ trans.ServicePages.crmSection3Text4 }}</li>
                             </ul>
                         </v-col>
                     </v-row>
@@ -82,13 +81,12 @@
                         <v-col cols="12" md="2" sm="12" xs="12" v-if="$mobileDetect.mobile()"></v-col>
 
                         <v-col cols="12" md="5" sm="12" xs="12" class="container-section">
-                            <p>Purpose-built video chat software</p>
+                            <p>{{ trans.ServicePages.crmSection4Title }}</p>
                             <ul>
-                                <li>No plugins, downloads, popups or separate applications required</li>
-                                <li>Works on all devices/browsers including smartphones</li>
-                                <li>Go fullscreen, 1 or 2 way video, flip cameras</li>
-                                <li>Global low-latency architecture, HD-quality video</li>
-                                <li>Use from agents’ mobile and tablet devices for a heightened virtual in-store experience</li>
+                                <li>{{ trans.ServicePages.crmSection4Text1 }}</li>
+                                <li>{{ trans.ServicePages.crmSection4Text2 }}</li>
+                                <li>{{ trans.ServicePages.crmSection4Text3 }}</li>
+                                <li>{{ trans.ServicePages.crmSection4Text4 }}</li>
                             </ul>
                         </v-col>
                         <v-col cols="12" md="2" sm="12" xs="12" v-if="!$mobileDetect.mobile()"></v-col>

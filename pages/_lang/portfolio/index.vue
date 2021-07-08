@@ -28,8 +28,9 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <img src="/portfolio/TD-JA-banner-main.png" width="100%">
-                    <div class="portfolio-descr">
-                        Julia Allert
+                    <div class="portfolio-descr text-center">
+                        <h3>{{ trans.Portfolio.cli1Title }}</h3>
+                        <p>{{ trans.Portfolio.cli1SubTitle }}</p>
                     </div>
                 </v-card>
             </v-col>
@@ -40,8 +41,9 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <img src="/portfolio/TD-AP-Bijoux-banner-main.png" width="100%">
-                    <div class="portfolio-descr">
-                        Anne Popova Jewellry
+                    <div class="portfolio-descr text-center">
+                        <h3>{{ trans.Portfolio.cli2Title }}</h3>
+                        <p>{{ trans.Portfolio.cli2SubTitle }}</p>
                     </div>
                 </v-card>
             </v-col>
@@ -52,8 +54,9 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <img src="/portfolio/TD-AP-Homewear-banner-main.png" width="100%">
-                    <div class="portfolio-descr">
-                        Anne Popova Loungewear
+                    <div class="portfolio-descr text-center">
+                        <h3>{{ trans.Portfolio.cli3Title }}</h3>
+                        <p>{{ trans.Portfolio.cli3SubTitle }}</p>
                     </div>
                 </v-card>
             </v-col>
@@ -64,7 +67,10 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <img src="/portfolio/TD-Stonedecorum-banner-main.png" width="100%">
-                    <div class="portfolio-descr">Stone Decorum</div>
+                    <div class="portfolio-descr text-center">
+                        <h3>{{ trans.Portfolio.cli4Title }}</h3>
+                        <p>{{ trans.Portfolio.cli4SubTitle }}</p>
+                    </div>
                 </v-card>
             </v-col>
             <v-col class="col-md-4">
@@ -74,7 +80,10 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <img src="/portfolio/TD-Sandic-banner-main.png" width="100%">
-                    <div class="portfolio-descr">Sandic</div>
+                    <div class="portfolio-descr text-center">
+                        <h3>{{ trans.Portfolio.cli5Title }}</h3>
+                        <p>{{ trans.Portfolio.cli5SubTitle }}</p>
+                    </div>
                 </v-card>
             </v-col>
             <v-col class="col-md-4">
@@ -84,7 +93,10 @@
                     class="mx-auto my-4 profolio-item"
                     >
                     <img src="/portfolio/TD-Seminee-banner-main.png" width="100%">
-                    <div class="portfolio-descr">Seminee</div>
+                    <div class="portfolio-descr text-center">
+                        <h3>{{ trans.Portfolio.cli6Title }}</h3>
+                        <p>{{ trans.Portfolio.cli6SubTitle }}</p>
+                    </div>
                 </v-card>
             </v-col>
 
@@ -97,7 +109,10 @@
                     <v-img
                         src="/portfolio/TD-Trendwood-banner-main.jpg"
                         ></v-img>
-                    <div class="portfolio-descr">Trenwood</div>
+                        <div class="portfolio-descr text-center">
+                            <h3>{{ trans.Portfolio.cli8Title }}</h3>
+                            <p>{{ trans.Portfolio.cli8SubTitle }}</p>
+                        </div>
                 </v-card>
             </v-col>
             <v-col class="col-md-4">
@@ -109,14 +124,12 @@
                     <v-img
                         src="https://itmall.digital/images/promotions/1607508369-boiar.png"
                         ></v-img>
-                    <div class="portfolio-descr">Boiar</div>
+                        <div class="portfolio-descr text-center">
+                            <h3>{{ trans.Portfolio.cli9Title }}</h3>
+                            <p>{{ trans.Portfolio.cli9SubTitle }}</p>
+                        </div>
                 </v-card>
             </v-col>
-
-
-
-
-
             <v-col class="col-md-4">
                 <v-card
                     :to="`/${language.lang}/portfolio/soledy`"
@@ -126,7 +139,10 @@
                     <v-img
                         src=""
                         ></v-img>
-                    <div class="portfolio-descr">Soledy</div>
+                        <div class="portfolio-descr text-center">
+                            <h3>{{ trans.Portfolio.cli10Title }}</h3>
+                            <p>{{ trans.Portfolio.cli10SubTitle }}</p>
+                        </div>
                 </v-card>
             </v-col>
 
@@ -139,7 +155,10 @@
                     <v-img
                         src=""
                         ></v-img>
-                    <div class="portfolio-descr">Biblioteca Hasdeu</div>
+                        <div class="portfolio-descr text-center">
+                            <h3>{{ trans.Portfolio.cli11Title }}</h3>
+                            <p>{{ trans.Portfolio.cli11SubTitle }}</p>
+                        </div>
                 </v-card>
             </v-col>
 
@@ -152,7 +171,10 @@
                     <v-img
                         src=""
                         ></v-img>
-                    <div class="portfolio-descr">Docrom</div>
+                        <div class="portfolio-descr text-center">
+                            <h3>{{ trans.Portfolio.cli12Title }}</h3>
+                            <p>{{ trans.Portfolio.cli12SubTitle }}</p>
+                        </div>
                 </v-card>
             </v-col>
 
@@ -165,7 +187,10 @@
                     <v-img
                         src=""
                         ></v-img>
-                    <div class="portfolio-descr">Galina Tomas</div>
+                        <div class="portfolio-descr text-center">
+                            <h3>{{ trans.Portfolio.cli13Title }}</h3>
+                            <p>{{ trans.Portfolio.cli13SubTitle }}</p>
+                        </div>
                 </v-card>
             </v-col>
 
@@ -230,6 +255,11 @@ export default {
         }
         .portfolio-descr {
             padding: 15px;
+            p{
+                font-size: 14px;
+                padding-top: 10px;
+                min-height: 50px;
+            }
         }
         .btn-area {
             padding: 20px;

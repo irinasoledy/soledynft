@@ -1,12 +1,12 @@
 <template>
     <main class="ja-bg portfolio-item" :style="{ backgroundImage: `url('/portfolio/ja/fonJulia.png')`}">
         <img src="/portfolio/sandic/Glavnii_ baner_Sandic.jpeg" alt="">
-        <h4 class="section-title">Branding</h4>
+        <h4 class="section-title">Sandic</h4>
         <img src="/portfolio/sandic/BranbookSandic.jpeg" width="100%">
         <div class="text-center">
             <h4 class="section-title">Shop Online</h4>
             <img src="/portfolio/sandic/MOCKUP.Sandic.png" alt="">
-            <h4 class="section-title">Realizarea sessiunilor foto-video</h4>
+            <h4 class="section-title">{{ trans.Portfolio.insidePageFotoSessionsTitle }}</h4>
             <v-carousel hide-delimiters>
                 <v-carousel-item
                     v-for="(item,i) in photoVideoImages"

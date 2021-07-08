@@ -1,54 +1,52 @@
 <template>
     <section class="services recommended-area">
         <v-container>
-            <v-row>
-                <v-col cols="12">
-                    <div class="display-1 text-center c-title white--text">
-                        Servicii Recomandate
-                    </div>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-spacer></v-spacer>
-                <v-col cols="12" sm="6" md="6">
-                    <v-card>
-                        <v-img src="/IMG_1599_polarr.jpeg" height="500px">
-                            <span
-                                class="headline white--text pl-4 pt-4 d-inline-block"
-                                v-text="'Publicitate Google Apps'"
-                            ></span>
+            <section>
+                <div>
+                    <v-row>
+                        <v-col cols="12">
+                            <div class="display-1 text-center c-title white--text">
+                                {{ trans.HP.hpRecomServices }}
+                            </div>
+                        </v-col>
+                    </v-row>
+                    <v-row  align="center" justify="center" class="promo-section">
+                        <v-col cols="12" md="5" sm="12" xs="12">
+                            <img class="section-image" src="https://back.terradigital.ro/images/promotions/1624016264-IMG_2479.PNG" width="100%">
+                        </v-col>
+                        <v-col cols="12" md="2" sm="12" xs="12"></v-col>
+                        <v-col cols="12" md="5" sm="12" xs="12" class="container-section">
+                            <p>{{ trans.HP.hpsection1title }}</p>
                             <ul>
-                                <li><v-icon> mdi-check</v-icon>Lorem Ipsum is simply dummy text of the printing</li>
-                                <li><v-icon> mdi-check</v-icon>Typesetting industry. Lorem Ipsum has been the industry's</li>
-                                <li><v-icon> mdi-check</v-icon>It has survived not only five centuries, but also the leap into </li>
-                                <li><v-icon> mdi-check</v-icon>Letraset sheets containing Lorem Ipsum passages, and more recently with desktop</li>
-                                <li><v-icon> mdi-check</v-icon>It has survived not only five centuries, but also the leap into </li>
+                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection1text1 }}</li>
+                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection1text2 }}</li>
+                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection1text3 }}</li>
+                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection1text4 }}</li>
                             </ul>
-                            <v-btn class="recommended-btn" color="primary">Details</v-btn>
-                        </v-img>
-                    </v-card>
-                </v-col>
-                <v-col cols="12" sm="6" md="6">
-                    <v-card>
-                        <v-img src="/IMG_0579_polarr.jpeg" height="500px">
-                            <span
-                                class="headline white--text pl-4 pt-4 d-inline-block"
-                                v-text="'Publicitate Google Apps'"
-                            ></span>
+                        </v-col>
+                    </v-row>
+                    <v-row  align="center" justify="center" class="promo-section">
+                        <v-col cols="12" md="5" sm="12" xs="12" v-if="$mobileDetect.mobile()">
+                            <img class="section-image" src="https://back.terradigital.ro/images/promotions/1624016264-IMG_2478.PNG" width="100%">
+                        </v-col>
+                        <v-col cols="12" md="5" sm="12" xs="12" v-if="$mobileDetect.mobile()"></v-col>
+                        <v-col cols="12" md="5" sm="12" xs="12" class="container-section">
+                            <p>{{ trans.HP.hpsection2title }}</p>
                             <ul>
-                                <li><v-icon> mdi-check</v-icon>Lorem Ipsum is simply dummy text of the printing</li>
-                                <li><v-icon> mdi-check</v-icon>Typesetting industry. Lorem Ipsum has been the industry's</li>
-                                <li><v-icon> mdi-check</v-icon>It has survived not only five centuries, but also the leap into </li>
-                                <li><v-icon> mdi-check</v-icon>Letraset sheets containing Lorem Ipsum passages, and more recently with desktop</li>
-                                <li><v-icon> mdi-check</v-icon>It has survived not only five centuries, but also the leap into </li>
+                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection2text1 }}</li>
+                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection2text2 }}</li>
+                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection2text3 }}</li>
+                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection2text4 }}</li>
                             </ul>
-                            <v-btn class="recommended-btn" color="primary">Details</v-btn>
-                        </v-img>
-                    </v-card>
-                </v-col>
-            </v-row>
+                        </v-col>
+                        <v-col cols="12" md="2" sm="12" xs="12" v-if="!$mobileDetect.mobile()"></v-col>
+                        <v-col cols="12" md="5" sm="12" xs="12" v-if="!$mobileDetect.mobile()">
+                            <img class="section-image" src="https://back.terradigital.ro/images/promotions/1624016264-IMG_2478.PNG" width="100%">
+                        </v-col>
+                    </v-row>
+                </div>
+            </section>
         </v-container>
-
     </section>
 </template>
 
@@ -114,6 +112,23 @@ export default {
         margin-left: 30px;
         margin-top: 20px;
         color: $custom_green !important;
+    }
+}
+.container-section{
+    text-align: left;
+    padding-left: 34px;
+    ul {
+        margin-top: 20px;
+        margin-left: 20px;
+        li {
+            color: #FFF;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    }
+    p {
+        font-size: 26px;
+        color: #FFF;
     }
 }
 </style>
