@@ -80,8 +80,8 @@ export default {
                     quantity: 1,
                 },
             ],
-            successURL: 'https://docrom.info/redirect/payment/success',
-            cancelURL: 'https://docrom.info/redirect/payment/cancel',
+            successURL: 'https://terradigital.ro/redirect/payment/success',
+            cancelURL: 'https://terradigital.ro/redirect/payment/cancel',
             validateErrors: null,
             payment: null,
             methods: {
