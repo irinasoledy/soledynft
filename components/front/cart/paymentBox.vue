@@ -56,7 +56,7 @@
                 :success-url="successURL"
                 :cancel-url="cancelURL"
                 @loading="v => loading = v"
-                />
+            />
             <!-- <v-btn @click="submit">test stripe</v-btn> -->
         </v-col>
     </v-row>
@@ -72,7 +72,7 @@ export default {
     data() {
         return {
             ready: true,
-            publishableKey: 'pk_live_51J2zFVFqQHaOvZ90hxwoDQnhXBLNeQET13gpabvTg27OPAynJX4tttToAHufHXquNvCCGg6f8T9ybrRLIvTR4EDP00e25RJMWe',
+            publishableKey: 'pk_live_51JABrOCSan7VcJr1xwgbeRFBq02Un3XXf4EyFn77Dc0YwONmGgr6Yzo5y1m8wPuEHpymXTArIEuJ7ZJI2nFlUUgJ0033JmqWom',
             loading: false,
             lineItems: [
                 {

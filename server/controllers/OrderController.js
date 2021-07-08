@@ -204,14 +204,14 @@ class OrderController {
                //      name: cart[i].service.translation.name,
                //  })
                //
-                price = await stripe.prices.create({
-                   product: cart[i].service.stripe_product,
-                   unit_amount: parseFloat(cart[i].service.price * 100),
-                   currency: 'eur',
-               })
+               //  price = await stripe.prices.create({
+               //     product: product.id,
+               //     unit_amount: parseFloat(cart[i].service.price * 100),
+               //     currency: 'ron',
+               // })
 
                items.push({
-                   price : price.id,
+                   price : cart[i].service.stripe_price,   
                    quantity: parseInt(cart[i].qty),
                })
             }

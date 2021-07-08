@@ -17,12 +17,10 @@ module.exports = {
             {rel: 'icon', type: 'image/x-icon', href: '/fav.png'}
         ],
         script: [
-            {
-                src: '/scripts/ammocrm.js',
-                src: 'https://js.stripe.com/v3'
-            }
+            { src: '/scripts/ammocrm.js' },
+            { src: 'https://js.stripe.com/v3' }
         ]
-        
+
     },
     /*
     ** Customize the progress-bar color
