@@ -193,11 +193,15 @@ export default {
     computed: mapGetters({
         trans: 'getTranslations'
     }),
-    mounted(){
+    mounted() {
+        this.setChatBotmessage(this.trans.General.botMessageTemplateContacts)
         this.title = this.trans.PageNames.defaultPageSeoTitle
         this.description = this.trans.PageNames.defaultPageSeoDesc
     },
     methods: {
+        ...mapActions({
+            setChatBotmessage: 'chat/setChatBotmessage'
+        }),
         validate () {
             this.$refs.form.validate()
         },

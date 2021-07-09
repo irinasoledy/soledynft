@@ -62,6 +62,7 @@ export default {
         services : 'getServices',
         language : 'getLanguage',
         envAPI : 'getEnvAPI',
+        trans: 'getTranslations',
     }),
     watch: {
         async services() {
@@ -75,7 +76,13 @@ export default {
         }
         this.title = this.service.translation.seo_title
         this.description = this.service.translation.seo_description
+        this.setChatBotmessage(this.trans.General.botMessageTemplate1 + " " + this.service.translation.bot_message + '? '+ this.trans.General.botMessageTemplate2)
     },
+    methods: {
+        ...mapActions({
+            setChatBotmessage: 'chat/setChatBotmessage'
+        }),
+    }
 }
 </script>
 

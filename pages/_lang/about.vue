@@ -79,9 +79,15 @@ export default {
     computed: mapGetters({
         trans: 'getTranslations'
     }),
-    mounted(){
+    mounted() {
+        this.setChatBotmessage(this.trans.General.botMessageTemplateAboutExperts)
         this.title = this.trans.PageNames.aboutSeoTitle
         this.description = this.trans.PageNames.aboutSeoDesc
+    },
+    methods: {
+        ...mapActions({
+            setChatBotmessage: 'chat/setChatBotmessage'
+        })
     },
     components: {
         Testimonials,

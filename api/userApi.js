@@ -56,6 +56,12 @@ export default {
             .catch(err => cbError(err.response.data))
     },
 
+    async getRandomOfflineEmployee(cb) {
+        await axios.get(`/api/user/random/offline/employee`)
+            .then(response => cb(response.data))
+            .catch(err => cbError(err.response.data))
+    },
+
     async setUserBotActivated(id, cb) {
         await axios.post(`/api/user/set/botActivated`, id)
             .then(response => cb(response.data))

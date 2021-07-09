@@ -423,6 +423,19 @@ class UserController {
         }
     }
 
+    async getRandomOfflineEmployee(req, res) {
+        try {
+            const allUsers = await User.find({type: 'employee'})
+            const rand = Math.floor(Math.random() * allUsers.length);
+
+            const user = await User.findOne({type: 'employee'}).skip(rand)
+
+            return res.status(200).json(user)
+        } catch (e) {
+            return res.status(505).json({message: `Error UserController@getRandomOfflineEmployee ${e}`})
+        }
+    }
+
     async setUserBotActivated(req, res) {
         try {
             const user = await User.findOneAndUpdate({_id: req.body.id}, {$set: {botActivated: true}}, {new: true})

@@ -25,18 +25,19 @@ export default {
         }
     },
     mounted() {
-        if (!this.user.botActivated) {
-            const path = this.$nuxt.$route.path
-            this.counter = setTimeout(async (path) => {
-                await this.findEmployee()
-                if (this.employee) {
-                    const message = await this.renderMessageTemplate()
-                    this.sendMessage(this.user._id, this.employee._id, message, () => {
-                        this.setUserBotActivated()
-                    })
-                }
-            }, 30000)
-        }
+        console.log(this.title);
+        // if (!this.user.botActivated) {
+        //     const path = this.$nuxt.$route.path
+        //     this.counter = setTimeout(async (path) => {
+        //         await this.findEmployee()
+        //         if (this.employee) {
+        //             const message = await this.renderMessageTemplate()
+        //             this.sendMessage(this.user._id, this.employee._id, message, () => {
+        //                 this.setUserBotActivated()
+        //             })
+        //         }
+        //     }, 30000)
+        // }
     },
     methods: {
         ...mapActions({

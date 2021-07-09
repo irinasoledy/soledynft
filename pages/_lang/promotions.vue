@@ -1,11 +1,15 @@
 <template lang="html">
     <main class="about-content">
+
         <div
             v-for="(promotion, index) in promotions"
             :key="promotion.id"
             :id="`${promotion.alias}`"
             class="section"
             >
+            <div class="section">
+                <video src="/TD-video-CRM-communication-mobile.mp4" autoplay width="100%" loop></video>
+            </div>
             <div class="banner-wrapper">
                 <img :src="`${envAPI}/images/promotions/${promotion.img}`" v-if="!$mobileDetect.mobile()">
                 <img :src="`${envAPI}/images/promotions/${promotion.img_mobile}`" v-else width="100%">
@@ -170,9 +174,12 @@ export default {
         this.title = this.trans.PageNames.defaultPageSeoTitle
         this.description = this.trans.PageNames.defaultPageSeoDesc
         this.promotion = await this.promotions.find((promo) => promo.alias == alias.substring(1))
-        this.chatBotMessage = this.trans.General.botMessageTemplate1 + " " + this.promotion.translation.bot_message + '? '+ this.trans.General.botMessageTemplate2
+        this.setChatBotmessage(this.trans.General.botMessageTemplate1 + " " + this.promotion.translation.bot_message + '? '+ this.trans.General.botMessageTemplate2)
     },
     methods: {
+        ...mapActions({
+            setChatBotmessage: 'chat/setChatBotmessage'
+        }),
         submitFeedback(promotion) {
             const ref = 'feedBackForm_' + promotion.id
             if (this.$refs.[ref][0].validate()) {
@@ -288,14 +295,14 @@ export default {
         margin-top: 20px;
         margin-left: 20px;
         li{
-            color: #4f5c65;
+            color: #FFF;
             padding-top: 5px;
-    padding-bottom: 5px;
+            padding-bottom: 5px;
         }
     }
     p strong{
         font-size: 26px;
-        color: $custom_blue;
+        color: #FFF;
     }
 }
 @media (max-width: 1281px) {

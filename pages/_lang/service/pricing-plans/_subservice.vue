@@ -138,9 +138,13 @@ export default {
         language: 'getLanguage',
         changedEmployee: 'getChangedEmployee',
         user: 'chat/getUser',
+        trans: 'getTranslations',
     }),
     async mounted() {
         this.service = await this.allServices.find((serv) => serv.alias == this.$route.params.subservice)
+        this.title = this.service.translation.seo_title
+        this.description = this.service.translation.seo_description
+        this.setChatBotmessage(this.trans.General.botMessageTemplate1 + " " + this.service.translation.bot_message + '? '+ this.trans.General.botMessageTemplate2)
     },
     watch: {
         refreshUserData() {
@@ -151,6 +155,9 @@ export default {
         },
     },
     methods: {
+        ...mapActions({
+            setChatBotmessage: 'chat/setChatBotmessage'
+        }),
         async getEmployees() {
             await contentApi.getEmployeesByService(this.service.id, response => {
                 this.employeeList = response

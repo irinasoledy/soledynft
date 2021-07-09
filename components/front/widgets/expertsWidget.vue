@@ -91,7 +91,6 @@ export default {
             getExpertsList: 'getExpertsList',
             setInterlocutor : 'dialog/setInterlocutor',
             initCall : 'dialog/initCall',
-
         }),
         openDialog(user) {
             this.setInterlocutor(null)

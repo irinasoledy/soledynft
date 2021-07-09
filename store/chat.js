@@ -33,6 +33,7 @@ export const state = () => ({
     videoUnmute: false,
     audioMute: false,
     audioUnmute: false,
+    chatBotMessage: null,
 })
 
 export const mutations = {
@@ -123,9 +124,15 @@ export const mutations = {
      SWITCH_POLICY(state){
          state.policy = false
      },
+     SET_CHAT_BOT_MESSAGE(state, message) {
+         state.chatBotMessage = message
+     }
 }
 
 export const actions = {
+    setChatBotmessage({ commit }, message) {
+        commit('SET_CHAT_BOT_MESSAGE', message)
+    },
     createNewRoom({ commit }, name) {
         axios.post('/create-employee-user', {name: name})
             .then(response => {
@@ -211,4 +218,5 @@ export const getters = {
     getPolicy: state => state.policy,
 
     getLastMessage: state => state.lastMessage,
+    getChatBotMessage: state => state.chatBotMessage,
 }

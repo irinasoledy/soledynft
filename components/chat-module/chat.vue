@@ -3,6 +3,7 @@
 
         <!-- Button -->
         <button type="button"
+                v-if="mode === 'client'"
                 @click="toogleMessageDialog"
                 class="messages-btn transition-swing v-btn v-btn--bottom v-btn--is-elevated v-btn--fab v-btn--fixed v-btn--has-bg v-btn--right v-btn--round theme--light v-size--large primary"
                 style="z-index: 6; margin-bottom: 0; transform-origin: center center;">
@@ -13,6 +14,36 @@
             </span>
             <small v-if="unreadMessages.length">{{ unreadMessages.length }}</small>
         </button>
+
+        <!-- Button -->
+        <button type="button"
+                v-if="mode === 'employee'"
+                @click="toogleBotDialog"
+                class="messages-btn transition-swing v-btn v-btn--bottom v-btn--is-elevated v-btn--fab v-btn--fixed v-btn--has-bg v-btn--right v-btn--round theme--light v-size--large primary"
+                style="z-index: 6; margin-bottom: 0; transform-origin: center center;">
+            <span class="v-btn__content">
+                <span aria-hidden="true" class="v-icon notranslate theme--light">
+                    <v-icon>mdi-chat</v-icon>
+                </span>
+            </span>
+            <small v-if="unreadMessages.length">{{ unreadMessages.length }}</small>
+        </button>
+
+        <v-dialog
+            content-class="chat-dialog-window"
+            class="messagesDialog"
+            v-model="dialogBot"
+            fullscreen
+            hide-overlay
+            transition="dialog-bottom-transition"
+        >
+            <v-card>
+                <v-toolbar class="messages-dialog-header" dark color="primary">
+                    <v-btn icon dark @click="dialogBot = false"><v-icon>mdi-close</v-icon></v-btn>
+                </v-toolbar>
+                <wellcome :recepient="user"></wellcome>
+            </v-card>
+        </v-dialog>
 
         <v-dialog
             content-class="chat-dialog-window"
@@ -191,18 +222,22 @@
 import {mapActions, mapGetters} from "vuex"
 import crmApi from '@/api/crmApi'
 import chatBox from '@/components/chat-module/chat/chatBox'
+import wellcome from '@/components/chat-module/chat-bot/wellcome'
 
 export default {
     props: ['mode', 'user'],
     data: () => ({
         dialogList: false,
         dialogItem: false,
+        dialogBot: false,
         snackbar: true,
         vertical: true,
         previewMessage: false,
         users: [],
         histories: [],
         userJoined: false,
+        botted: false,
+        counter: null,
     }),
     watch: {
         $route(to, from) {
@@ -236,6 +271,7 @@ export default {
             if (this.dialogItem === false && (this.lastMessage.sender._id !== this.user._id)) {
                 this.setInterlocutor(null)
                 this.setInterlocutor(this.lastMessage.sender)
+                this.botted = true
             }
             var audio = new Audio('/message.mp3')
             audio.play()
@@ -272,7 +308,22 @@ export default {
         trans: 'getTranslations',
         navigation: 'getNavigations',
     }),
+    beforeDestroy() {
+        if (this.counter) {
+            clearTimeout(this.counter);
+        }
+    },
     async mounted() {
+        if (this.mode === 'employee') {
+            this.counter = setTimeout(async () => {
+                if (this.botted === false) {
+                    this.dialogBot = true
+                }
+            }, 30000)
+        }
+        this.$nuxt.$on('closeChatBotDialog', () => {
+            this.dialogBot = false
+        })
         if (!this.$store.state.chat.cookie && (this.mode === 'employee')) {
             await this.setUserCookies().then(() => {
                 if (!this.userJoined) {
@@ -340,6 +391,11 @@ export default {
         async getHistories() {
             await crmApi.getUsers(this.mode, response => this.users = response.users)
             await crmApi.getHistoryUsers(this.user._id, response => this.histories = response)
+        },
+        toogleBotDialog() {
+            this.dialogBot = !this.dialogBot
+            this.botted = true
+            this.$nuxt.$emit('checkAssignedStatut')
         },
         async toogleMessageDialog() {
             this.getHistories()
@@ -427,7 +483,7 @@ export default {
         },
     },
     components: {
-        chatBox
+        chatBox, wellcome
     }
 }
 </script>
@@ -534,5 +590,41 @@ hr {
 .user-position{
     font-size: 11px !important;
     color: #AAA !important;
+}
+.chat-bot {
+    padding-top: 30px !important;
+    h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    p {
+        font-size: 16px;
+    }
+    section {
+        border: 1px solid $custom_blue;
+        border-radius: 10px;
+        padding: 15px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        .v-icon {
+            position: absolute;
+            font-size: 40px;
+            color: $custom_blue;
+        }
+        span {
+            display: block;
+            margin-left: 50px;
+            font-size: 17px;
+            line-height: 1;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: $custom_blue;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            margin-top: 8px;
+        }
+    }
 }
 </style>

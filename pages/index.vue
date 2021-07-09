@@ -109,14 +109,17 @@ export default {
         language: 'getLanguage',
         trans: 'getTranslations',
         banners: 'getBanners',
+        chatBotMessage: 'chat/getChatBotMessage',
     }),
     mounted() {
+        this.setChatBotmessage(this.trans.General.botMessageTemplateHP)
         this.title = this.trans.PageNames.homeSeoTitle
         this.description = this.trans.PageNames.homeSeoDesc
     },
     methods: {
         ...mapActions({
-            banner: 'banner'
+            banner: 'banner',
+            setChatBotmessage: 'chat/setChatBotmessage'
         })
     },
     components: {

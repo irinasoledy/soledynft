@@ -20,6 +20,8 @@ router.patch('/api/user/callStatus', UserController.chageCallStatus)
 
 router.get('/api/user/random/employee', UserController.getRandomEmployee)
 
+router.get('/api/user/random/offline/employee', UserController.getRandomOfflineEmployee)
+
 router.post('/api/user/set/botActivated', UserController.setUserBotActivated)
 
 module.exports = router

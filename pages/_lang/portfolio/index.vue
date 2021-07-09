@@ -227,9 +227,15 @@ export default {
         trans: 'getTranslations',
         language: 'getLanguage',
     }),
-    mounted(){
+    mounted() {
+        this.setChatBotmessage(this.trans.General.botMessageTemplateAboutExperts)
         this.title = this.trans.PageNames.defaultPageSeoTitle
         this.description = this.trans.PageNames.defaultPageSeoDesc
+    },
+    methods: {
+        ...mapActions({
+            setChatBotmessage: 'chat/setChatBotmessage'
+        }),
     },
     components: {
         MapContact, Experts
@@ -243,6 +249,7 @@ export default {
     font-weight: 700 !important;
 }
 .portfolio-content {
+    margin-top: 100px;
     background-color: $primary_dark !important;
     .profolio-item {
         background-color: $custom_blue !important;
