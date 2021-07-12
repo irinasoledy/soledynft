@@ -7,12 +7,17 @@
             :id="`${promotion.alias}`"
             class="section"
             >
-            <div class="section">
-                <video src="/TD-video-CRM-communication-mobile.mp4" autoplay width="100%" loop></video>
-            </div>
             <div class="banner-wrapper">
-                <img :src="`${envAPI}/images/promotions/${promotion.img}`" v-if="!$mobileDetect.mobile()">
-                <img :src="`${envAPI}/images/promotions/${promotion.img_mobile}`" v-else width="100%">
+                <div v-if="!promotion.video">
+                    <img :src="`${envAPI}/images/promotions/${promotion.img}`" v-if="!$mobileDetect.mobile()">
+                    <img :src="`${envAPI}/images/promotions/${promotion.img_mobile}`" v-else width="100%">
+                </div>
+
+                <div v-else>
+                    <video width="100%" v-if="!$mobileDetect.mobile()" :src="`${envAPI}/images/promotions/${promotion.video}`" autoplay></video>
+                    <img :src="`${envAPI}/images/promotions/${promotion.img_mobile}`" v-else width="100%">
+                </div>
+
                 <div class="headings">
                     <v-container>
                         <v-row>
@@ -208,7 +213,6 @@ export default {
     font-size: 20px !important;
     margin-top: 25px;
 }
-
 .contact-btns{
     color: #FFF;
     padding-bottom: 40px;
@@ -306,6 +310,9 @@ export default {
     }
 }
 @media (max-width: 1281px) {
+    .about-content {
+        background-color: $custom_blue !important;
+    }
     .minifed-title{
         text-align: center;
     }

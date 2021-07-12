@@ -5,7 +5,7 @@
               ref="slick"
               :options="slickOptions"
               >
-              <a href="#" class="slick--wrapp" v-for="(promotion, i) in promotions">
+              <a :to="`/${language.lang}/promotions#${promotion.alias}`" class="slick--wrapp" v-for="(promotion, i) in promotions">
                   <div class="fill-height-home-slider">
                       <v-row
                           class="fill-height-home-slider"
@@ -26,7 +26,8 @@
                           </v-col>
                       </v-row>
                   </div>
-                  <img :src="`${envAPI}/images/promotions/${promotion.img}`" alt="">
+                  <video width="100%" v-if="promotion.video" :src="`${envAPI}/images/promotions/${promotion.video}`" autoplay></video>
+                  <img v-else :src="`${envAPI}/images/promotions/${promotion.img}`" alt="">
               </a>
         </slick>
 
@@ -98,6 +99,7 @@ export default {
     top: 0;
     width: 100%;
     height: 100%;
+    z-index: 3;
 }
 .slick--wrapp{
     position: relative;
@@ -139,6 +141,7 @@ export default {
 }
 .c-subtitle{
     margin-bottom: 20px;
+    color: #FFF;
 }
 .btn-custom{
     color: $custom_blue !important;
