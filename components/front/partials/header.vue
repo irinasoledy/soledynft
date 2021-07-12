@@ -275,13 +275,13 @@
                     <v-col class="col-auto col-md-5">
                         <v-list dark color="primary" class="d-flex align-center" height="43">
                             <v-list-item height="43" exact nuxt to="/">
-                                <v-list-item-title>
+                                <v-list-item-title class="text-center">
                                     {{ trans.PageNames.home }}
                                 </v-list-item-title>
                             </v-list-item>
                             <v-hover v-slot="{hover}">
                                 <v-list-item exact nuxt>
-                                    <v-list-item-title>
+                                    <v-list-item-title class="text-center">
                                         {{ trans.PageNames.ourServices }}
                                     </v-list-item-title>
                                     <v-icon>mdi-chevron-down</v-icon>
@@ -339,24 +339,24 @@
                                 </v-list-item>
                             </v-hover>
                             <v-list-item height="43" exact nuxt :to="`/${language.lang}/about/`">
-                                <v-list-item-title>
+                                <v-list-item-title class="text-center">
                                     {{ trans.PageNames.about }}
                                 </v-list-item-title>
                             </v-list-item>
                             <v-list-item height="43" nuxt exact :to="`/${language.lang}/portfolio/`">
-                                <v-list-item-title>
+                                <v-list-item-title class="text-center">
                                     Portfolio
                                 </v-list-item-title>
                             </v-list-item>
                             <v-list-item height="43" nuxt exact :to="`/${language.lang}/contacts/`">
-                                <v-list-item-title>
+                                <v-list-item-title class="text-center">
                                     {{ trans.PageNames.contacts }}
                                 </v-list-item-title>
                             </v-list-item>
                         </v-list>
                     </v-col>
                     <v-col class="col-auto col-md-5">
-                        <v-row class="align-center">
+                        <v-row align="right" justify="end">
                             <v-col class="col-md-1" v-if="!$auth.loggedIn">
                             </v-col>
                             <v-col cols="auto" class="d-flex align-center">

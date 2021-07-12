@@ -1,7 +1,7 @@
 <template>
     <section class="experts">
         <v-container>
-            <v-row>
+            <v-row align="center" justify="center">
                 <v-col cols="12 experts-heading">
                     <div class="display-1 text-center c-title">
                         {{ trans.HP.hpDiscussLive }}
@@ -13,7 +13,7 @@
                 <v-col
                     v-for="(item, i) in experts"
                     :key="i"
-                    class="col-lg-4 col-md-6 col-12 d-flex child-flex"
+                    class="col-lg-3 col-md-6 col-12 d-flex child-flex"
                     >
                     <v-card>
                         <v-badge

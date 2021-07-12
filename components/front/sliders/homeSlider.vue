@@ -7,26 +7,28 @@
               >
               <a :to="`/${language.lang}/promotions#${promotion.alias}`" class="slick--wrapp" v-for="(promotion, i) in promotions">
                   <div class="fill-height-home-slider">
-                      <v-row
-                          class="fill-height-home-slider"
-                          align="center"
-                          >
-                          <v-col class="text-center col-md-6">
-                              <div class="display-1 text-center c-title">
-                                  {{ promotion.translation.name }}
-                              </div>
-                              <div class="text-center c-subtitle">
-                                  {{ promotion.translation.description }}
-                              </div>
-                              <v-btn
-                                  class="btn-custom"
-                                  color="accent"
-                                  :to="`/${language.lang}/promotions#${promotion.alias}`"
-                              >{{ promotion.translation.btn_text }} </v-btn>
-                          </v-col>
-                      </v-row>
+                      <v-container>
+                          <v-row
+                              class="fill-height-home-slider slider-text-desktop"
+                              align="center"
+                              >
+                              <v-col class="text-center col-md-5">
+                                  <div class="display-1 text-center c-title">
+                                      {{ promotion.translation.name }}
+                                  </div>
+                                  <div class="text-center c-subtitle">
+                                      {{ promotion.translation.description }}
+                                  </div>
+                                  <v-btn
+                                      class="btn-custom"
+                                      color="accent"
+                                      :to="`/${language.lang}/promotions#${promotion.alias}`"
+                                  >{{ promotion.translation.btn_text }} </v-btn>
+                              </v-col>
+                          </v-row>
+                      </v-container>
                   </div>
-                  <video width="100%" v-if="promotion.video" :src="`${envAPI}/images/promotions/${promotion.video}`" autoplay></video>
+                  <video width="100%" v-if="promotion.video" :src="`${envAPI}/images/promotions/${promotion.video}`" autoplay loop></video>
                   <img v-else :src="`${envAPI}/images/promotions/${promotion.img}`" alt="">
               </a>
         </slick>
@@ -36,16 +38,19 @@
               ref="slick"
               :options="slickOptions"
               >
-              <a href="#"  class="slick--wrapp" v-for="(promotion, i) in promotions">
+              <a href="#" class="slick--wrapp" v-for="(promotion, i) in promotions">
                   <div class="fill-height-home-slider">
                       <v-row
-                          class="fill-height-home-slider"
+                          class="fill-height-home-slider slider-text-mobile"
                           align="center"
                           justify="center"
                           >
                           <v-col md12 class="text-center">
-                              <div class="display-1 text-center c-title">
+                              <div class="text-center c-title">
                                   {{ promotion.translation.name }}
+                              </div>
+                              <div class="text-center c-subtitle">
+                                  {{ promotion.translation.description }}
                               </div>
                               <v-btn
                                   class="btn-custom"
@@ -145,5 +150,35 @@ export default {
 }
 .btn-custom{
     color: $custom_blue !important;
+}
+.slider-text-mobile {
+    width: 100%;
+    margin-left: 0;
+    .c-title {
+        font-size: 1.5rem !important;
+        line-height: 1.2 !important;
+        color: #0a072c !important;
+        margin-bottom: 20px !important;
+    }
+    .c-subtitle {
+        font-size: 0.9rem !important;
+        line-height: 1.2 !important;
+        color: #0a072c !important;
+    }
+}
+.slider-text-desktop {
+    .c-title {
+        font-size: 2rem !important;
+        text-transform: uppercase;
+        color: #0a072c !important;
+        font-weight: bold;
+        margin-bottom: 40px;
+    }
+    .c-subtitle {
+        font-size: 1.2rem !important;
+        font-weight: bold;
+        color: #0a072c !important;
+        margin-bottom: 40px;
+    }
 }
 </style>

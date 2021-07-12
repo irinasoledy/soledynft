@@ -106,9 +106,7 @@
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
-                    <v-img
-                        src="/portfolio/TD-Trendwood-banner-main.jpg"
-                        ></v-img>
+                    <img src="/portfolio/Portfolio-Trenwood-bannerMain.png" width="100%">
                         <div class="portfolio-descr text-center">
                             <h3>{{ trans.Portfolio.cli8Title }}</h3>
                             <p>{{ trans.Portfolio.cli8SubTitle }}</p>
@@ -121,9 +119,7 @@
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
-                    <v-img
-                        src="https://itmall.digital/images/promotions/1607508369-boiar.png"
-                        ></v-img>
+                    <img src="/portfolio/Portfolio-Boiar-main-image.jpg" width="100%">
                         <div class="portfolio-descr text-center">
                             <h3>{{ trans.Portfolio.cli9Title }}</h3>
                             <p>{{ trans.Portfolio.cli9SubTitle }}</p>
@@ -136,9 +132,7 @@
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
-                    <v-img
-                        src=""
-                        ></v-img>
+                    <img src="/portfolio/Portfolio-Soledy-bannerMain.png" width="100%">
                         <div class="portfolio-descr text-center">
                             <h3>{{ trans.Portfolio.cli10Title }}</h3>
                             <p>{{ trans.Portfolio.cli10SubTitle }}</p>
@@ -152,9 +146,7 @@
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
-                    <v-img
-                        src=""
-                        ></v-img>
+                    <img src="/portfolio/Portfolio-Hasdeu-bannerMain.png" width="100%">
                         <div class="portfolio-descr text-center">
                             <h3>{{ trans.Portfolio.cli11Title }}</h3>
                             <p>{{ trans.Portfolio.cli11SubTitle }}</p>
@@ -168,9 +160,7 @@
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
-                    <v-img
-                        src=""
-                        ></v-img>
+                    <img src="/portfolio/Portfolio-docrom-bannerMain.png" width="100%">
                         <div class="portfolio-descr text-center">
                             <h3>{{ trans.Portfolio.cli12Title }}</h3>
                             <p>{{ trans.Portfolio.cli12SubTitle }}</p>
@@ -184,9 +174,7 @@
                     :loading="loading"
                     class="mx-auto my-4 profolio-item"
                     >
-                    <v-img
-                        src=""
-                        ></v-img>
+                    <img src="/portfolio/Portfolio-GT-bannerMain.png" width="100%">
                         <div class="portfolio-descr text-center">
                             <h3>{{ trans.Portfolio.cli13Title }}</h3>
                             <p>{{ trans.Portfolio.cli13SubTitle }}</p>

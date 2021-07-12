@@ -12,36 +12,68 @@
                     </v-row>
                     <v-row  align="center" justify="center" class="promo-section">
                         <v-col cols="12" md="5" sm="12" xs="12">
-                            <img class="section-image" src="https://back.terradigital.ro/images/promotions/1624016264-IMG_2479.PNG" width="100%">
+                            <img class="section-image" src="/hp-banner-1-livechat.png" width="100%">
                         </v-col>
                         <v-col cols="12" md="2" sm="12" xs="12"></v-col>
                         <v-col cols="12" md="5" sm="12" xs="12" class="container-section">
                             <p>{{ trans.HP.hpsection1title }}</p>
                             <ul>
-                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection1text1 }}</li>
-                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection1text2 }}</li>
-                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection1text3 }}</li>
-                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection1text4 }}</li>
+                                <li>
+                                    <v-icon> mdi-check</v-icon>
+                                    {{ trans.HP.hpsection1text1 }}
+                                    <span>{{ trans.HP.hpsection1text1subtitle }}</span>
+                                </li>
+                                <li>
+                                    <v-icon> mdi-check</v-icon>
+                                    {{ trans.HP.hpsection1text2 }}
+                                    <span>{{ trans.HP.hpsection1text2subtitle }}</span>
+                                </li>
+                                <li>
+                                    <v-icon> mdi-check</v-icon>
+                                    {{ trans.HP.hpsection1text3 }}
+                                    <span>{{ trans.HP.hpsection1text3subtitle }}</span>
+                                </li>
+                                <li>
+                                    <v-icon> mdi-check</v-icon>
+                                    {{ trans.HP.hpsection1text4 }}
+                                    <span>{{ trans.HP.hpsection1text4subtitle }}</span>
+                                </li>
                             </ul>
                         </v-col>
                     </v-row>
                     <v-row  align="center" justify="center" class="promo-section">
                         <v-col cols="12" md="5" sm="12" xs="12" v-if="$mobileDetect.mobile()">
-                            <img class="section-image" src="https://back.terradigital.ro/images/promotions/1624016264-IMG_2478.PNG" width="100%">
+                            <img class="section-image" src="/hp-banner-1-livechat.png" width="100%">
                         </v-col>
                         <v-col cols="12" md="5" sm="12" xs="12" v-if="$mobileDetect.mobile()"></v-col>
                         <v-col cols="12" md="5" sm="12" xs="12" class="container-section">
                             <p>{{ trans.HP.hpsection2title }}</p>
                             <ul>
-                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection2text1 }}</li>
-                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection2text2 }}</li>
-                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection2text3 }}</li>
-                                <li><v-icon> mdi-check</v-icon>{{ trans.HP.hpsection2text4 }}</li>
+                                <li>
+                                    <v-icon> mdi-check</v-icon>
+                                    {{ trans.HP.hpsection2text1 }}
+                                    <span>{{ trans.HP.hpsection2text1subtitle }}</span>
+                                </li>
+                                <li>
+                                    <v-icon> mdi-check</v-icon>
+                                    {{ trans.HP.hpsection2text2 }}
+                                    <span>{{ trans.HP.hpsection2text2subtitle }}</span>
+                                </li>
+                                <li>
+                                    <v-icon> mdi-check</v-icon>
+                                    {{ trans.HP.hpsection2text3 }}
+                                    <span>{{ trans.HP.hpsection2text3subtitle }}</span>
+                                </li>
+                                <li>
+                                    <v-icon> mdi-check</v-icon>
+                                    {{ trans.HP.hpsection2text4 }}
+                                    <span>{{ trans.HP.hpsection2text4subtitle }}</span>
+                                </li>
                             </ul>
                         </v-col>
                         <v-col cols="12" md="2" sm="12" xs="12" v-if="!$mobileDetect.mobile()"></v-col>
                         <v-col cols="12" md="5" sm="12" xs="12" v-if="!$mobileDetect.mobile()">
-                            <img class="section-image" src="https://back.terradigital.ro/images/promotions/1624016264-IMG_2478.PNG" width="100%">
+                            <img class="section-image" src="/hp-banner-2-crm.png" width="100%">
                         </v-col>
                     </v-row>
                 </div>
@@ -93,10 +125,10 @@ export default {
         background-size: 100% !important;
     }
     background-color: $custom_blue;
-    ul{
+    ul {
         margin-left: 25px;
         list-style: none;
-        li{
+        li {
             color: #FFF;
             font-size: 1rem !important;
             font-weight: 400;
@@ -105,6 +137,13 @@ export default {
                 color: #FFF;
                 margin-right: 10px;
                 font-size: 14px;
+            }
+            span {
+                font-size: 14px;
+                margin-left: 25px;
+                display: block;
+                color: #AAA !important;
+                line-height: 1.5;
             }
         }
     }

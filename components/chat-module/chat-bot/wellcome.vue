@@ -1,27 +1,25 @@
 <template lang="html">
     <v-card-text class="chat-bot">
         <div class="text-center" v-if="!alert">
-            <h3 class="text-left">Hello</h3>
+            <h3 class="text-left">{{ trans.General.zoomHi }}</h3>
             <p class="text-left">{{ chatBotMessage }}</p>
-            Intreaba-ne Live:
+            {{ trans.General.zoomAskLive }}
             <section class="text-left" @click="attemptToCall()">
                 <v-icon>mdi-video</v-icon>
                 <span class="section-title">Web chat</span>
-                <span>Chat with one of our friendly experts.</span>
+                <span>{{ trans.General.zoomTalkToExperts }}</span>
             </section>
-            sau
+            {{ trans.General.orClickBelow }}
             <div class="discus-options text-left">
-                <span @click="attemptToRequestCall()"><v-icon color="primary">mdi-phone</v-icon> VREAU SA MA SUNATI</span>
-                <span @click="attemptToDialog()"><v-icon color="primary">mdi-chat</v-icon> VREAU SA-MI SCRIETI AICI</span>
-                <span @click="clossDialog()"><v-icon color="primary">mdi-close</v-icon> NU, MULTUMESC</span>
+                <span @click="attemptToRequestCall()"><v-icon color="primary">mdi-phone</v-icon>{{ trans.General.zoomCallme }}</span>
+                <span @click="attemptToDialog()"><v-icon color="primary">mdi-chat</v-icon>{{ trans.General.zoomWriteMe }}</span>
+                <span @click="clossDialog()"><v-icon color="primary">mdi-close</v-icon>{{ trans.General.zoomNoThanks }}</span>
             </div>
         </div>
         <p v-if="alert" class="text-center">
-            Va multumim pentru raspuns.
-            Ne contactati oricind aveti nevoie de ajutor.
-            Chatul se va inchide automat in {{ counter }} sec.
+            {{ trans.General.zoomResponseNoThanks }}
         </p><br>  <hr><br>
-        <nuxt-link :to="'/ro/terms'">Privacy policy</nuxt-link>
+        <nuxt-link :to="'/ro/terms'">{{ trans.General.zoomPrivacy }}</nuxt-link>
     </v-card-text>
 </template>
 
@@ -73,9 +71,8 @@ export default {
             }else{
                 await this.findOfflineEmployee()
                 if (this.employee) {
-                    this.message = `Buna ziua. Ma numesc ${this.employee.name}.
-                                    Sunt acum in altă discuție.
-                                    Lasati va rog numarul de contact si revin in max. 30 de minute`
+                    this.message = `${this.trans.General.zoomMyName} ${this.employee.name}
+                                    ${this.trans.General.zoomResponseBusy}`
                     this.sendMessage(this.user._id, this.employee._id, this.message)
                 }
             }
@@ -87,8 +84,8 @@ export default {
             }
 
             if (this.employee) {
-                this.message = `Buna ziua. Ma numesc ${this.employee.name}.
-                                Lasati va rog un numar de contact si revenim noi cu un sunet`
+                this.message = `${this.trans.General.zoomMyName} ${this.employee.name}
+                                ${this.trans.General.zoomResponseUsToContactUser}`
                 this.sendMessage(this.user._id, this.employee._id, this.message)
             }
         },
@@ -99,8 +96,8 @@ export default {
             }
 
             if (this.employee) {
-                this.message = `Buna ziua. Ma numesc ${this.employee.name}.
-                                Cu ce va pot ajuta?`
+                this.message = `${this.trans.General.zoomMyName} ${this.employee.name}
+                                ${this.trans.General.canIHelp}`
                 this.sendMessage(this.user._id, this.employee._id, this.message)
             }
         },

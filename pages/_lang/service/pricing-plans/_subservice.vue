@@ -2,9 +2,11 @@
     <main class="wrap">
         <v-container v-if="service" class="pricing-plans">
             <v-row class="ip-plan-row">
+
                 <v-col class="col-md-12">
                     <h1 class="text-center title-plans" color="#34495e">{{ service.translation.name }}</h1>
                 </v-col>
+
                 <v-tabs class="pricing-plans-tabs" centered dark>
                     <v-tab @click="$router.back()">Pricing plans</v-tab>
                     <v-tab :to="`/${language.lang}/service/pricing-plans/${service.alias}`">Extended</v-tab>
@@ -36,8 +38,11 @@
                     </template>
                 </v-simple-table>
 
-                <v-expansion-panels v-for="(anchor, index) in service.services" :key="index">
-                    <v-expansion-panel>
+                <v-expansion-panels v-model="panel" :readonly="readonly"
+      multiple>
+                    <v-expansion-panel v-for="(anchor, index) in service.services" :key="index">
+                        <!-- <v-expansion-panel-content> -->
+
                         <v-expansion-panel-header>
                             <template v-slot:actions>
                                 <v-icon color="primary">
@@ -46,6 +51,7 @@
                             </template>
                             {{ anchor.translation.title }}
                         </v-expansion-panel-header>
+
                         <v-expansion-panel-content>
                             <v-simple-table>
                                 <template v-slot:default>
@@ -81,6 +87,7 @@
                                 </template>
                             </v-simple-table>
                         </v-expansion-panel-content>
+
                     </v-expansion-panel>
                 </v-expansion-panels>
             </v-row>
@@ -123,6 +130,8 @@ export default {
     },
     data() {
         return {
+            readonly: false,
+            panel: [0],
             service: null,
             prevUrl: null,
             title: '',

@@ -1,6 +1,6 @@
 <template>
-    <main class="ja-bg portfolio-item" :style="{ backgroundImage: `url('/portfolio/ja/fonJulia.png')`}">
-        <img src="/portfolio/apl/Glavniibaner_APL.jpeg" alt="">
+    <main class="ja-bg portfolio-item mt-16" :style="{ backgroundImage: `url('/portfolio/ja/fonJulia.png')`}">
+        <img src="/portfolio/portfolio-AP-homewear-banner-1-inside-page.JPG" width="100%">
         <h4 class="section-title">Anne Popova Loungewear</h4>
 
         <div class="text-center">

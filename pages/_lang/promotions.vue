@@ -14,16 +14,28 @@
                 </div>
 
                 <div v-else>
-                    <video width="100%" v-if="!$mobileDetect.mobile()" :src="`${envAPI}/images/promotions/${promotion.video}`" autoplay></video>
+                    <video width="100%" v-if="!$mobileDetect.mobile()" :src="`${envAPI}/images/promotions/${promotion.video}`" autoplay loop></video>
                     <img :src="`${envAPI}/images/promotions/${promotion.img_mobile}`" v-else width="100%">
                 </div>
 
                 <div class="headings">
                     <v-container>
-                        <v-row>
+                        <v-row class="slider-text-mobile slider-text-desktop" v-if="!$mobileDetect.mobile()">
+                            <v-col class="col-md-6">
+                                <div class="text-center c-title">{{ promotion.translation.name }}</div>
+                                <div class="text-center c-subtitle">{{ promotion.translation.description }}</div>
+                                <div class="btn-wrapper-promo">
+                                    <v-btn
+                                        class="btn-custom" color="accent"
+                                        @click="$nuxt.$emit('open-appointment-form')"
+                                    >{{ promotion.translation.btn_text }}</v-btn>
+                                </div>
+                            </v-col>
+                        </v-row>
+                        <v-row class="slider-text-mobile" v-else>
                             <v-col class="col-md-7">
-                                <h2 class="mb-4 heading-title">{{ promotion.translation.name }}</h2>
-                                <p class="mb-4 heading-subtitle">{{ promotion.translation.description }}</p>
+                                <div class="text-center c-title">{{ promotion.translation.name }}</div>
+                                <div class="text-center c-subtitle">{{ promotion.translation.description }}</div>
                                 <div class="btn-wrapper-promo">
                                     <v-btn
                                         class="btn-custom" color="accent"
@@ -310,6 +322,21 @@ export default {
     }
 }
 @media (max-width: 1281px) {
+    .slider-text-mobile {
+        width: 100%;
+        margin-left: 0;
+        .c-title {
+            font-size: 1.5rem !important;
+            line-height: 1.2 !important;
+            color: #0a072c !important;
+            margin-bottom: 20px !important;
+        }
+        .c-subtitle {
+            font-size: 0.9rem !important;
+            line-height: 1.2 !important;
+            color: #0a072c !important;
+        }
+    }
     .about-content {
         background-color: $custom_blue !important;
     }
@@ -387,5 +414,22 @@ export default {
 }
 .btn-custom{
     color: $custom_blue !important;
+}
+.slider-text-desktop {
+    text-align: center;
+    .c-title {
+        font-size: 2rem !important;
+        text-transform: uppercase;
+        color: #0a072c !important;
+        font-weight: bold;
+        margin-bottom: 50px !important;
+    }
+    .c-subtitle {
+        line-height: 1.5 !important;
+        font-size: 1.2rem !important;
+        font-weight: bold;
+        color: #0a072c !important;
+        margin-bottom: 50px !important;
+    }
 }
 </style>

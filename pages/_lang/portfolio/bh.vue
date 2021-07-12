@@ -1,9 +1,9 @@
 <template>
-    <main class="ja-bg portfolio-item" :style="{ backgroundImage: `url('/portfolio/ja/fonJulia.png')`}">
-        <img src="/portfolio/seminee/Glavnii_ baner_Seminee2.jpeg" alt="">
+    <main class="ja-bg portfolio-item mt-16">
+        <img src="/portfolio/Portfolio-Hasdeu-banner-1.png" width="100%">
         <div class="text-center">
             <h4 class="section-title">Shop Online</h4>
-            <img src="/portfolio/seminee/MOCKUP.Seminee.png" alt="">
+            <img src="/portfolio/Portfolio-Hasdeu-banner-2.png" alt="">
         </div><br><br><br><br>
     </main>
 </template>

@@ -1,5 +1,5 @@
 <template lang="html">
-    <main class="about-content">
+    <main class="static-page-content mt-16">
         <div class="container">
             <div v-html="page.translation.body" v-if="page"></div>
         </div>
@@ -48,3 +48,21 @@ export default {
     })
 }
 </script>
+
+<style media="screen" lang="scss">
+    .static-page-content {
+        background-color: $primary_dark;
+        color: #FFF;
+        padding-top: 30px;
+        h4 {
+            text-align: center;
+            font-size: 25px;
+            margin: 10px 0;
+        }
+        ul {
+            li {
+                margin-left: 20px;
+            }
+        }
+    }
+</style>

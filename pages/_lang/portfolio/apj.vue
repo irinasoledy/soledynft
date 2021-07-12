@@ -1,6 +1,6 @@
 <template>
-    <main class="ja-bg portfolio-item" :style="{ backgroundImage: `url('/portfolio/ja/fonJulia.png')`}">
-        <img src="/portfolio/apj/mainbanerapj.jpeg" alt="">
+    <main class="ja-bg portfolio-item mt-16" :style="{ backgroundImage: `url('/portfolio/ja/fonJulia.png')`}">
+        <img src="/portfolio/Portfolio-AP-bijoux-banner-1-insidePage.JPG" width="100%">
         <h4 class="section-title">Anne Popova Jewellry</h4>
 
         <div class="text-center">
