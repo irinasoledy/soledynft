@@ -9,14 +9,27 @@
                   <div class="fill-height-home-slider">
                       <v-container>
                           <v-row
-                              class="fill-height-home-slider slider-text-desktop"
+                              class="fill-height-home-slider slider-text-desktop text-left"
                               align="center"
                               >
-                              <v-col class="text-center col-md-5">
-                                  <div class="display-1 text-center c-title">
+                              <v-col cols="12" md="10" class="slider-text-video" v-if="promotion.video">
+                                  <div class="display-1 c-title">
                                       {{ promotion.translation.name }}
                                   </div>
-                                  <div class="text-center c-subtitle">
+                                  <div class="c-subtitle">
+                                      {{ promotion.translation.description }}
+                                  </div>
+                                  <v-btn
+                                      class="btn-custom"
+                                      color="accent"
+                                      :to="`/${language.lang}/promotions#${promotion.alias}`"
+                                  >{{ promotion.translation.btn_text }} </v-btn>
+                              </v-col>
+                              <v-col class="col-md-5" v-else>
+                                  <div class="display-1 c-title">
+                                      {{ promotion.translation.name }}
+                                  </div>
+                                  <div class="c-subtitle">
                                       {{ promotion.translation.description }}
                                   </div>
                                   <v-btn
@@ -28,7 +41,10 @@
                           </v-row>
                       </v-container>
                   </div>
-                  <video width="100%" v-if="promotion.video" :src="`${envAPI}/images/promotions/${promotion.video}`" autoplay loop></video>
+                  <video width="100%" v-if="promotion.video" autoplay="true" loop>
+                        <source src="/Video-resized-amocrm-v-2-goodQuality.mp4" type="video/mp4">
+                        <source src="/Video-resize-amocrm-webm.webm" type="video/webm">
+                  </video>
                   <img v-else :src="`${envAPI}/images/promotions/${promotion.img}`" alt="">
               </a>
         </slick>
@@ -154,31 +170,57 @@ export default {
 .slider-text-mobile {
     width: 100%;
     margin-left: 0;
+    margin-top: -55px;
     .c-title {
         font-size: 1.5rem !important;
         line-height: 1.2 !important;
-        color: #0a072c !important;
+        color: #FFF !important;
         margin-bottom: 20px !important;
     }
     .c-subtitle {
         font-size: 0.9rem !important;
         line-height: 1.2 !important;
-        color: #0a072c !important;
+        color: #FFF !important;
     }
 }
 .slider-text-desktop {
     .c-title {
-        font-size: 2rem !important;
+        text-shadow: 2px 2px 9px #000;
+        font-size: 3rem !important;
         text-transform: uppercase;
-        color: #0a072c !important;
-        font-weight: bold;
+        color: #FFF !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
         margin-bottom: 40px;
+        letter-spacing: -2px;
     }
     .c-subtitle {
-        font-size: 1.2rem !important;
-        font-weight: bold;
-        color: #0a072c !important;
+        line-height: 1.2 !important;
+        font-size: 1.25rem !important;
+        color: #FFF !important;
         margin-bottom: 40px;
+        font-weight: bold !important;
+        text-shadow: 2px 2px 9px #000;
+    }
+}
+.slider-text-video {
+    .c-title {
+        text-shadow: 2px 2px 9px #000;
+        font-size: 4rem !important;
+        text-transform: uppercase;
+        color: #FFF !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+        margin-bottom: 40px;
+        letter-spacing: -2px;
+    }
+    .c-subtitle {
+        line-height: 1.2 !important;
+        font-size: 1.25rem !important;
+        color: #FFF !important;
+        margin-bottom: 40px;
+        font-weight: bold !important;
+        text-shadow: 2px 2px 9px #000;
     }
 }
 </style>

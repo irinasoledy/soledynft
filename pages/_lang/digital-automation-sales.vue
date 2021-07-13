@@ -1,11 +1,23 @@
 <template>
     <main class="about-content digital-wrapp">
 
-        <div class="banner-wrapper" v-if="!$mobileDetect.mobile()">
-            <video src="/static-services/servicePage-crm-vid-1-1920-844-cropped.mp4" autoplay loop v-if="!$mobileDetect.mobile()" width="100%"></video>
+        <div class="banner-wrapper">
+            <video width="100%" v-if="!$mobileDetect.mobile()" autoplay="true" loop>
+                  <source src="/Video-resized-amocrm-v-2-goodQuality.mp4" type="video/mp4">
+                  <source src="/Video-resize-amocrm-webm.webm" type="video/webm">
+              </video>
+            <!-- <video src="/static-services/servicePage-crm-vid-1-1920-844-cropped.mp4" autoplay loop v-if="!$mobileDetect.mobile()" width="100%"></video> -->
+            <img src="/static-services/servicePage-zoom-banner-mobile.png" v-else width="100%">
+
             <div class="headings">
                 <v-container>
-                    <v-row class="slider-text-mobile slider-text-desktop" v-if="!$mobileDetect.mobile()">
+                    <v-row class="slider-text-video text-left" v-if="!$mobileDetect.mobile()">
+                        <v-col class="col-md-12">
+                            <div class="c-title">{{ trans.ServicePages.crmMainbannerTitle }}</div>
+                            <div class="c-subtitle">{{ trans.ServicePages.crmMainbannerSubTitle }}</div>
+                        </v-col>
+                    </v-row>
+                    <v-row class="slider-text-mobile" v-else>
                         <v-col class="col-md-6">
                             <div class="text-center c-title">{{ trans.ServicePages.crmMainbannerTitle }}</div>
                             <div class="text-center c-subtitle">{{ trans.ServicePages.crmMainbannerSubTitle }}</div>
@@ -14,19 +26,6 @@
                 </v-container>
             </div>
         </div>
-
-        <v-parallax dark src="/static-services/servicePage-crm-banner-mobile.png" v-else>
-            <v-row align="center" justify="center" class="slider-text-mobile">
-                <v-col class="text-center" cols="12">
-                    <div class="text-center c-title">
-                        {{ trans.ServicePages.crmMainbannerTitle }}
-                    </div>
-                    <div class="text-center c-subtitle">
-                        {{ trans.ServicePages.crmMainbannerSubTitle }}
-                    </div>
-                </v-col>
-            </v-row>
-        </v-parallax>
 
         <v-container>
             <section>
@@ -167,16 +166,17 @@ export default {
 .slider-text-mobile {
     width: 100%;
     margin-left: 0;
+    margin-top: -55px;
     .c-title {
         font-size: 1.5rem !important;
         line-height: 1.2 !important;
-        color: #0a072c !important;
+        color: #FFF !important;
         margin-bottom: 20px !important;
     }
     .c-subtitle {
         font-size: 0.9rem !important;
         line-height: 1.2 !important;
-        color: #0a072c !important;
+        color: #FFF !important;
     }
 }
 .section-image {
@@ -227,25 +227,32 @@ section {
     }
     .headings {
         position: absolute;
-        top: 30%;
+        top: 0;
         width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
-.slider-text-desktop {
-    text-align: center;
+.slider-text-video {
     .c-title {
-        font-size: 2rem !important;
+        text-shadow: 2px 2px 9px #000;
+        font-size: 4rem !important;
         text-transform: uppercase;
-        color: #0a072c !important;
-        font-weight: bold;
-        margin-bottom: 50px !important;
+        color: #FFF !important;
+        font-weight: 700 !important;
+        line-height: 1.1 !important;
+        margin-bottom: 40px;
+        letter-spacing: -2px;
     }
     .c-subtitle {
-        line-height: 1.5 !important;
-        font-size: 1.2rem !important;
-        font-weight: bold;
-        color: #0a072c !important;
-        margin-bottom: 50px !important;
+        line-height: 1.2 !important;
+        font-size: 1.25rem !important;
+        color: #FFF !important;
+        margin-bottom: 40px;
+        font-weight: bold !important;
+        text-shadow: 2px 2px 9px #000;
     }
 }
 </style>

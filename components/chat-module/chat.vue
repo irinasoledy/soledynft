@@ -182,9 +182,9 @@
                         mdi-account
                     </v-icon>
 
-                    <v-icon @click.prevent="callTo(interlocutor)" color="grey" class="text-right">
-                        mdi-phone
-                    </v-icon>
+                    <b color="grey" class="text-right" @click.prevent="callTo(interlocutor)">
+                        <v-icon>mdi-phone</v-icon> {{ trans.General.zoomBtnCall }}
+                    </b>
 
                 </v-toolbar>
                 <chatBox :user="user" :interlocutor="interlocutor" :mode="mode"/>

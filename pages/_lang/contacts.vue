@@ -30,48 +30,6 @@
                         <p class="text-center">{{ trans.ContactsAndForms.companyMainName }}</p>
                         <p class="text-center white--text">
                             <v-icon class="white--text">mdi-marker</v-icon>
-                            {{ ContactsAndForms.companyMainAdres }}
-                        </p>
-                        <p class="text-center">
-                            <v-icon class="white--text">mdi-phone</v-icon>
-                            {{ trans.ContactsAndForms.companyMainPhone1 }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
-                        </p>
-                        <p class="text-center">
-                            <v-icon class="white--text">mdi-email</v-icon>
-                            {{ trans.ContactsAndForms.labelEmail }}: <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">{{ trans.ContactsAndForms.companyMainEmail1 }}</a>
-                        </p>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="text-center">
-                            <img width="100" src="/md2.png" class="map-country-img"/>
-                        </p>
-                        <p class="text-center">
-                            <!-- {{ trans.ContactsAndForms.formTitle2 }} -->
-                        </p>
-                        <p class="text-center">{{ trans.ContactsAndForms.companyMainNameMD  }}</p>
-                        <p class="text-center">
-                            <v-icon class="white--text">mdi-marker</v-icon>
-                            {{ trans.ContactsAndForms.companyMainAdresMD }}
-                        </p>
-                        <p class="text-center">
-                            <v-icon class="white--text">mdi-phone</v-icon>
-                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
-                        </p>
-                        <p class="text-center">
-                            <v-icon class="white--text">mdi-email</v-icon>
-                            {{ trans.ContactsAndForms.labelEmail }}: <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">{{ trans.ContactsAndForms.companyMainEmail1 }}</a>
-                        </p>
-                    </div>
-                    <div class="col-md-4 white--text">
-                        <p class="text-center">
-                            <img width="100" src="/es4.png" class="map-country-img"/>
-                        </p>
-                        <p class="text-center">
-                            <!-- {{ trans.ContactsAndForms.formTitle2 }} -->
-                        </p>
-                        <p class="text-center">{{ trans.ContactsAndForms.companyMainNameEE }}</p>
-                        <p class="text-center">
-                            <v-icon class="white--text">mdi-marker</v-icon>
                             {{ trans.ContactsAndForms.companyMainAdres }}
                         </p>
                         <p class="text-center">
@@ -82,10 +40,62 @@
                             <v-icon class="white--text">mdi-email</v-icon>
                             {{ trans.ContactsAndForms.labelEmail }}: <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">{{ trans.ContactsAndForms.companyMainEmail1 }}</a>
                         </p>
+                        <p class="text-center">
+                            <a class="white--text" :href="`https://${trans.ContactsAndForms.companyWebsite1}`">{{ trans.ContactsAndForms.companyWebsite1 }}</a>
+                        </p>
+                        <p class="text-center">
+                            <a class="white--text" :href="trans.ContactsAndForms.companyFacebook">{{ trans.ContactsAndForms.companyFacebook }}</a>
+                        </p>
+                        <p class="text-center">
+                            <a class="white--text" :href="trans.ContactsAndForms.companyInstagram">{{ trans.ContactsAndForms.companyInstagram }}</a>
+                        </p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <p class="text-center">
+                            <img width="100" src="/md2.png" class="map-country-img"/>
+                        </p>
+                        <p class="text-center">{{ trans.ContactsAndForms.companyMainNameMD }}</p>
+                        <p class="text-center white--text">
+                            <v-icon class="white--text">mdi-marker</v-icon>
+                            {{ trans.ContactsAndForms.companyMainAdresMD }}
+                        </p>
+                        <p class="text-center">
+                            <v-icon class="white--text">mdi-phone</v-icon>
+                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1MD}`">{{ trans.ContactsAndForms.companyMainPhone1MD }}</a>
+                        </p>
+                        <p class="text-center">
+                            <v-icon class="white--text">mdi-email</v-icon>
+                            {{ trans.ContactsAndForms.labelEmail }}: <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1MD}`">{{ trans.ContactsAndForms.companyMainEmail1MD }}</a>
+                        </p>
+                        <p class="text-center">
+                            <a class="white--text" :href="`https://${trans.ContactsAndForms.companyMainWebsiteMD}`">{{ trans.ContactsAndForms.companyMainWebsiteMD }}</a>
+                        </p>
+                    </div>
+                    <div class="col-md-4 white--text">
+                        <p class="text-center">
+                            <img width="100" src="/es4.png" class="map-country-img"/>
+                        </p>
+                        <p class="text-center">{{ trans.ContactsAndForms.companyMainNameEE }}</p>
+                        <p class="text-center white--text">
+                            <v-icon class="white--text">mdi-marker</v-icon>
+                            {{ trans.ContactsAndForms.companyMainAdresEE }}
+                        </p>
+                        <p class="text-center">
+                            <v-icon class="white--text">mdi-phone</v-icon>
+                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1EE}`">{{ trans.ContactsAndForms.companyMainPhone1EE }}</a>
+                        </p>
+                        <p class="text-center">
+                            <v-icon class="white--text">mdi-email</v-icon>
+                            {{ trans.ContactsAndForms.labelEmail }}: <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1EE}`">{{ trans.ContactsAndForms.companyMainEmail1EE }}</a>
+                        </p>
+                        <p class="text-center">
+                            <a class="white--text" :href="`https://${trans.ContactsAndForms.companyMainWebsiteEE}`">{{ trans.ContactsAndForms.companyMainWebsiteEE }}</a>
+                        </p>
                     </div>
                     <div class="col-md-12">
                         <v-form
-                            class="contactForm"
+                            class="contactForm text-center"
                             ref="form"
                             v-model="valid"
                             lazy-validation

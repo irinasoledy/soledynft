@@ -1,6 +1,37 @@
 <template>
-    <main class="about-content mt-16">
-        <v-parallax dark src="/static-services/servicePage-zoom-banner-desktop.png" v-if="!$mobileDetect.mobile()">
+    <main class="about-content mt-8">
+
+        <div class="banner-wrapper">
+            <img src="/static-services/servicePage-zoom-banner-desktop.png" v-if="!$mobileDetect.mobile()" width="100%">
+            <img src="/static-services/servicePage-zoom-banner-mobile.png" v-else width="100%">
+
+            <div class="headings">
+                <v-container>
+                    <v-row class="slider-text-desktop" v-if="!$mobileDetect.mobile()">
+                        <v-col class="col-md-6">
+                            <div class="c-title">
+                                {{ trans.ServicePages.zoomMainbannerTitle }}
+                            </div>
+                            <div class="c-subtitle">
+                                {{ trans.ServicePages.zoomMainbannerSubTitle }}
+                            </div>
+                        </v-col>
+                    </v-row>
+                    <v-row class="slider-text-mobile" v-else>
+                        <v-col class="col-md-7">
+                            <div class="text-center c-title">
+                                {{ trans.ServicePages.zoomMainbannerTitle }}
+                            </div>
+                            <div class="text-center c-subtitle">
+                                {{ trans.ServicePages.zoomMainbannerSubTitle }}
+                            </div>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </div>
+        </div>
+
+        <!-- <v-parallax dark src="/static-services/servicePage-zoom-banner-desktop.png" v-if="!$mobileDetect.mobile()">
             <v-container>
                 <v-row align="center" class="slider-text-desktop">
                     <v-col class="text-center col-md-6">
@@ -15,7 +46,7 @@
             </v-container>
         </v-parallax>
 
-        <v-parallax dark src="/static-services/servicePage-zoom-banner-mobile.png" v-else>
+        <v-img dark src="/static-services/servicePage-zoom-banner-mobile.png" v-else>
             <v-row align="center" justify="center" class="slider-text-mobile">
                 <v-col class="text-center" cols="12">
                     <div class="text-center c-title">
@@ -26,7 +57,7 @@
                     </div>
                 </v-col>
             </v-row>
-        </v-parallax>
+        </v-img> -->
 
         <v-container>
             <section>
@@ -167,16 +198,37 @@ export default {
 .slider-text-mobile {
     width: 100%;
     margin-left: 0;
+    margin-top: -55px;
     .c-title {
         font-size: 1.5rem !important;
         line-height: 1.2 !important;
-        color: #0a072c !important;
+        color: #FFF !important;
         margin-bottom: 20px !important;
     }
     .c-subtitle {
         font-size: 0.9rem !important;
         line-height: 1.2 !important;
-        color: #0a072c !important;
+        color: #FFF !important;
+    }
+}
+.slider-text-desktop {
+    .c-title {
+        text-shadow: 2px 2px 9px #000;
+        font-size: 3rem !important;
+        text-transform: uppercase;
+        color: #FFF !important;
+        font-weight: 700 !important;
+        line-height: 1.1 !important;
+        margin-bottom: 40px;
+        letter-spacing: -2px;
+    }
+    .c-subtitle {
+        line-height: 1.2 !important;
+        font-size: 1.25rem !important;
+        color: #FFF !important;
+        margin-bottom: 40px;
+        font-weight: bold !important;
+        text-shadow: 2px 2px 9px #000;
     }
 }
 .section-image {
@@ -223,6 +275,19 @@ section {
     p {
         font-size: 26px;
         color: #FFF;
+    }
+}
+.banner-wrapper {
+    position: relative;
+    .headings{
+        position: absolute;
+        left: 0px;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 </style>

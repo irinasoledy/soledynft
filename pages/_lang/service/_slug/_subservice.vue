@@ -23,10 +23,9 @@
                         <v-card-text class="pa-4 lighten-4">
                             <v-flex pa-0><h2 class="headline">{{ plan.translation.name }}</h2></v-flex>
                             <v-flex pa-0 class="ip-plan-price">
-                                {{ plan.translation.price_top_begin }}
+                                <p>{{ plan.translation.price_top_begin }}</p>
                                 <span>{{ plan.price }}</span>
-                                lei
-                                {{ plan.translation.price_top_end }}
+                                lei {{ plan.translation.price_top_end }}
                             </v-flex>
                             <v-flex pa-0 mt-4>
                                 <v-btn v-if="!$auth.loggedIn" :outline="!plan.highlight" depressed large color="primary"
@@ -42,7 +41,7 @@
                         </v-list>
                         <v-card-text class="pa-4 lighten-4">
                             <v-flex pa-0 class="ip-plan-price">
-                                {{ plan.translation.price_bottom_begin }}
+                                <p>{{ plan.translation.price_bottom_begin }}</p>
                                 <span>{{ plan.price_bottom }} </span>
                                 lei {{ plan.translation.price_bottom_end }}
                             </v-flex>

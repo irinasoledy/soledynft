@@ -1,5 +1,5 @@
 <template lang="html">
-    <main class="about-content">
+    <main class="about-content promo-content mt-16">
 
         <div
             v-for="(promotion, index) in promotions"
@@ -9,21 +9,35 @@
             >
             <div class="banner-wrapper">
                 <div v-if="!promotion.video">
-                    <img :src="`${envAPI}/images/promotions/${promotion.img}`" v-if="!$mobileDetect.mobile()">
+                    <img :src="`${envAPI}/images/promotions/${promotion.img}`" v-if="!$mobileDetect.mobile()" width="100%">
                     <img :src="`${envAPI}/images/promotions/${promotion.img_mobile}`" v-else width="100%">
                 </div>
 
                 <div v-else>
-                    <video width="100%" v-if="!$mobileDetect.mobile()" :src="`${envAPI}/images/promotions/${promotion.video}`" autoplay loop></video>
+                    <video width="100%" v-if="!$mobileDetect.mobile()" autoplay="true" loop>
+                          <source src="/Video-resized-amocrm-v-2-goodQuality.mp4" type="video/mp4">
+                          <source src="/Video-resize-amocrm-webm.webm" type="video/webm">
+                    </video>
+                    <!-- <video width="100%" v-if="!$mobileDetect.mobile()" :src="`${envAPI}/images/promotions/${promotion.video}`" autoplay loop></video> -->
                     <img :src="`${envAPI}/images/promotions/${promotion.img_mobile}`" v-else width="100%">
                 </div>
 
                 <div class="headings">
                     <v-container>
-                        <v-row class="slider-text-mobile slider-text-desktop" v-if="!$mobileDetect.mobile()">
-                            <v-col class="col-md-6">
-                                <div class="text-center c-title">{{ promotion.translation.name }}</div>
-                                <div class="text-center c-subtitle">{{ promotion.translation.description }}</div>
+                        <v-row class="slider-text-desktop text-left" v-if="!$mobileDetect.mobile()">
+                            <v-col class="col-md-6" v-if="!promotion.video">
+                                <div class="c-title">{{ promotion.translation.name }}</div>
+                                <div class="c-subtitle">{{ promotion.translation.description }}</div>
+                                <div class="btn-wrapper-promo">
+                                    <v-btn
+                                        class="btn-custom" color="accent"
+                                        @click="$nuxt.$emit('open-appointment-form')"
+                                    >{{ promotion.translation.btn_text }}</v-btn>
+                                </div>
+                            </v-col>
+                            <v-col class="col-md-12 slider-text-video" v-else>
+                                <div class="c-title">{{ promotion.translation.name }}</div>
+                                <div class="c-subtitle">{{ promotion.translation.description }}</div>
                                 <div class="btn-wrapper-promo">
                                     <v-btn
                                         class="btn-custom" color="accent"
@@ -104,7 +118,7 @@
                         </v-col>
                         <v-col cols="12" sm="6" md="3">
                             <v-text-field
-                            dark
+                                dark
                                 type="number"
                                 :label="trans.ContactsAndForms.labelPhone"
                                 outlined
@@ -237,16 +251,16 @@ export default {
 }
 .banner-wrapper{
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .banner-wrapper .headings{
     position: absolute;
     left: 0px;
-    top: 30%;
+    top: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .heading-title{
     margin-bottom: 20px;
@@ -322,21 +336,22 @@ export default {
     }
 }
 @media (max-width: 1281px) {
-    .slider-text-mobile {
-        width: 100%;
-        margin-left: 0;
-        .c-title {
-            font-size: 1.5rem !important;
-            line-height: 1.2 !important;
-            color: #0a072c !important;
-            margin-bottom: 20px !important;
-        }
-        .c-subtitle {
-            font-size: 0.9rem !important;
-            line-height: 1.2 !important;
-            color: #0a072c !important;
-        }
-    }
+    // .slider-text-mobile {
+    //     width: 100%;
+    //     margin-left: 0;
+    //     margin-top: -35px;
+    //     .c-title {
+    //         font-size: 1.5rem !important;
+    //         line-height: 1.2 !important;
+    //         color: #FFF !important;
+    //         margin-bottom: 20px !important;
+    //     }
+    //     .c-subtitle {
+    //         font-size: 0.9rem !important;
+    //         line-height: 1.2 !important;
+    //         color: #FFF !important;
+    //     }
+    // }
     .about-content {
         background-color: $custom_blue !important;
     }
@@ -415,21 +430,67 @@ export default {
 .btn-custom{
     color: $custom_blue !important;
 }
-.slider-text-desktop {
-    text-align: center;
+.slider-text-mobile {
+    width: 100%;
+    margin-left: 0;
+    margin-top: -55px;
     .c-title {
-        font-size: 2rem !important;
-        text-transform: uppercase;
-        color: #0a072c !important;
-        font-weight: bold;
-        margin-bottom: 50px !important;
+        font-size: 1.5rem !important;
+        line-height: 1.2 !important;
+        color: #FFF !important;
+        margin-bottom: 20px !important;
     }
     .c-subtitle {
-        line-height: 1.5 !important;
-        font-size: 1.2rem !important;
-        font-weight: bold;
-        color: #0a072c !important;
-        margin-bottom: 50px !important;
+        font-size: 0.9rem !important;
+        line-height: 1.2 !important;
+        color: #FFF !important;
+    }
+}
+.slider-text-desktop {
+    .c-title {
+        text-shadow: 2px 2px 9px #000;
+        font-size: 3rem !important;
+        text-transform: uppercase;
+        color: #FFF !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+        margin-bottom: 40px;
+        letter-spacing: -2px;
+    }
+    .c-subtitle {
+        line-height: 1.2 !important;
+        font-size: 1.25rem !important;
+        color: #FFF !important;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px 9px #000;
+        font-weight: bold !important;
+    }
+}
+.slider-text-video {
+    .c-title {
+        text-shadow: 2px 2px 9px #000;
+        font-size: 4rem !important;
+        text-transform: uppercase;
+        color: #FFF !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+        margin-bottom: 40px;
+        letter-spacing: -2px;
+    }
+    .c-subtitle {
+        line-height: 1.2 !important;
+        font-size: 1.25rem !important;
+        color: #FFF !important;
+        margin-bottom: 40px;
+        font-weight: bold !important;
+        text-shadow: 2px 2px 9px #000;
+    }
+}
+.promo-content {
+    .v-text-field__slot {
+        input {
+            color: #FFF !important;
+        }
     }
 }
 </style>
