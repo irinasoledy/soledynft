@@ -112,12 +112,12 @@
                         </v-list-item>
 
                         <v-list-item v-for="service in servicesList" :key="service.id"
-                                     @click.stop="openSubservices(service)">
+                                    @click="closeMenu(`/${language.lang}/service/plans/${service.alias}`)">
                             <v-list-item-title v-text="service.translation.name"></v-list-item-title>
                             <v-list-item-icon v-if="service.children.length">
-                                <v-icon>
+                                <!-- <v-icon>
                                     mdi-arrow-right-drop-circle-outline
-                                </v-icon>
+                                </v-icon> -->
                             </v-list-item-icon>
                         </v-list-item>
                     </v-list-item-group>

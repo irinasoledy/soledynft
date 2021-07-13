@@ -21,7 +21,7 @@
         </v-parallax>
     <v-container>
         <v-row>
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/ja`"
                     :loading="loading"
@@ -34,7 +34,7 @@
                     </div>
                 </v-card>
             </v-col>
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/apj`"
                     :loading="loading"
@@ -47,7 +47,7 @@
                     </div>
                 </v-card>
             </v-col>
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/apl`"
                     :loading="loading"
@@ -60,7 +60,7 @@
                     </div>
                 </v-card>
             </v-col>
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/stone-decorum`"
                     :loading="loading"
@@ -73,7 +73,7 @@
                     </div>
                 </v-card>
             </v-col>
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/sandic`"
                     :loading="loading"
@@ -86,7 +86,7 @@
                     </div>
                 </v-card>
             </v-col>
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/seminee`"
                     :loading="loading"
@@ -100,7 +100,7 @@
                 </v-card>
             </v-col>
 
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/trenwood`"
                     :loading="loading"
@@ -113,7 +113,7 @@
                         </div>
                 </v-card>
             </v-col>
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/boiar`"
                     :loading="loading"
@@ -126,7 +126,7 @@
                         </div>
                 </v-card>
             </v-col>
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/soledy`"
                     :loading="loading"
@@ -140,7 +140,7 @@
                 </v-card>
             </v-col>
 
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/bh`"
                     :loading="loading"
@@ -154,7 +154,7 @@
                 </v-card>
             </v-col>
 
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/docrom`"
                     :loading="loading"
@@ -168,7 +168,7 @@
                 </v-card>
             </v-col>
 
-            <v-col class="col-md-4">
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-card
                     :to="`/${language.lang}/portfolio/gt`"
                     :loading="loading"

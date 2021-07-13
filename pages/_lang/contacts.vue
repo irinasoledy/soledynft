@@ -27,17 +27,14 @@
                         <p class="text-center">
                             <img width="100" src="/rm1.png" class="map-country-img"/>
                         </p>
-                        <p class="text-center">
-                            {{ trans.ContactsAndForms.formTitle2 }}
-                        </p>
                         <p class="text-center">{{ trans.ContactsAndForms.companyMainName }}</p>
                         <p class="text-center white--text">
                             <v-icon class="white--text">mdi-marker</v-icon>
-                            {{ trans.ContactsAndForms.companyMainAdres }}
+                            {{ ContactsAndForms.companyMainAdres }}
                         </p>
                         <p class="text-center">
                             <v-icon class="white--text">mdi-phone</v-icon>
-                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
+                            {{ trans.ContactsAndForms.companyMainPhone1 }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
                         </p>
                         <p class="text-center">
                             <v-icon class="white--text">mdi-email</v-icon>
@@ -49,12 +46,12 @@
                             <img width="100" src="/md2.png" class="map-country-img"/>
                         </p>
                         <p class="text-center">
-                            {{ trans.ContactsAndForms.formTitle2 }}
+                            <!-- {{ trans.ContactsAndForms.formTitle2 }} -->
                         </p>
-                        <p class="text-center">{{ trans.ContactsAndForms.companyMainName }}</p>
+                        <p class="text-center">{{ trans.ContactsAndForms.companyMainNameMD  }}</p>
                         <p class="text-center">
                             <v-icon class="white--text">mdi-marker</v-icon>
-                            {{ trans.ContactsAndForms.companyMainAdres }}
+                            {{ trans.ContactsAndForms.companyMainAdresMD }}
                         </p>
                         <p class="text-center">
                             <v-icon class="white--text">mdi-phone</v-icon>
@@ -70,9 +67,9 @@
                             <img width="100" src="/es4.png" class="map-country-img"/>
                         </p>
                         <p class="text-center">
-                            {{ trans.ContactsAndForms.formTitle2 }}
+                            <!-- {{ trans.ContactsAndForms.formTitle2 }} -->
                         </p>
-                        <p class="text-center">{{ trans.ContactsAndForms.companyMainName }}</p>
+                        <p class="text-center">{{ trans.ContactsAndForms.companyMainNameEE }}</p>
                         <p class="text-center">
                             <v-icon class="white--text">mdi-marker</v-icon>
                             {{ trans.ContactsAndForms.companyMainAdres }}

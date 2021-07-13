@@ -58,7 +58,11 @@ module.exports = {
         '@nuxtjs/dotenv',
         'nuxt-mobile',
         'cookie-universal-nuxt',
+        '@nuxtjs/gtm',
     ],
+    gtm: {
+        id: 'GTM-NSG9WZ3'
+    },
     /*
     ** Axios module configuration
     ** See https://axios.nuxtjs.org/options
