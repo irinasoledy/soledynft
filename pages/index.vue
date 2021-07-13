@@ -236,4 +236,12 @@ main {
 .v-carousel__item {
     height: 558px !important;
 }
+.callNow {
+    margin-top: -28px !important;
+}
+@media (max-width: 991px) {
+    .callNow {
+        margin-top: 10px !important;
+    }
+}
 </style>

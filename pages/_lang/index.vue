@@ -1,7 +1,7 @@
 <template>
     <main>
         <banner/>
-        <div class="callNow">
+        <div class="callNow call-now-area">
             <v-parallax height="200" :src="$banner('callNowBGBanner', $mobileDetect.mobile())">
 
                 <v-container>
@@ -221,4 +221,6 @@ export default {
   .v-carousel__item{
       height: 558px !important;
   }
+ 
+
 </style>

@@ -1,5 +1,5 @@
 <template lang="html">
-    <div class="banner">
+    <div class="banner" v-if="loaded">
         <slick
               v-if="!$mobileDetect.mobile()"
               ref="slick"
@@ -41,10 +41,15 @@
                           </v-row>
                       </v-container>
                   </div>
-                  <video width="100%" v-if="promotion.video" autoplay="true" loop>
+
+                    <div v-if="promotion.video"  class="video-player-box"
+                        :playsinline="playsinline"
+                        v-video-player:myVideoPlayer="playerOptions">
+                    </div>
+                  <!-- <video width="100%" v-if="promotion.video" autoplay="true" loop>
                         <source src="/Video-resized-amocrm-v-2-goodQuality.mp4" type="video/mp4">
                         <source src="/Video-resize-amocrm-webm.webm" type="video/webm">
-                  </video>
+                  </video> -->
                   <img v-else :src="`${envAPI}/images/promotions/${promotion.img}`" alt="">
               </a>
         </slick>
@@ -79,7 +84,6 @@
                   <img :src="`${envAPI}/images/promotions/${promotion.img_mobile}`" alt="">
               </a>
         </slick>
-
     </div>
 </template>
 
@@ -92,11 +96,25 @@ import Slick from 'vue-slick'
 export default {
     data() {
         return {
+            loaded: false,
             slickOptions: {
                 slidesToShow: 1,
                 arrows: false,
                 dots: true,
             },
+            playsinline: true,
+            playerOptions: {
+                controls: false,
+                loop: true,
+                autoplay: true,
+                muted: true,
+                language: 'en',
+                playbackRates: [0.7, 1.0, 1.5, 2.0],
+                    sources: [{
+                        type: "video/mp4",
+                        src: "/Video-resized-amocrm-v-2-goodQuality.mp4"
+                }],
+            }
         };
     },
     computed: mapGetters({
@@ -105,6 +123,9 @@ export default {
         envAPI: 'getEnvAPI',
         language: 'getLanguage',
     }),
+    mounted() {
+        this.loaded = true
+    },
     components: {
         Slick
     },
@@ -158,7 +179,7 @@ export default {
     margin-bottom: 50px;
 }
 .banner{
-    margin-top: -42px;
+    margin-top: -45px;
 }
 .c-subtitle{
     margin-bottom: 20px;
@@ -186,7 +207,7 @@ export default {
 .slider-text-desktop {
     .c-title {
         text-shadow: 2px 2px 9px #000;
-        font-size: 3rem !important;
+        font-size: 3.3rem !important;
         text-transform: uppercase;
         color: #FFF !important;
         font-weight: 700 !important;
@@ -221,6 +242,37 @@ export default {
         margin-bottom: 40px;
         font-weight: bold !important;
         text-shadow: 2px 2px 9px #000;
+    }
+}
+video {
+    width: 100% !important;
+}
+.vjs_video_3-dimensions {
+    height: auto !important;
+}
+.video-js {
+    width: 100% !important;
+    height: auto !important;
+}
+.vjs-control-bar {
+    display: none !important;
+}
+.vjs-modal-dialog {
+     display: none !important;
+}
+.vjs-control-text {
+    display: none !important;
+}
+.vjs-big-play-button, .vjs-loading-spinner, .vjs-text-track-display, .vjs-poster {
+    display: none !important;
+}
+.slick-dots {
+    bottom: 28px;
+}
+
+@media (max-width: 991px) {
+    .slick-dots {
+        bottom: -5px;
     }
 }
 </style>

@@ -62,7 +62,7 @@
                 <h3>{{ trans.PageNames.ourServices }}</h3>
                 <ul>
                     <li v-for="service in serviceArray[1]" :key="service.id">
-                        <nuxt-link :to="`/${language.lang}/service/${service.alias}`">{{ service.translation.name }}</nuxt-link>
+                        <nuxt-link :to="`/${language.lang}/service/plans/${service.alias}`">{{ service.translation.name }}</nuxt-link>
                     </li>
                 </ul>
             </v-col>
@@ -151,7 +151,7 @@ export default {
     .footer-block{
         padding-top: 50px;
         .footer-logo{
-            z-index: 9;
+            z-index: 3;
             width: 200px;
             img{
                 width: 100%;

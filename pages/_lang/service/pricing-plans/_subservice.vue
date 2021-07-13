@@ -38,8 +38,7 @@
                     </template>
                 </v-simple-table>
 
-                <v-expansion-panels v-model="panel" :readonly="readonly"
-      multiple>
+                <v-expansion-panels v-model="panel" :readonly="readonly" multiple>
                     <v-expansion-panel v-for="(anchor, index) in service.services" :key="index">
                         <!-- <v-expansion-panel-content> -->
 
@@ -294,34 +293,6 @@ th{
 
 }
 
-@media (max-width: 991px) {
-    .side-block-wrap {
-        display: none;
-    }
-    .expert-one-content {
-        padding-top: 62px;
-    }
-    .v-application .display-1 {
-        font-size: 2rem !important;
-    }
-    .butons-service {
-        display: block;
-        max-width: 99%;
-        background-color: #FFF;
-        padding: 20px;
-        box-shadow: 0 3px 4px rgb(0 0 0 / 20%)
-    }
-    .costum-btn-service {
-        color: $custom_blue !important;
-        border: 1px solid $custom_blue;
-        box-shadow: none;
-        background-color: #FFF !important;
-    }
-    .expert-one-experts {
-        width: 100% !important;
-    }
-}
-
 .section-block {
     margin-bottom: 20px;
 }
@@ -477,6 +448,65 @@ th{
     .v-expansion-panel{
         margin-top: 10px;
     }
+}
 
+@media (max-width: 991px) {
+    .pricing-plans {
+        table {
+            td, th {
+                max-width: 70px;
+                padding: 5px !important;
+                overflow: hidden;
+                span {
+                    font-size: 12px;
+                    font-weight: bold;
+                    line-height: 1;
+                }
+            }
+        }
+        .big-col {
+            font-size: 13px !important;
+        }
+        .v-expansion-panel {
+            margin-top: 3px;
+        }
+        .v-expansion-panel-content__wrap {
+            padding: 0;
+        }
+        .th-title {
+            text-align: center !important;
+        }
+    }
+    .pricing-plans table th .package-title{
+        font-size: 14px !important;
+    }
+    .pricing-plans table th .package-price span {
+        font-size: 16px !important;
+    }
+    .side-block-wrap {
+        display: none;
+    }
+    .expert-one-content {
+        padding-top: 62px;
+    }
+    .v-application .display-1 {
+        font-size: 2rem !important;
+    }
+    .butons-service {
+        display: block;
+        max-width: 99%;
+        background-color: #FFF;
+        padding: 20px;
+        box-shadow: 0 3px 4px rgb(0 0 0 / 20%)
+    }
+    .costum-btn-service {
+        color: $custom_blue !important;
+        border: 1px solid $custom_blue;
+        box-shadow: none;
+        background-color: #FFF !important;
+    }
+    .expert-one-experts {
+        width: 100% !important;
+    }
 }
 </style>

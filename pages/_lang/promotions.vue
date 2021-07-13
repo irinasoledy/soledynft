@@ -14,10 +14,14 @@
                 </div>
 
                 <div v-else>
-                    <video width="100%" v-if="!$mobileDetect.mobile()" autoplay="true" loop>
+                    <div v-if="!$mobileDetect.mobile()"  class="video-player-box"
+                        :playsinline="playsinline"
+                        v-video-player:myVideoPlayer="playerOptions">
+                    </div>
+                    <!-- <video width="100%" v-if="!$mobileDetect.mobile()" autoplay="true" loop>
                           <source src="/Video-resized-amocrm-v-2-goodQuality.mp4" type="video/mp4">
                           <source src="/Video-resize-amocrm-webm.webm" type="video/webm">
-                    </video>
+                    </video> -->
                     <!-- <video width="100%" v-if="!$mobileDetect.mobile()" :src="`${envAPI}/images/promotions/${promotion.video}`" autoplay loop></video> -->
                     <img :src="`${envAPI}/images/promotions/${promotion.img_mobile}`" v-else width="100%">
                 </div>
@@ -176,6 +180,19 @@ export default {
         }
     },
     data: () => ({
+        playsinline: true,
+        playerOptions: {
+            controls: false,
+            loop: true,
+            autoplay: true,
+            muted: true,
+            language: 'en',
+            playbackRates: [0.7, 1.0, 1.5, 2.0],
+                sources: [{
+                    type: "video/mp4",
+                    src: "/Video-resized-amocrm-v-2-goodQuality.mp4"
+            }],
+        },
         chatBotMessage: null,
         promotion: null,
         title: '',
@@ -336,22 +353,6 @@ export default {
     }
 }
 @media (max-width: 1281px) {
-    // .slider-text-mobile {
-    //     width: 100%;
-    //     margin-left: 0;
-    //     margin-top: -35px;
-    //     .c-title {
-    //         font-size: 1.5rem !important;
-    //         line-height: 1.2 !important;
-    //         color: #FFF !important;
-    //         margin-bottom: 20px !important;
-    //     }
-    //     .c-subtitle {
-    //         font-size: 0.9rem !important;
-    //         line-height: 1.2 !important;
-    //         color: #FFF !important;
-    //     }
-    // }
     .about-content {
         background-color: $custom_blue !important;
     }
@@ -449,7 +450,7 @@ export default {
 .slider-text-desktop {
     .c-title {
         text-shadow: 2px 2px 9px #000;
-        font-size: 3rem !important;
+        font-size: 3.3rem !important;
         text-transform: uppercase;
         color: #FFF !important;
         font-weight: 700 !important;

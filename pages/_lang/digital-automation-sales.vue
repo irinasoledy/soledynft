@@ -2,10 +2,14 @@
     <main class="about-content digital-wrapp">
 
         <div class="banner-wrapper">
-            <video width="100%" v-if="!$mobileDetect.mobile()" autoplay="true" loop>
-                  <source src="/Video-resized-amocrm-v-2-goodQuality.mp4" type="video/mp4">
-                  <source src="/Video-resize-amocrm-webm.webm" type="video/webm">
-              </video>
+            <div v-if="!$mobileDetect.mobile()" class="video-player-box"
+                :playsinline="playsinline"
+                v-video-player:myVideoPlayer="playerOptions">
+            </div>
+            <!-- <video width="100%" v-if="!$mobileDetect.mobile()" autoplay="true" loop>
+                <source src="/Video-resized-amocrm-v-2-goodQuality.mp4" type="video/mp4">
+                <source src="/Video-resize-amocrm-webm.webm" type="video/webm">
+            </video> -->
             <!-- <video src="/static-services/servicePage-crm-vid-1-1920-844-cropped.mp4" autoplay loop v-if="!$mobileDetect.mobile()" width="100%"></video> -->
             <img src="/static-services/servicePage-zoom-banner-mobile.png" v-else width="100%">
 
@@ -146,6 +150,19 @@ export default {
     data: () => ({
         title: '',
         description: '',
+        playsinline: true,
+        playerOptions: {
+            controls: false,
+            loop: true,
+            autoplay: true,
+            muted: true,
+            language: 'en',
+            playbackRates: [0.7, 1.0, 1.5, 2.0],
+                sources: [{
+                    type: "video/mp4",
+                    src: "/Video-resized-amocrm-v-2-goodQuality.mp4"
+            }],
+        },
     }),
     computed: mapGetters({
         trans: 'getTranslations'

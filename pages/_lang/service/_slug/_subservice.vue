@@ -51,8 +51,8 @@
             </v-row>
             <v-row class="btns-row">
                 <v-col class="text-center">
-                    <v-btn class="v-btn-costum" color="accent" @click="$nuxt.$emit('open-appointment-form')">Solicita demo</v-btn>
-                    <v-btn class="v-btn-costum" to="#experts-block" color="accent">Dicuta cu consultantul</v-btn>
+                    <v-btn class="v-btn-costum mr-8" color="accent" @click="$nuxt.$emit('open-appointment-form')">Solicita demo</v-btn>
+                    <v-btn class="v-btn-costum ml-8" to="#experts-block" color="accent">Dicuta cu consultantul</v-btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -388,6 +388,7 @@ export default {
 }
 .v-btn-costum {
     color: $custom_blue !important;
+    width: 250px; 
 }
 .btns-row {
     padding: 30px;

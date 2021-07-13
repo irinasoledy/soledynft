@@ -257,4 +257,13 @@ textarea, input{
 .btn-primary-text{
     color: $custom_blue !important;
 }
+@media (max-width: 900px) {
+    .contact-content {
+    
+        .contactForm {
+            max-width: 100%;
+            margin: auto;
+        }
+    }
+}
 </style>

@@ -30,7 +30,8 @@ module.exports = {
     ** Global CSS
     */
     css: [
-        'font-awesome/css/font-awesome.css'
+        'font-awesome/css/font-awesome.css',
+        // 'video.js/dist/video-js.css'
     ],
     /*
     ** Plugins to load before mounting the App
@@ -40,6 +41,7 @@ module.exports = {
         {src: '~/plugins/vue-agile'},
         {src: '~/plugins/global.js'},
         {src: '~/plugins/stripe.js',  mode: 'client'},
+        {src: '~plugins/nuxt-video-player-plugin.js', ssr: false}
     ],
     components: true,
     /*
