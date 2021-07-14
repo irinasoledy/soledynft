@@ -21,7 +21,6 @@ module.exports = {
             { src: '/scripts/ammocrm.js' },
             { src: 'https://js.stripe.com/v3' }
         ]
-
     },
     /*
     ** Customize the progress-bar color

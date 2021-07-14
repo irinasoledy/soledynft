@@ -125,5 +125,6 @@ export default {
 
 .testimonial-author {
     margin-left: 20px;
+    color: #000 !important
 }
 </style>

@@ -99,10 +99,11 @@
                             ref="form"
                             v-model="valid"
                             lazy-validation
+                            v-if="!formSended"
                             >
                             <v-text-field
                                 solo
-                                v-model="name"
+                                v-model="form.name"
                                 :counter="10"
                                 :rules="nameRules"
                                 :label="trans.ContactsAndForms.labelName"
@@ -110,29 +111,42 @@
                                 ></v-text-field>
                             <v-text-field
                                 solo
-                                v-model="email"
+                                v-model="form.email"
                                 :rules="emailRules"
                                 :label="trans.ContactsAndForms.labelEmail"
                                 required
                                 ></v-text-field>
                             <v-text-field
                                 solo
+                                v-model="form.phone"
+                                :rules="phoneRules"
                                 :label="trans.ContactsAndForms.labelPhone"
                                 required
                                 ></v-text-field>
                             <v-textarea
                                 solo
+                                v-model="form.message"
                                 name="input-7-4"
                                 :label="trans.ContactsAndForms.labelMessage"
                                 hint="Hint text"
                                 ></v-textarea>
                             <v-btn
+                                @click="submitFeedback()"
                                 color="accent"
                                 class="mr-4 btn-primary-text"
                                 >
                                 {{ trans.ContactsAndForms.sendButton }}
                             </v-btn>
                         </v-form>
+                        <v-card-text v-else>
+                            <v-alert
+                                dense
+                                text
+                                type="success"
+                                >
+                                Datele au fost transmise cu succes!!!
+                            </v-alert>
+                        </v-card-text>
                     </div>
                 </v-row>
             </v-container>
@@ -162,6 +176,7 @@ import { mapActions, mapGetters } from 'vuex'
 import Testimonials from "@/components/front/sliders/testimonialsSlider"
 import Experts from "@/components/front/widgets/expertsWidget.vue"
 import MapContact from "@/components/front/widgets/mapWidget.vue"
+import userApi from '@/api/userApi'
 
 export default {
     layout: "default",
@@ -183,22 +198,31 @@ export default {
         Experts
     },
     data: () => ({
+        formSended: false,
         title: '',
         description: '',
         valid: true,
-        name: '',
+        form: {
+            name: '',
+            email: '',
+            phone: '',
+            message: '',
+        },
         nameRules: [
             v => !!v || 'Name is required',
             v => (v && v.length <= 10) || 'Name must be less than 10 characters',
         ],
-        email: '',
         emailRules: [
             v => !!v || 'E-mail is required',
             v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
+        phoneRules: [
+            v => !!v || 'Phone is required',
+        ],
     }),
     computed: mapGetters({
-        trans: 'getTranslations'
+        trans: 'getTranslations',
+        user: 'chat/getUser',
     }),
     mounted() {
         this.setChatBotmessage(this.trans.General.botMessageTemplateContacts)
@@ -209,13 +233,23 @@ export default {
         ...mapActions({
             setChatBotmessage: 'chat/setChatBotmessage'
         }),
-        validate () {
+        submitFeedback() {
+            if (this.$refs.form.validate()) {
+                this.form.guestId = this.user._id
+                this.form.trigger = "Contact Form"
+                userApi.bookUser(this.form, async response => {
+                    this.$refs.form.reset()
+                    this.formSended = true
+                })
+            }
+        },
+        validate() {
             this.$refs.form.validate()
         },
-        reset () {
+        reset() {
             this.$refs.form.reset()
         },
-        resetValidation () {
+        resetValidation() {
             this.$refs.form.resetValidation()
         },
     },
@@ -259,7 +293,7 @@ textarea, input{
 }
 @media (max-width: 900px) {
     .contact-content {
-    
+
         .contactForm {
             max-width: 100%;
             margin: auto;

@@ -11,7 +11,7 @@
                     cols="12"
                     >
                     <h1 class="display-1 mb-4">
-                        Portfolio
+                        {{ trans.PageNames.portfolio }}
                     </h1>
                     <h4 class="subheading" color="secondary">
                         {{ trans.About.aboutPageSubTitle }}

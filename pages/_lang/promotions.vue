@@ -154,6 +154,37 @@
         <appointment-form></appointment-form>
         <chatBot :title="chatBotMessage" v-if="chatBotMessage"/>
 
+        <v-dialog
+            v-model="formSended"
+            width="500"
+            >
+            <v-card>
+                <v-card-text> <br> 
+                    <v-alert
+                        dense
+                        text
+                        type="success"
+                        class="mt-16"
+                        >
+                        Datele au fost transmise cu succes!!!
+                    </v-alert>
+                </v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                        <v-btn
+                            color="primary"
+                            text
+                            @click="formSended = false"
+                            >
+                            close
+                        </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
     </main>
 </template>
 
@@ -180,6 +211,7 @@ export default {
         }
     },
     data: () => ({
+        formSended: false,
         playsinline: true,
         playerOptions: {
             controls: false,
@@ -237,6 +269,7 @@ export default {
                     this.form.name = ''
                     this.form.phone = ''
                     this.$refs.[ref][0].reset()
+                    this.formSended = true
                 })
             }
         }

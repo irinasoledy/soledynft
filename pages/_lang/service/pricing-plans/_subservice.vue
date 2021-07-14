@@ -8,8 +8,8 @@
                 </v-col>
 
                 <v-tabs class="pricing-plans-tabs" centered dark>
-                    <v-tab @click="$router.back()">Pricing plans</v-tab>
-                    <v-tab :to="`/${language.lang}/service/pricing-plans/${service.alias}`">Extended</v-tab>
+                    <v-tab @click="$router.back()">{{ trans.ServicePages.pricingPlans }}</v-tab>
+                    <v-tab :to="`/${language.lang}/service/pricing-plans/${service.alias}`">{{ trans.ServicePages.pricingPlansExtended }}</v-tab>
                 </v-tabs>
 
                 <v-simple-table>

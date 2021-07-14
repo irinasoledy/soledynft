@@ -20,7 +20,7 @@
                                     @click="$nuxt.$emit('open-appointment-form')"
                                 >
                                     <v-icon left>mdi-comment-bookmark</v-icon>
-                                    OBTINE UN DEMO
+                                    {{ trans.General.getDemo }}
                                 </v-btn>
                             </v-sheet>
                         </v-col>
@@ -49,7 +49,7 @@
                                     @click="$nuxt.$emit('open-appointment-form')"
                                 >
                                     <v-icon left>mdi-comment-bookmark</v-icon>
-                                   obtine un demo
+                                   {{ trans.General.getDemo }}
                                 </v-btn>
                             </v-sheet>
                         </v-col>

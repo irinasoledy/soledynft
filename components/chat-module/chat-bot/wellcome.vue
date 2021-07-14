@@ -48,7 +48,16 @@ export default {
     }),
     mounted() {
         this.$nuxt.$on('checkAssignedStatut', () => {
-            this.employee = this.lastMessage ? this.lastMessage.employee : null
+            if (this.lastMessage.employee) {
+                console.log(this.lastMessage.employee);
+                if (this.lastMessage.employee._id !== this.user._id) {
+                    this.employee = this.lastMessage.employee
+                } else {
+                    this.employee = this.lastMessage.client
+                }
+            }
+
+            // this.employee = this.lastMessage ? this.lastMessage.employee : null
             if (this.employee) {
                 this.$nuxt.$emit('closeChatBotDialog')
                 this.openDialog(this.employee)

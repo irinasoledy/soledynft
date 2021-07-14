@@ -83,13 +83,11 @@ export default {
                 this.connectToRoom()
             })
         },
-
         async connectToRoom() {
             let audioOutputDevice;
 
             await navigator.mediaDevices.enumerateDevices().then(devices => {
                 audioOutputDevice = devices.find(device => device.kind === 'audiooutput');
-                // return connect(this.accessToken, { name: this.room });
             })
 
             await connect(this.accessToken, {name: this.room}).then(room => {
@@ -97,36 +95,38 @@ export default {
                 const remoteVideo = this.$refs["remote-video"];
                 this.activeRoom = room;
 
-                createLocalVideoTrack().then(track => {
-                    localVideo.appendChild(track.attach())
-                })
-
-                room.on('trackAdded', track => {
-                    if (track.kind === 'audio') {
-                        const audioElement = track.attach();
-                        audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
-                            document.body.appendChild(audioElement);
-                        });
-                    }
-                });
-
-                room.participants.forEach(participant => {
-                    participant.on('trackSubscribed', track => {
-                        remoteVideo.appendChild(track.attach())
+                if (this.activeRoom.participants.size < 2) {
+                    createLocalVideoTrack().then(track => {
+                        localVideo.appendChild(track.attach())
                     })
-                })
 
-                room.on('participantConnected', participant => {
-                    participant.tracks.forEach(publication => {
-                        if (publication.isSubscribed) {
-                            const track = publication.track
-                            remoteVideo.appendChild(track.attach())
+                    room.on('trackAdded', track => {
+                        if (track.kind === 'audio') {
+                            const audioElement = track.attach();
+                            audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
+                                document.body.appendChild(audioElement);
+                            })
                         }
                     })
-                    participant.on('trackSubscribed', track => {
-                        remoteVideo.appendChild(track.attach())
+
+                    room.participants.forEach(participant => {
+                        participant.on('trackSubscribed', track => {
+                            remoteVideo.appendChild(track.attach())
+                        })
                     })
-                })
+
+                    room.on('participantConnected', participant => {
+                        participant.tracks.forEach(publication => {
+                            if (publication.isSubscribed) {
+                                const track = publication.track
+                                remoteVideo.appendChild(track.attach())
+                            }
+                        })
+                        participant.on('trackSubscribed', track => {
+                            remoteVideo.appendChild(track.attach())
+                        })
+                    })
+                }
 
                 room.on('disconnected', room => {
                     room.localParticipant.videoTracks.forEach(publication => {

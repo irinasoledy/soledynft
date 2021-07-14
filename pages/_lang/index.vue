@@ -1,9 +1,8 @@
 <template>
     <main>
         <banner/>
-        <div class="callNow call-now-area">
+        <div class="callNow">
             <v-parallax height="200" :src="$banner('callNowBGBanner', $mobileDetect.mobile())">
-
                 <v-container>
                     <v-row>
                         <v-col>
@@ -12,16 +11,16 @@
                                 elevation="0"
                                 height="auto"
                                 width="auto"
-                                >
+                            >
                                 <v-btn
                                     class="ma-2 btn-yell"
                                     medium
                                     max-width="330"
-                                    color="secondary"
+                                    color="primary"
                                     @click="$nuxt.$emit('open-appointment-form')"
-                                    >
+                                >
                                     <v-icon left>mdi-comment-bookmark</v-icon>
-                                    {{ trans.HP.hpfreeConsultation }}
+                                    {{ trans.General.getDemo }}
                                 </v-btn>
                             </v-sheet>
                         </v-col>
@@ -30,6 +29,7 @@
             </v-parallax>
         </div>
         <services></services>
+        <recommended></recommended>
         <experts></experts>
         <div class="callNow">
             <v-parallax height="200" :src="$banner('callNowBGBanner', $mobileDetect.mobile())">
@@ -41,15 +41,15 @@
                                 elevation="0"
                                 height="auto"
                                 width="auto"
-                                >
+                            >
                                 <v-btn
                                     class="ma-2 btn-yell"
                                     medium
-                                    color="secondary"
+                                    color="primary"
                                     @click="$nuxt.$emit('open-appointment-form')"
-                                    >
+                                >
                                     <v-icon left>mdi-comment-bookmark</v-icon>
-                                    {{ trans.HP.hpfreeConsultation }}
+                                   obtine un demo
                                 </v-btn>
                             </v-sheet>
                         </v-col>
@@ -61,8 +61,9 @@
             <v-container>
                 <v-row>
                     <v-col cols="12">
-                        <div class="display-1 text-center">
-                            {{ trans.General.testemonialsServicesPageTitle1 }} {{ trans.General.testemonialsServicesPageTitle2 }}
+                        <div class="display-1 text-center white--text">
+                            {{ trans.General.testemonialsServicesPageTitle1 }}
+                            {{ trans.General.testemonialsServicesPageTitle2 }}
                         </div>
                     </v-col>
                     <v-col cols="12">
@@ -76,15 +77,15 @@
 </template>
 
 <script>
-
-import 'slick-carousel/slick/slick.css';
-import { mapActions, mapGetters } from 'vuex'
 import Slick from 'vue-slick'
+import 'slick-carousel/slick/slick.css';
+import {mapActions, mapGetters} from 'vuex'
 import Testimonials from '@/components/front/sliders/testimonialsSlider'
 import Banner from '@/components/front/sliders/homeSlider'
 import Experts from '@/components/front/widgets/expertsWidget.vue'
 import Services from '@/components/front/widgets/servicesWidget.vue'
 import MapContact from "@/components/front/widgets/mapWidget.vue"
+import Recommended from "~/components/front/widgets/recommended";
 
 export default {
     layout: "default",
@@ -108,6 +109,7 @@ export default {
         language: 'getLanguage',
         trans: 'getTranslations',
         banners: 'getBanners',
+        chatBotMessage: 'chat/getChatBotMessage',
     }),
     mounted() {
         this.setChatBotmessage(this.trans.General.botMessageTemplateHP)
@@ -121,106 +123,125 @@ export default {
         })
     },
     components: {
+        Recommended,
         Testimonials,
         MapContact,
         Experts,
         Services,
-        Banner
+        Banner,
+
     },
 }
 </script>
 
 <style lang="scss" scoped>
 
-  .display-1 {
-    color: $custom_blue !important;
-    font-weight: 700 !important;
-  }
+.testimonials {
+    background-color: $custom_blue;
+}
 
-  .banner {
+.display-1 {
+    font-weight: 700 !important;
+}
+
+.banner {
 
     .c-title {
-      color: $custom_blue;
-      font-weight: 900 !important;
-      margin-bottom: 5rem;
+        color: $custom_blue;
+        font-weight: 900 !important;
+        margin-bottom: 5rem;
     }
 
     .c-sheet {
-      padding: 20px;
-      text-align: center;
-      display: inline;
-      background: rgba($color: $custom_red, $alpha: 1);
+        padding: 20px;
+        text-align: center;
+        display: inline;
+        background: rgba($color: $custom_red, $alpha: 1);
     }
 
     .v-responsive__content {
-      background-color: rgba($color: #ffff, $alpha: 0.8);
+        background-color: rgba($color: #ffff, $alpha: 0.8);
     }
-  }
-  .callNow {
+}
+
+.callNow {
     .c-sheet {
-      background: transparent;
+        background: transparent;
     }
 
     .btn-yell {
-      background: $custom_yellow !important;
-      color: #000000 !important;
+        //background: $custom_yellow !important;
+        color: $custom_yellow !important;
     }
-  }
+}
 
-  .experts {
+.experts {
     background-color: $custom_blue;
+
     .display-1 {
-      color: #ffff !important;
+        color: #ffff !important;
     }
 
     .text {
-      color: #ffff;
-      max-width: 500px;
-      margin: 20px auto;
+        color: #ffff;
+        max-width: 500px;
+        margin: 20px auto;
     }
-  }
+}
 
-  section {
+section {
     padding: 50px 0;
-  }
+}
 
-  main {
-    padding-bottom: 50px;
+main {
+    // padding-bottom: 50px;
     padding-top: 56px;
-  }
-  @media (min-width: 767px) {
+}
+
+@media (min-width: 767px) {
     .banner {
 
-      .v-window,
-      .v-carousel__item {
-        // min-height: 80vh;
-        // min-height: 558px;
-      }
+        .v-window,
+        .v-carousel__item {
+            // min-height: 80vh;
+            // min-height: 558px;
+        }
     }
-  }
+}
 
 
-  @media (min-width: 992px) {
+@media (min-width: 992px) {
     main {
-      padding-top: 118px;
+        padding-top: 118px;
     }
-  }
-  .v-image__image--cover{
-      background-size: 100% auto;
-      background-size: contain;
-  }
-  .v-carousel__item{
-      height: auto !important;
-  }
-  .v-carousel{
-      height: auto !important;
-  }
-  .v-image__image--cover{
-      background-size: 100% 100%;
-  }
-  .v-carousel__item{
-      height: 558px !important;
-  }
- 
+}
 
+.v-image__image--cover {
+    background-size: 100% auto;
+    background-size: contain;
+}
+
+.v-carousel__item {
+    height: auto !important;
+}
+
+.v-carousel {
+    height: auto !important;
+}
+
+.v-image__image--cover {
+    background-size: 100% 100%;
+}
+
+.v-carousel__item {
+    height: 558px !important;
+}
+.callNow {
+    margin-top: -28px !important;
+}
+@media (max-width: 991px) {
+    .callNow {
+        margin-top: 10px !important;
+    }
+}
 </style>

@@ -102,62 +102,64 @@ export default {
                     dominantSpeaker: true }).then(room => {
                 const localVideo = this.$refs["local-video"];
                 const remoteVideo = this.$refs["remote-video"];
+                
                 this.activeRoom = room;
 
-                createLocalVideoTrack().then(track => {
-                    localVideo.appendChild(track.attach())
-                })
-
-                room.on('trackSubscribed', track => {
-                    if (track.kind === 'audio') {
-                        console.log('vldfml');
-                        const audioElement = track.attach();
-                        audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
-                            document.body.appendChild(audioElement);
-                        });
-                    }
-                });
-
-                // room.on('trackAdded', track => {
-                //     if (track.kind === 'audio') {
-                //         console.log('track kind');
-                //         const audioElement = track.attach();
-                //         audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
-                //             document.body.appendChild(audioElement);
-                //         });
-                //     }
-                // })
-
-                room.participants.forEach(participant => {
-                    participant.on('trackSubscribed', track => {
-                        remoteVideo.appendChild(track.attach())
-
+                if (this.activeRoom.participants.size < 2) {
+                    createLocalVideoTrack().then(track => {
+                        localVideo.appendChild(track.attach())
                     })
-                })
 
-                room.on('participantConnected', participant => {
-                    participant.tracks.forEach(publication => {
-                        if (publication.isSubscribed) {
-                            const track = publication.track
+                    room.on('trackSubscribed', track => {
+                        if (track.kind === 'audio') {
+                            console.log('vldfml');
+                            const audioElement = track.attach();
+                            audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
+                                document.body.appendChild(audioElement);
+                            });
+                        }
+                    });
+
+                    // room.on('trackAdded', track => {
+                    //     if (track.kind === 'audio') {
+                    //         console.log('track kind');
+                    //         const audioElement = track.attach();
+                    //         audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
+                    //             document.body.appendChild(audioElement);
+                    //         });
+                    //     }
+                    // })
+
+                    room.participants.forEach(participant => {
+                        participant.on('trackSubscribed', track => {
                             remoteVideo.appendChild(track.attach())
+
+                        })
+                    })
+
+                    room.on('participantConnected', participant => {
+                        participant.tracks.forEach(publication => {
+                            if (publication.isSubscribed) {
+                                const track = publication.track
+                                remoteVideo.appendChild(track.attach())
+                            }
+                        })
+                        participant.on('trackSubscribed', track => {
+                            remoteVideo.appendChild(track.attach())
+                        })
+                    })
+
+                    room.on('trackAdded', track => {
+                        if (track.kind === 'audio') {
+                            console.log('track kind');
+                            const audioElement = track.attach();
+                            audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
+                                console.log(audioElement);
+                                document.body.appendChild(audioElement);
+                            });
                         }
                     })
-                    participant.on('trackSubscribed', track => {
-                        remoteVideo.appendChild(track.attach())
-                    })
-                })
-
-                room.on('trackAdded', track => {
-                    if (track.kind === 'audio') {
-                        console.log('track kind');
-                        const audioElement = track.attach();
-                        audioElement.setSinkId(audioOutputDevice.deviceId).then(() => {
-                            console.log(audioElement);
-                            document.body.appendChild(audioElement);
-                        });
-                    }
-                })
-
+                }
                 room.on('disconnected', room => {
                     room.localParticipant.videoTracks.forEach(publication => {
                         publication.track.disable()

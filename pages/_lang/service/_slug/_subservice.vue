@@ -6,8 +6,10 @@
                     <h1 class="text-center title-plans" color="#34495e">{{ service.translation.name }}</h1>
                 </v-col>
                 <v-tabs class="pricing-plans-tabs" centered dark>
-                    <v-tab>Pricing plans</v-tab>
-                    <v-tab v-if="service.services.length" :to="`/${language.lang}/service/pricing-plans/${service.alias}`">Extended</v-tab>
+                    <v-tab>{{ trans.ServicePages.pricingPlans }}</v-tab>
+                    <v-tab v-if="service.services.length" :to="`/${language.lang}/service/pricing-plans/${service.alias}`">
+                        {{ trans.ServicePages.pricingPlansExtended }}
+                    </v-tab>
                 </v-tabs>
                 <v-col v-for="(plan, planIndex) in service.children" v-if="service.children" :key="planIndex">
                     <v-card flat class="xs12 sm12 md4 mb-3 flex ip-plan-service"
@@ -30,7 +32,7 @@
                             <v-flex pa-0 mt-4>
                                 <v-btn v-if="!$auth.loggedIn" :outline="!plan.highlight" depressed large color="primary"
                                        class="ma-0 ip-plan-btn" @click="openDialogLogin()">
-                                    Add To Cart
+                                    {{ trans.General.addCart }}
                                 </v-btn>
                                 <cart-btn v-if="$auth.loggedIn" :user="$auth.user" :service="plan"/>
                             </v-flex>
@@ -50,9 +52,21 @@
                 </v-col>
             </v-row>
             <v-row class="btns-row">
-                <v-col class="text-center">
-                    <v-btn class="v-btn-costum mr-8" color="accent" @click="$nuxt.$emit('open-appointment-form')">Solicita demo</v-btn>
-                    <v-btn class="v-btn-costum ml-8" to="#experts-block" color="accent">Dicuta cu consultantul</v-btn>
+                <v-col class="text-center" v-if="!$mobileDetect.mobile()">
+                    <v-btn class="v-btn-costum mr-8" color="accent" @click="$nuxt.$emit('open-appointment-form')">
+                        {{ trans.General.getDemo }}
+                    </v-btn>
+                    <v-btn class="v-btn-costum ml-8" to="#experts-block" color="accent">
+                        {{ trans.General.talkConsultant }}
+                    </v-btn>
+                </v-col>
+                <v-col class="text-center" v-else>
+                    <v-btn class="v-btn-costum mb-8" color="accent" @click="$nuxt.$emit('open-appointment-form')">
+                        {{ trans.General.getDemo }}
+                    </v-btn>
+                    <v-btn class="v-btn-costum mb-8" to="#experts-block" color="accent">
+                        {{ trans.General.talkConsultant }}
+                    </v-btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -388,7 +402,7 @@ export default {
 }
 .v-btn-costum {
     color: $custom_blue !important;
-    width: 250px; 
+    width: 250px;
 }
 .btns-row {
     padding: 30px;

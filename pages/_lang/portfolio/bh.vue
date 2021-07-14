@@ -2,7 +2,7 @@
     <main class="ja-bg portfolio-item mt-16">
         <img src="/portfolio/Portfolio-Hasdeu-banner-1.png" width="100%">
         <div class="text-center">
-            <h4 class="section-title">Shop Online</h4>
+            <h4 class="section-title">Biblioteca Hasdeu</h4>
             <img src="/portfolio/Portfolio-Hasdeu-banner-2.png" alt="">
         </div><br><br><br><br>
     </main>

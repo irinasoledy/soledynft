@@ -115,6 +115,7 @@ export default {
     }
     .dialog--wrapp{
         position: relative;
+        background-color: #FFF !important;
     }
     @media (max-width: 991px) {
         .c-chat {

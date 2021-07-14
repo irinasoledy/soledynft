@@ -46,7 +46,7 @@
                     <li><nuxt-link :to="`/${language.lang}/about`">{{ trans.PageNames.about }}</nuxt-link></li>
                     <li><nuxt-link :to="`/${language.lang}/contacts`">{{ trans.PageNames.contacts }}</nuxt-link></li>
                     <li><nuxt-link :to="`/${language.lang}/experts`">{{ trans.PageNames.ourTeam }}</nuxt-link></li>
-                    <li><nuxt-link :to="`/`">{{ trans.PageNames.faq }}</nuxt-link></li>
+                    <li><nuxt-link :to="`/${language.lang}/portfolio`">{{ trans.PageNames.portfolio }}</nuxt-link></li>
                 </ul>
             </v-col>
 

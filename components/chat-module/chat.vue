@@ -557,7 +557,7 @@ export default {
 @media (max-width: 991px) {
     .chat-dialog-window {
         width: 100% !important;
-        height: calc(100vh - 56px);
+        height: calc(100vh - 96px);
         right: 0;
         bottom: 0;
         top: auto;

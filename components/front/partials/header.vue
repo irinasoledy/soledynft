@@ -42,7 +42,7 @@
                             <v-list-item-title>{{ trans.PageNames.home }}</v-list-item-title>
                         </v-list-item>
                         <v-list-item v-for="(item, i) in drawerItems" :key="i" nuxt :to="item.href">
-                            <v-list-item-title v-if="item.action" v-text="item.title"
+                            <v-list-item-title v-if="item.action" v-text="trans.PageNames.ourServices"
                                                @click.stop="openServices"></v-list-item-title>
                             <v-list-item-title v-else v-text="item.title"></v-list-item-title>
                             <v-list-item-icon>
@@ -53,7 +53,7 @@
                             <v-list-item-title>{{ trans.PageNames.about }}</v-list-item-title>
                         </v-list-item>
                         <v-list-item @click="closeMenu(`/${language.lang}/portfolio/`)">
-                            <v-list-item-title>Portfolio</v-list-item-title>
+                            <v-list-item-title>{{ trans.PageNames.portfolio }}</v-list-item-title>
                         </v-list-item>
                         <v-list-item @click="closeMenu(`/${language.lang}/contacts/`)">
                             <v-list-item-title>{{ trans.PageNames.contacts }}</v-list-item-title>
@@ -64,7 +64,7 @@
                     <div class="pa-2 mb-4">
                         <v-btn color="secondary" outlined block v-if="!$auth.loggedIn"
                                @click="$nuxt.$emit('openLoginDialog')">
-                            sign in
+                               {{ trans.ContactsAndForms.authSignIn }}
                         </v-btn>
                         <v-btn color="secondary" outlined block v-else @click.stop="cabinetDrawer = !cabinetDrawer">
                             Profile
@@ -100,14 +100,14 @@
                         <v-list-item>
                             <v-list-item-title
                                 @click="closeMenu(`/${language.lang}/live-video-chat`)"
-                                v-text="'Live VideoChat integrat pe website'">
+                                v-text="trans.ServicePages.zoomMenuTitle">
                             </v-list-item-title>
                         </v-list-item>
 
                         <v-list-item>
                             <v-list-item-title
                                 @click="closeMenu(`/${language.lang}/digital-automation-sales`)"
-                                v-text="'Automatizare Digitală Vânzari prin CRM'">
+                                v-text="trans.ServicePages.crmMenuTitle">
                             </v-list-item-title>
                         </v-list-item>
 
@@ -295,12 +295,12 @@
                                         >
                                             <v-hover v-slot="{hover}">
                                                 <v-list-item :to="`/${language.lang}/live-video-chat`">
-                                                    Live VideoChat integrat pe website
+                                                    {{ trans.ServicePages.zoomMenuTitle }}
                                                 </v-list-item>
                                             </v-hover>
                                             <v-hover v-slot="{hover}">
                                                 <v-list-item :to="`/${language.lang}/digital-automation-sales`">
-                                                    Automatizare Digitală Vânzari prin CRM
+                                                    {{ trans.ServicePages.crmMenuTitle }}
                                                 </v-list-item>
                                             </v-hover>
                                             <v-hover v-slot="{hover}" v-for="(item, i) in servicesList" :key="i">
@@ -345,7 +345,7 @@
                             </v-list-item>
                             <v-list-item height="43" nuxt exact :to="`/${language.lang}/portfolio/`">
                                 <v-list-item-title class="text-center">
-                                    Portfolio
+                                    {{ trans.PageNames.portfolio }}
                                 </v-list-item-title>
                             </v-list-item>
                             <v-list-item height="43" nuxt exact :to="`/${language.lang}/contacts/`">
@@ -368,7 +368,7 @@
                                     @click="$nuxt.$emit('open-appointment-form')"
                                     >
                                     <v-icon left>mdi-comment-bookmark</v-icon>
-                                    {{ trans.HP.hpfreeConsultation }}
+                                    {{ trans.General.freeConsultationMsg }}
                                 </v-btn>
                                 <v-select
                                     class="selectHeader"
