@@ -102,10 +102,10 @@ export default {
                     dominantSpeaker: true }).then(room => {
                 const localVideo = this.$refs["local-video"];
                 const remoteVideo = this.$refs["remote-video"];
-                
+
                 this.activeRoom = room;
 
-                if (this.activeRoom.participants.size < 2) {
+                // if (this.activeRoom.participants.size < 2) {
                     createLocalVideoTrack().then(track => {
                         localVideo.appendChild(track.attach())
                     })
@@ -159,7 +159,7 @@ export default {
                             });
                         }
                     })
-                }
+                // }
                 room.on('disconnected', room => {
                     room.localParticipant.videoTracks.forEach(publication => {
                         publication.track.disable()

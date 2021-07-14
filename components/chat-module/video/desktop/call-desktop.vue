@@ -95,7 +95,8 @@ export default {
                 const remoteVideo = this.$refs["remote-video"];
                 this.activeRoom = room;
 
-                if (this.activeRoom.participants.size < 2) {
+                console.log(this.activeRoom.participants);
+                // if (this.activeRoom.participants.size < 2) {
                     createLocalVideoTrack().then(track => {
                         localVideo.appendChild(track.attach())
                     })
@@ -126,7 +127,7 @@ export default {
                             remoteVideo.appendChild(track.attach())
                         })
                     })
-                }
+                // }
 
                 room.on('disconnected', room => {
                     room.localParticipant.videoTracks.forEach(publication => {
