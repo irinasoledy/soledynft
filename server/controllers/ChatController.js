@@ -5,9 +5,9 @@ const User = require('../models/user')
 
 class ChatController {
     constructor() {
-        this.accountId = 'ACf774fdacb3804858ce05f50638a9b7c4'
-        this.apiKeyId = 'SKa009673cd0e1a4fabe39b6f04fd213e4'
-        this.apiKeySecret = 'PCW5zOsQomxsPkrjX6Nl079irATIOMaE'
+        this.accountId = 'AC5ac2a44a5c1c95efc366c14f6ca84155'
+        this.apiKeyId = 'SK1d7d567d037fb395f3583360fcbd60bb'
+        this.apiKeySecret = '25JSMolczKMzMFiDNLvd07vmjBBuBMid'
     }
 
     async savePolicy(req, res) {
@@ -30,9 +30,9 @@ class ChatController {
 
         // const token = await new AccessToken(process.env.accountId, process.env.apiKeyId, process.env.apiKeySecret)
         const token = await new AccessToken(
-            'ACf774fdacb3804858ce05f50638a9b7c4',
-            'SKa009673cd0e1a4fabe39b6f04fd213e4',
-            'PCW5zOsQomxsPkrjX6Nl079irATIOMaE'
+            'AC5ac2a44a5c1c95efc366c14f6ca84155',
+            'SK1d7d567d037fb395f3583360fcbd60bb',
+            '25JSMolczKMzMFiDNLvd07vmjBBuBMid'
         )
 
         token.identity = identity
