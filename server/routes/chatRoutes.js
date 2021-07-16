@@ -3,7 +3,7 @@ const router = Router()
 
 const MessagesController = require('./../controllers/MessagesController')()
 const UserController = require('./../controllers/UserController')()
-
+const AmoCrmController = require('./../controllers/AmoCrmController')()
 
 router.get('/api/messages/unreaded', MessagesController.getUnreaded)
 
@@ -23,5 +23,8 @@ router.get('/api/user/random/employee', UserController.getRandomEmployee)
 router.get('/api/user/random/offline/employee', UserController.getRandomOfflineEmployee)
 
 router.post('/api/user/set/botActivated', UserController.setUserBotActivated)
+
+router.post('/api/leads', AmoCrmController.amoAuth)
+
 
 module.exports = router

@@ -36,6 +36,12 @@ export default {
         await axios.patch(`/api/user/callStatus`, data)
             .then(response => console.log('ok'))
             .catch(err => console.log(err) )
+    },
+
+    async setLeadsAmoCrm(data, cb) {
+        await axios.post(`/api/leads`, data)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
     }
 
 }

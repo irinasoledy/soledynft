@@ -6,6 +6,7 @@
                     <div id="formInfo">
                         <v-card-title class="d-flex justify-space-between elevation-1">
                             <h4>Edit Client: <i>{{ editedUser.name }}</i></h4>
+                            <v-btn @click="sendToAmoCrm()">send to amocrm</v-btn>
                             <v-icon @click="refresh">mdi-refresh</v-icon>
                         </v-card-title>
                     </div>
@@ -469,6 +470,23 @@ export default {
             editUser: 'admin/editUser',
             editClientAccount: 'admin/editClientAccount',
         }),
+        async sendToAmoCrm() {
+            const data = {
+                name: this.editedUser.name,
+                email: this.editedUser.email,
+                phone: this.editedUser.phone,
+                age: this.editedUser.age,
+                comments: this.editedUser.comments,
+                whatsapp: this.userDetatils.whatsapp,
+                messenger: this.userDetatils.messenger,
+                preferred: this.userDetatils.preferred,
+            }
+
+            await userApi.addLeadToAmoCrm(data, (response) => {
+                this.snackbarText = `${this.editedUser.name} has been sent to AmmoCRM!`
+            })
+            console.log(data);
+        },
         refresh() {
             this.$nuxt.$emit('refresh-crm-cart')
             this.$nuxt.$emit('refresh-crm-order')

@@ -81,4 +81,9 @@ export default {
         await axios.post(`/api/auth/social`, data)
             .then(response => cb(response.data))
     },
+
+    async addLeadToAmoCrm(data, cb) {
+        await axios.post(`${process.env.API}/api/v2/leads`, data)
+            .then(response => cb(response.data))
+    },
 }
