@@ -55,6 +55,7 @@ io.on('connection', socket => {
 
     socket.on('startCall', data => {
         socket.broadcast.to(data.to._id).emit('incomingCall', data)
+        io.to(data.from._id).emit('setRoom', {roomId: data.to._id})
     })
 
     socket.on('endCall', data => {
@@ -63,6 +64,7 @@ io.on('connection', socket => {
 
     socket.on('acceptCall', (data, cb) => {
         socket.broadcast.to(data.to._id).emit('acceptCall', data)
+        io.to(data.from._id).emit('setRoom', {roomId: data.from._id})
         cb()
     })
 

@@ -90,7 +90,10 @@ export default {
                 audioOutputDevice = devices.find(device => device.kind === 'audiooutput');
             })
 
-            await connect(this.accessToken, {name: this.room}).then(room => {
+            await connect(this.accessToken, { name: this.room, type: 'peer-to-peer' }).then(room => {
+
+                console.log(this.room);
+
                 const localVideo = this.$refs["local-video"];
                 const remoteVideo = this.$refs["remote-video"];
                 this.activeRoom = room;
