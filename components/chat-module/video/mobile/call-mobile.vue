@@ -207,4 +207,7 @@ export default {
 .local-video video{
     width: 100px;
 }
+#my-video-chat-window {
+    width: 100px !important;
+}
 </style>

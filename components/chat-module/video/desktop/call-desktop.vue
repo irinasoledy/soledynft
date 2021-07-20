@@ -168,9 +168,9 @@ export default {
 }
 
 .local-video-d video {
-    position: absolute;
-    right: 0;
-    top: 0;
+    position: absolute !important;
+    right: 20% !important;
+    top: 0 !important;
 }
 
 .local-video-d video {
@@ -187,5 +187,8 @@ export default {
 
 .v-item-group.v-bottom-navigation {
     z-index: 9;
+}
+.my-video-chat-window {
+    width: 100% !important;
 }
 </style>
