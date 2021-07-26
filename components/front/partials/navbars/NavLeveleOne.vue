@@ -1,0 +1,180 @@
+<template>
+  <v-list>
+    <v-list-item>
+      <v-list-item-icon @click="closeDrawer">
+        <v-icon color="primary">mdi-close</v-icon>
+      </v-list-item-icon>
+    </v-list-item>
+    <v-list-item>
+      <v-list-item-content>
+        <v-dialog
+          v-model="changeLanguage"
+          width="400"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-list-item-title class="d-flex align-center userSettings" v-bind="attrs"
+              v-on="on">
+              <span class="d-flex align-center">RON / RO / <img class="ml-1" src="https://soledy.com/images/flags/24x24/ro.png" alt=""> </span>
+              <v-spacer></v-spacer>
+              |
+              <v-spacer></v-spacer>
+              <span>modifica</span>
+            </v-list-item-title>
+          </template>
+          <language-modal @closeLanguageModal="changeLanguage = false" />
+        </v-dialog>
+      </v-list-item-content>
+    </v-list-item>
+    <v-list-item @click="openDrawerTwoCatalog">
+      <v-list-item-content>
+        <v-list-item-title>
+          Clothing
+        </v-list-item-title>
+      </v-list-item-content>
+      <v-list-item-icon>
+        <v-icon color="primary">mdi-chevron-right</v-icon>
+      </v-list-item-icon>
+    </v-list-item>
+    <v-list-item @click="openDrawerTwoCollections">
+      <v-list-item-content>
+        <v-list-item-title>
+          Clothing Collections
+        </v-list-item-title>
+      </v-list-item-content>
+      <v-list-item-icon>
+        <v-icon color="primary">mdi-chevron-right</v-icon>
+      </v-list-item-icon>
+    </v-list-item>
+    <v-list-item to="/designers" nuxt>
+      <v-list-item-content>
+        <v-list-item-title>
+          Designers
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+    <v-list-item to="/new" nuxt>
+      <v-list-item-content>
+        <v-list-item-title>
+          Articole noi
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+    <v-list-item to="/outlet" nuxt>
+      <v-list-item-content>
+        <v-list-item-title>
+          Outlet
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item >
+    <v-list-item to="/about" nuxt>
+      <v-list-item-content>
+        <v-list-item-title>
+          Brand soledy
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+    <v-list-item>
+      <v-list-item-content>
+        <v-dialog
+          v-model="authModal"
+          width="400"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-list-item-title v-bind="attrs"
+              v-on="on">
+              <v-btn block outlined color="primary">
+                Account
+              </v-btn>
+            </v-list-item-title>
+          </template>
+          <auth-modal @closeAuthModal="authModal = false" />
+        </v-dialog>
+      </v-list-item-content>
+    </v-list-item>
+    <v-list-group :value="false">
+      <template v-slot:activator>
+        <v-list-item-title>
+          ajutor & suport
+        </v-list-item-title>
+      </template>
+      <v-list-item dense class="pl-8" nuxt v-for="item in support" :key="item.title" :to="item.to">
+        <v-list-item-content>
+          <v-list-item-title>
+            {{item.title}}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list-group>
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>
+          urmareste-ne:
+        </v-list-item-title>
+      </v-list-item-content>
+      <v-list-item-action class="d-flex flex-row">
+        <v-btn href="https://www.facebook.com/" target="_blank" icon color="title">
+          <v-icon>mdi-facebook</v-icon>
+        </v-btn>
+        <v-btn href="https://www.instagram.com/" target="_blank" icon color="title">
+          <v-icon>mdi-instagram</v-icon>
+        </v-btn>
+      </v-list-item-action>
+    </v-list-item>
+  </v-list>
+</template>
+
+<script>
+import LanguageModal from '@/components/front/forms/LanguageModal'
+import AuthModal from '@/components/front/forms/AuthenticationForm'
+export default {
+  components: {
+    LanguageModal,
+    AuthModal
+  },
+  data () {
+
+    return {
+      clipped: false,
+      fixed: false,
+      changeLanguage: false,
+      authModal: false,
+      support: [
+        {
+          title: "contactele noastre",
+          to: "/contacts"
+        },
+        {
+          title: "livrare & achitare & retur",
+          to: "/terms"
+        },
+        {
+          title: "ghildul marimi",
+          to: "/sizes-guide"
+        }
+      ]
+    }
+  },
+  methods: {
+    closeDrawer () {
+      this.$emit('closeDrawer')
+    },
+    openDrawerTwoCatalog () {
+      this.$emit('openDrawerTwoCatalog')
+    },
+    openDrawerTwoCollections () {
+      this.$emit('openDrawerTwoCollections')
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .v-list-item {
+    &__title {
+      text-transform: uppercase;
+    }
+  }
+  .userSettings {
+    max-width: 250px;
+  }
+</style>

@@ -1,8 +1,9 @@
 <template>
-    <v-app id="root">
-        <NavComponent/>
-        <nuxt/>
-
+    <v-app>
+        <Header />
+        <v-main class="py-13">
+            <nuxt />
+        </v-main>
         <div v-if="$auth.loggedIn">
             <Chat mode="employee" :user="$auth.user"/>
             <Video mode="employee" :user="$auth.user"/>
@@ -15,15 +16,21 @@
             <AuthenticationForm :user="user"/>
             <Analytics type="client" :user="user"/>
         </div>
+        <Footer />
 
-        <Footer/>
     </v-app>
+    <!-- <v-app id="root">
+        <NavComponent/>
+        <nuxt/>
+        <Footer/>
+    </v-app> -->
 </template>
 
 <script>
 
 import {mapActions, mapGetters} from "vuex"
-import NavComponent from '@/components/front/partials/header';
+// import NavComponent from '@/components/front/partials/header';
+import Header from '@/components/front/partials/header';
 import Footer from '@/components/front/partials/footer';
 import Chat from '@/components/chat-module/chat';
 import Video from '@/components/chat-module/video';
@@ -41,7 +48,7 @@ export default {
         roomId: 'call/getRoomId',
     }),
     components: {
-        NavComponent,
+        Header,
         Footer,
         Chat,
         Video,
@@ -49,3 +56,21 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+  a {
+    text-decoration: none;
+  }
+  .v-application .v-btn.body {
+    border: 1px solid $main-color !important;
+    color: $red-color !important;
+    border-radius: 0 !important;
+  }
+  .v-btn {
+    border-radius: 0 !important;
+  }
+  body,
+  .theme--light.v-application {
+    background: $bcg-body !important;
+  }
+</style>
