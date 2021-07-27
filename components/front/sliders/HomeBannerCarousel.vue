@@ -1,13 +1,13 @@
 <template>
-  <div class="banner">
+  <div class="banner" v-if="promotions">
     <VueSlickCarousel ref="productSlider" v-bind="settings" >
-      <nuxt-link  to="/promotions" class="banner__inner" v-for="(item, i) in 4" :key="i">
+      <nuxt-link  to="/promotions" class="banner__inner" v-for="(promotion, i) in promotions" :key="i">
         <div class="banner__image">
-          <img src="https://cdn2.hubspot.net/hub/491011/hubfs/BLOG_6-technology-trends-reshaping-luxury-fashion-industry.jpg?width=1600&name=BLOG_6-technology-trends-reshaping-luxury-fashion-industry.jpg" alt="banner" />
+          <img :src="`https://back.soledy.com/images/promotions/${promotion.img}`" alt="banner" />
         </div>
         <div class="banner__text">
           <div class="banner__title">
-             vezi promotia {{i + 1}}
+              {{ promotion.translation.name }}
           </div>
         </div>
       </nuxt-link>
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
   import VueSlickCarousel from 'vue-slick-carousel'
   import 'vue-slick-carousel/dist/vue-slick-carousel.css'
   import ArrowLeft from '@/components/front/sliders/ArrowLeft.vue'
@@ -43,6 +45,10 @@ export default {
       }
     }
   },
+  computed: mapGetters({
+      promotions: 'getPromotions',
+      collections: 'getCollections',
+  }),
   methods: {
     nextSlide () {
       this.$refs.productSlider.next()

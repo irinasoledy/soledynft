@@ -11,8 +11,8 @@
         </div>
 
         <div v-else>
-            <Chat mode="employee" :user="user"/>
-            <Video mode="employee" :user="user"/>
+            <!-- <Chat mode="employee" :user="user"/>
+            <Video mode="employee" :user="user"/> -->
             <AuthenticationForm :user="user"/>
             <Analytics type="client" :user="user"/>
         </div>

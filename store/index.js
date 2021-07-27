@@ -8,6 +8,8 @@ export const state = () => ({
         {id: 3, lang: 'ru', active: 0, name: 'RU'}
     ],
     lang: {id: 1, lang: 'ro', active: 1, name: 'RO'},
+    categories: {},
+    collections: {},
     envAPI: {},
     pages: [],
     services: [],
@@ -51,7 +53,7 @@ export const mutations = {
     SET_SERVICES(state, data) {
         state.services = data.services
         state.allServices = data.servicesAll
-        state.promotions = data.promotions
+        // state.promotions = data.promotions
         state.pages = data.pages
         state.banners = data.banners
     },
@@ -60,6 +62,15 @@ export const mutations = {
     },
     SET_TRANSALATIONS(state, data) {
         state.translations = data.vars
+    },
+    SET_CATEGORIES(state, data) {
+        state.categories = data
+    },
+    SET_COLLECTIONS(state, data) {
+        state.collections = data
+    },
+    SET_PROMOTIONS(state, data) {
+        state.promotions = data
     },
     SOCKET_refreshEmployeeStatus(state, employee) {
         state.changedEmployee = employee
@@ -89,6 +100,11 @@ export const actions = {
                 commit('SET_DEFAULT_LANG', findLang.id)
             }
         }
+
+        await contentApi.getCategories(state.lang.lang, data => commit('SET_CATEGORIES', data))
+        await contentApi.getCollections(state.lang.lang, data => commit('SET_COLLECTIONS', data))
+        await contentApi.getPromotions(state.lang.lang, data => commit('SET_PROMOTIONS', data))
+
 
         await contentApi.getTranslations(state.lang.lang, data => commit('SET_TRANSALATIONS', data))
         await contentApi.getInitData(state.lang.lang, data => commit('SET_SERVICES', data))
@@ -138,11 +154,14 @@ export const getters = {
     getTranslations: state => state.translations,
     getChangedEmployee: state => state.changedEmployee,
     getEnvAPI: state => state.envAPI,
-    getPromotions: state => state.promotions,
     getPages: state => state.pages,
     getExperts: state => state.experts,
     getBanners: state => state.banners,
     getServerPing: state => state.ping,
     getPageName: state => state.pageName,
     getNavigations: state => state.navigations,
+
+    getCategories: state => state.categories,
+    getCollections: state => state.collections,
+    getPromotions: state => state.promotions,
 }

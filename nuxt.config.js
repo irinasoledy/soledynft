@@ -35,7 +35,7 @@ module.exports = {
     */
     css: [
         'font-awesome/css/font-awesome.css',
-        // 'video.js/dist/video-js.css'
+        "~layouts/global.scss"
     ],
     /*
     ** Plugins to load before mounting the App
