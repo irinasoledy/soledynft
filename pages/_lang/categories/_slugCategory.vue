@@ -1,9 +1,9 @@
 <template>
-  <v-container>
+  <v-container v-if="category">
     <v-row>
       <v-col cols="12">
         <h3 class="c-title title-olive mt-3">
-          Cercei
+          {{ category.translation.name }}
         </h3>
       </v-col>
       <v-col class="col-12">
@@ -19,14 +19,14 @@
             </v-btn>
           </div>
           <v-row>
-            <v-col class="col-lg-3 col-6 mb-2" v-for="(item, key) in items" :key="key">
+            <v-col class="col-lg-3 col-6 mb-2" v-for="(product, key) in category.products" :key="key">
                 <nuxt-link :to="`#`" class="product">
-                    <v-img :src="item.image"></v-img>
-                    <p class="product__name">{{item.name}}</p>
+                    <v-img :src="`https://back.soledy.com/images/products/sm/${product.main_image.src}`"></v-img>
+                    <p class="product__name">{{ product.translation.name }}</p>
                     <div class="collectionOne__price price">
                         <span>190</span>
-                        <span v-if="item.discount">/</span>
-                        <span v-if="item.discount" class="price__discount">320</span>
+                        <span>/</span>
+                        <span class="price__discount">320</span>
                         <span>RON </span>
                     </div>
                 </nuxt-link>
@@ -39,9 +39,13 @@
 </template>
 
 <script>
+
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
   data () {
     return {
+        category: null,
       filterModal: false,
       sortModal: false,
       items: [
@@ -53,6 +57,17 @@ export default {
           }
       ]
     }
+  },
+  computed: mapGetters({
+      categories: 'getCategories',
+      language: 'getLanguage',
+      trans: 'getTranslations',
+  }),
+  async mounted() {
+      this.category = await this.categories.find((category) => category.alias == this.$route.params.slugCategory)
+      // this.title = this.service.translation.seo_title
+      // this.description = this.service.translation.seo_description
+      // this.setChatBotmessage(this.trans.General.botMessageTemplate1 + " " + this.service.translation.bot_message + '? '+ this.trans.General.botMessageTemplate2)
   },
   methods: {
     openFilterModal () {
@@ -91,6 +106,20 @@ export default {
     margin-right: -15px;
     z-index: 4;
   }
+  .product {
+  &__name,
+  &__price {
+    display: block;
+    font-family: $font-text;
+    font-size: 14px;
+    color: $olive-color;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 1.2;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+}
   @media (min-width: 1200px) {
     .filter {
       top: 63px;

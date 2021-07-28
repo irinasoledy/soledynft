@@ -45,28 +45,28 @@
                 <v-icon color="primary">mdi-chevron-right</v-icon>
             </v-list-item-icon>
         </v-list-item>
-        <v-list-item to="/designers" nuxt>
+        <v-list-item to="/ro/designers" nuxt>
             <v-list-item-content>
                 <v-list-item-title>
                     Designers
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
-        <v-list-item to="/new" nuxt>
+        <v-list-item to="/ro/new" nuxt>
             <v-list-item-content>
                 <v-list-item-title>
                     Articole noi
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
-        <v-list-item to="/outlet" nuxt>
+        <v-list-item to="/ro/outlet" nuxt>
             <v-list-item-content>
                 <v-list-item-title>
                     Outlet
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item >
-        <v-list-item to="/about" nuxt>
+        <v-list-item to="/ro/about" nuxt>
             <v-list-item-content>
                 <v-list-item-title>
                     Brand soledy

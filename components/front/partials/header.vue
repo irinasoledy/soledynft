@@ -22,7 +22,7 @@
             <nav-level-one  @closeDrawer="drawerOne = false" @openDrawerTwoCatalog="openDrawerTwoCatalog" @openDrawerTwoCollections="openDrawerTwoCollections" />
         </v-navigation-drawer>
         <v-navigation-drawer width="360" v-model="drawerTwo" fixed color="body" temporary>
-            <nav-level-two @closeDrawerTwo="closeDrawerTwo" v-bind:items="items" />
+            <nav-level-two @closeDrawerTwo="closeDrawerTwo" v-bind:items="items"  v-bind:type="type"/>
         </v-navigation-drawer>
     </v-sheet>
 </template>
@@ -49,17 +49,20 @@ export default {
 		return {
 			drawerOne: false,
 			drawerTwo: false,
-			items: []
+			items: [],
+            type: 'category'
 		}
 	},
 	methods: {
 		openDrawerTwoCollections() {
 			this.items = [...this.collections]
+            this.type = 'collection'
 			this.drawerTwo = true
 			this.drawerOne = false
 		},
 		openDrawerTwoCatalog() {
 			this.items = [...this.categories]
+            this.type = 'category'
 			this.drawerTwo = true
 			this.drawerOne = false
 		},

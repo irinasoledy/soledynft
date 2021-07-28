@@ -7,13 +7,15 @@
                     {{ item.view.translation.name }}
                 </h3>
 
-                <home-carousel />
+                <home-carousel-sets :sets="item.view.sets" :collection="item.view" v-if="item.type === 'collection'"/>
+
+                <home-carousel-products :products="item.view.products" :category="item.view" v-else/>
 
                 <div class="h-section__button">
-                    <v-btn nuxt to="/ro/collections" outlined color="primary" v-if="item.type === 'collection'">
+                    <v-btn nuxt :to="`/ro/collections/${item.view.alias}`" outlined color="primary" v-if="item.type === 'collection'">
                         Vezi seturile
                     </v-btn>
-                    <v-btn nuxt to="/ro/categories" outlined color="primary" v-else>
+                    <v-btn nuxt :to="`/ro/categories/${item.view.alias}`" outlined color="primary" v-else>
                         Vezi produsele
                     </v-btn>
                 </div>
@@ -26,12 +28,13 @@
 <script>
 
 import { mapGetters, mapActions } from 'vuex'
-import HomeCarousel from '@/components/front/sliders/HomeCarousel.vue'
+import HomeCarouselSets from '@/components/front/sliders/HomeCarouselSets.vue'
+import HomeCarouselProducts from '@/components/front/sliders/HomeCarouselProducts.vue'
 import HomeBannerCarousel from '@/components/front/sliders/HomeBannerCarousel.vue'
 import About from '@/components/front/widgets/About.vue'
 
 export default {
-    components: {HomeCarousel, About, HomeBannerCarousel},
+    components: {HomeBannerCarousel, About, HomeCarouselSets, HomeCarouselProducts},
     computed: mapGetters({
         categories: 'getCategories',
         collections: 'getCollections',
@@ -44,13 +47,14 @@ export default {
     mounted() {
         const items = []
         this.categories.forEach((category, i) => {
-            items.push({type: 'category', view: category})
-            if (typeof this.collections[i] !== 'undefined') {
-                items.push({type: 'collection', view: this.collections[i]})
+            if (i < 5) {
+                items.push({type: 'category', view: category})
+                if (typeof this.collections[i] !== 'undefined') {
+                    items.push({type: 'collection', view: this.collections[i]})
+                }
             }
         })
         this.items = items
-        console.log(this.items)
     }
 }
 </script>

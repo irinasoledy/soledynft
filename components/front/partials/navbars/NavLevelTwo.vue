@@ -8,7 +8,15 @@
                 <v-list-item-title>back</v-list-item-title>
             </v-list-item-content>
         </v-list-item>
-        <v-list-item v-if="items" v-for="item in items" :key="item.id" nuxt to="/ro/categories" :class="'pl-8'">
+        <v-list-item v-if="items && type === 'category'" v-for="item in items" :key="item.id" nuxt :to="`/ro/categories/${item.alias}`" :class="'pl-8'">
+            <v-list-item-content>
+                <v-list-item-title>
+                    {{item.translation.name}}
+                </v-list-item-title>
+            </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item v-if="items && type === 'collection'" v-for="item in items" :key="item.id" nuxt :to="`/ro/collections/${item.alias}`" :class="'pl-8'">
             <v-list-item-content>
                 <v-list-item-title>
                     {{item.translation.name}}
@@ -21,7 +29,7 @@
 <script>
 export default {
     name: "NavLevelTwo",
-    	props: ['items'],
+    	props: ['items', 'type'],
     	data() {
     		return {
     			clipped: false,
