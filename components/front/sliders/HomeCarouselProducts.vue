@@ -2,7 +2,7 @@
     <div class="h-slider">
         <VueSlickCarousel ref="homeCarousel" :infinite="true" :variableWidth="true" :arrows="false" :settings="localSettings" >
             <div class="h-slider__item">
-                <a href="#" class="h-slider__item-inner">
+                <a :to="`/ro/collections/${category.alias}`" class="h-slider__item-inner">
                     <div class="h-slider__image">
                         {{ category.banner_mobile }}
                         <img :src="`https://back.soledy.com/images/categories/sm/${category.banner_mobile}`" alt="">
@@ -15,7 +15,7 @@
                 </a>
             </div>
             <div class="h-slider__item" v-for="(product, i) in products" :key="i" v-if="product.main_image && i < 5">
-                <a href="#" class="h-slider__item-inner" >
+                <a :to="`/ro/collections/${category.alias}/${product.alias}`" class="h-slider__item-inner" >
                     <div class="h-slider__image">
                         <img :src="`https://back.soledy.com/images/products/sm/${product.main_image.src}`">
                     </div>

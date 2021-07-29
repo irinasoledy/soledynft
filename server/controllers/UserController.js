@@ -376,22 +376,22 @@ class UserController {
             const user = await User.findOne({_id: userId})
 
             // let sessionDuration = user.sessionDuration
-            //
-            // if (user.sessionDate) {
+
+            if (user) {
                 let dateOne = new Date(user.sessionDate);
                 let dateTwo = Date.now();
 
                 let msDifference =  dateTwo - dateOne;
                 let sessionDuration = Math.floor(msDifference/1000/60);
-            // }
 
-            await User.findOneAndUpdate({_id: userId}, {$set: {online: true, sessionDuration: sessionDuration}})
+                await User.findOneAndUpdate({_id: userId}, {$set: {online: true, sessionDuration: sessionDuration}})
 
-            if (type === 'client') {
-                await UserAction.findOneAndUpdate({userId: userId}, {$set: {online: true}})
+                if (type === 'client') {
+                    await UserAction.findOneAndUpdate({userId: userId}, {$set: {online: true}})
+                }
+                return res.status(200).json(sessionDuration)
             }
-
-            return res.status(200).json(sessionDuration)
+            return false
         } catch (e) {
             return res.status(505).json({message: `Error UserController@setUserOnline ${e}`})
         }

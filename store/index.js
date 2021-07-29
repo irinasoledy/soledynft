@@ -134,6 +134,8 @@ export const actions = {
         await userApi.setUserOnline(data, response => {
             // commit('admin/SET_CLIENTS', response)
             // commit('SET_EXPERTS', response.users)
+        }, error => {
+            console.log(error);
         })
     },
 

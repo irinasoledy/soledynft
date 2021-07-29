@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const backURL = 'https://soledy.itmall.digital/'
+const backURL = 'http://soledy.itmall.digital'
 
 export default {
 
@@ -12,6 +12,24 @@ export default {
 
     async getCategories(lang, cb){
         await axios.get(`${backURL}/api/categories?lang=${lang}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
+    async getCategory(data, cb){
+        await axios.get(`${backURL}/api/category?lang=${data.lang}&alias=${data.alias}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
+    async getCollection(data, cb){
+        await axios.get(`${backURL}/api/collection?lang=${data.lang}&alias=${data.alias}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
+    async getProduct(data, cb){
+        await axios.get(`${backURL}/api/product?lang=${data.lang}&alias=${data.alias}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },

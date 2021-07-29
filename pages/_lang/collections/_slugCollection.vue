@@ -18,7 +18,7 @@
             <div class="collectionOne">
               <v-row class="justify-space-between">
                 <v-col class="col-lg-7 col-12">
-                  <!-- <slider-one-product :images="collectionImages" @openZoom="openZoom" :productImages="collectionImages" /> -->
+                  <slider-one-product :images="set.photos" @openZoom="openZoom" :productImages="set.photos" path="sets"/>
                 </v-col>
                 <v-col class="col-12 collectionOne__mobile">
                   <v-btn color="body" block>
@@ -36,20 +36,21 @@
                   </div>
                 </v-col>
 
-                <!-- <v-col class="col-lg-4 col-12">
+                <v-col class="col-lg-4 col-12">
                   <v-row>
-                    <v-col class="col-12 mt-6" v-for="(item, i) in 3" :key="i">
+                    <v-col class="col-12 mt-6" v-for="(product, i) in set.set_products" :key="i" v-if="product">
                       <div class="colProd__item">
                         <v-row>
                           <v-col class="col-4 pb-0">
                             <div class="colProd__image">
-                              <img src="https://soledy.com/images/products/sm/necklace-anne-blush-s6.JPG?5fa2a780ed00b" alt="">
+                              <img :src="`https://back.soledy.com/images/products/sm/${product.product.main_image.src}`" alt="">
                             </div>
                           </v-col>
                           <v-col class="col-8 pb-0">
                             <div class="colProd__descr">
                               <div class="colProd__name">
-                                Colier Anné Blush
+                                  <!-- {{ product }} -->
+                                {{ product.product.translation.name }}
                               </div>
                               <div class="colProd__price price">
                                 <span>190 RON</span>
@@ -82,7 +83,7 @@
                       </v-btn>
                     </v-col>
                   </v-row>
-                </v-col> -->
+                </v-col>
 
               </v-row>
             </div>
@@ -102,10 +103,27 @@ import {mapActions, mapGetters} from 'vuex'
 // import Sizes from '../components/products/Sizes.vue'
 // import Zoom from '../components/products/Zoom.vue'
 
-export default {
-  // components: {SliderOneProduct, Cart, Sizes, Zoom},
-  data () {
+import SliderOneProduct from '@/components/front/sliders/SliderOneProduct.vue'
 
+import Sizes from '@/components/front/productWidgets/Sizes.vue'
+import Colors from '@/components/front/productWidgets/Colors.vue'
+import Zoom from '@/components/front/productWidgets/Zoom.vue'
+
+import contentApi from '@/api/contentApi'
+
+export default {
+  components: {SliderOneProduct, Sizes, Zoom},
+  async asyncData({ app, params, store }) {
+      let collect = null
+      await contentApi.getCollection({lang: store.state.lang.lang, alias: params.slugCollection}, data => {
+          collect = data
+      })
+      return {
+          collection: collect,
+          // productImages: prod.images
+      }
+  },
+  data () {
     return {
         collection: null,
       sizesOptions: [
@@ -154,7 +172,7 @@ export default {
       trans: 'getTranslations',
   }),
   async mounted() {
-      this.collection = await this.collections.find((collection) => collection.alias == this.$route.params.slugCollection)
+      // this.collection = await this.collections.find((collection) => collection.alias == this.$route.params.slugCollection)
       // this.title = this.service.translation.seo_title
       // this.description = this.service.translation.seo_description
       // this.setChatBotmessage(this.trans.General.botMessageTemplate1 + " " + this.service.translation.bot_message + '? '+ this.trans.General.botMessageTemplate2)
