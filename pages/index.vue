@@ -47,7 +47,7 @@ export default {
     mounted() {
         const items = []
         this.categories.forEach((category, i) => {
-            if (i < 5) {
+            if (category.on_home === 1) {
                 items.push({type: 'category', view: category})
                 if (typeof this.collections[i] !== 'undefined') {
                     items.push({type: 'collection', view: this.collections[i]})

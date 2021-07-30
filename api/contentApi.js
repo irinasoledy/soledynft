@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const backURL = 'http://soledy.itmall.digital'
+const backURL = 'https://soledy.itmall.digital'
 
 export default {
 
@@ -22,12 +22,6 @@ export default {
             .catch(err => console.log(err))
     },
 
-    async getCollection(data, cb){
-        await axios.get(`${backURL}/api/collection?lang=${data.lang}&alias=${data.alias}`)
-            .then(response => cb(response.data))
-            .catch(err => console.log(err))
-    },
-
     async getProduct(data, cb){
         await axios.get(`${backURL}/api/product?lang=${data.lang}&alias=${data.alias}`)
             .then(response => cb(response.data))
@@ -36,6 +30,24 @@ export default {
 
     async getCollections(lang, cb){
         await axios.get(`${backURL}/api/collections?lang=${lang}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
+    async getCollection(data, cb){
+        await axios.get(`${backURL}/api/collection?lang=${data.lang}&alias=${data.alias}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
+    async getNewProducts(data, cb){
+        await axios.get(`${backURL}/api/products/new?lang=${data.lang}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
+    async getOutletProducts(data, cb){
+        await axios.get(`${backURL}/api/products/outlet?lang=${data.lang}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },

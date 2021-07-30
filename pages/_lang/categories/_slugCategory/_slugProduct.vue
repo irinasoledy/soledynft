@@ -26,16 +26,16 @@
                 </div>
                 <div class="buyOn__methods">
                   <v-btn icon>
-                    <img src="amazon_icon.png" alt="">
+                    <img src="/images/amazon_icon.png" alt="">
                   </v-btn>
                   <v-btn icon>
-                    <img src="ebay.png" alt="">
+                    <img src="/images/ebay.png" alt="">
                   </v-btn>
                   <v-btn icon>
-                    <img src="etsy.png" alt="">
+                    <img src="/images/etsy.png" alt="">
                   </v-btn>
                   <v-btn icon>
-                    <img src="wolf.png" alt="">
+                    <img src="/images/wolf.png" alt="">
                   </v-btn>
                 </div>
               </div>
@@ -45,19 +45,19 @@
                 </div>
                 <div class="guaranty__content">
                   <div class="guaranty__item">
-                    <img src="IMG_1070.png" alt="">
+                    <img src="/images/IMG_1070.png" alt="">
                     <span>happy worker</span>
                   </div>
                   <div class="guaranty__item">
-                    <img src="IMG_1071.png" alt="">
+                    <img src="/images/IMG_1071.png" alt="">
                     <span>non-toxic dyes</span>
                   </div>
                   <div class="guaranty__item">
-                    <img src="IMG_1072.png" alt="">
+                    <img src="/images/IMG_1072.png" alt="">
                     <span>happy worid</span>
                   </div>
                   <div class="guaranty__item">
-                    <img src="IMG_1073.png" alt="">
+                    <img src="/images/IMG_1073.png" alt="">
                     <span>co-product</span>
                   </div>
                 </div>

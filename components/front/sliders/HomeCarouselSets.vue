@@ -2,27 +2,23 @@
     <div class="h-slider">
         <VueSlickCarousel ref="homeCarousel" :infinite="true" :variableWidth="true" :arrows="false" :settings="localSettings" >
             <div class="h-slider__item">
-                <a href="#" class="h-slider__item-inner">
-                    <!-- {{ collection.banner }} -->
+                <nuxt-link :to="`/ro/collections/${collection.alias}`" class="h-slider__item-inner">
                     <div class="h-slider__image">
                         <img :src="`https://back.soledy.com/images/collections/${collection.banner_mob}`" alt="">
-                        <!-- <img src="https://back.soledy.com/images/sets/sm/set-authenic-anne-camelia-im1.JPG" alt=""> -->
                     </div>
                     <div class="h-slider__actions">
                         <v-btn color="primary" outlined>
                             Vezi produsele (here)
                         </v-btn>
                     </div>
-                </a>
+                </nuxt-link>
             </div>
             <div class="h-slider__item" v-for="(set, i) in sets" :key="i" v-if="set.main_photo && i < 5">
-                <a href="#" class="h-slider__item-inner">
+                <nuxt-link :to="`/ro/collections/${collection.alias}#${set.alias}`" class="h-slider__item-inner">
                     <div class="h-slider__image">
-
                         <img :src="`https://back.soledy.com/images/sets/sm/${set.main_photo.src}`">
-                        <!-- <img src="https://back.soledy.com/images/sets/sm/set-authenic-anne-camelia-im1.JPG" alt=""> -->
                     </div>
-                </a>
+                </nuxt-link>
             </div>
         </VueSlickCarousel>
         <div class="custom-arrow next-slide" @click="nextSlide">

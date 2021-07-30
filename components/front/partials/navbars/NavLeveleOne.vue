@@ -141,15 +141,15 @@ export default {
 			authModal: false,
 			support: [{
 					title: "contactele noastre",
-					to: "/contacts"
+					to: "/ro/contacts"
 				},
 				{
 					title: "livrare & achitare & retur",
-					to: "/terms"
+					to: "#"
 				},
 				{
 					title: "ghildul marimi",
-					to: "/sizes-guide"
+					to: "#"
 				}
 			]
 		}

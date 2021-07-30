@@ -16,13 +16,13 @@
                                         DESPRE SOLEDY
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
-                                        <nuxt-link to="/about">
+                                        <nuxt-link to="/ro/about">
                                             Brand Soledy
                                         </nuxt-link>
-                                        <nuxt-link to="/contact">
+                                        <nuxt-link to="/ro/contacts">
                                             Contactele Noastre
                                         </nuxt-link>
-                                        <nuxt-link to="/terms">
+                                        <nuxt-link to="#">
                                             Detalii comanda & livrare & achitare
                                         </nuxt-link>
                                     </v-expansion-panel-content>
@@ -34,10 +34,10 @@
                                         PRODUSELE NOASTRE:
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
-                                        <nuxt-link to="/about">
+                                        <nuxt-link to="#">
                                             Homewear Store
                                         </nuxt-link>
-                                        <nuxt-link to="/contact">
+                                        <nuxt-link to="#">
                                             Bijoux Boutique
                                         </nuxt-link>
                                     </v-expansion-panel-content>
@@ -49,16 +49,16 @@
                                         INFORMAȚII UTILE:
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
-                                        <nuxt-link to="/about">
+                                        <nuxt-link to="#">
                                             Termenii si condiții
                                         </nuxt-link>
-                                        <nuxt-link to="/contact">
+                                        <nuxt-link to="#">
                                             Politica de confidențialitate
                                         </nuxt-link>
-                                        <nuxt-link to="/about">
+                                        <nuxt-link to="#">
                                             Politica de retur
                                         </nuxt-link>
-                                        <nuxt-link to="/contact">
+                                        <nuxt-link to="#">
                                             Politica cookie
                                         </nuxt-link>
                                     </v-expansion-panel-content>
@@ -74,10 +74,10 @@
                                 DESPRE SOLEDY
                             </div>
                             <div class="footer__list">
-                                <nuxt-link to="/about">
+                                <nuxt-link to="/ro/about">
                                     Brand Soledy
                                 </nuxt-link>
-                                <nuxt-link to="/contact">
+                                <nuxt-link to="/ro/contacts">
                                     Contactele Noastre
                                 </nuxt-link>
                                 <nuxt-link to="/terms">
@@ -90,10 +90,10 @@
                                 PRODUSELE NOASTRE:
                             </div>
                             <div class="footer__list">
-                                <nuxt-link to="/about">
+                                <nuxt-link to="#">
                                     Homewear Store
                                 </nuxt-link>
-                                <nuxt-link to="/contact">
+                                <nuxt-link to="#">
                                     Bijoux Boutique
                                 </nuxt-link>
                             </div>
@@ -103,16 +103,16 @@
                                 INFORMAȚII UTILE:
                             </div>
                             <div class="footer__list">
-                                <nuxt-link to="/about">
+                                <nuxt-link to="#">
                                     Termenii si condiții
                                 </nuxt-link>
-                                <nuxt-link to="/contact">
+                                <nuxt-link to="#">
                                     Politica de confidențialitate
                                 </nuxt-link>
-                                <nuxt-link to="/about">
+                                <nuxt-link to="#">
                                     Politica de retur
                                 </nuxt-link>
-                                <nuxt-link to="/contact">
+                                <nuxt-link to="#">
                                     Politica cookie
                                 </nuxt-link>
                             </div>

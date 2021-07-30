@@ -24,10 +24,10 @@
     							<v-img :src="`https://back.soledy.com/images/products/sm/${product.main_image.src}`"></v-img>
     							<p class="product__name">{{ product.translation.name }}</p>
     							<div class="collectionOne__price price">
-    								<span>190</span>
-    								<span>/</span>
-    								<span class="price__discount">320</span>
-    								<span>RON </span>
+    								<span>{{ product.main_price.price }}</span>
+    								<!-- <span>/</span>
+    								<span class="price__discount">320</span> -->
+    								<span>EUR </span>
     							</div>
     						</nuxt-link>
     					</v-col>

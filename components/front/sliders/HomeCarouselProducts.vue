@@ -2,9 +2,8 @@
     <div class="h-slider">
         <VueSlickCarousel ref="homeCarousel" :infinite="true" :variableWidth="true" :arrows="false" :settings="localSettings" >
             <div class="h-slider__item">
-                <a :to="`/ro/collections/${category.alias}`" class="h-slider__item-inner">
+                <nuxt-link :to="`/ro/categories/${category.alias}`" class="h-slider__item-inner">
                     <div class="h-slider__image">
-                        {{ category.banner_mobile }}
                         <img :src="`https://back.soledy.com/images/categories/sm/${category.banner_mobile}`" alt="">
                     </div>
                     <div class="h-slider__actions">
@@ -12,14 +11,14 @@
                             Vezi produsele
                         </v-btn>
                     </div>
-                </a>
+                </nuxt-link>
             </div>
             <div class="h-slider__item" v-for="(product, i) in products" :key="i" v-if="product.main_image && i < 5">
-                <a :to="`/ro/collections/${category.alias}/${product.alias}`" class="h-slider__item-inner" >
+                <nuxt-link :to="`/ro/categories/${category.alias}/${product.alias}`" class="h-slider__item-inner" >
                     <div class="h-slider__image">
                         <img :src="`https://back.soledy.com/images/products/sm/${product.main_image.src}`">
                     </div>
-                </a>
+                </nuxt-link>
             </div>
         </VueSlickCarousel>
         <div class="custom-arrow next-slide" @click="nextSlide">

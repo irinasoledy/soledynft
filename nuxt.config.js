@@ -12,7 +12,7 @@ module.exports = {
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
             {hid: 'description', name: 'description', content: 'soledy.com'},
-            {name: 'facebook-domain-verification', content: 'zhd8ab5sq0dcog9zbvmxy74zgsdaim'}
+            // {name: 'facebook-domain-verification', content: 'zhd8ab5sq0dcog9zbvmxy74zgsdaim'}
         ],
         link: [
             {rel: 'icon', type: 'image/x-icon', href: '/fav.png'},
@@ -22,7 +22,7 @@ module.exports = {
             },
         ],
         script: [
-            { src: '/scripts/ammocrm.js' },
+            // { src: '/scripts/ammocrm.js' },
             { src: 'https://js.stripe.com/v3' }
         ]
     },

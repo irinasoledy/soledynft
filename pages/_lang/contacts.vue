@@ -19,7 +19,7 @@
             <v-container>
                 <v-row>
                     <v-col cols="12">
-                        <div class="display-1 text-center c-title white--text">
+                        <div class="display-1 text-center c-title">
                             {{ trans.ContactsAndForms.contactPagesTitle }}
                         </div>
                     </v-col>
@@ -28,26 +28,26 @@
                             <img width="100" src="/rm1.png" class="map-country-img"/>
                         </p>
                         <p class="text-center">{{ trans.ContactsAndForms.companyMainName }}</p>
-                        <p class="text-center white--text">
-                            <v-icon class="white--text">mdi-marker</v-icon>
+                        <p class="text-center">
+                            <v-icon>mdi-marker</v-icon>
                             {{ trans.ContactsAndForms.companyMainAdres }}
                         </p>
                         <p class="text-center">
-                            <v-icon class="white--text">mdi-phone</v-icon>
-                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
+                            <v-icon>mdi-phone</v-icon>
+                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
                         </p>
                         <p class="text-center">
-                            <v-icon class="white--text">mdi-email</v-icon>
-                            {{ trans.ContactsAndForms.labelEmail }}: <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">{{ trans.ContactsAndForms.companyMainEmail1 }}</a>
+                            <v-icon>mdi-email</v-icon>
+                            {{ trans.ContactsAndForms.labelEmail }}: <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">{{ trans.ContactsAndForms.companyMainEmail1 }}</a>
                         </p>
                         <p class="text-center">
-                            <a class="white--text" :href="`https://${trans.ContactsAndForms.companyWebsite1}`">{{ trans.ContactsAndForms.companyWebsite1 }}</a>
+                            <a :href="`https://${trans.ContactsAndForms.companyWebsite1}`">{{ trans.ContactsAndForms.companyWebsite1 }}</a>
                         </p>
                         <p class="text-center">
-                            <a class="white--text" :href="trans.ContactsAndForms.companyFacebook">{{ trans.ContactsAndForms.companyFacebook }}</a>
+                            <a :href="trans.ContactsAndForms.companyFacebook">{{ trans.ContactsAndForms.companyFacebook }}</a>
                         </p>
                         <p class="text-center">
-                            <a class="white--text" :href="trans.ContactsAndForms.companyInstagram">{{ trans.ContactsAndForms.companyInstagram }}</a>
+                            <a :href="trans.ContactsAndForms.companyInstagram">{{ trans.ContactsAndForms.companyInstagram }}</a>
                         </p>
                     </div>
 
@@ -56,41 +56,41 @@
                             <img width="100" src="/md2.png" class="map-country-img"/>
                         </p>
                         <p class="text-center">{{ trans.ContactsAndForms.companyMainNameMD }}</p>
-                        <p class="text-center white--text">
-                            <v-icon class="white--text">mdi-marker</v-icon>
+                        <p class="text-center">
+                            <v-icon>mdi-marker</v-icon>
                             {{ trans.ContactsAndForms.companyMainAdresMD }}
                         </p>
                         <p class="text-center">
-                            <v-icon class="white--text">mdi-phone</v-icon>
-                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1MD}`">{{ trans.ContactsAndForms.companyMainPhone1MD }}</a>
+                            <v-icon>mdi-phone</v-icon>
+                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1MD}`">{{ trans.ContactsAndForms.companyMainPhone1MD }}</a>
                         </p>
                         <p class="text-center">
-                            <v-icon class="white--text">mdi-email</v-icon>
-                            {{ trans.ContactsAndForms.labelEmail }}: <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1MD}`">{{ trans.ContactsAndForms.companyMainEmail1MD }}</a>
+                            <v-icon>mdi-email</v-icon>
+                            {{ trans.ContactsAndForms.labelEmail }}: <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1MD}`">{{ trans.ContactsAndForms.companyMainEmail1MD }}</a>
                         </p>
                         <p class="text-center">
-                            <a class="white--text" :href="`https://${trans.ContactsAndForms.companyMainWebsiteMD}`">{{ trans.ContactsAndForms.companyMainWebsiteMD }}</a>
+                            <a :href="`https://${trans.ContactsAndForms.companyMainWebsiteMD}`">{{ trans.ContactsAndForms.companyMainWebsiteMD }}</a>
                         </p>
                     </div>
-                    <div class="col-md-4 white--text">
+                    <div class="col-md-4">
                         <p class="text-center">
                             <img width="100" src="/es4.png" class="map-country-img"/>
                         </p>
                         <p class="text-center">{{ trans.ContactsAndForms.companyMainNameEE }}</p>
-                        <p class="text-center white--text">
-                            <v-icon class="white--text">mdi-marker</v-icon>
+                        <p class="text-center">
+                            <v-icon>mdi-marker</v-icon>
                             {{ trans.ContactsAndForms.companyMainAdresEE }}
                         </p>
                         <p class="text-center">
-                            <v-icon class="white--text">mdi-phone</v-icon>
-                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a class="white--text" :href="`tel:${trans.ContactsAndForms.companyMainPhone1EE}`">{{ trans.ContactsAndForms.companyMainPhone1EE }}</a>
+                            <v-icon>mdi-phone</v-icon>
+                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1EE}`">{{ trans.ContactsAndForms.companyMainPhone1EE }}</a>
                         </p>
                         <p class="text-center">
-                            <v-icon class="white--text">mdi-email</v-icon>
-                            {{ trans.ContactsAndForms.labelEmail }}: <a class="white--text" :href="`mailto:${trans.ContactsAndForms.companyMainEmail1EE}`">{{ trans.ContactsAndForms.companyMainEmail1EE }}</a>
+                            <v-icon>mdi-email</v-icon>
+                            {{ trans.ContactsAndForms.labelEmail }}: <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1EE}`">{{ trans.ContactsAndForms.companyMainEmail1EE }}</a>
                         </p>
                         <p class="text-center">
-                            <a class="white--text" :href="`https://${trans.ContactsAndForms.companyMainWebsiteEE}`">{{ trans.ContactsAndForms.companyMainWebsiteEE }}</a>
+                            <a :href="`https://${trans.ContactsAndForms.companyMainWebsiteEE}`">{{ trans.ContactsAndForms.companyMainWebsiteEE }}</a>
                         </p>
                     </div>
                     <div class="col-md-12">
@@ -132,7 +132,7 @@
                                 ></v-textarea>
                             <v-btn
                                 @click="submitFeedback()"
-                                color="accent"
+                                color="accent text--white"
                                 class="mr-4 btn-primary-text"
                                 >
                                 {{ trans.ContactsAndForms.sendButton }}
@@ -151,22 +151,7 @@
                 </v-row>
             </v-container>
         </section>
-        <experts></experts>
-        <section class="testimonials">
-            <v-container>
-                <v-row>
-                    <v-col cols="12">
-                        <div class="display-1 text-center">
-                            {{ trans.General.testemonialsServicesPageTitle1 }} {{ trans.General.testemonialsServicesPageTitle2 }}
-                        </div>
-                    </v-col>
-                    <v-col cols="12">
-                        <Testimonials></Testimonials>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </section>
-        <map-contact></map-contact>
+
     </main>
 </template>
 
@@ -261,14 +246,14 @@ export default {
     padding-top: 0 !important
 }
 .display-1 {
-    color: #FFF !important;
+    color: $main-color !important;
     font-weight: 700 !important;
 }
 .contact-content {
-    background-color: $custom_blue !important;
-    color: #FFF;
+    background-color: $bcg-body !important;
+    color: $main-color;
     .subheading {
-        color: $custom_red !important
+        color: $font-color-root !important
     }
     .v-parallax {
         height: 60vh !important;
