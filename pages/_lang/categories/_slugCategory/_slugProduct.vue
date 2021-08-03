@@ -1,255 +1,254 @@
 <template>
-  <v-container class="oneProduct-content" v-if="product">
-    <v-row>
-      <v-col class="col-12">
-        <div class="productOne mt-6">
-          <v-row class="justify-space-between">
-            <v-col class="col-lg-5 col-12">
-              <slider-one-product :images="product.images" @openZoom="openZoom" :productImages="product.images" path="products"/>
-            </v-col>
-            <v-col class="col-lg-5 col-12">
-              <p class="productOne__name">{{ product.translation.name }}</p>
-              <p class="productOne__by">by Emily Laura Designs</p>
-              <p class="productOne__price">{{ product.main_price.price }} EUR</p>
-              <sizes :sizes="sizesOptions" />
-              <colors :colors="colorOptions" />
-              <v-btn color="body" class="mt-4" block>
-                Add to cart
-                <!-- <cart /> -->
-                <span class="productOne__discount">
-                  5%
-                </span>
-              </v-btn>
-              <div class="buyOn">
-                <div class="buyOn__header">
-                  Buy it on
-                </div>
-                <div class="buyOn__methods">
-                  <v-btn icon>
-                    <img src="/images/amazon_icon.png" alt="">
-                  </v-btn>
-                  <v-btn icon>
-                    <img src="/images/ebay.png" alt="">
-                  </v-btn>
-                  <v-btn icon>
-                    <img src="/images/etsy.png" alt="">
-                  </v-btn>
-                  <v-btn icon>
-                    <img src="/images/wolf.png" alt="">
-                  </v-btn>
-                </div>
-              </div>
-              <div class="guaranty">
-                <div class="guaranty__header">
-                  Sustainability Guarantees
-                </div>
-                <div class="guaranty__content">
-                  <div class="guaranty__item">
-                    <img src="/images/IMG_1070.png" alt="">
-                    <span>happy worker</span>
-                  </div>
-                  <div class="guaranty__item">
-                    <img src="/images/IMG_1071.png" alt="">
-                    <span>non-toxic dyes</span>
-                  </div>
-                  <div class="guaranty__item">
-                    <img src="/images/IMG_1072.png" alt="">
-                    <span>happy worid</span>
-                  </div>
-                  <div class="guaranty__item">
-                    <img src="/images/IMG_1073.png" alt="">
-                    <span>co-product</span>
-                  </div>
-                </div>
-              </div>
-              <v-expansion-panels accordion>
-                <v-expansion-panel aria-expanded="true" class="productOne__exp">
-                  <v-expansion-panel-header class="productOne__exp-header">
-                    product description
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content>
-                    <p class="productOne__bloc-text">
-                      Soledy's Colier Anné Blush - Începînd cu anul 2012, colierul iconic ”Anné”, solicitat în peste 20 de țări, rămîne a fi colierul de semnătură al designerului Anné Popova, executat din elemente florale unice,detalii de semnatură ale colecțiilor ”Anné Popova”.
-                      <br>
-                      <br>
-                      Culoare: Blush
-                      <br>
-                      <br>
-                      Compoziţie: Margele, Elemente textile realizate manual, Bronz antic, Piese metalice nealergice, Mătase artificială, Flori
-                      <br>
-                      <br>
-                        Faceți un tur pentru a descoperi uimitoarele și adorabilele Bijuteri handmade, coliere handmade, coliere dama, coliere din margele, coliere elegante de seara, coliere femei, set colier si cercei, coliere lungi în magazinul online multi-brand Fashion Soledy. Mărci comerciale originale de modă pentru femei cu gust remarcabil!
-                    </p>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-                <v-expansion-panel class="productOne__exp">
-                  <v-expansion-panel-header class="productOne__exp-header">
-                    CARE & INFO
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content>
-                    <p class="productOne__bloc-text">
-                      How to look after your earrings:
-                      <br>
-                      <br>
-                      Polymer clay is a delicate material so trying to avoid dropping and putting pressure on the earrings will ensure a long life with your pair! The earrings have been coated in a varnish to protect the hand painted designs but please avoid getting them wet.
-                      <br>
-                      <br>
-                      Materials: <br>
-                      Polymer Clay (PVC, Plasticizer, Additive), Acrylic Paint, Polymer Varnish with UVLS (Matte), Rose Gold Links, Stainless Steel Studs.
-                      <br>
-                      <br>
-                      Handmade by artisan company Emily Laura Designs in the UK.
-                    </p>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-                <v-expansion-panel class="productOne__exp">
-                  <v-expansion-panel-header class="productOne__exp-header">
-                    Deliveries & Returns
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content>
-                    <div class="exp__point">
-                      Delivery
-                    </div>
-                    <p class="productOne__bloc-text">
-                      COVID-19: We're open online and shipping as usual, though there may be minor delays in some cases.
-                      <br>
-                      <br>
-                      FREE DELIVERY on orders over $200 in USA / C$250 in Canada / A$300 in Australia / 200€ in Europe
-                      <br>
-                      <br>
-                      Items are shipped to you directly by our brands, using tracked, contactless delivery.
-                      <br>
-                      <br>
-                      All customs fees, duties and taxes are included - see Delivery page for full details, conditions apply.
-                    </p>
-                    <div class="exp__point">Returns</div>
-                    <p class="productOne__bloc-text">
-                      FREE RETURNS worldwide within 14 days of delivery - see Returns page for full details.
-                    </p>
-                    <div class="exp__point">Price Match Guarantee</div>
-                    <p class="productOne__bloc-text">
-                      If you find an item cheaper elsewhere we will match the price, see FAQs or Contact Us for full details, conditions apply. Please note we're unable to offer a price match for products sold through independent retailers, or being shipped internationally.
-                    </p>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
-              <div class="productOne__bloc">
-                <div class="productOne__bloc-title">
-                  Meet the designer
-                </div>
-                <p class="productOne__bloc-text">
-                  Emily Laura Designs is a woman owned business inspired by uniqueness, slowmade fashion and homeware and a passion for colour and nature.
-                  <br> <br>
-                  Emily hand makes every one of her products, creating truly unique fabrics and jewellery. Whether you are looking to add a pop of colour and warmth to your home or outfit, Emily's work will ensure you stand out by design and quality.
-                </p>
-              </div>
-              <v-row class="help">
-                <v-col class="col-md col-12">
-                  <span>NEED HELP?:</span>
-                </v-col>
-                <v-col class="col-md col-6">
-                  <v-btn color="primary" small text href="tel:+4402036950011">
-                    <v-icon>mdi-phone</v-icon>
-                    +44 (0) 20 3695 0011
-                  </v-btn>
-                </v-col>
-                <v-col class="col-md col-6">
-                  <v-btn color="primary" small text href="mailto:info@likemedia.com">
-                    <v-icon>mdi-mail</v-icon>
-                    info@likemedia.com
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </div>
-      </v-col>
-      <v-col class="col-12">
-        <div class="moreProducts">
-          <v-row>
-            <v-col class="col-md-4 col-12">
-              <span>Not quite found the product for you?</span>
-            </v-col>
-            <v-col class="col-md-8 col-12">
-              <v-row>
-                <v-col class="col-md-6 col-12">
-                  <v-btn color="primary" nuxt to="/one-designer">
-                    view more from this designer
-                  </v-btn>
-                </v-col>
-                <v-col class="col-md-6 col-12">
-                  <v-btn color="primary" outlined to="/all-products" nuxt>
-                    view more earrings
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </div>
-      </v-col>
-      <v-col class="col-12 mt-lg-8">
+    <v-container class="oneProduct-content" v-if="product">
         <v-row>
-          <!-- <v-col class="col-12">
-            <h3 class="p-title">VEZI LIVE PRODUSELE</h3>
-          </v-col>
-          <v-col class="col-12">
-            <h4 class=" p-subtitle">Consulta-te live cu Consultantii nostri Fashion</h4>
-          </v-col> -->
+            <v-col class="col-12">
+                <div class="productOne mt-6">
+                    <v-row class="justify-space-between">
+                        <v-col class="col-lg-5 col-12">
+                            <slider-one-product :images="product.images" @openZoom="openZoom" :productImages="product.images" path="products"/>
+                        </v-col>
+                        <v-col class="col-lg-5 col-12">
+                            <p class="productOne__name">{{ product.translation.name }}</p>
+                            <p class="productOne__by">by Emily Laura Designs</p>
+                            <p class="productOne__price">{{ product.personal_price.price }} {{ currency.abbr }}</p>
 
-          <!-- <v-col class="col-12">
-            <v-row>
-              <v-col class="col-12 col-md-6 col-lg-4" v-for="(item, i) in 3" :key="i">
-                <v-card class="prof">
-                  <v-card-text class="prof__image">
-                    <v-img src="https://i.redd.it/6onq25y0sh311.jpg"></v-img>
-                    <v-chip color="green" class="prof__indicator">Online</v-chip>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-btn color="primary" outlined>
-                      <v-icon>mdi-chat</v-icon>
-                      Chat
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-col>
+                            <!-- {{ product.subproducts }} -->
 
-          <v-col class="col-12 mt-lg-8">
-            <h3 class="additional-title">Completează-ți Look-ul</h3>
-            <similar-slider />
-          </v-col>
-          <v-col class="col-12 mt-lg-8" >
-            <h3 class="additional-title">Produse Similare</h3>
-            <similar-slider />
-          </v-col> -->
+                            <sizes :sizes="sizesOptions" :subproducts="product.subproducts" v-if="product.subproducts.length"/>
+
+                            <v-btn color="body" class="mt-4" block>
+                                Add to cart
+                                <!-- <cart /> -->
+                                <span class="productOne__discount"> 5% </span>
+                            </v-btn>
+                            <div class="buyOn">
+                                <div class="buyOn__header">
+                                    Buy it on
+                                </div>
+                                <div class="buyOn__methods">
+                                    <v-btn icon>
+                                        <img src="/images/amazon_icon.png" alt="">
+                                    </v-btn>
+                                    <v-btn icon>
+                                        <img src="/images/ebay.png" alt="">
+                                    </v-btn>
+                                    <v-btn icon>
+                                        <img src="/images/etsy.png" alt="">
+                                    </v-btn>
+                                    <v-btn icon>
+                                        <img src="/images/wolf.png" alt="">
+                                    </v-btn>
+                                </div>
+                            </div>
+                            <div class="guaranty">
+                                <div class="guaranty__header">
+                                    Sustainability Guarantees
+                                </div>
+                                <div class="guaranty__content">
+                                    <div class="guaranty__item">
+                                        <img src="/images/IMG_1070.png" alt="">
+                                        <span>happy worker</span>
+                                    </div>
+                                    <div class="guaranty__item">
+                                        <img src="/images/IMG_1071.png" alt="">
+                                        <span>non-toxic dyes</span>
+                                    </div>
+                                    <div class="guaranty__item">
+                                        <img src="/images/IMG_1072.png" alt="">
+                                        <span>happy worid</span>
+                                    </div>
+                                    <div class="guaranty__item">
+                                        <img src="/images/IMG_1073.png" alt="">
+                                        <span>co-product</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <v-expansion-panels accordion>
+                                <v-expansion-panel aria-expanded="true" class="productOne__exp">
+                                    <v-expansion-panel-header class="productOne__exp-header">
+                                        product description
+                                    </v-expansion-panel-header>
+                                    <v-expansion-panel-content>
+                                        <p class="productOne__bloc-text">
+                                            Soledy's Colier Anné Blush - Începînd cu anul 2012, colierul iconic ”Anné”, solicitat în peste 20 de țări, rămîne a fi colierul de semnătură al designerului Anné Popova, executat din elemente florale unice,detalii de semnatură ale colecțiilor ”Anné Popova”.
+                                            <br>
+                                            <br>
+                                            Culoare: Blush
+                                            <br>
+                                            <br>
+                                            Compoziţie: Margele, Elemente textile realizate manual, Bronz antic, Piese metalice nealergice, Mătase artificială, Flori
+                                            <br>
+                                            <br>
+                                            Faceți un tur pentru a descoperi uimitoarele și adorabilele Bijuteri handmade, coliere handmade, coliere dama, coliere din margele, coliere elegante de seara, coliere femei, set colier si cercei, coliere lungi în magazinul online multi-brand Fashion Soledy. Mărci comerciale originale de modă pentru femei cu gust remarcabil!
+                                        </p>
+                                    </v-expansion-panel-content>
+                                </v-expansion-panel>
+                                <v-expansion-panel class="productOne__exp">
+                                    <v-expansion-panel-header class="productOne__exp-header">
+                                        CARE & INFO
+                                    </v-expansion-panel-header>
+                                    <v-expansion-panel-content>
+                                        <p class="productOne__bloc-text">
+                                            How to look after your earrings:
+                                            <br>
+                                            <br>
+                                            Polymer clay is a delicate material so trying to avoid dropping and putting pressure on the earrings will ensure a long life with your pair! The earrings have been coated in a varnish to protect the hand painted designs but please avoid getting them wet.
+                                            <br>
+                                            <br>
+                                            Materials: <br>
+                                            Polymer Clay (PVC, Plasticizer, Additive), Acrylic Paint, Polymer Varnish with UVLS (Matte), Rose Gold Links, Stainless Steel Studs.
+                                            <br>
+                                            <br>
+                                            Handmade by artisan company Emily Laura Designs in the UK.
+                                        </p>
+                                    </v-expansion-panel-content>
+                                </v-expansion-panel>
+                                <v-expansion-panel class="productOne__exp">
+                                    <v-expansion-panel-header class="productOne__exp-header">
+                                        Deliveries & Returns
+                                    </v-expansion-panel-header>
+                                    <v-expansion-panel-content>
+                                        <div class="exp__point">
+                                            Delivery
+                                        </div>
+                                        <p class="productOne__bloc-text">
+                                            COVID-19: We're open online and shipping as usual, though there may be minor delays in some cases.
+                                            <br>
+                                            <br>
+                                            FREE DELIVERY on orders over $200 in USA / C$250 in Canada / A$300 in Australia / 200€ in Europe
+                                            <br>
+                                            <br>
+                                            Items are shipped to you directly by our brands, using tracked, contactless delivery.
+                                            <br>
+                                            <br>
+                                            All customs fees, duties and taxes are included - see Delivery page for full details, conditions apply.
+                                        </p>
+                                        <div class="exp__point">Returns</div>
+                                        <p class="productOne__bloc-text">
+                                            FREE RETURNS worldwide within 14 days of delivery - see Returns page for full details.
+                                        </p>
+                                        <div class="exp__point">Price Match Guarantee</div>
+                                        <p class="productOne__bloc-text">
+                                            If you find an item cheaper elsewhere we will match the price, see FAQs or Contact Us for full details, conditions apply. Please note we're unable to offer a price match for products sold through independent retailers, or being shipped internationally.
+                                        </p>
+                                    </v-expansion-panel-content>
+                                </v-expansion-panel>
+                            </v-expansion-panels>
+                            <div class="productOne__bloc">
+                                <div class="productOne__bloc-title">
+                                    Meet the designer
+                                </div>
+                                <p class="productOne__bloc-text">
+                                    Emily Laura Designs is a woman owned business inspired by uniqueness, slowmade fashion and homeware and a passion for colour and nature.
+                                    <br> <br>
+                                    Emily hand makes every one of her products, creating truly unique fabrics and jewellery. Whether you are looking to add a pop of colour and warmth to your home or outfit, Emily's work will ensure you stand out by design and quality.
+                                </p>
+                            </div>
+                            <v-row class="help">
+                                <v-col class="col-md col-12">
+                                    <span>NEED HELP?:</span>
+                                </v-col>
+                                <v-col class="col-md col-6">
+                                    <v-btn color="primary" small text href="tel:+4402036950011">
+                                        <v-icon>mdi-phone</v-icon>
+                                        +44 (0) 20 3695 0011
+                                    </v-btn>
+                                </v-col>
+                                <v-col class="col-md col-6">
+                                    <v-btn color="primary" small text href="mailto:info@likemedia.com">
+                                        <v-icon>mdi-mail</v-icon>
+                                        info@likemedia.com
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-col>
+                    </v-row>
+                </div>
+            </v-col>
+            <v-col class="col-12">
+                <div class="moreProducts">
+                    <v-row>
+                        <v-col class="col-md-4 col-12">
+                            <span>Not quite found the product for you?</span>
+                        </v-col>
+                        <v-col class="col-md-8 col-12">
+                            <v-row>
+                                <v-col class="col-md-6 col-12">
+                                    <v-btn color="primary" nuxt to="/one-designer">
+                                        view more from this designer
+                                    </v-btn>
+                                </v-col>
+                                <v-col class="col-md-6 col-12">
+                                    <v-btn color="primary" outlined to="/all-products" nuxt>
+                                        view more earrings
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-col>
+                    </v-row>
+                </div>
+            </v-col>
+            <v-col class="col-12 mt-lg-8">
+                <v-row>
+                    <!-- <v-col class="col-12">
+                        <h3 class="p-title">VEZI LIVE PRODUSELE</h3>
+                        </v-col>
+                        <v-col class="col-12">
+                        <h4 class=" p-subtitle">Consulta-te live cu Consultantii nostri Fashion</h4>
+                        </v-col> -->
+                    <!-- <v-col class="col-12">
+                        <v-row>
+                          <v-col class="col-12 col-md-6 col-lg-4" v-for="(item, i) in 3" :key="i">
+                            <v-card class="prof">
+                              <v-card-text class="prof__image">
+                                <v-img src="https://i.redd.it/6onq25y0sh311.jpg"></v-img>
+                                <v-chip color="green" class="prof__indicator">Online</v-chip>
+                              </v-card-text>
+                              <v-card-actions>
+                                <v-btn color="primary" outlined>
+                                  <v-icon>mdi-chat</v-icon>
+                                  Chat
+                                </v-btn>
+                              </v-card-actions>
+                            </v-card>
+                          </v-col>
+                        </v-row>
+                        </v-col>
+
+                        <v-col class="col-12 mt-lg-8">
+                        <h3 class="additional-title">Completează-ți Look-ul</h3>
+                        <similar-slider />
+                        </v-col>
+                        <v-col class="col-12 mt-lg-8" >
+                        <h3 class="additional-title">Produse Similare</h3>
+                        <similar-slider />
+                        </v-col> -->
+                </v-row>
+            </v-col>
         </v-row>
-
-      </v-col>
-    </v-row>
-    <zoom v-if="zoom" @closeZoom="zoom = false" :mainImage="product.main_image" :productImages="productImages" />
-  </v-container>
+        <zoom v-if="zoom" @closeZoom="zoom = false" :mainImage="product.main_image" :productImages="productImages" />
+    </v-container>
 </template>
 
 <script>
 
 import { mapActions, mapGetters } from 'vuex'
+import contentApi from '@/api/contentApi'
 
 import SliderOneProduct from '@/components/front/sliders/SliderOneProduct.vue'
 import SimilarSlider from '@/components/front/sliders/SimilarCarousel.vue'
 
 // import Cart from '../components/icons/Cart.vue'
+// import Colors from '@/components/front/productWidgets/Colors.vue'
+
 import Sizes from '@/components/front/productWidgets/Sizes.vue'
-import Colors from '@/components/front/productWidgets/Colors.vue'
 import Zoom from '@/components/front/productWidgets/Zoom.vue'
 
-import contentApi from '@/api/contentApi'
-
 export default {
-  components: {SliderOneProduct, SimilarSlider, Sizes, Colors, Zoom},
+  components: {SliderOneProduct, SimilarSlider, Sizes, Zoom},
   async asyncData({ app, params, store }) {
       let prod = null
-      await contentApi.getProduct({lang: store.state.lang.lang, alias: params.slugProduct}, data => {
+      await contentApi.getProduct({lang: store.state.lang.lang, alias: params.slugProduct, currency: store.state.currency.id}, data => {
           prod = data
       })
       return {
@@ -260,6 +259,7 @@ export default {
   computed: mapGetters({
       categories: 'getCategories',
       language: 'getLanguage',
+      currency: 'getCurrency',
       trans: 'getTranslations',
   }),
   data () {

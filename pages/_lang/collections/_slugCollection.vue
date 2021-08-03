@@ -51,10 +51,10 @@
         															{{ product.product.translation.name }}
         														</div>
         														<div class="colProd__price price">
-        															<span>{{ product.product.main_price.price }} RON</span>
+        															<span>{{ product.product.personal_price.price }}</span>
         															<!-- <span>/</span>
         															<span class="price__discount">320</span> -->
-        															<span>EUR </span>
+        															<span>{{ currency.abbr }} </span>
         														</div>
         														<div class="colProd__color">
         															<!-- Black -->
@@ -62,7 +62,7 @@
         													</div>
         												</v-col>
         												<v-col class="col-12 pt-0">
-        													<sizes :sizes="sizesOptions" />
+        													<sizes :sizes="sizesOptions" :subproducts="product.product.subproducts" v-if="product.product.subproducts.length"/>
         												</v-col>
                                                     </nuxt-link>
     											</v-row>
@@ -114,7 +114,8 @@ export default {
 	async asyncData({ app, params, store}) {
 		let collect = null
 		await contentApi.getCollection({
-			lang: store.state.lang.lang,
+            lang: store.state.lang.lang,
+			currency: store.state.currency.id,
 			alias: params.slugCollection
 		}, data => {
 			collect = data
@@ -167,7 +168,8 @@ export default {
 	},
 	computed: mapGetters({
 		collections: 'getCollections',
-		language: 'getLanguage',
+        language: 'getLanguage',
+		currency: 'getCurrency',
 		trans: 'getTranslations',
 	}),
 	async mounted() {

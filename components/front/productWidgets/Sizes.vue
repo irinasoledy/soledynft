@@ -1,24 +1,32 @@
 <template>
-  <div class="size">
-    <div class="size__header">
-      <span>Select your size</span>
-      <span>Size Guide</span>
+    <div class="size">
+        <div class="size__header">
+            <span>Select your size</span>
+            <span>Size Guide</span>
+        </div>
+        <div class="size__items">
+
+            <div class="size__item" v-for="subproduct in subproducts" :key="subproduct.id">
+                <label class="size__radio">
+                    <input type="radio" name="size" :value="subproduct.parameter_value.id" />
+                    <span class="size__mark">{{ subproduct.parameter_value.translation.name }}</span>
+                </label>
+            </div>
+
+            <!-- <div class="size__item" v-for="size in sizes" :key="size.value">
+                <label class="size__radio">
+                    <input :checked="size.selected" type="radio" name="size" :value="size.value" />
+                    <span class="size__mark">{{size.label}}</span>
+                </label>
+            </div> -->
+        </div>
     </div>
-    <div class="size__items">
-      <div class="size__item" v-for="size in sizes" :key="size.value">
-        <label class="size__radio">
-          <input :checked="size.selected" type="radio" name="size" :value="size.value" />
-          <span class="size__mark">{{size.label}}</span>
-        </label>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
 export default {
   name: "Sizes",
-  props: ["sizes"]
+  props: ["sizes", "subproducts"]
 }
 </script>
 
@@ -48,7 +56,7 @@ export default {
       margin-right: 5px;
     }
     &__radio {
-      width: 40px;
+      min-width: 40px;
       height: 40px;
       position: relative;
       display: block;

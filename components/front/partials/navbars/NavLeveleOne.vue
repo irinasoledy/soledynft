@@ -12,9 +12,8 @@
                     width="400"
                     >
                     <template v-slot:activator="{ on, attrs }">
-                        <v-list-item-title class="d-flex align-center userSettings" v-bind="attrs"
-                            v-on="on">
-                            <span class="d-flex align-center">RON / RO / <img class="ml-1" src="https://back.soledy.com/images/flags/24x24/ro.png" alt=""> </span>
+                        <v-list-item-title class="d-flex align-center userSettings" v-bind="attrs" v-on="on">
+                            <span class="d-flex align-center">{{ currency.abbr }} / {{ language.lang }} / <img class="ml-1" :src="`https://back.soledy.com/images/flags/24x24/${country.flag}`" alt=""> </span>
                             <v-spacer></v-spacer>
                             |
                             <v-spacer></v-spacer>
@@ -124,6 +123,9 @@
 </template>
 
 <script>
+
+import { mapActions, mapGetters } from 'vuex'
+
 import LanguageModal from '@/components/front/forms/LanguageModal'
 import AuthModal from '@/components/front/forms/AuthenticationForm'
 
@@ -133,7 +135,6 @@ export default {
 		AuthModal
 	},
 	data() {
-
 		return {
 			clipped: false,
 			fixed: false,
@@ -154,6 +155,12 @@ export default {
 			]
 		}
 	},
+    computed: mapGetters({
+        language: 'getLanguage',
+        currency: 'getCurrency',
+        country: 'getCountry',
+        trans: 'getTranslations',
+    }),
 	methods: {
 		closeDrawer() {
 			this.$emit('closeDrawer')

@@ -4,6 +4,18 @@ const backURL = 'https://soledy.itmall.digital'
 
 export default {
 
+    async getInitSettings(cb){
+        await axios.get(`${backURL}/api/settings`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
+    async saveSettings(data, cb){ //to change
+        await axios.get(`${backURL}/api/set/settings?lang=${data.lang}&currency=${data.currency}&country=${data.country}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
     async getInitData(lang, cb){
         await axios.get(`${process.env.API}/api/v2/data?lang=${lang}`)
             .then(response => cb(response.data))
@@ -17,13 +29,13 @@ export default {
     },
 
     async getCategory(data, cb){
-        await axios.get(`${backURL}/api/category?lang=${data.lang}&alias=${data.alias}`)
+        await axios.get(`${backURL}/api/category?lang=${data.lang}&alias=${data.alias}&currency=${data.currency}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
 
     async getProduct(data, cb){
-        await axios.get(`${backURL}/api/product?lang=${data.lang}&alias=${data.alias}`)
+        await axios.get(`${backURL}/api/product?lang=${data.lang}&alias=${data.alias}&currency=${data.currency}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
@@ -35,19 +47,19 @@ export default {
     },
 
     async getCollection(data, cb){
-        await axios.get(`${backURL}/api/collection?lang=${data.lang}&alias=${data.alias}`)
+        await axios.get(`${backURL}/api/collection?lang=${data.lang}&alias=${data.alias}&currency=${data.currency}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
 
     async getNewProducts(data, cb){
-        await axios.get(`${backURL}/api/products/new?lang=${data.lang}`)
+        await axios.get(`${backURL}/api/products/new?lang=${data.lang}&currency=${data.currency}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
 
     async getOutletProducts(data, cb){
-        await axios.get(`${backURL}/api/products/outlet?lang=${data.lang}`)
+        await axios.get(`${backURL}/api/products/outlet?lang=${data.lang}&currency=${data.currency}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },

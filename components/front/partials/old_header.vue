@@ -173,7 +173,6 @@
                 </nuxt-link>
             </v-toolbar-title>
 
-
             <v-spacer></v-spacer>
 
             <CartIcon v-if="$auth.loggedIn"

@@ -11,10 +11,11 @@
         			<v-img :src="`https://back.soledy.com/images/products/og/${product.main_image.src}`"></v-img>
         			<p class="product__name">{{product.translation.name}}</p>
         			<div class="collectionOne__price price">
-        				<span>190</span>
+                        <span>{{ product.personal_price.price }}</span>
                         <span>/</span>
         				<span class="price__discount">320</span>
-        				<span>EUR </span>
+                        <span>{{ currency.abbr }} </span>
+
         			</div>
     			</nuxt-link>
     		</v-col>
@@ -25,12 +26,14 @@
 <script>
 
 import contentApi from '@/api/contentApi'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     async asyncData({ app, params, store}) {
         let prods = null
         await contentApi.getOutletProducts({
             lang: store.state.lang.lang,
+            currency: store.state.currency.id,
         }, data => {
             prods = data
         })
@@ -38,6 +41,12 @@ export default {
             products: prods,
         }
     },
+    computed: mapGetters({
+        categories: 'getCategories',
+        language: 'getLanguage',
+        currency: 'getCurrency',
+        trans: 'getTranslations',
+    }),
     data () {
         return {
             products: null,

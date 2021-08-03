@@ -2,35 +2,44 @@
   <v-form>
     <v-card>
       <v-card-title class="headline text-center">
-        Change Language
+        Settings
       </v-card-title>
       <v-card-text class="pt-8 pb-0">
         <v-select
-          :items="['Romania', 'Moldova', 'Polonia', 'Rusia']"
-          label="Livrare catre"
+            v-if="languageSelected"
+          :items="languages"
+          item-text="lang"
+          item-value="id"
+          label="Limba"
           color="primary"
           required
           outlined
           filled
-          value="Moldova"
+          v-model="languageSelected"
         >
         </v-select>
         <v-select
-          :items="['Romana', 'Engleza', 'Rusa']"
-          label="Limba"
+            v-if="countrySelected"
+          :items="countries"
+          item-text="name"
+          item-value="id"
+          label="Livrare catre"
           required
           color="primary"
           outlined
-          value="Engleza"
+          v-model="countrySelected"
         >
         </v-select>
         <v-select
-          :items="['RON', 'MDL', 'USD', 'RUB']"
+            v-if="currencySelected"
+          :items="currencies"
+          item-text="abbr"
+          item-value="id"
           label="Valuta"
           color="primary"
           outlined
           required
-          value="MDL"
+          v-model="currencySelected"
         >
         </v-select>
       </v-card-text>
@@ -49,7 +58,7 @@
         <v-btn
           color="primary"
           outlined
-          @click="closeLanguageModal"
+          @click="saveSettings()"
         >
           Save
         </v-btn>
@@ -59,12 +68,66 @@
 </template>
 
 <script>
+
+import { mapGetters, mapActions } from 'vuex'
+import contentApi from '@/api/contentApi'
+
 export default {
-  methods: {
-    closeLanguageModal () {
-      this.$emit("closeLanguageModal")
+    data() {
+        return {
+            languageSelected: null,
+            currencySelected: null,
+            countrySelected: null,
+        }
+    },
+    computed: mapGetters({
+        languages: 'getLanguages',
+        language: 'getLanguage',
+        currencies: 'getCurrencies',
+        currency: 'getCurrency',
+        countries: 'getCountries',
+        country: 'getCountry',
+    }),
+    mounted() {
+        this.languageSelected = this.language.id
+        this.currencySelected = this.currency.id
+        this.countrySelected = this.country.id
+    },
+    methods: {
+        ...mapActions({
+            changeSettings: 'changeSettings'
+        }),
+        closeLanguageModal() {
+            this.$emit("closeLanguageModal")
+        },
+        async saveSettings() {
+            await this.changeSettings({
+                    lang: this.languageSelected,
+                    currency: this.currencySelected,
+                    country: this.countrySelected
+                }).then(data => {
+                    const currentLang = '/' + this.language.lang
+                    const lastLang = this.$route.params.lang
+                    const fullPath = this.$route.fullPath
+                    let redirectTo = '/'
+
+                    if (lastLang) {
+                        redirectTo = fullPath.replace('/' + lastLang, currentLang);
+                    } else {
+                        redirectTo = currentLang;
+                    }
+                    this.$router.push(redirectTo)
+                    this.$emit("closeLanguageModal")
+                })
+            // await contentApi.setSettings({
+            //         lang: this.languageSelected,
+            //         currency: this.currencySelected,
+            //         country: this.countrySelected
+            //     }, data => {
+            //
+            //     })
+        },
     }
-  }
 }
 </script>
 

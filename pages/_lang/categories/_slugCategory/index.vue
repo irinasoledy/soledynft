@@ -24,10 +24,10 @@
     							<v-img :src="`https://back.soledy.com/images/products/sm/${product.main_image.src}`"></v-img>
     							<p class="product__name">{{ product.translation.name }}</p>
     							<div class="collectionOne__price price">
-    								<span>{{ product.main_price.price }}</span>
+    								<span>{{ product.personal_price.price }}</span>
     								<!-- <span>/</span>
     								<span class="price__discount">320</span> -->
-    								<span>EUR </span>
+    								<span>{{ currency.abbr }} </span>
     							</div>
     						</nuxt-link>
     					</v-col>
@@ -46,7 +46,7 @@ import contentApi from '@/api/contentApi'
 export default {
 	async asyncData({ app, params, store }) {
 		let categ = null
-		await contentApi.getCategory({lang: store.state.lang.lang, alias: params.slugCategory}, data => {
+		await contentApi.getCategory({lang: store.state.lang.lang, alias: params.slugCategory, currency: store.state.currency.id}, data => {
 		    categ = data
 		})
 		return {
@@ -68,7 +68,8 @@ export default {
 	},
 	computed: mapGetters({
 		categories: 'getCategories',
-		language: 'getLanguage',
+        language: 'getLanguage',
+		currency: 'getCurrency',
 		trans: 'getTranslations',
 	}),
 	async mounted() {
