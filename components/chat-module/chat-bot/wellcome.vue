@@ -49,7 +49,6 @@ export default {
     mounted() {
         this.$nuxt.$on('checkAssignedStatut', () => {
             if (this.lastMessage.employee) {
-                console.log(this.lastMessage.employee);
                 if (this.lastMessage.employee._id !== this.user._id) {
                     this.employee = this.lastMessage.employee
                 } else {

@@ -2,6 +2,9 @@ import contentApi from '@/api/contentApi'
 import userApi from '@/api/userApi'
 
 export const state = () => ({
+    // userCartId: null,
+    // cartProducts: [],
+    // cartSubproducts: [],
     langs: [
         {id: 1, lang: 'ro', active: 1, name: 'RO'},
         {id: 2, lang: 'en', active: 0, name: 'EN'},
@@ -73,6 +76,10 @@ export const mutations = {
         state.countries = data.countries
         state.currencies = data.currencies
     },
+    // SET_CART_ITEMS(state, data) {
+    //     state.cartProducts = data.products
+    //     state.cartSubproducts = data.subproducts
+    // },
     SOCKET_pingUsers(state) {
         state.ping = !state.ping
     },
@@ -140,7 +147,20 @@ export const mutations = {
 
 export const actions = {
 
-    async nuxtServerInit({state, commit}) {
+    async nuxtServerInit({state, commit}, { app }) {
+
+        if (!app.$cookies.get('user-cart-id')) {
+            const uniqueID = Date.now().toString(36)
+            app.$cookies.set('user-cart-id', uniqueID, {
+                path: '/',
+                maxAge: 60 * 60 * 24 * 7
+            })
+
+            commit('cart/SET_USER_CART_ID', uniqueID)
+        }else{
+            commit('cart/SET_USER_CART_ID', app.$cookies.get('user-cart-id'))
+        }
+
         const currentLang = this.$router.history.current.params.lang
 
         if (currentLang) {
@@ -151,10 +171,12 @@ export const actions = {
         }
 
         await contentApi.getInitSettings(data => commit('SET_SETTINGS', data))
+        await contentApi.getCartItems(state.userCartId, data => commit('cart/SET_CART_ITEMS', data))
 
         await contentApi.getCategories(state.lang.lang, data => commit('SET_CATEGORIES', data))
         await contentApi.getCollections(state.lang.lang, data => commit('SET_COLLECTIONS', data))
         await contentApi.getPromotions(state.lang.lang, data => commit('SET_PROMOTIONS', data))
+
 
 
         await contentApi.getTranslations(state.lang.lang, data => commit('SET_TRANSALATIONS', data))
@@ -224,6 +246,9 @@ export const getters = {
 
     getCurrencies: state => state.currencies,
     getCurrency: state => state.currency,
+
+    // getCartsProducts: state => state.cartProducts,
+    // getCartsSubproducts: state => state.cartSubproducts,
 
     getTranslations: state => state.translations,
     getChangedEmployee: state => state.changedEmployee,

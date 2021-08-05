@@ -12,15 +12,10 @@
                             <p class="productOne__by">by Emily Laura Designs</p>
                             <p class="productOne__price">{{ product.personal_price.price }} {{ currency.abbr }}</p>
 
-                            <!-- {{ product.subproducts }} -->
-
                             <sizes :sizes="sizesOptions" :subproducts="product.subproducts" v-if="product.subproducts.length"/>
 
-                            <v-btn color="body" class="mt-4" block>
-                                Add to cart
-                                <!-- <cart /> -->
-                                <span class="productOne__discount"> 5% </span>
-                            </v-btn>
+                            <cart-btn :product="product" type="prod"></cart-btn>
+
                             <div class="buyOn">
                                 <div class="buyOn__header">
                                     Buy it on
@@ -237,15 +232,13 @@ import contentApi from '@/api/contentApi'
 
 import SliderOneProduct from '@/components/front/sliders/SliderOneProduct.vue'
 import SimilarSlider from '@/components/front/sliders/SimilarCarousel.vue'
-
-// import Cart from '../components/icons/Cart.vue'
-// import Colors from '@/components/front/productWidgets/Colors.vue'
+import CartBtn from '@/components/front/cart/cartBtn.vue'
 
 import Sizes from '@/components/front/productWidgets/Sizes.vue'
 import Zoom from '@/components/front/productWidgets/Zoom.vue'
 
 export default {
-  components: {SliderOneProduct, SimilarSlider, Sizes, Zoom},
+  components: {SliderOneProduct, SimilarSlider, Sizes, Zoom, CartBtn},
   async asyncData({ app, params, store }) {
       let prod = null
       await contentApi.getProduct({lang: store.state.lang.lang, alias: params.slugProduct, currency: store.state.currency.id}, data => {

@@ -7,10 +7,7 @@
                 <v-img src="/images/logo.png" alt="logo" width="100" />
             </NuxtLink>
             <v-spacer />
-            <NuxtLink to="/" class="d-flex align-center">
-                <!-- <cart /> -->
-                <!-- <span class="pl-1 pt-2">0</span> -->
-            </NuxtLink>
+            <cart />
         </v-app-bar>
         <v-navigation-drawer
             v-model="drawerOne"
@@ -33,13 +30,14 @@ import { mapGetters, mapActions } from 'vuex'
 
 import NavLevelOne from '@/components/front/partials/navbars/NavLeveleOne'
 import NavLevelTwo from '@/components/front/partials/navbars/NavLevelTwo'
-// import Cart from '../icons/Cart.vue'
+import Cart from '@/components/front/cart/cartIcon'
 
 export default {
 	name: "Header",
 	components: {
 		NavLevelOne,
-		NavLevelTwo
+		NavLevelTwo,
+        Cart
 	},
     computed: mapGetters({
         categories: 'getCategories',

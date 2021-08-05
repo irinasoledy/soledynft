@@ -1,8 +1,17 @@
 import axios from 'axios'
 
+const backURL = 'http://soledy.itmall.digital'
+
 export default {
+
+    // async appendToCart(data, cb) {  // Remake post
+    //     await axios.get(`${backURL}/api/set/cart?productId=${data.productId}&userId=${data.userId}`)
+    //         .then(response => cb(response.data))
+    //         .catch(err => console.log(err))
+    // },
+
     async appendToCart(data, cb) {
-        await axios.patch(`/api/cart`, data)
+        await axios.post(`${backURL}/api/cart`, data)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },

@@ -10,6 +10,12 @@ export default {
             .catch(err => console.log(err) )
     },
 
+    async getCartItems(id, cb){
+        await axios.get(`${backURL}/api/cart?userId=${id}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
     async saveSettings(data, cb){ //to change
         await axios.get(`${backURL}/api/set/settings?lang=${data.lang}&currency=${data.currency}&country=${data.country}`)
             .then(response => cb(response.data))

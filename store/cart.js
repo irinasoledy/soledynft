@@ -1,6 +1,11 @@
 import cartApi from '@/api/cartApi'
 
 export const state = () => ({
+    userCartId: null,
+    cartProducts: [],
+    cartSubproducts: [],
+
+
     cart: [],
     subtotal: 0,
     total: 0,
@@ -10,6 +15,14 @@ export const state = () => ({
 })
 
 export const mutations = {
+    SET_USER_CART_ID(state, id) {
+        state.userCartId = id
+    },
+    SET_CART_ITEMS(state, data) {
+        state.cartProducts = data.products
+        state.cartSubproducts = data.subproducts
+    },
+
     refreshCart(state, data) {
         state.cart = data
     },
@@ -71,6 +84,10 @@ export const actions = {
 }
 
 export const getters = {
+    getCartsProducts: state => state.cartProducts,
+    getCartsSubproducts: state => state.cartSubproducts,
+    getUserCartId: state => state.userCartId,
+
     getCart: (state, getters, rootState) => {
         const services = rootState.allServices
         const user = rootState.auth.user
@@ -108,5 +125,5 @@ export const getters = {
     },
     getStep: state => state.step,
     getOrder: state => state.order,
-    getRefresh: state => state.refresh
+    getRefresh: state => state.refresh,
 }
