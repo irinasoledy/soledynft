@@ -4,6 +4,7 @@
         <v-main class="py-13">
             <nuxt />
         </v-main>
+
         <div v-if="$auth.loggedIn">
             <Chat mode="employee" :user="$auth.user"/>
             <Video mode="employee" :user="$auth.user"/>
@@ -11,19 +12,14 @@
         </div>
 
         <div v-else>
-            <!-- <Chat mode="employee" :user="user"/>
-            <Video mode="employee" :user="user"/> -->
+            <Chat mode="employee" :user="user"/>
+            <Video mode="employee" :user="user"/>
             <AuthenticationForm :user="user"/>
             <Analytics type="client" :user="user"/>
         </div>
+        
         <Footer />
-
     </v-app>
-    <!-- <v-app id="root">
-        <NavComponent/>
-        <nuxt/>
-        <Footer/>
-    </v-app> -->
 </template>
 
 <script>

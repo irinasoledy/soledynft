@@ -53,7 +53,7 @@
                                     ></v-text-field>
                                 </div>
                                 <div class="col-12 text-right">
-                                    <v-btn color="secondary" @click="submitFormData()">
+                                    <v-btn color="primary" @click="submitFormData()">
                                         Save
                                     </v-btn>
                                 </div>
@@ -98,7 +98,7 @@
                                     ></v-text-field>
                                 </div>
                                 <div class="col-12 text-right">
-                                    <v-btn color="secondary" @click="submitPasswords()">
+                                    <v-btn color="primary" @click="submitPasswords()">
                                         Save
                                     </v-btn>
                                 </div>
@@ -244,7 +244,7 @@
                                         ></v-text-field>
                                     </div>
                                     <div class="col-12 text-right">
-                                        <v-btn color="secondary" @click="submitUserDetails">
+                                        <v-btn color="primary" @click="submitUserDetails">
                                             save
                                         </v-btn>
                                     </div>
@@ -394,7 +394,7 @@ export default {
 
 <style scoped>
 .account-area {
-    margin-top: 80px;
+    margin-top: 20px;
 }
 
 .cabinet-content {

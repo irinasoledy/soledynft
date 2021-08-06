@@ -94,4 +94,22 @@ export default {
             .catch(err => console.log(err) )
     },
 
+    async sortProducts(data, cb){
+        await axios.get(`${backURL}/api/products/sort?order=${data.sort}&categoryId=${data.categoryId}&lang=${data.lang}&currency=${data.currency}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
+    async filterProducts(data, cb){
+        await axios.get(`${backURL}/api/products/filter?properties=${data.properties}&minPrice=${data.minPrice}&maxPrice=${data.maxPrice}&categoryId=${data.categoryId}&lang=${data.lang}&currency=${data.currency}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
+    async getDefaultFilter(data, cb){
+        await axios.get(`${backURL}/api/products/default-filter?categoryId=${data.categoryId}&lang=${data.lang}&currency=${data.currency}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
 }

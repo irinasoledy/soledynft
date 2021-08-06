@@ -10,7 +10,7 @@
                     <v-icon>mdi-close</v-icon>
                 </span>
                 <div class="auth-info">
-                    <p class="title">{{ trans.ContactsAndForms.authCustumerSupport }}</p>
+                    <p class="title_">{{ trans.ContactsAndForms.authCustumerSupport }}</p>
                     <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">
                         {{ trans.ContactsAndForms.companyMainPhone1 }}
                     </a>

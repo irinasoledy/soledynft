@@ -74,20 +74,12 @@
         </v-list-item>
         <v-list-item>
             <v-list-item-content>
-                <v-dialog
-                    v-model="authModal"
-                    width="400"
-                    >
-                    <template v-slot:activator="{ on, attrs }">
-                        <v-list-item-title v-bind="attrs"
-                            v-on="on">
-                            <v-btn block outlined color="primary">
-                                Account
-                            </v-btn>
-                        </v-list-item-title>
-                    </template>
-                    <auth-modal @closeAuthModal="authModal = false" />
-                </v-dialog>
+                <v-btn block outlined color="primary" :to="`/${language.lang}/account`" v-if="$auth.loggedIn">
+                    Account
+                </v-btn>
+                <v-btn block outlined color="primary" @click="$nuxt.$emit('openLoginDialog')" v-else>
+                    Account
+                </v-btn>
             </v-list-item-content>
         </v-list-item>
         <v-list-group :value="false">

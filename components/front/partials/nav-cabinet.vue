@@ -1,5 +1,5 @@
 <template>
-    <v-list nav light class="pt-15 navCabinet">
+    <v-list nav light class="navCabinet">
         <v-list-item two-line v-if="$auth.user">
             <v-list-item-avatar height="80" width="80" v-if="$auth.user.avatar">
                 <img :src="`/avatars/${$auth.user.avatar}`">
@@ -96,7 +96,7 @@ export default {
 .navCabinet {
     display: none;
     max-width: 400px;
-    padding-right: 30px;
+    // padding-right: 30px;
 
     .pad {
         padding: 0;
