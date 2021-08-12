@@ -4,10 +4,10 @@
             <v-row align="center" justify="center">
                 <v-col cols="12 experts-heading">
                     <div class="display-1 text-center c-title">
-                        {{ trans.HP.hpDiscussLive }}
+                        {{ $trans('HP', 'hpDiscussLive') }}
                     </div>
                     <p class="text-center text">
-                        {{ trans.HP.hpWeArePround }}
+                        {{ $trans('HP', 'hpWeArePround') }}
                     </p>
                 </v-col>
                 <v-col
@@ -47,14 +47,14 @@
                                 @click="openVideoCall(item)"
                                 >
                                 <v-icon left>mdi-phone</v-icon>
-                                {{ trans.Team.specialistBtnChat }}
+                                {{ $trans('Team', 'specialistBtnChat') }}
                             </v-btn>
                             <v-btn
                                 color="info"
                                 @click="openDialog(item)"
                                 >
                                 <v-icon left>mdi-chat</v-icon>
-                                {{ trans.Team.companyMainAddress }}
+                                {{ $trans('Team', 'companyMainAddress') }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>

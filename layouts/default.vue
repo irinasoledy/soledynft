@@ -6,18 +6,18 @@
         </v-main>
 
         <div v-if="$auth.loggedIn">
-            <Chat mode="employee" :user="$auth.user"/>
-            <Video mode="employee" :user="$auth.user"/>
+            <!-- <Chat mode="employee" :user="$auth.user"/> -->
+            <!-- <Video mode="employee" :user="$auth.user"/> -->
             <Analytics type="client" :user="$auth.user"/>
         </div>
 
         <div v-else>
-            <Chat mode="employee" :user="user"/>
-            <Video mode="employee" :user="user"/>
+            <!-- <Chat mode="employee" :user="user"/> -->
+            <!-- <Video mode="employee" :user="user"/> -->
             <AuthenticationForm :user="user"/>
             <Analytics type="client" :user="user"/>
         </div>
-        
+
         <Footer />
     </v-app>
 </template>

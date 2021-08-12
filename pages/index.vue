@@ -2,6 +2,7 @@
     <div class="h-content">
         <home-banner-carousel />
         <div class="h-sections">
+
             <section class="h-section" v-for="(item, index) in items" :key="index">
                 <h3 class="h-section__title">
                     {{ item.view.translation.name }}
@@ -12,11 +13,11 @@
                 <home-carousel-products :products="item.view.products" :category="item.view" v-else/>
 
                 <div class="h-section__button">
-                    <v-btn nuxt :to="`/ro/collections/${item.view.alias}`" outlined color="primary" v-if="item.type === 'collection'">
-                        Vezi seturile
+                    <v-btn nuxt :to="`/${language.lang}/collections/${item.view.alias}`" outlined color="primary" v-if="item.type === 'collection'">
+                        {{ $trans('DetailsProductSet', 'viewItemsFromSet') }}
                     </v-btn>
-                    <v-btn nuxt :to="`/ro/categories/${item.view.alias}`" outlined color="primary" v-else>
-                        Vezi produsele
+                    <v-btn nuxt :to="`/${language.lang}/categories/${item.view.alias}`" outlined color="primary" v-else>
+                        {{ $trans('DetailsProductSet', 'viewProducts') }}
                     </v-btn>
                 </div>
             </section>
@@ -28,6 +29,7 @@
 <script>
 
 import { mapGetters, mapActions } from 'vuex'
+
 import HomeCarouselSets from '@/components/front/sliders/HomeCarouselSets.vue'
 import HomeCarouselProducts from '@/components/front/sliders/HomeCarouselProducts.vue'
 import HomeBannerCarousel from '@/components/front/sliders/HomeBannerCarousel.vue'
@@ -38,6 +40,7 @@ export default {
     computed: mapGetters({
         categories: 'getCategories',
         collections: 'getCollections',
+        language: 'getLanguage'
     }),
     data() {
         return {

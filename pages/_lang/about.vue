@@ -3,13 +3,13 @@
     <v-container>
       <v-row>
         <v-col class="col-12">
-          <h3 class="c-title">povestea noastră</h3>
+          <h3 class="c-title">{{ $trans('About', 'title') }}</h3>
         </v-col>
         <v-col class="col-12">
           <div class="about__multi">
-            Multi-brand
+            {{ $trans('About', 'row1-1') }}
             <br>
-            magazin Soledy
+            {{ $trans('About', 'row1-2') }}
           </div>
         </v-col>
         <v-col class="col-12">
@@ -28,9 +28,9 @@
       <v-container>
         <v-row>
           <v-col class="col-12">
-            <h3 class="c-title-multi">Despre multi-brand online magazin Soledy</h3>
+            <h3 class="c-title-multi">{{ $trans('About', 'section1Title') }}</h3>
             <p class="about__text">
-              Soledy - multi-brand online magazin pentru dame cu gust remarcabil. Dragele doamne și domnișoare! Știm cât de mult timp și efort necesită să fie depus pentru ca să arăți bine. Pentru ca să arăți remarcabil - și mai mult. Secretul ținutei tale poate fi "acel" accesoriu sau "acea" haină, care nu e așa de ușor de găsit și de asortat la ținută. Anume cu acest scop am creat acest magazin online cu "acele" haine și "acele" accesorii pentru dame cu gust deosebit.
+                {{ $trans('General', 'brandHitoryBody') }}
             </p>
           </v-col>
         </v-row>
@@ -46,17 +46,21 @@
               </v-col>
               <v-col class="col-lg-9 col-12">
                 <p class="about__text bloc1">
-                  Haine si accesorii deosebite necesită efort și abordare deosebite. Avem pentru asta o echipa de Fashionistas, care găsesc "acele" articole remarcabile de la Branduri originale și le aduc aici intr-un singur loc.
+                    {{ $trans('About', 'section2-1') }}
                 </p>
               </v-col>
             </v-row>
           </v-col>
           <v-col class="col-12">
             <p class="subtitle">
-              De ce să cumperi de la noi?
+                {{ $trans('About', 'section2-2') }}
+              <!-- De ce să cumperi de la noi? -->
             </p>
             <img src="https://back.soledy.com/images/banners/5f872990e0b16-About4-apl.JPG" alt="">
-             <p class="about__text bloc3">Pe online e dificil să găsești haine și accesorii, care ți se potrivesc. Cu atât mai complicat e să le asortezi în ținută integră. Anume aici am încercat să fim de ajutor. Am asortat cu grijă și gust hainele și accesorii în seturi și colecții, care pot fi adăugate în coș printr-un singur click. Toate hainele și accesoriile sunt de la brand-uri veritabile, care nu fac parte din mass-market. Acele brand-uri care fac produse pentru oameni, și nu pentru vinzări in masă. Majoritatea produselor sunt lucrate manual. Toate produsele sunt la aceleași prețuri, ca și la furnizorii noștri - punct obligatoriu agreat cu fiecare brand in parte.</p>
+
+             <p class="about__text bloc3">
+                 {{ $trans('About', 'section2-3') }}
+             </p>
           </v-col>
         </v-row>
       </v-container>
@@ -69,12 +73,12 @@
         <v-row>
           <v-col class="col-12">
             <h4 class="bloc1">
-              Istoria brand-ului Soledy
+              {{ $trans('About', 'section3Title') }}
             </h4>
           </v-col>
           <v-col class="col-12">
             <p class="about__text bloc2">
-               Istoria brand-ului nostru a inceput de la entusiasm curat. La început, circa 5 ani în urmă am fost o echipă mică de visătoare. Pentru noi era important cum arătam și cum arată cei din jur. Ne doream să aducem contribuție proprie în acest aspect. Am început cu serviciile de consultanță a producătorilor de haine, încalțăminte și accesorii. Serviciile de consultanță cuprindeau aspecte globale, ce țin de marketing și vânzări, dar și detalii scrupuloase pâna la particularități de producere. Pentru noi era important ca haina sau accesoriu nu doar să arate bine pe persoana, dar și să fie comodă la purtat. Intram in cele mai mici detalii, cum ar fi: de ce să fie agățată haina în baie, inainte de duș, cum să fie cusătura pentru a scoate în evidență punctele forte ale siluetei și invers, ce fel de stofe și modele să fie utilizate pentru a combate fobiile existente ale femeilor. Cu timpul echipa noastră a crescut. Avem specialiști cu studii în design vestimentar, design grafic, specialiști marketing din domeniul Fashion. Experiența acumulată a dus la două concluzii majore: 1. toate femeile vor să arate bine, dar nu toate au suficiente resurse pentru asta (timp și bani) 2. există mulți producători în industria Fashion, care-și pun inima în lucru său, dar nu cunosc cum să se facă auziți. Ca rezultat, am conceput această platformă, în care damele au șansă să găsească ușor articole vestimentare de la brand-uri veritabile, asortate în ținute adorabile de către echipa noastră de fashioniste. Soledy este acronimul format din cuvintele So Lady (atât de damă) și Sole + Lady (unical + damă), care exprimă cel mai bine motto-ul nostru: Să arăți frumos este o artă, dar și necesitate. Soledy - pentru dame cu gust remarcabil!
+                {{ $trans('About', 'section3Body') }}
             </p>
           </v-col>
         </v-row>
@@ -84,11 +88,11 @@
       <v-container>
         <v-row>
           <v-col class="col-12">
-            <h3 class="c-title">Brand-urile Soledy </h3>
+            <h3 class="c-title">{{ $trans('About', 'ourBrands') }} </h3>
           </v-col>
           <v-col class="col-12">
             <h3 class="c-title">
-              Anné Popova BIJOUX
+              {{ $trans('About', 'outBijouxTitle') }}
             </h3>
           </v-col>
         </v-row>
@@ -106,10 +110,10 @@
         <v-row>
           <v-col class="col-12">
             <p class="about__text">
-               Brandul Anné Popova Bijoux își are bazele în anul 2009. Destul de mult timp pentru a căpăta o notorietate sporită pe piață și destul de puțin timp pentru îndeplinirea visului vieții. Astăzi, marca de bijuterii Anné Popova are peste 90 de distribuitori cu achiziții pentru recomercializare, inclusiv magazine de bijuterii, buticuri de accesorii și magazine de tip gift-shop.
+                {{ $trans('About', 'outBijouxBody') }}
             </p>
             <p class="about__north">
-              Bine ai venit la Anné Popova Bijoux
+                {{ $trans('About', 'welcomeToBijoux') }}
             </p>
           </v-col>
         </v-row>
@@ -119,11 +123,11 @@
       <v-container>
         <v-row>
           <v-col class="col-12">
-            <h3 class="c-title">Brand-urile Soledy </h3>
+            <h3 class="c-title">{{ $trans('About', 'ourBrands') }} </h3>
           </v-col>
           <v-col class="col-12">
             <h3 class="c-title">
-              Anné Popova HOMEWEAR
+              {{ $trans('About', 'welcomeToHomewear') }}
             </h3>
           </v-col>
         </v-row>
@@ -141,10 +145,10 @@
         <v-row>
           <v-col class="col-12">
             <p class="about__text">
-               Brandul Anné Popova Homewear: Istoria unui brand divers - de la bijuterii la lenjerie. Inspirat de succesul cu bijuteriile, brand-ul Anné Popova produce și hainele pentru casă și nu doar. Hainele Anné Popova Homewear nu sunt purtate doar în casă. Topurile, spre exemplu, sunt asortate cu sacouri pentru un stil clasic elegant. Salopetele sunt cumpărate pentru plimbările pe plajă. În unele rochii chiar poți ieși în oraș.
+                {{ $trans('About', 'ourHomewareBody') }}
             </p>
             <p class="about__north">
-               Bine ai venit la Anné Popova Homewear
+                {{ $trans('About', 'welcomeToHomewear') }}
             </p>
           </v-col>
         </v-row>
@@ -178,9 +182,9 @@ export default {
         trans: 'getTranslations'
     }),
     mounted() {
-        this.setChatBotmessage(this.trans.General.botMessageTemplateAboutExperts)
-        this.title = this.trans.PageNames.aboutSeoTitle
-        this.description = this.trans.PageNames.aboutSeoDesc
+        this.setChatBotmessage(this.$trans('General', 'botMessageTemplateAboutExperts'))
+        this.title = this.$trans('PageNames', 'aboutSeoTitle')
+        this.description = this.$trans('PageNames', 'aboutSeoDesc')
     },
     methods: {
         ...mapActions({

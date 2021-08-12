@@ -17,7 +17,7 @@
                             <v-spacer></v-spacer>
                             |
                             <v-spacer></v-spacer>
-                            <span>modifica</span>
+                            <span>{{ $trans('TehButtons', 'change') }}</span>
                         </v-list-item-title>
                     </template>
                     <language-modal @closeLanguageModal="changeLanguage = false" />
@@ -27,7 +27,7 @@
         <v-list-item @click="openDrawerTwoCatalog">
             <v-list-item-content>
                 <v-list-item-title>
-                    Clothing
+                    {{ $trans('PagesNames', 'pageNameProductsTitle') }}
                 </v-list-item-title>
             </v-list-item-content>
             <v-list-item-icon>
@@ -37,7 +37,7 @@
         <v-list-item @click="openDrawerTwoCollections">
             <v-list-item-content>
                 <v-list-item-title>
-                    Clothing Collections
+                    {{ $trans('PagesNames', 'pageNameCollections') }}
                 </v-list-item-title>
             </v-list-item-content>
             <v-list-item-icon>
@@ -47,28 +47,28 @@
         <v-list-item to="/ro/designers" nuxt>
             <v-list-item-content>
                 <v-list-item-title>
-                    Designers
+                    {{ $trans('PagesNames', 'PagesNames') }}
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
         <v-list-item to="/ro/new" nuxt>
             <v-list-item-content>
                 <v-list-item-title>
-                    Articole noi
+                    {{ $trans('PagesNames', 'pageNameNewTitle') }}
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
         <v-list-item to="/ro/outlet" nuxt>
             <v-list-item-content>
                 <v-list-item-title>
-                    Outlet
+                    {{ $trans('PagesNames', 'pageNameOutletTitle') }}
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item >
         <v-list-item to="/ro/about" nuxt>
             <v-list-item-content>
                 <v-list-item-title>
-                    Brand soledy
+                    {{ $trans('PagesNames', 'about') }}
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
@@ -78,20 +78,34 @@
                     Account
                 </v-btn>
                 <v-btn block outlined color="primary" @click="$nuxt.$emit('openLoginDialog')" v-else>
-                    Account
+                    {{ $trans('ContactsAndForms', 'authSignIn') }}
                 </v-btn>
             </v-list-item-content>
         </v-list-item>
         <v-list-group :value="false">
             <template v-slot:activator>
                 <v-list-item-title>
-                    ajutor & suport
+                    {{ $trans('General', 'helpInformation') }}
                 </v-list-item-title>
             </template>
-            <v-list-item dense class="pl-8" nuxt v-for="item in support" :key="item.title" :to="item.to">
+            <v-list-item dense class="pl-8" nuxt :to="`/${language.lang}/about`">
                 <v-list-item-content>
                     <v-list-item-title>
-                        {{item.title}}
+                        {{ $trans('PagesNames', 'about') }}
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+            <v-list-item dense class="pl-8" nuxt :to="`/${language.lang}/livrare-achitare-retur`">
+                <v-list-item-content>
+                    <v-list-item-title>
+                        {{ $trans('PagesNames', 'return') }}
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+            <v-list-item dense class="pl-8" nuxt :to="`/${language.lang}/contacts`">
+                <v-list-item-content>
+                    <v-list-item-title>
+                        {{ $trans('PagesNames', 'contactsOur') }}
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
@@ -99,7 +113,7 @@
         <v-list-item>
             <v-list-item-content>
                 <v-list-item-title>
-                    urmareste-ne:
+                    {{ $trans('HeaderFooter', 'followUs') }}
                 </v-list-item-title>
             </v-list-item-content>
             <v-list-item-action class="d-flex flex-row">
@@ -132,19 +146,6 @@ export default {
 			fixed: false,
 			changeLanguage: false,
 			authModal: false,
-			support: [{
-					title: "contactele noastre",
-					to: "/ro/contacts"
-				},
-				{
-					title: "livrare & achitare & retur",
-					to: "#"
-				},
-				{
-					title: "ghildul marimi",
-					to: "#"
-				}
-			]
 		}
 	},
     computed: mapGetters({

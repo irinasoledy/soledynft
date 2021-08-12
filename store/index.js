@@ -100,12 +100,18 @@ export const mutations = {
     drawer(state, val) {
         state.drawer = val
     },
+    SET_BANNERS(state, banners) {
+        state.banners = banners
+    },
+    SET_STATIC_PAGES(state, pages) {
+        state.pages = pages
+    },
     SET_SERVICES(state, data) {
-        state.services = data.services
-        state.allServices = data.servicesAll
+        // state.services = data.services
+        // state.allServices = data.servicesAll
         // state.promotions = data.promotions
-        state.pages = data.pages
-        state.banners = data.banners
+        // state.pages = data.pages
+        // state.banners = data.banners
     },
     SET_DEFAULT_LANG(state, id) {
         state.lang = state.langs.find((lang) => lang.id === id)
@@ -177,19 +183,14 @@ export const actions = {
         await contentApi.getCollections(state.lang.lang, data => commit('SET_COLLECTIONS', data))
         await contentApi.getPromotions(state.lang.lang, data => commit('SET_PROMOTIONS', data))
 
-
-
         await contentApi.getTranslations(state.lang.lang, data => commit('SET_TRANSALATIONS', data))
-        await contentApi.getInitData(state.lang.lang, data => commit('SET_SERVICES', data))
+        await contentApi.getBanners(state.lang.lang, response => commit('SET_BANNERS', response))
+        await contentApi.getStaticPages(state.lang.lang, response => commit('SET_STATIC_PAGES', response))
+
+        // await contentApi.getInitData(state.lang.lang, data => commit('SET_SERVICES', data))
 
         commit('SET_ENV_API', process.env.API)
     },
-
-    // async changeLanguage({state, commit}, id) {
-    //     commit('SET_DEFAULT_LANG', id)
-    //     await contentApi.getTranslations(state.lang.lang, (response) => commit('SET_TRANSALATIONS', response))
-    //     await contentApi.getInitData(state.lang.lang, (response) => commit('SET_SERVICES', response))
-    // },
 
     async changeSettings({state, commit}, data) {
         commit('SET_DEFAULT_LANG', data.lang)
@@ -201,7 +202,8 @@ export const actions = {
         await contentApi.getPromotions(state.lang.lang, data => commit('SET_PROMOTIONS', data))
 
         await contentApi.getTranslations(state.lang.lang, (response) => commit('SET_TRANSALATIONS', response))
-        await contentApi.getInitData(state.lang.lang, (response) => commit('SET_SERVICES', response))
+        await contentApi.getBanners(state.lang.lang, (response) => commit('SET_BANNERS', response))
+        await contentApi.getStaticPages(state.lang.lang, (response) => commit('SET_STATIC_PAGES', response))
     },
 
     async getExpertsList({commit}) {

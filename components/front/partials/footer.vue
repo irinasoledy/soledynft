@@ -13,17 +13,17 @@
                             <v-col class="col-lg-4 col-12">
                                 <v-expansion-panel>
                                     <v-expansion-panel-header>
-                                        DESPRE SOLEDY
+                                        {{ $trans('PagesNames', 'pageAboutAnne') }}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
-                                        <nuxt-link to="/ro/about">
-                                            Brand Soledy
+                                        <nuxt-link :to="`/${language.lang}/about`">
+                                            {{ $trans('PagesNames', 'about') }}
                                         </nuxt-link>
-                                        <nuxt-link to="/ro/contacts">
-                                            Contactele Noastre
+                                        <nuxt-link :to="`/${language.lang}/contacts`">
+                                            {{ $trans('PagesNames', 'contactsOur') }}
                                         </nuxt-link>
-                                        <nuxt-link to="#">
-                                            Detalii comanda & livrare & achitare
+                                        <nuxt-link :to="`/${language.lang}/livrare-achitare-retur`">
+                                            {{ $trans('PagesNames', 'pageAboutAnne') }}
                                         </nuxt-link>
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
@@ -31,7 +31,7 @@
                             <v-col class="col-lg-4 col-12">
                                 <v-expansion-panel>
                                     <v-expansion-panel-header>
-                                        PRODUSELE NOASTRE:
+                                        {{ $trans('PagesNames', 'ourProducts') }}:
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
                                         <nuxt-link to="#">
@@ -46,20 +46,11 @@
                             <v-col class="col-lg-4 col-12">
                                 <v-expansion-panel elevation="0">
                                     <v-expansion-panel-header>
-                                        INFORMAȚII UTILE:
+                                        {{ $trans('HeaderFooter', 'usefulInfo') }}:
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
-                                        <nuxt-link to="#">
-                                            Termenii si condiții
-                                        </nuxt-link>
-                                        <nuxt-link to="#">
-                                            Politica de confidențialitate
-                                        </nuxt-link>
-                                        <nuxt-link to="#">
-                                            Politica de retur
-                                        </nuxt-link>
-                                        <nuxt-link to="#">
-                                            Politica cookie
+                                        <nuxt-link :to="`/${language.lang}/${page.alias}`" v-for="(page, index) in pages" :key="index">
+                                            {{ page.translation.name }}
                                         </nuxt-link>
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
@@ -71,23 +62,23 @@
                     <v-row>
                         <v-col class="col-lg-4 col-12">
                             <div class="footer__subtitle">
-                                DESPRE SOLEDY
+                                {{ $trans('PagesNames', 'pageAboutAnne') }}
                             </div>
                             <div class="footer__list">
-                                <nuxt-link to="/ro/about">
-                                    Brand Soledy
+                                <nuxt-link :to="`/${language.lang}/about`">
+                                    {{ $trans('PagesNames', 'about') }}
                                 </nuxt-link>
-                                <nuxt-link to="/ro/contacts">
-                                    Contactele Noastre
+                                <nuxt-link :to="`/${language.lang}/contacts`">
+                                    {{ $trans('PagesNames', 'contactsOur') }}
                                 </nuxt-link>
-                                <nuxt-link to="/terms">
-                                    Detalii comanda & livrare & achitare
+                                <nuxt-link :to="`/${language.lang}/livrare-achitare-retur`">
+                                    {{ $trans('PagesNames', 'pageAboutAnne') }}
                                 </nuxt-link>
                             </div>
                         </v-col>
                         <v-col class="col-lg-4 col-12">
                             <div class="footer__subtitle">
-                                PRODUSELE NOASTRE:
+                                {{ $trans('PagesNames', 'ourProducts') }}:
                             </div>
                             <div class="footer__list">
                                 <nuxt-link to="#">
@@ -100,20 +91,11 @@
                         </v-col>
                         <v-col class="col-lg-4 col-12">
                             <div class="footer__subtitle">
-                                INFORMAȚII UTILE:
+                                {{ $trans('HeaderFooter', 'usefulInfo') }}:
                             </div>
                             <div class="footer__list">
-                                <nuxt-link to="#">
-                                    Termenii si condiții
-                                </nuxt-link>
-                                <nuxt-link to="#">
-                                    Politica de confidențialitate
-                                </nuxt-link>
-                                <nuxt-link to="#">
-                                    Politica de retur
-                                </nuxt-link>
-                                <nuxt-link to="#">
-                                    Politica cookie
+                                <nuxt-link :to="`/${language.lang}/${page.alias}`" v-for="(page, index) in pages" :key="index">
+                                    {{ page.translation.name }}
                                 </nuxt-link>
                             </div>
                         </v-col>
@@ -168,17 +150,18 @@
                 </v-col>
                 <v-col class="col-12">
                     <p class="my-3">
-                        Urmareste-ne:
+                        {{ $trans('HeaderFooter', 'followUs') }}:
                         <v-icon color="title">mdi-instagram</v-icon>
                         <v-icon color="title">mdi-facebook</v-icon>
                     </p>
                 </v-col>
                 <v-col class="col-12">
                     <p class="my-3">
-                        Dacă ai ajuns până aici, inseamnă că produsele noastre îți par cel puțin interesante. Scrie "Adorabil" (fără ghilimele) în căsuța pentru Promocode pe pagina Coșului pentru a beneficia de reducere de 10% pe toată comanda. Un mic cadou pentru tine. Soledy - pentru dame cu gust remarcabil!
+                        {{ $trans('HeaderFooter', 'concept') }}
                     </p>
                     <p class="ma-0 py-3">
-                        ©2021 Copyright: Toate drepturile rezervate, Website by Like-Media
+                        {{ $trans('HeaderFooter', 'copyright') }}
+                        <!-- ©2021 Copyright: Toate drepturile rezervate, Website by Like-Media -->
                     </p>
                 </v-col>
             </v-row>
@@ -187,8 +170,41 @@
 </template>
 
 <script>
+
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
-    name: "Footer"
+    data: () => ({
+        icons: [
+            'mdi-facebook',
+            'mdi-instagram',
+        ],
+        serviceArray: [],
+    }),
+    watch: {
+        services() {
+            this.serviceArray = []
+            this.splitToChunks(this.services, 2)
+        }
+    },
+    computed: mapGetters({
+        pages : 'getPages',
+        language: 'getLanguage',
+        trans: 'getTranslations',
+        services: 'getServices',
+    }),
+    mounted() {
+        this.splitToChunks(this.services, 2)
+    },
+    methods: {
+        splitToChunks(array, parts) {
+            const services = []
+            array.forEach(service => services.push(service))
+            for (let i = parts; i > 0; i--) {
+                this.serviceArray.push(services.splice(0, Math.ceil(services.length / i)))
+            }
+        }
+    }
 }
 </script>
 

@@ -70,11 +70,6 @@ module.exports = {
         id: 'GTM-NSG9WZ3'
     },
     /*
-    ** Axios module configuration
-    ** See https://axios.nuxtjs.org/options
-    */
-    axios: {},
-    /*
     ** vuetify module configuration
     ** https://github.com/nuxt-community/vuetify-module
     */
@@ -113,7 +108,7 @@ module.exports = {
         extend(config, ctx) {}
     },
     axios: {
-        baseURL: process.env.DOMAIN,
+        baseURL: 'https://soledy.itmall.digital',
         proxyHeaders: false,
         credentials: false
     },

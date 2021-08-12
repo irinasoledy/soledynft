@@ -1,6 +1,11 @@
 import axios from 'axios'
 
 const backURL = 'https://soledy.itmall.digital'
+const backURL2 = 'https://back.soledy.com'
+
+const token = 'SVQzSaN7QoRtGd6bAk8MeWoE8U1YhAmTvZNMEHUP'
+
+const headers = {"X-Requested-With":"XMLHttpRequest","X-CSRF-TOKEN":token}
 
 export default {
 
@@ -11,7 +16,7 @@ export default {
     // },
 
     async appendToCart(data, cb) {
-        await axios.post(`${backURL}/api/cart`, data)
+        await axios.post(`${backURL2}/api/cart`, data)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },

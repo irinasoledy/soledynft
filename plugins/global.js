@@ -18,6 +18,21 @@ export default ({ store, app }, inject) => {
         }
     })
 
+    inject('trans', (keyGroup, transKey) => {
+        const translations = store.state.translations
+
+        if (translations) {
+            if (translations.hasOwnProperty(keyGroup)) {
+                const group = translations[keyGroup]
+
+                if (group.hasOwnProperty(transKey)) {
+                    return group[transKey]
+                }
+            }
+        }
+
+        return keyGroup + '.' + transKey
+    })
 
     inject('parseDate', date => {
         date = new Date(date)

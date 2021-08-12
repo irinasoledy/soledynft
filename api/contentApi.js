@@ -77,7 +77,19 @@ export default {
     },
 
     async getTranslations(lang, cb){
-        await axios.get(`${process.env.API}/api/v2/translations?lang=${lang}`)
+        await axios.get(`${backURL}/api/translations?lang=${lang}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
+    async getBanners(lang, cb){
+        await axios.get(`${backURL}/api/banners?lang=${lang}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
+    async getStaticPages(lang, cb){
+        await axios.get(`${backURL}/api/static-pages?lang=${lang}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err) )
     },

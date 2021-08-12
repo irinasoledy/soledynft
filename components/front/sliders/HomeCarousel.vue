@@ -8,7 +8,7 @@
                     </div>
                     <div class="h-slider__actions">
                         <v-btn color="primary" outlined>
-                            Vezi produsele (here)
+                            {{ $trans('DetailsProductSet', 'viewProducts') }}
                         </v-btn>
                     </div>
                 </a>

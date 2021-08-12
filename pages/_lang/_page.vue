@@ -39,8 +39,8 @@ export default {
         if (Object.keys(this.page).length === 0) {
             this.$router.push("/")
         }
-        this.title = this.page.translation.seo_title || this.trans.PageNames.defaultPageSeoTitle,
-        this.description = this.page.translation.seo_description || this.trans.PageNames.defaultPageSeoDesc
+        this.title = this.page.translation.seo_title || this.$trans('PageNames', 'defaultPageSeoTitle'),
+        this.description = this.page.translation.seo_description || this.$trans('PageNames', 'defaultPageSeoDesc')
     },
     computed: mapGetters({
         pages: 'getPages',
@@ -51,9 +51,7 @@ export default {
 
 <style media="screen" lang="scss">
     .static-page-content {
-        background-color: $primary_dark;
-        color: #FFF;
-        padding-top: 30px;
+        color: $font-color-root;
         h4 {
             text-align: center;
             font-size: 25px;

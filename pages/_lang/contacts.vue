@@ -1,168 +1,168 @@
 <template>
-    <main class="contact-content">
-        <v-parallax dark src="/contact-banner.jpg">
-            <v-row align="center" justify="center">
-                <v-col
-                    class="text-center"
-                    cols="12"
-                    >
-                    <h1 class="display-1 mb-4">
-                        {{ trans.ContactsAndForms.contactPagesTitle }}
-                    </h1>
-                    <h4 class="subheading" color="secondary">
-                        {{ trans.ContactsAndForms.contactPagesContactSubtitle }}
-                    </h4>
-                </v-col>
-            </v-row>
-        </v-parallax>
-        <section class="contact-section">
-            <v-container>
-                <v-row>
-                    <v-col cols="12">
-                        <div class="display-1 text-center c-title">
-                            {{ trans.ContactsAndForms.contactPagesTitle }}
-                        </div>
-                    </v-col>
-                    <div class="col-md-4">
-                        <p class="text-center">
-                            <img width="100" src="/rm1.png" class="map-country-img"/>
-                        </p>
-                        <p class="text-center">{{ trans.ContactsAndForms.companyMainName }}</p>
-                        <p class="text-center">
-                            <v-icon>mdi-marker</v-icon>
-                            {{ trans.ContactsAndForms.companyMainAdres }}
-                        </p>
-                        <p class="text-center">
-                            <v-icon>mdi-phone</v-icon>
-                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1}`">{{ trans.ContactsAndForms.companyMainPhone1 }}</a>
-                        </p>
-                        <p class="text-center">
-                            <v-icon>mdi-email</v-icon>
-                            {{ trans.ContactsAndForms.labelEmail }}: <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1}`">{{ trans.ContactsAndForms.companyMainEmail1 }}</a>
-                        </p>
-                        <p class="text-center">
-                            <a :href="`https://${trans.ContactsAndForms.companyWebsite1}`">{{ trans.ContactsAndForms.companyWebsite1 }}</a>
-                        </p>
-                        <p class="text-center">
-                            <a :href="trans.ContactsAndForms.companyFacebook">{{ trans.ContactsAndForms.companyFacebook }}</a>
-                        </p>
-                        <p class="text-center">
-                            <a :href="trans.ContactsAndForms.companyInstagram">{{ trans.ContactsAndForms.companyInstagram }}</a>
-                        </p>
-                    </div>
+	<div class="contacts">
+		<div class="banner">
+			<div class="banner__image">
+				<img src="https://back.soledy.com/images/contactBanner.jpg" alt="banner" />
+			</div>
+			<div class="banner__text">
+				<div class="banner__title">
+					{{ $trans('ContactsAndForms', 'contactPagesTitle') }}
+				</div>
+				<p class="banner__paragraph">
+                    {{ $trans('ContactsAndForms', 'contactPagesContactSubtitle') }}
+                </p>
+			</div>
+		</div>
+		<v-container>
+			<v-row class="justify-space-around">
+				<v-col class="col-12">
+					<h3 class="c-title my-3">
+                        {{ $trans('ContactsAndForms', 'contactPagesTitle') }}
+					</h3>
+				</v-col>
+				<v-col class="col-xl-4 col-lg-5 col-md-6 col-12">
+					<div class="contacts__item">
+						<img src="/images/rm1.png" alt="">
+						<p class="contacts__country">Romania</p>
+						<p>{{ $trans('ContactsAndForms', 'companyMainName') }}</p>
+						<p>
+							<v-icon color="primary">mdi-map-marker</v-icon>
+							{{ $trans('ContactsAndForms', 'companyMainAdres') }}
+						</p>
+						<a href="tel:+37379666626">
+							<v-icon color="primary">mdi-phone</v-icon>
+							{{ $trans('ContactsAndForms', 'labelPhoneViberWhatsapp') }} <a :href="`tel:${$trans('ContactsAndForms', 'companyMainPhone1')}`">{{ $trans('ContactsAndForms', 'companyMainPhone1') }}</a>
+						</a>
+						<a href="mailto:info@soledy.com">
+							<v-icon color="primary">mdi-mail</v-icon>
+                            {{ $trans('ContactsAndForms', 'labelEmail') }}: <a :href="`mailto:${$trans('ContactsAndForms', 'companyMainEmail1')}`">{{ $trans('ContactsAndForms', 'companyMainEmail1') }}</a>
+						</a>
+						<div class="social">
+							<a href="https://www.instagram.com/anne_popova_brand/">
+								<v-icon color="primary">mdi-instagram</v-icon>
+							</a>
+							<a href="https://www.facebook.com/AnaPopovaOfficial">
+								<v-icon color="primary">mdi-facebook</v-icon>
+							</a>
+						</div>
+						<a class="butt" href="#contactsForm">
+                            {{ $trans('Contacts', 'sendUsMessage') }}
+						</a>
+					</div>
+				</v-col>
+				<v-col class="col-xl-4 col-lg-5 col-md-6 col-12">
+					<div class="contacts__item">
+						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Flag-map_of_Estonia.svg/1280px-Flag-map_of_Estonia.svg.png" alt="">
+						<p class="contacts__country">Estonia</p>
+						<p>{{ $trans('ContactsAndForms', 'companyMainNameEE') }}</p>
+						<p>
+							<v-icon color="primary">mdi-map-marker</v-icon>
+							{{ $trans('ContactsAndForms', 'companyMainAdresEE') }}
+						</p>
+						<a href="tel:+37379666626">
+							<v-icon color="primary">mdi-phone</v-icon>
+                            {{ $trans('ContactsAndForms', 'labelPhoneViberWhatsapp') }} <a :href="`tel:${$trans('ContactsAndForms', 'companyMainPhone1EE')}`">{{ $trans('ContactsAndForms', 'companyMainPhone1EE') }}</a>
+						</a>
+						<a href="mailto:info@soledy.com">
+							<v-icon color="primary">mdi-mail</v-icon>
+                            {{ $trans('ContactsAndForms', 'labelEmail') }}: <a :href="`mailto:${$trans('ContactsAndForms', 'companyMainEmail1EE')}`">{{ $trans('ContactsAndForms', 'companyMainEmail1EE') }}</a>
+						</a>
+						<div class="social">
+							<a href="https://www.instagram.com/anne_popova_brand/">
+								<v-icon color="primary">mdi-instagram</v-icon>
+							</a>
+							<a href="https://www.facebook.com/AnaPopovaOfficial">
+								<v-icon color="primary">mdi-facebook</v-icon>
+							</a>
+						</div>
+						<a class="butt" href="#contactsForm">
+                            {{ $trans('Contacts', 'sendUsMessage') }}
+						</a>
+					</div>
+				</v-col>
+			</v-row>
+			<v-row id="contactsForm" class="justify-center contacts__form">
+				<v-col class="col-xl-3 col-lg-5 col-md-6 col-sm-6 col-12">
+					<p class="form___title">
+						{{ $trans('ContactsAndForms', 'graficLucruTitle') }}
+					</p>
+					<p>
+                        {{ $trans('ContactsAndForms', 'weekDays') }}
+					</p>
+					<p>
+                        {{ $trans('ContactsAndForms', 'weekEnd') }}: {{ $trans('ContactsAndForms', 'closed') }}
+					</p>
+					<h3 class="c-title my-3">
+						{{ $trans('Contacts', 'getInTouch') }}
+					</h3>
+					<p>
+						{{ $trans('Contacts', 'fillTheForm') }}
+					</p>
 
-                    <div class="col-md-4">
-                        <p class="text-center">
-                            <img width="100" src="/md2.png" class="map-country-img"/>
-                        </p>
-                        <p class="text-center">{{ trans.ContactsAndForms.companyMainNameMD }}</p>
-                        <p class="text-center">
-                            <v-icon>mdi-marker</v-icon>
-                            {{ trans.ContactsAndForms.companyMainAdresMD }}
-                        </p>
-                        <p class="text-center">
-                            <v-icon>mdi-phone</v-icon>
-                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1MD}`">{{ trans.ContactsAndForms.companyMainPhone1MD }}</a>
-                        </p>
-                        <p class="text-center">
-                            <v-icon>mdi-email</v-icon>
-                            {{ trans.ContactsAndForms.labelEmail }}: <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1MD}`">{{ trans.ContactsAndForms.companyMainEmail1MD }}</a>
-                        </p>
-                        <p class="text-center">
-                            <a :href="`https://${trans.ContactsAndForms.companyMainWebsiteMD}`">{{ trans.ContactsAndForms.companyMainWebsiteMD }}</a>
-                        </p>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="text-center">
-                            <img width="100" src="/es4.png" class="map-country-img"/>
-                        </p>
-                        <p class="text-center">{{ trans.ContactsAndForms.companyMainNameEE }}</p>
-                        <p class="text-center">
-                            <v-icon>mdi-marker</v-icon>
-                            {{ trans.ContactsAndForms.companyMainAdresEE }}
-                        </p>
-                        <p class="text-center">
-                            <v-icon>mdi-phone</v-icon>
-                            {{ trans.ContactsAndForms.labelPhoneViberWhatsapp }} <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1EE}`">{{ trans.ContactsAndForms.companyMainPhone1EE }}</a>
-                        </p>
-                        <p class="text-center">
-                            <v-icon>mdi-email</v-icon>
-                            {{ trans.ContactsAndForms.labelEmail }}: <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1EE}`">{{ trans.ContactsAndForms.companyMainEmail1EE }}</a>
-                        </p>
-                        <p class="text-center">
-                            <a :href="`https://${trans.ContactsAndForms.companyMainWebsiteEE}`">{{ trans.ContactsAndForms.companyMainWebsiteEE }}</a>
-                        </p>
-                    </div>
-                    <div class="col-md-12">
-                        <v-form
-                            class="contactForm text-center"
-                            ref="form"
-                            v-model="valid"
-                            lazy-validation
-                            v-if="!formSended"
+                    <v-form
+                        class="contactForm text-center"
+                        ref="form"
+                        v-model="valid"
+                        lazy-validation
+                        v-if="!formSended"
+                        >
+                        <v-text-field
+                            v-model="form.name"
+                            dense outlined
+                            :rules="nameRules"
+                            :label="trans.ContactsAndForms.labelName"
+                            required
+                            ></v-text-field>
+                        <v-text-field
+                            dense outlined
+                            v-model="form.email"
+                            :rules="emailRules"
+                            :label="trans.ContactsAndForms.labelEmail"
+                            required
+                            ></v-text-field>
+                        <v-text-field
+                            dense outlined
+                            v-model="form.phone"
+                            :rules="phoneRules"
+                            :label="trans.ContactsAndForms.labelPhone"
+                            required
+                            ></v-text-field>
+                        <v-textarea
+                            dense outlined
+                            v-model="form.message"
+                            name="input-7-4"
+                            :label="trans.ContactsAndForms.labelMessage"
+                            hint="Hint text"
+                            ></v-textarea>
+                        <v-btn
+                            @click="submitFeedback()"
+                            color="accent text--white"
+                            class="mr-4 btn-primary-text"
                             >
-                            <v-text-field
-                                solo
-                                v-model="form.name"
-                                :counter="10"
-                                :rules="nameRules"
-                                :label="trans.ContactsAndForms.labelName"
-                                required
-                                ></v-text-field>
-                            <v-text-field
-                                solo
-                                v-model="form.email"
-                                :rules="emailRules"
-                                :label="trans.ContactsAndForms.labelEmail"
-                                required
-                                ></v-text-field>
-                            <v-text-field
-                                solo
-                                v-model="form.phone"
-                                :rules="phoneRules"
-                                :label="trans.ContactsAndForms.labelPhone"
-                                required
-                                ></v-text-field>
-                            <v-textarea
-                                solo
-                                v-model="form.message"
-                                name="input-7-4"
-                                :label="trans.ContactsAndForms.labelMessage"
-                                hint="Hint text"
-                                ></v-textarea>
-                            <v-btn
-                                @click="submitFeedback()"
-                                color="accent text--white"
-                                class="mr-4 btn-primary-text"
-                                >
-                                {{ trans.ContactsAndForms.sendButton }}
-                            </v-btn>
-                        </v-form>
-                        <v-card-text v-else>
-                            <v-alert
-                                dense
-                                text
-                                type="success"
-                                >
-                                Datele au fost transmise cu succes!!!
-                            </v-alert>
-                        </v-card-text>
-                    </div>
-                </v-row>
-            </v-container>
-        </section>
-
-    </main>
+                            {{ $trans('ContactsAndForms', 'sendButton') }}
+                        </v-btn>
+                    </v-form>
+                    <v-card-text v-else>
+                        <v-alert
+                            dense
+                            text
+                            type="success"
+                            >
+                            Datele au fost transmise cu succes!!!
+                        </v-alert>
+                    </v-card-text>
+				</v-col>
+			</v-row>
+		</v-container>
+	</div>
 </template>
+
+
 
 <script>
 
 import { mapActions, mapGetters } from 'vuex'
-import Testimonials from "@/components/front/sliders/testimonialsSlider"
-import Experts from "@/components/front/widgets/expertsWidget.vue"
-import MapContact from "@/components/front/widgets/mapWidget.vue"
 import userApi from '@/api/userApi'
-
 export default {
     layout: "default",
     head() {
@@ -176,11 +176,6 @@ export default {
                 }
             ]
         }
-    },
-    components: {
-        Testimonials,
-        MapContact,
-        Experts
     },
     data: () => ({
         formSended: false,
@@ -210,9 +205,9 @@ export default {
         user: 'chat/getUser',
     }),
     mounted() {
-        this.setChatBotmessage(this.trans.General.botMessageTemplateContacts)
-        this.title = this.trans.PageNames.defaultPageSeoTitle
-        this.description = this.trans.PageNames.defaultPageSeoDesc
+        this.setChatBotmessage(this.$trans('General', 'botMessageTemplateContacts'))
+        this.title = this.$trans('PageNames', 'defaultPageSeoTitle')
+        this.description = this.$trans('PageNames', 'defaultPageSeoDesc')
     },
     methods: {
         ...mapActions({
@@ -241,48 +236,87 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.contact-section {
-    padding-top: 0 !important
-}
-.display-1 {
-    color: $main-color !important;
-    font-weight: 700 !important;
-}
-.contact-content {
-    background-color: $bcg-body !important;
-    color: $main-color;
-    .subheading {
-        color: $font-color-root !important
-    }
-    .v-parallax {
-        height: 60vh !important;
-    }
-    .contactForm {
-        max-width: 50%;
-        margin: auto;
-    }
-}
-section {
-    padding: 50px 0;
-}
-.map-country-img{
-    height: 70px;
-    width: auto;
-}
-textarea, input{
-    color: $custom_blue !important;
-}
-.btn-primary-text{
-    color: $custom_blue !important;
-}
-@media (max-width: 900px) {
-    .contact-content {
+<style lang="scss" scoped>
+  .banner {
+    position: relative;
+    height: 70vh;
 
-        .contactForm {
-            max-width: 100%;
-            margin: auto;
-        }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-}
+    &__text {
+      flex-direction: column;
+      background: none;
+    }
+    &__title {
+      color: #ffff;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    &__paragraph {
+      font-size: 18px;
+      color: #ffffff !important;
+      text-align: center;
+
+    }
+    &__image {
+      width: 100%;
+      height: 70vh;
+    }
+  }
+  .contacts {
+    .c-title {
+      color: $red-color;
+    }
+    p, a {
+        color: $main-color;
+        font-size: 16px;
+        display: block;
+        margin-bottom: 5px;
+        font-family: $font-text;
+        text-align: center;
+    }
+    &__item {
+      text-align: center;
+      margin-bottom: 30px;
+
+      img {
+        max-width: 150px;
+      }
+    }
+    &__country {
+      font-size: 22px !important;
+      font-weight: bold;
+    }
+
+    .social a {
+      display: inline;
+       margin-left: 10px;
+    }
+    .social {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .butt {
+      top: 20px;
+      font-family: $font-text;
+      font-size: 20px;
+      color: #42261D;
+      padding: 10px;
+      border: 1px solid #42261D;
+      background: #fff1d7;
+      display: inline;
+    }
+    p.form___title {
+      font-weight: bold;
+      font-size: 20px;
+    }
+    form {
+      margin-top: 20px;
+    }
+  }
 </style>
