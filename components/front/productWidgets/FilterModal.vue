@@ -29,10 +29,11 @@
 
             <div class="filter__option" v-for="parameter in category.params" v-if="parameter.property.in_filter == 1">
                 <div class="filter__group">
-                    <div class="filter__title" v-if="parameter.property.multilingual == 1 && filter.includes(value.id)">{{ parameter.property.translation.name }}</div>
+                    <div class="filter__title" v-if="parameter.property.multilingual == 1 ">{{ parameter.property.translation.name }}</div>
                     <v-checkbox
+                        v-for="(value, index) in parameter.property.parameter_values"
+                        v-if="parameter.property.multilingual == 1 && filter.includes(value.id)"
                         @change="setProperty(parameter.property.id, value.id)"
-                        v-for="(value, index) in parameter.property.parameter_values" v-if="parameter.property.multilingual == 1"
                         :key="index"
                         :label="value.translation.name"
                         color="primary"

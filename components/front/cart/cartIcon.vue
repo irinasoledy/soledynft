@@ -59,7 +59,13 @@ export default {
     watch: {
         cartRefresh() {
             this.getCart(this.$auth.user._id)
-        }
+        },
+        cartsProducts() {
+            this.cartLenght = parseInt(this.cartsProducts.length) + parseInt(this.cartsSubproducts.length)
+        },
+        cartsSubproducts() {
+            this.cartLenght = parseInt(this.cartsProducts.length) + parseInt(this.cartsSubproducts.length)
+        },
     },
     async mounted() {
         this.cartLenght = parseInt(this.cartsProducts.length) + parseInt(this.cartsSubproducts.length)

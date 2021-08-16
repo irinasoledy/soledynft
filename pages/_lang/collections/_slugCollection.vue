@@ -19,70 +19,9 @@
     							<v-col class="col-lg-7 col-12">
     								<slider-one-product :images="set.photos" @openZoom="openZoom" :productImages="set.photos" path="sets"/>
     							</v-col>
-    							<v-col class="col-12 collectionOne__mobile">
-    								<v-btn color="body" block>
-    									Adauga setul
-    									<!-- <cart /> -->
-    									<span class="collectionOne__discount">
-    									5%
-    									</span>
-    								</v-btn>
-    								<div class="collectionOne__price price">
-    									<span>190 RON</span>
-    									<span>/</span>
-    									<span class="price__discount">320</span>
-    									<span>RON </span>
-    								</div>
-    							</v-col>
-    							<v-col class="col-lg-4 col-12">
-    								<v-row>
-    									<v-col class="col-12 mt-6" v-for="(product, i) in set.set_products" :key="i" v-if="product">
-    										<div class="colProd__item">
-    											<v-row>
-                                                    <nuxt-link :to="`/ro/categories/${product.product.category.alias}/${product.product.alias}`" class="h-slider__item-inner">
-        												<v-col class="col-4 pb-0">
-        													<div class="colProd__image">
-        														<img :src="`https://back.soledy.com/images/products/sm/${product.product.main_image.src}`" alt="">
-        													</div>
-        												</v-col>
-        												<v-col class="col-8 pb-0">
-        													<div class="colProd__descr">
-        														<div class="colProd__name">
-        															{{ product.product.translation.name }}
-        														</div>
-        														<div class="colProd__price price">
-        															<span>{{ product.product.personal_price.price }}</span>
-        															<!-- <span>/</span>
-        															<span class="price__discount">320</span> -->
-        															<span>{{ currency.abbr }} </span>
-        														</div>
-        														<div class="colProd__color">
-        															<!-- Black -->
-        														</div>
-        													</div>
-        												</v-col>
-        												<v-col class="col-12 pt-0">
-        													<sizes :sizes="sizesOptions" :subproducts="product.product.subproducts" v-if="product.product.subproducts.length"/>
-        												</v-col>
-                                                    </nuxt-link>
-    											</v-row>
-    										</div>
-    									</v-col>
-    									<v-col class="col-12">
-    										<!-- <div class="collectionOne__total">
-    											<span>items selected: 3</span>
-    											<div class="price ma-0">
-    												<span>230$</span>
-    											</div>
-    										</div> -->
-    									</v-col>
-    									<v-col class="col-12">
-    										<!-- <v-btn color="primary">
-    											Add items to bag
-    											</v-btn> -->
-    									</v-col>
-    								</v-row>
-    							</v-col>
+
+                                <set-products :set="set"/>
+
     						</v-row>
     					</div>
     				</v-col>
@@ -94,11 +33,9 @@
 </template>
 
 <script>
-import {
-	mapActions,
-	mapGetters
-} from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import SliderOneProduct from '@/components/front/sliders/SliderOneProduct.vue'
+import SetProducts from '@/components/front/productWidgets/SetProducts.vue'
 import Sizes from '@/components/front/productWidgets/Sizes.vue'
 import Colors from '@/components/front/productWidgets/Colors.vue'
 import Zoom from '@/components/front/productWidgets/Zoom.vue'
@@ -109,7 +46,8 @@ export default {
 	components: {
 		SliderOneProduct,
 		Sizes,
-		Zoom
+		Zoom,
+        SetProducts
 	},
 	async asyncData({ app, params, store}) {
 		let collect = null
@@ -179,6 +117,13 @@ export default {
 		// this.setChatBotmessage(this.trans.General.botMessageTemplate1 + " " + this.service.translation.bot_message + '? '+ this.trans.General.botMessageTemplate2)
 	},
 	methods: {
+        getTotalSetPrice(products) {
+            let price = 0
+            for (var i = 0; i < products.length; i++) {
+                price += parseInt(products[i].product.personal_price.price)
+            }
+            return parseFloat(price).toFixed( 2 )
+        },
 		openZoom(image) {
 			this.mainImage = image
 			this.zoom = true

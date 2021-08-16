@@ -1,32 +1,64 @@
 <template>
-    <div class="size">
-        <div class="size__header">
-            <span>Select your size</span>
-            <span>Size Guide</span>
-        </div>
-        <div class="size__items">
-
-            <div class="size__item" v-for="subproduct in subproducts" :key="subproduct.id">
-                <label class="size__radio">
-                    <input type="radio" name="size" :value="subproduct.parameter_value.id" />
-                    <span class="size__mark">{{ subproduct.parameter_value.translation.name }}</span>
-                </label>
+    <div class="">
+        <div class="size">
+            <div class="size__header">
+                <span>Select your size</span>
+                <span>Size Guide</span>
             </div>
+            <div class="size__items">
 
-            <!-- <div class="size__item" v-for="size in sizes" :key="size.value">
-                <label class="size__radio">
-                    <input :checked="size.selected" type="radio" name="size" :value="size.value" />
-                    <span class="size__mark">{{size.label}}</span>
-                </label>
-            </div> -->
+                <div class="size__item" v-for="subproduct in product.subproducts" :key="subproduct.id">
+                    <label class="size__radio">
+                        <input type="radio" name="size" :value="subproduct.parameter_value.id" @change="setSubproduct(subproduct.id)"/>
+                        <span class="size__mark">{{ subproduct.parameter_value.translation.name }}</span>
+                    </label>
+                </div>
+
+            </div>
         </div>
+        <p class="alert-danger" v-if="alertChangeSize">
+            {{ alertChangeSize }}
+        </p>
+        <v-btn color="body" class="mt-4" block @click="addToCart()">
+            <v-icon>mdi-cart</v-icon>
+            Add to cart
+        </v-btn>
     </div>
 </template>
 
 <script>
+
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  name: "Sizes",
-  props: ["sizes", "subproducts"]
+    props: ['product'],
+    computed: mapGetters({
+        cart: 'cart/getCart',
+        userCartId: 'cart/getUserCartId',
+    }),
+    data() {
+        return {
+            alertChangeSize: null,
+            subproductId: null,
+        }
+    },
+    methods: {
+        ...mapActions({
+            appendToCart: 'cart/appendToCart',
+        }),
+        addToCart() {
+            this.alertChangeSize = null
+            if (this.subproductId) {
+                this.appendToCart({userId: this.userCartId, productId: this.product.id, subproductId: this.subproductId})
+            }else {
+                this.alertChangeSize = "Alegeti o marime!"
+            }
+        },
+        setSubproduct(subproductId) {
+            this.alertChangeSize = null
+            this.subproductId = subproductId
+        }
+    }
 }
 </script>
 
@@ -56,8 +88,8 @@ export default {
       margin-right: 5px;
     }
     &__radio {
-      min-width: 40px;
-      height: 40px;
+      min-width: 50px;
+      height: 50px;
       position: relative;
       display: block;
 
@@ -73,8 +105,8 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      font-size: 18px;
-      line-height: 40px;
+      font-size: 9px;
+      line-height: 50px;
       text-align: center;
       text-transform: uppercase;
       color: rgba(0, 0, 0, 0.6);
@@ -86,5 +118,9 @@ export default {
       border-color: $main-color;
       border-width: 2px;
     }
+  }
+  .alert-danger {
+      color: #C0392B;
+      padding-top: 20px;
   }
 </style>

@@ -47,7 +47,7 @@
         <v-list-item to="/ro/designers" nuxt>
             <v-list-item-content>
                 <v-list-item-title>
-                    {{ $trans('PagesNames', 'PagesNames') }}
+                    {{ $trans('PagesNames', 'pageNameDesigners') }}
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
@@ -68,7 +68,7 @@
         <v-list-item to="/ro/about" nuxt>
             <v-list-item-content>
                 <v-list-item-title>
-                    {{ $trans('PagesNames', 'about') }}
+                    {{ $trans('PagesNames', 'pageAbout') }}
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
@@ -91,21 +91,21 @@
             <v-list-item dense class="pl-8" nuxt :to="`/${language.lang}/about`">
                 <v-list-item-content>
                     <v-list-item-title>
-                        {{ $trans('PagesNames', 'about') }}
+                        {{ $trans('PagesNames', 'pageAbout') }}
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
             <v-list-item dense class="pl-8" nuxt :to="`/${language.lang}/livrare-achitare-retur`">
                 <v-list-item-content>
                     <v-list-item-title>
-                        {{ $trans('PagesNames', 'return') }}
+                        {{ $trans('PagesNames', 'pageReturnPolicy') }}
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
             <v-list-item dense class="pl-8" nuxt :to="`/${language.lang}/contacts`">
                 <v-list-item-content>
                     <v-list-item-title>
-                        {{ $trans('PagesNames', 'contactsOur') }}
+                        {{ $trans('PagesNames', 'pageNameContacts') }}
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>

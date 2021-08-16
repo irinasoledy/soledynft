@@ -19,6 +19,7 @@ export const mutations = {
         state.userCartId = id
     },
     SET_CART_ITEMS(state, data) {
+        console.log(data);
         state.cartProducts = data.products
         state.cartSubproducts = data.subproducts
     },
@@ -39,7 +40,7 @@ export const mutations = {
 
 export const actions = {
     async appendToCart({commit}, data) {
-        await cartApi.appendToCart(data, response => commit('refreshCart', response))
+        await cartApi.appendToCart(data, response => commit('SET_CART_ITEMS', response))
     },
 
     async getCart({commit}, userId) {

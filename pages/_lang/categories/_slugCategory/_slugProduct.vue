@@ -4,17 +4,17 @@
             <v-col class="col-12">
                 <div class="productOne mt-6">
                     <v-row class="justify-space-between">
-                        <v-col class="col-lg-5 col-12">
+                        <v-col class="col-lg-6 col-12">
                             <slider-one-product :images="product.images" @openZoom="openZoom" :productImages="product.images" path="products"/>
                         </v-col>
-                        <v-col class="col-lg-5 col-12">
+                        <v-col class="col-lg-6 col-12">
                             <p class="productOne__name">{{ product.translation.name }}</p>
                             <p class="productOne__by">by Emily Laura Designs</p>
                             <p class="productOne__price">{{ product.personal_price.price }} {{ currency.abbr }}</p>
 
-                            <sizes :sizes="sizesOptions" :subproducts="product.subproducts" v-if="product.subproducts.length"/>
+                            <sizes :product="product" v-if="product.subproducts.length"/>
 
-                            <cart-btn :product="product" type="prod"></cart-btn>
+                            <cart-btn :product="product" type="prod" v-else></cart-btn>
 
                             <div class="buyOn">
                                 <div class="buyOn__header">

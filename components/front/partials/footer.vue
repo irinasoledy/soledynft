@@ -17,10 +17,10 @@
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
                                         <nuxt-link :to="`/${language.lang}/about`">
-                                            {{ $trans('PagesNames', 'about') }}
+                                            {{ $trans('PagesNames', 'pageAbout') }}
                                         </nuxt-link>
                                         <nuxt-link :to="`/${language.lang}/contacts`">
-                                            {{ $trans('PagesNames', 'contactsOur') }}
+                                            {{ $trans('PagesNames', 'pageNameContacts') }}
                                         </nuxt-link>
                                         <nuxt-link :to="`/${language.lang}/livrare-achitare-retur`">
                                             {{ $trans('PagesNames', 'pageAboutAnne') }}
@@ -66,10 +66,10 @@
                             </div>
                             <div class="footer__list">
                                 <nuxt-link :to="`/${language.lang}/about`">
-                                    {{ $trans('PagesNames', 'about') }}
+                                    {{ $trans('PagesNames', 'pageAbout') }}
                                 </nuxt-link>
                                 <nuxt-link :to="`/${language.lang}/contacts`">
-                                    {{ $trans('PagesNames', 'contactsOur') }}
+                                    {{ $trans('PagesNames', 'pageNameContacts') }}
                                 </nuxt-link>
                                 <nuxt-link :to="`/${language.lang}/livrare-achitare-retur`">
                                     {{ $trans('PagesNames', 'pageAboutAnne') }}
@@ -274,6 +274,7 @@ export default {
 		}
 		a {
 			font-family: $font-roboto;
+            text-transform: capitalize;
 		}
 	}
 }
