@@ -21,23 +21,27 @@ export default {
             .catch(err => console.log(err))
     },
 
+    async removeCart(data, cb) {
+        await axios.delete(`${backURL}/api/cart?id=${data.cartId}&userId=${data.userId}&lang=${data.lang}&currency=${data.currency}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
+    async updateCartQty(data, cb) {
+        await axios.patch(`${backURL}/api/cart`, data)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
     async getCart(useId, cb) {
         await axios.get(`/api/cart?userId=${useId}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
 
-    async updateCartQty(data, cb) {
-        await axios.patch(`/api/cart/qty`, data)
-            .then(response => cb(response.data))
-            .catch(err => console.log(err))
-    },
 
-    async removeCart(data, cb) {
-        await axios.delete(`/api/${data.cartId}/cart?userId=${data.userId}`)
-            .then(response => cb(response.data))
-            .catch(err => console.log(err))
-    },
+
+
 
     async addCheckOutInfo(data, cb) {
         await axios.post(`/api/checkout`, data)

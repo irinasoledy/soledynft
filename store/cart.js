@@ -48,11 +48,11 @@ export const actions = {
     },
 
     async removeCart({commit}, data) {
-        await cartApi.removeCart(data, response => commit('refreshCart', response))
+        await cartApi.removeCart(data, response => commit('SET_CART_ITEMS', response))
     },
 
     async updateQty({commit}, data) {
-        await cartApi.updateCartQty(data, response => commit('refreshCart', response))
+        await cartApi.updateCartQty(data, response => commit('SET_CART_ITEMS', response))
     },
 
     async addCheckOutInfo({commit}, data) {
@@ -109,19 +109,29 @@ export const getters = {
         return cart
     },
     getSubtotal: (state, getters) => {
-        const carts = getters.getCart
+        const cartsProducts = getters.getCartsProducts
+        const cartsSubproducts = getters.getCartsSubproducts
         let subtotal = 0
-        for (let i = 0; i < carts.length; i++) {
-            subtotal += parseFloat(carts[i].service.price) * carts[i].qty
+        for (let i = 0; i < cartsProducts.length; i++) {
+            subtotal += parseFloat(cartsProducts[i].product.personal_price.price) * cartsProducts[i].qty
         }
+        for (let i = 0; i < cartsSubproducts.length; i++) {
+            subtotal += parseFloat(cartsSubproducts[i].subproduct.product.personal_price.price) * cartsSubproducts[i].qty
+        }
+
         return subtotal.toFixed(2)
     },
     getTotal: (state, getters) => {
-        const carts = getters.getCart
+        const cartsProducts = getters.getCartsProducts
+        const cartsSubproducts = getters.getCartsSubproducts
         let subtotal = 0
-        for (let i = 0; i < carts.length; i++) {
-            subtotal += parseFloat(carts[i].service.price) * carts[i].qty
+        for (let i = 0; i < cartsProducts.length; i++) {
+            subtotal += parseFloat(cartsProducts[i].product.personal_price.price) * cartsProducts[i].qty
         }
+        for (let i = 0; i < cartsSubproducts.length; i++) {
+            subtotal += parseFloat(cartsSubproducts[i].subproduct.product.personal_price.price) * cartsSubproducts[i].qty
+        }
+
         return subtotal.toFixed(2)
     },
     getStep: state => state.step,

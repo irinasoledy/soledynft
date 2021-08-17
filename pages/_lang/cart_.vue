@@ -1,13 +1,13 @@
-<template lang="html">
-    <main class="content">
+<template>
+    <main class="content" v-if="$auth.loggedIn">
 
-        <v-stepper v-model="stepper" class="cart-area">
+        <v-stepper v-model="e1">
             <v-container>
                 <v-stepper-header>
                     <template>
                         <v-stepper-step
                             key="1-step"
-                            :complete="stepper > 1"
+                            :complete="e1 > 1"
                             step="1"
                             editable
                         >
@@ -18,7 +18,7 @@
                     <template>
                         <v-stepper-step
                             key="2-step"
-                            :complete="stepper > 2"
+                            :complete="e1 > 2"
                             step="2"
                             editable
                         >
@@ -30,7 +30,7 @@
                     <template v-if="order">
                         <v-stepper-step
                             key="3-step"
-                            :complete="stepper > 3"
+                            :complete="e1 > 3"
                             :step="3"
                             editable
                         >
@@ -40,7 +40,7 @@
                     <template v-else>
                         <v-stepper-step
                             key="3-step"
-                            :complete="stepper > 3"
+                            :complete="e1 > 3"
                             :step="3"
                         >
                             Complete order
@@ -90,7 +90,7 @@
                     <v-container>
                         <v-row>
                             <v-col class="col-md-8 cart-box">
-                                <!-- <paymentBox /> -->
+                                <paymentBox />
                                 <p><b>We accept:</b></p>
                                 <img class="cards-img" src="/cards-img.png" alt="">
                             </v-col>
@@ -112,12 +112,12 @@ import {mapGetters, mapActions} from 'vuex'
 import cartBox from '@/components/front/cart/cartBox'
 import cartSummary from '@/components/front/cart/cartSummary'
 import checkOutBox from '@/components/front/cart/checkOutBox'
-// import paymentBox from "~/components/front/cart/paymentBox";
+import paymentBox from "~/components/front/cart/paymentBox";
 
 export default {
     data() {
         return {
-            stepper: 1,
+            e1: 1,
             steps: [
                 {id: 1, title: 'Shopping Cart'},
                 {id: 2, title: 'Checkout'},
@@ -131,8 +131,8 @@ export default {
     }),
     watch: {
         steps(val) {
-            if (this.stepper > val) {
-                this.stepper = val
+            if (this.e1 > val) {
+                this.e1 = val
             }
         },
     },
@@ -148,23 +148,22 @@ export default {
         nextStep(n) {
             n = parseInt(n)
             if (n === 3) {
-                this.stepper = 1
+                this.e1 = 1
             } else {
-                this.stepper = n + 1
+                this.e1 = n + 1
             }
         },
     },
     components: {
-        cartBox, cartSummary, checkOutBox,
-        // paymentBox
+        cartBox, cartSummary, checkOutBox, paymentBox
     }
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 
 .content {
-    margin-top: 30px;
+    margin-top: 130px;
 }
 .v-stepper__header {
     box-shadow: none;
@@ -187,9 +186,5 @@ export default {
     .v-stepper__header{
         margin-left: 0;
     }
-}
-.cart-area {
-    background-color: transparent;
-    box-shadow: none;
 }
 </style>

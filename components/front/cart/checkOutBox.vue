@@ -1,7 +1,6 @@
 <template>
     <v-form
         ref="formCheckOut"
-        v-if="$auth.loggedIn"
         lazy-validation
         v-model="form.valid"
     >
@@ -79,9 +78,9 @@ export default {
             nextStep: false,
             form: {
                 valid: false,
-                name: this.$auth.user.name,
-                email: this.$auth.user.email,
-                phone: this.$auth.user.phone,
+                name: this.$auth.loggedIn ? this.$auth.user.name : '',
+                email: this.$auth.loggedIn ? this.$auth.user.email : '',
+                phone: this.$auth.loggedIn ? this.$auth.user.phone : '',
                 address: '',
                 city: '',
                 country: '',
@@ -106,7 +105,9 @@ export default {
         order: 'cart/getOrder',
     }),
     mounted() {
-        this.getOrderDetails()
+        if (this.$auth.loggedIn) {
+            this.getOrderDetails()
+        }
 
         this.$nuxt.$on('valiadateCheckoutForm', response => {
             this.validateForm(response)

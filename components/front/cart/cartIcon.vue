@@ -57,9 +57,9 @@ export default {
         language: 'getLanguage',
     }),
     watch: {
-        cartRefresh() {
-            this.getCart(this.$auth.user._id)
-        },
+        // cartRefresh() {
+        //     this.getCart(this.$auth.user._id)
+        // },
         cartsProducts() {
             this.cartLenght = parseInt(this.cartsProducts.length) + parseInt(this.cartsSubproducts.length)
         },

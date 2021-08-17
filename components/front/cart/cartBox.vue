@@ -4,7 +4,7 @@
             <thead>
             <tr>
                 <th class="text-left">ID</th>
-                <th class="text-left">Service</th>
+                <th class="text-left">Product</th>
                 <th class="text-center">Qty</th>
                 <th class="text-left">Unit Price</th>
                 <th class="text-left">Price</th>
@@ -12,22 +12,44 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(cartItem, index) in cart" :key="index">
-                <td>{{ index + 1 }}</td>
-                <td class="str-col">{{ cartItem.service.translation.name }}</td>
-                <td class="text-center qty-area str-col">
-                    <v-icon class="qty-control" @click="changeQty(cartItem, 'minus')">mdi-minus</v-icon>
-                    <span>{{ cartItem.qty }}</span>
-                    <v-icon class="qty-control" @click="changeQty(cartItem, 'plus')">mdi-plus</v-icon>
-                </td>
-                <td class="str-col">{{ cartItem.service.price }} EUR</td>
-                <td class="str-col">{{ cartItem.service.price * cartItem.qty }} EUR</td>
-                <td>
-                    <v-icon class="pointer" @click="deleteCartItem(cartItem)">
-                        mdi-delete
-                    </v-icon>
-                </td>
-            </tr>
+                <tr v-for="(cartsProduct, index) in cartsProducts" :key="cartsProduct.id">
+                    <td>{{ index + 1 }}</td>
+                    <td class="str-col" v-if="cartsProduct.product.translation">
+                        {{ cartsProduct.product.translation.name }}
+                    </td>
+                    <td class="text-center qty-area str-col">
+                        <v-icon class="qty-control" @click="changeQty(cartsProduct, 'minus')">mdi-minus</v-icon>
+                        <span>{{ cartsProduct.qty }}</span>
+                        <v-icon class="qty-control" @click="changeQty(cartsProduct, 'plus')">mdi-plus</v-icon>
+                    </td>
+                    <td class="str-col">{{ cartsProduct.product.personal_price.price }} EUR</td>
+                    <td class="str-col">{{ cartsProduct.product.personal_price.price * cartsProduct.qty }} EUR</td>
+                    <td>
+                        <v-icon class="pointer" @click="deleteCartItem(cartsProduct)">
+                            mdi-delete
+                        </v-icon>
+                    </td>
+                </tr>
+
+                <tr v-for="(cartsSubproduct, index) in cartsSubproducts" :key="cartsSubproduct.id">
+                    <td>{{ cartsProducts.length + index + 1 }}</td>
+                    <td class="str-col" v-if="cartsSubproduct.subproduct.product.translation">
+                        {{ cartsSubproduct.subproduct.product.translation.name }}
+                        <p><small><b>Size: {{ cartsSubproduct.subproduct.parameter_value.translation.name }}</b></small> </p>
+                    </td>
+                    <td class="text-center qty-area str-col">
+                        <v-icon class="qty-control" @click="changeQty(cartsSubproduct, 'minus')">mdi-minus</v-icon>
+                        <span>{{ cartsSubproduct.qty }}</span>
+                        <v-icon class="qty-control" @click="changeQty(cartsSubproduct, 'plus')">mdi-plus</v-icon>
+                    </td>
+                    <td class="str-col">{{ cartsSubproduct.subproduct.product.personal_price.price }} EUR</td>
+                    <td class="str-col">{{ cartsSubproduct.subproduct.product.personal_price.price * cartsSubproduct.qty }} EUR</td>
+                    <td>
+                        <v-icon class="pointer" @click="deleteCartItem(cartsSubproduct)">
+                            mdi-delete
+                        </v-icon>
+                    </td>
+                </tr>
             </tbody>
         </template>
     </v-simple-table>
@@ -43,6 +65,11 @@ export default {
     }),
     computed: mapGetters({
         cart: 'cart/getCart',
+        cartsProducts: 'cart/getCartsProducts',
+        cartsSubproducts: 'cart/getCartsSubproducts',
+        userCartId: 'cart/getUserCartId',
+        language: 'getLanguage',
+        currency: 'getCurrency',
     }),
     methods: {
         ...mapActions({
@@ -50,7 +77,12 @@ export default {
             updateQty: 'cart/updateQty',
         }),
         async deleteCartItem(cartItem) {
-            await this.removeCart({ cartId: cartItem.id, userId: cartItem.user._id })
+            await this.removeCart({
+                cartId: cartItem.id,
+                userId: this.userCartId,
+                lang: this.language.lang,
+                currency: this.currency.id,
+            })
         },
         async changeQty(cartItem, direction) {
             if (direction === 'plus') {
@@ -61,7 +93,13 @@ export default {
             }
 
             if (this.qty > 0) {
-                await this.updateQty({ cartId: cartItem.id, qty: this.qty, userId: cartItem.user._id  })
+                await this.updateQty({
+                    cartId: cartItem.id,
+                    qty: this.qty,
+                    userId: this.userCartId,
+                    lang: this.language.lang,
+                    currency: this.currency.id
+                })
             }
         }
     }
