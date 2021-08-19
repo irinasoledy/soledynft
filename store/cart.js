@@ -9,6 +9,7 @@ export const state = () => ({
     cart: [],
     subtotal: 0,
     total: 0,
+    shippingPrice: 15,
     step: 1,
     order: null,
     refresh: false,
@@ -135,10 +136,13 @@ export const getters = {
         for (let i = 0; i < cartsSubproducts.length; i++) {
             subtotal += parseFloat(cartsSubproducts[i].subproduct.product.personal_price.price) * cartsSubproducts[i].qty
         }
+        
+        subtotal = subtotal + parseFloat(getters.getShippingPrice)
 
         return subtotal.toFixed(2)
     },
     getStep: state => state.step,
     getOrder: state => state.order,
     getRefresh: state => state.refresh,
+    getShippingPrice: state => state.shippingPrice
 }

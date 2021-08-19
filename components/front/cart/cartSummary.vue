@@ -6,6 +6,16 @@
                 <v-list-item-content>
                     <v-list-item-title>
                         <v-row>
+                            <v-col class="col-xs-9">Shipping Price</v-col>
+                            <v-col class="col-xs-3 text-right">15 EUR</v-col>
+                        </v-row>
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        <v-row>
                             <v-col class="col-xs-9">Subtotal</v-col>
                             <v-col class="col-xs-3 text-right">{{ subtotal }} EUR</v-col>
                         </v-row>
@@ -13,7 +23,7 @@
                 </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
-            <v-list-item>
+            <v-list-item class="total-section">
                 <v-list-item-content>
                     <v-list-item-title>
                         <v-row>
@@ -23,11 +33,12 @@
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
+
             <v-list-item>
                 <v-list-item-content>
-                    <v-list-item-title>
+                    <!-- <v-list-item-title>
                         <v-row>
-                            <!-- <v-col class="col-xs-9">Delivery Time</v-col>
+                            <v-col class="col-xs-9">Shipping Time</v-col>
                             <v-col class="col-xs-3 text-right">
                                 2-3 days
                                 <v-tooltip
@@ -47,9 +58,9 @@
                                     </template>
                                     <span>Depends by courier busy...information Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam asperiores deleniti distinctio dolor dolorem earum eius eum eveniet incidunt ipsam, laboriosam magnam maiores maxime nemo non pariatur, quasi sequi, voluptatum.</span>
                                 </v-tooltip>
-                            </v-col> -->
+                            </v-col>
                         </v-row>
-                    </v-list-item-title>
+                    </v-list-item-title> -->
                 </v-list-item-content>
             </v-list-item>
 
@@ -82,6 +93,7 @@ export default {
         cart: 'cart/getCart',
         subtotal: 'cart/getSubtotal',
         total: 'cart/getTotal',
+        shippingPrice: 'cart/getShippingPrice'
     }),
     mounted() {
         window.addEventListener('scroll', this.handleScroll);
@@ -139,11 +151,13 @@ export default {
 <style>
 .summary {
     width: 370px;
+    margin-left: 20px;
 }
 
 .fixed {
     position: fixed;
     margin-top: -80px;
+    margin-left: 20px;
     background-color: #FFF;
 }
 
@@ -160,5 +174,9 @@ export default {
     .summary{
         width: 100%;
     }
+}
+.total-section div{
+    font-size: 20px;
+    /* border: 1px solid red; */
 }
 </style>

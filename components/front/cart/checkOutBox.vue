@@ -34,6 +34,20 @@
                 <h4>Contacts:</h4>
             </v-col>
             <v-col cols="12" md="4" sm="12" xs="12">
+                <v-select
+                    :rules="form.rules.country"
+                    v-if="form.country"
+                    :items="countries"
+                    item-text="name"
+                    item-value="name"
+                    label="Country"
+                    required
+                    color="primary"
+                    v-model="form.country"
+                    >
+                </v-select>
+            </v-col>
+            <v-col cols="12" md="4" sm="12" xs="12">
                 <v-text-field
                     v-model="form.address"
                     :rules="form.rules.address"
@@ -47,13 +61,7 @@
                     label="City"
                 ></v-text-field>
             </v-col>
-            <v-col cols="12" md="4" sm="12" xs="12">
-                <v-text-field
-                    v-model="form.country"
-                    :rules="form.rules.country"
-                    label="Country"
-                ></v-text-field>
-            </v-col>
+
             <v-col cols="12" md="4" sm="12" xs="12">
                 <v-text-field
                     v-model="form.postalCode"
@@ -75,6 +83,8 @@ import crmApi from '@/api/crmApi'
 export default {
     data() {
         return {
+            countrySelected: null,
+
             nextStep: false,
             form: {
                 valid: false,
@@ -104,8 +114,12 @@ export default {
         cart: 'cart/getCart',
         order: 'cart/getOrder',
         user: 'chat/getUser',
+        countries: 'getCountries',
+        country: 'getCountry',
     }),
     mounted() {
+        this.form.country = this.country.name
+
         if (this.$auth.loggedIn) {
             this.getOrderDetails()
         }
