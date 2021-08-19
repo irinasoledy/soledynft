@@ -35,6 +35,8 @@ export default {
     computed: mapGetters({
         cart: 'cart/getCart',
         userCartId: 'cart/getUserCartId',
+        language: 'getLanguage',
+        currency: 'getCurrency',
     }),
     data() {
         return {
@@ -49,7 +51,13 @@ export default {
         addToCart() {
             this.alertChangeSize = null
             if (this.subproductId) {
-                this.appendToCart({userId: this.userCartId, productId: this.product.id, subproductId: this.subproductId})
+                this.appendToCart({
+                    userId: this.userCartId,
+                    productId: this.product.id,
+                    subproductId: this.subproductId,
+                    lang: this.language.lang,
+                    currency: this.currency.id
+                })
             }else {
                 this.alertChangeSize = "Alegeti o marime!"
             }

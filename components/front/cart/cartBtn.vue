@@ -17,6 +17,8 @@ export default {
         cart: 'cart/getCart',
         total: 'cart/getTotal',
         userCartId: 'cart/getUserCartId',
+        language: 'getLanguage',
+        currency: 'getCurrency',
     }),
     methods: {
         ...mapActions({
@@ -24,7 +26,12 @@ export default {
         }),
         addToCart() {
             if (this.type === 'prod') {
-                this.appendToCart({userId: this.userCartId, productId: this.product.id})
+                this.appendToCart({
+                        userId: this.userCartId,
+                        productId: this.product.id,
+                        lang: this.language.lang,
+                        currency: this.currency.id
+                })
             }
         }
     }

@@ -19,7 +19,6 @@ export const mutations = {
         state.userCartId = id
     },
     SET_CART_ITEMS(state, data) {
-        console.log(data);
         state.cartProducts = data.products
         state.cartSubproducts = data.subproducts
     },
@@ -53,6 +52,10 @@ export const actions = {
 
     async updateQty({commit}, data) {
         await cartApi.updateCartQty(data, response => commit('SET_CART_ITEMS', response))
+    },
+
+    async clearCart({commit}, data) {
+        await cartApi.clearCart(data, response => commit('SET_CART_ITEMS', response))
     },
 
     async addCheckOutInfo({commit}, data) {
@@ -90,23 +93,24 @@ export const getters = {
     getUserCartId: state => state.userCartId,
 
     getCart: (state, getters, rootState) => {
-        const services = rootState.allServices
-        const user = rootState.auth.user
-
-        const cart = state.cart.map(item => {
-            const arr = {
-                id: item._id,
-                qty: item.qty,
-                user: user,
-                service: '',
-                stripePrice: '',
-                stripeProduct: '',
-            }
-            arr.service = services.find(service => service.id == item.serviceId)
-            // arr.stripePrice = services.find(service => service.id == item.serviceId)
-            return arr
-        })
-        return cart
+        return { products: state.cartProducts, subproducts: state.cartSubproducts }
+        // const services = rootState.allServices
+        // const user = rootState.auth.user
+        //
+        // const cart = state.cart.map(item => {
+        //     const arr = {
+        //         id: item._id,
+        //         qty: item.qty,
+        //         user: user,
+        //         service: '',
+        //         stripePrice: '',
+        //         stripeProduct: '',
+        //     }
+        //     arr.service = services.find(service => service.id == item.serviceId)
+        //     // arr.stripePrice = services.find(service => service.id == item.serviceId)
+        //     return arr
+        // })
+        // return cart
     },
     getSubtotal: (state, getters) => {
         const cartsProducts = getters.getCartsProducts

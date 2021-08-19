@@ -1,7 +1,6 @@
 <template>
   <v-parallax
     dark
-    src="/bcgFour.png"
     class="container-404"
   >
     <v-container>
@@ -10,8 +9,9 @@
           justify="center"
         >
           <v-col cols="12">
-            <img src="/four.png" class="image-404">
-            <p class="subheading" color="primary">
+            <!-- <img src="/four.png" class="image-404"> -->
+            <h1 class="error_404">404</h1>
+            <p class="subheading">
                 We looked far and wide for that page and couldn't find it. Try one of these links to get back on track:
             </p>
             <p class="btn-wrapp-404">
@@ -64,11 +64,14 @@ h1 {
     font-size: 5.125rem !important;
 }
 .subheading{
-    color: #293754;
+    color: #734030 !important;
     font-size: 2rem;
-    color: #FFF;
     max-width: 600px;
     line-height: 1.2;
+}
+.error_404{
+    color: #734030;
+    font-size: 5rem !important;
 }
 .v-parallax__image{
     bottom: auto;

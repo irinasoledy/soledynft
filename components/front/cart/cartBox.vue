@@ -4,6 +4,7 @@
             <thead>
             <tr>
                 <th class="text-left">ID</th>
+                <th class="text-left"></th>
                 <th class="text-left">Product</th>
                 <th class="text-center">Qty</th>
                 <th class="text-left">Unit Price</th>
@@ -14,8 +15,15 @@
             <tbody>
                 <tr v-for="(cartsProduct, index) in cartsProducts" :key="cartsProduct.id">
                     <td>{{ index + 1 }}</td>
+                    <td class="cart-image">
+                        <nuxt-link :to="`/${language.lang}/categories/${cartsProduct.product.category.alias}/${cartsProduct.product.alias}`">
+                            <img :src="`https://back.soledy.com/images/products/sm/${cartsProduct.product.main_image.src}`" alt="">
+                        </nuxt-link>
+                    </td>
                     <td class="str-col" v-if="cartsProduct.product.translation">
-                        {{ cartsProduct.product.translation.name }}
+                        <nuxt-link :to="`/${language.lang}/categories/${cartsProduct.product.category.alias}/${cartsProduct.product.alias}`">
+                            {{ cartsProduct.product.translation.name }}
+                        </nuxt-link>
                     </td>
                     <td class="text-center qty-area str-col">
                         <v-icon class="qty-control" @click="changeQty(cartsProduct, 'minus')">mdi-minus</v-icon>
@@ -33,9 +41,16 @@
 
                 <tr v-for="(cartsSubproduct, index) in cartsSubproducts" :key="cartsSubproduct.id">
                     <td>{{ cartsProducts.length + index + 1 }}</td>
+                    <td class="cart-image">
+                        <nuxt-link :to="`/${language.lang}/categories/${cartsSubproduct.subproduct.product.category.alias}/${cartsSubproduct.subproduct.product.alias}`">
+                            <img :src="`https://back.soledy.com/images/products/sm/${cartsSubproduct.subproduct.product.main_image.src}`" alt="">
+                        </nuxt-link>
+                    </td>
                     <td class="str-col" v-if="cartsSubproduct.subproduct.product.translation">
-                        {{ cartsSubproduct.subproduct.product.translation.name }}
-                        <p><small><b>Size: {{ cartsSubproduct.subproduct.parameter_value.translation.name }}</b></small> </p>
+                        <nuxt-link :to="`/${language.lang}/categories/${cartsSubproduct.subproduct.product.category.alias}/${cartsSubproduct.subproduct.product.alias}`">
+                            {{ cartsSubproduct.subproduct.product.translation.name }}
+                            <p><small><b>Size: {{ cartsSubproduct.subproduct.parameter_value.translation.name }}</b></small> </p>
+                        </nuxt-link>
                     </td>
                     <td class="text-center qty-area str-col">
                         <v-icon class="qty-control" @click="changeQty(cartsSubproduct, 'minus')">mdi-minus</v-icon>
@@ -133,5 +148,8 @@ export default {
     .summary{
         width: 100%;
     }
+}
+.cart-image img {
+    max-width: 50px;
 }
 </style>

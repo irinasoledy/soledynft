@@ -229,7 +229,7 @@
                         </v-expansion-panel-content>
                     </v-expansion-panel>
 
-                    <crmCart v-if="editedUser" :user="editedUser"/>
+                    <!-- <crmCart v-if="editedUser" :user="editedUser"/> -->
                     <crmOrders v-if="editedUser" :user="editedUser"/>
 
                 </v-expansion-panels>

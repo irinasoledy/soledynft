@@ -27,7 +27,7 @@
                 <v-list-item-content>
                     <v-list-item-title>
                         <v-row>
-                            <v-col class="col-xs-9">Delivery Time</v-col>
+                            <!-- <v-col class="col-xs-9">Delivery Time</v-col>
                             <v-col class="col-xs-3 text-right">
                                 2-3 days
                                 <v-tooltip
@@ -47,7 +47,7 @@
                                     </template>
                                     <span>Depends by courier busy...information Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam asperiores deleniti distinctio dolor dolorem earum eius eum eveniet incidunt ipsam, laboriosam magnam maiores maxime nemo non pariatur, quasi sequi, voluptatum.</span>
                                 </v-tooltip>
-                            </v-col>
+                            </v-col> -->
                         </v-row>
                     </v-list-item-title>
                 </v-list-item-content>

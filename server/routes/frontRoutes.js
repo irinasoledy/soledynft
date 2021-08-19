@@ -44,6 +44,8 @@ router.patch('/api/order/payment', OrderController.changeOrderPayment)
 
 router.patch('/api/order/appointment', OrderController.changeOrderAppointment)
 
+router.patch('/api/order/merge', OrderController.mergeOrderWithCart)
+
 router.post('/api/stripe', OrderController.addProductsToStripe)
 
 module.exports = router

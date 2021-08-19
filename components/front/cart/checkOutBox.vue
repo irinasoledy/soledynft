@@ -103,6 +103,7 @@ export default {
     computed: mapGetters({
         cart: 'cart/getCart',
         order: 'cart/getOrder',
+        user: 'chat/getUser',
     }),
     mounted() {
         if (this.$auth.loggedIn) {
@@ -138,7 +139,7 @@ export default {
         },
         validateForm(response) {
             if (this.$refs.formCheckOut) {
-                this.form.userId = this.$auth.user
+                this.form.userId = this.user
                 if (this.order) {
                     this.form.orderId = this.order._id
                     this.updateCheckOutInfo(this.form).then(res => {

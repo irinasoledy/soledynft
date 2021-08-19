@@ -69,10 +69,11 @@ import {mapGetters, mapActions} from 'vuex'
 import cartApi from '@/api/cartApi'
 
 export default {
+    components: { StripeCheckout},
     data() {
         return {
             ready: true,
-            publishableKey: 'pk_live_51JABrOCSan7VcJr1xwgbeRFBq02Un3XXf4EyFn77Dc0YwONmGgr6Yzo5y1m8wPuEHpymXTArIEuJ7ZJI2nFlUUgJ0033JmqWom',
+            publishableKey: 'pk_live_51JP5ExKr7kNfYJz5FaJR5Dw0Vgo5GHTXhRK4YTw5OFFCyFZoSbgXfIMLyhysojhhWQzcEiTYP4aTJAqKpAVuaYnC00JG32l1fq',
             loading: false,
             lineItems: [
                 {
@@ -80,8 +81,8 @@ export default {
                     quantity: 1,
                 },
             ],
-            successURL: 'https://terradigital.ro/redirect/payment/success',
-            cancelURL: 'https://terradigital.ro/redirect/payment/cancel',
+            successURL: 'https://soledy.com/redirect/payment/success',
+            cancelURL: 'https://soledy.com/redirect/payment/cancel',
             validateErrors: null,
             payment: null,
             methods: {
@@ -95,29 +96,33 @@ export default {
         order: 'cart/getOrder',
         total: 'cart/getTotal',
         language: 'getLanguage',
+        currency: 'getCurrency',
         cart: 'cart/getCart',
+        user: 'chat/getUser',
+        userCartId: 'cart/getUserCartId'
     }),
     mounted() {
         this.$nuxt.$on('valiadatePayment', cb => {
             if (this.payment === 'card' && this.ready) {
                 this.ready = false
-                cartApi.createStripeProducts({userId: this.$auth.user._id, cart: this.cart}, response => {
+                cartApi.createStripeProducts({userId: this.user._id, cart: this.cart}, response => {
                     this.lineItems = response
                     if (this.lineItems) {
                         this.redirectToCheckout()
                     }
                 })
-            }else{
-                this.validatePayments(cb)
+            }
+            if(this.payment === 'cod' && this.ready){
+                this.codOrder()
             }
         })
     },
-    components: { StripeCheckout},
     methods: {
         ...mapActions({
             updatePaymentInfo: 'cart/updatePaymentInfo',
             pay: 'cart/pay',
-            resetOrder: 'cart/resetOrder'
+            resetOrder: 'cart/resetOrder',
+            clearCart: 'cart/clearCart'
         }),
         changePayment(payment) {
             this.resetMethods()
@@ -136,11 +141,18 @@ export default {
                 paymentMethod: this.payment,
                 orderId: this.order._id
             }).then(res => {
-                this.$refs.checkoutRef.redirectToCheckout()
+                cartApi.addCartToOrder({
+                        userId: this.user._id,
+                        cart: this.cart,
+                        orderId: this.order._id,
+                        amount: this.total
+                    }, res => {
+                        this.$refs.checkoutRef.redirectToCheckout()
+                })
                 this.ready = true
             })
         },
-        validatePayments(cb) {
+        codOrder() {
             if (!this.payment) {
                 this.validateErrors = 'Change payment method'
                 return false
@@ -148,24 +160,35 @@ export default {
                 this.updatePaymentInfo({
                     paymentMethod: this.payment,
                     orderId: this.order._id
-                }).then(res => {
-                    this.handleBilling()
+                }).then(async res => {
+                    await cartApi.addCartToOrder({
+                        userId: this.user._id,
+                        cart: this.cart,
+                        orderId: this.order._id,
+                        amount: this.total
+                    }, res => {})
+                    await this.handleBilling()
                 })
             }
         },
         handleBilling() {
-            const order =  this.order
+            const order = this.order
             if (!this.order.paymentMethod) {
                 this.validateErrors = 'Change payment method'
                 return false
             }
             this.pay({
-                userId: this.$auth.user._id,
+                userId: this.user._id,
                 orderId: this.order._id,
                 amount: this.total
-            }).then(res => {
+            }).then(async res => {
                 this.resetMethods()
                 this.resetOrder()
+                await this.clearCart({
+                    userId : this.userCartId,
+                    language: this.language.lang,
+                    currency: this.currency.id,
+                }, res => {})
                 this.$router.push(`/${this.language.lang}/thank-you?order=${order._id}`)
             })
         }

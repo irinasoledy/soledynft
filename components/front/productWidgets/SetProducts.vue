@@ -99,14 +99,27 @@ export default {
             if (checkSubproducts) {
                 if (this.checkedSizes.length === this.set.set_products.length) {
                     this.checkedSizes.forEach(async item => {
-                        await this.appendToCart({userId: this.userCartId, productId: item.productId, subproductId: item.subproductId, setId: this.set.id})
+                        await this.appendToCart({
+                            userId: this.userCartId,
+                            productId: item.productId,
+                            subproductId: item.subproductId,
+                            setId: this.set.id,
+                            lang: this.language.lang,
+                            currency: this.currency.id
+                        })
                     })
                 } else {
                     this.sizeAllert = "Alege marimea!"
                 }
             } else {
                 this.set.set_products.forEach(async item => {
-                    await this.appendToCart({userId: this.userCartId, productId: item.product.id, setId: this.set.id})
+                    await this.appendToCart({
+                        userId: this.userCartId,
+                        productId: item.product.id,
+                        setId: this.set.id,
+                        lang: this.language.lang,
+                        currency: this.currency.id
+                    })
                 })
             }
         },

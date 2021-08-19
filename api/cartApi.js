@@ -39,7 +39,11 @@ export default {
             .catch(err => console.log(err))
     },
 
-
+    async clearCart(data, cb) {
+        await axios.delete(`${backURL}/api/carts?userId=${data.userId}&lang=${data.lang}&currency=${data.currency}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
 
 
 
@@ -100,5 +104,12 @@ export default {
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
+
+    async addCartToOrder(data, cb) {
+        await axios.patch(`/api/order/merge`, data)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
 
 }

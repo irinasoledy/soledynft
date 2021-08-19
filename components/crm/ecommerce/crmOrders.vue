@@ -116,21 +116,52 @@
                                 </v-list-item-content>
                             </v-list-item>
                         </v-col>
-                        <v-col>
-                            <v-card-title>Services list:</v-card-title>
-                            <v-list-item two-line v-for="(service, index) in orderServices" :key="index">
-                                <v-list-item-content>
-                                    <v-list-item-title>
-                                        <strong>#{{ index + 1 }}</strong>
-                                        {{ service.service.translation.name }}
-                                    </v-list-item-title>
-                                    <v-list-item-subtitle>
-                                        <strong>Qty:</strong> {{ service.qty }} |
-                                        <strong>Price:</strong> {{ service.service.price }} EUR
-                                    </v-list-item-subtitle>
-                                </v-list-item-content>
-                            </v-list-item>
+                        <v-col v-if="order">
+                            <v-card-title>Order Products:</v-card-title>
+                            <v-simple-table class="full-width">
+                                <template v-slot:default>
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">ID</th>
+                                        <th class="text-center">Product</th>
+                                        <th class="text-center">Qty</th>
+                                        <th class="text-center">Unit Price</th>
+                                        <th class="text-center">Price</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(cartsProduct, index) in order.cart.products" :key="cartsProduct.id">
+                                            <td>{{ index + 1 }}</td>
+                                            <td class="str-col" v-if="cartsProduct.product.translation">
+                                                <nuxt-link :to="`/ro/categories/${cartsProduct.product.category.alias}/${cartsProduct.product.alias}`">
+                                                    {{ cartsProduct.product.translation.name }}
+                                                </nuxt-link>
+                                            </td>
+                                            <td class="text-center qty-area str-col">
+                                                <span>{{ cartsProduct.qty }}</span>
+                                            </td>
+                                            <td class="str-col">{{ cartsProduct.product.main_price.price }} EUR</td>
+                                            <td class="str-col">{{ cartsProduct.product.main_price.price * cartsProduct.qty }} EUR</td>
+                                        </tr>
 
+                                        <tr v-for="(cartsSubproduct, index) in order.cart.subproducts" :key="cartsSubproduct.id">
+                                            <td>{{ cartsProducts.length + index + 1 }}</td>
+                                            <td class="str-col" v-if="cartsSubproduct.subproduct.product.translation">
+                                                <nuxt-link :to="`/ro/categories/${cartsSubproduct.subproduct.product.category.alias}/${cartsSubproduct.subproduct.product.alias}`">
+                                                    {{ cartsSubproduct.subproduct.product.translation.name }}
+                                                    <p><small><b>Size: {{ cartsSubproduct.subproduct.parameter_value.translation.name }}</b></small> </p>
+                                                </nuxt-link>
+                                            </td>
+                                            <td class="text-center qty-area str-col">
+                                                <span>{{ cartsSubproduct.qty }}</span>
+                                            </td>
+                                            <td class="str-col">{{ cartsSubproduct.subproduct.product.main_price.price }} EUR</td>
+                                            <td class="str-col">{{ cartsSubproduct.subproduct.product.main_price.price * cartsSubproduct.qty }} EUR</td>
+                                        </tr>
+                                    </tbody>
+                                </template>
+                            </v-simple-table> <br> <br>
+                            <h3 class="text-right">Amount: {{ order.amount }} EUR</h3>
                             <v-list-item>
                                 <v-list-content>
                                     <v-text-field
@@ -143,6 +174,7 @@
                                 <v-icon @click="saveAppointmentDate(order)">mdi-content-save</v-icon>
                             </v-list-item>
                         </v-col>
+                    <v-col></v-col>
                     </v-row>
                     <v-card-actions class="justify-end">
                         <v-btn text @click="servicesDialog = false">
@@ -235,5 +267,8 @@ export default {
 
 .table-select .v-input__control {
     min-height: 28px !important;
+}
+.cart-image img {
+    max-width: 50px;
 }
 </style>

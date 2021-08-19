@@ -90,7 +90,7 @@
                     <v-container>
                         <v-row>
                             <v-col class="col-md-8 cart-box">
-                                <!-- <paymentBox /> -->
+                                <paymentBox />
                                 <p><b>We accept:</b></p>
                                 <img class="cards-img" src="/cards-img.png" alt="">
                             </v-col>
@@ -112,7 +112,7 @@ import {mapGetters, mapActions} from 'vuex'
 import cartBox from '@/components/front/cart/cartBox'
 import cartSummary from '@/components/front/cart/cartSummary'
 import checkOutBox from '@/components/front/cart/checkOutBox'
-// import paymentBox from "~/components/front/cart/paymentBox";
+import paymentBox from "~/components/front/cart/paymentBox";
 
 export default {
     data() {
@@ -155,8 +155,7 @@ export default {
         },
     },
     components: {
-        cartBox, cartSummary, checkOutBox,
-        // paymentBox
+        cartBox, cartSummary, checkOutBox, paymentBox
     }
 }
 </script>

@@ -34,6 +34,7 @@ const schema = new Schema({
             qty: {type: String, required: true},
         }
     ],
+    cart: Schema.Types.Mixed,
     date: {
         type: Date,
         default: Date.now,

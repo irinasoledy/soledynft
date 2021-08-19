@@ -268,13 +268,15 @@ export default {
             this.previewMessage = true
         },
         newMessage() {
-            if (this.dialogItem === false && (this.lastMessage.sender._id !== this.user._id)) {
-                this.setInterlocutor(null)
-                this.setInterlocutor(this.lastMessage.sender)
-                this.botted = true
+            if (this.lastMessage.sender) {
+                if (this.dialogItem === false && (this.lastMessage.sender._id !== this.user._id)) {
+                    this.setInterlocutor(null)
+                    this.setInterlocutor(this.lastMessage.sender)
+                    this.botted = true
+                }
+                var audio = new Audio('/message.mp3')
+                audio.play()
             }
-            var audio = new Audio('/message.mp3')
-            audio.play()
         },
         call() {
             this.dialog = true
