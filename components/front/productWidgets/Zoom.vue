@@ -9,14 +9,14 @@
       </v-icon>
     </div>
     <div class="zoom__nav">
-      <img  v-for="(item, i) in images" :src="`https://back.soledy.com/images/products/og/${item.src}`" :key="i" @click="setMainImg" :class="[item.src === mainImg.src ? 'selected' : '', 'navImage']" alt="">
+      <img  v-for="(item, i) in images" :src="`https://back.soledy.com/images/${path}/og/${item.src}`" :key="i" @click="setMainImg" :class="[item.src === mainImg.src ? 'selected' : '', 'navImage']" alt="">
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["mainImage", "productImages"],
+  props: ["mainImage", "productImages", "path"],
   data () {
     return {
       images: this.productImages,

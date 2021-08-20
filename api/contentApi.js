@@ -124,4 +124,10 @@ export default {
             .catch(err => console.log(err) )
     },
 
+    async getDesigners(data, cb){
+        await axios.get(`${backURL}/api/designers?lang=${data.lang}&currency=${data.currency}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
+
 }

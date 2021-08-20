@@ -235,18 +235,18 @@ class OrderController {
                })
             }
 
-            const shipping = await stripe.products.create({
-                name: 'shipping 15 EUR',
-            })
-
-            const shippingPrice = await stripe.prices.create({
-               product: shipping.id,
-               unit_amount: parseFloat(15 * 100),
-               currency: 'eur',
-           })
+           //  const shipping = await stripe.products.create({
+           //      name: 'shipping 15 EUR',
+           //  })
+           //
+           //  const shippingPrice = await stripe.prices.create({
+           //      product: shipping.id,
+           //     unit_amount: parseFloat(15 * 100),
+           //     currency: 'eur',
+           // })
 
            items.push({
-               price : shippingPrice.id,
+               price : 'price_1JQBNlKr7kNfYJz5O2PCHtEB',
                quantity: 1,
            })
 

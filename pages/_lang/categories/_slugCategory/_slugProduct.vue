@@ -18,7 +18,7 @@
 
                             <div class="buyOn">
                                 <div class="buyOn__header">
-                                    Buy it on
+                                    {{ $trans('DetailsProductSet', 'buyItOn') }}
                                 </div>
                                 <div class="buyOn__methods">
                                     <v-btn icon>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="guaranty">
                                 <div class="guaranty__header">
-                                    Sustainability Guarantees
+                                    {{ $trans('DetailsProductSet', 'GuaranteesSustainability') }}
                                 </div>
                                 <div class="guaranty__content">
                                     <div class="guaranty__item">
@@ -61,98 +61,92 @@
                             <v-expansion-panels accordion>
                                 <v-expansion-panel aria-expanded="true" class="productOne__exp">
                                     <v-expansion-panel-header class="productOne__exp-header">
-                                        product description
+                                        {{ $trans('DetailsProductSet', 'productDescr') }}
+                                    </v-expansion-panel-header>
+                                    <v-expansion-panel-content >
+                                        <p class="productOne__bloc-text" v-html="product.translation.body"></p>
+                                    </v-expansion-panel-content>
+                                </v-expansion-panel>
+                                <v-expansion-panel class="productOne__exp">
+                                    <v-expansion-panel-header class="productOne__exp-header">
+                                        {{ $trans('DetailsProductSet', 'careAndInfo') }}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
                                         <p class="productOne__bloc-text">
-                                            Soledy's Colier Anné Blush - Începînd cu anul 2012, colierul iconic ”Anné”, solicitat în peste 20 de țări, rămîne a fi colierul de semnătură al designerului Anné Popova, executat din elemente florale unice,detalii de semnatură ale colecțiilor ”Anné Popova”.
+                                            {{ $trans('DetailsProductSet', 'careAndInfo1') }}
                                             <br>
                                             <br>
-                                            Culoare: Blush
+                                            {{ $trans('DetailsProductSet', 'careAndInfo2') }}
                                             <br>
                                             <br>
-                                            Compoziţie: Margele, Elemente textile realizate manual, Bronz antic, Piese metalice nealergice, Mătase artificială, Flori
+                                            {{ $trans('DetailsProductSet', 'careAndInfo3') }} <br>
+                                            {{ $trans('DetailsProductSet', 'careAndInfo4') }}
                                             <br>
                                             <br>
-                                            Faceți un tur pentru a descoperi uimitoarele și adorabilele Bijuteri handmade, coliere handmade, coliere dama, coliere din margele, coliere elegante de seara, coliere femei, set colier si cercei, coliere lungi în magazinul online multi-brand Fashion Soledy. Mărci comerciale originale de modă pentru femei cu gust remarcabil!
+                                            {{ $trans('DetailsProductSet', 'careAndInfo5') }}
                                         </p>
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
                                 <v-expansion-panel class="productOne__exp">
                                     <v-expansion-panel-header class="productOne__exp-header">
-                                        CARE & INFO
-                                    </v-expansion-panel-header>
-                                    <v-expansion-panel-content>
-                                        <p class="productOne__bloc-text">
-                                            How to look after your earrings:
-                                            <br>
-                                            <br>
-                                            Polymer clay is a delicate material so trying to avoid dropping and putting pressure on the earrings will ensure a long life with your pair! The earrings have been coated in a varnish to protect the hand painted designs but please avoid getting them wet.
-                                            <br>
-                                            <br>
-                                            Materials: <br>
-                                            Polymer Clay (PVC, Plasticizer, Additive), Acrylic Paint, Polymer Varnish with UVLS (Matte), Rose Gold Links, Stainless Steel Studs.
-                                            <br>
-                                            <br>
-                                            Handmade by artisan company Emily Laura Designs in the UK.
-                                        </p>
-                                    </v-expansion-panel-content>
-                                </v-expansion-panel>
-                                <v-expansion-panel class="productOne__exp">
-                                    <v-expansion-panel-header class="productOne__exp-header">
-                                        Deliveries & Returns
+                                        <!-- Deliveries & Returns -->
+                                        {{ $trans('DetailsProductSet', 'deliveriesAndReturnsTitle') }}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
                                         <div class="exp__point">
-                                            Delivery
+                                            {{ $trans('DetailsProductSet', 'deliveriesAndReturnsSubitle1') }}
                                         </div>
                                         <p class="productOne__bloc-text">
-                                            COVID-19: We're open online and shipping as usual, though there may be minor delays in some cases.
+                                            {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList1.1') }}
                                             <br>
                                             <br>
-                                            FREE DELIVERY on orders over $200 in USA / C$250 in Canada / A$300 in Australia / 200€ in Europe
+                                            {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList1.2') }}
                                             <br>
                                             <br>
-                                            Items are shipped to you directly by our brands, using tracked, contactless delivery.
+                                            {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList1.3') }}
                                             <br>
                                             <br>
-                                            All customs fees, duties and taxes are included - see Delivery page for full details, conditions apply.
+                                            {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList1.4') }}
                                         </p>
-                                        <div class="exp__point">Returns</div>
+                                        <div class="exp__point">
+                                            {{ $trans('DetailsProductSet', 'deliveriesAndReturnsSubtitle2') }}
+                                        </div>
                                         <p class="productOne__bloc-text">
-                                            FREE RETURNS worldwide within 14 days of delivery - see Returns page for full details.
+                                            {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList2.1') }}
                                         </p>
-                                        <div class="exp__point">Price Match Guarantee</div>
+                                        <div class="exp__point">
+                                            {{ $trans('DetailsProductSet', 'deliveriesAndReturnsSubtitle3') }}
+                                        </div>
                                         <p class="productOne__bloc-text">
-                                            If you find an item cheaper elsewhere we will match the price, see FAQs or Contact Us for full details, conditions apply. Please note we're unable to offer a price match for products sold through independent retailers, or being shipped internationally.
+                                            {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList3.1') }}
                                         </p>
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
                             </v-expansion-panels>
                             <div class="productOne__bloc">
                                 <div class="productOne__bloc-title">
-                                    Meet the designer
+                                    {{ $trans('DetailsProductSet', 'meetTheDesignerTitle') }}
                                 </div>
                                 <p class="productOne__bloc-text">
-                                    Emily Laura Designs is a woman owned business inspired by uniqueness, slowmade fashion and homeware and a passion for colour and nature.
+                                    {{ $trans('DetailsProductSet', 'meetTheDesignerList1') }}
                                     <br> <br>
-                                    Emily hand makes every one of her products, creating truly unique fabrics and jewellery. Whether you are looking to add a pop of colour and warmth to your home or outfit, Emily's work will ensure you stand out by design and quality.
+                                    {{ $trans('DetailsProductSet', 'meetTheDesignerList2') }}
                                 </p>
                             </div>
                             <v-row class="help">
                                 <v-col class="col-md col-12">
-                                    <span>NEED HELP?:</span>
+                                    <span>{{ $trans('Contacts', 'needHelp') }}</span>
                                 </v-col>
                                 <v-col class="col-md col-6">
-                                    <v-btn color="primary" small text href="tel:+4402036950011">
+                                    <v-btn color="primary" small text :href="`tel:${$trans('Contacts', 'phoneNumber')}`">
                                         <v-icon>mdi-phone</v-icon>
-                                        +44 (0) 20 3695 0011
+                                        {{ $trans('Contacts', 'phoneNumber') }}
                                     </v-btn>
                                 </v-col>
                                 <v-col class="col-md col-6">
-                                    <v-btn color="primary" small text href="mailto:info@likemedia.com">
+                                    <v-btn color="primary" small text :href="`mailto:${$trans('Contacts', 'email')}`">
                                         <v-icon>mdi-mail</v-icon>
-                                        info@likemedia.com
+                                        {{ $trans('Contacts', 'email') }}
                                     </v-btn>
                                 </v-col>
                             </v-row>
@@ -161,7 +155,7 @@
                 </div>
             </v-col>
             <v-col class="col-12">
-                <div class="moreProducts">
+                <!-- <div class="moreProducts">
                     <v-row>
                         <v-col class="col-md-4 col-12">
                             <span>Not quite found the product for you?</span>
@@ -181,47 +175,19 @@
                             </v-row>
                         </v-col>
                     </v-row>
-                </div>
+                </div> -->
             </v-col>
             <v-col class="col-12 mt-lg-8">
                 <v-row>
-                    <!-- <v-col class="col-12">
-                        <h3 class="p-title">VEZI LIVE PRODUSELE</h3>
-                        </v-col>
-                        <v-col class="col-12">
-                        <h4 class=" p-subtitle">Consulta-te live cu Consultantii nostri Fashion</h4>
-                        </v-col> -->
-                    <!-- <v-col class="col-12">
-                        <v-row>
-                          <v-col class="col-12 col-md-6 col-lg-4" v-for="(item, i) in 3" :key="i">
-                            <v-card class="prof">
-                              <v-card-text class="prof__image">
-                                <v-img src="https://i.redd.it/6onq25y0sh311.jpg"></v-img>
-                                <v-chip color="green" class="prof__indicator">Online</v-chip>
-                              </v-card-text>
-                              <v-card-actions>
-                                <v-btn color="primary" outlined>
-                                  <v-icon>mdi-chat</v-icon>
-                                  Chat
-                                </v-btn>
-                              </v-card-actions>
-                            </v-card>
-                          </v-col>
-                        </v-row>
-                        </v-col>
-
-                        <v-col class="col-12 mt-lg-8">
-                        <h3 class="additional-title">Completează-ți Look-ul</h3>
-                        <similar-slider />
-                        </v-col>
-                        <v-col class="col-12 mt-lg-8" >
-                        <h3 class="additional-title">Produse Similare</h3>
-                        <similar-slider />
-                        </v-col> -->
+                    <experts />
+                    <v-col class="col-12 mt-lg-8" v-if="similars" >
+                        <h3 class="additional-title">{{ $trans('DetailsProductSet', 'similarProducts') }}</h3>
+                        <similar-slider :similars="similars"/>
+                    </v-col>
                 </v-row>
             </v-col>
         </v-row>
-        <zoom v-if="zoom" @closeZoom="zoom = false" :mainImage="product.main_image" :productImages="productImages" />
+        <zoom v-if="zoom" @closeZoom="zoom = false" :mainImage="mainImage" :productImages="productImages" path="products"/>
     </v-container>
 </template>
 
@@ -236,18 +202,26 @@ import CartBtn from '@/components/front/cart/cartBtn.vue'
 
 import Sizes from '@/components/front/productWidgets/Sizes.vue'
 import Zoom from '@/components/front/productWidgets/Zoom.vue'
+import Experts from '@/components/front/widgets/expertsWidget'
 
 export default {
-  components: {SliderOneProduct, SimilarSlider, Sizes, Zoom, CartBtn},
+  components: { SliderOneProduct, SimilarSlider, Sizes, Zoom, CartBtn, Experts },
   async asyncData({ app, params, store }) {
       let prod = null
-      await contentApi.getProduct({lang: store.state.lang.lang, alias: params.slugProduct, currency: store.state.currency.id}, data => {
-          prod = data
-      })
-      return {
+      let similars1 = null
+      await contentApi.getProduct({
+            lang: store.state.lang.lang,
+            alias: params.slugProduct,
+            currency: store.state.currency.id
+        }, data => {
+          prod = data.product
+          similars1 = data.similars
+        })
+        return {
+          similars: similars1,
           product: prod,
           productImages: prod.images
-      }
+        }
   },
   computed: mapGetters({
       categories: 'getCategories',
@@ -323,6 +297,7 @@ export default {
   },
   methods: {
     openZoom (image) {
+        console.log(image);
       this.mainImage = image
       this.zoom = true
     }

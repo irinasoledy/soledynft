@@ -31,7 +31,7 @@
                             <v-col class="col-lg-4 col-12">
                                 <v-expansion-panel>
                                     <v-expansion-panel-header>
-                                        {{ $trans('PagesNames', 'ourProducts') }}:
+                                        {{ $trans('HeaderFooter', 'ourProducts') }}:
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
                                         <nuxt-link to="#">
@@ -78,7 +78,7 @@
                         </v-col>
                         <v-col class="col-lg-4 col-12">
                             <div class="footer__subtitle">
-                                {{ $trans('PagesNames', 'ourProducts') }}:
+                                {{ $trans('HeaderFooter', 'ourProducts') }}:
                             </div>
                             <div class="footer__list">
                                 <nuxt-link to="#">

@@ -1,12 +1,12 @@
 <template>
   <div class="a-slider">
     <VueSlickCarousel ref="homeCarousel" v-bind="settings" >
-      <div class="a-slider__item" v-for="(item, i) in 5" :key="i">
-        <a href="#" class="a-slider__item-inner">
+      <div class="a-slider__item" v-for="(similar, i) in similars" :key="i">
+        <nuxt-link :to="`/ro/categories/${similar.category.alias}/${similar.alias}`" class="a-slider__item-inner">
           <div class="a-slider__image">
-            <img src="https://soledy.com/images/sets/sm/set-authenic-anne-camelia-im1.JPG" alt="">
+              <v-img :src="`https://back.soledy.com/images/products/sm/${similar.main_image.src}`"></v-img>
           </div>
-        </a>
+        </nuxt-link>
       </div>
     </VueSlickCarousel>
     <div class="custom-arrow next-slide" @click="nextSlide">
@@ -30,6 +30,7 @@
 export default {
   name: 'SimilarCarousel',
   components: { VueSlickCarousel, ArrowLeft },
+  props: ['similars'],
   data () {
     return {
       settings: {

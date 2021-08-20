@@ -19,16 +19,14 @@
     							<v-col class="col-lg-7 col-12">
     								<slider-one-product :images="set.photos" @openZoom="openZoom" :productImages="set.photos" path="sets"/>
     							</v-col>
-
                                 <set-products :set="set"/>
-
     						</v-row>
     					</div>
     				</v-col>
+                    <zoom v-if="zoom" @closeZoom="zoom = false" :mainImage="mainImage" :productImages="set.photos" path="sets"/>
     			</v-row>
     		</v-col>
     	</v-row>
-    	<!-- <zoom v-if="zoom" @closeZoom="zoom = false" :mainImage="mainImage" :productImages="collectionImages" /> -->
     </v-container>
 </template>
 
