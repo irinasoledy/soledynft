@@ -3,10 +3,10 @@
 		<div class="banner" v-for="(promotion, i) in promotions" :key="i" :id="`${promotion.alias}`">
 			<nuxt-link to="#" class="banner__inner">
 				<div class="banner__image">
-                     <img :src="`https://back.soledy.com/images/promotions/${promotion.img}`" />
+                     <img :src="`${envAPI}/images/promotions/${promotion.img}`" />
 				</div>
 				<div class="banner__text">
-					<div class="banner__title">
+					<div class="banner__title" v-if="promotion.translation">
 						 {{ promotion.translation.name }}
 					</div>
 				</div>
@@ -24,12 +24,14 @@
 									<v-row>
 										<v-col class="col-lg-3 col-md-4 col-6" v-for="(product, i) in promotion.products" :key="i" v-if="product.product.main_image">
 											<nuxt-link :to="`/${language.lang}/categories/${product.product.category.alias}/${product.product.alias}`" class="product">
-												<v-img :src="`https://back.soledy.com/images/products/og/${product.product.main_image.src}`"></v-img>
+												<v-img :src="`${envAPI}/images/products/og/${product.product.main_image.src}`"></v-img>
 												<p class="product__name">{{ product.product.translation.name }}</p>
 												<div class="collectionOne__price price">
                                                     <span>{{ product.product.personal_price.price }}</span>
-                    								<!-- <span>/</span>
-                    								<span class="price__discount">320</span> -->
+													<span v-if="product.product.personal_price.old_price > product.product.personal_price.price">/</span>
+				    								<span class="price__discount" v-if="product.product.personal_price.old_price > product.product.personal_price.price">
+				                                        {{ product.product.personal_price.old_price }}
+				                                    </span>
                     								<span>{{ currency.abbr }} </span>
 												</div>
 											</nuxt-link>
@@ -42,18 +44,27 @@
 				</v-row>
 			</v-container>
 		</div>
+		<v-row class="experts">
+            <v-col class="col-12">
+                <h3 class="p-title-experts">{{ $trans('DetailsProductSet', 'viewLiveProducts') }}</h3>
+            </v-col>
+            <experts />
+        </v-row>
 	</div>
 </template>
 
 <script>
 
 import { mapGetters, mapActions } from 'vuex'
+import Experts from '@/components/front/widgets/expertsWidget'
 
 export default {
+	components: {Experts},
     computed: mapGetters({
         promotions: 'getPromotions',
         currency: 'getCurrency',
         language: 'getLanguage',
+		envAPI: 'getEnvAPI'
     }),
 }
 </script>

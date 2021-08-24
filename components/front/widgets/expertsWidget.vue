@@ -1,50 +1,45 @@
 <template>
-    <v-row class="experts">
+    <v-row align="center" justify="center">
         <v-col class="col-12">
-            <h3 class="p-title">VEZI LIVE PRODUSELE</h3>
+            <h4 class=" p-subtitle">{{ $trans('General', 'freeConsultationMsg') }}</h4>
         </v-col>
-        <v-col class="col-12">
-            <h4 class=" p-subtitle">Consulta-te live cu Consultantii nostri Fashion</h4>
-        </v-col>
-        <v-col class="col-12">
-            <v-row>
-                <v-col class="col-12 col-md-6 col-lg-4" v-for="(item, i) in experts" :key="i">
-                    <v-card class="prof">
-                        <v-card-text class="prof__image">
-                            <v-img
-                                :src="`/avatars/${item.avatar}`"
-                                aspect-ratio="1"
-                                class="grey lighten-2"
-                                >
-                            </v-img>
-                            <v-chip v-if="item.online === true" color="green" class="prof__indicator">Online</v-chip>
-                        </v-card-text>
-                        <v-card-actions class="text-center">
-                            <h4>{{item.name}}</h4>
-                        </v-card-actions>
-                        <v-card-actions>
-                            <v-btn
-                                outlined
-                                v-if="item.status"
-                                color="primary"
-                                @click="openVideoCall(item)"
-                                >
-                                <v-icon left>mdi-phone</v-icon>
-                                Call
-                            </v-btn>
-                            <v-btn
-                                outlined
-                                color="primary"
-                                @click="openDialog(item)"
-                                >
-                                <v-icon left>mdi-chat</v-icon>
-                                Chat
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-col>
-            </v-row>
-        </v-col>
+        <v-row align="center" justify="center">
+            <v-col class="col-lg-3 col-md-6 col-12 d-flex child-flex" v-for="(item, i) in experts" :key="i">
+                <v-card class="prof">
+                    <v-card-text class="prof__image">
+                        <v-img
+                            :src="`/avatars/${item.avatar}`"
+                            aspect-ratio="1"
+                            class="grey lighten-2"
+                            >
+                        </v-img>
+                        <v-chip v-if="item.online === true" color="green" class="prof__indicator">Online</v-chip>
+                    </v-card-text>
+                    <v-card-actions class="text-center">
+                        <h4>{{item.name}}</h4>
+                    </v-card-actions>
+                    <v-card-actions>
+                        <v-btn
+                            outlined
+                            v-if="item.status"
+                            color="primary"
+                            @click="openVideoCall(item)"
+                            >
+                            <v-icon left>mdi-phone</v-icon>
+                            Call
+                        </v-btn>
+                        <v-btn
+                            outlined
+                            color="primary"
+                            @click="openDialog(item)"
+                            >
+                            <v-icon left>mdi-chat</v-icon>
+                            Chat
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-col>
+        </v-row>
     </v-row>
 </template>
 

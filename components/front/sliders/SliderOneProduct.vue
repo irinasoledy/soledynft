@@ -3,7 +3,7 @@
     <VueSlickCarousel ref="productSlider" v-bind="settings" >
       <div class="p-slider__item" v-for="(item, i) in images" :key="i">
         <div class="p-slider__image">
-          <img :src="`https://back.soledy.com/images/${path}/og/${item.src}`" alt="" @click="openZoom">
+          <img :src="`https://back.soledy.com/images/${path}/md/${item.src}`" alt="" @click="openZoom">
         </div>
       </div>
     </VueSlickCarousel>

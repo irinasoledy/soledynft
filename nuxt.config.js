@@ -15,7 +15,7 @@ module.exports = {
             // {name: 'facebook-domain-verification', content: 'zhd8ab5sq0dcog9zbvmxy74zgsdaim'}
         ],
         link: [
-            {rel: 'icon', type: 'image/x-icon', href: '/fav.png'},
+            {rel: 'icon', type: 'image/x-icon', href: 'https://soledy.com/images/favicon.png'},
             {
                 rel: "stylesheet",
                 href: "https://fonts.googleapis.com/css2?family=Roboto&display=swap",

@@ -2,15 +2,15 @@
   <v-form>
     <v-card>
       <v-card-title class="headline text-center">
-        Settings
+        {{ $trans('FormFields', 'settings') }}
       </v-card-title>
       <v-card-text class="pt-8 pb-0">
         <v-select
-            v-if="languageSelected"
+          v-if="languageSelected"
           :items="languages"
-          item-text="lang"
+          item-text="description"
           item-value="id"
-          label="Limba"
+          :label="$trans('FormFields', 'language')"
           color="primary"
           required
           outlined
@@ -18,12 +18,13 @@
           v-model="languageSelected"
         >
         </v-select>
+
         <v-select
             v-if="countrySelected"
           :items="countries"
           item-text="name"
           item-value="id"
-          label="Livrare catre"
+            :label="$trans('FormFields', 'shipTo')"
           required
           color="primary"
           outlined
@@ -35,7 +36,7 @@
           :items="currencies"
           item-text="abbr"
           item-value="id"
-          label="Valuta"
+            :label="$trans('FormFields', 'currency')"
           color="primary"
           outlined
           required
@@ -53,14 +54,15 @@
           text
           @click="closeLanguageModal"
         >
-          Close
+        {{ $trans('TehButtons', 'btnClose') }}
+
         </v-btn>
         <v-btn
           color="primary"
           outlined
           @click="saveSettings()"
         >
-          Save
+          {{ $trans('FormFields', 'save') }}
         </v-btn>
       </v-card-actions>
     </v-card>

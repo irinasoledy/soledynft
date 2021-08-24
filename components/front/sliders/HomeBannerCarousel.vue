@@ -1,12 +1,12 @@
 <template>
   <div class="banner" v-if="promotions">
     <VueSlickCarousel ref="productSlider" v-bind="settings" >
-      <nuxt-link  :to="`${language.lang}/promotions#${promotion.alias}`" class="banner__inner" v-for="(promotion, i) in promotions" :key="i">
+      <nuxt-link :to="`${language.lang}/promotions#${promotion.alias}`" class="banner__inner" v-for="(promotion, i) in promotions" :key="i">
         <div class="banner__image">
-          <img :src="`https://back.soledy.com/images/promotions/${promotion.img}`" alt="banner" />
+          <img :src="`${envAPI}/images/promotions/${promotion.img}`" alt="banner" />
         </div>
         <div class="banner__text">
-          <div class="banner__title">
+          <div class="banner__title" v-if="promotion.translation">
               {{ promotion.translation.name }}
           </div>
         </div>
@@ -48,7 +48,8 @@ export default {
   computed: mapGetters({
       promotions: 'getPromotions',
       collections: 'getCollections',
-      language: 'getLanguage'
+      language: 'getLanguage',
+      envAPI: 'getEnvAPI'
   }),
   methods: {
     nextSlide () {

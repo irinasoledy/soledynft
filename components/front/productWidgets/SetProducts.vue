@@ -5,28 +5,30 @@
                 <div class="colProd__item">
                     <v-row>
                         <nuxt-link :to="`/ro/categories/${product.product.category.alias}/${product.product.alias}`" class="h-slider__item-inner">
+                            <v-row class="justify-space-around">
                             <v-col class="col-4 pb-0">
                                 <div class="colProd__image">
                                     <img :src="`https://back.soledy.com/images/products/sm/${product.product.main_image.src}`" alt="">
                                 </div>
                             </v-col>
-                            <v-col class="col-8 pb-0">
+                            <v-col class="col-xl-8 col-lg-8 col-md-6 col-12 pb-0">
                                 <div class="colProd__descr">
                                     <div class="colProd__name">
                                         {{ product.product.translation.name }}
                                     </div>
                                     <div class="colProd__price price">
                                         <span>{{ product.product.personal_price.price }}</span>
-                                        <!-- <span>/</span>
-                                        <span class="price__discount">320</span> -->
+                                        <span v-if="product.product.personal_price.old_price > product.product.personal_price.price">/</span>
+        								<span class="price__discount" v-if="product.product.personal_price.old_price > product.product.personal_price.price">
+                                            {{ product.product.personal_price.old_price }}
+                                        </span>
                                         <span>{{ currency.abbr }} </span>
                                     </div>
                                 </div>
                             </v-col>
-
+                        </v-row>
                         </nuxt-link>
-                        <v-col class="col-12 pt-0">
-
+                        <v-col class="col-12 pb-0">
                             <div class="size__items">
                                 <div class="size__item" v-for="subproduct in product.product.subproducts" :key="subproduct.id">
                                     <label class="size__radio">
@@ -49,7 +51,7 @@
             </v-col>
             <v-col class="col-12">
                 <p v-if="sizeAllert" class="alert-danger">
-                    check size!
+                    {{ $trans('DetailsProductSet', 'selectSizeProdsSet') }}
                 </p>
                 <v-btn color="primary" @click="addToCart()">
                     Add items to bag

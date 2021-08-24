@@ -27,6 +27,12 @@
     			</v-row>
     		</v-col>
     	</v-row>
+        <v-row class="experts">
+            <v-col class="col-12">
+                <h3 class="p-title-experts">{{ $trans('DetailsProductSet', 'viewLiveProducts') }}</h3>
+            </v-col>
+            <experts />
+        </v-row>
     </v-container>
 </template>
 
@@ -37,6 +43,7 @@ import SetProducts from '@/components/front/productWidgets/SetProducts.vue'
 import Sizes from '@/components/front/productWidgets/Sizes.vue'
 import Colors from '@/components/front/productWidgets/Colors.vue'
 import Zoom from '@/components/front/productWidgets/Zoom.vue'
+import Experts from '@/components/front/widgets/expertsWidget'
 
 import contentApi from '@/api/contentApi'
 
@@ -45,7 +52,8 @@ export default {
 		SliderOneProduct,
 		Sizes,
 		Zoom,
-        SetProducts
+        SetProducts,
+        Experts
 	},
 	async asyncData({ app, params, store}) {
 		let collect = null
@@ -60,6 +68,17 @@ export default {
 			collection: collect,
 		}
 	},
+    watch: {
+        async currency() {
+            await contentApi.getCollection({
+                lang: this.language.lang,
+                currency: this.currency.id,
+                alias: this.collection.alias
+            }, data => {
+                this.collection = data
+            })
+        },
+    },
 	data() {
 		return {
 			collection: null,

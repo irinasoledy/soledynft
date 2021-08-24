@@ -53,7 +53,7 @@ export default {
     .static-page-content {
         color: $font-color-root;
         h4 {
-            text-align: center;
+            // text-align: center;
             font-size: 25px;
             margin: 10px 0;
         }

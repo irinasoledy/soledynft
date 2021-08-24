@@ -20,7 +20,7 @@
                         {{ $trans('ContactsAndForms', 'contactPagesTitle') }}
 					</h3>
 				</v-col>
-				<v-col class="col-xl-4 col-lg-5 col-md-6 col-12">
+				<v-col class="col-xl-3 col-lg-3 col-md-6 col-12">
 					<div class="contacts__item">
 						<img src="/images/rm1.png" alt="">
 						<p class="contacts__country">Romania</p>
@@ -50,7 +50,43 @@
 						</a>
 					</div>
 				</v-col>
-				<v-col class="col-xl-4 col-lg-5 col-md-6 col-12">
+
+				<v-col class="col-xl-3 col-lg-3 col-md-6 col-12">
+					<div class="contacts__item">
+					<p class="text-center">
+						<img width="100" src="https://terradigital.ro/md2.png" class="map-country-img"/>
+					</p>
+					<p class="text-center">{{ $trans('ContactsAndForms', 'companyMainNameMD') }}</p>
+					<p class="text-center">
+						<v-icon>mdi-marker</v-icon>
+						{{ $trans('ContactsAndForms', 'companyMainAdresMD') }}
+					</p>
+					<p class="text-center">
+						<v-icon>mdi-phone</v-icon>
+						{{ $trans('ContactsAndForms', 'labelPhoneViberWhatsapp') }} <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1MD}`">{{ $trans('ContactsAndForms', 'companyMainPhone1MD') }}</a>
+					</p>
+					<p class="text-center">
+						<v-icon>mdi-email</v-icon>
+						{{ $trans('ContactsAndForms', 'labelEmail') }}: <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1MD}`">{{ $trans('ContactsAndForms', 'companyMainEmail1MD') }}</a>
+					</p>
+					<p class="text-center">
+						<a :href="`https://${trans.ContactsAndForms.companyMainWebsiteMD}`">{{ $trans('ContactsAndForms', 'companyMainWebsiteMD') }}</a>
+					</p>
+					<div class="social">
+						<a href="https://www.instagram.com/anne_popova_brand/">
+							<v-icon color="primary">mdi-instagram</v-icon>
+						</a>
+						<a href="https://www.facebook.com/AnaPopovaOfficial">
+							<v-icon color="primary">mdi-facebook</v-icon>
+						</a>
+					</div>
+					<a class="butt" href="#contactsForm">
+						{{ $trans('Contacts', 'sendUsMessage') }}
+					</a>
+				</div>
+				</v-col>
+
+				<v-col class="col-xl-3 col-lg-3 col-md-6 col-12">
 					<div class="contacts__item">
 						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Flag-map_of_Estonia.svg/1280px-Flag-map_of_Estonia.svg.png" alt="">
 						<p class="contacts__country">Estonia</p>

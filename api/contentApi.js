@@ -40,6 +40,12 @@ export default {
             .catch(err => console.log(err))
     },
 
+    async getAllProducts(data, cb){
+        await axios.get(`${backURL}/api/products/all?lang=${data.lang}&currency=${data.currency}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
     async getProduct(data, cb){
         await axios.get(`${backURL}/api/product?lang=${data.lang}&alias=${data.alias}&currency=${data.currency}`)
             .then(response => cb(response.data))
@@ -70,8 +76,8 @@ export default {
             .catch(err => console.log(err))
     },
 
-    async getPromotions(lang, cb){
-        await axios.get(`${backURL}/api/promotions?lang=${lang}`)
+    async getPromotions(data, cb){
+        await axios.get(`${backURL}/api/promotions?lang=${data.lang}&currency=${data.currency}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
@@ -130,4 +136,9 @@ export default {
             .catch(err => console.log(err) )
     },
 
+    async getDesigner(data, cb){
+        await axios.get(`${backURL}/api/designer?lang=${data.lang}&currency=${data.currency}&alias=${data.alias}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err) )
+    },
 }

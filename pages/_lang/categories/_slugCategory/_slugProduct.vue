@@ -9,8 +9,18 @@
                         </v-col>
                         <v-col class="col-lg-6 col-12">
                             <p class="productOne__name">{{ product.translation.name }}</p>
-                            <p class="productOne__by">by Emily Laura Designs</p>
-                            <p class="productOne__price">{{ product.personal_price.price }} {{ currency.abbr }}</p>
+                            <p class="productOne__by" v-if="product.brand">
+                                by {{ product.brand.translation.name }}
+                            </p>
+
+                            <p class="productOne__price">
+                                {{ product.personal_price.price }}
+                                <span v-if="product.personal_price.old_price > product.personal_price.price">/</span>
+                                <span class="price__discount" v-if="product.personal_price.old_price > product.personal_price.price">
+                                    {{ product.personal_price.old_price }}
+                                </span>
+                                {{ currency.abbr }}
+                            </p>
 
                             <sizes :product="product" v-if="product.subproducts.length"/>
 
@@ -24,12 +34,16 @@
                                     <v-btn icon>
                                         <img src="/images/amazon_icon.png" alt="">
                                     </v-btn>
-                                    <v-btn icon>
+                                    <!-- <v-btn icon>
                                         <img src="/images/ebay.png" alt="">
                                     </v-btn>
                                     <v-btn icon>
                                         <img src="/images/etsy.png" alt="">
+                                    </v-btn> -->
+                                    <v-btn icon class="ozon-icon">
+                                        <img src="/images/ozon.png" height="30px">
                                     </v-btn>
+
                                     <v-btn icon>
                                         <img src="/images/wolf.png" alt="">
                                     </v-btn>
@@ -41,19 +55,19 @@
                                 </div>
                                 <div class="guaranty__content">
                                     <div class="guaranty__item">
-                                        <img src="/images/IMG_1070.png" alt="">
+                                        <img src="/images/IMG_1070.PNG" alt="">
                                         <span>happy worker</span>
                                     </div>
                                     <div class="guaranty__item">
-                                        <img src="/images/IMG_1071.png" alt="">
+                                        <img src="/images/IMG_1071.PNG" alt="">
                                         <span>non-toxic dyes</span>
                                     </div>
                                     <div class="guaranty__item">
-                                        <img src="/images/IMG_1072.png" alt="">
+                                        <img src="/images/IMG_1072.PNG" alt="">
                                         <span>happy worid</span>
                                     </div>
                                     <div class="guaranty__item">
-                                        <img src="/images/IMG_1073.png" alt="">
+                                        <img src="/images/IMG_1073.PNG" alt="">
                                         <span>co-product</span>
                                     </div>
                                 </div>
@@ -67,24 +81,12 @@
                                         <p class="productOne__bloc-text" v-html="product.translation.body"></p>
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
-                                <v-expansion-panel class="productOne__exp">
+                                <v-expansion-panel class="productOne__exp" v-if="product.translation.info">
                                     <v-expansion-panel-header class="productOne__exp-header">
                                         {{ $trans('DetailsProductSet', 'careAndInfo') }}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
-                                        <p class="productOne__bloc-text">
-                                            {{ $trans('DetailsProductSet', 'careAndInfo1') }}
-                                            <br>
-                                            <br>
-                                            {{ $trans('DetailsProductSet', 'careAndInfo2') }}
-                                            <br>
-                                            <br>
-                                            {{ $trans('DetailsProductSet', 'careAndInfo3') }} <br>
-                                            {{ $trans('DetailsProductSet', 'careAndInfo4') }}
-                                            <br>
-                                            <br>
-                                            {{ $trans('DetailsProductSet', 'careAndInfo5') }}
-                                        </p>
+                                        <p class="productOne__bloc-text" v-html="product.translation.info"></p>
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
                                 <v-expansion-panel class="productOne__exp">
@@ -123,15 +125,11 @@
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
                             </v-expansion-panels>
-                            <div class="productOne__bloc">
+                            <div class="productOne__bloc" v-if="product.brand">
                                 <div class="productOne__bloc-title">
                                     {{ $trans('DetailsProductSet', 'meetTheDesignerTitle') }}
                                 </div>
-                                <p class="productOne__bloc-text">
-                                    {{ $trans('DetailsProductSet', 'meetTheDesignerList1') }}
-                                    <br> <br>
-                                    {{ $trans('DetailsProductSet', 'meetTheDesignerList2') }}
-                                </p>
+                                <p class="productOne__bloc-text" v-html="product.brand.translation.description"></p>
                             </div>
                             <v-row class="help">
                                 <v-col class="col-md col-12">
@@ -179,11 +177,18 @@
             </v-col>
             <v-col class="col-12 mt-lg-8">
                 <v-row>
-                    <experts />
                     <v-col class="col-12 mt-lg-8" v-if="similars" >
                         <h3 class="additional-title">{{ $trans('DetailsProductSet', 'similarProducts') }}</h3>
                         <similar-slider :similars="similars"/>
                     </v-col>
+
+                    <v-row class="experts">
+                        <v-col class="col-12">
+                            <h3 class="p-title">VEZI LIVE PRODUSELE</h3>
+                        </v-col>
+                        <experts />
+                    </v-row>
+
                 </v-row>
             </v-col>
         </v-row>
@@ -222,6 +227,19 @@ export default {
           product: prod,
           productImages: prod.images
         }
+  },
+  watch: {
+    async currency() {
+        await contentApi.getProduct({
+                lang: this.language.lang,
+                alias: this.product.alias,
+                currency: this.currency.id
+            }, data => {
+                this.product = data.product
+                this.similars = data.similars
+                this.productImages =  this.product.images
+        })
+    },
   },
   computed: mapGetters({
       categories: 'getCategories',
@@ -522,6 +540,7 @@ export default {
     }
   }
 
+
   .buyOn {
     margin-top: 30px;
     padding-top: 20px;
@@ -549,6 +568,9 @@ export default {
     span {
       width: 100% !important
     }
+  }
+  .ozon-icon img{
+      height: 30px !important;
   }
   .guaranty {
     padding-bottom: 20px;

@@ -1,32 +1,16 @@
 <template>
-    <v-container v-if="category">
-        <v-navigation-drawer v-model="filterModal" fixed color="body" temporary>
-            <filter-modal @closeFilterModal="closeFilterModal" :category="category"/>
-        </v-navigation-drawer>
-        <v-navigation-drawer v-model="sortModal" fixed color="body" temporary>
-            <sort-modal @closeSortModal="closeSortModal" :category="category" />
-        </v-navigation-drawer>
+    <v-container v-if="products">
     	<v-row>
     		<v-col cols="12">
     			<h3 class="c-title title-olive mt-3">
-    				{{ category.translation.name }}
+    				{{ $trans('PagesNames', 'pageNameAllProducts') }}
     			</h3>
     		</v-col>
     		<v-col class="col-12">
     			<div class="category-container">
-    				<div class="filter">
-    					<v-btn large @click="openFilterModal" >
-    						<v-icon color="title" class="mr-2">mdi-filter</v-icon>
-    						Filter
-    					</v-btn>
-    					<v-btn large @click="openSortModal">
-    						<v-icon color="title" class="mr-2">mdi-sort</v-icon>
-    						Sort
-    					</v-btn>
-    				</div>
     				<v-row>
     					<v-col class="col-lg-3 col-6 mb-2" v-for="(product, key) in products" :key="key" v-if="product.main_image">
-    						<nuxt-link :to="`/ro/categories/${category.alias}/${product.alias}`" class="product">
+    						<nuxt-link :to="`/ro/categories/${product.category.alias}/${product.alias}`" class="product">
     							<v-img :src="`https://back.soledy.com/images/products/sm/${product.main_image.src}`"></v-img>
     							<p class="product__name">{{ product.translation.name }}</p>
     							<div class="collectionOne__price price">
@@ -57,33 +41,29 @@
 
 import { mapActions, mapGetters } from 'vuex'
 import contentApi from '@/api/contentApi'
+import Experts from '@/components/front/widgets/expertsWidget'
 
 import FilterModal from '@/components/front/productWidgets/FilterModal.vue'
 import SortModal from '@/components/front/productWidgets/SortModal.vue'
-import Experts from '@/components/front/widgets/expertsWidget'
 
 export default {
     components: {FilterModal, SortModal, Experts},
 	async asyncData({ app, params, store }) {
-		let categ = null
-		await contentApi.getCategory({lang: store.state.lang.lang, alias: params.slugCategory, currency: store.state.currency.id}, data => {
-		    categ = data
+		let prods = null
+		await contentApi.getAllProducts({lang: store.state.lang.lang, currency: store.state.currency.id}, data => {
+		    prods = data
 		})
 		return {
-		    category: categ
+		    products: prods
 		}
 	},
     watch: {
         async currency() {
-            await contentApi.getCategory({
+            await contentApi.getAllProducts({
                         lang: this.language.lang,
-                        alias: this.category.alias,
                         currency: this.currency.id
                     },
-                    data => {
-                        this.category = data
-                        this.products = this.category.products
-                    }
+                    data => { this.products = data }
             )
         },
     },
@@ -93,12 +73,6 @@ export default {
 			filterModal: false,
 			sortModal: false,
             products: null,
-			items: [{
-				image: "https://back.soledy.com/images/products/og/bracelet-anne-poppy-forest-s1.JPG?5fa2a780ed00b",
-				name: "Brăţară Anné-Poppy Forest",
-				price: "170.00",
-				to: "/one-product"
-			}]
 		}
 	},
 	computed: mapGetters({
@@ -108,7 +82,7 @@ export default {
 		trans: 'getTranslations',
 	}),
 	async mounted() {
-        this.products = this.category.products
+        // this.products = this.category.products
 
         this.$nuxt.$on('replaceProducts', data => {
             this.products = data

@@ -6,7 +6,7 @@ export const state = () => ({
     // cartProducts: [],
     // cartSubproducts: [],
     langs: [
-        {id: 1, lang: 'ro', active: 1, name: 'RO'},
+        {id: 38, lang: 'ro', default: 1, description: "Romana", active: 1},
         {id: 2, lang: 'en', active: 0, name: 'EN'},
         {id: 3, lang: 'ru', active: 0, name: 'RU'}
     ],
@@ -154,7 +154,6 @@ export const mutations = {
 export const actions = {
 
     async nuxtServerInit({state, commit}, { app }) {
-
         if (!app.$cookies.get('user-cart-id')) {
             const uniqueID = Date.now().toString(36)
             app.$cookies.set('user-cart-id', uniqueID, {
@@ -183,7 +182,7 @@ export const actions = {
 
         await contentApi.getCategories(state.lang.lang, data => commit('SET_CATEGORIES', data))
         await contentApi.getCollections(state.lang.lang, data => commit('SET_COLLECTIONS', data))
-        await contentApi.getPromotions(state.lang.lang, data => commit('SET_PROMOTIONS', data))
+        await contentApi.getPromotions({lang: state.lang.lang, currency: state.currency.id}, data => commit('SET_PROMOTIONS', data))
 
         await contentApi.getTranslations(state.lang.lang, data => commit('SET_TRANSALATIONS', data))
         await contentApi.getBanners(state.lang.lang, response => commit('SET_BANNERS', response))
@@ -196,16 +195,17 @@ export const actions = {
 
     async changeSettings({state, commit}, data) {
         commit('SET_DEFAULT_LANG', data.lang)
-        commit('SET_DEFAULT_CURRENCY', data.currency)
-        commit('SET_DEFAULT_COUNTRY', data.country)
-
+        
         await contentApi.getCategories(state.lang.lang, data => commit('SET_CATEGORIES', data))
         await contentApi.getCollections(state.lang.lang, data => commit('SET_COLLECTIONS', data))
-        await contentApi.getPromotions(state.lang.lang, data => commit('SET_PROMOTIONS', data))
+        await contentApi.getPromotions({lang: state.lang.lang, currency: data.currency}, data => commit('SET_PROMOTIONS', data))
 
         await contentApi.getTranslations(state.lang.lang, (response) => commit('SET_TRANSALATIONS', response))
         await contentApi.getBanners(state.lang.lang, (response) => commit('SET_BANNERS', response))
         await contentApi.getStaticPages(state.lang.lang, (response) => commit('SET_STATIC_PAGES', response))
+
+        commit('SET_DEFAULT_CURRENCY', data.currency)
+        commit('SET_DEFAULT_COUNTRY', data.country)
     },
 
     async getExpertsList({commit}) {

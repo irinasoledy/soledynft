@@ -98,7 +98,7 @@
             <v-list-item dense class="pl-8" nuxt :to="`/${language.lang}/livrare-achitare-retur`">
                 <v-list-item-content>
                     <v-list-item-title>
-                        {{ $trans('PagesNames', 'pageReturnPolicy') }}
+                        {{ $trans('PagesNames', 'pageDelivery') }}
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
@@ -117,10 +117,10 @@
                 </v-list-item-title>
             </v-list-item-content>
             <v-list-item-action class="d-flex flex-row">
-                <v-btn href="https://www.facebook.com/" target="_blank" icon color="title">
+                <v-btn :href="`${$trans('ContactsAndForms', 'companyFacebook')}`" target="_blank" icon color="title">
                     <v-icon>mdi-facebook</v-icon>
                 </v-btn>
-                <v-btn href="https://www.instagram.com/" target="_blank" icon color="title">
+                <v-btn :href="`${$trans('ContactsAndForms', 'companyInstagram')}`" target="_blank" icon color="title">
                     <v-icon>mdi-instagram</v-icon>
                 </v-btn>
             </v-list-item-action>

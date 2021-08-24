@@ -57,7 +57,7 @@ export default {
                 {
                     categoryId: this.category.id,
                     sort: this.sort,
-                    language: this.language.lang, 
+                    lang: this.language.lang, 
                     currency: this.currency.id
                 }, response => {
                 this.$nuxt.$emit('replaceProducts', response)

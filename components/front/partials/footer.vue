@@ -23,7 +23,10 @@
                                             {{ $trans('PagesNames', 'pageNameContacts') }}
                                         </nuxt-link>
                                         <nuxt-link :to="`/${language.lang}/livrare-achitare-retur`">
-                                            {{ $trans('PagesNames', 'pageAboutAnne') }}
+                                            {{ $trans('PagesNames', 'pageDelivery') }}
+                                        </nuxt-link>
+                                        <nuxt-link :to="`/${language.lang}/designers`">
+                                            {{ $trans('PagesNames', 'pageNameDesigners') }}
                                         </nuxt-link>
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
@@ -34,11 +37,17 @@
                                         {{ $trans('HeaderFooter', 'ourProducts') }}:
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
-                                        <nuxt-link to="#">
-                                            Homewear Store
+                                        <nuxt-link :to="`/${language.lang}/categories/all`">
+                                            {{ $trans('PagesNames', 'pageNameAllProducts') }}
                                         </nuxt-link>
-                                        <nuxt-link to="#">
-                                            Bijoux Boutique
+                                        <nuxt-link :to="`/${language.lang}/collections/authentic`">
+                                            {{ $trans('PagesNames', 'pageNameCollections') }}
+                                        </nuxt-link>
+                                        <nuxt-link :to="`/${language.lang}/outlet`">
+                                            {{ $trans('PagesNames', 'pageNameOutletTitle') }}
+                                        </nuxt-link>
+                                        <nuxt-link :to="`/${language.lang}/new`">
+                                            {{ $trans('PagesNames', 'pageNameNewTitle') }}
                                         </nuxt-link>
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
@@ -72,7 +81,10 @@
                                     {{ $trans('PagesNames', 'pageNameContacts') }}
                                 </nuxt-link>
                                 <nuxt-link :to="`/${language.lang}/livrare-achitare-retur`">
-                                    {{ $trans('PagesNames', 'pageAboutAnne') }}
+                                    {{ $trans('PagesNames', 'pageDelivery') }}
+                                </nuxt-link>
+                                <nuxt-link :to="`/${language.lang}/designers`">
+                                    {{ $trans('PagesNames', 'pageNameDesigners') }}
                                 </nuxt-link>
                             </div>
                         </v-col>
@@ -81,11 +93,17 @@
                                 {{ $trans('HeaderFooter', 'ourProducts') }}:
                             </div>
                             <div class="footer__list">
-                                <nuxt-link to="#">
-                                    Homewear Store
+                                <nuxt-link :to="`/${language.lang}/categories/all`">
+                                    {{ $trans('PagesNames', 'pageNameAllProducts') }}
                                 </nuxt-link>
-                                <nuxt-link to="#">
-                                    Bijoux Boutique
+                                <nuxt-link :to="`/${language.lang}/collections/authentic`">
+                                    {{ $trans('PagesNames', 'pageNameCollections') }}
+                                </nuxt-link>
+                                <nuxt-link :to="`/${language.lang}/outlet`">
+                                    {{ $trans('PagesNames', 'pageNameOutletTitle') }}
+                                </nuxt-link>
+                                <nuxt-link :to="`/${language.lang}/new`">
+                                    {{ $trans('PagesNames', 'pageNameNewTitle') }}
                                 </nuxt-link>
                             </div>
                         </v-col>
@@ -141,18 +159,19 @@
                             </svg>
                         </div>
                         <div class="footer__payments-img">
-                            <v-img width="60" src="https://back.soledy.com/images/g2apay_acceptance_mark_trans_for_light_L.png" />
-                        </div>
-                        <div class="footer__payments-img">
-                            <v-img src="https://back.soledy.com/images/pp.jpeg" />
+                            <v-img width="60" src="/images/stripe-icon.png" />
                         </div>
                     </div>
                 </v-col>
                 <v-col class="col-12">
                     <p class="my-3">
                         {{ $trans('HeaderFooter', 'followUs') }}:
-                        <v-icon color="title">mdi-instagram</v-icon>
-                        <v-icon color="title">mdi-facebook</v-icon>
+                        <a class="footer-social-link" :href="`${$trans('ContactsAndForms', 'companyInstagram')}`">
+                            <v-icon color="title">mdi-instagram</v-icon>
+                        </a>
+                        <a class="footer-social-link" :href="`${$trans('ContactsAndForms', 'companyFacebook')}`">
+                            <v-icon color="title">mdi-facebook</v-icon>
+                        </a>
                     </p>
                 </v-col>
                 <v-col class="col-12">
@@ -161,7 +180,6 @@
                     </p>
                     <p class="ma-0 py-3">
                         {{ $trans('HeaderFooter', 'copyright') }}
-                        <!-- ©2021 Copyright: Toate drepturile rezervate, Website by Like-Media -->
                     </p>
                 </v-col>
             </v-row>
@@ -277,5 +295,9 @@ export default {
             text-transform: capitalize;
 		}
 	}
+}
+.footer-social-link {
+    display: inline-block !important;
+
 }
 </style>
