@@ -7,19 +7,19 @@ const actions = require('./services/ActionService')()
 const cron = require('node-cron')
 let loading = false
 
-// cron.schedule('*/25 * * * * *', async () => {
-//     if (!loading) {
-//         loading = true
-//         await actions.setOfflineUsers()
-//         await io.emit('pingUsers')
-//
-//         setTimeout(async res => {
-//             const data = await actions.getUsersList()
-//             await io.emit('refreshUserList', data)
-//             loading = false
-//         },4000)
-//     }
-// })
+cron.schedule('*/25 * * * * *', async () => {
+    if (!loading) {
+        loading = true
+        await actions.setOfflineUsers()
+        await io.emit('pingUsers')
+
+        setTimeout(async res => {
+            const data = await actions.getUsersList()
+            await io.emit('refreshUserList', data)
+            loading = false
+        },4000)
+    }
+})
 
 const m = (name, text, id) => ({name, text, id})
 
