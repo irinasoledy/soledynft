@@ -15,10 +15,10 @@
         <v-col class="col-12">
           <v-row class="justify-center" >
             <v-col class="col-lg-3 col-md-4 col-5 image-left">
-              <img src="https://back.soledy.com/images/banners/5f872dcdba429-About2-apl.JPG" alt="banner" />
+              <img :src="$banner('Banner_About_Section_1_left', $mobileDetect.mobile())" alt="banner" />
             </v-col>
             <v-col class="col-lg-5 col-md-6 col-7 image-right">
-              <img src="https://back.soledy.com/images/banners/5f8728233f64f-About1-apj.JPG" alt="banner" />
+              <img :src="$banner('Banner_HP_About_Section_4', $mobileDetect.mobile())" alt="banner" />
             </v-col>
           </v-row>
         </v-col>
@@ -42,7 +42,7 @@
           <v-col class="col-12">
             <v-row class="row sectionTwo-container">
               <v-col class="col-lg-3 col-12 sectionTwo__image-one">
-                <img src="https://back.soledy.com/images/banners/5f8728f3432a8-About3-apj.JPG" alt="">
+                <img :src="$banner('Banner_About_Section_2_right', $mobileDetect.mobile())" alt="banner" />
               </v-col>
               <v-col class="col-lg-9 col-12">
                 <p class="about__text bloc1">
@@ -54,9 +54,8 @@
           <v-col class="col-12">
             <p class="subtitle">
                 {{ $trans('About', 'section2-2') }}
-              <!-- De ce să cumperi de la noi? -->
             </p>
-            <img src="https://back.soledy.com/images/banners/5f872990e0b16-About4-apl.JPG" alt="">
+            <img :src="$banner('Banner_About_Section_2_left', $mobileDetect.mobile())" alt="banner" />
 
              <p class="about__text bloc3">
                  {{ $trans('About', 'section2-3') }}
@@ -66,7 +65,7 @@
       </v-container>
     </section>
     <section class="sectionParallax">
-      <img src="https://back.soledy.com/images/banners/5f8729adcde25-About5-apj.JPG" alt="">
+      <img :src="$banner('Banner_About_Section_3_fulwidth', $mobileDetect.mobile())" alt="banner" />
     </section>
     <section class="sectionThree">
       <v-container>
@@ -98,13 +97,14 @@
         </v-row>
         <v-row>
           <v-col class="col-3 image-left">
-            <img src="https://back.soledy.com/images/banners/5f872b29d3049-About7-apj.JPG" alt="">
+            <img :src="$banner('Banner_About_Section_4_bijoux_1', $mobileDetect.mobile())" alt="banner" />
           </v-col>
           <v-col class="col-6">
-            <img src="https://back.soledy.com/images/banners/5f872b450f08a-About6-apj.JPG" alt="">
+            <img :src="$banner('Banner_About_Section_4_bijoux_2', $mobileDetect.mobile())" alt="banner" />
+
           </v-col>
           <v-col class="col-3 image-right">
-            <img src="https://back.soledy.com/images/banners/5f872b874876c-About8-apj.JPG" alt="">
+            <img :src="$banner('Banner_About_Section_4_bijoux_3', $mobileDetect.mobile())" alt="banner" />
           </v-col>
         </v-row>
         <v-row>
@@ -133,13 +133,13 @@
         </v-row>
         <v-row>
           <v-col class="col-3 image-left">
-            <img src="https://back.soledy.com/images/banners/5f872bebc34d4-About10-apl.JPG" alt="">
+            <img :src="$banner('Banner_About_Section_5_homewear_1', $mobileDetect.mobile())" alt="banner" />
           </v-col>
           <v-col class="col-6">
-            <img src="https://back.soledy.com/images/banners/5f872c574ef39-About9-apl.JPG" alt="">
+            <img :src="$banner('Banner_About_Section_5_homewear_2', $mobileDetect.mobile())" alt="banner" />
           </v-col>
           <v-col class="col-3 image-right">
-            <img src="https://back.soledy.com/images/banners/5f872c74bc8cb-About11-apl.JPG" alt="">
+            <img :src="$banner('Banner_About_Section_5_homewear_3', $mobileDetect.mobile())" alt="banner" />
           </v-col>
         </v-row>
         <v-row>

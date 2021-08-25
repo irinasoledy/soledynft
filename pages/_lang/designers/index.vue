@@ -2,7 +2,7 @@
   <div class="designers">
     <div class="banner">
       <div class="banner__image">
-        <img src="https://cdn2.hubspot.net/hub/491011/hubfs/BLOG_6-technology-trends-reshaping-luxury-fashion-industry.jpg?width=1600&name=BLOG_6-technology-trends-reshaping-luxury-fashion-industry.jpg" alt="banner" />
+        <img :src="$banner('Designers_Banner', $mobileDetect.mobile())" alt="banner" />
       </div>
       <div class="banner__text">
         <div class="banner__title">

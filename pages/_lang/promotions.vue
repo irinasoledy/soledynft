@@ -24,7 +24,7 @@
 									<v-row>
 										<v-col class="col-lg-3 col-md-4 col-6" v-for="(product, i) in promotion.products" :key="i" v-if="product.product.main_image">
 											<nuxt-link :to="`/${language.lang}/categories/${product.product.category.alias}/${product.product.alias}`" class="product">
-												<v-img :src="`${envAPI}/images/products/og/${product.product.main_image.src}`"></v-img>
+												<v-img :src="`${envAPI}/images/products/md/${product.product.main_image.src}`"></v-img>
 												<p class="product__name">{{ product.product.translation.name }}</p>
 												<div class="collectionOne__price price">
                                                     <span>{{ product.product.personal_price.price }}</span>

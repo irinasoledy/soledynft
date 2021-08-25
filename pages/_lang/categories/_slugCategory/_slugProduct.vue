@@ -31,20 +31,13 @@
                                     {{ $trans('DetailsProductSet', 'buyItOn') }}
                                 </div>
                                 <div class="buyOn__methods">
-                                    <v-btn icon>
+                                    <v-btn icon :href="`${product.amazon}`">
                                         <img src="/images/amazon_icon.png" alt="">
                                     </v-btn>
-                                    <!-- <v-btn icon>
-                                        <img src="/images/ebay.png" alt="">
-                                    </v-btn>
-                                    <v-btn icon>
-                                        <img src="/images/etsy.png" alt="">
-                                    </v-btn> -->
-                                    <v-btn icon class="ozon-icon">
+                                    <v-btn icon class="ozon-icon" :href="`${product.ozon}`">
                                         <img src="/images/ozon.png" height="30px">
                                     </v-btn>
-
-                                    <v-btn icon>
+                                    <v-btn icon :href="`${product.w&b}`">
                                         <img src="/images/wolf.png" alt="">
                                     </v-btn>
                                 </div>
@@ -219,13 +212,13 @@ export default {
             alias: params.slugProduct,
             currency: store.state.currency.id
         }, data => {
-          prod = data.product
-          similars1 = data.similars
+              prod = data.product
+              similars1 = data.similars
         })
         return {
-          similars: similars1,
-          product: prod,
-          productImages: prod.images
+            similars: similars1,
+            product: prod,
+            productImages: prod.images
         }
   },
   watch: {
