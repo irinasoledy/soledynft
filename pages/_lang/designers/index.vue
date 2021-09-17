@@ -32,7 +32,7 @@
             </p>
             <p class="designers__text" v-html="designer.translation.description"></p>
           </nuxt-link>
-        </v-col>
+         </v-col>
       </v-row>
     </v-container>
   </div>
@@ -53,6 +53,7 @@ export default {
         }, data => {
             items = data
         })
+
         return {
             designers: items
         }

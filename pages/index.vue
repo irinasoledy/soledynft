@@ -52,7 +52,9 @@ export default {
         this.categories.forEach((category, i) => {
             if (category.on_home === 1) {
                 items.push({type: 'category', view: category})
-                if (typeof this.collections[i] !== 'undefined') {
+            }
+            if (typeof this.collections[i] !== 'undefined') {
+                if (this.collections[i].on_home === 1) {
                     items.push({type: 'collection', view: this.collections[i]})
                 }
             }

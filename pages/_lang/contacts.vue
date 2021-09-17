@@ -2,7 +2,7 @@
 	<div class="contacts">
 		<div class="banner">
 			<div class="banner__image">
-				<img src="https://back.soledy.com/images/contactBanner.jpg" alt="banner" />
+				<img :src="$banner('Contacts_Banner', $mobileDetect.mobile())" alt="banner" />
 			</div>
 			<div class="banner__text">
 				<div class="banner__title">

@@ -1,9 +1,11 @@
 <template>
   <div class="banner" v-if="promotions">
     <VueSlickCarousel ref="productSlider" v-bind="settings" >
+
       <nuxt-link :to="`${language.lang}/promotions#${promotion.alias}`" class="banner__inner" v-for="(promotion, i) in promotions" :key="i">
         <div class="banner__image">
-          <img :src="`${envAPI}/images/promotions/${promotion.img}`" alt="banner" />
+            <img :src="`${envAPI}/images/promotions/${promotion.img}`" alt="banner" v-if="!$mobileDetect.mobile()"/>
+            <img :src="`${envAPI}/images/promotions/${promotion.img_mobile}`" alt="banner" v-else/>
         </div>
         <div class="banner__text">
           <div class="banner__title" v-if="promotion.translation">
@@ -45,6 +47,9 @@ export default {
       }
     }
   },
+  mounted(){
+      console.log(this.promotions);
+  },
   computed: mapGetters({
       promotions: 'getPromotions',
       collections: 'getCollections',
@@ -75,6 +80,9 @@ export default {
     }
     .prev-slide {
       left: 15px;
+    }
+    img{
+        object-fit: fill !important;
     }
   }
 </style>

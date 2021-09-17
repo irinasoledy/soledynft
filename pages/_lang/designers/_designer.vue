@@ -2,7 +2,9 @@
   <div class="designers" v-if="designer">
     <div class="banner">
       <div class="banner__image">
-          <img :src="$banner('Designers_Banner', $mobileDetect.mobile())" alt="banner" />
+          <!-- <img :src="$banner('Designers_Banner', $mobileDetect.mobile())" alt="banner" /> -->
+          <img :src="`https://soledy.itmall.digital/images/brands/${designer.image}`" v-if="!$mobileDetect.mobile()">
+          <img :src="`https://soledy.itmall.digital/images/brands/${designer.logo}`" v-else>
       </div>
       <div class="banner__text">
         <div class="banner__title">
@@ -22,19 +24,19 @@
           <div class="guaranty">
             <div class="guaranty__content">
               <div class="guaranty__item">
-                <img src="/images/IMG_1070.png" alt="">
+                <img src="/images/IMG_1070.PNG" alt="">
                 <span>happy worker</span>
               </div>
               <div class="guaranty__item">
-                <img src="/images/IMG_1071.png" alt="">
+                <img src="/images/IMG_1071.PNG" alt="">
                 <span>non-toxic dyes</span>
               </div>
               <div class="guaranty__item">
-                <img src="/images/IMG_1072.png" alt="">
+                <img src="/images/IMG_1072.PNG" alt="">
                 <span>happy worid</span>
               </div>
               <div class="guaranty__item">
-                <img src="/images/IMG_1073.png" alt="">
+                <img src="/images/IMG_1073.PNG" alt="">
                 <span>co-product</span>
               </div>
             </div>
@@ -47,7 +49,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col class="col-xl-2 col-lg-3 col-md-4 col-6" v-for="(product, i) in designer.products" :key="i" v-if="designer.products">
+        <v-col class="col-xl-2 col-lg-3 col-md-4 col-6" v-for="(product, i) in designer.products" :key="i" v-if="designer.products && product.main_image">
           <nuxt-link :to="`/ro/categories/${product.category.alias}/${product.alias}`" class="product">
               <v-img :src="`https://back.soledy.com/images/products/sm/${product.main_image.src}`"></v-img>
               <p class="product__name">{{ product.translation.name }}</p>
