@@ -31,13 +31,13 @@
                                     {{ $trans('DetailsProductSet', 'buyItOn') }}
                                 </div>
                                 <div class="buyOn__methods">
-                                    <v-btn icon :href="`${product.amazon}`">
+                                    <v-btn icon target="_blank" :href="`${product.amazon}`">
                                         <img src="/images/amazon_icon.png" alt="">
                                     </v-btn>
-                                    <v-btn icon class="ozon-icon" :href="`${product.ozon}`">
+                                    <v-btn icon class="ozon-icon" target="_blank" :href="`${product.ozon}`">
                                         <img src="/images/ozon.png" height="30px">
                                     </v-btn>
-                                    <v-btn icon :href="`${product.w&b}`">
+                                    <v-btn icon target="_blank" :href="`${product.w_b}`">
                                         <img src="/images/wolf.png" alt="">
                                     </v-btn>
                                 </div>
