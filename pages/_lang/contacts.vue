@@ -35,13 +35,13 @@
 						</a>
 						<a href="mailto:info@soledy.com">
 							<v-icon color="primary">mdi-mail</v-icon>
-                            {{ $trans('ContactsAndForms', 'labelEmail') }}: <a :href="`mailto:${$trans('ContactsAndForms', 'companyMainEmail1')}`">{{ $trans('ContactsAndForms', 'companyMainEmail1') }}</a>
+                            {{ $trans('ContactsAndForms', 'labelCommunicationMethodOptionEmail') }}: <a :href="`mailto:${$trans('ContactsAndForms', 'companyMainEmail1')}`">{{ $trans('ContactsAndForms', 'companyMainEmail1') }}</a>
 						</a>
 						<div class="social">
-							<a href="https://www.instagram.com/anne_popova_brand/">
+							<a :href="$trans('ContactsAndForms', 'companyInstagram')">
 								<v-icon color="primary">mdi-instagram</v-icon>
 							</a>
-							<a href="https://www.facebook.com/AnaPopovaOfficial">
+							<a :href="$trans('ContactsAndForms', 'companyFacebook')">
 								<v-icon color="primary">mdi-facebook</v-icon>
 							</a>
 						</div>
@@ -53,37 +53,37 @@
 
 				<v-col class="col-xl-3 col-lg-3 col-md-6 col-12">
 					<div class="contacts__item">
-					<p class="text-center">
-						<img width="100" src="https://terradigital.ro/md2.png" class="map-country-img"/>
-					</p>
-					<p class="text-center">{{ $trans('ContactsAndForms', 'companyMainNameMD') }}</p>
-					<p class="text-center">
-						<v-icon>mdi-marker</v-icon>
-						{{ $trans('ContactsAndForms', 'companyMainAdresMD') }}
-					</p>
-					<p class="text-center">
-						<v-icon>mdi-phone</v-icon>
-						{{ $trans('ContactsAndForms', 'labelPhoneViberWhatsapp') }} <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1MD}`">{{ $trans('ContactsAndForms', 'companyMainPhone1MD') }}</a>
-					</p>
-					<p class="text-center">
-						<v-icon>mdi-email</v-icon>
-						{{ $trans('ContactsAndForms', 'labelEmail') }}: <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1MD}`">{{ $trans('ContactsAndForms', 'companyMainEmail1MD') }}</a>
-					</p>
-					<p class="text-center">
-						<a :href="`https://${trans.ContactsAndForms.companyMainWebsiteMD}`">{{ $trans('ContactsAndForms', 'companyMainWebsiteMD') }}</a>
-					</p>
-					<div class="social">
-						<a href="https://www.instagram.com/anne_popova_brand/">
-							<v-icon color="primary">mdi-instagram</v-icon>
-						</a>
-						<a href="https://www.facebook.com/AnaPopovaOfficial">
-							<v-icon color="primary">mdi-facebook</v-icon>
+						<p class="text-center">
+							<img width="100" src="https://terradigital.ro/md2.png" class="map-country-img"/>
+						</p>
+						<p class="text-center">{{ $trans('ContactsAndForms', 'companyMainNameMD') }}</p>
+						<p class="text-center">
+							<v-icon>mdi-marker</v-icon>
+							{{ $trans('ContactsAndForms', 'companyMainAdresMD') }}
+						</p>
+						<p class="text-center">
+							<v-icon>mdi-phone</v-icon>
+							{{ $trans('ContactsAndForms', 'labelPhoneViberWhatsapp') }} <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1MD}`">{{ $trans('ContactsAndForms', 'companyMainPhone1MD') }}</a>
+						</p>
+						<p class="text-center">
+							<v-icon>mdi-email</v-icon>
+							{{ $trans('ContactsAndForms', 'labelCommunicationMethodOptionEmail') }}: <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1MD}`">{{ $trans('ContactsAndForms', 'companyMainEmail1MD') }}</a>
+						</p>
+						<p class="text-center">
+							<a :href="`https://${trans.ContactsAndForms.companyMainWebsiteMD}`">{{ $trans('ContactsAndForms', 'companyMainWebsiteMD') }}</a>
+						</p>
+						<div class="social">
+							<a :href="$trans('ContactsAndForms', 'companyInstagram')">
+								<v-icon color="primary">mdi-instagram</v-icon>
+							</a>
+							<a :href="$trans('ContactsAndForms', 'companyFacebook')">
+								<v-icon color="primary">mdi-facebook</v-icon>
+							</a>
+						</div>
+						<a class="butt" href="#contactsForm">
+							{{ $trans('Contacts', 'sendUsMessage') }}
 						</a>
 					</div>
-					<a class="butt" href="#contactsForm">
-						{{ $trans('Contacts', 'sendUsMessage') }}
-					</a>
-				</div>
 				</v-col>
 
 				<v-col class="col-xl-3 col-lg-3 col-md-6 col-12">
@@ -101,13 +101,13 @@
 						</a>
 						<a href="mailto:info@soledy.com">
 							<v-icon color="primary">mdi-mail</v-icon>
-                            {{ $trans('ContactsAndForms', 'labelEmail') }}: <a :href="`mailto:${$trans('ContactsAndForms', 'companyMainEmail1EE')}`">{{ $trans('ContactsAndForms', 'companyMainEmail1EE') }}</a>
+                            {{ $trans('ContactsAndForms', 'labelCommunicationMethodOptionEmail') }}: <a :href="`mailto:${$trans('ContactsAndForms', 'companyMainEmail1EE')}`">{{ $trans('ContactsAndForms', 'companyMainEmail1EE') }}</a>
 						</a>
 						<div class="social">
-							<a href="https://www.instagram.com/anne_popova_brand/">
+							<a :href="$trans('ContactsAndForms', 'companyInstagram')">
 								<v-icon color="primary">mdi-instagram</v-icon>
 							</a>
-							<a href="https://www.facebook.com/AnaPopovaOfficial">
+							<a :href="$trans('ContactsAndForms', 'companyFacebook')">
 								<v-icon color="primary">mdi-facebook</v-icon>
 							</a>
 						</div>
@@ -117,13 +117,15 @@
 					</div>
 				</v-col>
 			</v-row>
+			
 			<v-row id="contactsForm" class="justify-center contacts__form">
 				<v-col class="col-xl-3 col-lg-5 col-md-6 col-sm-6 col-12">
 					<p class="form___title">
 						{{ $trans('ContactsAndForms', 'graficLucruTitle') }}
 					</p>
 					<p>
-                        {{ $trans('ContactsAndForms', 'weekDays') }}
+                        {{ $trans('ContactsAndForms', 'mondayFriday') }}
+						{{ $trans('ContactsAndForms', 'mondayFridayHours') }}
 					</p>
 					<p>
                         {{ $trans('ContactsAndForms', 'weekEnd') }}: {{ $trans('ContactsAndForms', 'closed') }}
@@ -153,7 +155,7 @@
                             dense outlined
                             v-model="form.email"
                             :rules="emailRules"
-                            :label="trans.ContactsAndForms.labelEmail"
+                            :label="$trans('ContactsAndForms', 'labelCommunicationMethodOptionEmail')"
                             required
                             ></v-text-field>
                         <v-text-field

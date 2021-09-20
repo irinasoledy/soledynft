@@ -9,6 +9,10 @@
    url(~assets/Northwell-Alt.ttf) format("truetype");
 }
 
+body {
+    overflow: hidden;
+}
+
 .butt-dots {
   position: relative;
   padding-bottom: 5px;

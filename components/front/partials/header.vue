@@ -72,4 +72,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+// @media (max-width: 1200px) {
+//
+//     .v-toolbar__content {
+//         width: 90% !important;
+//     }
+// }
+</style>

@@ -173,7 +173,9 @@ export default {
 @media (max-width: 991px) {
     .summary{
         width: 100%;
+        margin-left: 0;
     }
+
 }
 .total-section div{
     font-size: 20px;
