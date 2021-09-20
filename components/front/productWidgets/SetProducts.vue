@@ -11,7 +11,7 @@
                                     <img :src="`https://back.soledy.com/images/products/sm/${product.product.main_image.src}`" alt="">
                                 </div>
                             </v-col>
-                            <v-col class="col-xl-8 col-lg-8 col-md-6 col-12 pb-0">
+                            <v-col class="col-xl-8 col-lg-8 col-md-6 col-6 pb-0">
                                 <div class="colProd__descr">
                                     <div class="colProd__name">
                                         {{ product.product.translation.name }}

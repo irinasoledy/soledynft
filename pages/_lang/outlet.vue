@@ -80,3 +80,9 @@ export default {
     }
 }
 </script>
+
+<style media="screen">
+    .product__name {
+        text-align: center !important;
+    }
+</style>

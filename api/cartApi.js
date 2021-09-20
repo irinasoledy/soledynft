@@ -16,19 +16,19 @@ export default {
     // },
 
     async appendToCart(data, cb) {
-        await axios.post(`${backURL}/api/cart`, data)
+        await axios.post(`${backURL}/en/api/cart`, data, {headers})
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
 
     async removeCart(data, cb) {
-        await axios.delete(`${backURL}/api/cart?id=${data.cartId}&userId=${data.userId}&lang=${data.lang}&currency=${data.currency}`)
+        await axios.delete(`${backURL}/en/api/cart?id=${data.cartId}&userId=${data.userId}&lang=${data.lang}&currency=${data.currency}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
 
     async updateCartQty(data, cb) {
-        await axios.patch(`${backURL}/api/cart`, data)
+        await axios.patch(`${backURL}/en/api/cart`, data, {headers})
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
@@ -40,7 +40,7 @@ export default {
     },
 
     async clearCart(data, cb) {
-        await axios.delete(`${backURL}/api/carts?userId=${data.userId}&lang=${data.lang}&currency=${data.currency}`)
+        await axios.delete(`${backURL}/en/api/carts?userId=${data.userId}&lang=${data.lang}&currency=${data.currency}`)
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },

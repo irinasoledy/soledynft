@@ -111,7 +111,7 @@ export default {
 <style lang="scss" scoped>
   .banner {
     position: relative;
-    height: 70vh;
+    // height: 70vh;
 
     img {
       width: 100%;
@@ -121,7 +121,7 @@ export default {
     }
     &__image {
       width: 100%;
-      height: 70vh;
+      // height: 70vh;
     }
   }
   .designers {

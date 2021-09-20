@@ -363,6 +363,7 @@ export default {
       text-align: left;
       text-transform: uppercase;
       margin-top: 20px;
+      line-height: 1.5;
     }
     &__price {
       margin-top: 10px;

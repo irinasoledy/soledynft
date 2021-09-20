@@ -4,7 +4,7 @@
             <div class="h-slider__item">
                 <nuxt-link :to="`/ro/categories/${category.alias}`" class="h-slider__item-inner">
                     <div class="h-slider__image">
-                        <img :src="`https://back.soledy.com/images/categories/sm/${category.banner_mobile}`" alt="">
+                        <img :src="`https://soledy.itmall.digital/images/categories/sm/${category.banner_mobile}`" alt="">
                     </div>
                     <div class="h-slider__actions">
                         <v-btn color="primary" outlined>
@@ -16,7 +16,7 @@
             <div class="h-slider__item" v-for="(product, i) in products" :key="i" v-if="product.main_image && i < 5">
                 <nuxt-link :to="`/ro/categories/${category.alias}/${product.alias}`" class="h-slider__item-inner" >
                     <div class="h-slider__image">
-                        <img :src="`https://back.soledy.com/images/products/sm/${product.main_image.src}`">
+                        <img :src="`https://soledy.itmall.digital/images/products/sm/${product.main_image.src}`">
                     </div>
                 </nuxt-link>
             </div>
