@@ -3,8 +3,8 @@
     <div class="banner">
       <div class="banner__image">
           <!-- <img :src="$banner('Designers_Banner', $mobileDetect.mobile())" alt="banner" /> -->
-          <img :src="`https://soledy.itmall.digital/images/brands/${designer.image}`" v-if="!$mobileDetect.mobile()">
-          <img :src="`https://soledy.itmall.digital/images/brands/${designer.logo}`" v-else>
+          <img :src="`https://back.soledy.com/images/brands/${designer.image}`" v-if="!$mobileDetect.mobile()">
+          <img :src="`https://back.soledy.com/images/brands/${designer.logo}`" v-else>
       </div>
       <div class="banner__text">
         <div class="banner__title">

@@ -47,9 +47,7 @@ export default {
       }
     }
   },
-  mounted(){
-      console.log(this.promotions);
-  },
+  mounted(){},
   computed: mapGetters({
       promotions: 'getPromotions',
       collections: 'getCollections',

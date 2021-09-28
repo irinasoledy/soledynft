@@ -69,7 +69,6 @@ export default {
     },
     async mounted() {
         this.cartLenght = parseInt(this.cartsProducts.length) + parseInt(this.cartsSubproducts.length)
-        console.log(this.cartsProducts.length, this.cartsSubproducts.length);
     },
     methods: {
         ...mapActions({
