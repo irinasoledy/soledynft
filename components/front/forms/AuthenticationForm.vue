@@ -36,7 +36,7 @@
                                 class="full-width social-btns"
                                 color="#365899"
                                 dark
-                                href="https://api.terradigital.ro/api/login/facebook"
+                                href="https://api.soledy.com/api/login/facebook"
                                 >
                                 <v-icon>mdi-facebook</v-icon>
                                 {{ trans.ContactsAndForms.authGoogleLogin }}
@@ -44,7 +44,7 @@
                             <v-spacer></v-spacer>
                             <v-btn
                                 class="full-width social-btns"
-                                href="https://api.terradigital.ro/api/login/google"
+                                href="https://api.soledy.com/api/login/google"
                                 light
                                 >
                                 <v-icon>mdi-google</v-icon>
@@ -70,7 +70,7 @@
                                 class="full-width social-btns"
                                 color="#365899"
                                 dark
-                                href="https://api.terradigital.ro/api/login/facebook"
+                                href="https://api.soledy.com/api/login/facebook"
                                 >
                                 <v-icon>mdi-facebook</v-icon>
                                 {{ trans.ContactsAndForms.authGoogleLogin }}
@@ -78,7 +78,7 @@
                             <v-spacer></v-spacer>
                             <v-btn
                                 class="full-width social-btns"
-                                href="https://api.terradigital.ro/api/login/google"
+                                href="https://api.soledy.com/api/login/google"
                                 light
                                 >
                                 <v-icon>mdi-google</v-icon>
