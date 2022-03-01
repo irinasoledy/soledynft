@@ -113,9 +113,9 @@ export default {
 				"https://www.nawpic.com/media/2020/desktop-backgrounds-nawpic-1.png",
 				"https://www.nawpic.com/media/2020/desktop-backgrounds-nawpic-17.jpg",
 				"https://img.freepik.com/free-vector/colorful-palm-silhouettes-background_23-2148541792.jpg?size=626&ext=jpg&ga=GA1.2.1685543998.1622592000",
-				"https://soledy.com/images/products/sm/necklace-anne-kelly-black-s4.JPG?5fa2a780ed00b",
-				"https://soledy.com/images/products/sm/necklace-anne-kelly-black-s5.JPG?5fa2a780ed00b",
-				"https://soledy.com/images/products/sm/necklace-anne-kelly-black-s6.JPG?5fa2a780ed00b"
+				"https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s4.JPG?5fa2a780ed00b",
+				"https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s5.JPG?5fa2a780ed00b",
+				"https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s6.JPG?5fa2a780ed00b"
 			],
 			zoom: false,
 			mainImage: null

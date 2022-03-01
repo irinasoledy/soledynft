@@ -27,7 +27,7 @@
     				<v-row>
     					<v-col class="col-lg-3 col-6 mb-2" v-for="(product, key) in products" :key="key" v-if="product.main_image">
     						<nuxt-link :to="`/ro/categories/${category.alias}/${product.alias}`" class="product">
-    							<v-img :src="`https://back.soledy.com/images/products/sm/${product.main_image.src}`"></v-img>
+    							<v-img :src="`https://back.soledynft.shop/images/products/sm/${product.main_image.src}`"></v-img>
     							<p class="product__name">{{ product.translation.name }}</p>
     							<div class="collectionOne__price price">
     								<span>{{ product.personal_price.price }}</span>
@@ -94,7 +94,7 @@ export default {
 			sortModal: false,
             products: null,
 			items: [{
-				image: "https://back.soledy.com/images/products/og/bracelet-anne-poppy-forest-s1.JPG?5fa2a780ed00b",
+				image: "https://back.soledynft.shop/images/products/og/bracelet-anne-poppy-forest-s1.JPG?5fa2a780ed00b",
 				name: "Brăţară Anné-Poppy Forest",
 				price: "170.00",
 				to: "/one-product"

@@ -4,7 +4,7 @@
             <div class="h-slider__item">
                 <nuxt-link :to="`/ro/collections/${collection.alias}`" class="h-slider__item-inner">
                     <div class="h-slider__image">
-                        <img :src="`https://back.soledy.com/images/collections/${collection.banner_mob}`" alt="">
+                        <img :src="`https://back.soledynft.shop/images/collections/${collection.banner_mob}`" alt="">
                     </div>
                     <div class="h-slider__actions">
                         <v-btn color="primary" outlined>
@@ -16,7 +16,7 @@
             <div class="h-slider__item" v-for="(set, i) in sets" :key="i" v-if="set.main_photo && i < 5">
                 <nuxt-link :to="`/ro/collections/${collection.alias}#${set.alias}`" class="h-slider__item-inner">
                     <div class="h-slider__image">
-                        <img :src="`https://back.soledy.com/images/sets/sm/${set.main_photo.src}`">
+                        <img :src="`https://back.soledynft.shop/images/sets/sm/${set.main_photo.src}`">
                     </div>
                 </nuxt-link>
             </div>

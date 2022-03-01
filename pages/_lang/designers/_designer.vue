@@ -3,8 +3,8 @@
     <div class="banner">
       <div class="banner__image">
           <!-- <img :src="$banner('Designers_Banner', $mobileDetect.mobile())" alt="banner" /> -->
-          <img :src="`https://back.soledy.com/images/brands/${designer.image}`" v-if="!$mobileDetect.mobile()">
-          <img :src="`https://back.soledy.com/images/brands/${designer.logo}`" v-else>
+          <img :src="`https://back.soledynft.shop/images/brands/${designer.image}`" v-if="!$mobileDetect.mobile()">
+          <img :src="`https://back.soledynft.shop/images/brands/${designer.logo}`" v-else>
       </div>
       <div class="banner__text">
         <div class="banner__title">
@@ -51,7 +51,7 @@
       <v-row>
         <v-col class="col-xl-2 col-lg-3 col-md-4 col-6" v-for="(product, i) in designer.products" :key="i" v-if="designer.products && product.main_image">
           <nuxt-link :to="`/ro/categories/${product.category.alias}/${product.alias}`" class="product">
-              <v-img :src="`https://back.soledy.com/images/products/sm/${product.main_image.src}`"></v-img>
+              <v-img :src="`https://back.soledynft.shop/images/products/sm/${product.main_image.src}`"></v-img>
               <p class="product__name">{{ product.translation.name }}</p>
               <div class="collectionOne__price price">
                   <span>{{ product.personal_price.price }}</span>

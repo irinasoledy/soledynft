@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const backURL = 'https://back.soledy.com'
+const backURL = 'https://back.soledynft.shop'
 
 export default {
 

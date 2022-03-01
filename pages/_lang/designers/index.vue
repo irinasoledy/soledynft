@@ -22,7 +22,7 @@
         <v-col class="col-xl-3 col-lg-4 col-6" v-for="(designer, i) in designers" :key="i" v-if="designers">
           <nuxt-link :to="`/${language.lang}/designers/${designer.alias}`" class="designers__item">
             <div class="designers__image">
-              <img :src="`https://back.soledy.com/images/brands/${designer.logo}`" alt="">
+              <img :src="`https://back.soledynft.shop/images/brands/${designer.logo}`" alt="">
               <div class="designers__hover">
                 Read More
               </div>

@@ -295,12 +295,12 @@ export default {
         }
       ],
       productImages: [
-        "https://soledy.com/images/products/sm/necklace-anne-kelly-black-s1.JPG?5fa2a780ed00b",
-        "https://soledy.com/images/products/sm/necklace-anne-kelly-black-s2.JPG?5fa2a780ed00b",
-        "https://soledy.com/images/products/sm/necklace-anne-kelly-black-s3.JPG?5fa2a780ed00b",
-        "https://soledy.com/images/products/sm/necklace-anne-kelly-black-s4.JPG?5fa2a780ed00b",
-        "https://soledy.com/images/products/sm/necklace-anne-kelly-black-s5.JPG?5fa2a780ed00b",
-        "https://soledy.com/images/products/sm/necklace-anne-kelly-black-s6.JPG?5fa2a780ed00b"
+        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s1.JPG?5fa2a780ed00b",
+        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s2.JPG?5fa2a780ed00b",
+        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s3.JPG?5fa2a780ed00b",
+        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s4.JPG?5fa2a780ed00b",
+        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s5.JPG?5fa2a780ed00b",
+        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s6.JPG?5fa2a780ed00b"
       ],
       zoom: false,
       mainImage: null
