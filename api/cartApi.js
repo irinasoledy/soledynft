@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const backURL = 'https://back.soledy.com'
+const backURL = 'https://back.soledynft.shop'
 
 const token = 'SVQzSaN7QoRtGd6bAk8MeWoE8U1YhAmTvZNMEHUP'
 
