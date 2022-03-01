@@ -8,7 +8,7 @@
                             <v-row class="justify-space-around">
                             <v-col class="col-4 pb-0">
                                 <div class="colProd__image">
-                                    <img :src="`https://back.soledy.com/images/products/sm/${product.product.main_image.src}`" alt="">
+                                    <img :src="`https://back.soledynft.shop/images/products/sm/${product.product.main_image.src}`" alt="">
                                 </div>
                             </v-col>
                             <v-col class="col-xl-8 col-lg-8 col-md-6 col-6 pb-0">

@@ -4,7 +4,7 @@
       <div class="a-slider__item" v-for="(similar, i) in similars" :key="i">
         <nuxt-link :to="`/ro/categories/${similar.category.alias}/${similar.alias}`" class="a-slider__item-inner">
           <div class="a-slider__image">
-              <v-img :src="`https://back.soledy.com/images/products/sm/${similar.main_image.src}`"></v-img>
+              <v-img :src="`https://back.soledynft.shop/images/products/sm/${similar.main_image.src}`"></v-img>
           </div>
         </nuxt-link>
       </div>

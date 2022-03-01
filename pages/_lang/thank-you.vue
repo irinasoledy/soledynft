@@ -38,7 +38,7 @@
                         <td>{{ index + 1 }}</td>
                         <td class="cart-image">
                             <nuxt-link :to="`/${language.lang}/categories/${cartsProduct.product.category.alias}/${cartsProduct.product.alias}`">
-                                <img :src="`https://back.soledy.com/images/products/sm/${cartsProduct.product.main_image.src}`" alt="">
+                                <img :src="`https://back.soledynft.shop/images/products/sm/${cartsProduct.product.main_image.src}`" alt="">
                             </nuxt-link>
                         </td>
                         <td class="str-col" v-if="cartsProduct.product.translation">
@@ -57,7 +57,7 @@
                         <td>{{ cartsProducts.length + index + 1 }}</td>
                         <td class="cart-image">
                             <nuxt-link :to="`/${language.lang}/categories/${cartsSubproduct.subproduct.product.category.alias}/${cartsSubproduct.subproduct.product.alias}`">
-                                <img :src="`https://back.soledy.com/images/products/sm/${cartsSubproduct.subproduct.product.main_image.src}`" alt="">
+                                <img :src="`https://back.soledynft.shop/images/products/sm/${cartsSubproduct.subproduct.product.main_image.src}`" alt="">
                             </nuxt-link>
                         </td>
                         <td class="str-col" v-if="cartsSubproduct.subproduct.product.translation">

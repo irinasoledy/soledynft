@@ -9,7 +9,7 @@
       </v-icon>
     </div>
     <div class="zoom__nav">
-      <img  v-for="(item, i) in images" :src="`https://back.soledy.com/images/${path}/md/${item.src}`" :key="i" @click="setMainImg" :class="[item.src === mainImg.src ? 'selected' : '', 'navImage']" alt="">
+      <img  v-for="(item, i) in images" :src="`https://back.soledynft.shop/images/${path}/md/${item.src}`" :key="i" @click="setMainImg" :class="[item.src === mainImg.src ? 'selected' : '', 'navImage']" alt="">
     </div>
   </div>
 </template>

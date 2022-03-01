@@ -81,8 +81,8 @@ export default {
                     quantity: 1,
                 },
             ],
-            successURL: 'https://soledy.com/redirect/payment/success',
-            cancelURL: 'https://soledy.com/redirect/payment/cancel',
+            successURL: 'https://soledynft.shop/redirect/payment/success',
+            cancelURL: 'https://soledynft.shop/redirect/payment/cancel',
             validateErrors: null,
             payment: null,
             methods: {

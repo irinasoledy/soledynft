@@ -70,7 +70,7 @@ export default {
         return {
             products: null,
             items: {
-                image: "https://back.soledy.com/images/products/og/bracelet-anne-poppy-forest-s1.JPG?5fa2a780ed00b",
+                image: "https://back.soledynft.shop/images/products/og/bracelet-anne-poppy-forest-s1.JPG?5fa2a780ed00b",
                 name: "Brăţară Anné-Poppy Forest",
                 price: "170.00",
                 to: "/one-product"
