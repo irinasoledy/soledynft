@@ -117,9 +117,9 @@
                 </v-list-item-title>
             </v-list-item-content>
             <v-list-item-action class="d-flex flex-row">
-                <v-btn :href="`${$trans('ContactsAndForms', 'companyFacebook')}`" target="_blank" icon color="title">
-                    <v-icon>mdi-facebook</v-icon>
-                </v-btn>
+<!--                <v-btn :href="`${$trans('ContactsAndForms', 'companyFacebook')}`" target="_blank" icon color="title">-->
+<!--                    <v-icon>mdi-facebook</v-icon>-->
+<!--                </v-btn>-->
                 <v-btn :href="`${$trans('ContactsAndForms', 'companyInstagram')}`" target="_blank" icon color="title">
                     <v-icon>mdi-instagram</v-icon>
                 </v-btn>

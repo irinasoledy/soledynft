@@ -9,7 +9,7 @@
         </div>
         <div class="banner__text">
           <div class="banner__title" v-if="promotion.translation">
-              {{ promotion.translation.name }}
+<!--              {{ promotion.translation.name }}-->
           </div>
         </div>
       </nuxt-link>
