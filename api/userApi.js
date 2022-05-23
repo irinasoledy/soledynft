@@ -90,3 +90,4 @@ export default {
             .then(response => cb(response.data))
     },
 }
+
