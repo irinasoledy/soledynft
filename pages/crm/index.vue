@@ -194,3 +194,4 @@ export default {
         color: $custom_blue !important;
     }
 </style>
+
