@@ -257,3 +257,58 @@ export default {
    }
 }
 </style>
+
+/components/front/partials/nav-cabinet'
+import cartApi from '@/api/cartApi'
+
+export default {
+    components: {sidebar},
+    middleware: ['user'],
+    data: () => ({
+        orderId: '',
+        order: null,
+        orderServices: null
+    }),
+    computed: mapGetters({
+        allServices: 'getAllServices'
+    }),
+    mounted() {
+        this.orderId = this.$route.params.id
+        this.getOrder()
+    },
+    methods: {
+        getOrder() {
+            cartApi.getOrder(this.orderId, response => {
+                this.order = response
+                this.getOrderServices()
+            })
+        },
+        getOrderServices() {
+            this.orderServices = this.order.services.map(item => {
+                const arr = {
+                    id: item._id,
+                    qty: item.qty,
+                    service: '',
+                }
+                arr.service = this.allServices.find(service => service.id == item.serviceId)
+                return arr
+            })
+        }
+    }
+}
+</script>
+
+<style>
+.account-area {
+    margin-top: 80px;
+    margin-bottom: 50px;
+}
+@media (max-width: 991px) {
+    .account-area {
+        margin-top: 20px;
+    }
+    .display-1{
+        font-size: 1.5rem !important;
+    }
+}
+</style>
