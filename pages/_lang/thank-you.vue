@@ -135,3 +135,4 @@ export default {
     max-width: 50px;
 }
 </style>
+
