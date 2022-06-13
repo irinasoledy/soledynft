@@ -7,7 +7,7 @@ module.exports = {
     */
     head: {
         titleTemplate: '%s',
-        title: 'soledy.com',
+        title: 'soledynft.shop',
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -15,14 +15,13 @@ module.exports = {
             // {name: 'facebook-domain-verification', content: 'zhd8ab5sq0dcog9zbvmxy74zgsdaim'}
         ],
         link: [
-            {rel: 'icon', type: 'image/x-icon', href: 'https://soledy.com/images/favicon.png'},
+            {rel: 'icon', type: 'image/x-icon', href: 'https://soledynft.shop/images/favicon.png'},
             {
                 rel: "stylesheet",
                 href: "https://fonts.googleapis.com/css2?family=Roboto&display=swap",
             },
         ],
         script: [
-            // { src: '/scripts/ammocrm.js' },
             { src: 'https://js.stripe.com/v3' }
         ]
     },
@@ -35,17 +34,15 @@ module.exports = {
     */
     css: [
         'font-awesome/css/font-awesome.css',
-        "~layouts/global.scss"
+        "~assets/global.scss"
     ],
     /*
     ** Plugins to load before mounting the App
     */
     plugins: [
         {src: '@/plugins/socket', ssr: false},
-        {src: '~/plugins/vue-agile'},
         {src: '~/plugins/global.js'},
-        {src: '~/plugins/stripe.js',  mode: 'client'},
-        {src: '~plugins/nuxt-video-player-plugin.js', ssr: false}
+        {src: '~/plugins/stripe.js',  mode: 'client'}
     ],
     components: true,
     /*
