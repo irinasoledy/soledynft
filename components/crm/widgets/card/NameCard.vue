@@ -108,3 +108,106 @@ export default {
         font-weight:200;
     }
 </style>
+
+: {
+        services() {
+            this.serviceArray = []
+            this.splitToChunks(this.services, 2)
+        }
+    },
+    computed: mapGetters({
+        pages : 'getPages',
+        language: 'getLanguage',
+        trans: 'getTranslations',
+        services: 'getServices',
+    }),
+    mounted() {
+        this.splitToChunks(this.services, 2)
+    },
+    methods: {
+        splitToChunks(array, parts) {
+            const services = []
+            array.forEach(service => services.push(service))
+            for (let i = parts; i > 0; i--) {
+                this.serviceArray.push(services.splice(0, Math.ceil(services.length / i)))
+            }
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.footer {
+	background: $bcg-header;
+	.v-expansion-panel {
+		box-shadow: none !important;
+		background: $bcg-header !important;
+		font-family: $font-roboto;
+		&:before {
+			box-shadow: none;
+		}
+	}
+	.v-expansion-panel-header {
+		font-size: 20px !important;
+		color: $main-color;
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.v-expansion-panel-content__wrap {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+	a {
+		font-size: 18px;
+		color: $main-color;
+		display: block;
+		line-height: 1.8;
+		font-weight: 300;
+		font-family: $font-roboto, sans-serif;
+	}
+	p {
+		font-family: $font-roboto, sans-serif;
+		font-size: 20px;
+		color: $main-color;
+		letter-spacing: 0;
+		line-height: 1.5;
+		margin-bottom: 10px;
+		font-weight: 300;
+	}
+	&__desktop {
+		display: none;
+	}
+}
+
+@media (min-width: 1200px) {
+	.footer {
+		&__payments {
+			max-width: 600px;
+		}
+		&__mobile {
+			display: none;
+		}
+		&__desktop {
+			display: block;
+			margin-top: 30px;
+		}
+		&__subtitle {
+			font-family: $font-roboto, sans-serif;
+			font-size: 20px;
+			color: $main-color;
+			letter-spacing: 0;
+			line-height: 20px;
+			font-weight: 400;
+			margin-bottom: 20px;
+		}
+		a {
+			font-family: $font-roboto;
+            text-transform: capitalize;
+		}
+	}
+}
+.footer-social-link {
+    display: inline-block !important;
+
+}
+</style>

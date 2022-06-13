@@ -414,3 +414,146 @@ export default {
     }
 }
 </style>
+
+
+
+il is required',
+                        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+                    ],
+                    phone: [v => !!v || 'Phone is required'],
+                }
+            },
+            formPasswords: {
+                oldPassword: '',
+                newPassword: '',
+                confirmPassword: '',
+                rules: {
+                    oldPassword: [
+                        v => !!v || 'Type old password',
+                        v => v === atob(this.$auth.user.hash) || 'Old Password is not corect'
+                    ],
+                    newPassword: [v => !!v || 'Type new password'],
+                    confirmPassword: [
+                        (value) => !!value || 'Type confirm password',
+                        (value) =>
+                            value === this.formPasswords.newPassword || 'The password confirmation does not match.',
+                    ]
+                }
+            },
+            formAvatar: {
+                avatar: this.$auth.user.avatar,
+                selectedFile: '',
+            },
+            userDetatils: {
+                whatsapp: '',
+                messager: '',
+                viber: '',
+                telegram: '',
+                facebook: '',
+                instagram: '',
+                other: '',
+                preferred: '',
+                address: '',
+                city: '',
+                country: '',
+                postalCode: '',
+                language: '',
+                currency: '',
+                payment: '',
+            },
+        }
+    },
+    mounted() {
+        this.getDetails()
+    },
+    methods: {
+        ...mapActions({
+            editUserAvatar: 'admin/editUserAvatar',
+        }),
+        async submitFormData() {
+            if (this.$refs.formGeneralData.validate()) {
+                this.formGeneralData.userId = this.$auth.user._id
+                await crmApi.setUserGeneralData(this.formGeneralData, user => {
+                    this.$auth.user.name = user.name
+                    this.$auth.user.email = user.email
+                    this.$auth.user.phone = user.phone
+                    this.$auth.user.age = user.age
+                })
+            }
+        },
+        async submitPasswords() {
+            if (this.$refs.formPasswords.validate()) {
+                this.formPasswords.userId = this.$auth.user._id
+                await crmApi.setUserPasswords(this.formPasswords, user => {
+                    this.$auth.user.hash = user.hash
+                })
+            }
+        },
+        onFileChange(e) {
+            this.formAvatar.selectedFile = e.target.files[0]
+        },
+        onUploadFile() {
+            const formData = new FormData();
+            formData.append("file", this.formAvatar.selectedFile)
+            formData.append("id", this.$auth.user._id)
+
+            this.editUserAvatar({formData, id: this.$auth.user._id}).then(user => {
+                this.$auth.user.avatar = user.avatar
+                this.formAvatar.avatar = user.avatar
+            })
+        },
+        getInitials(user) {
+            const name = user.name
+            if (name) {
+                const rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+                let initials = [...name.matchAll(rgx)] || [];
+
+                initials = (
+                    (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+                ).toUpperCase();
+
+                return initials
+            }
+            return 'C'
+        },
+        async getDetails() {
+            await crmApi.getUserDetails(this.$auth.user._id, response => {
+                if (response.user !== null) {
+                    this.userDetatils = response.user
+                }
+            })
+        },
+        async submitUserDetails() {
+            this.userDetatils.userId = this.$auth.user._id
+            await crmApi.setUserDetails(this.userDetatils, response => {
+            })
+        },
+    }
+}
+</script>
+
+<style scoped>
+.account-area {
+    margin-top: 20px;
+}
+
+.cabinet-content {
+
+.radiogroup {
+    flex-direction: row;
+}
+
+}
+
+@media (max-width: 991px) {
+    .account-area {
+        margin-top: 20px;
+    }
+    .display-1{
+        font-size: 1.5rem !important;
+    }
+}
+</style>
+
+
+

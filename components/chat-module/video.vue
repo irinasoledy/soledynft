@@ -376,3 +376,31 @@ export default {
         font-weight: bold;
     }
 </style>
+
+
+tion: absolute;
+        z-index: -1;
+        opacity: 0;
+      }
+    }
+    &__mark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 18px;
+      line-height: 40px;
+      text-align: center;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    input:checked ~ &__mark {
+      color: $main-color;
+      border-color: $main-color;
+      border-width: 6px;
+    }
+  }
+</style>
