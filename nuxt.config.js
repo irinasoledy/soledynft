@@ -7,7 +7,7 @@ module.exports = {
     */
     head: {
         titleTemplate: '%s',
-        title: 'soledy.com',
+        title: 'soledynft.shop',
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -22,7 +22,6 @@ module.exports = {
             },
         ],
         script: [
-            // { src: '/scripts/ammocrm.js' },
             { src: 'https://js.stripe.com/v3' }
         ]
     },
@@ -35,17 +34,15 @@ module.exports = {
     */
     css: [
         'font-awesome/css/font-awesome.css',
-        "~layouts/global.scss"
+        "~assets/global.scss"
     ],
     /*
     ** Plugins to load before mounting the App
     */
     plugins: [
         {src: '@/plugins/socket', ssr: false},
-        {src: '~/plugins/vue-agile'},
         {src: '~/plugins/global.js'},
-        {src: '~/plugins/stripe.js',  mode: 'client'},
-        {src: '~plugins/nuxt-video-player-plugin.js', ssr: false}
+        {src: '~/plugins/stripe.js',  mode: 'client'}
     ],
     components: true,
     /*
