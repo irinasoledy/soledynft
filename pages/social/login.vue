@@ -92,8 +92,3 @@ export default {
     margin-top: 150px;
 }
 </style>
-
-
-
-
-
