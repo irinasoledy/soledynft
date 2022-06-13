@@ -192,5 +192,3 @@ export default {
       background: $bcg-body !important;
     }
 </style>
-
-
