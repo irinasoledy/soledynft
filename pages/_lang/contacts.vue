@@ -1,24 +1,20 @@
 <template>
   <div class="contacts">
+
     <div class="banner">
       <div class="banner__image">
         <img :src="$banner('Contacts_Banner', $mobileDetect.mobile())" alt="banner"/>
       </div>
       <div class="banner__text">
-        <div class="banner__title">
-          {{ $trans('ContactsAndForms', 'contactPagesTitle') }}
-        </div>
-        <p class="banner__paragraph">
-          {{ $trans('ContactsAndForms', 'contactPagesContactSubtitle') }}
-        </p>
+        <div class="banner__title">{{ $trans('ContactsAndForms', 'contactPagesTitle') }}</div>
+        <p class="banner__paragraph">{{ $trans('ContactsAndForms', 'contactPagesContactSubtitle') }}</p>
       </div>
     </div>
+
     <v-container>
       <v-row class="justify-space-around">
         <v-col class="col-12">
-          <h3 class="c-title my-3">
-            {{ $trans('ContactsAndForms', 'contactPagesTitle') }}
-          </h3>
+          <h3 class="c-title my-3">{{ $trans('ContactsAndForms', 'contactPagesTitle') }}</h3>
         </v-col>
         <v-col class="col-xl-3 col-lg-3 col-md-6 col-12">
           <div class="contacts__item">
@@ -31,17 +27,17 @@
             </p>
             <a href="tel:+37379666626">
               <v-icon color="primary">mdi-phone</v-icon>
-              {{ $trans('ContactsAndForms', 'labelPhoneViberWhatsapp') }} <a
-                :href="`tel:${$trans('ContactsAndForms', 'companyMainPhone1')}`">{{
-                $trans('ContactsAndForms', 'companyMainPhone1')
-              }}</a>
+              {{ $trans('ContactsAndForms', 'labelPhoneViberWhatsapp') }}
+              <a :href="`tel:${$trans('ContactsAndForms', 'companyMainPhone1')}`">
+                {{ $trans('ContactsAndForms', 'companyMainPhone1') }}
+              </a>
             </a>
             <a href="mailto:info@soledy.com">
               <v-icon color="primary">mdi-mail</v-icon>
-              {{ $trans('ContactsAndForms', 'labelCommunicationMethodOptionEmail') }}: <a
-                :href="`mailto:${$trans('ContactsAndForms', 'companyMainEmail1')}`">{{
-                $trans('ContactsAndForms', 'companyMainEmail1')
-              }}</a>
+              {{ $trans('ContactsAndForms', 'labelCommunicationMethodOptionEmail') }}:
+              <a :href="`mailto:${$trans('ContactsAndForms', 'companyMainEmail1')}`">
+                {{ $trans('ContactsAndForms', 'companyMainEmail1') }}
+              </a>
             </a>
             <div class="social">
               <a :href="$trans('ContactsAndForms', 'companyInstagram')">
@@ -69,22 +65,22 @@
             </p>
             <p class="text-center">
               <v-icon>mdi-phone</v-icon>
-              {{ $trans('ContactsAndForms', 'labelPhoneViberWhatsapp') }} <a
-                :href="`tel:${trans.ContactsAndForms.companyMainPhone1MD}`">{{
-                $trans('ContactsAndForms', 'companyMainPhone1MD')
-              }}</a>
+              {{ $trans('ContactsAndForms', 'labelPhoneViberWhatsapp') }}
+              <a :href="`tel:${trans.ContactsAndForms.companyMainPhone1MD}`">
+                {{ $trans('ContactsAndForms', 'companyMainPhone1MD') }}
+              </a>
             </p>
             <p class="text-center">
               <v-icon>mdi-email</v-icon>
-              {{ $trans('ContactsAndForms', 'labelCommunicationMethodOptionEmail') }}: <a
-                :href="`mailto:${trans.ContactsAndForms.companyMainEmail1MD}`">{{
-                $trans('ContactsAndForms', 'companyMainEmail1MD')
-              }}</a>
+              {{ $trans('ContactsAndForms', 'labelCommunicationMethodOptionEmail') }}:
+              <a :href="`mailto:${trans.ContactsAndForms.companyMainEmail1MD}`">
+                {{ $trans('ContactsAndForms', 'companyMainEmail1MD') }}
+              </a>
             </p>
             <p class="text-center">
-              <a :href="`https://${trans.ContactsAndForms.companyMainWebsiteMD}`">{{
-                  $trans('ContactsAndForms', 'companyMainWebsiteMD')
-                }}</a>
+              <a :href="`https://${trans.ContactsAndForms.companyMainWebsiteMD}`">
+                {{ $trans('ContactsAndForms', 'companyMainWebsiteMD') }}
+              </a>
             </p>
             <div class="social">
               <a :href="$trans('ContactsAndForms', 'companyInstagram')">
@@ -113,17 +109,17 @@
             </p>
             <a href="tel:+37379666626">
               <v-icon color="primary">mdi-phone</v-icon>
-              {{ $trans('ContactsAndForms', 'labelPhoneViberWhatsapp') }} <a
-                :href="`tel:${$trans('ContactsAndForms', 'companyMainPhone1EE')}`">{{
-                $trans('ContactsAndForms', 'companyMainPhone1EE')
-              }}</a>
+              {{ $trans('ContactsAndForms', 'labelPhoneViberWhatsapp') }}
+              <a :href="`tel:${$trans('ContactsAndForms', 'companyMainPhone1EE')}`">
+                {{ $trans('ContactsAndForms', 'companyMainPhone1EE') }}
+              </a>
             </a>
             <a href="mailto:info@soledy.com">
               <v-icon color="primary">mdi-mail</v-icon>
-              {{ $trans('ContactsAndForms', 'labelCommunicationMethodOptionEmail') }}: <a
-                :href="`mailto:${$trans('ContactsAndForms', 'companyMainEmail1EE')}`">{{
-                $trans('ContactsAndForms', 'companyMainEmail1EE')
-              }}</a>
+              {{ $trans('ContactsAndForms', 'labelCommunicationMethodOptionEmail') }}:
+              <a :href="`mailto:${$trans('ContactsAndForms', 'companyMainEmail1EE')}`">
+                {{ $trans('ContactsAndForms', 'companyMainEmail1EE') }}
+              </a>
             </a>
             <div class="social">
               <a :href="$trans('ContactsAndForms', 'companyInstagram')">
@@ -217,10 +213,9 @@
   </div>
 </template>
 
-
 <script>
 
-import {mapActions, mapGetters} from 'vuex'
+import {mapGetters} from 'vuex'
 import userApi from '@/api/userApi'
 
 export default {
@@ -284,11 +279,8 @@ export default {
     },
     reset() {
       this.$refs.form.reset()
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation()
-    },
-  },
+    }
+  }
 }
 </script>
 

@@ -1,6 +1,7 @@
 <template>
   <div class="promotions" v-if="promotions">
     <div class="banner" v-for="(promotion, i) in promotions" :key="i" :id="`${promotion.alias}`">
+
       <nuxt-link to="#" class="banner__inner">
         <div class="banner__image">
           <img :src="`${envAPI}/images/promotions/${promotion.img}`" v-if="!$mobileDetect.mobile()" width="100%">
@@ -19,7 +20,9 @@
             <v-expansion-panels v-if="promotion.products.length">
               <v-expansion-panel>
                 <v-row>
-                  <v-col class="col-lg-3 col-md-4 col-6" v-for="(product, i) in promotion.products" :key="i"
+                  <v-col class="col-lg-3 col-md-4 col-6"
+                         v-for="(product, i) in promotion.products"
+                         :key="i"
                          v-if="product.main_image">
                     <nuxt-link :to="`/${language.lang}/categories/${product.category.alias}/${product.alias}`"
                                class="product">
@@ -30,31 +33,26 @@
                         <span v-if="product.personal_price.old_price > product.personal_price.price">/</span>
                         <span class="price__discount"
                               v-if="product.personal_price.old_price > product.personal_price.price">
-				                                        {{ product.personal_price.old_price }}
-				                                    </span>
+                          {{ product.personal_price.old_price }}
+                        </span>
                         <span>{{ currency.abbr }} </span>
                       </div>
                     </nuxt-link>
                   </v-col>
                 </v-row>
-                <!-- </v-expansion-panel-content> -->
               </v-expansion-panel>
             </v-expansion-panels>
           </v-col>
         </v-row>
       </v-container>
+
     </div>
-    <v-row class="experts">
-      <v-col class="col-12">
-        <h3 class="p-title-experts">{{ $trans('DetailsProductSet', 'viewLiveProducts') }}</h3>
-      </v-col>
-    </v-row>
   </div>
 </template>
 
 <script>
 
-import {mapGetters, mapActions} from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: mapGetters({

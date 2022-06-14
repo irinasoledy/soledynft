@@ -1,11 +1,11 @@
 <template>
   <v-container v-if="collection">
     <v-row>
+
       <v-col class="col-12">
-        <h3 class="collectionOne__title">
-          <span>{{ collection.translation.name }}</span>
-        </h3>
+        <h3 class="collectionOne__title"><span>{{ collection.translation.name }}</span></h3>
       </v-col>
+
       <v-col class="col-12">
         <v-row v-for="(set, i) in collection.sets" :key="i" class="collectionsItems mb-8">
           <v-col class="col-12">
@@ -13,31 +13,38 @@
               {{ set.translation.name }}
             </h4>
           </v-col>
+
           <v-col class="col-12">
             <div class="collectionOne">
               <v-row class="justify-space-between">
                 <v-col class="col-lg-7 col-12">
-                  <slider-one-product :images="set.photos" @openZoom="openZoom" :productImages="set.photos"
+                  <slider-one-product :images="set.photos"
+                                      @openZoom="openZoom"
+                                      :productImages="set.photos"
                                       path="sets"/>
                 </v-col>
+
                 <set-products :set="set"/>
+
               </v-row>
             </div>
           </v-col>
-          <zoom v-if="zoom" @closeZoom="zoom = false" :mainImage="mainImage" :productImages="set.photos" path="sets"/>
+
+          <zoom v-if="zoom"
+                @closeZoom="zoom = false"
+                :mainImage="mainImage"
+                :productImages="set.photos"
+                path="sets"/>
+
         </v-row>
       </v-col>
-    </v-row>
-    <v-row class="experts">
-      <v-col class="col-12">
-        <h3 class="p-title-experts">{{ $trans('DetailsProductSet', 'viewLiveProducts') }}</h3>
-      </v-col>
+
     </v-row>
   </v-container>
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex'
+import {mapGetters} from 'vuex'
 import SliderOneProduct from '@/components/front/sliders/SliderOneProduct.vue'
 import SetProducts from '@/components/front/productWidgets/SetProducts.vue'
 import Sizes from '@/components/front/productWidgets/Sizes.vue'
@@ -78,41 +85,7 @@ export default {
   data() {
     return {
       collection: null,
-      sizesOptions: [{
-        label: "XS",
-        value: "xs",
-
-      },
-        {
-          label: "S",
-          value: "s",
-          selected: true
-        },
-        {
-          label: "M",
-          value: "m"
-        },
-        {
-          label: "L",
-          value: "l"
-        },
-        {
-          label: "XL",
-          value: "xl"
-        },
-        {
-          label: "XXL",
-          value: "xxl"
-        }
-      ],
-      collectionImages: [
-        "https://www.nawpic.com/media/2020/desktop-backgrounds-nawpic-1.png",
-        "https://www.nawpic.com/media/2020/desktop-backgrounds-nawpic-17.jpg",
-        "https://img.freepik.com/free-vector/colorful-palm-silhouettes-background_23-2148541792.jpg?size=626&ext=jpg&ga=GA1.2.1685543998.1622592000",
-        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s4.JPG?5fa2a780ed00b",
-        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s5.JPG?5fa2a780ed00b",
-        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s6.JPG?5fa2a780ed00b"
-      ],
+      collectionImages: [],
       zoom: false,
       mainImage: null
     }
@@ -123,12 +96,6 @@ export default {
     currency: 'getCurrency',
     trans: 'getTranslations',
   }),
-  async mounted() {
-    // this.collection = await this.collections.find((collection) => collection.alias == this.$route.params.slugCollection)
-    // this.title = this.service.translation.seo_title
-    // this.description = this.service.translation.seo_description
-    // this.setChatBotmessage(this.trans.General.botMessageTemplate1 + " " + this.service.translation.bot_message + '? '+ this.trans.General.botMessageTemplate2)
-  },
   methods: {
     getTotalSetPrice(products) {
       let price = 0

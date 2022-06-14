@@ -1,9 +1,12 @@
 <template>
   <div class="h-content">
+
     <home-banner-carousel/>
+
     <div class="h-sections">
 
       <section class="h-section" v-for="(item, index) in items" :key="index">
+
         <h3 class="h-section__title">
           {{ item.view.translation.name }}
         </h3>
@@ -21,16 +24,19 @@
             {{ $trans('DetailsProductSet', 'viewProducts') }}
           </v-btn>
         </div>
+
       </section>
+
     </div>
+
     <about/>
+
   </div>
 </template>
 
 <script>
 
-import {mapGetters, mapActions} from 'vuex'
-
+import {mapGetters} from 'vuex'
 import HomeCarouselSets from '@/components/front/sliders/HomeCarouselSets.vue'
 import HomeCarouselProducts from '@/components/front/sliders/HomeCarouselProducts.vue'
 import HomeBannerCarousel from '@/components/front/sliders/HomeBannerCarousel.vue'

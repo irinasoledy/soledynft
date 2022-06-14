@@ -1,16 +1,13 @@
 <template>
   <div class="about">
+
     <v-container>
       <v-row>
         <v-col class="col-12">
           <h3 class="c-title">{{ $trans('About', 'title') }}</h3>
         </v-col>
         <v-col class="col-12">
-          <div class="about__multi">
-            {{ $trans('About', 'row1-1') }}
-            <br>
-            {{ $trans('About', 'row1-2') }}
-          </div>
+          <div class="about__multi">{{ $trans('About', 'row1-1') }}<br>{{ $trans('About', 'row1-2') }}</div>
         </v-col>
         <v-col class="col-12">
           <v-row class="justify-center">
@@ -24,18 +21,18 @@
         </v-col>
       </v-row>
     </v-container>
+
     <section class="sectionOne">
       <v-container>
         <v-row>
           <v-col class="col-12">
             <h3 class="c-title-multi">{{ $trans('About', 'section1Title') }}</h3>
-            <p class="about__text">
-              {{ $trans('General', 'brandHitoryBody') }}
-            </p>
+            <p class="about__text">{{ $trans('General', 'brandHitoryBody') }}</p>
           </v-col>
         </v-row>
       </v-container>
     </section>
+
     <section class="sectionTwo">
       <v-container>
         <v-row>
@@ -45,44 +42,36 @@
                 <img :src="$banner('Banner_About_Section_2_right', $mobileDetect.mobile())" alt="banner"/>
               </v-col>
               <v-col class="col-lg-9 col-12">
-                <p class="about__text bloc1">
-                  {{ $trans('About', 'section2-1') }}
-                </p>
+                <p class="about__text bloc1">{{ $trans('About', 'section2-1') }}</p>
               </v-col>
             </v-row>
           </v-col>
           <v-col class="col-12">
-            <p class="subtitle">
-              {{ $trans('About', 'section2-2') }}
-            </p>
+            <p class="subtitle">{{ $trans('About', 'section2-2') }}</p>
             <img :src="$banner('Banner_About_Section_2_left', $mobileDetect.mobile())" alt="banner"/>
-
-            <p class="about__text bloc3">
-              {{ $trans('About', 'section2-3') }}
-            </p>
+            <p class="about__text bloc3">{{ $trans('About', 'section2-3') }}</p>
           </v-col>
         </v-row>
       </v-container>
     </section>
+
     <section class="sectionParallax">
       <img :src="$banner('Banner_About_Section_3_fulwidth', $mobileDetect.mobile())" alt="banner"/>
     </section>
+
     <section class="sectionThree">
       <v-container>
         <v-row>
           <v-col class="col-12">
-            <h4 class="bloc1">
-              {{ $trans('About', 'section3Title') }}
-            </h4>
+            <h4 class="bloc1">{{ $trans('About', 'section3Title') }}</h4>
           </v-col>
           <v-col class="col-12">
-            <p class="about__text bloc2">
-              {{ $trans('About', 'section3Body') }}
-            </p>
+            <p class="about__text bloc2">{{ $trans('About', 'section3Body') }}</p>
           </v-col>
         </v-row>
       </v-container>
     </section>
+
     <section class="sectionFour">
       <v-container>
         <v-row>
@@ -101,7 +90,6 @@
           </v-col>
           <v-col class="col-6">
             <img :src="$banner('Banner_About_Section_4_bijoux_2', $mobileDetect.mobile())" alt="banner"/>
-
           </v-col>
           <v-col class="col-3 image-right">
             <img :src="$banner('Banner_About_Section_4_bijoux_3', $mobileDetect.mobile())" alt="banner"/>
@@ -109,16 +97,13 @@
         </v-row>
         <v-row>
           <v-col class="col-12">
-            <p class="about__text">
-              {{ $trans('About', 'outBijouxBody') }}
-            </p>
-            <p class="about__north">
-              {{ $trans('About', 'welcomeToBijoux') }}
-            </p>
+            <p class="about__text">{{ $trans('About', 'outBijouxBody') }}</p>
+            <p class="about__north">{{ $trans('About', 'welcomeToBijoux') }}</p>
           </v-col>
         </v-row>
       </v-container>
     </section>
+
     <section class="sectionFive">
       <v-container>
         <v-row>
@@ -126,9 +111,7 @@
             <h3 class="c-title">{{ $trans('About', 'ourBrands') }} </h3>
           </v-col>
           <v-col class="col-12">
-            <h3 class="c-title">
-              {{ $trans('About', 'welcomeToHomewear') }}
-            </h3>
+            <h3 class="c-title">{{ $trans('About', 'welcomeToHomewear') }}</h3>
           </v-col>
         </v-row>
         <v-row>
@@ -144,21 +127,18 @@
         </v-row>
         <v-row>
           <v-col class="col-12">
-            <p class="about__text">
-              {{ $trans('About', 'ourHomewareBody') }}
-            </p>
-            <p class="about__north">
-              {{ $trans('About', 'welcomeToHomewear') }}
-            </p>
+            <p class="about__text">{{ $trans('About', 'ourHomewareBody') }}</p>
+            <p class="about__north">{{ $trans('About', 'welcomeToHomewear') }}</p>
           </v-col>
         </v-row>
       </v-container>
     </section>
+
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   layout: "default",

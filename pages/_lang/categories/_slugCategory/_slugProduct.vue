@@ -1,25 +1,25 @@
 <template>
   <v-container class="oneProduct-content" v-if="product">
     <v-row>
+
       <v-col class="col-12">
         <div class="productOne mt-6">
           <v-row class="justify-space-between">
             <v-col class="col-lg-6 col-12">
-              <slider-one-product :images="product.images" @openZoom="openZoom" :productImages="product.images"
+              <slider-one-product :images="product.images"
+                                  @openZoom="openZoom"
+                                  :productImages="product.images"
                                   path="products"/>
             </v-col>
             <v-col class="col-lg-6 col-12">
               <p class="productOne__name">{{ product.translation.name }}</p>
-              <p class="productOne__by" v-if="product.brand">
-                by {{ product.brand.translation.name }}
-              </p>
-
+              <p class="productOne__by" v-if="product.brand">by {{ product.brand.translation.name }}</p>
               <p class="productOne__price">
                 {{ product.personal_price.price }}
                 <span v-if="product.personal_price.old_price > product.personal_price.price">/</span>
                 <span class="price__discount" v-if="product.personal_price.old_price > product.personal_price.price">
-                                    {{ product.personal_price.old_price }}
-                                </span>
+                  {{ product.personal_price.old_price }}
+                </span>
                 {{ currency.abbr }}
               </p>
 
@@ -43,6 +43,7 @@
                   </v-btn>
                 </div>
               </div>
+
               <div class="guaranty">
                 <div class="guaranty__header">
                   {{ $trans('DetailsProductSet', 'GuaranteesSustainability') }}
@@ -66,6 +67,7 @@
                   </div>
                 </div>
               </div>
+
               <v-expansion-panels accordion>
                 <v-expansion-panel aria-expanded="true" class="productOne__exp">
                   <v-expansion-panel-header class="productOne__exp-header">
@@ -146,58 +148,31 @@
           </v-row>
         </div>
       </v-col>
-      <v-col class="col-12">
-        <!-- <div class="moreProducts">
-            <v-row>
-                <v-col class="col-md-4 col-12">
-                    <span>Not quite found the product for you?</span>
-                </v-col>
-                <v-col class="col-md-8 col-12">
-                    <v-row>
-                        <v-col class="col-md-6 col-12">
-                            <v-btn color="primary" nuxt to="/one-designer">
-                                view more from this designer
-                            </v-btn>
-                        </v-col>
-                        <v-col class="col-md-6 col-12">
-                            <v-btn color="primary" outlined to="/all-products" nuxt>
-                                view more earrings
-                            </v-btn>
-                        </v-col>
-                    </v-row>
-                </v-col>
-            </v-row>
-        </div> -->
-      </v-col>
+      <v-col class="col-12"></v-col>
+
       <v-col class="col-12 mt-lg-8">
         <v-row>
           <v-col class="col-12 mt-lg-8" v-if="similars">
             <h3 class="additional-title">{{ $trans('DetailsProductSet', 'similarProducts') }}</h3>
             <similar-slider :similars="similars"/>
           </v-col>
-
-          <v-row class="experts">
-            <v-col class="col-12">
-              <h3 class="p-title">VEZI LIVE PRODUSELE</h3>
-            </v-col>
-          </v-row>
-
         </v-row>
       </v-col>
+
     </v-row>
+
     <zoom v-if="zoom" @closeZoom="zoom = false" :mainImage="mainImage" :productImages="productImages" path="products"/>
+
   </v-container>
 </template>
 
 <script>
 
-import {mapActions, mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 import contentApi from '@/api/contentApi'
-
 import SliderOneProduct from '@/components/front/sliders/SliderOneProduct.vue'
 import SimilarSlider from '@/components/front/sliders/SimilarCarousel.vue'
 import CartBtn from '@/components/front/cart/cartBtn.vue'
-
 import Sizes from '@/components/front/productWidgets/Sizes.vue'
 import Zoom from '@/components/front/productWidgets/Zoom.vue'
 
@@ -242,65 +217,7 @@ export default {
   data() {
     return {
       product: null,
-      sizesOptions: [
-        {
-          label: "XS",
-          value: "xs",
-
-        },
-        {
-          label: "S",
-          value: "s",
-          selected: true
-        },
-        {
-          label: "M",
-          value: "m"
-        },
-        {
-          label: "L",
-          value: "l"
-        },
-        {
-          label: "XL",
-          value: "xl"
-        },
-        {
-          label: "XXL",
-          value: "xxl"
-        }
-      ],
-      colorOptions: [
-        {
-          label: "Red",
-          value: "red"
-        },
-        {
-          label: "Green",
-          value: "green",
-          selected: true
-        },
-        {
-          label: "Purple",
-          value: "purple"
-        },
-        {
-          label: "White",
-          value: "white"
-        },
-        {
-          label: "Black",
-          value: "black"
-        }
-      ],
-      productImages: [
-        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s1.JPG?5fa2a780ed00b",
-        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s2.JPG?5fa2a780ed00b",
-        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s3.JPG?5fa2a780ed00b",
-        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s4.JPG?5fa2a780ed00b",
-        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s5.JPG?5fa2a780ed00b",
-        "https://soledynft.shop/images/products/sm/necklace-anne-kelly-black-s6.JPG?5fa2a780ed00b"
-      ],
+      productImages: [],
       zoom: false,
       mainImage: null
     }

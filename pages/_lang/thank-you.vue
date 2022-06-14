@@ -110,7 +110,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import cartApi from '@/api/cartApi'
 
 export default {
