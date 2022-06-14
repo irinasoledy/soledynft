@@ -61,7 +61,7 @@
 
 <script>
 import {mapGetters, mapActions} from "vuex";
-import sidebar from '@/components/front/partials/nav-cabinet'
+import sidebar from '~/components/front/partials/Nav-cabinet'
 import cartApi from '@/api/cartApi'
 
 export default {

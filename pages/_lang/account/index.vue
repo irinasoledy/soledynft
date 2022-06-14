@@ -261,7 +261,7 @@
 <script>
 
 import {mapActions} from "vuex";
-import sidebar from '@/components/front/partials/nav-cabinet'
+import sidebar from '~/components/front/partials/Nav-cabinet'
 // import crmApi from "@/api/crmApi";
 
 export default {
