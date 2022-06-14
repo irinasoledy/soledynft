@@ -29,8 +29,6 @@
 
     </div>
 
-    <about/>
-
   </div>
 </template>
 
@@ -40,10 +38,9 @@ import {mapGetters} from 'vuex'
 import HomeCarouselSets from '@/components/front/sliders/HomeCarouselSets.vue'
 import HomeCarouselProducts from '@/components/front/sliders/HomeCarouselProducts.vue'
 import HomeBannerCarousel from '@/components/front/sliders/HomeBannerCarousel.vue'
-import About from '@/components/front/widgets/About.vue'
 
 export default {
-  components: {HomeBannerCarousel, About, HomeCarouselSets, HomeCarouselProducts},
+  components: {HomeBannerCarousel, HomeCarouselSets, HomeCarouselProducts},
   computed: mapGetters({
     categories: 'getCategories',
     collections: 'getCollections',
