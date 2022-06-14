@@ -10,8 +10,8 @@
 
 <script>
 
-import Header from '@/components/front/partials/header';
-import Footer from '@/components/front/partials/footer';
+import Header from '~/components/front/partials/Header';
+import Footer from '~/components/front/partials/Footer';
 
 export default {
   components: {

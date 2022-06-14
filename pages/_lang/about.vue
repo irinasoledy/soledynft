@@ -1,88 +1,77 @@
 <template>
   <div class="about">
+
     <v-container>
       <v-row>
         <v-col class="col-12">
           <h3 class="c-title">{{ $trans('About', 'title') }}</h3>
         </v-col>
         <v-col class="col-12">
-          <div class="about__multi">
-            {{ $trans('About', 'row1-1') }}
-            <br>
-            {{ $trans('About', 'row1-2') }}
-          </div>
+          <div class="about__multi">{{ $trans('About', 'row1-1') }}<br>{{ $trans('About', 'row1-2') }}</div>
         </v-col>
         <v-col class="col-12">
-          <v-row class="justify-center" >
+          <v-row class="justify-center">
             <v-col class="col-lg-3 col-md-4 col-5 image-left">
-              <img :src="$banner('Banner_About_Section_1_left', $mobileDetect.mobile())" alt="banner" />
+              <img :src="$banner('Banner_About_Section_1_left', $mobileDetect.mobile())" alt="banner"/>
             </v-col>
             <v-col class="col-lg-5 col-md-6 col-7 image-right">
-              <img :src="$banner('Banner_HP_About_Section_4', $mobileDetect.mobile())" alt="banner" />
+              <img :src="$banner('Banner_HP_About_Section_4', $mobileDetect.mobile())" alt="banner"/>
             </v-col>
           </v-row>
         </v-col>
       </v-row>
     </v-container>
+
     <section class="sectionOne">
       <v-container>
         <v-row>
           <v-col class="col-12">
             <h3 class="c-title-multi">{{ $trans('About', 'section1Title') }}</h3>
-            <p class="about__text">
-                {{ $trans('General', 'brandHitoryBody') }}
-            </p>
+            <p class="about__text">{{ $trans('General', 'brandHitoryBody') }}</p>
           </v-col>
         </v-row>
       </v-container>
     </section>
+
     <section class="sectionTwo">
       <v-container>
         <v-row>
           <v-col class="col-12">
             <v-row class="row sectionTwo-container">
               <v-col class="col-lg-3 col-12 sectionTwo__image-one">
-                <img :src="$banner('Banner_About_Section_2_right', $mobileDetect.mobile())" alt="banner" />
+                <img :src="$banner('Banner_About_Section_2_right', $mobileDetect.mobile())" alt="banner"/>
               </v-col>
               <v-col class="col-lg-9 col-12">
-                <p class="about__text bloc1">
-                    {{ $trans('About', 'section2-1') }}
-                </p>
+                <p class="about__text bloc1">{{ $trans('About', 'section2-1') }}</p>
               </v-col>
             </v-row>
           </v-col>
           <v-col class="col-12">
-            <p class="subtitle">
-                {{ $trans('About', 'section2-2') }}
-            </p>
-            <img :src="$banner('Banner_About_Section_2_left', $mobileDetect.mobile())" alt="banner" />
-
-             <p class="about__text bloc3">
-                 {{ $trans('About', 'section2-3') }}
-             </p>
+            <p class="subtitle">{{ $trans('About', 'section2-2') }}</p>
+            <img :src="$banner('Banner_About_Section_2_left', $mobileDetect.mobile())" alt="banner"/>
+            <p class="about__text bloc3">{{ $trans('About', 'section2-3') }}</p>
           </v-col>
         </v-row>
       </v-container>
     </section>
+
     <section class="sectionParallax">
-      <img :src="$banner('Banner_About_Section_3_fulwidth', $mobileDetect.mobile())" alt="banner" />
+      <img :src="$banner('Banner_About_Section_3_fulwidth', $mobileDetect.mobile())" alt="banner"/>
     </section>
+
     <section class="sectionThree">
       <v-container>
         <v-row>
           <v-col class="col-12">
-            <h4 class="bloc1">
-              {{ $trans('About', 'section3Title') }}
-            </h4>
+            <h4 class="bloc1">{{ $trans('About', 'section3Title') }}</h4>
           </v-col>
           <v-col class="col-12">
-            <p class="about__text bloc2">
-                {{ $trans('About', 'section3Body') }}
-            </p>
+            <p class="about__text bloc2">{{ $trans('About', 'section3Body') }}</p>
           </v-col>
         </v-row>
       </v-container>
     </section>
+
     <section class="sectionFour">
       <v-container>
         <v-row>
@@ -97,28 +86,24 @@
         </v-row>
         <v-row>
           <v-col class="col-3 image-left">
-            <img :src="$banner('Banner_About_Section_4_bijoux_1', $mobileDetect.mobile())" alt="banner" />
+            <img :src="$banner('Banner_About_Section_4_bijoux_1', $mobileDetect.mobile())" alt="banner"/>
           </v-col>
           <v-col class="col-6">
-            <img :src="$banner('Banner_About_Section_4_bijoux_2', $mobileDetect.mobile())" alt="banner" />
-
+            <img :src="$banner('Banner_About_Section_4_bijoux_2', $mobileDetect.mobile())" alt="banner"/>
           </v-col>
           <v-col class="col-3 image-right">
-            <img :src="$banner('Banner_About_Section_4_bijoux_3', $mobileDetect.mobile())" alt="banner" />
+            <img :src="$banner('Banner_About_Section_4_bijoux_3', $mobileDetect.mobile())" alt="banner"/>
           </v-col>
         </v-row>
         <v-row>
           <v-col class="col-12">
-            <p class="about__text">
-                {{ $trans('About', 'outBijouxBody') }}
-            </p>
-            <p class="about__north">
-                {{ $trans('About', 'welcomeToBijoux') }}
-            </p>
+            <p class="about__text">{{ $trans('About', 'outBijouxBody') }}</p>
+            <p class="about__north">{{ $trans('About', 'welcomeToBijoux') }}</p>
           </v-col>
         </v-row>
       </v-container>
     </section>
+
     <section class="sectionFive">
       <v-container>
         <v-row>
@@ -126,71 +111,60 @@
             <h3 class="c-title">{{ $trans('About', 'ourBrands') }} </h3>
           </v-col>
           <v-col class="col-12">
-            <h3 class="c-title">
-              {{ $trans('About', 'welcomeToHomewear') }}
-            </h3>
+            <h3 class="c-title">{{ $trans('About', 'welcomeToHomewear') }}</h3>
           </v-col>
         </v-row>
         <v-row>
           <v-col class="col-3 image-left">
-            <img :src="$banner('Banner_About_Section_5_homewear_1', $mobileDetect.mobile())" alt="banner" />
+            <img :src="$banner('Banner_About_Section_5_homewear_1', $mobileDetect.mobile())" alt="banner"/>
           </v-col>
           <v-col class="col-6">
-            <img :src="$banner('Banner_About_Section_5_homewear_2', $mobileDetect.mobile())" alt="banner" />
+            <img :src="$banner('Banner_About_Section_5_homewear_2', $mobileDetect.mobile())" alt="banner"/>
           </v-col>
           <v-col class="col-3 image-right">
-            <img :src="$banner('Banner_About_Section_5_homewear_3', $mobileDetect.mobile())" alt="banner" />
+            <img :src="$banner('Banner_About_Section_5_homewear_3', $mobileDetect.mobile())" alt="banner"/>
           </v-col>
         </v-row>
         <v-row>
           <v-col class="col-12">
-            <p class="about__text">
-                {{ $trans('About', 'ourHomewareBody') }}
-            </p>
-            <p class="about__north">
-                {{ $trans('About', 'welcomeToHomewear') }}
-            </p>
+            <p class="about__text">{{ $trans('About', 'ourHomewareBody') }}</p>
+            <p class="about__north">{{ $trans('About', 'welcomeToHomewear') }}</p>
           </v-col>
         </v-row>
       </v-container>
     </section>
+
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
-    layout: "default",
-    head() {
-        return {
-            title: this.title,
-            meta: [
-                {
-                    hid: 'description',
-                    name: 'description',
-                    content: this.description
-                }
-            ]
+  layout: "default",
+  head() {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.description
         }
-    },
-    data: () => ({
-        title: '',
-        description: '',
-    }),
-    computed: mapGetters({
-        trans: 'getTranslations'
-    }),
-    mounted() {
-        this.setChatBotmessage(this.$trans('General', 'botMessageTemplateAboutExperts'))
-        this.title = this.$trans('PageNames', 'aboutSeoTitle')
-        this.description = this.$trans('PageNames', 'aboutSeoDesc')
-    },
-    methods: {
-        ...mapActions({
-            setChatBotmessage: 'chat/setChatBotmessage'
-        })
-    },
+      ]
+    }
+  },
+  data: () => ({
+    title: '',
+    description: '',
+  }),
+  computed: mapGetters({
+    trans: 'getTranslations'
+  }),
+  mounted() {
+    this.title = this.$trans('PageNames', 'aboutSeoTitle')
+    this.description = this.$trans('PageNames', 'aboutSeoDesc')
+  }
 }
 </script>
 
@@ -217,6 +191,7 @@ export default {
     text-align: right;
     position: relative;
     padding: 0;
+
     img {
       width: 120%;
       position: absolute;
@@ -224,15 +199,18 @@ export default {
       top: 20%;
     }
   }
+
   .image-right {
     padding: 0;
     text-align: left;
     overflow: hidden;
+
     img {
       width: 120%;
     }
   }
 }
+
 .c-title-multi {
   font-family: $font-titles;
   font-size: 25px;
@@ -243,6 +221,7 @@ export default {
   margin: 30px 0;
   font-weight: 400;
 }
+
 .c-title-green {
   font-family: $font-titles;
   font-size: 30px;
@@ -251,9 +230,11 @@ export default {
   line-height: 30px;
   margin-top: 30px;
 }
+
 .c-title {
   color: $red-color;
 }
+
 .sectionOne .about__text {
   font-family: $font-text;
   font-size: 20px;
@@ -262,14 +243,17 @@ export default {
   line-height: 24px;
   margin-top: 20px;
 }
+
 .about .sectionTwo {
   background-color: $bcg-header;
   text-align: right;
   margin-top: 100px;
+
   &-container {
     position: relative;
     padding-top: 200px;
   }
+
   &__image-one {
     position: absolute;
     top: -80px;
@@ -278,6 +262,7 @@ export default {
     margin-left: auto;
     margin-right: 0;
   }
+
   p.bloc1 {
     font-family: $font-text;
     font-size: 30px;
@@ -286,6 +271,7 @@ export default {
     line-height: 30px;
     margin-top: 30px;
   }
+
   p.bloc3 {
     font-family: $font-text;
     font-size: 20px;
@@ -294,6 +280,7 @@ export default {
     line-height: 24px;
     margin-top: 30px;
   }
+
   .subtitle {
     font-family: $font-text;
     font-weight: 700;
@@ -303,10 +290,12 @@ export default {
     font-size: 25px;
     margin-top: 30px;
   }
+
   p {
     text-align: left;
   }
 }
+
 .about .sectionThree {
   .bloc1,
   .bloc2 {
@@ -316,10 +305,12 @@ export default {
     letter-spacing: 0.08px;
     line-height: 24px;
   }
+
   .bloc1 {
     margin-top: 20px;
   }
 }
+
 .about .sectionFour,
 .about .sectionFive {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(37%, #eddcd5), color-stop(37%, #fffcf5));
@@ -337,6 +328,7 @@ export default {
     text-align: center;
     line-height: 1;
   }
+
   p {
     font-family: $font-text;
     font-size: 20px;
@@ -345,6 +337,7 @@ export default {
     line-height: 24px;
     margin-top: 20px;
   }
+
   .about__north {
     font-family: $font-north;
     font-size: 30px;
@@ -353,6 +346,7 @@ export default {
     color: $olive-color;
     margin-top: 30px;
   }
+
   .image-left,
   .image-right {
     position: relative;
@@ -363,33 +357,40 @@ export default {
       width: 120%;
     }
   }
+
   .image-right img {
     right: 0;
     top: 20%;
   }
+
   .image-left img {
     left: 0;
     top: 35%;
   }
 }
+
 .about .sectionFive {
   background: transparent;
 
   .c-title {
     color: $red-color;
   }
+
   .about__north {
     color: $red-color;
   }
+
   .image-right img {
     right: 0;
     top: 35%;
   }
+
   .image-left img {
     left: 0;
     top: 20%;
   }
 }
+
 .sectionParallax {
   background-image: url('~static/images/about-parallax.jpg');
   background-size: cover;
@@ -400,6 +401,7 @@ export default {
     opacity: 0;
   }
 }
+
 @media (min-width: 1200px) {
   .about .sectionTwo {
 
@@ -411,9 +413,11 @@ export default {
       margin-left: auto;
       margin-right: 0;
     }
+
     &-container {
       padding-top: 50px;
     }
+
     .subtitle {
       margin-bottom: 50px;
       margin-top: 80px;
