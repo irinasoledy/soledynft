@@ -25,7 +25,6 @@
             <v-col class="col-12">
                 <h3 class="p-title-experts">{{ $trans('DetailsProductSet', 'viewLiveProducts') }}</h3>
             </v-col>
-            <experts />
         </v-row>
     </v-container>
 </template>
@@ -34,10 +33,8 @@
 
 import contentApi from '@/api/contentApi'
 import { mapActions, mapGetters } from 'vuex'
-import Experts from '@/components/front/widgets/expertsWidget'
 
 export default {
-    components: {Experts},
     async asyncData({ app, params, store}) {
         let prods = null
         await contentApi.getOutletProducts({

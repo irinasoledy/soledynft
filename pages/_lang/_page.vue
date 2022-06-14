@@ -8,7 +8,7 @@
 
 <script>
 
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
     layout: "default",
