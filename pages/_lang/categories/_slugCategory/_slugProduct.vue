@@ -172,7 +172,7 @@ import { mapGetters } from 'vuex'
 import contentApi from '@/api/contentApi'
 import SliderOneProduct from '@/components/front/sliders/SliderOneProduct.vue'
 import SimilarSlider from '@/components/front/sliders/SimilarCarousel.vue'
-import CartBtn from '@/components/front/cart/cartBtn.vue'
+import CartBtn from '~/components/front/cart/CartBtn.vue'
 import Sizes from '@/components/front/productWidgets/Sizes.vue'
 import Zoom from '@/components/front/productWidgets/Zoom.vue'
 

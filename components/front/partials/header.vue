@@ -30,7 +30,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 import NavLevelOne from '@/components/front/partials/navbars/NavLeveleOne'
 import NavLevelTwo from '@/components/front/partials/navbars/NavLevelTwo'
-import Cart from '@/components/front/cart/cartIcon'
+import Cart from '~/components/front/cart/CartIcon'
 
 export default {
 	name: "Header",

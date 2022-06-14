@@ -110,10 +110,10 @@
 
 import {mapGetters, mapActions} from 'vuex'
 
-import cartBox from '@/components/front/cart/cartBox'
-import cartSummary from '@/components/front/cart/cartSummary'
-import checkOutBox from '@/components/front/cart/checkOutBox'
-import paymentBox from "~/components/front/cart/paymentBox";
+import cartBox from '~/components/front/cart/CartBox'
+import cartSummary from '~/components/front/cart/CartSummary'
+import checkOutBox from '~/components/front/cart/CheckOutBox'
+import paymentBox from "~/components/front/cart/PaymentBox";
 
 export default {
   data() {
