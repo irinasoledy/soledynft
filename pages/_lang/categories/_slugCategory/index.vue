@@ -48,7 +48,6 @@
             <v-col class="col-12">
                 <h3 class="p-title-experts">{{ $trans('DetailsProductSet', 'viewLiveProducts') }}</h3>
             </v-col>
-            <experts />
         </v-row>
     </v-container>
 </template>
@@ -60,10 +59,9 @@ import contentApi from '@/api/contentApi'
 
 import FilterModal from '@/components/front/productWidgets/FilterModal.vue'
 import SortModal from '@/components/front/productWidgets/SortModal.vue'
-import Experts from '@/components/front/widgets/expertsWidget'
 
 export default {
-    components: {FilterModal, SortModal, Experts},
+    components: {FilterModal, SortModal},
 	async asyncData({ app, params, store }) {
 		let categ = null
 		await contentApi.getCategory({lang: store.state.lang.lang, alias: params.slugCategory, currency: store.state.currency.id}, data => {

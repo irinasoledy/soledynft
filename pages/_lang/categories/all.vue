@@ -32,7 +32,6 @@
             <v-col class="col-12">
                 <h3 class="p-title-experts">{{ $trans('DetailsProductSet', 'viewLiveProducts') }}</h3>
             </v-col>
-            <experts />
         </v-row>
     </v-container>
 </template>
@@ -41,13 +40,12 @@
 
 import { mapActions, mapGetters } from 'vuex'
 import contentApi from '@/api/contentApi'
-import Experts from '@/components/front/widgets/expertsWidget'
 
 import FilterModal from '@/components/front/productWidgets/FilterModal.vue'
 import SortModal from '@/components/front/productWidgets/SortModal.vue'
 
 export default {
-    components: {FilterModal, SortModal, Experts},
+    components: {FilterModal, SortModal},
 	async asyncData({ app, params, store }) {
 		let prods = null
 		await contentApi.getAllProducts({lang: store.state.lang.lang, currency: store.state.currency.id}, data => {

@@ -44,7 +44,6 @@ import Sizes from '@/components/front/productWidgets/Sizes.vue'
 import Colors from '@/components/front/productWidgets/Colors.vue'
 import Zoom from '@/components/front/productWidgets/Zoom.vue'
 import Experts from '@/components/front/widgets/expertsWidget'
-
 import contentApi from '@/api/contentApi'
 
 export default {
