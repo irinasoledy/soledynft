@@ -78,7 +78,7 @@
 <script>
 
 import {mapGetters, mapActions} from 'vuex'
-import crmApi from '@/api/crmApi'
+// import crmApi from '@/api/crmApi'
 
 export default {
     data() {
@@ -113,7 +113,7 @@ export default {
     computed: mapGetters({
         cart: 'cart/getCart',
         order: 'cart/getOrder',
-        user: 'chat/getUser',
+        // user: 'chat/getUser',
         countries: 'getCountries',
         country: 'getCountry',
     }),

@@ -262,7 +262,7 @@
 
 import {mapActions} from "vuex";
 import sidebar from '@/components/front/partials/nav-cabinet'
-import crmApi from "@/api/crmApi";
+// import crmApi from "@/api/crmApi";
 
 export default {
   middleware: ['user'],
@@ -328,7 +328,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      editUserAvatar: 'admin/editUserAvatar',
+      // editUserAvatar: 'admin/editUserAvatar',
     }),
     async submitFormData() {
       if (this.$refs.formGeneralData.validate()) {
@@ -357,10 +357,10 @@ export default {
       formData.append("file", this.formAvatar.selectedFile)
       formData.append("id", this.$auth.user._id)
 
-      this.editUserAvatar({formData, id: this.$auth.user._id}).then(user => {
-        this.$auth.user.avatar = user.avatar
-        this.formAvatar.avatar = user.avatar
-      })
+      // this.editUserAvatar({formData, id: this.$auth.user._id}).then(user => {
+      //   this.$auth.user.avatar = user.avatar
+      //   this.formAvatar.avatar = user.avatar
+      // })
     },
     getInitials(user) {
       const name = user.name

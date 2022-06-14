@@ -158,7 +158,7 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   layout: "default",
@@ -182,15 +182,9 @@ export default {
     trans: 'getTranslations'
   }),
   mounted() {
-    this.setChatBotmessage(this.$trans('General', 'botMessageTemplateAboutExperts'))
     this.title = this.$trans('PageNames', 'aboutSeoTitle')
     this.description = this.$trans('PageNames', 'aboutSeoDesc')
-  },
-  methods: {
-    ...mapActions({
-      setChatBotmessage: 'chat/setChatBotmessage'
-    })
-  },
+  }
 }
 </script>
 

@@ -98,7 +98,7 @@ export default {
         language: 'getLanguage',
         currency: 'getCurrency',
         cart: 'cart/getCart',
-        user: 'chat/getUser',
+        // user: 'chat/getUser',
         userCartId: 'cart/getUserCartId'
     }),
     mounted() {

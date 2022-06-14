@@ -262,17 +262,13 @@ export default {
   }),
   computed: mapGetters({
     trans: 'getTranslations',
-    user: 'chat/getUser',
+    // user: 'chat/getUser',
   }),
   mounted() {
-    this.setChatBotmessage(this.$trans('General', 'botMessageTemplateContacts'))
     this.title = this.$trans('PageNames', 'defaultPageSeoTitle')
     this.description = this.$trans('PageNames', 'defaultPageSeoDesc')
   },
   methods: {
-    ...mapActions({
-      setChatBotmessage: 'chat/setChatBotmessage'
-    }),
     submitFeedback() {
       if (this.$refs.form.validate()) {
         this.form.guestId = this.user._id

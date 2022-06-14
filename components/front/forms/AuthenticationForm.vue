@@ -140,7 +140,7 @@
 
 <script>
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 import LoginForm from '@/components/front/forms/LoginForm'
 import RegisterForm from '@/components/front/forms/RegisterForm'
@@ -164,10 +164,10 @@ export default {
         languages: 'getLanguages',
         language: 'getLanguage',
         trans: 'getTranslations',
-        user: 'chat/getUser',
-        remoteLogin: 'authFront/getRemoteLogin',
-        userToLogin: 'authFront/getUserToLogin',
-        crmUser: 'authCRM/getUser'
+        // user: 'chat/getUser',
+        // remoteLogin: 'authFront/getRemoteLogin',
+        // userToLogin: 'authFront/getUserToLogin',
+        // crmUser: 'authCRM/getUser'
     }),
     watch: {
         finish (newVal) {

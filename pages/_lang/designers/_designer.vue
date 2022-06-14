@@ -97,12 +97,12 @@ export default {
   methods: {
     ...mapActions({
       setDefaultChangedEmployee: 'setDefaultChangedEmployee',
-      setDefaultReject: 'call/setDefaultReject',
-      setDefaultResponse: 'call/setDefaultResponse',
-      setClientAsUser: 'chat/setClientAsUser',
-      setUser: 'chat/setUser',
-      setInterlocutor: 'dialog/setInterlocutor',
-      initCall: 'dialog/initCall',
+      // setDefaultReject: 'call/setDefaultReject',
+      // setDefaultResponse: 'call/setDefaultResponse',
+      // setClientAsUser: 'chat/setClientAsUser',
+      // setUser: 'chat/setUser',
+      // setInterlocutor: 'dialog/setInterlocutor',
+      // initCall: 'dialog/initCall',
     }),
   }
 }

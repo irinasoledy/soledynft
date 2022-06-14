@@ -96,7 +96,7 @@ export default {
     }),
     computed: mapGetters({
         trans: 'getTranslations',
-        user: 'chat/getUser',
+        // user: 'chat/getUser',
     }),
     methods: {
         submit () {
