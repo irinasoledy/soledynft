@@ -68,7 +68,7 @@
 <script>
 
 import { mapGetters, mapActions } from 'vuex'
-import appointmentForm from "@/components/front/forms/appointmentForm.vue"
+import appointmentForm from "~/components/front/forms/AppointmentForm.vue"
 
 export default {
     components: { appointmentForm },
