@@ -1,5 +1,5 @@
 {
-  "name": "Soledy NFT",
+  "name": "SoledyNFT",
   "version": "1.0.0",
   "description": "soledynft",
   "author": "Tudor Iovita",
@@ -52,7 +52,11 @@
     "vue-slick": "^1.1.16",
     "vue-slick-carousel": "^1.0.6",
     "vue-socket.io": "^3.0.7",
-    "vue-video-player": "^5.0.2"
+    "vue-video-player": "^5.0.2",
+    "near-api-js": "^0.44.2",
+    "near-cli": "^3.3.1",
+    "near-sdk-as": "^3.2.3",
+    "near-workspaces": "^2.0.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0",
