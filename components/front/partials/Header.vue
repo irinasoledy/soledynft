@@ -30,7 +30,7 @@
 
 <script>
 
-import {mapGetters, mapActions} from 'vuex'
+import { mapGetters } from 'vuex'
 
 import NavLevelOne from '@/components/front/partials/navbars/NavLeveleOne'
 import NavLevelTwo from '@/components/front/partials/navbars/NavLevelTwo'

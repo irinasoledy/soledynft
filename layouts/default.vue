@@ -10,6 +10,7 @@
 
 <script>
 
+import { mapGetters } from 'vuex';
 import Header from '~/components/front/partials/Header';
 import Footer from '~/components/front/partials/Footer';
 
@@ -17,7 +18,16 @@ export default {
   components: {
     Header,
     Footer
-  }
+  },
+  mounted() {
+    console.log(this.contract)
+  },
+  computed: mapGetters({
+    contract: 'near/getContract',
+    currentUser: 'near/getCurrentUser',
+    nearConfig: 'near/getNearConfig',
+    walletConnection: 'near/getWalletConnection',
+  }),
 };
 </script>
 

@@ -2,9 +2,6 @@ import contentApi from '@/api/contentApi'
 import userApi from '@/api/userApi'
 
 export const state = () => ({
-    // userCartId: null,
-    // cartProducts: [],
-    // cartSubproducts: [],
     langs: [
         {id: 38, lang: 'ro', default: 1, description: "Romana", active: 1},
         {id: 2, lang: 'en', active: 0, name: 'EN'},
@@ -76,15 +73,11 @@ export const mutations = {
         state.countries = data.countries
         state.currencies = data.currencies
     },
-    // SET_CART_ITEMS(state, data) {
-    //     state.cartProducts = data.products
-    //     state.cartSubproducts = data.subproducts
-    // },
     SOCKET_pingUsers(state) {
         state.ping = !state.ping
     },
     SOCKET_refreshUserList(state, data) {
-        this.commit('admin/SET_CLIENTS_ACTIONS', data.actions)
+        // this.commit('admin/SET_CLIENTS_ACTIONS', data.actions)
         this.commit('SET_EXPERTS', data.users)
     },
     setTest(state, param) {
@@ -105,13 +98,6 @@ export const mutations = {
     },
     SET_STATIC_PAGES(state, pages) {
         state.pages = pages
-    },
-    SET_SERVICES(state, data) {
-        // state.services = data.services
-        // state.allServices = data.servicesAll
-        // state.promotions = data.promotions
-        // state.pages = data.pages
-        // state.banners = data.banners
     },
     SET_DEFAULT_LANG(state, id) {
         state.lang = state.langs.find((lang) => lang.id === id)
@@ -153,52 +139,49 @@ export const mutations = {
 
 export const actions = {
 
-    async nuxtServerInit({state, commit}, { app }) {
+    async nuxtServerInit({state, commit}, {app}) {
         if (!app.$cookies.get('user-cart-id')) {
             const uniqueID = Date.now().toString(36)
             app.$cookies.set('user-cart-id', uniqueID, {
                 path: '/',
                 maxAge: 60 * 60 * 24 * 7
             })
-
             commit('cart/SET_USER_CART_ID', uniqueID)
-        }else{
+        } else {
             commit('cart/SET_USER_CART_ID', app.$cookies.get('user-cart-id'))
         }
-
         const currentLang = this.$router.history.current.params.lang
-
         if (currentLang) {
             const findLang = state.langs.find(lang => lang.lang === currentLang)
             if (findLang) {
                 commit('SET_DEFAULT_LANG', findLang.id)
             }
         }
-
-        // console.log(state.cart.userCartId);
-
         await contentApi.getInitSettings(data => commit('SET_SETTINGS', data))
         await contentApi.getCartItems(state.cart.userCartId, data => commit('cart/SET_CART_ITEMS', data))
-
         await contentApi.getCategories(state.lang.lang, data => commit('SET_CATEGORIES', data))
         await contentApi.getCollections(state.lang.lang, data => commit('SET_COLLECTIONS', data))
-        await contentApi.getPromotions({lang: state.lang.lang, currency: state.currency.id}, data => commit('SET_PROMOTIONS', data))
+        await contentApi.getPromotions({
+            lang: state.lang.lang,
+            currency: state.currency.id
+        }, data => commit('SET_PROMOTIONS', data))
 
         await contentApi.getTranslations(state.lang.lang, data => commit('SET_TRANSALATIONS', data))
         await contentApi.getBanners(state.lang.lang, response => commit('SET_BANNERS', response))
         await contentApi.getStaticPages(state.lang.lang, response => commit('SET_STATIC_PAGES', response))
-
-        // await contentApi.getInitData(state.lang.lang, data => commit('SET_SERVICES', data))
 
         commit('SET_ENV_API', process.env.API)
     },
 
     async changeSettings({state, commit}, data) {
         commit('SET_DEFAULT_LANG', data.lang)
-        
+
         await contentApi.getCategories(state.lang.lang, data => commit('SET_CATEGORIES', data))
         await contentApi.getCollections(state.lang.lang, data => commit('SET_COLLECTIONS', data))
-        await contentApi.getPromotions({lang: state.lang.lang, currency: data.currency}, data => commit('SET_PROMOTIONS', data))
+        await contentApi.getPromotions({
+            lang: state.lang.lang,
+            currency: data.currency
+        }, data => commit('SET_PROMOTIONS', data))
 
         await contentApi.getTranslations(state.lang.lang, (response) => commit('SET_TRANSALATIONS', response))
         await contentApi.getBanners(state.lang.lang, (response) => commit('SET_BANNERS', response))
@@ -250,9 +233,6 @@ export const getters = {
 
     getCurrencies: state => state.currencies,
     getCurrency: state => state.currency,
-
-    // getCartsProducts: state => state.cartProducts,
-    // getCartsSubproducts: state => state.cartSubproducts,
 
     getTranslations: state => state.translations,
     getChangedEmployee: state => state.changedEmployee,
