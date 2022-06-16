@@ -10,7 +10,7 @@
 
 <script>
 
-import { mapGetters } from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import Header from '~/components/front/partials/Header';
 import Footer from '~/components/front/partials/Footer';
 
@@ -20,6 +20,7 @@ export default {
     Footer
   },
   mounted() {
+    this.initContract();
     console.log(this.contract)
   },
   computed: mapGetters({
@@ -28,6 +29,11 @@ export default {
     nearConfig: 'near/getNearConfig',
     walletConnection: 'near/getWalletConnection',
   }),
+  methods: {
+    ...mapActions({
+      initContract : 'near/initContract'
+    }),
+  }
 };
 </script>
 

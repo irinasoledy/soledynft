@@ -5,25 +5,41 @@ export const state = () => ({
     contract: {},
     currentUser: false,
     nearConfig: {},
-    walletConnection: {}
+    walletConnection: ''
 })
 
 export const mutations = {
-    async setContract(state) {
+    setContract(state, contract) {
+        state.contract = contract;
+    },
+    setCurrentUser(state, currentUser) {
+        state.currentUser = currentUser;
+    },
+    setNearConfig(state, nearConfig) {
+        state.nearConfig = nearConfig;
+    },
+    setWalletConnection(state, walletConnection) {
+        state.walletConnection = walletConnection;
+    }
+}
+
+export const actions = {
+    async initContract({commit}) {
         const nearConfig = getConfig(process.env.NEAR_ENV || 'testnet');
         const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore();
-        const near = await nearAPI.connect({keyStore, ...nearConfig});
+        const near = await nearAPI.connect({keyStore: keyStore, ...nearConfig});
+
         const walletConnection = new nearAPI.WalletConnection(near);
 
-        let currentUser;
         if (walletConnection.getAccountId()) {
-            currentUser = {
-                accountId: walletConnection.getAccountId(),
-                balance: (await walletConnection.account().state()).amount,
+            const currentUser = {
+                accountId: state.walletConnection.getAccountId(),
+                balance: (await state.walletConnection.account().state()).amount,
             };
+            commit('setCurrentUser', currentUser);
         }
 
-        state.contract = await new nearAPI.Contract(
+        const contract = await new nearAPI.Contract(
             walletConnection.account(),
             nearConfig.contractName,
             {
@@ -32,16 +48,9 @@ export const mutations = {
                 sender: walletConnection.getAccountId(),
             }
         );
-        state.currentUser = currentUser;
-        state.nearConfig = nearConfig;
-        state.walletConnection = walletConnection;
-        console.log(currentUser, nearConfig, walletConnection)
-    },
-}
-
-export const actions = {
-    initContract({commit}) {
-        commit('setContract')
+        commit('setContract', contract);
+        commit('setNearConfig', nearConfig);
+        commit('setWalletConnection', walletConnection);
     },
 }
 
