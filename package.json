@@ -1,5 +1,5 @@
 {
-  "name": "Soledy NFT",
+  "name": "SoledyNFT",
   "version": "1.0.0",
   "description": "soledynft",
   "author": "Tudor Iovita",
@@ -8,7 +8,10 @@
     "dev": "PORT=3002 cross-env NODE_ENV=development nodemon server/index.js --watch server",
     "build": "PORT=3002 nuxt build",
     "start": "PORT=3002 cross-env NODE_ENV=production node server/index.js",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "build:contract": "asb",
+    "build1": "yarn build:contract",
+    "deploy": "yarn build1 && near deploy"
   },
   "dependencies": {
     "@nuxtjs/auth-next": "5.0.0-1617968180.f699074",
@@ -52,7 +55,14 @@
     "vue-slick": "^1.1.16",
     "vue-slick-carousel": "^1.0.6",
     "vue-socket.io": "^3.0.7",
-    "vue-video-player": "^5.0.2"
+    "vue-video-player": "^5.0.2",
+    "near-api-js": "^0.44.2",
+    "near-cli": "^3.3.1",
+    "near-sdk-as": "^3.2.3",
+    "near-workspaces": "^2.0.0",
+    "ava": "^4.3.0",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0",

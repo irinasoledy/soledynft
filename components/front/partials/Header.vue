@@ -8,7 +8,10 @@
         <v-img src="/images/logo.png" alt="logo" width="100"/>
       </NuxtLink>
       <v-spacer/>
-      <cart/>
+
+      <NearAuth/>
+
+      <!--<cart/>-->
     </v-app-bar>
 
     <v-navigation-drawer
@@ -30,18 +33,20 @@
 
 <script>
 
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters} from 'vuex'
 
 import NavLevelOne from '@/components/front/partials/navbars/NavLeveleOne'
 import NavLevelTwo from '@/components/front/partials/navbars/NavLevelTwo'
 import Cart from '~/components/front/cart/CartIcon'
+import NearAuth from "~/components/front/near/NearAuth";
 
 export default {
   name: "Header",
   components: {
     NavLevelOne,
     NavLevelTwo,
-    Cart
+    Cart,
+    NearAuth
   },
   computed: mapGetters({
     categories: 'getCategories',
@@ -75,3 +80,4 @@ export default {
   }
 }
 </script>
+

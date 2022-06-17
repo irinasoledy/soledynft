@@ -16,7 +16,7 @@
                 {{ currency.abbr }} /
                 {{ language.lang }} /
                 <img class="ml-1"
-                     :src="`https://back.soledy.com/images/flags/24x24/${country.flag}`">
+                     :src="`https://back.soledynft.shop/images/flags/24x24/${country.flag}`">
               </span>
               <v-spacer></v-spacer>
               |
@@ -77,14 +77,11 @@
       </v-list-item-content>
     </v-list-item>
     <v-list-item>
+
       <v-list-item-content>
-        <v-btn block outlined color="primary" :to="`/${language.lang}/account`" v-if="$auth.loggedIn">
-          Account
-        </v-btn>
-        <v-btn block outlined color="primary" @click="$nuxt.$emit('openLoginDialog')" v-else>
-          {{ $trans('ContactsAndForms', 'authSignIn') }}
-        </v-btn>
+        <NearAuth/>
       </v-list-item-content>
+
     </v-list-item>
     <v-list-group :value="false">
       <template v-slot:activator>
@@ -134,11 +131,13 @@
 import {mapGetters} from 'vuex'
 import LanguageModal from '@/components/front/forms/LanguageModal'
 import AuthModal from '@/components/front/forms/AuthenticationForm'
+import NearAuth from "@/components/front/near/NearAuth";
 
 export default {
   components: {
     LanguageModal,
-    AuthModal
+    AuthModal,
+    NearAuth
   },
   data() {
     return {

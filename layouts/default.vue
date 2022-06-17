@@ -10,6 +10,7 @@
 
 <script>
 
+import {mapActions, mapGetters} from 'vuex';
 import Header from '~/components/front/partials/Header';
 import Footer from '~/components/front/partials/Footer';
 
@@ -17,6 +18,20 @@ export default {
   components: {
     Header,
     Footer
+  },
+  mounted() {
+    this.initContract();
+  },
+  computed: mapGetters({
+    contract: 'near/getContract',
+    currentUser: 'near/getCurrentUser',
+    nearConfig: 'near/getNearConfig',
+    walletConnection: 'near/getWalletConnection',
+  }),
+  methods: {
+    ...mapActions({
+      initContract : 'near/initContract'
+    }),
   }
 };
 </script>
