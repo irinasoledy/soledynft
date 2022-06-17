@@ -1,8 +1,8 @@
-import getConfig from '@/config.js';
+import getConfig from '@/src/config.js';
 import * as nearAPI from 'near-api-js';
 
 export const state = () => ({
-    contract: {},
+    contract: false,
     currentUser: false,
     nearConfig: {},
     walletConnection: ''
@@ -33,8 +33,8 @@ export const actions = {
 
         if (walletConnection.getAccountId()) {
             const currentUser = {
-                accountId: state.walletConnection.getAccountId(),
-                balance: (await state.walletConnection.account().state()).amount,
+                accountId: walletConnection.getAccountId(),
+                balance: (await walletConnection.account().state()).amount,
             };
             commit('setCurrentUser', currentUser);
         }

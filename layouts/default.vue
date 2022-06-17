@@ -21,7 +21,6 @@ export default {
   },
   mounted() {
     this.initContract();
-    console.log(this.contract)
   },
   computed: mapGetters({
     contract: 'near/getContract',

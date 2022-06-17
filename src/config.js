@@ -1,7 +1,7 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME || 'iovitatudor.testnet';
+const CONTRACT_NAME = process.env.CONTRACT_NAME || 'soledy-test.testnet';
 
 function getConfig(env) {
-    switch(env) {
+    switch (env) {
         case 'mainnet':
             return {
                 networkId: 'mainnet',
@@ -10,8 +10,8 @@ function getConfig(env) {
                 walletUrl: 'https://wallet.near.org',
                 helperUrl: 'https://helper.mainnet.near.org'
             };
-        // This is an example app so production is set to testnet.
-        // You can move production to mainnet if that is applicable.
+// This is an example app so production is set to testnet.
+// You can move production to mainnet if that is applicable.
         case 'production':
         case 'development':
         case 'testnet':

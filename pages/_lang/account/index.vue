@@ -324,7 +324,7 @@ export default {
     }
   },
   mounted() {
-    this.getDetails()
+    // this.getDetails()
   },
   methods: {
     ...mapActions({

@@ -78,7 +78,9 @@
     </v-list-item>
     <v-list-item>
 
-    <NearAuth/>
+      <v-list-item-content>
+        <NearAuth/>
+      </v-list-item-content>
 
     </v-list-item>
     <v-list-group :value="false">
