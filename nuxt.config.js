@@ -12,7 +12,6 @@ module.exports = {
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
             {hid: 'description', name: 'description', content: 'soledy.com'},
-            // {name: 'facebook-domain-verification', content: 'zhd8ab5sq0dcog9zbvmxy74zgsdaim'}
         ],
         link: [
             {rel: 'icon', type: 'image/x-icon', href: 'https://soledynft.shop/images/favicon.png'},
@@ -34,7 +33,8 @@ module.exports = {
     */
     css: [
         'font-awesome/css/font-awesome.css',
-        "~assets/global.scss"
+        "~assets/global.scss",
+        "~assets/styles.scss"
     ],
     /*
     ** Plugins to load before mounting the App
