@@ -30,7 +30,7 @@ export default {
   }),
   methods: {
     ...mapActions({
-      initContract : 'near/initContract'
+      initContract: 'near/initContract'
     }),
   }
 };
