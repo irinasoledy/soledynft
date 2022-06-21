@@ -66,6 +66,7 @@
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0",
-    "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4",
+    "big.js": "^6.2.0"
   }
 }

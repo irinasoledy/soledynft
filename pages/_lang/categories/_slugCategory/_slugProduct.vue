@@ -25,7 +25,7 @@
 
               <sizes :product="product" v-if="product.subproducts.length"/>
 
-              <cart-btn :product="product" type="prod" v-else></cart-btn>
+              <near-buy-sub-product-btn :product="product" v-else></near-buy-sub-product-btn>
 
               <div class="buyOn">
                 <div class="buyOn__header">
@@ -175,9 +175,11 @@ import SimilarSlider from '@/components/front/sliders/SimilarCarousel.vue'
 import CartBtn from '~/components/front/cart/CartBtn.vue'
 import Sizes from '@/components/front/productWidgets/Sizes.vue'
 import Zoom from '@/components/front/productWidgets/Zoom.vue'
+import NearBuyProductBtn from "~/components/front/near/NearBuyProductBtn"
+import NearBuySubProductBtn from "~/components/front/near/NearBuySubProductBtn";
 
 export default {
-  components: {SliderOneProduct, SimilarSlider, Sizes, Zoom, CartBtn},
+  components: {NearBuySubProductBtn, SliderOneProduct, SimilarSlider, Sizes, Zoom, CartBtn, NearBuyProductBtn},
   async asyncData({app, params, store}) {
     let prod = null
     let similars1 = null
