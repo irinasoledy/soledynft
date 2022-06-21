@@ -25,7 +25,9 @@
 
               <sizes :product="product" v-if="product.subproducts.length"/>
 
-              <near-buy-sub-product-btn :product="product" v-else></near-buy-sub-product-btn>
+              <div class="mt-4" v-else>
+                <near-buy-sub-product-btn :product="product" ></near-buy-sub-product-btn>
+              </div>
 
               <div class="buyOn">
                 <div class="buyOn__header">
@@ -168,7 +170,7 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import contentApi from '@/api/contentApi'
 import SliderOneProduct from '@/components/front/sliders/SliderOneProduct.vue'
 import SimilarSlider from '@/components/front/sliders/SimilarCarousel.vue'

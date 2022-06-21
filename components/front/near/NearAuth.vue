@@ -1,7 +1,8 @@
 <template>
   <div class="header-account" v-if="contract">
-    <v-btn outlined color="primary" @click="signIn" v-if="!currentUser">
-      {{ $trans('ContactsAndForms', 'authSignIn') }}
+    <v-btn outlined color="primary" @click="signIn" block v-if="!currentUser">
+      <v-icon v-if="icon">{{ icon }}</v-icon>
+      {{ title }}
     </v-btn>
 
     <div class="near-account">
@@ -28,6 +29,7 @@ import {mapActions, mapGetters} from 'vuex';
 
 export default {
   name: "NearAuth",
+  props: ['title', 'icon'],
   computed: mapGetters({
     contract: 'near/getContract',
     currentUser: 'near/getCurrentUser',

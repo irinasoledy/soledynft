@@ -1,16 +1,21 @@
 <template>
-  <v-btn color="body" class="mt-4" block @click="buy">
-    <v-icon>mdi-cart</v-icon>
-    Buy with Near
-  </v-btn>
+  <div>
+    <v-btn color="primary" class="mt-4" block @click="buy" v-if="currentUser">
+      <v-icon>mdi-cart</v-icon>
+      Buy with Near
+    </v-btn>
+    <near-auth :title="'Buy with Near'" :icon="'mdi-cart'" v-else></near-auth>
+  </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from 'vuex';
 import Big from 'big.js';
+import NearAuth from "~/components/front/near/NearAuth";
 
 export default {
   name: "NearBuySubProductBtn",
+  components: {NearAuth},
   props: ['subProduct', 'product'],
   data() {
     return {
@@ -54,5 +59,7 @@ export default {
 </script>
 
 <style scoped>
-
+.header-account {
+  margin-top: 20px;
+}
 </style>

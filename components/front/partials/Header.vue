@@ -9,7 +9,7 @@
       </NuxtLink>
       <v-spacer/>
 
-      <NearAuth/>
+      <NearAuth :title="'Sign In'"/>
 
       <!--<cart/>-->
     </v-app-bar>
