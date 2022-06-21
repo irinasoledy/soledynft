@@ -14,7 +14,6 @@ export default {
   props: ['subProduct', 'product'],
   data() {
     return {
-      message: '',
       user: '',
       price: 0,
     }
@@ -39,14 +38,13 @@ export default {
       return Math.floor(Math.random() * (max - min)) + min;
     },
     buy() {
-      this.message = this.product.translation.name;
       this.user = "User " + this.getRandomInt(12000, 90000);
       this.price = this.product.main_price.price / 100;
 
       const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
       this.contract.addMessage(
-          {productName: this.message, userName: this.user, price: parseFloat(this.price).toFixed(2)},
+          {productName: this.product.translation.name, userName: this.user, price: parseFloat(this.price).toFixed(2)},
           BOATLOAD_OF_GAS,
           Big(this.price || '0').times(10 ** 24).toFixed()
       )

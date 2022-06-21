@@ -24,6 +24,7 @@
       <v-icon>mdi-cart</v-icon>Buy with Near
     </v-btn>
   </div>
+
 </template>
 
 <script>
