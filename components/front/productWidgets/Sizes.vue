@@ -10,7 +10,7 @@
         <div class="size__item" v-for="subproduct in product.subproducts" :key="subproduct.id">
           <label class="size__radio">
             <input type="radio" name="size" :value="subproduct.parameter_value.id"
-                   @change="setSubproduct(subproduct.id)"/>
+                   @change="setSubproduct(subproduct)"/>
             <span class="size__mark">{{ subproduct.parameter_value.translation.name }}</span>
           </label>
         </div>
@@ -18,18 +18,22 @@
       </div>
     </div>
     <p class="alert-danger" v-if="alertChangeSize">{{ alertChangeSize }}</p>
-    <v-btn color="body" class="mt-4" block @click="addToCart()">
-      <v-icon>mdi-cart</v-icon>
-      Add to cart
+
+    <near-buy-sub-product-btn :sub-product="subProduct" :product="product" v-if="subProduct"></near-buy-sub-product-btn>
+    <v-btn color="body" class="mt-4" block v-else @click="setAlertChangeSize">
+      <v-icon>mdi-cart</v-icon>Buy with Near
     </v-btn>
   </div>
+
 </template>
 
 <script>
 
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters, mapActions} from 'vuex';
+import NearBuySubProductBtn from "~/components/front/near/NearBuySubProductBtn";
 
 export default {
+  components: {NearBuySubProductBtn},
   props: ['product'],
   computed: mapGetters({
     cart: 'cart/getCart',
@@ -40,13 +44,16 @@ export default {
   data() {
     return {
       alertChangeSize: null,
-      subproductId: null,
+      subProduct: null,
     }
   },
   methods: {
     ...mapActions({
       appendToCart: 'cart/appendToCart',
     }),
+    setAlertChangeSize() {
+      this.alertChangeSize = "Alegeti o marime!"
+    },
     addToCart() {
       this.alertChangeSize = null
       if (this.subproductId) {
@@ -61,9 +68,9 @@ export default {
         this.alertChangeSize = "Alegeti o marime!"
       }
     },
-    setSubproduct(subproductId) {
+    setSubproduct(subProduct) {
       this.alertChangeSize = null
-      this.subproductId = subproductId
+      this.subProduct = subProduct
     }
   }
 }

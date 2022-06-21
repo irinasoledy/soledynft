@@ -37,7 +37,7 @@ export const state = () => ({
     currencies: {},
     currency: {
         "id": 5,
-        "abbr": "EUR",
+        "abbr": "NEAR",
         "type": "1",
         "rate": "1.00",
         "active": 1,

@@ -131,18 +131,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.thank-you-area {
-  min-height: 500px;
-  margin-top: 150px;
-}
-
-.full-width {
-  width: 100% !important;
-}
-
-.cart-image img {
-  max-width: 50px;
-}
-</style>

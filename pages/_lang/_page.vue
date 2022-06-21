@@ -8,7 +8,7 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   layout: "default",
@@ -48,20 +48,3 @@ export default {
   })
 }
 </script>
-
-<style lang="scss">
-.static-page-content {
-  color: $font-color-root;
-
-  h4 {
-    font-size: 25px;
-    margin: 10px 0;
-  }
-
-  ul {
-    li {
-      margin-left: 20px;
-    }
-  }
-}
-</style>

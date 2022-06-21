@@ -61,12 +61,20 @@
       </v-col>
 
       <v-col class="col-12">
-        <p v-if="sizeAllert" class="alert-danger">
+        <p v-if="sizeAlert" class="alert-danger">
           {{ $trans('DetailsProductSet', 'selectSizeProdsSet') }}
         </p>
-        <v-btn color="primary" @click="addToCart()">
-          Add items to bag
+
+        <near-buy-set-btn :collectionName="set.translation.name"
+                          :price="totalPrice"
+                          v-if="readyToBuy">
+        </near-buy-set-btn>
+
+        <v-btn color="body" class="mt-4" block @click="addToCart()" v-else>
+          <v-icon>mdi-cart</v-icon>
+          Buy with Near
         </v-btn>
+
       </v-col>
 
     </v-row>
@@ -76,14 +84,17 @@
 <script>
 import {mapActions, mapGetters} from 'vuex'
 import Sizes from '@/components/front/productWidgets/Sizes.vue'
+import NearBuySetBtn from "~/components/front/near/NearBuySetBtn";
 
 export default {
   props: ['set'],
-  components: {Sizes},
+  components: {Sizes, NearBuySetBtn},
   data() {
     return {
       checkedSizes: [],
-      sizeAllert: null,
+      sizeAlert: null,
+      totalPrice: 0,
+      readyToBuy: false
     }
   },
   computed: mapGetters({
@@ -97,12 +108,13 @@ export default {
       appendToCart: 'cart/appendToCart',
     }),
     setSubproduct(product, subproduct) {
-      this.sizeAllert = null
+      this.sizeAlert = null
+      this.readyToBuy = true
       this.checkedSizes = this.checkedSizes.filter(item => item.productId != product)
       this.checkedSizes.push({productId: product, subproductId: subproduct})
     },
     addToCart() {
-      this.sizeAllert = null
+      this.sizeAlert = null
       const checkSubproducts = this.set.set_products.find(item => {
         if (item.product.subproducts.length) {
           return true
@@ -110,29 +122,32 @@ export default {
       })
       if (checkSubproducts) {
         if (this.checkedSizes.length === this.set.set_products.length) {
-          this.checkedSizes.forEach(async item => {
-            await this.appendToCart({
-              userId: this.userCartId,
-              productId: item.productId,
-              subproductId: item.subproductId,
-              setId: this.set.id,
-              lang: this.language.lang,
-              currency: this.currency.id
-            })
-          })
+          this.readyToBuy = true
+          // this.checkedSizes.forEach(async item => {
+          // await this.appendToCart({
+          //   userId: this.userCartId,
+          //   productId: item.productId,
+          //   subproductId: item.subproductId,
+          //   setId: this.set.id,
+          //   lang: this.language.lang,
+          //   currency: this.currency.id
+          // })
+          // })
         } else {
-          this.sizeAllert = "Alege marimea!"
+          this.readyToBuy = false
+          this.sizeAlert = "Alege marimea!"
         }
       } else {
-        this.set.set_products.forEach(async item => {
-          await this.appendToCart({
-            userId: this.userCartId,
-            productId: item.product.id,
-            setId: this.set.id,
-            lang: this.language.lang,
-            currency: this.currency.id
-          })
-        })
+        this.readyToBuy = true
+        // this.set.set_products.forEach(async item => {
+        // await this.appendToCart({
+        //   userId: this.userCartId,
+        //   productId: item.product.id,
+        //   setId: this.set.id,
+        //   lang: this.language.lang,
+        //   currency: this.currency.id
+        // })
+        // })
       }
     },
     getTotalSetPrice(products) {
@@ -140,7 +155,8 @@ export default {
       for (let i = 0; i < products.length; i++) {
         price += parseInt(products[i].product.personal_price.price)
       }
-      return parseFloat(price).toFixed(2)
+      this.totalPrice = parseFloat(price).toFixed(2)
+      return this.totalPrice
     },
   }
 }

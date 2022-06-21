@@ -19,10 +19,12 @@
         <div class="category-container">
           <div class="filter">
             <v-btn large @click="openFilterModal">
-              <v-icon color="title" class="mr-2">mdi-filter</v-icon>Filter
+              <v-icon color="title" class="mr-2">mdi-filter</v-icon>
+              Filter
             </v-btn>
             <v-btn large @click="openSortModal">
-              <v-icon color="title" class="mr-2">mdi-sort</v-icon>Sort
+              <v-icon color="title" class="mr-2">mdi-sort</v-icon>
+              Sort
             </v-btn>
           </div>
 
@@ -55,7 +57,7 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import contentApi from '@/api/contentApi'
 import FilterModal from '@/components/front/productWidgets/FilterModal.vue'
 import SortModal from '@/components/front/productWidgets/SortModal.vue'
@@ -136,53 +138,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.v-navigation-drawer {
-  width: 100vw !important;
-  max-width: 450px !important;
-}
-
-.category-container {
-  position: relative;
-}
-
-.filter {
-  display: flex;
-  justify-content: space-around;
-  padding: 20px 0;
-  margin-bottom: 20px;
-  background: $bcg-body;
-  position: sticky;
-  top: 56px;
-  margin-left: -15px;
-  margin-right: -15px;
-  z-index: 4;
-}
-
-.product {
-  &__name,
-  &__price {
-    display: block;
-    font-family: $font-text;
-    font-size: 14px;
-    color: $olive-color;
-    letter-spacing: 0;
-    text-align: center;
-    line-height: 1.2;
-    margin-top: 10px;
-    margin-bottom: 0;
-  }
-}
-
-@media (min-width: 1200px) {
-  .filter {
-    top: 63px;
-    justify-content: center;
-
-    .v-btn {
-      margin: 0 20px;
-    }
-  }
-}
-</style>

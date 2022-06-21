@@ -1,4 +1,4 @@
-export default ({ store, app }, inject) => {
+export default ({store, app}, inject) => {
 
     inject('banner', (key, isMobile = false) => {
         const banners = store.state.banners
@@ -12,7 +12,7 @@ export default ({ store, app }, inject) => {
 
             if (!isMobile) {
                 return `${process.env.API}/images/banners/${banner.desktop_src}`
-            }else{
+            } else {
                 return `${process.env.API}/images/banners/${banner.mobile_src}`
             }
         }

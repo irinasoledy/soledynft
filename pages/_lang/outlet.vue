@@ -78,9 +78,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.product__name {
-  text-align: center !important;
-}
-</style>
