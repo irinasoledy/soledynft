@@ -46,14 +46,10 @@ export default {
       const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
       this.contract.addMessage(
-          {text: this.message, name: this.user, donation: parseFloat(this.price).toFixed(2)},
+          {productName: this.message, userName: this.user, price: parseFloat(this.price).toFixed(2)},
           BOATLOAD_OF_GAS,
           Big(this.price || '0').times(10 ** 24).toFixed()
-      ).then(() => {
-        this.contract.getMessages().then(messages => {
-        });
-      });
-
+      )
     }
   }
 }
