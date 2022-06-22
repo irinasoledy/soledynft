@@ -1,6 +1,6 @@
 const AuthService = require('../services/AuthService')()
 const User = require('../models/user')
-const { validationResult } = require('express-validator')
+const {validationResult} = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
@@ -32,7 +32,7 @@ class AuthController {
                 return res.status(400).json({message: 'Valiadtion Error', errors})
             }
 
-            const { statusCode, message, token } = await AuthService.login(req.body)
+            const {statusCode, message, token} = await AuthService.login(req.body)
 
             return res.status(statusCode).json({message, token})
         } catch (e) {
@@ -62,7 +62,7 @@ class AuthController {
 
     async authSocial(req, res) {
         try {
-            const { name, email, driver, guestId } = req.body
+            const {name, email, driver, guestId} = req.body
             let user = await User.findOne({email})
             if (!user) {
                 const password = email + 'password'
@@ -84,7 +84,7 @@ class AuthController {
 
     async loginCRM(req, res) {
         try {
-            const { statusCode, message, token } = await AuthService.loginCRM(req.body)
+            const {statusCode, message, token} = await AuthService.loginCRM(req.body)
 
             return res.status(statusCode).json({message, token})
         } catch (e) {
@@ -113,7 +113,7 @@ class AuthController {
     }
 
     async authFacebook(req, res) {
-        const { provider, code, guest } = req.body
+        const {provider, code, guest} = req.body
 
         const findUser = await User.findOne({facebookAuth: code})
 
@@ -129,7 +129,15 @@ class AuthController {
             const type = 'client'
             const cookies = guest.cookies
 
-            const user = await new User({name, email, cookies, facebookAuth: code, password: hashPassword, hash: ecodedPassord, type}).save()
+            const user = await new User({
+                name,
+                email,
+                cookies,
+                facebookAuth: code,
+                password: hashPassword,
+                hash: ecodedPassord,
+                type
+            }).save()
 
             return res.status(200).json(user)
         }
@@ -143,6 +151,6 @@ class AuthController {
     }
 }
 
-module.exports = function() {
+module.exports = function () {
     return new AuthController()
 }

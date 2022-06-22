@@ -190,11 +190,12 @@ class OrderController {
     }
 
 
-    async createStripeProducts() {}
+    async createStripeProducts() {
+    }
 
     async addProductsToStripe(req, res) {
         try {
-            const { userId, cart } = req.body
+            const {userId, cart} = req.body
             const items = []
             const cartProducts = cart.products
             const cartSubproducts = cart.subproducts
@@ -207,15 +208,15 @@ class OrderController {
                 })
 
                 price = await stripe.prices.create({
-                   product: product.id,
-                   unit_amount: parseFloat(cartProducts[i].product.personal_price.price * 100),
-                   currency: 'eur',
-               })
+                    product: product.id,
+                    unit_amount: parseFloat(cartProducts[i].product.personal_price.price * 100),
+                    currency: 'eur',
+                })
 
-               items.push({
-                   price : price.id,
-                   quantity: parseInt(cartProducts[i].qty),
-               })
+                items.push({
+                    price: price.id,
+                    quantity: parseInt(cartProducts[i].qty),
+                })
             }
 
             for (var i = 0; i < cartSubproducts.length; i++) {
@@ -224,31 +225,31 @@ class OrderController {
                 })
 
                 price = await stripe.prices.create({
-                   product: product.id,
-                   unit_amount: parseFloat(cartSubproducts[i].subproduct.product.personal_price.price * 100),
-                   currency: 'eur',
-               })
+                    product: product.id,
+                    unit_amount: parseFloat(cartSubproducts[i].subproduct.product.personal_price.price * 100),
+                    currency: 'eur',
+                })
 
-               items.push({
-                   price : price.id,
-                   quantity: parseInt(cartSubproducts[i].qty),
-               })
+                items.push({
+                    price: price.id,
+                    quantity: parseInt(cartSubproducts[i].qty),
+                })
             }
 
-           //  const shipping = await stripe.products.create({
-           //      name: 'shipping 15 EUR',
-           //  })
-           //
-           //  const shippingPrice = await stripe.prices.create({
-           //      product: shipping.id,
-           //     unit_amount: parseFloat(15 * 100),
-           //     currency: 'eur',
-           // })
+            //  const shipping = await stripe.products.create({
+            //      name: 'shipping 15 EUR',
+            //  })
+            //
+            //  const shippingPrice = await stripe.prices.create({
+            //      product: shipping.id,
+            //     unit_amount: parseFloat(15 * 100),
+            //     currency: 'eur',
+            // })
 
-           items.push({
-               price : 'price_1JQBNlKr7kNfYJz5O2PCHtEB',
-               quantity: 1,
-           })
+            items.push({
+                price: 'price_1JQBNlKr7kNfYJz5O2PCHtEB',
+                quantity: 1,
+            })
 
             // for (var i = 0; i < cart.length; i++) {
             //    //  product = await stripe.products.create({
@@ -276,7 +277,7 @@ class OrderController {
 
     async mergeOrderWithCart(req, res) {
         try {
-            const { userId, cart, orderId, amount } = req.body
+            const {userId, cart, orderId, amount} = req.body
 
             const order = await Order.findOneAndUpdate(
                 {_id: orderId},

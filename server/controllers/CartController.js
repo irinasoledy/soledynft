@@ -40,7 +40,7 @@ class CartController {
 
             await Cart.findOneAndUpdate(
                 {_id: cartId},
-                {$set: {qty, qty}},
+                {$set: {qty}},
                 {new: true}
             )
 
