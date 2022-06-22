@@ -235,3 +235,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.buyOn__methods {
+  .v-btn--icon.v-size--default {
+    width: auto !important;
+  }
+}
+.productOne__bloc {
+  .v-application p {
+    padding: 0;
+  }
+}
+</style>
