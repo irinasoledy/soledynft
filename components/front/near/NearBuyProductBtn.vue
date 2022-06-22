@@ -44,7 +44,7 @@ export default {
     },
     buy() {
       this.user = "User " + this.getRandomInt(12000, 90000);
-      this.price = this.product.main_price.price / 100;
+      this.price = this.product.main_price.price;
 
       const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
