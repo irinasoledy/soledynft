@@ -1,32 +1,19 @@
-import { PostedMessage, messages } from './model';
-
-// --- contract code goes below
+import { PostedOrder, orders } from './model';
 
 // The maximum number of latest messages the contract returns.
-const MESSAGE_LIMIT = 10;
+const ORDER_LIMIT = 10;
 
-/**
- * Adds a new message under the name of the sender's account id.\
- * NOTE: This is a change method. Which means it will modify the state.\
- * But right now we don't distinguish them with annotations yet.
- */
-export function addMessage(productName: string, userName: string, price: string): void {
-  // Creating a new message and populating fields with our data
-  const message = new PostedMessage(productName, userName, price);
-  // Adding the message to end of the persistent collection
-  messages.push(message);
+export function order(productName: string, userName: string, price: string): void {
+  const order = new PostedOrder(productName, userName, price);
+  orders.push(order);
 }
 
-/**
- * Returns an array of last N messages.\
- * NOTE: This is a view method. Which means it should NOT modify the state.
- */
-export function getMessages(): PostedMessage[] {
-  const numMessages = min(MESSAGE_LIMIT, messages.length);
-  const startIndex = messages.length - numMessages;
-  const result = new Array<PostedMessage>(numMessages);
-  for(let i = 0; i < numMessages; i++) {
-    result[i] = messages[i + startIndex];
+export function getOrders(): PostedOrder[] {
+  const numOrders = min(ORDER_LIMIT, orders.length);
+  const startIndex = orders.length - numOrders;
+  const result = new Array<PostedOrder>(numOrders);
+  for(let i = 0; i < numOrders; i++) {
+    result[i] = orders[i + startIndex];
   }
   return result;
 }

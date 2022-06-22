@@ -43,8 +43,8 @@ export const actions = {
             walletConnection.account(),
             nearConfig.contractName,
             {
-                viewMethods: ['getMessages'],
-                changeMethods: ['addMessage'],
+                viewMethods: ['getOrders'],
+                changeMethods: ['order'],
                 sender: walletConnection.getAccountId(),
             }
         );
