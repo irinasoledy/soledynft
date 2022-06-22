@@ -17,7 +17,7 @@ cron.schedule('*/25 * * * * *', async () => {
             const data = await actions.getUsersList()
             await io.emit('refreshUserList', data)
             loading = false
-        },4000)
+        }, 4000)
     }
 })
 
@@ -35,7 +35,7 @@ io.on('connection', socket => {
                 const data = await actions.getUsersList()
                 await io.emit('refreshUserList', data)
                 loading = false
-            },4000)
+            }, 4000)
         }
     })
 

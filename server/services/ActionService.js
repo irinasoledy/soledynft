@@ -6,10 +6,6 @@ class ActionService {
 
     async setOfflineUsers() {
         try {
-            // await User.updateMany(
-            //     {online: false},
-            //     {$set: {sessionDate: null}}
-            // )
             await User.updateMany({online: true}, {$set: {online: false}})
 
             await userAction.updateMany({online: true}, {$set: {online: false}})
@@ -61,23 +57,23 @@ class ActionService {
         const findAction = await userAction.findOne({userId: payload.userId})
         const findUser = await User.findOne({_id: payload.userId})
         let sessionDate = findUser.sessionDate
-        let sessionDuration= findUser.sessionDuration
+        let sessionDuration = findUser.sessionDuration
         let action = null
 
         if (!findUser.online) {
-            sessionDate =  Date.now()
+            sessionDate = Date.now()
             sessionDuration = 0
         }
 
         await User.findOneAndUpdate(
-            {_id:  payload.userId}, { $set: { sessionDate: sessionDate, sessionDuration: sessionDuration } }
+            {_id: payload.userId}, {$set: {sessionDate: sessionDate, sessionDuration: sessionDuration}}
         )
 
         if (findAction) {
             const visitsQty = findAction.visitsQty + parseInt(payload.visits)
             const visitsMin = parseInt(findAction.visitsMin) + parseInt(payload.visitsMin)
 
-            action = await userAction.findOneAndUpdate (
+            action = await userAction.findOneAndUpdate(
                 {_id: findAction._id}, {
                     $set: {
                         online: payload.online,
@@ -118,24 +114,7 @@ class ActionService {
         let action = null
         let now = new Date()
         let nowMinus = now.setMinutes(now.getMinutes() - 2);
-
         const actions = await userAction.find({online: true})
-
-        // actions.forEach(async action => {
-        //     let dt = new Date(action.lastVisit);
-        //     date = dt.setMinutes(dt.getMinutes());
-        //
-        //     if (nowMinus > date) {
-        //         action = await userAction.findOneAndUpdate(
-        //             {_id: action._id}, {
-        //                 $set: {
-        //                     online: false,
-        //                 }
-        //             }, {new: true}
-        //         )
-        //     }
-        // })
-
         return date
     }
 }
