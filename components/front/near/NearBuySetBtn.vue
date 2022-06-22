@@ -47,7 +47,7 @@ export default {
 
       const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
-      this.contract.addMessage(
+      this.contract.order(
           {productName: this.collectionName, userName: this.user, price: parseFloat(price).toFixed(2)},
           BOATLOAD_OF_GAS,
           Big(price || '0').times(10 ** 24).toFixed()
