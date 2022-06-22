@@ -1,4 +1,4 @@
-const UserService = require('../services/UserService')()
+const NearService = require('../services/NearService')()
 
 
 class NearController {
@@ -9,12 +9,23 @@ class NearController {
             const userName = req.userName;
             const price = req.price;
 
-            const response = await NearService.order(productName, userName, price)
+            const response = NearService.order(productName, userName, price)
 
             return res.status(200).json({response})
 
         } catch (e) {
             return res.status(404).json({message: `Error NearController@order ${e}`})
+        }
+    }
+
+    async getOrders(req, res) {
+        try {
+            const response = await NearService.getOrders()
+
+            return res.status(200).json({response})
+
+        } catch (e) {
+            return res.status(404).json({message: `Error NearController@getOrders ${e}`})
         }
     }
 }
