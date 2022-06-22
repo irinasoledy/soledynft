@@ -97,18 +97,7 @@ class UserController {
     async getEmployeeByService(req, res) {
         try {
             const services = await EmployeeService.find({service: req.query.serviceId})
-                // .sort({status: 'asc'})
-                // .populate('employee')
                 .populate('employee', '_id name avatar status position online', null, {sort: {status: 'desc'}})
-            // .populate({path: 'employee', options: { sort: { status: 'desc' } } })
-            // .populate({
-            //     path: 'employee'
-            //     , select: '_id name avatar status position'
-            //     , match: null
-            //     , options: { sort: {status: -1}}
-            // }).lean()
-            // .populate({path:'employee',options:{ sort: {'status' : 'desc'}}})
-
 
             return res.status(200).json(services)
 
@@ -381,8 +370,8 @@ class UserController {
                 let dateOne = new Date(user.sessionDate);
                 let dateTwo = Date.now();
 
-                let msDifference =  dateTwo - dateOne;
-                let sessionDuration = Math.floor(msDifference/1000/60);
+                let msDifference = dateTwo - dateOne;
+                let sessionDuration = Math.floor(msDifference / 1000 / 60);
 
                 await User.findOneAndUpdate({_id: userId}, {$set: {online: true, sessionDuration: sessionDuration}})
 
