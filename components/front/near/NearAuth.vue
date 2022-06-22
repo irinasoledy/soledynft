@@ -50,7 +50,7 @@ export default {
     },
     signIn() {
       this.walletConnection.requestSignIn(
-          {contractId: this.nearConfig.contractName, methodNames: [this.contract.addMessage.name]},
+          {contractId: this.nearConfig.contractName, methodNames: [this.contract.order.name]},
           'NEAR Prototype Vue',
           null,
           null,
