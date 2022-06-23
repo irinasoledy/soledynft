@@ -3,8 +3,8 @@ import { PostedOrder, orders } from './model';
 // The maximum number of latest messages the contract returns.
 const ORDER_LIMIT = 10;
 
-export function order(productName: string, userName: string, price: string): void {
-  const order = new PostedOrder(productName, userName, price);
+export function order(itemId: string, itemName: string, userName: string, price: string): void {
+  const order = new PostedOrder(itemId, itemName, userName, price);
   orders.push(order);
 }
 

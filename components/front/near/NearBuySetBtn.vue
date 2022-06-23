@@ -16,7 +16,7 @@ import NearAuth from "~/components/front/near/NearAuth";
 export default {
   name: "NearBuySetBtn",
   components: {NearAuth},
-  props: ['collectionName', 'price'],
+  props: ['collectionId', 'collectionName', 'price'],
   data() {
     return {
       user: '',
@@ -42,13 +42,13 @@ export default {
       return Math.floor(Math.random() * (max - min)) + min;
     },
     buy() {
-      this.user = "User " + this.getRandomInt(12000, 90000);
+      this.user = this.user = this.currentUser.accountId;
       const price = this.price;
 
       const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
       this.contract.order(
-          {productName: this.collectionName, userName: this.user, price: parseFloat(price).toFixed(2)},
+          {itemId: this.collectionId, itemName: this.collectionName, userName: this.user, price: parseFloat(price).toFixed(2)},
           BOATLOAD_OF_GAS,
           Big(price || '0').times(10 ** 24).toFixed()
       )
