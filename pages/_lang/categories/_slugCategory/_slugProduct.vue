@@ -29,23 +29,6 @@
                 <near-buy-sub-product-btn :product="product" ></near-buy-sub-product-btn>
               </div>
 
-              <div class="buyOn">
-                <div class="buyOn__header">
-                  {{ $trans('DetailsProductSet', 'buyItOn') }}
-                </div>
-                <div class="buyOn__methods">
-                  <v-btn icon target="_blank" :href="`${product.amazon}`">
-                    <img src="/images/amazon_icon.png" alt="">
-                  </v-btn>
-                  <v-btn icon class="ozon-icon" target="_blank" :href="`${product.ozon}`">
-                    <img src="/images/ozon.png" height="30px">
-                  </v-btn>
-                  <v-btn icon target="_blank" :href="`${product.w_b}`">
-                    <img src="/images/wolf.png" alt="">
-                  </v-btn>
-                </div>
-              </div>
-
               <div class="guaranty">
                 <div class="guaranty__header">
                   {{ $trans('DetailsProductSet', 'GuaranteesSustainability') }}
@@ -129,23 +112,6 @@
                 </div>
                 <p class="productOne__bloc-text" v-html="product.brand.translation.description"></p>
               </div>
-              <v-row class="help">
-                <v-col class="col-md col-12">
-                  <span>{{ $trans('Contacts', 'needHelp') }}</span>
-                </v-col>
-                <v-col class="col-md col-6">
-                  <v-btn color="primary" small text :href="`tel:${$trans('Contacts', 'phoneNumber')}`">
-                    <v-icon>mdi-phone</v-icon>
-                    {{ $trans('Contacts', 'phoneNumber') }}
-                  </v-btn>
-                </v-col>
-                <v-col class="col-md col-6">
-                  <v-btn color="primary" small text :href="`mailto:${$trans('Contacts', 'email')}`">
-                    <v-icon>mdi-mail</v-icon>
-                    {{ $trans('Contacts', 'email') }}
-                  </v-btn>
-                </v-col>
-              </v-row>
             </v-col>
           </v-row>
         </div>
