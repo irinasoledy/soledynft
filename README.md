@@ -1,6 +1,4 @@
-# nuxt-chat
-
-> Chat project
+# NFT-marketplace
 
 ## Build Setup
 
