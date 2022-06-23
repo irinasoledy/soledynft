@@ -7,7 +7,7 @@ import { context, u128, PersistentVector } from "near-sdk-as";
 export class PostedOrder {
   premium: boolean;
   sender: string;
-  constructor(public productName: string, public userName: string, public price: string) {
+  constructor(public itemId: string, public itemName: string, public userName: string, public price: string) {
     this.premium = context.attachedDeposit >= u128.from('10000000000000000000000');
     this.sender = context.sender;
   }

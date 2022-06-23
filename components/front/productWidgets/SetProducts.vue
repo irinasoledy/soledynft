@@ -65,7 +65,8 @@
           {{ $trans('DetailsProductSet', 'selectSizeProdsSet') }}
         </p>
 
-        <near-buy-set-btn :collectionName="set.translation.name"
+        <near-buy-set-btn :collectionId="set.id"
+                          :collectionName="set.translation.name"
                           :price="totalPrice"
                           v-if="readyToBuy">
         </near-buy-set-btn>
