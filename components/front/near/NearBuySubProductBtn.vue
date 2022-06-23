@@ -43,7 +43,7 @@ export default {
       return Math.floor(Math.random() * (max - min)) + min;
     },
     buy() {
-      this.user = "User " + this.getRandomInt(12000, 90000);
+      this.user = this.currentUser.accountId;
       this.price = this.product.main_price.price;
 
       const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
