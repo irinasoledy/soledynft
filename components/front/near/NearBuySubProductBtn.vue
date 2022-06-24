@@ -1,10 +1,20 @@
 <template>
-  <div>
-    <v-btn color="primary" class="mt-4" block @click="buy" v-if="currentUser">
+  <div class="buy-btns-area">
+
+    <v-btn color="primary" @click="buy" width="200" v-if="currentUser">
       <v-icon>mdi-cart</v-icon>
       Buy with Near
     </v-btn>
+
     <near-auth :title="'Buy with Near'" :icon="'mdi-cart'" v-else></near-auth>
+
+    <div class="header-account">
+      <v-btn color="primary" width="200" @click="buy">
+        <v-icon>mdi-label-multiple-outline</v-icon>
+        Make Offer
+      </v-btn>
+    </div>
+
   </div>
 </template>
 
@@ -49,7 +59,12 @@ export default {
       const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
       this.contract.order(
-          {itemId: this.product.id, itemName: this.product.translation.name, userName: this.user, price: parseFloat(this.price).toFixed(2)},
+          {
+            itemId: this.product.id,
+            itemName: this.product.translation.name,
+            userName: this.user,
+            price: parseFloat(this.price).toFixed(2)
+          },
           BOATLOAD_OF_GAS,
           Big(this.price || '0').times(10 ** 24).toFixed()
       )
@@ -61,5 +76,10 @@ export default {
 <style scoped>
 .header-account {
   margin-top: 20px;
+  margin-right: 20px;
+}
+
+.buy-btns-area {
+  display: flex;
 }
 </style>

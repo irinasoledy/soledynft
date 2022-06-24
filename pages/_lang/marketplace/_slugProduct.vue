@@ -12,7 +12,42 @@
             </v-col>
             <v-col class="col-lg-6 col-12">
               <p class="productOne__name">{{ product.translation.name }}</p>
-              <p class="productOne__by" v-if="product.brand">by {{ product.brand.translation.name }}</p>
+              <v-row class="product-option">
+                <v-col class="col-lg-4 col-12">
+                  <v-row>
+                    <v-col class="col-lg-3 col-12">
+                      <img src="/lotus-yoga-svgrepo-com.svg" alt="">
+                    </v-col>
+                    <v-col class="col-lg-9 col-12">
+                      <p>Designer</p>
+                      <p class="product-option-value">{{ product.brand.translation.name }}</p>
+                    </v-col>
+                  </v-row>
+                </v-col>
+                <v-col class="col-lg-4 col-12">
+                  <v-row>
+                    <v-col class="col-lg-3 col-12">
+                      <img src="/eye-svgrepo-com.svg" alt="">
+                    </v-col>
+                    <v-col class="col-lg-9 col-12">
+                      <p>Owner</p>
+                      <p class="product-option-value">soledy-test.testnet</p>
+                    </v-col>
+                  </v-row>
+                </v-col>
+                <v-col class="col-lg-4 col-12">
+                  <v-row>
+                    <v-col class="col-lg-3 col-12">
+                      <img src="/mnx-svgrepo-com.svg" alt="">
+                    </v-col>
+                    <v-col class="col-lg-9 col-12">
+                      <p>Chain</p>
+                      <p class="product-option-value">soledy-test.testnet</p>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+
               <p class="productOne__price">
                 {{ product.personal_price.price }}
                 <span v-if="product.personal_price.old_price > product.personal_price.price">/</span>

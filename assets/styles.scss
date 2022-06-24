@@ -1296,3 +1296,28 @@ button.v-expansion-panel-header {
     max-width: 1185px;
   }
 }
+
+.product-option {
+  padding-bottom: 30px;
+  .row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #5C591A;
+    margin: 1px;
+  }
+  img {
+    height: 30px;
+    display: block;
+    margin: 0 auto;
+  }
+  p {
+    margin-bottom: 0 !important;
+    color: #5C591A;
+    font-size: 12px;
+  }
+  .product-option-value {
+    color: #734030;
+    font-size: 13px;
+  }
+}
