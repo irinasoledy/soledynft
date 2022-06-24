@@ -1,6 +1,6 @@
 <template>
   <div class="header-account" v-if="contract">
-    <v-btn outlined color="primary" @click="signIn" block v-if="!currentUser">
+    <v-btn outlined color="primary" @click="signIn"  v-if="!currentUser">
       <v-icon v-if="icon">{{ icon }}</v-icon>
       {{ title }}
     </v-btn>
