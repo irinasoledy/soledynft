@@ -271,7 +271,6 @@ export default {
     font-size: 25px;
     color: $olive-color;
     letter-spacing: 0;
-    line-height: 17px;
     text-align: left;
     text-transform: uppercase;
     margin-top: 20px;
@@ -291,7 +290,6 @@ export default {
     right: 0;
     width: 100px;
     height: 100px;
-    // background-image: url("./static/discountIcon.png");
     background-size: 110%;
     background-position: center center;
     font-family: $font-text-bold;

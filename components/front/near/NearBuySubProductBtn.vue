@@ -1,5 +1,5 @@
 <template>
-  <div class="buy-btns-area">
+  <div class="buy-btn-area">
 
     <v-btn color="primary" @click="buy" width="200" v-if="currentUser">
       <v-icon>mdi-cart</v-icon>
@@ -74,11 +74,7 @@ export default {
 </script>
 
 <style scoped>
-.btn-wrapper_1 {
-  margin-left: 20px;
-}
-
-.buy-btns-area {
+.buy-btn-area {
   display: flex;
 }
 </style>
