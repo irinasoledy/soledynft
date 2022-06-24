@@ -1,7 +1,6 @@
 <template>
   <v-container class="oneProduct-content" v-if="product">
     <v-row>
-
       <v-col class="col-12">
         <div class="productOne mt-6">
           <v-row class="justify-space-between">

@@ -33,7 +33,7 @@
                    v-for="(product, key) in products"
                    :key="key"
                    v-if="product.main_image">
-              <nuxt-link :to="`/ro/categories/${category.alias}/${product.alias}`" class="product">
+              <nuxt-link :to="`/ro/marketplace/${product.alias}`" class="product">
                 <v-img :src="`https://back.soledynft.shop/images/products/sm/${product.main_image.src}`"></v-img>
                 <p class="product__name">{{ product.translation.name }}</p>
                 <div class="collectionOne__price price">
