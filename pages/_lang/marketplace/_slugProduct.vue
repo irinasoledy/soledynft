@@ -60,7 +60,7 @@
               <sizes :product="product" v-if="product.subproducts.length"/>
 
               <div class="mt-4" v-else>
-                <near-buy-sub-product-btn :product="product" ></near-buy-sub-product-btn>
+                <near-buy-sub-product-btn :product="product"></near-buy-sub-product-btn>
               </div>
 
               <v-expansion-panels accordion class="mt-8" v-model="panel" multiple :readonly="readonly">
@@ -70,7 +70,7 @@
                     Properties
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p class="productOne__bloc-text" v-html="product.translation.body"></p>
+<!--                    <p class="productOne__bloc-text" v-html="product.translation.body"></p>-->
                   </v-expansion-panel-content>
                 </v-expansion-panel>
 
@@ -80,52 +80,35 @@
                     Offers
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p class="productOne__bloc-text" v-html="product.translation.info"></p>
+<!--                    <p class="productOne__bloc-text" v-html="product.translation.info"></p>-->
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel class="productOne__exp">
                   <v-expansion-panel-header class="productOne__exp-header">
-                   <v-icon>mdi-grid-large</v-icon>
+                    <v-icon>mdi-grid-large</v-icon>
                     About
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <div class="exp__point">
-                      {{ $trans('DetailsProductSet', 'deliveriesAndReturnsSubitle1') }}
-                    </div>
-                    <p class="productOne__bloc-text">
-                      {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList1.1') }}
-                      <br>
-                      <br>
-                      {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList1.2') }}
-                      <br>
-                      <br>
-                      {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList1.3') }}
-                      <br>
-                      <br>
-                      {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList1.4') }}
-                    </p>
-                    <div class="exp__point">
-                      {{ $trans('DetailsProductSet', 'deliveriesAndReturnsSubtitle2') }}
-                    </div>
-                    <p class="productOne__bloc-text">
-                      {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList2.1') }}
-                    </p>
-                    <div class="exp__point">
-                      {{ $trans('DetailsProductSet', 'deliveriesAndReturnsSubtitle3') }}
-                    </div>
-                    <p class="productOne__bloc-text">
-                      {{ $trans('DetailsProductSet', 'deliveriesAndReturnsList3.1') }}
-                    </p>
+                    <p class="productOne__bloc-text" v-html="product.translation.body"></p>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+                <v-expansion-panel class="productOne__exp">
+                  <v-expansion-panel-header class="productOne__exp-header">
+                    <v-icon>mdi-dots-vertical</v-icon>
+                    Details
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content>
+
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
-              <div class="productOne__bloc" v-if="product.brand">
-                <div class="productOne__bloc-title">
-                  <v-icon>mdi-dots-vertical</v-icon>
-                  Details
-                </div>
-                <p class="productOne__bloc-text" v-html="product.brand.translation.description"></p>
-              </div>
+<!--              <div class="productOne__bloc" v-if="product.brand">-->
+<!--                <div class="productOne__bloc-title">-->
+<!--                  <v-icon>mdi-dots-vertical</v-icon>-->
+<!--                  Details-->
+<!--                </div>-->
+<!--                <p class="productOne__bloc-text" v-html="product.brand.translation.description"></p>-->
+<!--              </div>-->
             </v-col>
           </v-row>
         </div>
@@ -204,13 +187,12 @@ export default {
       productImages: [],
       zoom: false,
       mainImage: null,
-      panel: [0, 1],
+      panel: [0, 1, 2, 3],
       readonly: false
     }
   },
   methods: {
     openZoom(image) {
-      console.log(image);
       this.mainImage = image
       this.zoom = true
     }
@@ -224,47 +206,59 @@ export default {
     width: auto !important;
   }
 }
+
 .productOne__bloc {
   .v-application p {
     padding: 0;
   }
 }
+
 .oneProduct-content {
   max-width: 1500px;
 }
+
 .moreProducts {
   border: 2px solid $main-color;
   padding: 15px;
   margin-bottom: 20px;
+
   span {
     color: $main-color;
   }
+
   .v-btn {
     width: 100%
   }
+
   .row {
     align-items: center;
   }
 }
+
 .help {
   align-items: center;
   color: $main-color;
   font-size: 12px;
   margin-top: 20px;
+
   .col {
     padding: 0 10px;
   }
+
   span {
     padding-bottom: 15px;
   }
+
   .v-btn {
     display: flex;
     margin-bottom: 0 !important;
   }
+
   .v-icon {
     margin-right: 5px;
   }
 }
+
 .productOne {
   &__name {
     font-family: $font-titles;
@@ -276,6 +270,7 @@ export default {
     margin-top: 20px;
     line-height: 1.5;
   }
+
   &__price {
     margin-top: 10px;
     text-transform: uppercase;
@@ -284,6 +279,7 @@ export default {
     font-weight: 400;
     color: $main-color;
   }
+
   &__discount {
     position: absolute;
     top: -40px;
@@ -315,40 +311,50 @@ export default {
     flex-direction: column;
     padding-top: 20px;
   }
+
   &__by {
     color: $main-color;
     font-size: 12px;
   }
+
   &__exp {
     padding: 0;
+
     &::before {
       box-shadow: none;
     }
+
     div {
       padding: 0 !important;
     }
   }
+
   .v-expansion-panel,
   .v-expansion-panel__header {
     background-color: $bcg-body !important;
   }
+
   .v-expansion-panel-content__wrap {
-    padding: 0  30px !important;
+    padding: 0 30px !important;
   }
+
   &__exp &__bloc-text {
     padding: 0;
   }
+
   &__exp-header {
     color: $olive-color;
     padding: 0;
     text-transform: uppercase;
   }
+
   &__bloc {
     padding-top: 10px;
     margin-bottom: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.12);
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }
+
   &__bloc-text {
     font-family: $font-roboto;
     font-size: 13px;
@@ -357,10 +363,12 @@ export default {
     color: $main-color;
     font-weight: 300;
     padding: 0 24px 0;
+
     a {
       text-decoration: underline;
     }
   }
+
   &__bloc-title {
     color: $olive-color;
     padding: 0;
@@ -371,11 +379,14 @@ export default {
     align-items: center;
     text-transform: uppercase;
   }
+
   .v-btn.body {
     color: $main-color !important;
   }
+
   .v-btn {
     margin-bottom: 15px;
+
     .cart-icon {
       width: 15px;
       margin-left: 10px;
@@ -383,6 +394,7 @@ export default {
     }
   }
 }
+
 .p-title {
   text-align: left;
   color: $main-color;
@@ -393,6 +405,7 @@ export default {
   text-transform: uppercase;
   line-height: 1.3;
 }
+
 .p-subtitle {
   text-align: center;
   font-size: 20px;
@@ -400,32 +413,40 @@ export default {
   letter-spacing: -0.11px;
   font-family: $font-titles;
 }
+
 .prof {
   padding-bottom: 15px;
+
   &__iamge {
     position: relative;
   }
+
   &__indicator {
     position: absolute;
     top: 35px;
     left: 35px;
   }
+
   .v-card__actions {
     display: flex;
     justify-content: center;
   }
+
   .v-btn {
     border-radius: 9px !important;
   }
 }
+
 .v-input--selection-controls {
   margin-top: 5px;
 }
+
 .productOne .exp__point {
   color: $main-color;
   margin-bottom: 10px;
   position: relative;
   margin-left: 10px !important;
+
   &:after {
     content: "";
     width: 10px;
@@ -438,80 +459,98 @@ export default {
     top: 6px;
   }
 }
+
 .buyOn {
   margin-top: 30px;
   padding-top: 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
   &__header {
     color: $olive-color;
     text-transform: uppercase;
     margin-bottom: 10px;
   }
+
   img {
     width: auto;
     height: 50px;
   }
+
   .v-btn {
     width: auto;
     height: auto;
     margin-right: 10px;
+
     &:last-child {
       img {
         height: 40px;
       }
     }
   }
+
   span {
     width: 100% !important
   }
 }
+
 .ozon-icon img {
   height: 30px !important;
 }
+
 .guaranty {
   padding-bottom: 20px;
   padding-top: 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
   &__header {
     color: $olive-color;
     text-transform: uppercase;
   }
+
   &__content {
     display: flex;
     align-items: center;
     margin-top: 10px;
   }
+
   &__item {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-right: 10px;
+
     span {
       font-size: 10px;
       color: $main-color;
       text-transform: uppercase;
     }
   }
+
   img {
     width: 60px
   }
 }
+
 .color {
   margin-top: 15px;
   margin-bottom: 40px;
 }
+
 @media (min-width: 1200px) {
   .additional-title {
     font-size: 30px;
   }
 }
+
 .exp__point {
   padding-left: 30px !important;
 }
+
 .productOne__bloc-text {
   padding: 0 0px !important;
 }
+
 .v-expansion-panel-header {
   max-width: 100% !important;
 }
