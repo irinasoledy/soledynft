@@ -63,42 +63,21 @@
                 <near-buy-sub-product-btn :product="product" ></near-buy-sub-product-btn>
               </div>
 
-              <div class="guaranty">
-                <div class="guaranty__header">
-                  {{ $trans('DetailsProductSet', 'GuaranteesSustainability') }}
-                </div>
-                <div class="guaranty__content">
-                  <div class="guaranty__item">
-                    <img src="/images/IMG_1070.PNG" alt="">
-                    <span>happy worker</span>
-                  </div>
-                  <div class="guaranty__item">
-                    <img src="/images/IMG_1071.PNG" alt="">
-                    <span>non-toxic dyes</span>
-                  </div>
-                  <div class="guaranty__item">
-                    <img src="/images/IMG_1072.PNG" alt="">
-                    <span>happy worid</span>
-                  </div>
-                  <div class="guaranty__item">
-                    <img src="/images/IMG_1073.PNG" alt="">
-                    <span>co-product</span>
-                  </div>
-                </div>
-              </div>
-
-              <v-expansion-panels accordion>
-                <v-expansion-panel aria-expanded="true" class="productOne__exp">
+              <v-expansion-panels accordion class="mt-8" v-model="panel" multiple :readonly="readonly">
+                <v-expansion-panel aria-expanded="false" class="productOne__exp">
                   <v-expansion-panel-header class="productOne__exp-header">
-                    {{ $trans('DetailsProductSet', 'productDescr') }}
+                    <v-icon>mdi-checkbox-marked-outline</v-icon>
+                    Properties
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <p class="productOne__bloc-text" v-html="product.translation.body"></p>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
                 <v-expansion-panel class="productOne__exp" v-if="product.translation.info">
                   <v-expansion-panel-header class="productOne__exp-header">
-                    {{ $trans('DetailsProductSet', 'careAndInfo') }}
+                    <v-icon>mdi-label-multiple-outline</v-icon>
+                    Offers
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <p class="productOne__bloc-text" v-html="product.translation.info"></p>
@@ -106,8 +85,8 @@
                 </v-expansion-panel>
                 <v-expansion-panel class="productOne__exp">
                   <v-expansion-panel-header class="productOne__exp-header">
-                    <!-- Deliveries & Returns -->
-                    {{ $trans('DetailsProductSet', 'deliveriesAndReturnsTitle') }}
+                   <v-icon>mdi-grid-large</v-icon>
+                    About
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <div class="exp__point">
@@ -142,7 +121,8 @@
               </v-expansion-panels>
               <div class="productOne__bloc" v-if="product.brand">
                 <div class="productOne__bloc-title">
-                  {{ $trans('DetailsProductSet', 'meetTheDesignerTitle') }}
+                  <v-icon>mdi-dots-vertical</v-icon>
+                  Details
                 </div>
                 <p class="productOne__bloc-text" v-html="product.brand.translation.description"></p>
               </div>
@@ -223,7 +203,9 @@ export default {
       product: null,
       productImages: [],
       zoom: false,
-      mainImage: null
+      mainImage: null,
+      panel: [0, 1],
+      readonly: false
     }
   },
   methods: {

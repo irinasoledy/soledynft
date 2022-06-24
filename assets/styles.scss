@@ -1321,3 +1321,14 @@ button.v-expansion-panel-header {
     font-size: 13px;
   }
 }
+
+.v-expansion-panel-header > *:not(.v-expansion-panel-header__icon) {
+  flex: 0 0 auto !important;
+}
+.productOne__exp {
+  .v-icon {
+    color: #734030 !important;
+    margin-right: 15px;
+    font-size: 18px !important;
+  }
+}
