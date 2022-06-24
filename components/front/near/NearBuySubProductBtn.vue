@@ -8,7 +8,7 @@
 
     <near-auth :title="'Buy with Near'" :icon="'mdi-cart'" v-else></near-auth>
 
-    <div class="header-account">
+    <div class="btn-wrapper_1">
       <v-btn color="primary" width="200" @click="buy">
         <v-icon>mdi-label-multiple-outline</v-icon>
         Make Offer
@@ -74,9 +74,8 @@ export default {
 </script>
 
 <style scoped>
-.header-account {
-  margin-top: 20px;
-  margin-right: 20px;
+.btn-wrapper_1 {
+  margin-left: 20px;
 }
 
 .buy-btns-area {
