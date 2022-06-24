@@ -48,6 +48,13 @@
         <v-icon color="primary">mdi-chevron-right</v-icon>
       </v-list-item-icon>
     </v-list-item>
+    <v-list-item to="/ro/marketplace" nuxt>
+      <v-list-item-content>
+        <v-list-item-title>
+          NFT Marketplace
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
     <v-list-item to="/ro/designers" nuxt>
       <v-list-item-content>
         <v-list-item-title>
