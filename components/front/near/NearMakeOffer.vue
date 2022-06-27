@@ -78,6 +78,7 @@ import {validationMixin} from 'vuelidate'
 import {required, maxLength, email, numeric} from 'vuelidate/lib/validators'
 
 export default {
+  props: ['itemId', 'type'],
   mixins: [validationMixin],
 
   validations: {
@@ -128,7 +129,6 @@ export default {
       return errors
     },
   },
-
   methods: {
     submit() {
       this.$v.$touch()

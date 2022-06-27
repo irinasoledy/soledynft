@@ -7,7 +7,7 @@
 
     <near-auth :title="'Buy with Near'" :icon="'mdi-cart'" v-else></near-auth>
 
-    <near-make-offer></near-make-offer>
+    <near-make-offer :item-id="collectionId" type="'set'"></near-make-offer>
 
   </div>
 </template>
