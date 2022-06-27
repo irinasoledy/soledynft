@@ -82,7 +82,9 @@
                     Offers
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <!--                    <p class="productOne__bloc-text" v-html="product.translation.info"></p>-->
+
+                    <offers-area></offers-area>
+
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel class="productOne__exp">
@@ -145,6 +147,7 @@ import Zoom from '@/components/front/productWidgets/Zoom.vue'
 import NearBuyProductBtn from "~/components/front/near/NearBuyProductBtn"
 import NearBuySubProductBtn from "~/components/front/near/NearBuySubProductBtn";
 import PropertiesArea from "@/components/front/productWidgets/marketplace/PropertiesArea";
+import OffersArea from "~/components/front/productWidgets/marketplace/OffersArea";
 
 export default {
   components: {
@@ -155,7 +158,8 @@ export default {
     Zoom,
     CartBtn,
     NearBuyProductBtn,
-    PropertiesArea
+    PropertiesArea,
+    OffersArea
   },
   async asyncData({app, params, store}) {
     let prod = null
