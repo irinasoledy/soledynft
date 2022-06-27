@@ -1341,3 +1341,61 @@ button.v-expansion-panel-header {
 .btn-wrapper_1 {
   margin-left: 20px;
 }
+
+.properties-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .properties-area-item {
+    width: 26%;
+    margin: 1%;
+    background-color: #eddcd5;
+    padding: 5px 15px;
+    color: #5C591A;
+
+    p {
+      display: block;
+      margin-bottom: 0;
+    }
+
+    .properties-area-item-name {
+      font-size: 12px;
+    }
+  }
+}
+
+.details-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .details-area-item {
+    width: 33%;
+    margin: 1%;
+    background-color: #eddcd5;
+    padding: 5px 15px;
+    color: #5C591A;
+
+    p {
+      display: block;
+      margin-bottom: 0;
+    }
+
+    .details-area-item-name {
+      font-size: 12px;
+    }
+  }
+}
+
+.offers-area {
+  table {
+    background-color: #eddcd5;
+    color: #734030;
+  }
+  margin: 1%;
+}
+
+.about-area {
+  margin: 1%;
+}

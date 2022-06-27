@@ -70,7 +70,9 @@
                     Properties
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-<!--                    <p class="productOne__bloc-text" v-html="product.translation.body"></p>-->
+
+                    <properties-area></properties-area>
+
                   </v-expansion-panel-content>
                 </v-expansion-panel>
 
@@ -80,7 +82,9 @@
                     Offers
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-<!--                    <p class="productOne__bloc-text" v-html="product.translation.info"></p>-->
+
+                    <offers-area></offers-area>
+
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel class="productOne__exp">
@@ -89,7 +93,10 @@
                     About
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <p class="productOne__bloc-text" v-html="product.translation.body"></p>
+
+                    <about-area :text="product.translation.body"
+                                :brandText="product.brand.translation.description"></about-area>
+
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel class="productOne__exp">
@@ -98,17 +105,17 @@
                     Details
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-
+                    <details-area></details-area>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
-<!--              <div class="productOne__bloc" v-if="product.brand">-->
-<!--                <div class="productOne__bloc-title">-->
-<!--                  <v-icon>mdi-dots-vertical</v-icon>-->
-<!--                  Details-->
-<!--                </div>-->
-<!--                <p class="productOne__bloc-text" v-html="product.brand.translation.description"></p>-->
-<!--              </div>-->
+              <!--              <div class="productOne__bloc" v-if="product.brand">-->
+              <!--                <div class="productOne__bloc-title">-->
+              <!--                  <v-icon>mdi-dots-vertical</v-icon>-->
+              <!--                  Details-->
+              <!--                </div>-->
+              <!--                <p class="productOne__bloc-text" v-html="product.brand.translation.description"></p>-->
+              <!--              </div>-->
             </v-col>
           </v-row>
         </div>
@@ -142,9 +149,25 @@ import Sizes from '@/components/front/productWidgets/Sizes.vue'
 import Zoom from '@/components/front/productWidgets/Zoom.vue'
 import NearBuyProductBtn from "~/components/front/near/NearBuyProductBtn"
 import NearBuySubProductBtn from "~/components/front/near/NearBuySubProductBtn";
+import PropertiesArea from "@/components/front/productWidgets/marketplace/PropertiesArea";
+import OffersArea from "~/components/front/productWidgets/marketplace/OffersArea";
+import AboutArea from "~/components/front/productWidgets/marketplace/AboutArea";
+import DetailsArea from "~/components/front/productWidgets/marketplace/DetailsArea";
 
 export default {
-  components: {NearBuySubProductBtn, SliderOneProduct, SimilarSlider, Sizes, Zoom, CartBtn, NearBuyProductBtn},
+  components: {
+    NearBuySubProductBtn,
+    SliderOneProduct,
+    SimilarSlider,
+    Sizes,
+    Zoom,
+    CartBtn,
+    NearBuyProductBtn,
+    PropertiesArea,
+    OffersArea,
+    AboutArea,
+    DetailsArea
+  },
   async asyncData({app, params, store}) {
     let prod = null
     let similars1 = null
