@@ -1365,9 +1365,37 @@ button.v-expansion-panel-header {
   }
 }
 
+.details-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .details-area-item {
+    width: 33%;
+    margin: 1%;
+    background-color: #eddcd5;
+    padding: 5px 15px;
+    color: #5C591A;
+
+    p {
+      display: block;
+      margin-bottom: 0;
+    }
+
+    .details-area-item-name {
+      font-size: 12px;
+    }
+  }
+}
+
 .offers-area {
   table {
     background-color: #eddcd5;
     color: #734030;
   }
+  margin: 1%;
+}
+
+.about-area {
+  margin: 1%;
 }

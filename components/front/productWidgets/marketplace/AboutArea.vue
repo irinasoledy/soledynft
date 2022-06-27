@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="about-area">
     <p class="productOne__bloc-text" v-html="text"></p>
     <p class="productOne__bloc-text" v-html="brandText"></p>
   </div>

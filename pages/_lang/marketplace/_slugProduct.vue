@@ -94,7 +94,8 @@
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
 
-                    <about-area :text="product.translation.body" :brandText="product.brand.translation.description"></about-area>
+                    <about-area :text="product.translation.body"
+                                :brandText="product.brand.translation.description"></about-area>
 
                   </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -104,7 +105,7 @@
                     Details
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-
+                    <details-area></details-area>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
@@ -151,6 +152,7 @@ import NearBuySubProductBtn from "~/components/front/near/NearBuySubProductBtn";
 import PropertiesArea from "@/components/front/productWidgets/marketplace/PropertiesArea";
 import OffersArea from "~/components/front/productWidgets/marketplace/OffersArea";
 import AboutArea from "~/components/front/productWidgets/marketplace/AboutArea";
+import DetailsArea from "~/components/front/productWidgets/marketplace/DetailsArea";
 
 export default {
   components: {
@@ -163,7 +165,8 @@ export default {
     NearBuyProductBtn,
     PropertiesArea,
     OffersArea,
-    AboutArea
+    AboutArea,
+    DetailsArea
   },
   async asyncData({app, params, store}) {
     let prod = null
