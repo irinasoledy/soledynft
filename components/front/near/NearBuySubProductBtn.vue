@@ -8,12 +8,7 @@
 
     <near-auth :title="'Buy with Near'" :icon="'mdi-cart'" v-else></near-auth>
 
-    <div class="btn-wrapper_1">
-      <v-btn color="primary" width="200" @click="buy">
-        <v-icon>mdi-label-multiple-outline</v-icon>
-        Make Offer
-      </v-btn>
-    </div>
+    <near-make-offer></near-make-offer>
 
   </div>
 </template>
@@ -22,10 +17,11 @@
 import {mapActions, mapGetters} from 'vuex';
 import Big from 'big.js';
 import NearAuth from "~/components/front/near/NearAuth";
+import NearMakeOffer from "~/components/front/near/NearMakeOffer";
 
 export default {
   name: "NearBuySubProductBtn",
-  components: {NearAuth},
+  components: {NearAuth, NearMakeOffer},
   props: ['subProduct', 'product'],
   data() {
     return {
