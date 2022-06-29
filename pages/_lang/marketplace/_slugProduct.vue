@@ -64,14 +64,15 @@
               </div>
 
               <v-expansion-panels accordion class="mt-8" v-model="panel" multiple :readonly="readonly">
-                <v-expansion-panel aria-expanded="false" class="productOne__exp">
+
+                <v-expansion-panel aria-expanded="false" class="productOne__exp" v-if="properties">
                   <v-expansion-panel-header class="productOne__exp-header">
                     <v-icon>mdi-checkbox-marked-outline</v-icon>
                     Properties
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
 
-                    <properties-area></properties-area>
+                    <properties-area :properties="properties"></properties-area>
 
                   </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -171,6 +172,7 @@ export default {
   async asyncData({app, params, store}) {
     let prod = null
     let similars1 = null
+    let properties = null
     await contentApi.getProduct({
       lang: store.state.lang.lang,
       alias: params.slugProduct,
@@ -178,11 +180,13 @@ export default {
     }, data => {
       prod = data.product
       similars1 = data.similars
+      properties = data.properties
     })
     return {
       similars: similars1,
       product: prod,
-      productImages: prod.images
+      productImages: prod.images,
+      properties: properties
     }
   },
   watch: {
@@ -194,6 +198,7 @@ export default {
       }, data => {
         this.product = data.product
         this.similars = data.similars
+        this.properties = data.properties
         this.productImages = this.product.images
       })
     },
