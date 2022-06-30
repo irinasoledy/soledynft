@@ -84,7 +84,7 @@
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
 
-                    <offers-area></offers-area>
+                    <offers-area :offers="offers"></offers-area>
 
                   </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -143,6 +143,7 @@
 
 import {mapGetters} from 'vuex'
 import contentApi from '@/api/contentApi'
+import userApi from "~/api/userApi";
 import SliderOneProduct from '@/components/front/sliders/SliderOneProduct.vue'
 import SimilarSlider from '@/components/front/sliders/SimilarCarousel.vue'
 import CartBtn from '~/components/front/cart/CartBtn.vue'
@@ -173,6 +174,8 @@ export default {
     let prod = null
     let similars1 = null
     let properties = null
+    let offers = null
+
     await contentApi.getProduct({
       lang: store.state.lang.lang,
       alias: params.slugProduct,
@@ -181,12 +184,14 @@ export default {
       prod = data.product
       similars1 = data.similars
       properties = data.properties
+      offers = data.offers
     })
     return {
       similars: similars1,
       product: prod,
       productImages: prod.images,
-      properties: properties
+      properties: properties,
+      offers: offers
     }
   },
   watch: {
@@ -198,6 +203,7 @@ export default {
       }, data => {
         this.product = data.product
         this.similars = data.similars
+        this.offers = data.offers
         this.properties = data.properties
         this.productImages = this.product.images
       })
@@ -219,7 +225,22 @@ export default {
       readonly: false
     }
   },
+  mounted() {
+    this.$nuxt.$on('update-product-offers', data => {
+      this.updateOffers();
+    });
+  },
   methods: {
+    updateOffers() {
+      const data = {
+        productId: this.product.id,
+        lang: this.language.lang,
+        currency: this.currency.id
+      };
+      userApi.getOffers(data, async response => {
+        this.offers = response.data
+      })
+    },
     openZoom(image) {
       this.mainImage = image
       this.zoom = true

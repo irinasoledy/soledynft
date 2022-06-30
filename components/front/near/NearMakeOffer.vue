@@ -96,8 +96,8 @@ export default {
         };
 
         userApi.makeOffer(data, async response => {
-          // console.log(response)
           this.sent = response.data.message;
+            this.$nuxt.$emit('update-product-offers');
         }, async response => {
           this.error = 'Price field is required';
         })
