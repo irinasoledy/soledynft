@@ -77,7 +77,7 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
 
-                <v-expansion-panel class="productOne__exp" v-if="product.translation.info">
+                <v-expansion-panel class="productOne__exp" v-if="offers.length">
                   <v-expansion-panel-header class="productOne__exp-header">
                     <v-icon>mdi-label-multiple-outline</v-icon>
                     Offers
@@ -88,6 +88,7 @@
 
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
                 <v-expansion-panel class="productOne__exp">
                   <v-expansion-panel-header class="productOne__exp-header">
                     <v-icon>mdi-grid-large</v-icon>
@@ -100,6 +101,7 @@
 
                   </v-expansion-panel-content>
                 </v-expansion-panel>
+
                 <v-expansion-panel class="productOne__exp">
                   <v-expansion-panel-header class="productOne__exp-header">
                     <v-icon>mdi-dots-vertical</v-icon>
@@ -110,18 +112,11 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
-              <!--              <div class="productOne__bloc" v-if="product.brand">-->
-              <!--                <div class="productOne__bloc-title">-->
-              <!--                  <v-icon>mdi-dots-vertical</v-icon>-->
-              <!--                  Details-->
-              <!--                </div>-->
-              <!--                <p class="productOne__bloc-text" v-html="product.brand.translation.description"></p>-->
-              <!--              </div>-->
+
             </v-col>
           </v-row>
         </div>
       </v-col>
-      <v-col class="col-12"></v-col>
 
       <v-col class="col-12 mt-lg-8">
         <v-row>
