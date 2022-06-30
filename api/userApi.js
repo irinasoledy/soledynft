@@ -1,6 +1,19 @@
 import axios from 'axios'
 
+const backURL = 'https://back.soledynft.shop'
+
 export default {
+
+    async getOffers(data, cb, cbError) {
+        await axios.get(`${backURL}/en/api/offers?productId=${data.productId}&lang=${data.lang}&currency=${data.currency}`)
+            .then(response => cb(response.data))
+    },
+
+    async makeOffer(data, cb, cbError) {
+        await axios.post(`${backURL}/en/api/offer`, data)
+            .then(response => cb(response.data))
+            .catch(err => cbError(err.message))
+    },
 
     async setUserOnline(data, cb) {
         await axios.post(`/user/pong`, data)

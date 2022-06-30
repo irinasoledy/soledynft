@@ -10,22 +10,23 @@
           ID Wallet
         </th>
         <th class="text-left">
-          Time
+          Accepted
         </th>
         <th class="text-left">
-          Activity
+          Time
         </th>
       </tr>
       </thead>
       <tbody>
       <tr
-          v-for="item in desserts"
-          :key="item.name"
+          v-for="offer in offers"
+          :key="offer.id"
       >
-        <td>{{ item.price }} NEAR</td>
-        <td>{{ item.id }}</td>
-        <td>{{ item.time }}</td>
-        <td>{{ item.activity }}</td>
+        <td>{{ offer.price_decimals }} <small>NEAR</small></td>
+        <td>{{ offer.account_id }}</td>
+        <td v-if="offer.accepted"> <v-icon>mdi-check-all</v-icon> </td>
+        <td v-else> <v-icon>mdi-minus</v-icon> </td>
+        <td>{{ offer.created_at }}</td>
       </tr>
       </tbody>
     </template>
@@ -35,31 +36,7 @@
 <script>
 export default {
   name: "OffersArea",
-  data() {
-    return {
-      desserts: [
-        {
-          price: '2',
-          id: 'test.testnet',
-          time: 'Mon Jun 27 2022 17:22:07 ',
-          activity: 3,
-        },
-        {
-          price: '3',
-          id: 'test20132lorem.testnet',
-          time: 'Mon Jun 27 2022 17:22:07 ',
-          activity: 3,
-        },
-        {
-          price: '10',
-          id: 'iovitatudor.testnet',
-          time: 'Mon Jun 27 2022 17:22:07 ',
-          activity: 1,
-        },
-
-      ]
-    }
-  }
+  props: ['offers'],
 }
 </script>
 
