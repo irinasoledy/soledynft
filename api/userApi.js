@@ -12,7 +12,7 @@ export default {
     async makeOffer(data, cb, cbError) {
         await axios.post(`${backURL}/en/api/offer`, data)
             .then(response => cb(response.data))
-            .catch(err => cbError(err.response.data))
+            .catch(err => cbError(err.message))
     },
 
     async setUserOnline(data, cb) {
