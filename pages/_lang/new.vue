@@ -10,7 +10,7 @@
              v-for="(product, key) in products"
              key="key"
              v-if="products.length > 0">
-        <nuxt-link :to="`/ro/categories/${product.category.alias}/${product.alias}`" class="product">
+        <nuxt-link :to="getProductLink(product)" class="product">
           <v-img :src="`${envAPI}/images/products/md/${product.main_image.src}`"></v-img>
           <p class="product__name">{{ product.translation.name }}</p>
           <div class="collectionOne__price price">
@@ -73,6 +73,15 @@ export default {
   data() {
     return {
       products: null
+    }
+  },
+  methods: {
+    getProductLink(product) {
+      if (product.category.alias === 'nfts') {
+        return `/${this.language.lang}/marketplace/${product.alias}`;
+      } else {
+        return `/${this.language.lang}/categories/${product.category.alias}/${product.alias}`;
+      }
     }
   }
 }

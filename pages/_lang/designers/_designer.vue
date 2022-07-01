@@ -49,7 +49,7 @@
                v-for="(product, i) in designer.products"
                :key="i"
                v-if="designer.products && product.main_image">
-          <nuxt-link :to="`/ro/categories/${product.category.alias}/${product.alias}`" class="product">
+          <nuxt-link :to="getProductLink(product)" class="product">
             <v-img :src="`https://back.soledynft.shop/images/products/sm/${product.main_image.src}`"></v-img>
             <p class="product__name">{{ product.translation.name }}</p>
             <div class="collectionOne__price price">
@@ -96,6 +96,13 @@ export default {
     ...mapActions({
       setDefaultChangedEmployee: 'setDefaultChangedEmployee'
     }),
+    getProductLink(product) {
+      if (product.category.alias === 'nfts') {
+        return `/${this.language.lang}/marketplace/${product.alias}`;
+      } else {
+        return `/${this.language.lang}/categories/${product.category.alias}/${product.alias}`;
+      }
+    },
   }
 }
 </script>
