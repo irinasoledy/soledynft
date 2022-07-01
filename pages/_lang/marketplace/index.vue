@@ -43,14 +43,12 @@
                     {{ product.personal_price.old_price }}
                   </span>
                   <span>{{ currency.abbr }} </span>
-                  <span>
-                    <v-btn class="v-btn v-btn--outlined theme--light v-size--default primary--text">
-                      <v-icon>mdi-cart</v-icon>
-                      Buy
-                    </v-btn>
-                  </span>
+
                 </div>
               </nuxt-link>
+              <span class="marketplace-btn-area">
+                     <near-buy-sub-product-btn :product="product"></near-buy-sub-product-btn>
+                  </span>
             </v-col>
           </v-row>
 
@@ -67,9 +65,10 @@ import {mapGetters} from 'vuex'
 import contentApi from '@/api/contentApi'
 import FilterModal from '@/components/front/productWidgets/FilterModal.vue'
 import SortModal from '@/components/front/productWidgets/SortModal.vue'
+import NearBuyProductBtn from "~/components/front/near/NearBuyProductBtn"
 
 export default {
-  components: {FilterModal, SortModal},
+  components: {FilterModal, SortModal, NearBuyProductBtn},
   async asyncData({app, params, store}) {
     let categ = null
     await contentApi.getCategory({
@@ -144,3 +143,27 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.marketplace-btn-area {
+  padding-top: 20px;
+  display: block;
+  .btn-wrapper_1 {
+    margin-left: 5px;
+  }
+  .buy-btn-area {
+    display: flex;
+    justify-content: space-between;
+    button {
+      background-color: #eddcd5 !important;
+      width: auto !important;
+      font-size: 13px;
+      color: #734030 !important;
+      padding: 6px !important;
+      i {
+        font-size: 14px;
+      }
+    }
+  }
+}
+</style>
