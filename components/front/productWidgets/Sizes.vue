@@ -20,6 +20,7 @@
     <p class="alert-danger" v-if="alertChangeSize">{{ alertChangeSize }}</p>
 
     <near-buy-sub-product-btn :sub-product="subProduct" :product="product" v-if="subProduct"></near-buy-sub-product-btn>
+
     <v-btn color="body" class="mt-4" block v-else @click="setAlertChangeSize">
       <v-icon>mdi-cart</v-icon>Buy with Near
     </v-btn>

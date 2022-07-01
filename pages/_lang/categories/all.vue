@@ -12,7 +12,7 @@
             <v-col class="col-lg-3 col-6 mb-2"
                    v-for="(product, key) in products"
                    :key="key"
-                   v-if="product.main_image">
+                   v-if="product.main_image && product.category.alias !== 'nfts'">
               <nuxt-link :to="`/ro/categories/${product.category.alias}/${product.alias}`" class="product">
                 <v-img :src="`https://back.soledynft.shop/images/products/sm/${product.main_image.src}`"></v-img>
                 <p class="product__name">{{ product.translation.name }}</p>

@@ -40,6 +40,12 @@ export default {
             .catch(err => console.log(err))
     },
 
+    async getMarketplaceCategory(data, cb){
+        await axios.get(`${backURL}/api/marketplace/category?lang=${data.lang}&alias=${data.alias}&currency=${data.currency}`)
+            .then(response => cb(response.data))
+            .catch(err => console.log(err))
+    },
+
     async getAllProducts(data, cb){
         await axios.get(`${backURL}/api/products/all?lang=${data.lang}&currency=${data.currency}`)
             .then(response => cb(response.data))

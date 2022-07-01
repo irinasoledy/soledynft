@@ -4,7 +4,7 @@
       <v-col class="col-12 mt-6" v-for="(product, i) in set.set_products" :key="i" v-if="product">
         <div class="colProd__item">
           <v-row>
-            <nuxt-link :to="`/ro/categories/${product.product.category.alias}/${product.product.alias}`"
+            <nuxt-link :to="getProductLink(product)"
                        class="h-slider__item-inner">
               <v-row class="justify-space-around">
 
@@ -108,6 +108,13 @@ export default {
     ...mapActions({
       appendToCart: 'cart/appendToCart',
     }),
+    getProductLink(product) {
+      if (product.product.category.alias === 'nfts') {
+        return `/${this.language.lang}/marketplace/${product.product.alias}`;
+      } else {
+        return `/${this.language.lang}/categories/${product.product.category.alias}/${product.product.alias}`;
+      }
+    },
     setSubproduct(product, subproduct) {
       this.sizeAlert = null
       this.readyToBuy = true
