@@ -1371,7 +1371,7 @@ button.v-expansion-panel-header {
   justify-content: center;
 
   .details-area-item {
-    width: 33%;
+    width: 50%;
     margin: 1%;
     background-color: #eddcd5;
     padding: 5px 15px;
@@ -1384,6 +1384,10 @@ button.v-expansion-panel-header {
 
     .details-area-item-name {
       font-size: 12px;
+    }
+    .details-area-item-value {
+      font-size: 13px;
+      color: #734030;
     }
   }
 }

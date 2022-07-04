@@ -108,7 +108,9 @@
                     Details
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
+
                     <details-area></details-area>
+
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
