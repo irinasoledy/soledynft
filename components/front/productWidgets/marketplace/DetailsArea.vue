@@ -15,11 +15,6 @@
       <p class="details-area-item-value">soledy-test.testnet <small>8PhhyumpYC5EGoNtjQkZTEfgsw8xeicD9W5of2Hup3VS</small></p>
     </span>
 
-<!--    <span class="details-area-item">-->
-<!--      <p class="details-area-item-name">Blockchain</p>-->
-<!--      <p class="details-area-item-value">Near</p>-->
-<!--    </span>-->
-
   </div>
 </template>
 
