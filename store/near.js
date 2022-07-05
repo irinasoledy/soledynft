@@ -25,7 +25,7 @@ export const mutations = {
 
 export const actions = {
     async initContract({commit}) {
-        const nearConfig = getConfig(process.env.NEAR_ENV || 'testnet');
+        const nearConfig = getConfig(process.env.NEAR_ENV || 'mainnet');
         const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore();
         const near = await nearAPI.connect({keyStore: keyStore, ...nearConfig});
 

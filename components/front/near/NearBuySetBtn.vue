@@ -54,7 +54,7 @@ export default {
 
       this.contract.order(
           {
-            itemId: this.collectionId,
+            itemId: this.collectionId.toString(),
             itemName: this.collectionName,
             userName: this.user,
             price: parseFloat(price).toFixed(2)

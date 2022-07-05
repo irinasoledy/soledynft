@@ -4,15 +4,17 @@
     <span class="details-area-item">
       <p class="details-area-item-name">Contract Address</p>
       <p class="details-area-item-value">
-        <a href="https://explorer.testnet.near.org/accounts/soledy-test.testnet" target="_blank">
-          https://explorer.testnet.near.org/accounts/soledy-test.testnet
+        <a href="https://explorer.mainnet.near.org/accounts/soledy.near" target="_blank">
+          https://explorer.mainnet.near.org/accounts/soledy.near
         </a>
       </p>
     </span>
 
     <span class="details-area-item">
       <p class="details-area-item-name">Token ID</p>
-      <p class="details-area-item-value">soledy-test.testnet <small>8PhhyumpYC5EGoNtjQkZTEfgsw8xeicD9W5of2Hup3VS</small></p>
+      <p class="details-area-item-value">soledy.near
+<!--        <small>8PhhyumpYC5EGoNtjQkZTEfgsw8xeicD9W5of2Hup3VS</small>-->
+      </p>
     </span>
 
   </div>
