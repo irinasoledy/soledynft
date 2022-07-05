@@ -1,7 +1,11 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME || 'soledy-test.testnet';
+const CONTRACT_NAME = process.env.CONTRACT_NAME || 'soledy.near';
 
 function getConfig(env) {
-    switch (env) {
+    console.log(env)
+
+    const network = 'mainnet';
+
+    switch (network) {
         case 'mainnet':
             return {
                 networkId: 'mainnet',
