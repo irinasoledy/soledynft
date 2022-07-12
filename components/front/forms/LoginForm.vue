@@ -2,8 +2,7 @@
   <v-form
       ref="form"
       v-model="form.valid"
-      lazy-validation
-  >
+      lazy-validation>
     <v-text-field
         v-model="form.email"
         :rules="emailRules"
@@ -24,8 +23,7 @@
         :disabled="!form.valid"
         color="primary lighten-1"
         class="mr-4 full-width"
-        @click="login()"
-    >
+        @click="login()">
       LogIn
     </v-btn>
   </v-form>

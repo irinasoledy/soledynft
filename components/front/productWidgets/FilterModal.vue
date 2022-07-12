@@ -8,7 +8,7 @@
       <v-card-subtitle>Set Filters</v-card-subtitle>
       <v-spacer></v-spacer>
       <v-btn text color="primary" @click="resetFilter">
-        Sterge
+        Delete
       </v-btn>
     </v-sheet>
     <v-sheet class="filterModal-container__scroll pt-3">
@@ -29,9 +29,8 @@
 
       <div class="filter__option" v-for="parameter in category.params" v-if="parameter.property.in_filter == 1">
         <div class="filter__group">
-          <div class="filter__title" v-if="parameter.property.multilingual == 1 ">{{
-              parameter.property.translation.name
-            }}
+          <div class="filter__title" v-if="parameter.property.multilingual == 1 ">
+            {{ parameter.property.translation.name }}
           </div>
           <v-checkbox
               v-for="(value, index) in parameter.property.parameter_values"

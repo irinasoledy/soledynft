@@ -3,8 +3,7 @@
     <slick
         v-if="!$mobileDetect.mobile()"
         ref="slick"
-        :options="slickOptions"
-    >
+        :options="slickOptions">
       <a :to="`/${language.lang}/promotions#${promotion.alias}`" class="slick--wrapp"
          v-for="(promotion, i) in promotions">
         <div class="fill-height-home-slider">
@@ -45,6 +44,7 @@
         </div>
 
         <img :src="`${envAPI}/images/promotions/${promotion.img}`" alt="">
+
       </a>
     </slick>
 
@@ -52,6 +52,7 @@
         v-else
         ref="slick"
         :options="slickOptions">
+      
       <a href="#" class="slick--wrapp" v-for="(promotion, i) in promotions">
         <div class="fill-height-home-slider">
           <v-row
@@ -76,6 +77,7 @@
         </div>
         <img :src="`${envAPI}/images/promotions/${promotion.img_mobile}`" alt="">
       </a>
+
     </slick>
   </div>
 </template>
