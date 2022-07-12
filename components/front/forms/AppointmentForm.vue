@@ -9,8 +9,7 @@
           <v-form
               ref="form"
               v-model="form.valid"
-              lazy-validation
-          >
+              lazy-validatio>
             <v-text-field
                 label="Nume*"
                 v-model="form.name"
@@ -44,8 +43,7 @@
                 :disabled="!form.valid"
                 color="primary lighten-1"
                 class="mr-4 full-width"
-                @click="submit()"
-            >
+                @click="submit()">
               Programeaza-te
             </v-btn>
           </v-form>
@@ -55,8 +53,7 @@
         <v-alert
             dense
             text
-            type="success"
-        >
+            type="success">
           Datele au fost transmise cu succes!!!
         </v-alert>
       </v-card-text>
