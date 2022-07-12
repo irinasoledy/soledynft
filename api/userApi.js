@@ -98,7 +98,7 @@ export default {
     async addLeadToAmoCrm(data, cb) {
         const stringData = `?name=${data.name}&email=${data.email}&phone=${data.phone}&age=${data.age}&comments=${data.comments}&whatsapp=${data.whatsapp}&messenger=${data.messenger}&preferred=${data.preferred}`
 
-        // Must be POST Method
+        //TODO: Must be POST Method
         await axios.get(`${process.env.API}/api/v2/leads${stringData}`)
             .then(response => cb(response.data))
     },

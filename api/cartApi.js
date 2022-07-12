@@ -8,12 +8,6 @@ const headers = {"X-Requested-With":"XMLHttpRequest","X-CSRF-TOKEN":token}
 
 export default {
 
-    // async appendToCart(data, cb) {  // Remake post
-    //     await axios.get(`${backURL}/api/set/cart?productId=${data.productId}&userId=${data.userId}`)
-    //         .then(response => cb(response.data))
-    //         .catch(err => console.log(err))
-    // },
-
     async appendToCart(data, cb) {
         await axios.post(`${backURL}/en/api/cart`, data)
             .then(response => cb(response.data))
@@ -109,6 +103,4 @@ export default {
             .then(response => cb(response.data))
             .catch(err => console.log(err))
     },
-
-
 }
