@@ -4,8 +4,6 @@ export const state = () => ({
     userCartId: null,
     cartProducts: [],
     cartSubproducts: [],
-
-
     cart: [],
     subtotal: 0,
     total: 0,
@@ -95,23 +93,6 @@ export const getters = {
 
     getCart: (state, getters, rootState) => {
         return { products: state.cartProducts, subproducts: state.cartSubproducts }
-        // const services = rootState.allServices
-        // const user = rootState.auth.user
-        //
-        // const cart = state.cart.map(item => {
-        //     const arr = {
-        //         id: item._id,
-        //         qty: item.qty,
-        //         user: user,
-        //         service: '',
-        //         stripePrice: '',
-        //         stripeProduct: '',
-        //     }
-        //     arr.service = services.find(service => service.id == item.serviceId)
-        //     // arr.stripePrice = services.find(service => service.id == item.serviceId)
-        //     return arr
-        // })
-        // return cart
     },
     getSubtotal: (state, getters) => {
         const cartsProducts = getters.getCartsProducts

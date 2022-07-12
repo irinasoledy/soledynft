@@ -77,7 +77,6 @@ export const mutations = {
         state.ping = !state.ping
     },
     SOCKET_refreshUserList(state, data) {
-        // this.commit('admin/SET_CLIENTS_ACTIONS', data.actions)
         this.commit('SET_EXPERTS', data.users)
     },
     setTest(state, param) {
