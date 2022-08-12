@@ -105,7 +105,7 @@ module.exports = {
         extend(config, ctx) {}
     },
     axios: {
-        baseURL: 'https://soledy.itmall.digital',
+        baseURL: 'https://back.soledynft.shop',
         proxyHeaders: false,
         credentials: false
     },
