@@ -177,10 +177,10 @@ export const actions = {
 
         await contentApi.getCategories(state.lang.lang, data => commit('SET_CATEGORIES', data))
         await contentApi.getCollections(state.lang.lang, data => commit('SET_COLLECTIONS', data))
-        await contentApi.getPromotions({
-            lang: state.lang.lang,
-            currency: data.currency
-        }, data => commit('SET_PROMOTIONS', data))
+        // await contentApi.getPromotions({
+        //     lang: state.lang.lang,
+        //     currency: data.currency
+        // }, data => commit('SET_PROMOTIONS', data))
 
         await contentApi.getTranslations(state.lang.lang, (response) => commit('SET_TRANSALATIONS', response))
         await contentApi.getBanners(state.lang.lang, (response) => commit('SET_BANNERS', response))
